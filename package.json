@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "dev": "next",
+    "prod": "next build && next export",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.14",
+    "@emotion/core": "^10.0.14",
+    "@fullhuman/postcss-purgecss": "^1.2.0",
+    "@mdx-js/loader": "^1.1.0",
+    "@next/mdx": "^9.0.2",
+    "@zeit/next-css": "^1.0.1",
+    "autoprefixer": "^9.6.1",
+    "next": "^9.0.2",
+    "postcss-nested": "^4.1.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-syntax-highlighter": "^11.0.2",
+    "tailwindcss": "^1.0.5"
+  }
+}
