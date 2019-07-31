@@ -4,3 +4,51 @@ export default Layout
 export const meta = { title: 'Installation' }
 
 # Installation
+
+## Setting up Webpack
+
+Here is an example Webpack configuration that uses [Laravel Mix](https://github.com/JeffreyWay/laravel-mix). Note the `@` alias to the `/resources/js` directory.
+
+~~~js
+const mix = require('laravel-mix')
+const path = require('path')
+
+mix
+  .js('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css')
+  .webpackConfig({
+    output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
+    resolve: {
+      alias: {
+        vue$: 'vue/dist/vue.runtime.esm.js',
+        '@': path.resolve('resources/js'),
+      },
+    },
+  })
+~~~
+
+## Setup dynamic imports
+
+By default, Inertia.js uses code splitting. To do this we need to enable [dynamic imports](https://github.com/tc39/proposal-dynamic-import). We'll use a Babel plugin to make this work. First, install the plugin:
+
+~~~bash
+npm install @babel/plugin-syntax-dynamic-import --save
+~~~
+
+Next, create a `.babelrc` file in your project with the following:
+
+~~~json
+{
+  "plugins": ["@babel/plugin-syntax-dynamic-import"]
+}
+~~~
+
+Alternatively, if you're using Laravel Mix, you can put this in your `webpack.mix.js` file:
+
+~~~js
+mix.babelConfig({
+  plugins: ['@babel/plugin-syntax-dynamic-import'],
+})
+~~~
+
+**Limitation:** When using Laravel Mix (v4) with dynamic imports you cannot write styles within Vue files. As a workaround, you need to drop Mix entirely or downgrade to v3 due to current Webpack limitations ([source](https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909)).
