@@ -17,51 +17,6 @@ npm install inertiajs/inertia-react --save
 
 The first step when using Inertia.js is to configure your server-side framework. This primarily includes setting up a root template and updating your endpoints to return a proper Inertia response. For an example of this, see our [Laravel adapter](/laravel).
 
-## Setting up Webpack
-
-Here is an example Webpack configuration that uses [Laravel Mix](https://github.com/JeffreyWay/laravel-mix). Note the `@` alias to the `/resources/js` directory.
-
-~~~js
-const mix = require('laravel-mix')
-const path = require('path')
-
-mix
-  .react('resources/js/app.js', 'public/js')
-  .sass('resources/sass/app.scss', 'public/css')
-  .webpackConfig({
-    output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
-    resolve: {
-      alias: {
-        '@': path.resolve('resources/js'),
-      },
-    },
-  })
-~~~
-
-## Setup dynamic imports
-
-We recommend using code splitting with Inertia.js. To do this we need to enable [dynamic imports](https://github.com/tc39/proposal-dynamic-import). We'll use a Babel plugin to make this work. First, install the plugin:
-
-~~~bash
-npm install @babel/plugin-syntax-dynamic-import --save
-~~~
-
-Next, create a `.babelrc` file in your project with the following:
-
-~~~json
-{
-  "plugins": ["@babel/plugin-syntax-dynamic-import"]
-}
-~~~
-
-Alternatively, if you're using Laravel Mix, you can put this in your `webpack.mix.js` file:
-
-~~~js
-mix.babelConfig({
-  plugins: ['@babel/plugin-syntax-dynamic-import'],
-})
-~~~
-
 ## Initializing React
 
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing React with the base Inertia page component.
