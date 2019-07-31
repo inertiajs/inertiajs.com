@@ -5,6 +5,66 @@ export const meta = { title: 'Installation' }
 
 # Installation
 
+To use Inertia.js you need both a server-side adapter (ie. Laravel) as well as a client-side adapter (ie. Vue.js). Be sure to also follow the installation instructions below for the frameworks you use.
+
+## Vue.js
+
+Install using NPM:
+
+~~~bash
+npm install inertiajs/inertia-vue --save
+~~~
+
+Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Vue with the base Inertia page component.
+
+~~~js
+import Inertia from 'inertia-vue'
+import Vue from 'vue'
+
+Vue.use(Inertia)
+
+const app = document.getElementById('app')
+
+new Vue({
+  render: h => h(Inertia, {
+    props: {
+      initialPage: JSON.parse(app.dataset.page),
+      resolveComponent: name => import(`@/Pages/${name}`).then(module => module.default),
+    },
+  }),
+}).$mount(app)
+~~~
+
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
+## React
+
+Install using NPM:
+
+~~~bash
+npm install inertiajs/inertia-react --save
+~~~
+
+Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing React with the base Inertia page component.
+
+~~~jsx harmony
+import Inertia from 'inertia-react'
+import React from 'react'
+import { render } from 'react-dom'
+
+const app = document.getElementById('app')
+
+render(
+  <Inertia
+    initialPage={JSON.parse(app.dataset.page)}
+    resolveComponent={name => import(`@/Pages/${name}`).then(module => module.default)}
+  />,
+  app
+)
+~~~
+
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
 ## Setting up Webpack
 
 Here is an example Webpack configuration that uses [Laravel Mix](https://github.com/JeffreyWay/laravel-mix). Note the `@` alias to the `/resources/js` directory.
@@ -52,3 +112,159 @@ mix.babelConfig({
 ~~~
 
 **Limitation:** When using Laravel Mix (v4) with dynamic imports you cannot write styles within Vue files. As a workaround, you need to drop Mix entirely or downgrade to v3 due to current Webpack limitations ([source](https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909)).
+
+## Using Inertia without code splitting in Vue.js
+
+It's possible to also use Inertia without code splitting. This will generate one larger JavaScript bundle, instead of many smaller ones. With this approach, the dynamic imports Babel plugin is not required.
+
+One way to do this is manually loading all your page components:
+
+~~~js
+import Inertia from 'inertia-vue'
+import Vue from 'vue'
+
+Vue.use(Inertia)
+
+const app = document.getElementById('app')
+
+const pages = {
+  'Dashboard/Index': require('./Pages/Dashboard/Index').default,
+  'Users/Index': require('./Pages/Users/Index').default,
+  'Users/Create': require('./Pages/Users/Create').default,
+  // etc...
+}
+
+new Vue({
+  render: h => h(Inertia, {
+    props: {
+      initialPage: JSON.parse(app.dataset.page),
+      resolveComponent: name => pages[name],
+    },
+  }),
+}).$mount(app)
+~~~
+
+Another option is to use `required.context` to automatically register all your page components.
+
+~~~js
+import Inertia from 'inertia-vue'
+import Vue from 'vue'
+
+Vue.use(Inertia)
+
+const app = document.getElementById('app')
+
+const files = require.context('./', true, /\.vue$/i)
+
+new Vue({
+  render: h => h(Inertia, {
+    props: {
+      initialPage: JSON.parse(app.dataset.page),
+      resolveComponent: page => files(`./Pages/${page}.vue`).default,
+    },
+  }),
+}).$mount(app)
+~~~
+
+## Using Inertia without code splitting in React
+
+It's possible to also use Inertia without code splitting. This will generate one larger JavaScript bundle, instead of many smaller ones. With this approach, the dynamic imports Babel plugin is not required.
+
+One way to do this is manually loading all your page components:
+
+~~~jsx harmony
+import Inertia from 'inertia-react'
+import React from 'react'
+import { render } from 'react-dom'
+
+const app = document.getElementById('app')
+
+const pages = {
+  'Dashboard/Index': require('./Pages/Dashboard/Index').default,
+  'Users/Index': require('./Pages/Users/Index').default,
+  'Users/Create': require('./Pages/Users/Create').default,
+  // etc...
+}
+
+render(
+  <Inertia
+    initialPage={JSON.parse(app.dataset.page)}
+    resolveComponent={name => pages[name]}
+  />,
+  app
+)
+~~~
+
+Another option is to use `required.context` to automatically register all your page components.
+
+~~~jsx harmony
+import Inertia from 'inertia-react'
+import React from 'react'
+import { render } from 'react-dom'
+
+const app = document.getElementById('app')
+
+const files = require.context('./', true, /\.js$/i)
+
+render(
+  <Inertia
+    initialPage={JSON.parse(app.dataset.page)}
+    resolveComponent={page => files(`./Pages/${page}.js`).default}
+  />,
+  app
+)
+~~~
+
+## Laravel
+
+Install using Composer:
+
+~~~bash
+composer require inertiajs/inertia-laravel
+~~~
+
+### Setup root template
+
+The first step to using Inertia is creating a root template. We recommend using `app.blade.php`. This template should include your assets, as well as the `@inertia` directive.
+
+~~~php
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <script src="{{ mix('/js/app.js') }}" defer></script>
+</head>
+<body>
+
+@inertia
+
+</body>
+</html>
+~~~
+
+The `@inertia` directive is simply a helper for creating our base `div`. It includes a `data-page` attribute which contains the inital page information. Here's what that looks like.
+
+~~~php
+<div id="app" data-page="{{ json_encode($page) }}"></div>
+~~~
+
+If you'd like to use a different root view, you can change it using `Inertia::setRootView()`.
+
+~~~php
+Inertia\Inertia::setRootView('name');
+~~~
+
+### Add Inertia middleware
+
+Next, add the `Inertia\Middleware` middleware to your `web` middleware group, found in the `/app/Http/Kernel.php` file. This middleware monitors for asset changes, and also fixes an edge case with 302 redirects. Be sure to include this middleware *after* any session related middleware.
+
+~~~php
+protected $middlewareGroups = [
+    'web' => [
+        // ...
+        \Inertia\Middleware::class,
+    ]
+];
+~~~

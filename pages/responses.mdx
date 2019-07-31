@@ -1,0 +1,39 @@
+import Layout from '../components/Layout'
+
+export default Layout
+export const meta = { title: 'Responses' }
+
+# Responses
+
+## Laravel
+
+To make an Inertia response, use `Inertia::render()`. This function takes two arguments, the component name, and the component data (props).
+
+~~~php
+use Inertia\Inertia;
+
+class EventsController extends Controller
+{
+    public function show(Event $event)
+    {
+        return Inertia::render('Event', [
+            'event' => $event->only('id', 'title', 'start_date', 'description'),
+        ]);
+    }
+}
+~~~
+
+Alternatively, you can use the `with()` method to include component data (props):
+
+~~~php
+use Inertia\Inertia;
+
+class EventsController extends Controller
+{
+    public function show(Event $event)
+    {
+        return Inertia::render('Event')
+            ->with('event', $event->only('id', 'title', 'start_date', 'description'));
+    }
+}
+~~~

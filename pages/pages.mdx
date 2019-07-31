@@ -1,0 +1,92 @@
+import Layout from '../components/Layout'
+
+export default Layout
+export const meta = { title: 'Pages' }
+
+# Pages
+
+## Creating a base layout in Vue.js
+
+While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.vue`.
+
+~~~vue
+<template>
+  <main>
+    <header>
+      <inertia-link href="/">Home</inertia-link>
+      <inertia-link href="/about">About</inertia-link>
+      <inertia-link href="/contact">Contact</inertia-link>
+    </header>
+
+    <article>
+      <slot />
+    </article>
+  </main>
+</template>
+~~~
+
+## Creating page components in Vue.js
+
+With Inertia.js, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.vue`. Note how it extends the `Layout.vue` component we created above.
+
+~~~vue
+<template>
+  <layout>
+    <h1>Welcome</h1>
+    <p>Welcome to my first Inertia.js app!</p>
+  </layout>
+</template>
+
+<script>
+import Layout from '@/Shared/Layout'
+
+export default {
+  components: {
+    Layout,
+  },
+}
+</script>
+~~~
+
+<hr />
+
+## Creating a base layout in React
+
+While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.js`.
+
+~~~jsx harmony
+import { InertiaLink } from 'inertia-react'
+import React from 'react'
+
+export default function Layout({ children }) {
+  return (
+    <main>
+      <header>
+        <InertiaLink href="/">Home</InertiaLink>
+        <InertiaLink href="/about">About</InertiaLink>
+        <InertiaLink href="/contact">Contact</InertiaLink>
+      </header>
+
+      <article>{children}</article>
+    </main>
+  )
+}
+~~~
+
+## Creating page components in React
+
+With Inertia.js, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.js`. Note how it extends the `Layout.js` component we created above.
+
+~~~jsx harmony
+import React from 'react'
+import Layout from '@/Shared/Layout'
+
+export default function Welcome() {
+  return (
+    <Layout>
+      <h1>Welcome</h1>
+      <p>Welcome to my first Inertia.js app!</p>
+    </Layout>
+  )
+}
+~~~

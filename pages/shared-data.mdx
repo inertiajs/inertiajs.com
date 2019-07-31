@@ -1,0 +1,132 @@
+import Layout from '../components/Layout'
+
+export default Layout
+export const meta = { title: 'Shared data' }
+
+# Shared data
+
+## Laravel
+
+To share data with all your components, use `Inertia::share($key, $data)`. This can be done both synchronously and lazily.
+
+~~~php
+// Synchronously
+Inertia::share('app.name', Config::get('app.name'));
+
+// Lazily
+Inertia::share('auth.user', function () {
+    if (Auth::user()) {
+        return [
+            'id' => Auth::user()->id,
+            'first_name' => Auth::user()->first_name,
+            'last_name' => Auth::user()->last_name,
+        ];
+    }
+});
+~~~
+
+You can also get shared data using the same method `Inertia::share($key)`. If the key is not found, `null` is returned.
+
+### Accessing data in root template
+
+There are situations where you may want to access your prop data in your root Blade template. For example, you may want to add a meta description tag, Twitter card meta tags, or Facebook Open Graph meta tags. These props are available via the `$page` variable.
+
+~~~php
+<meta name="twitter:title" content="{{ $page['props']['event']->title }}">
+~~~
+
+Sometimes you may even want to provide data that will not be sent to your JavaScript component. You can do this using the `withViewData()` method.
+
+~~~php
+return Inertia::render('Event', ['event' => $event])->withViewData(['meta' => $event->meta]);
+~~~
+
+You can then access this variable like a regular Blade variable.
+
+~~~php
+<meta name="description" content="{{ $meta }}">
+~~~
+
+## Vue.js
+
+Sometimes it's necessary to access the page data (props) from a non-page component. One really common use-case for this is the site layout. For example, you may want to show the currently authenticated user in the site header. This can be done using the `$page` property. Here's a simple example:
+
+~~~html
+<template>
+  <main>
+    <header>
+      You are logged in as: {{ $page.auth.user.name }}
+
+      <nav>
+        <inertia-link href="/">Home</inertia-link>
+        <inertia-link href="/about">About</inertia-link>
+        <inertia-link href="/contact">Contact</inertia-link>
+      </nav>
+    </header>
+
+    <article>
+      <slot />
+    </article>
+  </main>
+</template>
+~~~
+
+This can also be useful for other common "global" data, such as errors and flash messages.
+
+## React
+
+Sometimes it's necessary to access the page data (props) from a non-page component. One really common use-case for this is the site layout. For example, maybe you want to show the currently authenticated user in your site header. This is possible using React's context feature. The base Inertia component automatically provides the current page via context, which can then be accessed by a consumer later on.
+
+The easiest way to access page props is with our `usePageProps` hook.
+
+~~~jsx harmony
+import { InertiaLink, usePageProps } from 'inertia-react'
+import React from 'react'
+
+export default function Layout({ children }) {
+  const { auth } = usePageProps()
+
+  return (
+    <main>
+      <header>
+        You are logged in as: {auth.user.name}
+
+        <nav>
+          <InertiaLink href="/">Home</InertiaLink>
+          <InertiaLink href="/about">About</InertiaLink>
+          <InertiaLink href="/contact">Contact</InertiaLink>
+        </nav>
+      </header>
+
+      <article>{children}</article>
+    </main>
+  )
+}
+~~~
+
+If you need to access the entire Inertia `page` object, you can directly access it via the `usePage` hook. Note that `usePageProps` should suffice for most use cases, so we don't recommend doing this unless you have a good reason!
+
+~~~jsx harmony
+import { InertiaLink, usePage } from 'inertia-react'
+import React from 'react'
+
+export default function Layout({ children }) {
+  const { props } = usePage()
+
+  return (
+    <main>
+      <header>
+        You are logged in as: {props.auth.user.name}
+
+        <nav>
+          <InertiaLink href="/">Home</InertiaLink>
+          <InertiaLink href="/about">About</InertiaLink>
+          <InertiaLink href="/contact">Contact</InertiaLink>
+        </nav>
+      </header>
+
+      <article>{children}</article>
+    </main>
+  )
+}
+~~~
