@@ -2,8 +2,8 @@ import Code from './Code'
 import dedent from 'dedent'
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { useState } from 'react'
 import { MDXProvider } from '@mdx-js/react'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 const components = {
   h1: ({ children }) => <h1 className="mb-8 text-4xl font-bold text-gray-700 leading-none">{children}</h1>,
@@ -12,11 +12,10 @@ const components = {
   pre: ({ children }) => <pre className="my-8 block rounded overflow-hidden">{children}</pre>,
   a: (props) => <a className="text-blue-700 hover:text-orange-700 font-medium underline" {...props} />,
   code: (props) => <Code {...props} />,
+  inlineCode: (props) => <code className="font-mono text-sm font-bold bg-gray-200 rounded p-1" {...props} />,
 }
 
 export default function Layout({ meta, children }) {
-  const [tab, setTab] = useState('php')
-
   return (
     <div className="leading-none font-sans text-gray-800 antialiased">
       <Head>
@@ -57,80 +56,93 @@ export default function Layout({ meta, children }) {
                   </p>
               </div>
               <div className="w-1/2 pl-24">
-                <div className="px-4 pt-4 rounded-t flex" css={{ background: '#303f6d' }}>
-                    <button onClick={() => setTab('php')} type="button" className="focus:outline-none text-xs text-gray-500 hover:text-gray-200 font-medium px-6 pt-3 pb-2 rounded-t mr-1" css={ tab === 'php' ? { color: 'white', background: '#202e59' } : {}}>UsersController.php</button>
-                    <button onClick={() => setTab('vue')} type="button" className="focus:outline-none text-xs text-gray-500 hover:text-gray-200 font-medium px-6 pt-3 pb-2 rounded-t" css={ tab === 'vue' ? { color: 'white', background: '#202e59' } : {}}>Users.vue</button>
-                </div>
-                { tab === 'php' &&
-                  <Code className="language-php" height={320}>{dedent`
-                    class UsersController
+                <TabbedCodeExamples
+                  height="320"
+                  examples={[
                     {
-                        public function index()
+                      name: 'UsersController.php',
+                      language: 'php',
+                      code: dedent`
+                        class UsersController
                         {
-                            $users = User::active()
-                                ->orderByName()
-                                ->get()
-                                ->only('id', 'name', 'email');
+                            public function index()
+                            {
+                                $users = User::active()
+                                    ->orderByName()
+                                    ->get()
+                                    ->only('id', 'name', 'email');
 
-                            return Inertia::render('Users', [
-                                'users' => $users
-                            ]);
+                                return Inertia::render('Users', [
+                                    'users' => $users
+                                ]);
+                            }
                         }
-                    }
-                  `}</Code>
-                }
-                { tab === 'vue' &&
-                  <Code className="language-html" height={320}>{dedent`
-                    <template>
-                      <layout title="Users">
-                        <div v-for="user in users" :key="user.id">
-                          <inertia-link :href="\`/users/\${user.id}\`">
-                            {{ user.name }}
-                          </inertia-link>
-                          <div>{{ user.email }}</div>
-                        </div>
-                      </layout>
-                    </template>
+                      `
+                    },
+                    {
+                      name: 'Users.vue',
+                      language: 'html',
+                      code: dedent`
+                        <template>
+                          <layout title="Users">
+                            <div v-for="user in users" :key="user.id">
+                              <inertia-link :href="\`/users/\${user.id}\`">
+                                {{ user.name }}
+                              </inertia-link>
+                              <div>{{ user.email }}</div>
+                            </div>
+                          </layout>
+                        </template>
 
-                    <script>
-                    import Layout from '../Shared/Layout'
+                        <script>
+                        import Layout from '../Shared/Layout'
 
-                    export default {
-                      components: {
-                        Layout,
-                      },
-                      props: {
-                        users: Array,
-                      },
+                        export default {
+                          components: {
+                            Layout,
+                          },
+                          props: {
+                            users: Array,
+                          },
+                        }
+                        </script>
+                      `
                     }
-                    </script>
-                  `}</Code>
-                }
+                  ]}
+                />
               </div>
             </div>
           }
         </div>
       </div>
       <div className="max-w-6xl mx-auto flex py-24">
-        <nav className="w-64 flex-shrink-0">
-          <ul className="-mt-5">
+        <nav className="w-64 flex-shrink-0 border-r">
+          <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
+          <ul className="font-medium">
             <li className="mt-5"><Link href="/"><a className="hover:underline">Introduction</a></Link></li>
             <li className="mt-5"><Link href="/installation"><a className="hover:underline">Installation</a></Link></li>
+            <li className="mt-5"><Link href="/server-side-setup"><a className="hover:underline">Server-side</a></Link></li>
+            <li className="mt-5"><Link href="/client-side-setup"><a className="hover:underline">Client-side</a></Link></li>
+            <li className="mt-5"><Link href="/code-splitting"><a className="hover:underline">Code splitting</a></Link></li>
+          </ul>
+          <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
+          <ul className="font-medium">
             <li className="mt-5"><Link href="/routing"><a className="hover:underline">Routing</a></Link></li>
-            <li className="mt-5"><Link href="/responses"><a className="hover:underline">Responses</a></Link></li>
-            <li className="mt-5"><Link href="/redirects"><a className="hover:underline">Redirects</a></Link></li>
-            <li className="mt-5"><Link href="/links"><a className="hover:underline">Links</a></Link></li>
             <li className="mt-5"><Link href="/pages"><a className="hover:underline">Pages</a></Link></li>
+            <li className="mt-5"><Link href="/links"><a className="hover:underline">Links</a></Link></li>
             <li className="mt-5"><Link href="/forms"><a className="hover:underline">Forms</a></Link></li>
             <li className="mt-5"><Link href="/shared-data"><a className="hover:underline">Shared data</a></Link></li>
-            <li className="mt-5"><Link href="/flash-messages"><a className="hover:underline">Flash messages</a></Link></li>
-            <li className="mt-5"><Link href="/asset-versioning"><a className="hover:underline">Asset versioning</a></Link></li>
-            <li className="mt-5"><Link href="/local-state-caching"><a className="hover:underline">Local state caching</a></Link></li>
-            <li className="mt-5"><Link href="/transforming-props"><a className="hover:underline">Transforming props</a></Link></li>
             <li className="mt-5"><Link href="/authorization"><a className="hover:underline">Authorization</a></Link></li>
           </ul>
+          <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Advanced</div>
+          <ul className="font-medium">
+          <li className="mt-5"><Link href="/asset-versioning"><a className="hover:underline">Asset versioning</a></Link></li>
+            <li className="mt-5"><Link href="/local-state-caching"><a className="hover:underline">Local state caching</a></Link></li>
+            <li className="mt-5"><Link href="/transforming-props"><a className="hover:underline">Transforming props</a></Link></li>
+            <li className="mt-5"><Link href="/server-side-rendering"><a className="hover:underline">Server-side rendering</a></Link></li>
+          </ul>
         </nav>
-        <div className="leading-relaxed">
+        <div className="flex-1 pl-16 leading-relaxed text-lg">
           <MDXProvider components={components} children={children} />
         </div>
       </div>

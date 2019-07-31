@@ -9,7 +9,7 @@ export const meta = { title: 'Local state caching' }
 
 When navigating browser history, Inertia reloads pages using prop data cached in history state. Inertia does not, however, cache local component state, since this is beyond its reach. This can lead to outdated pages in your browser history. For example, if a user partially completes a form, then navigates away, and then returns back, the form will be reset and their work will have been lost.
 
-To mitigate this issue, you can use the `remember` property to tell Inertia.js which local component state to cache. To do this, provide an array of keys that correspond to your component's data.
+To mitigate this issue, you can use the `remember` property to tell Inertia which local component state to cache. To do this, provide an array of keys that correspond to your component's data.
 
 ~~~js
 {
@@ -64,9 +64,9 @@ You can also shortform the remember values:
 
 When navigating browser history, Inertia reloads pages using prop data cached in history state. Inertia does not, however, cache local component state, since this is beyond its reach. This can lead to outdated pages in your browser history. For example, if a user partially completes a form, then navigates away, and then returns back, the form will be reset and their work will have been lost.
 
-To mitigate this issue, you can use the `useRememberedState` hook to tell Inertia.js which local component state to cache.
+To mitigate this issue, you can use the `useRememberedState` hook to tell Inertia which local component state to cache.
 
-~~~jsx harmony
+~~~jsx
 import { useRememberedState } from 'inertia-react'
 import React from 'react'
 
@@ -83,7 +83,7 @@ export default function Profile() {
 
 If your page contains multiple components using the remember functionality, you'll need to provide a unique key for each component. For example, `Users/Create`. If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
 
-~~~jsx harmony
+~~~jsx
 import { useRememberedState } from 'inertia-react'
 import React from 'react'
 

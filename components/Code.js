@@ -17,7 +17,7 @@ export default ({ className, height, children }) => (
     language={className.replace('language-', '')}
     className={className}
     style={theme}
-    css={{ height: `${height}px`, overflowY: 'auto' }}
+    css={ height ? { height: `${height}px`, overflowY: 'auto' } : {}}
     children={children}
   />
 )

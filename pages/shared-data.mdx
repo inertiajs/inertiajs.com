@@ -1,132 +1,99 @@
+import dedent from 'dedent'
 import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = { title: 'Shared data' }
 
 # Shared data
 
-## Laravel
+Sometimes need to access certain data on numerous pages within your application. For example, a common use-case for this is showing the current user in the site header. Passing this data manually in each response isn't practical. In these situations shared data can be useful.
 
-To share data with all your components, use `Inertia::share($key, $data)`. This can be done both synchronously and lazily.
+## Sharing data
 
-~~~php
-// Synchronously
-Inertia::share('app.name', Config::get('app.name'));
+The server-side adapters provide a way to preassign shared data which each request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller. <span className="bg-orange-200 px-1">Be sure to use this feature sparingly, since this data will be included with every response.</span>
 
-// Lazily
-Inertia::share('auth.user', function () {
-    if (Auth::user()) {
-        return [
-            'id' => Auth::user()->id,
-            'first_name' => Auth::user()->first_name,
-            'last_name' => Auth::user()->last_name,
-        ];
+<TabbedCodeExamples
+  className="my-8"
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        // Synchronously
+        Inertia::share('app.name', Config::get('app.name'));\n
+        // Lazily
+        Inertia::share('auth.user', function () {
+            if (Auth::user()) {
+                return [
+                    'id' => Auth::user()->id,
+                    'first_name' => Auth::user()->first_name,
+                    'last_name' => Auth::user()->last_name,
+                ];
+            }
+        });
+      `
     }
-});
-~~~
+  ]}
+/>
 
-You can also get shared data using the same method `Inertia::share($key)`. If the key is not found, `null` is returned.
+## Accessing shared data
 
-### Accessing data in root template
+Once you've shared the data server-side, you'll then be able to access it within your page components as props. Share data can even be accessed in non-page components, although not as props in those cases. Here's an example of how to do this in a layout component.
 
-There are situations where you may want to access your prop data in your root Blade template. For example, you may want to add a meta description tag, Twitter card meta tags, or Facebook Open Graph meta tags. These props are available via the `$page` variable.
+<TabbedCodeExamples
+  className="my-8"
+  examples={[
+    {
+      name: 'Vue',
+      description: 'Access shared data using the $page property.',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header>
+              You are logged in as: {{ $page.auth.user.name }}\n
+              <nav>
+                <inertia-link href="/">Home</inertia-link>
+                <inertia-link href="/about">About</inertia-link>
+                <inertia-link href="/contact">Contact</inertia-link>
+              </nav>
+            </header>\n
+            <article>
+              <slot />
+            </article>
+          </main>
+        </template>
+      `
+    },
+    {
+      name: 'React',
+      description: 'Access shared data using the usePageProps() hook.',
+      language: 'jsx',
+      code: dedent`
+        import { InertiaLink, usePageProps } from 'inertia-react'
+        import React from 'react'\n
+        export default function Layout({ children }) {
+          const { auth } = usePageProps()\n
+          return (
+            <main>
+              <header>
+                You are logged in as: {auth.user.name}\n
+                <nav>
+                  <InertiaLink href="/">Home</InertiaLink>
+                  <InertiaLink href="/about">About</InertiaLink>
+                  <InertiaLink href="/contact">Contact</InertiaLink>
+                </nav>
+              </header>\n
+              <article>{children}</article>
+            </main>
+          )
+        }
+      `
+    }
+  ]}
+/>
 
-~~~php
-<meta name="twitter:title" content="{{ $page['props']['event']->title }}">
-~~~
+## Flash messages
 
-Sometimes you may even want to provide data that will not be sent to your JavaScript component. You can do this using the `withViewData()` method.
-
-~~~php
-return Inertia::render('Event', ['event' => $event])->withViewData(['meta' => $event->meta]);
-~~~
-
-You can then access this variable like a regular Blade variable.
-
-~~~php
-<meta name="description" content="{{ $meta }}">
-~~~
-
-## Vue.js
-
-Sometimes it's necessary to access the page data (props) from a non-page component. One really common use-case for this is the site layout. For example, you may want to show the currently authenticated user in the site header. This can be done using the `$page` property. Here's a simple example:
-
-~~~html
-<template>
-  <main>
-    <header>
-      You are logged in as: {{ $page.auth.user.name }}
-
-      <nav>
-        <inertia-link href="/">Home</inertia-link>
-        <inertia-link href="/about">About</inertia-link>
-        <inertia-link href="/contact">Contact</inertia-link>
-      </nav>
-    </header>
-
-    <article>
-      <slot />
-    </article>
-  </main>
-</template>
-~~~
-
-This can also be useful for other common "global" data, such as errors and flash messages.
-
-## React
-
-Sometimes it's necessary to access the page data (props) from a non-page component. One really common use-case for this is the site layout. For example, maybe you want to show the currently authenticated user in your site header. This is possible using React's context feature. The base Inertia component automatically provides the current page via context, which can then be accessed by a consumer later on.
-
-The easiest way to access page props is with our `usePageProps` hook.
-
-~~~jsx harmony
-import { InertiaLink, usePageProps } from 'inertia-react'
-import React from 'react'
-
-export default function Layout({ children }) {
-  const { auth } = usePageProps()
-
-  return (
-    <main>
-      <header>
-        You are logged in as: {auth.user.name}
-
-        <nav>
-          <InertiaLink href="/">Home</InertiaLink>
-          <InertiaLink href="/about">About</InertiaLink>
-          <InertiaLink href="/contact">Contact</InertiaLink>
-        </nav>
-      </header>
-
-      <article>{children}</article>
-    </main>
-  )
-}
-~~~
-
-If you need to access the entire Inertia `page` object, you can directly access it via the `usePage` hook. Note that `usePageProps` should suffice for most use cases, so we don't recommend doing this unless you have a good reason!
-
-~~~jsx harmony
-import { InertiaLink, usePage } from 'inertia-react'
-import React from 'react'
-
-export default function Layout({ children }) {
-  const { props } = usePage()
-
-  return (
-    <main>
-      <header>
-        You are logged in as: {props.auth.user.name}
-
-        <nav>
-          <InertiaLink href="/">Home</InertiaLink>
-          <InertiaLink href="/about">About</InertiaLink>
-          <InertiaLink href="/contact">Contact</InertiaLink>
-        </nav>
-      </header>
-
-      <article>{children}</article>
-    </main>
-  )
-}
-~~~
+<div className="my-8 px-8 py-3 text-orange-900 text-base font-medium bg-orange-200 rounded-r border-l-4 border-orange-400">This section is still being developed.</div>

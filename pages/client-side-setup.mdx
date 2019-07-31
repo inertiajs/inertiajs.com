@@ -1,0 +1,90 @@
+import Layout from '../components/Layout'
+
+export default Layout
+export const meta = { title: 'Client-side setup' }
+
+# Client-side setup
+
+## Vue.js
+
+Install using NPM:
+
+~~~bash
+npm install inertiajs/inertia-vue --save
+~~~
+
+Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Vue with the base Inertia page component.
+
+~~~js
+import Inertia from 'inertia-vue'
+import Vue from 'vue'
+
+Vue.use(Inertia)
+
+const app = document.getElementById('app')
+
+new Vue({
+  render: h => h(Inertia, {
+    props: {
+      initialPage: JSON.parse(app.dataset.page),
+      resolveComponent: name => import(`@/Pages/${name}`).then(module => module.default),
+    },
+  }),
+}).$mount(app)
+~~~
+
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
+## React
+
+Install using NPM:
+
+~~~bash
+npm install inertiajs/inertia-react --save
+~~~
+
+Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing React with the base Inertia page component.
+
+~~~jsx
+import Inertia from 'inertia-react'
+import React from 'react'
+import { render } from 'react-dom'
+
+const app = document.getElementById('app')
+
+render(
+  <Inertia
+    initialPage={JSON.parse(app.dataset.page)}
+    resolveComponent={name => import(`@/Pages/${name}`).then(module => module.default)}
+  />,
+  app
+)
+~~~
+
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
+## Setting up Webpack
+
+Here is an example Webpack configuration that uses [Laravel Mix](https://github.com/JeffreyWay/laravel-mix). Note the `@` alias to the `/resources/js` directory.
+
+~~~js
+const mix = require('laravel-mix')
+const path = require('path')
+
+mix
+  .js('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css')
+  .webpackConfig({
+    output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
+    resolve: {
+      alias: {
+        vue$: 'vue/dist/vue.runtime.esm.js',
+        '@': path.resolve('resources/js'),
+      },
+    },
+  })
+~~~
+
+## Setup dynamic imports
+
+

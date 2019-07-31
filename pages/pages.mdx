@@ -5,7 +5,34 @@ export const meta = { title: 'Pages' }
 
 # Pages
 
-## Creating a base layout in Vue.js
+## Creating pages
+
+With Inertia, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.vue`. Note how it extends the `Layout.vue` component we created above.
+
+~~~vue
+<template>
+  <layout>
+    <h1>Welcome</h1>
+    <p>Welcome to my first Inertia app!</p>
+  </layout>
+</template>
+
+<script>
+import Layout from '@/Shared/Layout'
+
+export default {
+  components: {
+    Layout,
+  },
+}
+</script>
+~~~
+
+## Accessing response data
+
+Pages components receive the props (data) that you return form your controller. Page props can also be access via `$page` property in Vue.js
+
+## Creating layouts
 
 While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.vue`.
 
@@ -27,26 +54,6 @@ While not required, for most projects it makes sense to create a default site la
 
 ## Creating page components in Vue.js
 
-With Inertia.js, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.vue`. Note how it extends the `Layout.vue` component we created above.
-
-~~~vue
-<template>
-  <layout>
-    <h1>Welcome</h1>
-    <p>Welcome to my first Inertia.js app!</p>
-  </layout>
-</template>
-
-<script>
-import Layout from '@/Shared/Layout'
-
-export default {
-  components: {
-    Layout,
-  },
-}
-</script>
-~~~
 
 <hr />
 
@@ -54,7 +61,7 @@ export default {
 
 While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.js`.
 
-~~~jsx harmony
+~~~jsx
 import { InertiaLink } from 'inertia-react'
 import React from 'react'
 
@@ -75,9 +82,9 @@ export default function Layout({ children }) {
 
 ## Creating page components in React
 
-With Inertia.js, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.js`. Note how it extends the `Layout.js` component we created above.
+With Inertia, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.js`. Note how it extends the `Layout.js` component we created above.
 
-~~~jsx harmony
+~~~jsx
 import React from 'react'
 import Layout from '@/Shared/Layout'
 
@@ -85,7 +92,7 @@ export default function Welcome() {
   return (
     <Layout>
       <h1>Welcome</h1>
-      <p>Welcome to my first Inertia.js app!</p>
+      <p>Welcome to my first Inertia app!</p>
     </Layout>
   )
 }
