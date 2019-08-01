@@ -29,7 +29,11 @@ mix.babelConfig({
 })
 ~~~
 
-**Limitation:** When using Laravel Mix (v4) with dynamic imports you cannot write styles within Vue files. As a workaround, you need to drop Mix entirely or downgrade to v3 due to current Webpack limitations ([source](https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909)).
+<div className="my-8 px-8 py-3 text-orange-900 text-base bg-orange-200 rounded-r border-l-4 border-orange-400">
+
+When using Laravel Mix (v4) with dynamic imports you cannot use styles within Vue files due to current Webpack [limitations](https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909). As a workaround, you need to drop Mix entirely or downgrade to v3.
+
+</div>
 
 ## Using Inertia without code splitting
 
@@ -92,40 +96,45 @@ One way to do this is manually loading all your page components:
 
 Another option is to use `required.context` to automatically register all your page components.
 
-~~~js
-import Inertia from 'inertia-vue'
-import Vue from 'vue'
-
-Vue.use(Inertia)
-
-const app = document.getElementById('app')
-
-const files = require.context('./', true, /\.vue$/i)
-
-new Vue({
-  render: h => h(Inertia, {
-    props: {
-      initialPage: JSON.parse(app.dataset.page),
-      resolveComponent: page => files(`./Pages/${page}.vue`).default,
+<TabbedCodeExamples
+  className="my-8"
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        import Inertia from 'inertia-vue'
+        import Vue from 'vue'\n
+        Vue.use(Inertia)\n
+        const app = document.getElementById('app')\n
+        const files = require.context('./', true, /\.vue$/i)\n
+        new Vue({
+          render: h => h(Inertia, {
+            props: {
+              initialPage: JSON.parse(app.dataset.page),
+              resolveComponent: page => files(`+`\`./Pages/\${page}.vue\``+dedent`).default,
+            },
+          }),
+        }).$mount(app)
+      `
     },
-  }),
-}).$mount(app)
-~~~
-
-~~~jsx
-import Inertia from 'inertia-react'
-import React from 'react'
-import { render } from 'react-dom'
-
-const app = document.getElementById('app')
-
-const files = require.context('./', true, /\.js$/i)
-
-render(
-  <Inertia
-    initialPage={JSON.parse(app.dataset.page)}
-    resolveComponent={page => files(`./Pages/${page}.js`).default}
-  />,
-  app
-)
-~~~
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import Inertia from 'inertia-react'
+        import React from 'react'
+        import { render } from 'react-dom'\n
+        const app = document.getElementById('app')\n
+        const files = require.context('./', true, /\.js$/i)\n
+        render(
+          <Inertia
+            initialPage={JSON.parse(app.dataset.page)}
+            resolveComponent={page => files(`+`\`./Pages/\${page}.js\``+dedent`).default}
+          />,
+          app
+        )
+      `
+    }
+  ]}
+/>
