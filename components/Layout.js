@@ -51,7 +51,7 @@ export default function Layout({ meta, children }) {
                   <h1 className="text-5xl leading-tight font-light">
                     Build single-page apps, <strong className="font-bold">without building an API.</strong>
                   </h1>
-                  <p className="mt-8 text-xl leading-relaxed  max-w-md">
+                  <p className="mt-8 text-xl leading-relaxed max-w-md pr-2">
                     Inertia.js allows you to <strong className="font-bold" css={{ color: '#92eee2' }}>quickly build modern <span className="whitespace-no-wrap">single-page</span> React and Vue.js applications</strong> using classic server-side routing and controllers.
                   </p>
               </div>
