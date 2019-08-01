@@ -14,7 +14,6 @@ Sometimes need to access certain data on numerous pages within your application.
 The server-side adapters provide a way to preassign shared data which each request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller. <span className="bg-orange-200 px-1">Be sure to use this feature sparingly, since this data will be included with every response.</span>
 
 <TabbedCodeExamples
-  className="my-8"
   examples={[
     {
       name: 'Laravel',
@@ -42,7 +41,6 @@ The server-side adapters provide a way to preassign shared data which each reque
 Once you've shared the data server-side, you'll then be able to access it within your page components as props. Share data can even be accessed in non-page components, although not as props in those cases. Here's an example of how to do this in a layout component.
 
 <TabbedCodeExamples
-  className="my-8"
   examples={[
     {
       name: 'Vue',

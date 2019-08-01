@@ -9,9 +9,10 @@ const components = {
   h1: ({ children }) => <h1 className="mb-8 text-4xl font-bold text-gray-700 leading-none">{children}</h1>,
   h2: ({ children }) => <h2 className="mt-16 mb-4 text-2xl font-bold text-gray-700 leading-none">{children}</h2>,
   h3: ({ children }) => <h3 className="mt-16 mb-4 text-xl font-bold text-gray-700 leading-none">{children}</h3>,
-  pre: ({ children }) => <pre className="my-8 block rounded overflow-hidden">{children}</pre>,
   a: (props) => <a className="text-blue-700 hover:text-orange-700 font-medium underline" {...props} />,
-  code: (props) => <Code {...props} />,
+  pre: ({ children }) => children,
+  code: ({ className, children }) => <Code className="my-8 p-6 leading-normal rounded" language={className.replace('language-', '')} children={children} />,
+  TabbedCodeExamples: (props) => <TabbedCodeExamples className="my-8 rounded overflow-hidden" {...props} />,
   inlineCode: (props) => <code className="font-mono text-sm font-bold bg-gray-200 rounded p-1" {...props} />,
 }
 
@@ -55,6 +56,7 @@ export default function Layout({ meta, children }) {
               </div>
               <div className="w-full lg:w-1/2 lg:pl-24 mt-8 lg:mt-0">
                 <TabbedCodeExamples
+                  className="rounded-t overflow-hidden"
                   height="320"
                   examples={[
                     {
@@ -113,8 +115,8 @@ export default function Layout({ meta, children }) {
           }
         </div>
       </div>
-      <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 flex py-24">
-        <nav className="w-64 flex-shrink-0 border-r">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 py-12 md:py-24 flex">
+        <nav className="hidden md:block md:w-48 lg:w-64 flex-shrink-0 border-r">
           <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
           <ul className="font-medium">
             <li className="mt-4"><Link href="/"><a className="hover:underline">Introduction</a></Link></li>
@@ -140,7 +142,7 @@ export default function Layout({ meta, children }) {
             <li className="mt-4"><Link href="/server-side-rendering"><a className="hover:underline">Server-side rendering</a></Link></li>
           </ul>
         </nav>
-        <div className="flex-1 pl-16 leading-relaxed text-lg">
+        <div className="flex-1 overflow-hidden md:pl-8 lg:pl-16 leading-relaxed text-lg">
           <MDXProvider components={components} children={children} />
         </div>
       </div>
