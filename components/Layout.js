@@ -119,27 +119,27 @@ export default function Layout({ meta, children }) {
         <nav className="w-64 flex-shrink-0 border-r">
           <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
           <ul className="font-medium">
-            <li className="mt-5"><Link href="/"><a className="hover:underline">Introduction</a></Link></li>
-            <li className="mt-5"><Link href="/installation"><a className="hover:underline">Installation</a></Link></li>
-            <li className="mt-5"><Link href="/server-side-setup"><a className="hover:underline">Server-side</a></Link></li>
-            <li className="mt-5"><Link href="/client-side-setup"><a className="hover:underline">Client-side</a></Link></li>
-            <li className="mt-5"><Link href="/code-splitting"><a className="hover:underline">Code splitting</a></Link></li>
+            <li className="mt-4"><Link href="/"><a className="hover:underline">Introduction</a></Link></li>
+            <li className="mt-4"><Link href="/installation"><a className="hover:underline">Installation</a></Link></li>
+            <li className="mt-4"><Link href="/server-side-setup"><a className="hover:underline">Server-side</a></Link></li>
+            <li className="mt-4"><Link href="/client-side-setup"><a className="hover:underline">Client-side</a></Link></li>
+            <li className="mt-4"><Link href="/code-splitting"><a className="hover:underline">Code splitting</a></Link></li>
           </ul>
           <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
           <ul className="font-medium">
-            <li className="mt-5"><Link href="/routing"><a className="hover:underline">Routing</a></Link></li>
-            <li className="mt-5"><Link href="/pages"><a className="hover:underline">Pages</a></Link></li>
-            <li className="mt-5"><Link href="/links"><a className="hover:underline">Links</a></Link></li>
-            <li className="mt-5"><Link href="/forms"><a className="hover:underline">Forms</a></Link></li>
-            <li className="mt-5"><Link href="/shared-data"><a className="hover:underline">Shared data</a></Link></li>
-            <li className="mt-5"><Link href="/authorization"><a className="hover:underline">Authorization</a></Link></li>
+            <li className="mt-4"><Link href="/routing"><a className="hover:underline">Routing</a></Link></li>
+            <li className="mt-4"><Link href="/pages"><a className="hover:underline">Pages</a></Link></li>
+            <li className="mt-4"><Link href="/links"><a className="hover:underline">Links</a></Link></li>
+            <li className="mt-4"><Link href="/forms"><a className="hover:underline">Forms</a></Link></li>
+            <li className="mt-4"><Link href="/shared-data"><a className="hover:underline">Shared data</a></Link></li>
+            <li className="mt-4"><Link href="/authorization"><a className="hover:underline">Authorization</a></Link></li>
           </ul>
           <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Advanced</div>
           <ul className="font-medium">
-          <li className="mt-5"><Link href="/asset-versioning"><a className="hover:underline">Asset versioning</a></Link></li>
-            <li className="mt-5"><Link href="/local-state-caching"><a className="hover:underline">Local state caching</a></Link></li>
-            <li className="mt-5"><Link href="/transforming-props"><a className="hover:underline">Transforming props</a></Link></li>
-            <li className="mt-5"><Link href="/server-side-rendering"><a className="hover:underline">Server-side rendering</a></Link></li>
+          <li className="mt-4"><Link href="/asset-versioning"><a className="hover:underline">Asset versioning</a></Link></li>
+            <li className="mt-4"><Link href="/local-state-caching"><a className="hover:underline">Local state caching</a></Link></li>
+            <li className="mt-4"><Link href="/transforming-props"><a className="hover:underline">Transforming props</a></Link></li>
+            <li className="mt-4"><Link href="/server-side-rendering"><a className="hover:underline">Server-side rendering</a></Link></li>
           </ul>
         </nav>
         <div className="flex-1 pl-16 leading-relaxed text-lg">
