@@ -84,7 +84,7 @@ export default function Layout({ meta, children }) {
                       language: 'html',
                       code: dedent`
                         <template>
-                          <layout title="Users">
+                          <layout>
                             <div v-for="user in users" :key="user.id">
                               <inertia-link :href="\`/users/\${user.id}\`">
                                 {{ user.name }}
