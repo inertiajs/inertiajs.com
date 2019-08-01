@@ -22,15 +22,13 @@ export default function Layout({ meta, children }) {
         <title>{meta.title}</title>
       </Head>
       <div className="overflow-hidden text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
-        <div className="max-w-6xl mx-auto relative">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 relative">
           <svg className="absolute z-10 top-0 w-auto" css={{ height: '600px', fill: '#b2b6ff', opacity: '.08' }} viewBox="0 0 95 52.8"><path d="M27.3 0H0l26.4 26.4L0 52.8h27.3l26.4-26.4z"/><path d="M68.6 0H41.3l26.4 26.4-26.4 26.4h27.3L95 26.4z"/></svg>
           <header className="py-12 relative z-20 flex justify-between">
             <Link href="/">
-              <a>
-                <svg className="fill-current text-white" viewBox="0 0 637.4 50.48" css={{ height: '25px' }}>
-                  <path d="M231.19 16.08H213.4l17.2 17.2-17.2 17.2h17.79l17.2-17.2-17.2-17.2z"></path>
-                  <path d="M258.09 16.08h-17.78l17.2 17.2-17.2 17.2h17.78l17.2-17.2-17.2-17.2zM320.2 36.73h-4.55V50.2h-2V36.73h-4.54v-1.94h11.09zM338.18 34.79V50.2h-2v-6.94h-7.48v6.94h-2V34.79h2v6.54h7.48v-6.54zM355.07 48.26v1.94h-9.17V34.79h9.08v1.94h-7v4.73h6.49v1.91h-6.57v4.89zM386.25 50.2h-2v-12l-5 8.38h-.35l-5-8.36v12h-2V34.79h2.31l4.9 8.14 4.89-8.14h2.31zM393.13 42.49a8 8 0 1 1 8 8 7.91 7.91 0 0 1-8-8zm13.91 0a5.94 5.94 0 1 0-5.94 6 5.88 5.88 0 0 0 5.94-6zM429.26 42.49c0 4.27-3.06 7.71-7.31 7.71h-6V34.79h6a7.37 7.37 0 0 1 7.31 7.7zm-2 0c0-3.25-2.18-5.76-5.35-5.76h-4v11.53h4c3.21 0 5.39-2.51 5.39-5.77zM445.34 48.26v1.94h-9.2V34.79h9.09v1.94h-7v4.73h6.49v1.91h-6.49v4.89zM457.9 44.3h-3.63v5.9h-2.07V34.79h6.16a4.75 4.75 0 0 1 1.61 9.24l3.63 6.17h-2.27zm-3.63-1.85h4.11a2.87 2.87 0 0 0 0-5.74h-4.11zM481.66 34.79V50.2h-1.65l-7.92-11.53v11.51h-2.05V34.79h1.65l7.92 11.49V34.79zM513.67 50.2h-2v-12l-5 8.38h-.26l-5-8.36v12h-2V34.79h2.31l4.91 8.14 4.88-8.14h2.31zM520.56 42.49a8 8 0 1 1 8 8 7.9 7.9 0 0 1-8-8zm13.9 0a5.94 5.94 0 1 0-5.94 6 5.87 5.87 0 0 0 5.94-6zM554.99 34.79V50.2h-1.65l-7.92-11.53v11.51h-2V34.79h1.65l7.83 11.49V34.79zM561.9 42.49a8 8 0 1 1 8 8 7.91 7.91 0 0 1-8-8zm13.91 0a5.94 5.94 0 1 0-5.94 6 5.88 5.88 0 0 0 5.91-6zM593.38 48.26v1.94h-8.69V34.79h2v13.47zM601.9 34.79V50.2h-2.05V34.79zM619.42 36.73h-4.52V50.2h-2V36.73h-4.53v-1.94h11.11zM637.4 34.79V50.2h-2v-6.94h-7.5v6.94h-2V34.79h2v6.54h7.48v-6.54zM6.02 15.32h10.26l-6 34.2H0zm.61-9.17A7.59 7.59 0 0 1 13.75 0a5.14 5.14 0 0 1 5.2 6.15 7.53 7.53 0 0 1-7.18 6.16 5.1 5.1 0 0 1-5.14-6.16zM54.31 28.52l-3.69 21H40.36l3.42-19.49c.75-4.38-1.64-6.23-4.93-6.23s-6.5 2-7.45 6.64l-3.35 19.08H17.78l6-34.2h10.26l-.54 3.22a13.8 13.8 0 0 1 10-4.18c7.12 0 12.4 5.07 10.81 14.16zM94.46 32.42a24.07 24.07 0 0 1-1.09 4.11H68.9c.62 3.76 3.76 4.78 7.05 4.78a10 10 0 0 0 7.18-2.66l7.18 5.88c-4 4-8.69 5.95-15 5.95-11.83 0-18-8.48-16.35-18.74a20.71 20.71 0 0 1 20.46-17.38c9.85 0 16.96 7.66 15.04 18.06zm-9.64-3.69c-.34-3.83-3-5.27-6.16-5.27a9 9 0 0 0-8.34 5.27zM123.95 14.67l-2 11.63c-4-.62-10.46.75-11.7 7.79l.07-.41-2.8 15.87H97.27l6-34.2h10.26l-1.1 6.16c2.14-4.68 6.66-6.84 11.52-6.84zM137.83 37.28c-.55 3.08 2 3.28 6.57 2.94l-1.64 9.3c-12.32 1.37-16.9-2.66-15.19-12.24l2.12-12.11h-5.47l1.78-9.85h5.4l1.16-6.5 10.81-3.08-1.71 9.58h7.12L147 25.17h-7.05zM155.27 15.32h10.26l-6 34.2h-10.28zm.62-9.17A7.58 7.58 0 0 1 163 0a5.14 5.14 0 0 1 5.2 6.15 7.52 7.52 0 0 1-7.18 6.16 5.09 5.09 0 0 1-5.12-6.16zM208.15 15.32l-6 34.2H191.9l.41-2.32c-2.53 2.12-5.88 3.28-10.26 3.28-11.08 0-15.32-9.64-13.55-18.88 1.58-8.75 8.55-17.24 19.23-17.24 4.51 0 7.66 1.78 9.57 4.59l.62-3.63zM194.9 32.49v-.07c.89-5.13-1.92-8.34-6.64-8.34s-8.62 3.21-9.51 8.34 1.85 8.35 6.57 8.35a9.62 9.62 0 0 0 9.58-8.28z"></path>
-                </svg>
+              <a className="lg:flex lg:items-end">
+                <svg className="block fill-current text-white" css={{ height: '25px' }} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 275.3 50.5"><path d="M231.2 16.1h-17.8l17.2 17.2-17.2 17.2h17.8l17.2-17.2z"/><path d="M258.1 16.1h-17.8l17.2 17.2-17.2 17.2h17.8l17.2-17.2z"/><g><path d="M6 15.3h10.3l-6 34.2H0l6-34.2zm.6-9.1C7.2 2.9 10.3 0 13.7 0s5.7 2.8 5.2 6.2c-.5 3.4-3.7 6.2-7.2 6.2s-5.6-3-5.1-6.2zM54.3 28.5l-3.7 21H40.4L43.8 30c.8-4.4-1.6-6.2-4.9-6.2-3.4 0-6.5 2-7.5 6.6L28 49.5H17.8l6-34.2h10.3l-.5 3.2c2.3-2.6 6.2-4.2 10.1-4.2 6.9.1 12.2 5.1 10.6 14.2zM94.5 32.4c-.1.8-.5 2.7-1.1 4.1H68.9c.6 3.8 3.8 4.8 7 4.8 2.9 0 5.2-.8 7.2-2.7l7.2 5.9c-4 4-8.7 6-15 6-11.8 0-18-8.5-16.3-18.7a20.7 20.7 0 0 1 20.5-17.4c9.8 0 16.9 7.6 15 18zm-9.7-3.7c-.3-3.8-3-5.3-6.2-5.3a8.9 8.9 0 0 0-8.3 5.3h14.5zM123.9 14.6l-2 11.6c-4-.6-10.5.8-11.7 7.8l.1-.4-2.8 15.9H97.3l6-34.2h10.3l-1.1 6.2c2.1-4.7 6.6-6.9 11.4-6.9zM137.8 37.3c-.5 3.1 2 3.3 6.6 2.9l-1.6 9.3c-12.3 1.4-16.9-2.7-15.2-12.2l2.1-12.1h-5.5l1.8-9.9h5.4l1.2-6.5 10.8-3.1-1.7 9.6h7.1l-1.8 9.9h-7l-2.2 12.1zM155.3 15.3h10.3l-6 34.2h-10.3l6-34.2zm.6-9.1c.5-3.3 3.7-6.2 7.1-6.2s5.7 2.8 5.2 6.2c-.5 3.4-3.7 6.2-7.2 6.2s-5.7-3-5.1-6.2zM208.1 15.3l-6 34.2h-10.3l.4-2.3a15.5 15.5 0 0 1-10.3 3.3c-11.1 0-15.3-9.6-13.5-18.9 1.6-8.8 8.6-17.2 19.2-17.2 4.5 0 7.7 1.8 9.6 4.6l.6-3.6h10.3zm-13.2 17.2c.9-5.2-1.9-8.4-6.6-8.4a9.5 9.5 0 0 0-9.5 8.3c-.9 5.1 1.8 8.3 6.6 8.3 4.6.1 8.6-3.1 9.5-8.2z"/></g></svg>
+                <svg className="block fill-current text-white mt-2 lg:mt-0 lg:ml-4" css={{ height: '8px' }} version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 328.3 16"><path d="M11.1 2.2H6.6v13.5h-2V2.2H0V.3h11.1v1.9zM29.1.3v15.4h-2V8.8h-7.5v6.9h-2V.3h2v6.5h7.5V.3h2zM46 13.8v1.9h-9.2V.3h9.1v1.9h-7V7h6.5v1.9h-6.5v4.9H46zM77.2 15.7h-2v-12l-5 8.4h-.3l-5-8.4v12h-2V.3h2.3L70 8.4 74.9.3h2.3v15.4zM84 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.4 0 5.9-2.6 5.9-6zM120.2 8c0 4.3-3.1 7.7-7.3 7.7h-6V.3h6c4.2 0 7.3 3.4 7.3 7.7zm-2 0c0-3.3-2.2-5.8-5.3-5.8h-4v11.5h4c3.1.1 5.3-2.5 5.3-5.7zM136.2 13.8v1.9H127V.3h9.1v1.9h-7V7h6.5v1.9h-6.5v4.9h7.1zM148.8 9.8h-3.6v5.9h-2V.3h6.2c2.6 0 4.8 2.1 4.8 4.8 0 2-1.3 3.8-3.2 4.5l3.6 6.2h-2.3l-3.5-6zm-3.6-1.9h4.1c1.5 0 2.8-1.3 2.8-2.9 0-1.6-1.2-2.9-2.8-2.9h-4.1v5.8zM172.6.3v15.4H171l-8-11.5v11.5h-2V.3h1.7l7.9 11.5V.3h2zM204.6 15.7h-2v-12l-5 8.4h-.3l-5-8.4v12h-2V.3h2.3l4.9 8.1 4.9-8.1h2.3v15.4zM211.5 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.3 0 5.9-2.6 5.9-6zM245.9.3v15.4h-1.6l-7.9-11.5v11.5h-2V.3h1.7l7.9 11.5V.3h1.9zM252.8 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.3 0 5.9-2.6 5.9-6zM284.3 13.8v1.9h-8.7V.3h2v13.5h6.7zM292.8.3v15.4h-2V.3h2zM310.3 2.2h-4.6v13.5h-2V2.2h-4.5V.3h11.1v1.9zM328.3.3v15.4h-2V8.8h-7.5v6.9h-2V.3h2v6.5h7.5V.3h2z"/></svg>
               </a>
             </Link>
             <div className="flex items-center text-white">
@@ -46,16 +44,16 @@ export default function Layout({ meta, children }) {
             </div>
           </header>
           { meta.hero &&
-            <div className="mt-16 relative z-20 flex items-start">
-              <div className="w-1/2 mt-4">
-                  <h1 className="text-5xl leading-tight font-light">
+            <div className="lg:mt-16 relative z-20 flex flex-wrap items-start">
+              <div className="w-full lg:w-1/2 mt-4">
+                  <h1 className="text-4xl lg:text-5xl leading-tight font-light">
                     Build single-page apps, <strong className="font-bold">without building an API.</strong>
                   </h1>
-                  <p className="mt-8 text-xl leading-relaxed max-w-md pr-2">
+                  <p className="mt-8 text-lg lg:text-xl leading-relaxed max-w-md pr-2">
                     Inertia.js allows you to <strong className="font-bold" css={{ color: '#92eee2' }}>quickly build modern <span className="whitespace-no-wrap">single-page</span> React and Vue.js applications</strong> using classic server-side routing and controllers.
                   </p>
               </div>
-              <div className="w-1/2 pl-24">
+              <div className="w-full lg:w-1/2 lg:pl-24 mt-8 lg:mt-0">
                 <TabbedCodeExamples
                   height="320"
                   examples={[
@@ -115,7 +113,7 @@ export default function Layout({ meta, children }) {
           }
         </div>
       </div>
-      <div className="max-w-6xl mx-auto flex py-24">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 flex py-24">
         <nav className="w-64 flex-shrink-0 border-r">
           <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
           <ul className="font-medium">
