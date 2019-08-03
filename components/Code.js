@@ -46,7 +46,7 @@ export default ({ className, language, height, children }) => (
     style={theme}
     customStyle={{
       color: 'white',
-      'font-size': '.85rem',
+      fontSize: '.85rem',
       overflow: 'auto',
       background: '#202e59',
       height: height ? `${height}px` : 'auto',
