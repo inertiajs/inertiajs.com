@@ -135,7 +135,7 @@ export default function Layout({ meta, children}) {
           <MDXProvider components={MarkdownComponents} children={children} />
         </div>
         { meta.links &&
-          <div className="hidden md:block w-48 flex-shrink-0 relative -mt-6">
+          <div className="hidden md:block w-48 flex-shrink-0 relative -mt-8">
             <div className="pt-8 sticky top-0">
               <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">On this page</div>
               <ul>
