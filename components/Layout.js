@@ -131,11 +131,11 @@ export default function Layout({ meta, children}) {
             <li className="mt-4"><Link href="/server-side-rendering"><a className="hover:underline font-medium text-gray-700">Server-side rendering</a></Link></li>
           </ul>
         </nav>
-        <div className="flex-1 overflow-hidden md:pl-8 lg:pl-16 pr-16 leading-relaxed text-lg" id="top">
+        <div className="flex-1 overflow-hidden md:pl-8 lg:pl-16 xl:pr-16 leading-relaxed text-lg" id="top">
           <MDXProvider components={MarkdownComponents} children={children} />
         </div>
         { meta.links &&
-          <div className="hidden md:block w-48 flex-shrink-0 relative -mt-8">
+          <div className="hidden xl:block w-48 flex-shrink-0 relative -mt-8">
             <div className="pt-8 sticky top-0">
               <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">On this page</div>
               <ul>
