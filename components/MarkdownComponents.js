@@ -1,4 +1,5 @@
 import Code from './Code'
+import Link from 'next/link'
 import TabbedCodeExamples from './TabbedCodeExamples'
 
 function kebabCase(str) {
@@ -35,11 +36,13 @@ export default {
       {...props}
     />
   ),
-  a: (props) => (
-    <a
-      className="text-blue-700 hover:text-orange-700 font-medium underline"
-      {...props}
-    />
+  a: ({ href, children }) => (
+    <Link href={href}>
+      <a
+        className="text-blue-700 hover:text-orange-700 font-medium underline"
+        children={children}
+      />
+    </Link>
   ),
   pre: ({ children }) => (
     children
