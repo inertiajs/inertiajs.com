@@ -35,7 +35,9 @@ The magic of Inertia is in the server-side responses. On the first page load, a 
 </html>
 ~~~
 
-Since Inertia is a framework for building single-page applications, all subsequent page visits are made as `xhr` requests. That means subsequent responses must be handled differently. Instead of returning a full `html` response like the first page load, we instead return a `json` response. This response is in the exact same format as the `json` encoded in the `data-page` attribute.
+Since Inertia is a framework for building single-page applications, all subsequent page visits are made as `xhr` requests. That means subsequent responses must be handled differently.
+
+Rather than returning a full `html` response like the first page load, instead make a `json` response with just the page data. This `json` response should be in the exact same format as the `json` encoded in the `data-page` attribute.
 
 ~~~json
 {
