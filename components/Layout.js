@@ -139,8 +139,8 @@ export default function Layout({ meta, children}) {
             <div className="pt-8 sticky top-0">
               <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">On this page</div>
               <ul>
-                {meta.links.map(link => (
-                  <li className="mt-4">
+                {meta.links.map((link, index) => (
+                  <li className="mt-4" key={index}>
                     <Link href={link.url}><a className="hover:underline font-medium text-gray-700">{link.name}</a></Link>
                   </li>
                 ))}
