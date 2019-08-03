@@ -1,22 +1,11 @@
-import Code from './Code'
 import dedent from 'dedent'
 import Head from 'next/head'
 import Link from 'next/link'
 import { MDXProvider } from '@mdx-js/react'
-import TabbedCodeExamples from '../components/TabbedCodeExamples'
+import TabbedCodeExamples from './TabbedCodeExamples'
+import MarkdownComponents from './MarkdownComponents'
 
-const components = {
-  h1: ({ children }) => <h1 className="mb-8 text-4xl font-bold text-gray-700 leading-none">{children}</h1>,
-  h2: ({ children }) => <h2 className="mt-16 mb-4 text-2xl font-bold text-gray-700 leading-none">{children}</h2>,
-  h3: ({ children }) => <h3 className="mt-16 mb-4 text-xl font-bold text-gray-700 leading-none">{children}</h3>,
-  a: (props) => <a className="text-blue-700 hover:text-orange-700 font-medium underline" {...props} />,
-  pre: ({ children }) => children,
-  code: ({ className, children }) => <Code className="my-8 p-6 leading-normal rounded" language={className.replace('language-', '')} children={children} />,
-  TabbedCodeExamples: (props) => <TabbedCodeExamples className="my-8 rounded overflow-hidden" {...props} />,
-  inlineCode: (props) => <code className="font-mono text-sm font-bold bg-gray-200 rounded p-1" {...props} />,
-}
-
-export default function Layout({ meta, children }) {
+export default function Layout({ meta, children}) {
   return (
     <div className="leading-none font-sans text-gray-800 antialiased">
       <Head>
@@ -116,35 +105,49 @@ export default function Layout({ meta, children }) {
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 py-12 md:py-24 flex">
-        <nav className="hidden md:block md:w-48 lg:w-64 flex-shrink-0 border-r">
+        <nav className="hidden md:block md:w-56 flex-shrink-0 border-r">
           <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
-          <ul className="font-medium">
-            <li className="mt-4"><Link href="/"><a className="hover:underline">Introduction</a></Link></li>
-            <li className="mt-4"><Link href="/installation"><a className="hover:underline">Installation</a></Link></li>
-            <li className="mt-4"><Link href="/server-side-setup"><a className="hover:underline">Server-side</a></Link></li>
-            <li className="mt-4"><Link href="/client-side-setup"><a className="hover:underline">Client-side</a></Link></li>
-            <li className="mt-4"><Link href="/code-splitting"><a className="hover:underline">Code splitting</a></Link></li>
+          <ul>
+            <li className="mt-4"><Link href="/"><a className="hover:underline font-medium text-gray-700">Introduction</a></Link></li>
+            <li className="mt-4"><Link href="/installation"><a className="hover:underline font-medium text-gray-700">Installation</a></Link></li>
+            <li className="mt-4"><Link href="/server-side-setup"><a className="hover:underline font-medium text-gray-700">Server-side</a></Link></li>
+            <li className="mt-4"><Link href="/client-side-setup"><a className="hover:underline font-medium text-gray-700">Client-side</a></Link></li>
+            <li className="mt-4"><Link href="/code-splitting"><a className="hover:underline font-medium text-gray-700">Code splitting</a></Link></li>
           </ul>
           <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
-          <ul className="font-medium">
-            <li className="mt-4"><Link href="/routing"><a className="hover:underline">Routing</a></Link></li>
-            <li className="mt-4"><Link href="/pages"><a className="hover:underline">Pages</a></Link></li>
-            <li className="mt-4"><Link href="/links"><a className="hover:underline">Links</a></Link></li>
-            <li className="mt-4"><Link href="/forms"><a className="hover:underline">Forms</a></Link></li>
-            <li className="mt-4"><Link href="/shared-data"><a className="hover:underline">Shared data</a></Link></li>
-            <li className="mt-4"><Link href="/authorization"><a className="hover:underline">Authorization</a></Link></li>
+          <ul>
+            <li className="mt-4"><Link href="/routing"><a className="hover:underline font-medium text-gray-700">Routing</a></Link></li>
+            <li className="mt-4"><Link href="/pages"><a className="hover:underline font-medium text-gray-700">Pages</a></Link></li>
+            <li className="mt-4"><Link href="/links"><a className="hover:underline font-medium text-gray-700">Links</a></Link></li>
+            <li className="mt-4"><Link href="/forms"><a className="hover:underline font-medium text-gray-700">Forms</a></Link></li>
+            <li className="mt-4"><Link href="/shared-data"><a className="hover:underline font-medium text-gray-700">Shared data</a></Link></li>
+            <li className="mt-4"><Link href="/authorization"><a className="hover:underline font-medium text-gray-700">Authorization</a></Link></li>
           </ul>
           <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Advanced</div>
-          <ul className="font-medium">
-          <li className="mt-4"><Link href="/asset-versioning"><a className="hover:underline">Asset versioning</a></Link></li>
-            <li className="mt-4"><Link href="/local-state-caching"><a className="hover:underline">Local state caching</a></Link></li>
-            <li className="mt-4"><Link href="/transforming-props"><a className="hover:underline">Transforming props</a></Link></li>
-            <li className="mt-4"><Link href="/server-side-rendering"><a className="hover:underline">Server-side rendering</a></Link></li>
+          <ul>
+            <li className="mt-4"><Link href="/asset-versioning"><a className="hover:underline font-medium text-gray-700">Asset versioning</a></Link></li>
+            <li className="mt-4"><Link href="/local-state-caching"><a className="hover:underline font-medium text-gray-700">Local state caching</a></Link></li>
+            <li className="mt-4"><Link href="/transforming-props"><a className="hover:underline font-medium text-gray-700">Transforming props</a></Link></li>
+            <li className="mt-4"><Link href="/server-side-rendering"><a className="hover:underline font-medium text-gray-700">Server-side rendering</a></Link></li>
           </ul>
         </nav>
-        <div className="flex-1 overflow-hidden md:pl-8 lg:pl-16 leading-relaxed text-lg">
-          <MDXProvider components={components} children={children} />
+        <div className="flex-1 overflow-hidden md:pl-8 lg:pl-16 pr-16 leading-relaxed text-lg" id="top">
+          <MDXProvider components={MarkdownComponents} children={children} />
         </div>
+        { meta.links &&
+          <div className="hidden md:block w-48 flex-shrink-0 relative -mt-6">
+            <div className="pt-8 sticky top-0">
+              <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">On this page</div>
+              <ul>
+                {meta.links.map(link => (
+                  <li className="mt-4">
+                    <Link href={link.url}><a className="hover:underline font-medium text-gray-700">{link.name}</a></Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        }
       </div>
     </div>
   )
