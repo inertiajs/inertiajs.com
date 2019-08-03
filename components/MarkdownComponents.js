@@ -59,7 +59,7 @@ export default {
   ),
   inlineCode: (props) => (
     <code
-      className="font-mono text-sm font-bold bg-gray-200 rounded p-1"
+      className="font-mono text-sm font-bold bg-gray-200 rounded p-1 whitespace-no-wrap"
       {...props}
     />
   ),
