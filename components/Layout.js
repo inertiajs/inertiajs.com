@@ -10,6 +10,7 @@ export default function Layout({ meta, children}) {
     <div className="leading-none font-sans text-gray-800 antialiased">
       <Head>
         <title>{meta.title}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
       </Head>
       <div className="overflow-hidden text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 relative">
