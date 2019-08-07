@@ -1,100 +1,165 @@
+import dedent from 'dedent'
 import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
-export const meta = { title: 'Pages' }
+export const meta = {
+  title: 'Pages',
+  links: [
+    { url: '#top', name: 'Introduction' },
+    { url: '#creating-pages', name: 'Creating pages' },
+    { url: '#creating-layouts', name: 'Creating layouts' },
+  ],
+}
 
 # Pages
 
-With Inertia, each page in your application has it's own controller, and it's own JavaScript page component. This allows you to retrieve just the data required for that particular page, and nothing else.
+With Inertia, each page in your application has it's own controller, and it's own JavaScript page component. This allows you to retrieve just the data required for that particular page.
 
 ## Creating pages
 
-Here's an example of a page component. Save this to `/Pages/Welcome.vue`. Note how it extends the `Layout.vue` component we created above.
+Pages are simply JavaScript components. There is nothing particularly special about them. Pages receive data from the controllers as props. Here's an example of simple page component.
 
-```html
-<template>
-  <layout>
-    <h1>Welcome</h1>
-    <p>Welcome to my first Inertia app!</p>
-  </layout>
-</template>
-
-<script>
-  import Layout from '@/Shared/Layout'
-
-  export default {
-    components: {
-      Layout,
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <layout title="Welcome">
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </layout>
+        </template>\n
+        <script>
+          import Layout from '@/Shared/Layout'\n
+          export default {
+            components: {
+              Layout,
+            },
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
     },
-  }
-</script>
-```
-
-## Accessing response data
-
-Pages components receive the props (data) that you return form your controller. Page props can also be access via `$page` property in Vue.js
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import React from 'react'
+        import Layout from '@/Shared/Layout'\n
+        export default function Welcome({ user }) {
+          return (
+            <Layout title="Welcome">
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            </Layout>
+          )
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <script>
+          import { pageProps } from 'inertia-svelte'
+          import Layout from '@/Shared/Layout.svelte'
+        </script>\n
+        <Layout title="Welcome">
+          <h1>Welcome</h1>
+          <p>Hello {$pageProps.user.name}, welcome to your first Inertia app!</p>
+        </Layout>
+      `,
+    },
+  ]}
+/>
 
 ## Creating layouts
 
-While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.vue`.
+While not required, for most projects it makes sense to create a default site layout that your pages can extend. Here's an example of how you can do that. Again, there is nothing Inertia specific here. This is just a standard JavaScript component.
 
-```html
-<template>
-  <main>
-    <header>
-      <inertia-link href="/">Home</inertia-link>
-      <inertia-link href="/about">About</inertia-link>
-      <inertia-link href="/contact">Contact</inertia-link>
-    </header>
-
-    <article>
-      <slot />
-    </article>
-  </main>
-</template>
-```
-
-## Creating page components in Vue.js
-
-<hr />
-
-## Creating a base layout in React
-
-While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.js`.
-
-```jsx
-import { InertiaLink } from 'inertia-react'
-import React from 'react'
-
-export default function Layout({ children }) {
-  return (
-    <main>
-      <header>
-        <InertiaLink href="/">Home</InertiaLink>
-        <InertiaLink href="/about">About</InertiaLink>
-        <InertiaLink href="/contact">Contact</InertiaLink>
-      </header>
-
-      <article>{children}</article>
-    </main>
-  )
-}
-```
-
-## Creating page components in React
-
-With Inertia, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.js`. Note how it extends the `Layout.js` component we created above.
-
-```jsx
-import React from 'react'
-import Layout from '@/Shared/Layout'
-
-export default function Welcome() {
-  return (
-    <Layout>
-      <h1>Welcome</h1>
-      <p>Welcome to my first Inertia app!</p>
-    </Layout>
-  )
-}
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header>
+              <inertia-link href="/">Home</inertia-link>
+              <inertia-link href="/about">About</inertia-link>
+              <inertia-link href="/contact">Contact</inertia-link>
+            </header>
+            <article>
+              <slot />
+            </article>
+          </main>
+        </template>\n
+        <script>
+          export default {
+            props: {
+              title: String,
+            },
+            watch: {
+              title: {
+                immediate: true,
+                handler(title) {
+                  document.title = title
+                },
+              },
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import React, { useEffect } from 'react'
+        import { InertiaLink } from 'inertia-react'\n
+        export default function Layout({ title, children }) {
+          useEffect(() => document.title = title, [title])\n
+          return (
+            <main>
+              <header>
+                <InertiaLink href="/">Home</InertiaLink>
+                <InertiaLink href="/about">About</InertiaLink>
+                <InertiaLink href="/contact">Contact</InertiaLink>
+              </header>\n
+              <article>{children}</article>
+            </main>
+          )
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <script>
+          import { InertiaLink } from 'inertia-svelte'\n
+          export let title
+        </script>\n
+        <svelte:head>
+            <title>{title}</title>
+        </svelte:head>\n
+        <main>
+          <header>
+            <InertiaLink href="/">Home</InertiaLink>
+            <InertiaLink href="/about">About</InertiaLink>
+            <InertiaLink href="/contact">Contact</InertiaLink>
+          </header>\n
+          <article>
+            <slot />
+          </article>
+        </main>
+      `,
+    },
+  ]}
+/>
