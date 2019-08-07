@@ -23,7 +23,7 @@ The magic of Inertia is in the server-side responses. When your app first loads,
 
 To create an Inertia response in your application, we recommend using one of our <a href="/server-side-setup">server-side adapters</a>.
 
-In your controller, provide both the name of the JavaScript page component, as well as any props (data) required for the page.
+In your controller, provide both the name of the JavaScript page component, as well as any props (data) for the page.
 
 <TabbedCodeExamples
   examples={[
@@ -60,7 +60,7 @@ In this example we're passing a single prop, called `event`, which contains four
 
 ## The page object
 
-Inertia shares page data between the server and the client-side page components using a `page` object. This object includes the necessary information required to render the page component, update the history state, and track the application's asset version.
+Inertia shares page data between the server and the front-end using a `page` object. This object includes the necessary information required to render the page component, update the history state, and track the application's asset version.
 
 The `page` object includes four attributes:
 
