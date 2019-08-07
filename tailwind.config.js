@@ -1,11 +1,10 @@
 module.exports = {
   theme: {
     fontFamily: {
-      'sans': ['Gilroy', 'sans-serif'],
+      sans: ['Gilroy', 'sans-serif'],
     },
-    extend: {
-    }
+    extend: {},
   },
   variants: {},
-  plugins: []
+  plugins: [],
 }

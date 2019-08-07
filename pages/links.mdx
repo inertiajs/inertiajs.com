@@ -9,85 +9,123 @@ export const meta = { title: 'Links' }
 
 To create an Inertia link, use the `<inertia-link>` component.
 
-~~~html
+```html
 <template>
   <inertia-link href="/">Home</inertia-link>
 </template>
-~~~
+```
 
 You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
 
-~~~html
+```html
 <inertia-link href="/" replace preserve-scroll>Home</inertia-link>
-~~~
+```
 
 You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-~~~html
+```html
 <inertia-link href="/logout" method="post">Logout</inertia-link>
-~~~
+```
 
 You can add data using the `data` attribute:
 
-~~~html
+```html
 <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
-~~~
+```
 
 You can also preserve a page component's local state using the `preserve-state` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
 
-~~~html
+```html
 <input v-model="query" type="text" />
 <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
-~~~
+```
 
 ## Creating links with React
 
 To create an Inertia link, use the `<InertiaLink>` component.
 
-~~~jsx
+```jsx
 import { InertiaLink } from 'inertia-react'
 import React from 'react'
 
 export default () => <InertiaLink href="/">Home</InertiaLink>
-~~~
+```
 
 You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
 
-~~~jsx
-<InertiaLink replace preserve-scroll href="/">Home</InertiaLink>
-~~~
+```jsx
+<InertiaLink replace preserve-scroll href="/">
+  Home
+</InertiaLink>
+```
 
 You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-~~~jsx
-<InertiaLink href="/logout" method="post">Logout</InertiaLink>
-~~~
+```jsx
+<InertiaLink href="/logout" method="post">
+  Logout
+</InertiaLink>
+```
 
 You can add data using the `data` attribute:
 
-~~~jsx
-<InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
-~~~
+```jsx
+<InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>
+  Save
+</InertiaLink>
+```
 
 You can also preserve a page component's local state using the `preserveState` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
 
-~~~jsx
+```jsx
 <input onChange={this.handleChange} value={query} />
 <InertiaLink href="/search" data={query}>Search</InertiaLink>
-~~~
+```
 
 ## Programmatic navigation
 
 In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take note of the defaults.
 
-~~~js
-$inertia.visit(url, { method: 'get', data: {}, replace: false, preserveScroll: false, preserveState: false })
-$inertia.replace(url, { method: 'get', data: {}, preserveScroll: false, preserveState: true })
-$inertia.reload({ method: 'get', data: {}, preserveScroll: false, preserveState: false })
-$inertia.post(url, data, { replace: false, preserveScroll: false, preserveState: true })
-$inertia.put(url, data, { replace: false, preserveScroll: false, preserveState: true })
-$inertia.patch(url, data, { replace: false, preserveScroll: false, preserveState: true })
-$inertia.delete(url, { replace: false, preserveScroll: false, preserveState: false })
-~~~
+```js
+$inertia.visit(url, {
+  method: 'get',
+  data: {},
+  replace: false,
+  preserveScroll: false,
+  preserveState: false,
+})
+$inertia.replace(url, {
+  method: 'get',
+  data: {},
+  preserveScroll: false,
+  preserveState: true,
+})
+$inertia.reload({
+  method: 'get',
+  data: {},
+  preserveScroll: false,
+  preserveState: false,
+})
+$inertia.post(url, data, {
+  replace: false,
+  preserveScroll: false,
+  preserveState: true,
+})
+$inertia.put(url, data, {
+  replace: false,
+  preserveScroll: false,
+  preserveState: true,
+})
+$inertia.patch(url, data, {
+  replace: false,
+  preserveScroll: false,
+  preserveState: true,
+})
+$inertia.delete(url, {
+  replace: false,
+  preserveScroll: false,
+  preserveState: false,
+})
+```
 
 Just like with an `<inertia-link>`, you can control the history state behaviour using `replace`, scroll behaviour using `preserveScroll`, and local component state behaviour using `preserveState`.

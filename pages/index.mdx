@@ -2,12 +2,9 @@ import Layout from '../components/Layout'
 
 export default Layout
 export const meta = {
-    title: 'Introduction',
-    hero: true,
-    links: [
-        { url: '#top', name: 'Introduction' },
-        { url: '#adapters', name: 'Adapters' },
-    ],
+  title: 'Introduction',
+  hero: true,
+  links: [{ url: '#top', name: 'Introduction' }, { url: '#adapters', name: 'Adapters' }],
 }
 
 # JavaScript apps the monolith way
@@ -18,11 +15,10 @@ Inertia allows you to create fully client-side rendered, single-page apps, witho
 
 Inertia has no client-side routing, nor does it require an API. Simply build controllers and page views like you've always done! To learn more about how Inertia works, see our how it works page.
 
-~~~html
+```html
 <inertia-link :href="route('users.edit', user.id)">Edit</inertia-link>
-~~~
+```
 
 ## Adapters
 
 The first step when getting started with Inertia is to configure a server-side adapter. This primarily includes setting up a root template and updating your endpoints to return proper Inertia responses. To make this process easier, Inertia ships with a number of adapters for common server-side frameworks.
-

@@ -9,25 +9,25 @@ export const meta = { title: 'Code splitting' }
 
 To use code splitting with Inertia you'll need to enable [dynamic imports](https://github.com/tc39/proposal-dynamic-import). You'll need a Babel plugin to make this work. First, install the plugin:
 
-~~~bash
+```bash
 npm install @babel/plugin-syntax-dynamic-import --save
-~~~
+```
 
 Next, create a `.babelrc` file in your project with the following:
 
-~~~json
+```json
 {
   "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
-~~~
+```
 
 Alternatively, if you're using Laravel Mix, you can put this in your `webpack.mix.js` file:
 
-~~~js
+```js
 mix.babelConfig({
   plugins: ['@babel/plugin-syntax-dynamic-import'],
 })
-~~~
+```
 
 <div className="my-8 px-8 py-3 text-orange-900 text-base bg-orange-200 rounded-r border-l-4 border-orange-400">
 
@@ -65,7 +65,7 @@ One way to do this is manually loading all your page components:
             },
           }),
         }).$mount(app)
-      `
+      `,
     },
     {
       name: 'React',
@@ -88,8 +88,8 @@ One way to do this is manually loading all your page components:
           />,
           app
         )
-      `
-    }
+      `,
+    },
   ]}
 />
 
@@ -100,7 +100,8 @@ Another option is to use `required.context` to automatically register all your p
     {
       name: 'Vue.js',
       language: 'js',
-      code: dedent`
+      code:
+        dedent`
         import Inertia from 'inertia-vue'
         import Vue from 'vue'\n
         Vue.use(Inertia)\n
@@ -110,16 +111,19 @@ Another option is to use `required.context` to automatically register all your p
           render: h => h(Inertia, {
             props: {
               initialPage: JSON.parse(app.dataset.page),
-              resolveComponent: page => files(`+`\`./Pages/\${page}.vue\``+dedent`).default,
+              resolveComponent: page => files(` +
+        `\`./Pages/\${page}.vue\`` +
+        dedent`).default,
             },
           }),
         }).$mount(app)
-      `
+      `,
     },
     {
       name: 'React',
       language: 'jsx',
-      code: dedent`
+      code:
+        dedent`
         import Inertia from 'inertia-react'
         import React from 'react'
         import { render } from 'react-dom'\n
@@ -128,11 +132,13 @@ Another option is to use `required.context` to automatically register all your p
         render(
           <Inertia
             initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent={page => files(`+`\`./Pages/\${page}.js\``+dedent`).default}
+            resolveComponent={page => files(` +
+        `\`./Pages/\${page}.js\`` +
+        dedent`).default}
           />,
           app
         )
-      `
-    }
+      `,
+    },
   ]}
 />

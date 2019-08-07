@@ -35,7 +35,7 @@ const theme = {
   url: { color: '#67cdcc' },
   bold: { fontWeight: 'bold' },
   italic: { fontStyle: 'italic' },
-  inserted: { color: 'green' }
+  inserted: { color: 'green' },
 }
 
 export default ({ className, language, height, children }) => (

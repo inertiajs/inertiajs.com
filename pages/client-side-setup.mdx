@@ -2,13 +2,13 @@ import Layout from '../components/Layout'
 
 export default Layout
 export const meta = {
-    title: 'Client-side setup',
-    links: [
-        { url: '#vue-js', name: 'Vue.js' },
-        { url: '#react', name: 'React' },
-        { url: '#setting-up-webpack', name: 'Setting up Webpack' },
-        { url: '#setup-dynamic-imports', name: 'Setup dynamic imports' },
-    ],
+  title: 'Client-side setup',
+  links: [
+    { url: '#vue-js', name: 'Vue.js' },
+    { url: '#react', name: 'React' },
+    { url: '#setting-up-webpack', name: 'Setting up Webpack' },
+    { url: '#setup-dynamic-imports', name: 'Setup dynamic imports' },
+  ],
 }
 
 # Client-side setup
@@ -17,13 +17,13 @@ export const meta = {
 
 Install using NPM:
 
-~~~bash
+```bash
 npm install inertiajs/inertia-vue --save
-~~~
+```
 
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Vue with the base Inertia page component.
 
-~~~js
+```js
 import Inertia from 'inertia-vue'
 import Vue from 'vue'
 
@@ -32,14 +32,15 @@ Vue.use(Inertia)
 const app = document.getElementById('app')
 
 new Vue({
-  render: h => h(Inertia, {
-    props: {
-      initialPage: JSON.parse(app.dataset.page),
-      resolveComponent: name => import(`@/Pages/${name}`).then(module => module.default),
-    },
-  }),
+  render: h =>
+    h(Inertia, {
+      props: {
+        initialPage: JSON.parse(app.dataset.page),
+        resolveComponent: name => import(`@/Pages/${name}`).then(module => module.default),
+      },
+    }),
 }).$mount(app)
-~~~
+```
 
 The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
 
@@ -47,13 +48,13 @@ The `resolveComponent` is a callback that tells Inertia how to load a page compo
 
 Install using NPM:
 
-~~~bash
+```bash
 npm install inertiajs/inertia-react --save
-~~~
+```
 
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing React with the base Inertia page component.
 
-~~~jsx
+```jsx
 import Inertia from 'inertia-react'
 import React from 'react'
 import { render } from 'react-dom'
@@ -67,7 +68,7 @@ render(
   />,
   app
 )
-~~~
+```
 
 The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
 
@@ -75,7 +76,7 @@ The `resolveComponent` is a callback that tells Inertia how to load a page compo
 
 Here is an example Webpack configuration that uses [Laravel Mix](https://github.com/JeffreyWay/laravel-mix). Note the `@` alias to the `/resources/js` directory.
 
-~~~js
+```js
 const mix = require('laravel-mix')
 const path = require('path')
 
@@ -91,8 +92,10 @@ mix
       },
     },
   })
-~~~
+```
 
 ## Setup dynamic imports
 
-<div className="my-8 px-8 py-3 text-orange-900 text-base font-medium bg-orange-200 rounded-r border-l-4 border-orange-400">This section is still being developed.</div>
+<div className="my-8 px-8 py-3 text-orange-900 text-base font-medium bg-orange-200 rounded-r border-l-4 border-orange-400">
+  This section is still being developed.
+</div>

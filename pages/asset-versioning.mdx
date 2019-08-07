@@ -9,16 +9,16 @@ One common challenge with single-page apps is refreshing site assets when they'v
 
 To enable automatic asset refreshing, first call the `Inertia::version($version)` method with your current asset version. We recommend putting this in a service provider.
 
-~~~php
+```php
 Inertia::version($version);
-~~~
+```
 
 If you're using Laravel Mix, you can use the `mix-manifest.json` for this. Here's an example of that using lazy evaluation.
 
-~~~php
+```php
 Inertia::version(function () {
     return md5_file(public_path('mix-manifest.json'));
 });
-~~~
+```
 
 Finally, make sure you have [versioning](https://laravel.com/docs/mix#versioning-and-cache-busting) setup in your `webpack.mix.js` to enable asset cache busting.

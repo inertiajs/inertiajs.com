@@ -4,12 +4,12 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = {
-    title: 'Routing',
-    links: [
-        { url: '#top', name: 'Routing' },
-        { url: '#responses', name: 'Responses' },
-        { url: '#redirects', name: 'Redirects' },
-    ],
+  title: 'Routing',
+  links: [
+    { url: '#top', name: 'Routing' },
+    { url: '#responses', name: 'Responses' },
+    { url: '#redirects', name: 'Redirects' },
+  ],
 }
 
 # Routing
@@ -20,7 +20,7 @@ With Inertia all routing is defined server-side. Meaning you don't need Vue Rout
 
 The magic of Inertia is in the server-side responses. On the first page load, a full `html` response is returned from the server. This includes your site assets and a root `div`. The root div includes a `data-page` attribute, which includes a `json` encoded version of the current (JavaScript) page component name, it's props (data), the current page url, and the asset version. Inertia uses this to boot your JavaScript application.
 
-~~~twig
+```twig
 <html>
 <head>
     <title>My app</title>
@@ -33,13 +33,13 @@ The magic of Inertia is in the server-side responses. On the first page load, a 
 
 </body>
 </html>
-~~~
+```
 
 Since Inertia is a framework for building single-page applications, all subsequent page visits are made as `xhr` requests. That means subsequent responses must be handled differently.
 
 Rather than returning a full `html` response like the first page load, instead make a `json` response with just the page data. This `json` response should be in the exact same format as the `json` encoded in the `data-page` attribute.
 
-~~~json
+```json
 {
   "component": "Event",
   "props": {
@@ -47,13 +47,13 @@ Rather than returning a full `html` response like the first page load, instead m
       "id": 80,
       "title": "Birthday party",
       "start_date": "2019-06-02",
-      "description": "Come out and celebrate Jonathan's 36th birthday party!",
-    },
+      "description": "Come out and celebrate Jonathan's 36th birthday party!"
+    }
   },
   "url": "/events/80",
   "version": "c32b8e4965f418ad16eaebba1d4e960f"
 }
-~~~
+```
 
 Inertia responses must have the `Vary` header set to `Accept` and the `X-Inertia` header set to `true`.
 
@@ -82,7 +82,7 @@ Of course, all this work can be avoided by simply using a server-side adapter, s
                 ]);
             }
         }
-      `
+      `,
     },
   ]}
 />
@@ -91,7 +91,7 @@ Of course, all this work can be avoided by simply using a server-side adapter, s
 
 When making a non-GET Inertia request, via `<inertia-link>` or manually, be sure to still respond with a proper Inertia response. For example, if you're creating a new user, have your "store" endpoint return a redirect back to a standard GET endpoint, such as your user index page. Inertia will automatically follow this redirect and update the page accordingly. Here's a simplified example.
 
-~~~php
+```php
 class UsersController extends Controller
 {
     public function index()
@@ -112,7 +112,6 @@ class UsersController extends Controller
         return Redirect::route('users');
     }
 }
-~~~
+```
 
 Note, when redirecting after a `PUT`, `PATCH` or `DELETE` request you must use a `303` response code, otherwise the subsequent request will not be treated as a `GET` request. A `303` redirect is the same as a `302` except that the follow-up request is explicitly changed to a `GET` request.
-
