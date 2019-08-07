@@ -5,11 +5,13 @@ export const meta = { title: 'Pages' }
 
 # Pages
 
+With Inertia, each page in your application has it's own controller, and it's own JavaScript page component. This allows you to retrieve just the data required for that particular page, and nothing else.
+
 ## Creating pages
 
-With Inertia, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.vue`. Note how it extends the `Layout.vue` component we created above.
+Here's an example of a page component. Save this to `/Pages/Welcome.vue`. Note how it extends the `Layout.vue` component we created above.
 
-```vue
+```html
 <template>
   <layout>
     <h1>Welcome</h1>
@@ -18,13 +20,13 @@ With Inertia, each page in your application is a JavaScript component. Here's an
 </template>
 
 <script>
-import Layout from '@/Shared/Layout'
+  import Layout from '@/Shared/Layout'
 
-export default {
-  components: {
-    Layout,
-  },
-}
+  export default {
+    components: {
+      Layout,
+    },
+  }
 </script>
 ```
 
@@ -36,7 +38,7 @@ Pages components receive the props (data) that you return form your controller. 
 
 While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.vue`.
 
-```vue
+```html
 <template>
   <main>
     <header>

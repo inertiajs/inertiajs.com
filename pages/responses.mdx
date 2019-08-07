@@ -1,0 +1,125 @@
+import dedent from 'dedent'
+import Layout from '../components/Layout'
+import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Responses',
+  links: [
+    { url: '#top', name: 'Introduction' },
+    { url: '#creating-responses', name: 'Creating responses' },
+    { url: '#the-page-object', name: 'The page object' },
+    { url: '#html-responses', name: 'HTML responses' },
+    { url: '#xhr-responses', name: 'XHR responses' },
+  ],
+}
+
+# Responses
+
+The magic of Inertia is in the server-side responses. When your app first loads, a full `html` page is returned. However, all subsequent page visits are done via `xhr`, with only `json` returned. This allows the single-page app functionality, since Inertia doesn't have to reboot the JavaScript framework on each page load.
+
+## Creating responses
+
+To create an Inertia response in your application, we recommend using one of our <a href="/server-side-setup">server-side adapters</a>.
+
+In your controller, provide both the name of the JavaScript page component, as well as any props (data) required for the page.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        use Inertia\Inertia;\n
+        class EventsController extends Controller
+        {
+            public function show(Event $event)
+            {
+                return Inertia::render('Event/Show', [
+                    'event' => $event->only(
+                        'id',
+                        'title',
+                        'start_date',
+                        'description'
+                    ),
+                ]);
+            }
+        }
+      `,
+    },
+  ]}
+/>
+
+In this example we're passing a single prop, called `event`, which contains four attributes (`id`, `title`, `start_date` and `description`) to the `Event/Show` page component.
+
+<Notice>
+  To ensure that pages load quickly, only return the minimum data required for the page. Also, be aware that all data
+  returned from the controllers will be visible client-side, so be sure to omit sensitive information.
+</Notice>
+
+## The page object
+
+Inertia shares page data between the server and the client-side page components using a `page` object. This object includes the necessary information required to render the page component, update the history state, and track the application's asset version.
+
+The `page` object includes four attributes:
+
+1. **component**: The name of the JavaScript page component.
+2. **props**: The page props (data).
+3. **url**: The page url.
+4. **version**: The current asset version.
+
+## HTML responses
+
+When an Inertia app first loads, a full `html` response is returned from the server. This includes your site assets in the `<head>` and a root `<div>` in the body.
+
+The root `<div>` includes a `data-page` attribute with a `json` encoded version of the initial page object. Inertia uses this to boot your JavaScript application.
+
+```twig
+<html>
+<head>
+    <title>My app</title>
+    <link href="/css/app.css" rel="stylesheet">
+    <script src="/js/app.js" defer></script>
+</head>
+<body>
+
+<div id="app" data-page="{&quot;component&quot;:&quot;Event&quot;,&quot;props&quot;:{&quot;event&quot;:{&quot;id&quot;:80,&quot;title&quot;:&quot;Birthday party&quot;,&quot;start_date&quot;:&quot;2019-06-02&quot;,&quot;description&quot;:&quot;Come out and celebrate Jonathan's 36th birthday party!&quot;}},&quot;url&quot;:&quot;/events/80&quot;,&quot;version&quot;:&quot;c32b8e4965f418ad16eaebba1d4e960f&quot;}"></div>
+
+</body>
+</html>
+```
+
+<Notice>
+  While the initial page load is HTML, Inertia does not server-side render the JavaScript page component. It simply{' '}
+  <inlineCode>json</inlineCode> encodes the page object into the root <inlineCode>&lt;div&gt;</inlineCode>, which is
+  used to boot your JavaScript framework.
+</Notice>
+
+## XHR responses
+
+Since Inertia is a framework for building single-page applications, all subsequent page visits are made as `xhr` requests.
+
+Rather than returning a full `html` response on subsequent page visits, Inertia simply returns a `json` response of the page object. This `json` response is in the exact same format as the page object encoded in the initial `data-page` attribute.
+
+```json
+{
+  "component": "Event",
+  "props": {
+    "event": {
+      "id": 80,
+      "title": "Birthday party",
+      "start_date": "2019-06-02",
+      "description": "Come out and celebrate Jonathan's 36th birthday party!"
+    }
+  },
+  "url": "/events/80",
+  "version": "c32b8e4965f418ad16eaebba1d4e960f"
+}
+```
+
+All `xhr` responses have an `X-Inertia` header set to `true`. If you're creating your own server-side adapter, you can use this header to detect an Inertia response.
+
+All `xhr` responses also include an `X-Inertia-Version` header used for auto refreshing assets. You can learn more about that on the [asset versioning](/asset-versioning) page.
+
+Finally, all `xhr` responses have the `Vary` header set to `Accept`. This tells the browser that a page can be loaded in two different formats: `html` and `json`.

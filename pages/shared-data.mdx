@@ -1,11 +1,13 @@
 import dedent from 'dedent'
 import Layout from '../components/Layout'
+import Notice from '../components/Notice'
 import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = {
   title: 'Shared data',
   links: [
+    { url: '#top', name: 'Introduction' },
     { url: '#sharing-data', name: 'Sharing data' },
     { url: '#accessing-shared-data', name: 'Accessing shared data' },
     { url: '#flash-messages', name: 'Flash messages' },
@@ -18,7 +20,9 @@ Sometimes need to access certain data on numerous pages within your application.
 
 ## Sharing data
 
-The server-side adapters provide a way to preassign shared data which each request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller. <span className="bg-orange-200 px-1">Be sure to use this feature sparingly, since this data will be included with every response.</span>
+The server-side adapters provide a way to preassign shared data which each request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller.
+
+<Notice>Be sure to use this feature sparingly, since shared data will be included with every Inertia response.</Notice>
 
 <TabbedCodeExamples
   examples={[
@@ -101,6 +105,4 @@ Once you've shared the data server-side, you'll then be able to access it within
 
 ## Flash messages
 
-<div className="my-8 px-8 py-3 text-orange-900 text-base font-medium bg-orange-200 rounded-r border-l-4 border-orange-400">
-  This section is still being developed.
-</div>
+<Notice>This section is still being developed.</Notice>

@@ -1,5 +1,6 @@
 import dedent from 'dedent'
 import Layout from '../components/Layout'
+import Notice from '../components/Notice'
 import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
@@ -29,11 +30,11 @@ mix.babelConfig({
 })
 ```
 
-<div className="my-8 px-8 py-3 text-orange-900 text-base bg-orange-200 rounded-r border-l-4 border-orange-400">
-
-When using Laravel Mix (v4) with dynamic imports you cannot use styles within Vue files due to current Webpack [limitations](https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909). As a workaround, you need to drop Mix entirely or downgrade to v3.
-
-</div>
+<Notice>
+  When using Laravel Mix (v4) with dynamic imports you cannot use styles within Vue files due to current Webpack{' '}
+  <a href="https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909">limitations</a>. As a
+  workaround, you need to drop Mix entirely or downgrade to v3.
+</Notice>
 
 ## Using Inertia without code splitting
 
