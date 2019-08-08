@@ -220,6 +220,11 @@ export default function Layout({ meta, children }) {
           <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Advanced</div>
           <ul>
             <li className="mt-4">
+              <Link href="/error-handling">
+                <a className="hover:underline font-medium text-gray-700">Error handling</a>
+              </Link>
+            </li>
+            <li className="mt-4">
               <Link href="/asset-versioning">
                 <a className="hover:underline font-medium text-gray-700">Asset versioning</a>
               </Link>
