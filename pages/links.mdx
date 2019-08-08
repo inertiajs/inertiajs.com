@@ -3,9 +3,20 @@ import Layout from '../components/Layout'
 import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
-export const meta = { title: 'Links' }
+export const meta = {
+  title: 'Links',
+  links: [
+    { url: '#top', name: 'Introduction' },
+    { url: '#creating-links', name: 'Creating links' },
+    { url: '#programmatic-navigation', name: 'Programmatic navigation' },
+  ],
+}
 
 # Links
+
+To create links within an Inertia app you'll need to use the Inertia link component. They are a simple wrapper around a standard anchor link that intercept click events, and prevent a full page reload from occurring. This is how Inertia provides a single-page app experience.
+
+## Creating links
 
 To create an Inertia link, use the `<inertia-link>` component.
 
@@ -16,6 +27,34 @@ To create an Inertia link, use the `<inertia-link>` component.
       language: 'twig',
       code: dedent`
         <inertia-link href="/">Home</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/">Home</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/">Home</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/" replace preserve-scroll>Home</inertia-link>
       `,
     },
     {
@@ -35,81 +74,150 @@ To create an Inertia link, use the `<inertia-link>` component.
   ]}
 />
 
-You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
-
-```html
-<inertia-link href="/" replace preserve-scroll>Home</inertia-link>
-```
-
 You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-```html
-<inertia-link href="/logout" method="post">Logout</inertia-link>
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/logout" method="post">Logout</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/logout" method="post">Logout</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/logout" method="post">Logout</InertiaLink>
+      `,
+    },
+  ]}
+/>
 
 You can add data using the `data` attribute:
 
-```html
-<inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
+      `,
+    },
+  ]}
+/>
 
 You can also preserve a page component's local state using the `preserve-state` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
 
-```html
-<input v-model="query" type="text" />
-<inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <input v-model="query" type="text" />
+        <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <input onChange={this.handleChange} value={query} />
+        <InertiaLink href="/search" data={query}>Search</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <input on:change={handleChange} value={query} />
+        <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
+      `,
+    },
+  ]}
+/>
 
 ## Programmatic navigation
 
 In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take note of the defaults.
 
-```js
-$inertia.visit(url, {
-  method: 'get',
-  data: {},
-  replace: false,
-  preserveScroll: false,
-  preserveState: false,
-})
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from 'inertia-vue'\n
+        Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveScroll: false, preserveState: false })
+        Inertia.replace(url, { method: 'get', data: {}, preserveScroll: false, preserveState: true })
+        Inertia.reload({ method: 'get', data: {}, preserveScroll: false, preserveState: false })
+        Inertia.post(url, data, { replace: false, preserveScroll: false, preserveState: true })
+        Inertia.put(url, data, { replace: false, preserveScroll: false, preserveState: true })
+        Inertia.patch(url, data, { replace: false, preserveScroll: false, preserveState: true })
+        Inertia.delete(url, { replace: false, preserveScroll: false, preserveState: false })\n
+        // Inertia is available via the $inertia property
+        this.$inertia.visit(url, { method: 'get', data: {}, replace: false, preserveScroll: false, preserveState: false })
+        this.$inertia.replace(url, { method: 'get', data: {}, preserveScroll: false, preserveState: true })
+        this.$inertia.reload({ method: 'get', data: {}, preserveScroll: false, preserveState: false })
+        this.$inertia.post(url, data, { replace: false, preserveScroll: false, preserveState: true })
+        this.$inertia.put(url, data, { replace: false, preserveScroll: false, preserveState: true })
+        this.$inertia.patch(url, data, { replace: false, preserveScroll: false, preserveState: true })
+        this.$inertia.delete(url, { replace: false, preserveScroll: false, preserveState: false })
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from 'inertia-react'\n
+        Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveState: false, preserveScroll: false })
+        Inertia.replace(url, { method: 'get', data: {}, preserveState: true, preserveScroll: false })
+        Inertia.reload({ method: 'get', data: {}, preserveState: false, preserveScroll: false })
+        Inertia.post(url, data, { replace: false, preserveState: true, preserveScroll: false })
+        Inertia.put(url, data, { replace: false, preserveState: true, preserveScroll: false })
+        Inertia.patch(url, data, { replace: false, preserveState: true, preserveScroll: false })
+        Inertia.delete(url, { replace: false, preserveState: false, preserveScroll: false })
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from 'inertia-svelte'\n
+        Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveState: false, preserveScroll: false })
+        Inertia.replace(url, { method: 'get', data: {}, preserveState: true, preserveScroll: false })
+        Inertia.reload({ method: 'get', data: {}, preserveState: false, preserveScroll: false })
+        Inertia.post(url, data, { replace: false, preserveState: true, preserveScroll: false })
+        Inertia.put(url, data, { replace: false, preserveState: true, preserveScroll: false })
+        Inertia.patch(url, data, { replace: false, preserveState: true, preserveScroll: false })
+        Inertia.delete(url, { replace: false, preserveState: false, preserveScroll: false })
+      `,
+    },
+  ]}
+/>
 
-$inertia.replace(url, {
-  method: 'get',
-  data: {},
-  preserveScroll: false,
-  preserveState: true,
-})
-
-$inertia.reload({
-  method: 'get',
-  data: {},
-  preserveScroll: false,
-  preserveState: false,
-})
-
-$inertia.post(url, data, {
-  replace: false,
-  preserveScroll: false,
-  preserveState: true,
-})
-
-$inertia.put(url, data, {
-  replace: false,
-  preserveScroll: false,
-  preserveState: true,
-})
-
-$inertia.patch(url, data, {
-  replace: false,
-  preserveScroll: false,
-  preserveState: true,
-})
-
-$inertia.delete(url, {
-  replace: false,
-  preserveScroll: false,
-  preserveState: false,
-})
-```
-
-Just like with an `<inertia-link>`, you can control the history state behaviour using `replace`, scroll behaviour using `preserveScroll`, and local component state behaviour using `preserveState`.
+Just like with an Inertia link, you can control the history state behaviour using `replace`, scroll behaviour using `preserveScroll`, and local component state behaviour using `preserveState`.
