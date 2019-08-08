@@ -1,19 +1,39 @@
+import dedent from 'dedent'
 import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = { title: 'Links' }
 
 # Links
 
-## Creating links with Vue.js
-
 To create an Inertia link, use the `<inertia-link>` component.
 
-```html
-<template>
-  <inertia-link href="/">Home</inertia-link>
-</template>
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/">Home</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink replace preserve-scroll href="/">Home</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink replace preserveScroll href="/">Home</InertiaLink>
+      `,
+    },
+  ]}
+/>
 
 You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
 
@@ -40,48 +60,6 @@ You can also preserve a page component's local state using the `preserve-state` 
 <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
 ```
 
-## Creating links with React
-
-To create an Inertia link, use the `<InertiaLink>` component.
-
-```jsx
-import { InertiaLink } from 'inertia-react'
-import React from 'react'
-
-export default () => <InertiaLink href="/">Home</InertiaLink>
-```
-
-You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
-
-```jsx
-<InertiaLink replace preserve-scroll href="/">
-  Home
-</InertiaLink>
-```
-
-You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
-
-```jsx
-<InertiaLink href="/logout" method="post">
-  Logout
-</InertiaLink>
-```
-
-You can add data using the `data` attribute:
-
-```jsx
-<InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>
-  Save
-</InertiaLink>
-```
-
-You can also preserve a page component's local state using the `preserveState` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
-
-```jsx
-<input onChange={this.handleChange} value={query} />
-<InertiaLink href="/search" data={query}>Search</InertiaLink>
-```
-
 ## Programmatic navigation
 
 In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take note of the defaults.
@@ -94,33 +72,39 @@ $inertia.visit(url, {
   preserveScroll: false,
   preserveState: false,
 })
+
 $inertia.replace(url, {
   method: 'get',
   data: {},
   preserveScroll: false,
   preserveState: true,
 })
+
 $inertia.reload({
   method: 'get',
   data: {},
   preserveScroll: false,
   preserveState: false,
 })
+
 $inertia.post(url, data, {
   replace: false,
   preserveScroll: false,
   preserveState: true,
 })
+
 $inertia.put(url, data, {
   replace: false,
   preserveScroll: false,
   preserveState: true,
 })
+
 $inertia.patch(url, data, {
   replace: false,
   preserveScroll: false,
   preserveState: true,
 })
+
 $inertia.delete(url, {
   replace: false,
   preserveScroll: false,
