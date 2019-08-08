@@ -66,12 +66,12 @@ Pages are simply JavaScript components. There is nothing particularly special ab
       language: 'html',
       code: dedent`
         <script>
-          import { pageProps } from 'inertia-svelte'
           import Layout from '@/Shared/Layout.svelte'
+          export let user
         </script>\n
         <Layout title="Welcome">
           <h1>Welcome</h1>
-          <p>Hello {$pageProps.user.name}, welcome to your first Inertia app!</p>
+          <p>Hello {user.name}, welcome to your first Inertia app!</p>
         </Layout>
       `,
     },
