@@ -22,12 +22,11 @@ Sometimes need to access certain data on numerous pages within your application.
 
 The server-side adapters provide a way to preassign shared data which each request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller.
 
-<Notice>Be sure to use this feature sparingly, since shared data will be included with every Inertia response.</Notice>
-
 <TabbedCodeExamples
   examples={[
     {
       name: 'Laravel',
+      description: 'Place this code in your AppServiceProvider boot method.',
       language: 'php',
       code: dedent`
         // Synchronously
@@ -47,6 +46,10 @@ The server-side adapters provide a way to preassign shared data which each reque
   ]}
 />
 
+<Notice>Use this feature sparingly as shared data is included with every response.</Notice>
+
+<Notice>Page props and shared data are merged together, so be sure to namespace your shared data appropriately.</Notice>
+
 ## Accessing shared data
 
 Once you've shared the data server-side, you'll then be able to access it within your page components as props. Share data can even be accessed in non-page components, although not as props in those cases. Here's an example of how to do this in a layout component.
@@ -61,16 +64,17 @@ Once you've shared the data server-side, you'll then be able to access it within
         <template>
           <main>
             <header>
-              You are logged in as: {{ $page.auth.user.name }}\n
+              <div>You are logged in as: {{ $page.auth.user.name }}</div>
               <nav>
                 <inertia-link href="/">Home</inertia-link>
                 <inertia-link href="/about">About</inertia-link>
                 <inertia-link href="/contact">Contact</inertia-link>
               </nav>
-            </header>\n
-            <article>
+            </header>
+            <content>
               <slot />
-            </article>
+            </content>
+            <footer></footer>
           </main>
         </template>
       `,
@@ -80,21 +84,117 @@ Once you've shared the data server-side, you'll then be able to access it within
       description: 'Access shared data using the usePageProps() hook.',
       language: 'jsx',
       code: dedent`
-        import { InertiaLink, usePageProps } from 'inertia-react'
-        import React from 'react'\n
+        import { InertiaLink, usePageProps } from 'inertia-react'\n
         export default function Layout({ children }) {
           const { auth } = usePageProps()\n
           return (
             <main>
               <header>
-                You are logged in as: {auth.user.name}\n
+                <div>You are logged in as: {auth.user.name}</div>
                 <nav>
                   <InertiaLink href="/">Home</InertiaLink>
                   <InertiaLink href="/about">About</InertiaLink>
                   <InertiaLink href="/contact">Contact</InertiaLink>
                 </nav>
-              </header>\n
-              <article>{children}</article>
+              </header>
+              <content>{children}</content>
+              <footer></footer>
+            </main>
+          )
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      description: 'Access shared data using the $pageProps export.',
+      language: 'html',
+      code: dedent`
+        <script>
+          import { InertiaLink, pageProps } from 'inertia-svelte'
+        </script>\n
+        <main>
+          <header>
+            <div>You are logged in as: {$pageProps.user.name}</div>
+            <nav>
+              <InertiaLink href="/">Home</InertiaLink>
+              <InertiaLink href="/about">About</InertiaLink>
+              <InertiaLink href="/contact">Contact</InertiaLink>
+            </nav>
+          </header>
+          <content>
+            <slot />
+          </content>
+          <footer></footer>
+        </main>
+      `,
+    },
+  ]}
+/>
+
+## Flash messages
+
+Another great use-case for shared data is flash messages. These are messages stored in the session only for the next request. You'll often set a flash message after completing a task and before redirecting to a different page.
+
+Here's a simple way to implement flash messages in your Inertia applications. First, share the flash message on each request.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      description: 'Place this code in your AppServiceProvider boot method.',
+      language: 'php',
+      code: dedent`
+        use Session;
+        use Inertia\Inertia;\n
+        Inertia::share('flash', function () {
+            return [
+                'message' => Session::get('message'),
+            ];
+        });
+      `,
+    },
+  ]}
+/>
+
+Next, display the flash message in a front-end component, such as the site layout.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header></header>
+            <content>
+              <div v-if="$page.flash.message" class="alert">
+                {{ $page.flash.message }}
+              </div>
+              <slot />
+            </content>
+            <footer></footer>
+          </main>
+        </template>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { usePageProps } from 'inertia-react'\n
+        export default function Layout({ children }) {
+          const { flash } = usePageProps()\n
+          return (
+            <main>
+              <header></header>
+              <content>
+                {flash.message && (
+                  <div class="alert">{flash.message}</div>
+                )}
+                {children}
+              </content>
+              <footer></footer>
             </main>
           )
         }
@@ -105,26 +205,19 @@ Once you've shared the data server-side, you'll then be able to access it within
       language: 'html',
       code: dedent`
         <script>
-          import { InertiaLink, pageProps } from 'inertia-svelte'
+          import { pageProps } from 'inertia-svelte'
         </script>\n
         <main>
-          <header>
-            You are logged in as: {$pageProps.user.name}\n
-            <nav>
-              <InertiaLink href="/">Home</InertiaLink>
-              <InertiaLink href="/about">About</InertiaLink>
-              <InertiaLink href="/contact">Contact</InertiaLink>
-            </nav>
-          </header>\n
-          <article>
+          <header></header>
+          <content>
+            {#if $pageProps.flash.message}
+              <div class="alert">{$pageProps.flash.message}</div>
+            {/if}
             <slot />
-          </article>
+          </content>
+          <footer></footer>
         </main>
       `,
     },
   ]}
 />
-
-## Flash messages
-
-<Notice>This section is still being developed.</Notice>
