@@ -42,3 +42,5 @@ class UsersController extends Controller
 ## 303 response code
 
 Note, when redirecting after a `PUT`, `PATCH` or `DELETE` request you must use a `303` response code, otherwise the subsequent request will not be treated as a `GET` request. A `303` redirect is the same as a `302` except that the follow-up request is explicitly changed to a `GET` request.
+
+If you're using one of our official server-side adapters, redirects will automatically be converted.
