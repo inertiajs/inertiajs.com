@@ -14,11 +14,11 @@ export const meta = {
 
 # Links
 
-To create links within an Inertia app you'll need to use the Inertia link component. They are a simple wrapper around a standard anchor link that intercept click events, and prevent a full page reload from occurring. This is how Inertia provides a single-page app experience.
+To create links within an Inertia app you'll need to use the Inertia link component. This is a light wrapper around a standard anchor link that intercepts click events and prevents full page reloads from occurring. This is how Inertia provides a single-page app experience.
 
 ## Creating links
 
-To create an Inertia link, use the `<inertia-link>` component.
+To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the underlying `<a>` tag.
 
 <TabbedCodeExamples
   examples={[
