@@ -100,6 +100,28 @@ Once you've shared the data server-side, you'll then be able to access it within
         }
       `,
     },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <script>
+          import { InertiaLink, pageProps } from 'inertia-svelte'
+        </script>\n
+        <main>
+          <header>
+            You are logged in as: {$pageProps.user.name}\n
+            <nav>
+              <InertiaLink href="/">Home</InertiaLink>
+              <InertiaLink href="/about">About</InertiaLink>
+              <InertiaLink href="/contact">Contact</InertiaLink>
+            </nav>
+          </header>\n
+          <article>
+            <slot />
+          </article>
+        </main>
+      `,
+    },
   ]}
 />
 
