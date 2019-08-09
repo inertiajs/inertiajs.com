@@ -102,11 +102,14 @@ If you have multiple instances of the same component on the page, be sure to inc
     {
       name: 'Vue',
       language: 'js',
-      code: dedent`
+      code:
+        dedent`
         {
           remember: {
             data: ['form'],
-            key: () =>`+`\`Users/Edit:\${this.user.id}\``+dedent`,
+            key: () =>` +
+        `\`Users/Edit:\${this.user.id}\`` +
+        dedent`,
           },
           data() {
             return {
@@ -123,7 +126,8 @@ If you have multiple instances of the same component on the page, be sure to inc
     {
       name: 'React',
       language: 'jsx',
-      code: dedent`
+      code:
+        dedent`
         import { useRememberedState } from 'inertia-react'
         import React from 'react'\n
         export default function Profile() {
@@ -133,7 +137,9 @@ If you have multiple instances of the same component on the page, be sure to inc
               last_name: props.user.last_name,
               // ...
             },
-            `+`\`Users/Edit:\${this.user.id}\``+dedent`
+            ` +
+        `\`Users/Edit:\${this.user.id}\`` +
+        dedent`
           )\n
           // ...
         }
@@ -142,14 +148,17 @@ If you have multiple instances of the same component on the page, be sure to inc
     {
       name: 'Svelte',
       language: 'html',
-      code: dedent`
+      code:
+        dedent`
         <script>
           import { Inertia, page, remember } from 'inertia-svelte'\n
           $: ({ user } = $page)\n
           let form = remember({
             first_name: null,
             last_name: null,
-          }, `+`\`Users/Edit:\${this.user.id}\``+dedent`)\n
+          }, ` +
+        `\`Users/Edit:\${this.user.id}\`` +
+        dedent`)\n
           // ...
         </script>
       `,
