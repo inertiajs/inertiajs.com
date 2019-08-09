@@ -68,7 +68,7 @@ You can also specify the browser history and scroll behaviour. By default all li
       name: 'Svelte',
       language: 'html',
       code: dedent`
-        <InertiaLink replace preserveScroll href="/">Home</InertiaLink>
+        <InertiaLink href="/" preserveScroll replace>Home</InertiaLink>
       `,
     },
   ]}
@@ -147,7 +147,7 @@ You can also preserve a page component's local state using the `preserve-state` 
       language: 'html',
       code: dedent`
         <input onChange={this.handleChange} value={query} />
-        <InertiaLink href="/search" data={query}>Search</InertiaLink>
+        <InertiaLink href="/search" data={query} preserve-state>Search</InertiaLink>
       `,
     },
     {

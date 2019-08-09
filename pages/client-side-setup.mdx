@@ -7,6 +7,7 @@ export const meta = {
   links: [
     { url: '#vue-js', name: 'Vue.js' },
     { url: '#react', name: 'React' },
+    { url: '#svelte', name: 'Svelte' },
     { url: '#setting-up-webpack', name: 'Setting up Webpack' },
     { url: '#setup-dynamic-imports', name: 'Setup dynamic imports' },
   ],
@@ -69,6 +70,32 @@ render(
   />,
   app
 )
+```
+
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
+## Svelte
+
+Install using NPM:
+
+```bash
+npm install inertiajs/inertia-svelte --save
+```
+
+Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Svelte with the base Inertia page component.
+
+```js
+import Inertia from 'inertia-svelte'
+
+const app = document.getElementById('app')
+
+new Inertia({
+  target: app,
+  props: {
+    initialPage: JSON.parse(app.dataset.page),
+    resolveComponent: name => import(`@/Pages/${name}.svelte`).then(module => module.default),
+  },
+})
 ```
 
 The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
