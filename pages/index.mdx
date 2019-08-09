@@ -4,7 +4,11 @@ export default Layout
 export const meta = {
   title: 'Introduction',
   hero: true,
-  links: [{ url: '#top', name: 'Introduction' }, { url: '#adapters', name: 'Adapters' }],
+  links: [
+  	{ url: '#top', name: 'Introduction' },
+  	{ url: '#adapters', name: 'Adapters' },
+  	{ url: '#demo-application', name: 'Demo application' },
+  ],
 }
 
 # JavaScript apps the monolith way
@@ -22,3 +26,7 @@ Inertia has no client-side routing, nor does it require an API. Simply build con
 ## Adapters
 
 The first step when getting started with Inertia is to configure a server-side adapter. This primarily includes setting up a root template and updating your endpoints to return proper Inertia responses. To make this process easier, Inertia ships with a number of adapters for common server-side frameworks.
+
+## Demo application
+
+If you'd like to see a complete working demo application built with Inertia.js, see [Ping CRM](https://github.com/inertiajs/pingcrm). This application is built using Laravel and Vue.js.
