@@ -91,6 +91,27 @@ One way to do this is manually loading all your page components:
         )
       `,
     },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import Inertia from 'inertia-svelte'\n
+        const app = document.getElementById('app')\n
+        const pages = {
+          'Dashboard/Index': require('./Pages/Dashboard/Index.svelte').default,
+          'Users/Index': require('./Pages/Users/Index.svelte').default,
+          'Users/Create': require('./Pages/Users/Create.svelte').default,
+          // etc...
+        }\n
+        new Inertia({
+          target: app,
+          props: {
+            initialPage: JSON.parse(app.dataset.page),
+            resolveComponent: name => pages[name],
+          },
+        })
+      `,
+    },
   ]}
 />
 
@@ -139,6 +160,25 @@ Another option is to use `required.context` to automatically register all your p
           />,
           app
         )
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code:
+        dedent`
+        import Inertia from 'inertia-svelte'\n
+        const app = document.getElementById('app')\n
+        const files = require.context('./', true, /\.svelte$/i)\n
+        export default new Inertia({
+          target: app,
+          props: {
+            initialPage: JSON.parse(app.dataset.page),
+            resolveComponent: page => files(` +
+        `\`./Pages/\${page}.svelte\`` +
+        dedent`).default,
+          }
+        })
       `,
     },
   ]}
