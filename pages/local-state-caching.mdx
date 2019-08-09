@@ -100,3 +100,49 @@ export default function Profile() {
   // ...
 }
 ```
+
+## Svelte
+
+When navigating browser history, Inertia reloads pages using prop data cached in history state. Inertia does not, however, cache local component state, since this is beyond its reach. This can lead to outdated pages in your browser history. For example, if a user partially completes a form, then navigates away, and then returns back, the form will be reset and their work will have been lost.
+
+To mitigate this issue, you can use the `remember` store to tell Inertia.js which local component state to cache.
+
+```html
+<script>
+  import { Inertia, remember } from 'inertia-svelte'
+
+  let form = remember({
+    first_name: null,
+    last_name: null,
+  })
+</script>
+
+<form on:submit|preventDefault={() => Inertia.post('/contact', $form)}>
+  <label for="first_name">First Name:</label>
+  <input id="first_name" bind:value={$form.first_name}></div>
+
+  <label for="last_name">Last name:</label>
+  <input id="last_name" bind:value={$form.last_name}></div>
+
+  <button type="submit">Save</button>
+</form>
+```
+
+> `remember` returns a store. Prefix the variable you assign it to with `$` to take advantage of [auto-subscription](https://svelte.dev/tutorial/auto-subscriptions).
+
+If your page contains multiple components using the remember functionality, you'll need to provide a unique key for each component. For example, `Users/Create`. If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
+
+```js
+<script>
+  import { Inertia, page, remember } from 'inertia-svelte'
+
+  $: ({ user } = $page)
+
+  let form = remember({
+    first_name: null,
+    last_name: null,
+  }, `Users/Edit:${user.id}`)
+
+  // ...
+</script>
+```
