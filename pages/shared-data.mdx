@@ -106,15 +106,15 @@ Once you've shared the data server-side, you'll then be able to access it within
     },
     {
       name: 'Svelte',
-      description: 'Access shared data using the $pageProps export.',
+      description: 'Access shared data using the $page store.',
       language: 'html',
       code: dedent`
         <script>
-          import { InertiaLink, pageProps } from 'inertia-svelte'
+          import { InertiaLink, page } from 'inertia-svelte'
         </script>\n
         <main>
           <header>
-            <div>You are logged in as: {$pageProps.user.name}</div>
+            <div>You are logged in as: {$page.user.name}</div>
             <nav>
               <InertiaLink href="/">Home</InertiaLink>
               <InertiaLink href="/about">About</InertiaLink>
@@ -205,13 +205,13 @@ Next, display the flash message in a front-end component, such as the site layou
       language: 'html',
       code: dedent`
         <script>
-          import { pageProps } from 'inertia-svelte'
+          import { page } from 'inertia-svelte'
         </script>\n
         <main>
           <header></header>
           <content>
-            {#if $pageProps.flash.message}
-              <div class="alert">{$pageProps.flash.message}</div>
+            {#if $page.flash.message}
+              <div class="alert">{$page.flash.message}</div>
             {/if}
             <slot />
           </content>
