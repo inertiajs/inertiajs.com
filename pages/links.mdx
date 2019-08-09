@@ -147,7 +147,7 @@ You can also preserve a page component's local state using the `preserve-state` 
       language: 'html',
       code: dedent`
         <input onChange={this.handleChange} value={query} />
-        <InertiaLink href="/search" data={query}>Search</InertiaLink>
+        <InertiaLink href="/search" data={query} preserve-state>Search</InertiaLink>
       `,
     },
     {
