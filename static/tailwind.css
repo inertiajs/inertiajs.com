@@ -57,5 +57,25 @@
   font-style: italic;
 }
 
+.carbon-wrap {
+  @apply block pr-16;
+}
+
+.carbon-img {
+  @apply block mb-3;
+
+  img {
+    @apply block;
+  }
+}
+
+.carbon-text {
+  @apply block text-sm leading-snug mb-2;
+}
+
+.carbon-poweredby {
+  @apply text-xs text-gray-500;
+}
+
 @tailwind components;
 @tailwind utilities;
