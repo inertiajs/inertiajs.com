@@ -1,9 +1,21 @@
+import dedent from 'dedent'
 import Layout from '../components/Layout'
-import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = { title: 'File uploads' }
 
 # File uploads
 
-<Notice>This section is still being developed.</Notice>
+The trick to to uploading files via `xhr` is using th `FormData` object. You can learn more about `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData). Here is a simple example of using `FormData` with Inertia.
+
+```js
+var data = new FormData()
+data.append('first_name', first_name || '')
+data.append('last_name', last_name || '')
+data.append('email', email || '')
+data.append('password', password || '')
+data.append('photo', photo || '')
+
+Inertia.post('/users', data)
+```
