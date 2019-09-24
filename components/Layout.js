@@ -8,13 +8,15 @@ import MarkdownComponents from './MarkdownComponents'
 
 export default function Layout({ meta, children }) {
   useEffect(() => {
-    var s = document.createElement('script')
-    s.setAttribute('async', '')
-    s.src = '//cdn.carbonads.com/carbon.js?serve=CE7DCKJ7&placement=inertiajscom'
-    s.id = '_carbonads_js'
-    var adElement = document.getElementById('ad')
-    adElement.innerHTML = ''
-    adElement.appendChild(s)
+    if (process.env.NODE_ENV === 'production') {
+      var s = document.createElement('script')
+      s.setAttribute('async', '')
+      s.src = '//cdn.carbonads.com/carbon.js?serve=CE7DCKJ7&placement=inertiajscom'
+      s.id = '_carbonads_js'
+      var adElement = document.getElementById('ad')
+      adElement.innerHTML = ''
+      adElement.appendChild(s)
+    }
   })
 
   return (
