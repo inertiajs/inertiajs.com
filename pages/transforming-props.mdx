@@ -1,28 +1,38 @@
+import dedent from 'dedent'
 import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = { title: 'Transforming props' }
 
 # Transforming props
 
-## Vue.js
+Sometimes it can be useful to transform the props client-side before they are passed to the page component. For example, you may have a collection of errors that you want to convert into a custom `Error` object. You can do this using the `transformProps` callback.
 
-Sometimes it can be useful to transform the props client-side before they are passed to the page component. For example, you may have a collection of errors that you want to convert into a custom Error object. You can do this using the `transformProps` callback.
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'js',
+      code: dedent`
+        new Vue({
+          render: h =>
+            h(Inertia, {
+              props: {
+                initialPage: JSON.parse(app.dataset.page),
+                resolveComponent: name => import(\`@/Pages/\${name}\`).then(module => module.default),
+                transformProps: props => {
+                  return {
+                    ...props,
+                    errors: new Errors(props.errors),
+                  }
+                },
+              },
+            }),
+        }).$mount(app)
+      `,
+    },
+  ]}
+/>
 
-```js
-new Vue({
-  render: h =>
-    h(Inertia, {
-      props: {
-        initialPage: JSON.parse(app.dataset.page),
-        resolveComponent: name => import(`@/Pages/${name}`).then(module => module.default),
-        transformProps: props => {
-          return {
-            ...props,
-            errors: new Errors(props.errors),
-          }
-        },
-      },
-    }),
-}).$mount(app)
-```
+This feature is currently only supported in the Vue adapter, since it isn't necessary in the other adapters.
