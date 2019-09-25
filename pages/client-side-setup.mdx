@@ -147,7 +147,7 @@ Finally, update the `resolveComponent` callback in your app initialization to us
             h(Inertia, {
               props: {
                 initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: name => import(\`@/Pages/\${name}\`).then(module => module.default),
+                resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
               },
             }),
         }).$mount(app)
@@ -164,7 +164,7 @@ Finally, update the `resolveComponent` callback in your app initialization to us
         render(
           <Inertia
             initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent={name => import(\`@/Pages/\${name}\`).then(module => module.default)}
+            resolveComponent={name => import(\`./Pages/\${name}\`).then(module => module.default)}
           />,
           app
         )
@@ -180,7 +180,7 @@ Finally, update the `resolveComponent` callback in your app initialization to us
           target: app,
           props: {
             initialPage: JSON.parse(app.dataset.page),
-            resolveComponent: name => import(\`@/Pages/\${name}.svelte\`).then(module => module.default),
+            resolveComponent: name => import(\`./Pages/\${name}.svelte\`).then(module => module.default),
           },
         })
       `,
