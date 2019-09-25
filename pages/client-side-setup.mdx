@@ -187,3 +187,11 @@ Finally, update the `resolveComponent` callback in your app initialization to us
     },
   ]}
 />
+
+Consider using cache busting to force browsers to load the latest version of your assets. To do this, add the following to your webpack config:
+
+```js
+output: {
+  chunkFilename: 'js/[name].js?id=[chunkhash]',
+}
+```
