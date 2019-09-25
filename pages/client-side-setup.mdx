@@ -1,127 +1,189 @@
+import dedent from 'dedent'
 import Layout from '../components/Layout'
 import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = {
   title: 'Client-side setup',
   links: [
-    { url: '#vue-js', name: 'Vue.js' },
-    { url: '#react', name: 'React' },
-    { url: '#svelte', name: 'Svelte' },
-    { url: '#setting-up-webpack', name: 'Setting up Webpack' },
-    { url: '#setup-dynamic-imports', name: 'Setup dynamic imports' },
+    { url: '#install-dependencies', name: 'Install dependencies' },
+    { url: '#initialize-app', name: 'Initialize app' },
+    { url: '#code-splitting', name: 'Code splitting' },
   ],
 }
 
 # Client-side setup
 
-## Vue.js
+## Install dependencies
 
-Install using NPM:
+install the Inertia client-side adapters using NPM or Yarn.
 
-```bash
-npm install inertiajs/inertia-vue --save
-```
-
-Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Vue with the base Inertia page component.
-
-```js
-import Inertia from 'inertia-vue'
-import Vue from 'vue'
-
-Vue.use(Inertia)
-
-const app = document.getElementById('app')
-
-new Vue({
-  render: h =>
-    h(Inertia, {
-      props: {
-        initialPage: JSON.parse(app.dataset.page),
-        resolveComponent: name => import(`@/Pages/${name}`).then(module => module.default),
-      },
-    }),
-}).$mount(app)
-```
-
-The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
-
-## React
-
-Install using NPM:
-
-```bash
-npm install inertiajs/inertia-react --save
-```
-
-Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing React with the base Inertia page component.
-
-```jsx
-import Inertia from 'inertia-react'
-import React from 'react'
-import { render } from 'react-dom'
-
-const app = document.getElementById('app')
-
-render(
-  <Inertia
-    initialPage={JSON.parse(app.dataset.page)}
-    resolveComponent={name => import(`@/Pages/${name}`).then(module => module.default)}
-  />,
-  app
-)
-```
-
-The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
-
-## Svelte
-
-Install using NPM:
-
-```bash
-npm install inertiajs/inertia-svelte --save
-```
-
-Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Svelte with the base Inertia page component.
-
-```js
-import Inertia from 'inertia-svelte'
-
-const app = document.getElementById('app')
-
-new Inertia({
-  target: app,
-  props: {
-    initialPage: JSON.parse(app.dataset.page),
-    resolveComponent: name => import(`@/Pages/${name}.svelte`).then(module => module.default),
-  },
-})
-```
-
-The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
-
-## Setting up Webpack
-
-Here is an example Webpack configuration that uses [Laravel Mix](https://github.com/JeffreyWay/laravel-mix). Note the `@` alias to the `/resources/js` directory.
-
-```js
-const mix = require('laravel-mix')
-const path = require('path')
-
-mix
-  .js('resources/js/app.js', 'public/js')
-  .sass('resources/sass/app.scss', 'public/css')
-  .webpackConfig({
-    output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
-    resolve: {
-      alias: {
-        vue$: 'vue/dist/vue.runtime.esm.js',
-        '@': path.resolve('resources/js'),
-      },
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'bash',
+      code: dedent`
+        npm install @inertiajs/inertia @inertiajs/inertia-vue
+        yarn add @inertiajs/inertia @inertiajs/inertia-vue
+      `,
     },
-  })
+    {
+      name: 'React',
+      language: 'bash',
+      code: dedent`
+        npm install @inertiajs/inertia @inertiajs/inertia-react
+        yarn add @inertiajs/inertia @inertiajs/inertia-react
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'bash',
+      code: dedent`
+        npm install @inertiajs/inertia @inertiajs/inertia-svelte
+        yarn add @inertiajs/inertia @inertiajs/inertia-svelte
+      `,
+    },
+  ]}
+/>
+
+## Initialize app
+
+Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing the client-side framework with the base Inertia page component.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        import Inertia from 'inertia-vue'
+        import Vue from 'vue'\n
+        Vue.use(Inertia)\n
+        const app = document.getElementById('app')\n
+        new Vue({
+          render: h =>
+            h(Inertia, {
+              props: {
+                initialPage: JSON.parse(app.dataset.page),
+                resolveComponent: name => require(\`./Pages/\${name}\`),
+              },
+            }),
+        }).$mount(app)
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import Inertia from 'inertia-react'
+        import React from 'react'
+        import { render } from 'react-dom'\n
+        const app = document.getElementById('app')\n
+        render(
+          <Inertia
+            initialPage={JSON.parse(app.dataset.page)}
+            resolveComponent: name => require(\`./Pages/\${name}\`),
+          />,
+          app
+        )
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import Inertia from 'inertia-svelte'\n
+        const app = document.getElementById('app')\n
+        new Inertia({
+          target: app,
+          props: {
+            initialPage: JSON.parse(app.dataset.page),
+            resolveComponent: name => require(\`./Pages/\${name}\`),
+          },
+        })
+      `,
+    },
+  ]}
+/>
+
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
+## Code splitting
+
+To use code splitting with Inertia you'll need to enable [dynamic imports](https://github.com/tc39/proposal-dynamic-import). You'll need a Babel plugin to make this work. First, install the plugin:
+
+```bash
+npm install @babel/plugin-syntax-dynamic-import
 ```
 
-## Setup dynamic imports
+Next, create a `.babelrc` file in your project with the following:
 
-<Notice>This section is still being developed.</Notice>
+```json
+{
+  "plugins": ["@babel/plugin-syntax-dynamic-import"]
+}
+```
+
+<Notice>
+  If you're using Laravel Mix v4, the dynamic imports Babel plugin is already configured. However, there is a known issue with Laravel Mix v4 when using dynamic imports where you cannot use styles within Vue files due to a Webpack <a href="https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909">limitation</a>. As a workaround, you need to drop Mix entirely or downgrade to Laravel Mix v3.
+</Notice>
+
+Finally, update the `resolveComponent` callback in your app initialization to use `import` instead of `require`.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        import Inertia from 'inertia-vue'
+        import Vue from 'vue'\n
+        Vue.use(Inertia)\n
+        const app = document.getElementById('app')\n
+        new Vue({
+          render: h =>
+            h(Inertia, {
+              props: {
+                initialPage: JSON.parse(app.dataset.page),
+                resolveComponent: name => import(\`@/Pages/\${name}\`).then(module => module.default),
+              },
+            }),
+        }).$mount(app)
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import Inertia from 'inertia-react'
+        import React from 'react'
+        import { render } from 'react-dom'\n
+        const app = document.getElementById('app')\n
+        render(
+          <Inertia
+            initialPage={JSON.parse(app.dataset.page)}
+            resolveComponent={name => import(\`@/Pages/\${name}\`).then(module => module.default)}
+          />,
+          app
+        )
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import Inertia from 'inertia-svelte'\n
+        const app = document.getElementById('app')\n
+        new Inertia({
+          target: app,
+          props: {
+            initialPage: JSON.parse(app.dataset.page),
+            resolveComponent: name => import(\`@/Pages/\${name}.svelte\`).then(module => module.default),
+          },
+        })
+      `,
+    },
+  ]}
+/>

@@ -168,17 +168,12 @@ export default function Layout({ meta, children }) {
             </li>
             <li className="mt-4">
               <Link href="/server-side-setup">
-                <a className="hover:underline font-medium text-gray-700">Server-side</a>
+                <a className="hover:underline font-medium text-gray-700">Server-side setup</a>
               </Link>
             </li>
             <li className="mt-4">
               <Link href="/client-side-setup">
-                <a className="hover:underline font-medium text-gray-700">Client-side</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/code-splitting">
-                <a className="hover:underline font-medium text-gray-700">Code splitting</a>
+                <a className="hover:underline font-medium text-gray-700">Client-side setup</a>
               </Link>
             </li>
           </ul>
