@@ -8,7 +8,6 @@ export const meta = {
   links: [
     { url: '#top', name: 'Introduction' },
     { url: '#creating-links', name: 'Creating links' },
-    { url: '#programmatic-navigation', name: 'Programmatic navigation' },
   ],
 }
 
@@ -160,64 +159,3 @@ You can also preserve a page component's local state using the `preserve-state` 
     },
   ]}
 />
-
-## Programmatic navigation
-
-In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take note of the defaults.
-
-<TabbedCodeExamples
-  examples={[
-    {
-      name: 'Vue',
-      language: 'js',
-      code: dedent`
-        import { Inertia } from 'inertia-vue'\n
-        Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveScroll: false, preserveState: false })
-        Inertia.replace(url, { method: 'get', data: {}, preserveScroll: false, preserveState: true })
-        Inertia.reload({ method: 'get', data: {}, preserveScroll: false, preserveState: false })
-        Inertia.post(url, data, { replace: false, preserveScroll: false, preserveState: true })
-        Inertia.put(url, data, { replace: false, preserveScroll: false, preserveState: true })
-        Inertia.patch(url, data, { replace: false, preserveScroll: false, preserveState: true })
-        Inertia.delete(url, { replace: false, preserveScroll: false, preserveState: false })\n
-        // Inertia is available via the $inertia property
-        this.$inertia.visit(url, { method: 'get', data: {}, replace: false, preserveScroll: false, preserveState: false })
-        this.$inertia.replace(url, { method: 'get', data: {}, preserveScroll: false, preserveState: true })
-        this.$inertia.reload({ method: 'get', data: {}, preserveScroll: false, preserveState: false })
-        this.$inertia.post(url, data, { replace: false, preserveScroll: false, preserveState: true })
-        this.$inertia.put(url, data, { replace: false, preserveScroll: false, preserveState: true })
-        this.$inertia.patch(url, data, { replace: false, preserveScroll: false, preserveState: true })
-        this.$inertia.delete(url, { replace: false, preserveScroll: false, preserveState: false })
-      `,
-    },
-    {
-      name: 'React',
-      language: 'js',
-      code: dedent`
-        import { Inertia } from 'inertia-react'\n
-        Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveState: false, preserveScroll: false })
-        Inertia.replace(url, { method: 'get', data: {}, preserveState: true, preserveScroll: false })
-        Inertia.reload({ method: 'get', data: {}, preserveState: false, preserveScroll: false })
-        Inertia.post(url, data, { replace: false, preserveState: true, preserveScroll: false })
-        Inertia.put(url, data, { replace: false, preserveState: true, preserveScroll: false })
-        Inertia.patch(url, data, { replace: false, preserveState: true, preserveScroll: false })
-        Inertia.delete(url, { replace: false, preserveState: false, preserveScroll: false })
-      `,
-    },
-    {
-      name: 'Svelte',
-      language: 'js',
-      code: dedent`
-        import { Inertia } from 'inertia-svelte'\n
-        Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveState: false, preserveScroll: false })
-        Inertia.replace(url, { method: 'get', data: {}, preserveState: true, preserveScroll: false })
-        Inertia.reload({ method: 'get', data: {}, preserveState: false, preserveScroll: false })
-        Inertia.post(url, data, { replace: false, preserveState: true, preserveScroll: false })
-        Inertia.put(url, data, { replace: false, preserveState: true, preserveScroll: false })
-        Inertia.patch(url, data, { replace: false, preserveState: true, preserveScroll: false })
-        Inertia.delete(url, { replace: false, preserveState: false, preserveScroll: false })
-      `,
-    },
-  ]}
-/>
-
-Just like with an Inertia link, you can control the history state behaviour using `replace`, scroll behaviour using `preserveScroll`, and local component state behaviour using `preserveState`.

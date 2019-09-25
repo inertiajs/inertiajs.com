@@ -195,6 +195,11 @@ export default function Layout({ meta, children }) {
               </Link>
             </li>
             <li className="mt-4">
+              <Link href="/requests">
+                <a className="hover:underline font-medium text-gray-700">Requests</a>
+              </Link>
+            </li>
+            <li className="mt-4">
               <Link href="/redirects">
                 <a className="hover:underline font-medium text-gray-700">Redirects</a>
               </Link>
