@@ -84,7 +84,7 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
         render(
           <Inertia
             initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent: name => require(\`./Pages/\${name}\`),
+            resolveComponent={name => require(\`./Pages/\${name}\`)},
           />,
           app
         )
@@ -127,7 +127,10 @@ Next, create a `.babelrc` file in your project with the following:
 ```
 
 <Notice>
-  If you're using Laravel Mix v4, the dynamic imports Babel plugin is already configured. However, there is a known issue with Laravel Mix v4 when using dynamic imports where you cannot use styles within Vue files due to a Webpack <a href="https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909">limitation</a>. As a workaround, you need to drop Mix entirely or downgrade to Laravel Mix v3.
+  If you're using Laravel Mix v4, the dynamic imports Babel plugin is already configured. However, there is a known
+  issue with Laravel Mix v4 when using dynamic imports where you cannot use styles within Vue files due to a Webpack{' '}
+  <a href="https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909">limitation</a>. As a
+  workaround, you need to drop Mix entirely or downgrade to Laravel Mix v3.
 </Notice>
 
 Finally, update the `resolveComponent` callback in your app initialization to use `import` instead of `require`.

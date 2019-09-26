@@ -35,7 +35,25 @@ Sometimes it can be useful to transform the props client-side before they are pa
     {
       name: 'React',
       language: 'jsx',
-      code: `// add`,
+      code: dedent`
+        import Inertia from 'inertia-react'
+        import React from 'react'
+        import { render } from 'react-dom'\n
+        const app = document.getElementById('app')\n
+        render(
+          <Inertia
+            initialPage={JSON.parse(app.dataset.page)}
+            resolveComponent={name => require(\`./Pages/\${name}\`)},
+            transformProps={props => {
+              return {
+                ...props,
+                errors: new Errors(props.errors),
+              }
+            }}
+          />,
+          app
+        )
+      `,
     },
     {
       name: 'Svelte',
