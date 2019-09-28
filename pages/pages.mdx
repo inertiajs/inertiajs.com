@@ -168,7 +168,9 @@ While not required, for most projects it makes sense to create a site layout tha
 
 ## Persistent layouts
 
-While implementing layouts as children of the page components is simple, it does force the layout instance to be completely destroyed and recreated between page visits. This means you cannot have persistent layout state between page visits. For example, maybe you have an audio player on a podcast website that you want to continue playing as users navigate the site. Or, maybe you simply want to maintain the scroll position in your navigation between page visits. In these situations, using the persistent layouts feature in Inertia is a better choice.
+While it's simple to implement layouts as children of the page components, it does force the layout instance to be destroyed and recreated between visits. This means you cannot have persistent layout state when navigating between pages.
+
+For example, maybe you have an audio player on a podcast website that you want to continue playing as users navigate the site. Or, maybe you simply want to maintain the scroll position in your navigation between page visits. In these situations, using the persistent layouts feature in Inertia is a better choice.
 
 <TabbedCodeExamples
   examples={[
