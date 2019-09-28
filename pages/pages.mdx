@@ -9,6 +9,8 @@ export const meta = {
     { url: '#top', name: 'Introduction' },
     { url: '#creating-pages', name: 'Creating pages' },
     { url: '#creating-layouts', name: 'Creating layouts' },
+    { url: '#persistent-layouts', name: 'Persistent layouts' },
+    { url: '#scroll-regions', name: 'Scroll regions' },
   ],
 }
 
@@ -80,7 +82,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
 
 ## Creating layouts
 
-While not required, for most projects it makes sense to create a site layout that your pages can extend. Here's an example of how you can do that. Again, there is nothing Inertia specific here. This is just a standard JavaScript component.
+While not required, for most projects it makes sense to create a site layout that your pages can extend. Notice in our page example above that we're wrapping the page content within a `<layout>` component. Here's an example of such a component. There is nothing Inertia specific here. This is just a standard JavaScript component.
 
 <TabbedCodeExamples
   examples={[
@@ -163,3 +165,96 @@ While not required, for most projects it makes sense to create a site layout tha
     },
   ]}
 />
+
+## Persistent layouts
+
+While implementing layouts as children of the page components is simple, it does force the layout instance to be completely destroyed and recreated between page visits. This means you cannot have persistent layout state between page visits. For example, maybe you have an audio player on a podcast website that you want to continue playing as users navigate the site. Or, maybe you simply want to maintain the scroll position in your navigation between page visits. In these situations, using the persistent layouts feature in Inertia is a better choice.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <div>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </div>
+        </template>\n
+        <script>
+          import Layout from '@/Shared/Layout'\n
+          export default {
+            layout: Layout,
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: '// to do',
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: '// to do',
+    },
+  ]}
+/>
+
+You can optionally make `layout` a render function, allowing you to create more complex layout arrangements. For example, you can use this to create a secondary nested layout within a subsection of your app.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <div>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </div>
+        </template>\n
+        <script>
+          import SiteLayout from './SiteLayout'
+          import NestedLayout from './NestedLayout'\n
+          export default {
+            layout: (h, page) => {
+              return h(SiteLayout, [
+                h(NestedLayout, [page]),
+              ])
+            },
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: '// to do',
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: '// to do',
+    },
+  ]}
+/>
+
+## Scroll regions
+
+When navigating between pages, Inertia will automatically reset the scroll position to the top of the body (unless disabled via the `preserve-scroll` functionality). Depending on your app, you may have nested scroll containers within your layout, and these will not be reset by default. You can tell Inertia to also reset these areas by adding a `scroll-region` attribute.
+
+```html
+<div class="overflow-y-auto" scroll-region>
+  <!-- Your page content -->
+</div>
+```
