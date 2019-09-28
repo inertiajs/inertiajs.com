@@ -1,12 +1,15 @@
+import Nav from './Nav'
 import dedent from 'dedent'
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import TabbedCodeExamples from './TabbedCodeExamples'
 import MarkdownComponents from './MarkdownComponents'
 
 export default function Layout({ meta, children }) {
+  const [showMobileNav, setShowMobileNav] = useState(false)
+
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
       var s = document.createElement('script')
@@ -25,7 +28,7 @@ export default function Layout({ meta, children }) {
         <title>{meta.title}</title>
         <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
       </Head>
-      <div className="overflow-hidden text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
+      <div className="md:overflow-hidden text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 relative">
           <svg
             className="absolute z-10 top-0 w-auto"
@@ -35,7 +38,7 @@ export default function Layout({ meta, children }) {
             <path d="M27.3 0H0l26.4 26.4L0 52.8h27.3l26.4-26.4z" />
             <path d="M68.6 0H41.3l26.4 26.4-26.4 26.4h27.3L95 26.4z" />
           </svg>
-          <header className="py-12 relative z-20 flex justify-between">
+          <header className="py-12 relative z-30 flex justify-between">
             <Link href="/">
               <a className="lg:flex lg:items-end">
                 <svg className="block fill-current text-white" css={{ height: '25px' }} viewBox="0 0 275.3 50.5">
@@ -52,7 +55,17 @@ export default function Layout({ meta, children }) {
                 </svg>
               </a>
             </Link>
-            <div className="flex items-center text-white">
+            <div className="md:hidden relative z-50">
+              <svg className="block fill-current text-white w-6 h-6" onClick={() => setShowMobileNav(true)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+              </svg>
+              {showMobileNav && (
+                <div className="absolute top-0 right-0 p-4 bg-white shadow-xl rounded z-50 whitespace-no-wrap">
+                  <Nav />
+                </div>
+              )}
+            </div>
+            <div className="hidden md:flex items-center text-white">
               <a className="block flex items-center hover:text-purple-900 mr-5" href="https://github.com/inertiajs">
                 <svg className="fill-current w-6 h-6" viewBox="0 0 20 20">
                   <title>GitHub</title>
@@ -153,117 +166,9 @@ export default function Layout({ meta, children }) {
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 py-12 md:py-24 flex">
-        <nav className="hidden md:block md:w-56 flex-shrink-0 border-r">
-          <div className="text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
-          <ul>
-            <li className="mt-4">
-              <Link href="/">
-                <a className="hover:underline font-medium text-gray-700">Introduction</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/installation">
-                <a className="hover:underline font-medium text-gray-700">Installation</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/server-side-setup">
-                <a className="hover:underline font-medium text-gray-700">Server-side setup</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/client-side-setup">
-                <a className="hover:underline font-medium text-gray-700">Client-side setup</a>
-              </Link>
-            </li>
-          </ul>
-          <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
-          <ul>
-            <li className="mt-4">
-              <Link href="/routing">
-                <a className="hover:underline font-medium text-gray-700">Routing</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/responses">
-                <a className="hover:underline font-medium text-gray-700">Responses</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/requests">
-                <a className="hover:underline font-medium text-gray-700">Requests</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/redirects">
-                <a className="hover:underline font-medium text-gray-700">Redirects</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/pages">
-                <a className="hover:underline font-medium text-gray-700">Pages</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/links">
-                <a className="hover:underline font-medium text-gray-700">Links</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/forms">
-                <a className="hover:underline font-medium text-gray-700">Forms</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/file-uploads">
-                <a className="hover:underline font-medium text-gray-700">File uploads</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/shared-data">
-                <a className="hover:underline font-medium text-gray-700">Shared data</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/csrf-protection">
-                <a className="hover:underline font-medium text-gray-700">CSRF protection</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/authorization">
-                <a className="hover:underline font-medium text-gray-700">Authorization</a>
-              </Link>
-            </li>
-          </ul>
-          <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Advanced</div>
-          <ul>
-            <li className="mt-4">
-              <Link href="/error-handling">
-                <a className="hover:underline font-medium text-gray-700">Error handling</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/asset-versioning">
-                <a className="hover:underline font-medium text-gray-700">Asset versioning</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/local-state-caching">
-                <a className="hover:underline font-medium text-gray-700">Local state caching</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/transforming-props">
-                <a className="hover:underline font-medium text-gray-700">Transforming props</a>
-              </Link>
-            </li>
-            <li className="mt-4">
-              <Link href="/server-side-rendering">
-                <a className="hover:underline font-medium text-gray-700">Server-side rendering</a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <div className="hidden md:block md:w-56 flex-shrink-0 border-r">
+          <Nav />
+        </div>
         <div className="flex-1 overflow-hidden md:pl-8 lg:pl-16 xl:pr-16 leading-relaxed text-lg" id="top">
           <MDXProvider components={MarkdownComponents} children={children} />
         </div>
