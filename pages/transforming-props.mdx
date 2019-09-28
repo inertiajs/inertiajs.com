@@ -20,7 +20,7 @@ Sometimes it can be useful to transform the props client-side before they are pa
             h(Inertia, {
               props: {
                 initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: name => import(\`@/Pages/\${name}\`).then(module => module.default),
+                resolveComponent: name => require(\`./Pages/\${name}\`).default,
                 transformProps: props => {
                   return {
                     ...props,
@@ -43,7 +43,7 @@ Sometimes it can be useful to transform the props client-side before they are pa
         render(
           <Inertia
             initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent={name => require(\`./Pages/\${name}\`)},
+            resolveComponent={name => require(\`./Pages/\${name}\`).default},
             transformProps={props => {
               return {
                 ...props,
@@ -58,7 +58,7 @@ Sometimes it can be useful to transform the props client-side before they are pa
     {
       name: 'Svelte',
       language: 'js',
-      code: `// add`,
+      code: `// todo`,
     },
   ]}
 />

@@ -67,7 +67,7 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
             h(Inertia, {
               props: {
                 initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: name => require(\`./Pages/\${name}\`),
+                resolveComponent: name => require(\`./Pages/\${name}\`).default,
               },
             }),
         }).$mount(app)
@@ -84,7 +84,7 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
         render(
           <Inertia
             initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent={name => require(\`./Pages/\${name}\`)},
+            resolveComponent={name => require(\`./Pages/\${name}\`).default},
           />,
           app
         )
@@ -100,7 +100,7 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
           target: app,
           props: {
             initialPage: JSON.parse(app.dataset.page),
-            resolveComponent: name => require(\`./Pages/\${name}\`),
+            resolveComponent: name => require(\`./Pages/\${name}\`).default,
           },
         })
       `,
