@@ -1,5 +1,5 @@
 import Nav from './Nav'
-import dedent from 'dedent'
+import dedent from 'dedent-js'
 import Head from 'next/head'
 import Link from 'next/link'
 import { MDXProvider } from '@mdx-js/react'
