@@ -175,11 +175,11 @@ export default function Layout({ meta, children }) {
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 py-12 md:py-24 flex">
-        <Nav className="hidden md:block md:w-56 flex-shrink-0 border-r" />
-        <div className="flex-1 overflow-hidden md:pl-12 lg:pl-16 xl:pr-16 leading-relaxed text-lg" id="top">
+        <Nav className="hidden md:block md:w-48 lg:w-56 flex-shrink-0 border-r" />
+        <div className="flex-1 overflow-hidden md:pl-12 lg:pl-16 xl:pl-16 xl:pr-20 leading-relaxed text-lg" id="top">
           <MDXProvider components={MarkdownComponents} children={children} />
         </div>
-        <div className="hidden xl:block w-48 flex-shrink-0 relative -mt-8">
+        <div className="hidden xl:block w-40 flex-shrink-0 relative -mt-8">
           <div className="pt-8 sticky top-0">
             {meta.links && (
               <div className="mb-12">
