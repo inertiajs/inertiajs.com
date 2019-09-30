@@ -32,7 +32,7 @@ export default function Layout({ meta, children }) {
       </Head>
       <div className="text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 relative">
-          <div className="overflow-hidden absolute top-0 h-full">
+          <div className="overflow-hidden absolute top-0 left-0 w-full h-full">
             <svg className="w-auto" css={{ height: '600px', fill: '#b2b6ff', opacity: '.08' }} viewBox="0 0 95 52.8">
               <path d="M27.3 0H0l26.4 26.4L0 52.8h27.3l26.4-26.4z" />
               <path d="M68.6 0H41.3l26.4 26.4-26.4 26.4h27.3L95 26.4z" />
