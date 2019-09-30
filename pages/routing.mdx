@@ -5,8 +5,57 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Routing',
+  links: [{ url: '#top', name: 'Defining routes' }, { url: '#generating-routes', name: 'Generating URLs' }],
 }
 
 # Routing
 
+## Defining routes
+
 With Inertia all routing is defined server-side. Meaning you don't need Vue Router or React Router. Simply create routes using your server-side framework of choice.
+
+## Generating URLs
+
+Some server-side frameworks allow you to generate URLs from named routes. However, you will not have access to those helpers client-side. Here are a couple ways to still used named routes with Inertia.
+
+The first option is to generate URLs server-side and include them as props. Notice in this example how we're passing the `edit_url` and `create_url` to the `Users` component.
+
+```php
+class UsersController
+{
+    public function index()
+    {
+        $users = User::get()->map(function ($user) {
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'edit_url' => URL::route('users.edit', $user),
+            ];
+        });
+
+        return Inertia::render('Users', [
+            'users' => $users
+            'create_url' => URL::route('users.create'),
+        ]);
+    }
+}
+```
+
+Another option is to make your route definitions available client-side as JSON, and then use this to generate URLs from your named routes.
+
+```php
+<script>
+  let routes = {{ json_encode($routes) }}
+</script>
+```
+
+If you're using Laravel, the <a href="https://github.com/tightenco/ziggy">Ziggy</a> library does this for you automatically via a global `route()` function. If you're using Ziggy with Vue.js, it's helpful to make this function available as a custom `$route` property so you can use it directly in your templates.
+
+```js
+Vue.prototype.$route = (...args) => route(...args).url()
+```
+
+```html
+<inertia-link :href="$route('users.create')">Create User</inertia-link>
+```
