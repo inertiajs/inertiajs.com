@@ -27,6 +27,7 @@ export default function Layout({ meta, children }) {
     <div onClick={e => setShowMobileNav(mobileNav.current.contains(e.target))} className="leading-none font-sans text-gray-800 antialiased">
       <Head>
         <title>{meta.title}</title>
+        <meta type="description" content="Inertia.js allows you to quickly build modern single-page React, Vue.js and Svelte apps using classic server-side routing and controllers." />
         <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
       </Head>
       <div className="text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
