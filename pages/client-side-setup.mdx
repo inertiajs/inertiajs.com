@@ -58,18 +58,17 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'Vue.js',
       language: 'js',
       code: dedent`
-        import Inertia from 'inertia-vue'
+        import { InertiaApp } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
-        Vue.use(Inertia)\n
+        Vue.use(InertiaApp)\n
         const app = document.getElementById('app')\n
         new Vue({
-          render: h =>
-            h(Inertia, {
-              props: {
-                initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: name => require(\`./Pages/\${name}\`).default,
-              },
-            }),
+          render: h => h(InertiaApp, {
+            props: {
+              initialPage: JSON.parse(app.dataset.page),
+              resolveComponent: name => require(\`./Pages/\${name}\`).default,
+            },
+          }),
         }).$mount(app)
       `,
     },
@@ -77,12 +76,12 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import Inertia from 'inertia-react'
+        import { InertiaApp } from '@inertiajs/inertia-react'
         import React from 'react'
         import { render } from 'react-dom'\n
         const app = document.getElementById('app')\n
         render(
-          <Inertia
+          <InertiaApp
             initialPage={JSON.parse(app.dataset.page)}
             resolveComponent={name => require(\`./Pages/\${name}\`).default},
           />,
@@ -94,13 +93,13 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'Svelte',
       language: 'js',
       code: dedent`
-        import Inertia from 'inertia-svelte'\n
+        import { InertiaApp } from '@inertiajs/inertia-svelte'\n
         const app = document.getElementById('app')\n
-        new Inertia({
+        new InertiaApp({
           target: app,
           props: {
             initialPage: JSON.parse(app.dataset.page),
-            resolveComponent: name => require(\`./Pages/\${name}\`).default,
+            resolveComponent: name => require(\`./Pages/\${name}.svelte\`).default,
           },
         })
       `,
@@ -141,18 +140,17 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       name: 'Vue.js',
       language: 'js',
       code: dedent`
-        import Inertia from 'inertia-vue'
+        import { InertiaApp } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
-        Vue.use(Inertia)\n
+        Vue.use(InertiaApp)\n
         const app = document.getElementById('app')\n
         new Vue({
-          render: h =>
-            h(Inertia, {
-              props: {
-                initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
-              },
-            }),
+          render: h => h(InertiaApp, {
+            props: {
+              initialPage: JSON.parse(app.dataset.page),
+              resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
+            },
+          }),
         }).$mount(app)
       `,
     },
@@ -160,12 +158,12 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import Inertia from 'inertia-react'
+        import { InertiaApp } from '@inertiajs/inertia-react'
         import React from 'react'
         import { render } from 'react-dom'\n
         const app = document.getElementById('app')\n
         render(
-          <Inertia
+          <InertiaApp
             initialPage={JSON.parse(app.dataset.page)}
             resolveComponent={name => import(\`./Pages/\${name}\`).then(module => module.default)}
           />,
@@ -177,9 +175,9 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       name: 'Svelte',
       language: 'js',
       code: dedent`
-        import Inertia from 'inertia-svelte'\n
+        import { InertiaApp } from '@inertiajs/inertia-svelte'\n
         const app = document.getElementById('app')\n
-        new Inertia({
+        new InertiaApp({
           target: app,
           props: {
             initialPage: JSON.parse(app.dataset.page),
