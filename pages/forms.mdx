@@ -107,7 +107,15 @@ Unlike a classic ajax submitted form, with Inertia you don't handle the post sub
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        # todo
+        class UsersController < ApplicationController
+          def index
+            render inertia: 'Users/Index', props: {users: User.all}
+          end\n
+          def store
+            User.create params.require(:user).permit(:first_name, :last_name, :email)\n
+            redirect_to users_path
+          end
+        end
       `,
     },
   ]}
