@@ -1,0 +1,39 @@
+import Layout from '../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'CSRF protection',
+  links: [
+    { url: '#top', name: 'CSRF protection' },
+    { url: '#include-token-as-prop', name: 'Include token as prop' },
+    { url: '#include-token-as-cookie', name: 'Include token as cookie' },
+  ],
+}
+
+# CSRF protection
+
+If your web framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that each Inertia requests includes the necessary token for `POST`, `PUT`, `PATCH` and `DELETE` requests.
+
+## Include token as prop
+
+One solution is to include the CSRF token as a prop on every response. You can then use the token when making Inertia requests.
+
+```js
+this.$inertia.post('/users', {
+  name: this.name,
+  email: this.email,
+  _token: this.$page.csrf_token,
+})
+```
+
+You can even use the <a href="/shared-data">shared data</a> functionality to automatically include the `csrf_token` with each response.
+
+## Include token as cookie
+
+However, a better approach is to use the CSRF functionality already built into [axios](https://github.com/axios/axios) for this. Axios is the HTTP library that Inertia uses under the hood.
+
+Axios automatically checks for the existence of an `XSRF-TOKEN` cookie. If it's present, it will then include the token in an `X-CSRF-TOKEN` header for any requests it makes.
+
+The easiest way to implement this is using server-side middleware. Simply include the `XSRF-TOKEN` cookie on each response, and then verify the token using the `X-CSRF-TOKEN` header sent in the requests from axios.
+
+Some frameworks, such as [Laravel](https://github.com/laravel/framework/blob/5.8/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php#L176-L188), do this automatically, meaning there is no configuration required.

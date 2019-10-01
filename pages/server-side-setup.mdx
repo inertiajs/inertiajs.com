@@ -1,0 +1,148 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Server-side setup',
+  links: [
+    { url: '#install-dependencies', name: 'Install dependencies' },
+    { url: '#root-template', name: 'Root template' },
+    { url: '#asset-versioning', name: 'Asset versioning' },
+    { url: '#creating-responses', name: 'Creating responses' },
+  ],
+}
+
+# Server-side setup
+
+## Install dependencies
+
+Install the Inertia server-side adapters using the preferred package manager for that language or framework.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'bash',
+      code: dedent`
+        composer require inertiajs/inertia-laravel
+      `,
+      description: 'Install via Composer',
+    },
+    {
+      name: 'Rails',
+      language: 'bash',
+      description: 'Install via RubyGems',
+      code: dedent`
+        gem install inertia-rails
+      `,
+    },
+  ]}
+/>
+
+### Root template
+
+Next, setup the root template that will be loaded on the first page visit. This will be used to load your site assets (CSS and JavaScript), and will also contain a root `<div>` to boot your JavaScript application in.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'twig',
+      code: dedent`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+            <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
+            <script src="{{ mix('/js/app.js') }}" defer></script>
+          </head>
+          <body>
+            @inertia
+          </body>
+        </html>
+      `,
+      description: `By default the Laravel adapter will use the app.blade.php view. This template should include your assets, as well as the @inertia directive. If you'd like to use a different root view, you can change it using Inertia::setRootView().`,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        Inertia.configure do |config|
+          config.layout = 'inertia' # uses layouts/inertia.html.erb
+        end
+      `,
+      description: `Inertia Rails automatically uses your default application layout. If you'd like to change that, you can do so via the Inertia config.`,
+    },
+  ]}
+/>
+
+## Asset versioning
+
+While not required, it's highly recommended that you also configure automatic asset refreshing. To do this you simply need to tell Inertia what the current version of your assets is. See the [asset versioning](/asset-versioning) page for more information.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        Inertia::version($version);
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        Inertia.configure do |config|
+          config.version = '1.0'
+        end
+      `,
+    },
+  ]}
+/>
+
+## Creating responses
+
+That's it, you're all ready to go server-side! From here you can start creating Inertia responses. See the [responses](/responses) page for more information.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        use Inertia\\Inertia;\n
+        class EventsController extends Controller
+        {
+            public function show(Event $event)
+            {
+                return Inertia::render('Event/Show', [
+                    'event' => $event->only(
+                        'id',
+                        'title',
+                        'start_date',
+                        'description'
+                    ),
+                ]);
+            }
+        }
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        class EventsController < ApplicationController
+          def index
+            render inertia: 'Events',
+              props: {
+                events: Event.all
+              }
+          end
+        end
+      `,
+    },
+  ]}
+/>

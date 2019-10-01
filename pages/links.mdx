@@ -1,0 +1,158 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Links',
+  links: [{ url: '#top', name: 'Introduction' }, { url: '#creating-links', name: 'Creating links' }],
+}
+
+# Links
+
+To create links within an Inertia app you'll need to use the Inertia link component. This is a light wrapper around a standard anchor link that intercepts click events and prevents full page reloads from occurring. This is how Inertia provides a single-page app experience.
+
+## Creating links
+
+To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the underlying `<a>` tag.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/">Home</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/">Home</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/">Home</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/" replace preserve-scroll>Home</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink replace preserve-scroll href="/">Home</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/" preserveScroll replace>Home</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/logout" method="post">Logout</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/logout" method="post">Logout</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/logout" method="post">Logout</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+You can add data using the `data` attribute:
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+You can also preserve a page component's local state using the `preserve-state` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <input v-model="query" type="text" />
+        <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <input onChange={this.handleChange} value={query} />
+        <InertiaLink href="/search" data={query} preserve-state>Search</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <input on:change={handleChange} value={query} />
+        <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
+      `,
+    },
+  ]}
+/>

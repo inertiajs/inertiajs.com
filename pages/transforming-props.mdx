@@ -1,0 +1,64 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = { title: 'Transforming props' }
+
+# Transforming props
+
+Sometimes it can be useful to transform the props client-side before they are passed to the page component. For example, you may have a collection of errors that you want to convert into a custom `Error` object. You can do this using the `transformProps` callback.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'js',
+      code: dedent`
+        new Vue({
+          render: h =>
+            h(Inertia, {
+              props: {
+                initialPage: JSON.parse(app.dataset.page),
+                resolveComponent: name => require(\`./Pages/\${name}\`).default,
+                transformProps: props => {
+                  return {
+                    ...props,
+                    errors: new Errors(props.errors),
+                  }
+                },
+              },
+            }),
+        }).$mount(app)
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import Inertia from 'inertia-react'
+        import React from 'react'
+        import { render } from 'react-dom'\n
+        const app = document.getElementById('app')\n
+        render(
+          <Inertia
+            initialPage={JSON.parse(app.dataset.page)}
+            resolveComponent={name => require(\`./Pages/\${name}\`).default},
+            transformProps={props => {
+              return {
+                ...props,
+                errors: new Errors(props.errors),
+              }
+            }}
+          />,
+          app
+        )
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: `// todo`,
+    },
+  ]}
+/>

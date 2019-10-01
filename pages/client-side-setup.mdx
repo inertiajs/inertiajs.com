@@ -1,0 +1,198 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Client-side setup',
+  links: [
+    { url: '#install-dependencies', name: 'Install dependencies' },
+    { url: '#initialize-app', name: 'Initialize app' },
+    { url: '#code-splitting', name: 'Code splitting' },
+  ],
+}
+
+# Client-side setup
+
+## Install dependencies
+
+Install the Inertia client-side adapters using NPM or Yarn.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'bash',
+      code: dedent`
+        npm install @inertiajs/inertia @inertiajs/inertia-vue
+        yarn add @inertiajs/inertia @inertiajs/inertia-vue
+      `,
+    },
+    {
+      name: 'React',
+      language: 'bash',
+      code: dedent`
+        npm install @inertiajs/inertia @inertiajs/inertia-react
+        yarn add @inertiajs/inertia @inertiajs/inertia-react
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'bash',
+      code: dedent`
+        npm install @inertiajs/inertia @inertiajs/inertia-svelte
+        yarn add @inertiajs/inertia @inertiajs/inertia-svelte
+      `,
+    },
+  ]}
+/>
+
+## Initialize app
+
+Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing the client-side framework with the base Inertia page component.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        import { InertiaApp } from '@inertiajs/inertia-vue'
+        import Vue from 'vue'\n
+        Vue.use(InertiaApp)\n
+        const app = document.getElementById('app')\n
+        new Vue({
+          render: h => h(InertiaApp, {
+            props: {
+              initialPage: JSON.parse(app.dataset.page),
+              resolveComponent: name => require(\`./Pages/\${name}\`).default,
+            },
+          }),
+        }).$mount(app)
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { InertiaApp } from '@inertiajs/inertia-react'
+        import React from 'react'
+        import { render } from 'react-dom'\n
+        const app = document.getElementById('app')\n
+        render(
+          <InertiaApp
+            initialPage={JSON.parse(app.dataset.page)}
+            resolveComponent={name => require(\`./Pages/\${name}\`).default},
+          />,
+          app
+        )
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import { InertiaApp } from '@inertiajs/inertia-svelte'\n
+        const app = document.getElementById('app')\n
+        new InertiaApp({
+          target: app,
+          props: {
+            initialPage: JSON.parse(app.dataset.page),
+            resolveComponent: name => require(\`./Pages/\${name}.svelte\`).default,
+          },
+        })
+      `,
+    },
+  ]}
+/>
+
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
+## Code splitting
+
+To use code splitting with Inertia you'll need to enable [dynamic imports](https://github.com/tc39/proposal-dynamic-import). You'll need a Babel plugin to make this work. First, install the plugin:
+
+```bash
+npm install @babel/plugin-syntax-dynamic-import
+```
+
+Next, create a `.babelrc` file in your project with the following:
+
+```json
+{
+  "plugins": ["@babel/plugin-syntax-dynamic-import"]
+}
+```
+
+<Notice>
+  If you're using Laravel Mix v4, the dynamic imports Babel plugin is already configured. However, there is a known
+  issue with Laravel Mix v4 when using dynamic imports where you cannot use styles within Vue files due to a Webpack{' '}
+  <a href="https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909">limitation</a>. As a
+  workaround, you need to drop Mix entirely or downgrade to Laravel Mix v3.
+</Notice>
+
+Finally, update the `resolveComponent` callback in your app initialization to use `import` instead of `require`.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        import { InertiaApp } from '@inertiajs/inertia-vue'
+        import Vue from 'vue'\n
+        Vue.use(InertiaApp)\n
+        const app = document.getElementById('app')\n
+        new Vue({
+          render: h => h(InertiaApp, {
+            props: {
+              initialPage: JSON.parse(app.dataset.page),
+              resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
+            },
+          }),
+        }).$mount(app)
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { InertiaApp } from '@inertiajs/inertia-react'
+        import React from 'react'
+        import { render } from 'react-dom'\n
+        const app = document.getElementById('app')\n
+        render(
+          <InertiaApp
+            initialPage={JSON.parse(app.dataset.page)}
+            resolveComponent={name => import(\`./Pages/\${name}\`).then(module => module.default)}
+          />,
+          app
+        )
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import { InertiaApp } from '@inertiajs/inertia-svelte'\n
+        const app = document.getElementById('app')\n
+        new InertiaApp({
+          target: app,
+          props: {
+            initialPage: JSON.parse(app.dataset.page),
+            resolveComponent: name => import(\`./Pages/\${name}.svelte\`).then(module => module.default),
+          },
+        })
+      `,
+    },
+  ]}
+/>
+
+Consider using cache busting to force browsers to load the latest version of your assets. To do this, add the following to your webpack config:
+
+```js
+output: {
+  chunkFilename: 'js/[name].js?id=[chunkhash]',
+}
+```

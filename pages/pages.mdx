@@ -1,0 +1,262 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Pages',
+  links: [
+    { url: '#top', name: 'Introduction' },
+    { url: '#creating-pages', name: 'Creating pages' },
+    { url: '#creating-layouts', name: 'Creating layouts' },
+    { url: '#persistent-layouts', name: 'Persistent layouts' },
+    { url: '#scroll-regions', name: 'Scroll regions' },
+  ],
+}
+
+# Pages
+
+With Inertia, each page in your application has it's own controller and corresponding JavaScript component. This allows you to retrieve just the data necessary for that page, no API required.
+
+## Creating pages
+
+Pages are simply JavaScript components. There is nothing particularly special about them. Pages receive data from the controllers as props. Here's an example of a simple page component.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <layout title="Welcome">
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </layout>
+        </template>\n
+        <script>
+          import Layout from '@/Shared/Layout'\n
+          export default {
+            components: {
+              Layout,
+            },
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import React from 'react'
+        import Layout from '@/Shared/Layout'\n
+        export default function Welcome({ user }) {
+          return (
+            <Layout title="Welcome">
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            </Layout>
+          )
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <script>
+          import Layout from '@/Shared/Layout.svelte'
+          export let user
+        </script>\n
+        <Layout title="Welcome">
+          <h1>Welcome</h1>
+          <p>Hello {user.name}, welcome to your first Inertia app!</p>
+        </Layout>
+      `,
+    },
+  ]}
+/>
+
+## Creating layouts
+
+While not required, for most projects it makes sense to create a site layout that your pages can extend. Notice in our page example above that we're wrapping the page content within a `<layout>` component. Here's an example of such a component. There is nothing Inertia specific here. This is just a standard JavaScript component.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header>
+              <inertia-link href="/">Home</inertia-link>
+              <inertia-link href="/about">About</inertia-link>
+              <inertia-link href="/contact">Contact</inertia-link>
+            </header>
+            <article>
+              <slot />
+            </article>
+          </main>
+        </template>\n
+        <script>
+          export default {
+            props: {
+              title: String,
+            },
+            watch: {
+              title: {
+                immediate: true,
+                handler(title) {
+                  document.title = title
+                },
+              },
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import React, { useEffect } from 'react'
+        import { InertiaLink } from 'inertia-react'\n
+        export default function Layout({ title, children }) {
+          useEffect(() => document.title = title, [title])\n
+          return (
+            <main>
+              <header>
+                <InertiaLink href="/">Home</InertiaLink>
+                <InertiaLink href="/about">About</InertiaLink>
+                <InertiaLink href="/contact">Contact</InertiaLink>
+              </header>\n
+              <article>{children}</article>
+            </main>
+          )
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <script>
+          import { InertiaLink } from 'inertia-svelte'\n
+          export let title
+        </script>\n
+        <svelte:head>
+            <title>{title}</title>
+        </svelte:head>\n
+        <main>
+          <header>
+            <InertiaLink href="/">Home</InertiaLink>
+            <InertiaLink href="/about">About</InertiaLink>
+            <InertiaLink href="/contact">Contact</InertiaLink>
+          </header>\n
+          <article>
+            <slot />
+          </article>
+        </main>
+      `,
+    },
+  ]}
+/>
+
+## Persistent layouts
+
+While it's simple to implement layouts as children of the page components, it does force the layout instance to be destroyed and recreated between visits. This means you cannot have persistent layout state when navigating between pages.
+
+For example, maybe you have an audio player on a podcast website that you want to continue playing as users navigate the site. Or, maybe you simply want to maintain the scroll position in your navigation between page visits. In these situations, using the persistent layouts feature in Inertia is a better choice.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <div>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </div>
+        </template>\n
+        <script>
+          import Layout from '@/Shared/Layout'\n
+          export default {
+            layout: Layout,
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: `// todo`,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: `// todo`,
+    },
+  ]}
+/>
+
+You can optionally make `layout` a render function, allowing you to create more complex layout arrangements. For example, you can use this to create a secondary nested layout within a subsection of your app.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <div>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </div>
+        </template>\n
+        <script>
+          import SiteLayout from './SiteLayout'
+          import NestedLayout from './NestedLayout'\n
+          export default {
+            layout: (h, page) => {
+              return h(SiteLayout, [
+                h(NestedLayout, [page]),
+              ])
+            },
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: `// todo`,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: `// todo`,
+    },
+  ]}
+/>
+
+## Scroll regions
+
+When navigating between pages, Inertia will automatically reset the scroll position to the top of the body (unless disabled via the `preserve-scroll` functionality). Depending on your app, you may have nested scroll containers within your layout, and these will not be reset by default. You can tell Inertia to also reset these areas by adding a `scroll-region` attribute.
+
+```html
+<div class="overflow-y-auto" scroll-region>
+  <!-- Your page content -->
+</div>
+```
