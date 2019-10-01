@@ -47,6 +47,22 @@ In your controller, provide both the name of the JavaScript page component, as w
             }
         }
       `,
+      description: `To make an Inertia response, use the Inertia render function. This method takes the component name, and allows you to pass props and view data.`,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        class EventsController < ApplicationController
+          def index
+            render inertia: 'Events',
+              props: {
+                events: Event.all
+              }
+          end
+        end
+      `,
+      description: `To make an Inertia response, use the inertia renderer. This renderer takes the component name, and allows you to pass props and view_data as an options hash.`,
     },
   ]}
 />
