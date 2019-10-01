@@ -58,7 +58,7 @@
 }
 
 .carbon-wrap {
-  @apply block pr-16;
+  @apply block;
 }
 
 .carbon-img {
