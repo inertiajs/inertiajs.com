@@ -9,6 +9,7 @@ export const meta = {
   links: [
     { url: '#creating-responses', name: 'Creating responses' },
     { url: '#lazy-evaluation', name: 'Lazy evaluation' },
+    { url: '#root-template-data', name: 'Root template data' },
   ],
 }
 
@@ -102,6 +103,76 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
       language: 'ruby',
       code: dedent`
         # add
+      `,
+    },
+  ]}
+/>
+
+## Root template data
+
+There are situations where you may want to access your prop data in your root Blade template. For example, you may want to add a meta description tag, Twitter card meta tags, or Facebook Open Graph meta tags.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'twig',
+      code: dedent`
+        <meta name="twitter:title" content="{{ $page['props']['event']->title }}">
+      `,
+      description: `These props are available via the $page variable.`,
+    },
+    {
+      name: 'Rails',
+      language: 'erb',
+      code: dedent`
+        <meta name="twitter:title" content="<%= page['props']['event'].title %>">
+      `,
+      description: `These props are available via the page variable.`,
+    },
+  ]}
+/>
+
+Sometimes you may even want to provide data that will not be sent to your JavaScript component.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        return Inertia::render('Event', ['event' => $event])
+            ->withViewData(['meta' => $event->meta]);
+      `,
+      description: `Do this using the withViewData() method.`,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        render inertia: 'Event', props: {event: event}, view_data: {meta: event.meta}
+      `,
+      description: `Do this using the "view_data" option`,
+    },
+  ]}
+/>
+
+You can then access this variable like a regular template variable.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'twig',
+      code: dedent`
+        <meta name="description" content="{{ $meta }}">
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'erb',
+      code: dedent`
+        <meta name="description" content="<%= meta %>">
       `,
     },
   ]}
