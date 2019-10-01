@@ -145,7 +145,7 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
       language: 'php',
       code: dedent`
         use Session;
-        use Inertia\Inertia;\n
+        use Inertia\\Inertia;\n
         Inertia::share('flash', function () {
             return [
                 'message' => Session::get('message'),
