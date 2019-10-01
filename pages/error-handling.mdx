@@ -31,7 +31,7 @@ Inertia solves this by showing all non-Inertia responses in a modal. Meaning you
 
 ## In production
 
-In production you'll want to return a proper Inertia error response instead of relying on the modal behaviour. To do this you'll need to update your framework's default exception handler.
+In production you'll want to return a proper Inertia error response instead of relying on the modal behaviour. To do this you'll need to update your framework's default exception handler to return a custom error page.
 
 <TabbedCodeExamples
   examples={[
@@ -39,15 +39,16 @@ In production you'll want to return a proper Inertia error response instead of r
       name: 'Laravel',
       language: 'php',
       code: dedent`
+        use Inertia\\Inertia;\n
         public function render($request, Exception $exception)
         {
-            if ($request->header('X-Inertia') {
-                return Inertia::render('Error', [
-                    'code' => $exception->getStatusCode(),
-                    'message' => $exception->getMessage(),
-                ]);
+            $response = parent::render($request, $exception);\n
+            if ($request->header('X-Inertia') && in_array($response->status(), [500, 503, 404, 403])) {
+                return Inertia::render('Error', ['status' => $response->status()])
+                    ->toResponse($request)
+                    ->setStatusCode($response->status());
             }\n
-            return parent::render($request, $exception);
+            return $response;
         }
       `,
     },
@@ -56,6 +57,64 @@ In production you'll want to return a proper Inertia error response instead of r
       language: 'ruby',
       code: dedent`
         # todo
+      `,
+    },
+  ]}
+/>
+
+Notice how we're returning an `Error` page component in the example above. You'll need to actually create this. Here's an example error page component you can use as a starting point.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <div>
+            <h1>{{ title }}</h1>
+            <div>{{ description }}</div>
+          </div>
+        </template>\n
+        <script>
+        export default {
+          props: {
+            status: Number,
+          },
+          computed: {
+            title() {
+              return {
+                503: '503: Service Unavailable',
+                500: '500: Server Error',
+                404: '404: Page Not Found',
+                403: '404: Forbidden',
+              }[this.status]
+            },
+            description() {
+              return {
+                503: 'Sorry, we are doing some maintenance. Please check back soon.',
+                500: 'Whoops, something went wrong on our servers.',
+                404: 'Sorry, the page you are looking for could not be found.',
+                403: 'Sorry, you are forbidden from accessing this page.',
+              }[this.status]
+            },
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        // todo
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        // todo
       `,
     },
   ]}
