@@ -10,9 +10,11 @@ export const meta = {
 
 # Redirects
 
-When making a non-GET Inertia request, via `<inertia-link>` or manually, be sure to always respond with a proper Inertia response.
+When making a non-GET Inertia request, via `<inertia-link>` or manually, be sure to always respond with a proper Inertia
+response.
 
-For example, if you're creating a new user, have your "store" endpoint return a redirect back to a standard GET endpoint, such as your user index page.
+For example, if you're creating a new user, have your "store" endpoint return a redirect back to a standard GET
+endpoint, such as your user index page.
 
 Inertia will automatically follow this redirect and update the page accordingly. Here's a simplified example.
 
@@ -63,6 +65,8 @@ Inertia will automatically follow this redirect and update the page accordingly.
 
 ## 303 response code
 
-Note, when redirecting after a `PUT`, `PATCH` or `DELETE` request you must use a `303` response code, otherwise the subsequent request will not be treated as a `GET` request. A `303` redirect is the same as a `302` except that the follow-up request is explicitly changed to a `GET` request.
+Note, when redirecting after a `PUT`, `PATCH` or `DELETE` request you must use a `303` response code, otherwise the
+subsequent request will not be treated as a `GET` request. A `303` redirect is the same as a `302` except that the
+follow-up request is explicitly changed to a `GET` request.
 
 If you're using one of our official server-side adapters, redirects will automatically be converted.

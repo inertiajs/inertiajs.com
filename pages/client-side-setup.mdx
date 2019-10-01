@@ -51,7 +51,8 @@ Install the Inertia client-side adapters using NPM or Yarn.
 
 ## Initialize app
 
-Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing the client-side framework with the base Inertia page component.
+Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing the client-side
+framework with the base Inertia page component.
 
 <TabbedCodeExamples
   examples={[
@@ -108,11 +109,15 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
   ]}
 />
 
-The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string),
+and must return a component instance.
 
 ## Loading indicator
 
-Since Inertia requests are made via XHR, there's no default browser loading indicator. To solve this, Inertia ships with [NProgress.js](https://ricostacruz.com/nprogress/), a nice little progress bar library. Be sure to include the [nprogress.css](https://github.com/rstacruz/nprogress/blob/master/nprogress.css) in your project, otherwise you won't see it.
+Since Inertia requests are made via XHR, there's no default browser loading indicator. To solve this, Inertia ships with
+[NProgress.js](https://ricostacruz.com/nprogress/), a nice little progress bar library. Be sure to include the
+[nprogress.css](https://github.com/rstacruz/nprogress/blob/master/nprogress.css) in your project, otherwise you won't
+see it.
 
 <Notice>
   In the future we intend to give more control over the handling of the loading indicator. See this{' '}
@@ -121,7 +126,9 @@ Since Inertia requests are made via XHR, there's no default browser loading indi
 
 ## Code splitting
 
-To use code splitting with Inertia you'll need to enable [dynamic imports](https://github.com/tc39/proposal-dynamic-import). You'll need a Babel plugin to make this work. First, install the plugin:
+To use code splitting with Inertia you'll need to enable
+[dynamic imports](https://github.com/tc39/proposal-dynamic-import). You'll need a Babel plugin to make this work. First,
+install the plugin:
 
 ```bash
 npm install @babel/plugin-syntax-dynamic-import
@@ -199,7 +206,8 @@ Finally, update the `resolveComponent` callback in your app initialization to us
   ]}
 />
 
-Consider using cache busting to force browsers to load the latest version of your assets. To do this, add the following to your webpack config:
+Consider using cache busting to force browsers to load the latest version of your assets. To do this, add the following
+to your webpack config:
 
 ```js
 output: {

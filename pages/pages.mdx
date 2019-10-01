@@ -16,11 +16,13 @@ export const meta = {
 
 # Pages
 
-With Inertia, each page in your application has its own controller and corresponding JavaScript component. This allows you to retrieve just the data necessary for that page, no API required.
+With Inertia, each page in your application has its own controller and corresponding JavaScript component. This allows
+you to retrieve just the data necessary for that page, no API required.
 
 ## Creating pages
 
-Pages are simply JavaScript components. There is nothing particularly special about them. Pages receive data from the controllers as props. Here's an example of a simple page component.
+Pages are simply JavaScript components. There is nothing particularly special about them. Pages receive data from the
+controllers as props. Here's an example of a simple page component.
 
 <TabbedCodeExamples
   examples={[
@@ -82,7 +84,9 @@ Pages are simply JavaScript components. There is nothing particularly special ab
 
 ## Creating layouts
 
-While not required, for most projects it makes sense to create a site layout that your pages can extend. Notice in our page example above that we're wrapping the page content within a `<layout>` component. Here's an example of such a component. There is nothing Inertia specific here. This is just a standard JavaScript component.
+While not required, for most projects it makes sense to create a site layout that your pages can extend. Notice in our
+page example above that we're wrapping the page content within a `<layout>` component. Here's an example of such a
+component. There is nothing Inertia specific here. This is just a standard JavaScript component.
 
 <TabbedCodeExamples
   examples={[
@@ -168,9 +172,13 @@ While not required, for most projects it makes sense to create a site layout tha
 
 ## Persistent layouts
 
-While it's simple to implement layouts as children of the page components, it does force the layout instance to be destroyed and recreated between visits. This means you cannot have persistent layout state when navigating between pages.
+While it's simple to implement layouts as children of the page components, it does force the layout instance to be
+destroyed and recreated between visits. This means you cannot have persistent layout state when navigating between
+pages.
 
-For example, maybe you have an audio player on a podcast website that you want to continue playing as users navigate the site. Or, maybe you simply want to maintain the scroll position in your navigation between page visits. In these situations, using the persistent layouts feature in Inertia is a better choice.
+For example, maybe you have an audio player on a podcast website that you want to continue playing as users navigate the
+site. Or, maybe you simply want to maintain the scroll position in your navigation between page visits. In these
+situations, using the persistent layouts feature in Inertia is a better choice.
 
 <TabbedCodeExamples
   examples={[
@@ -208,7 +216,8 @@ For example, maybe you have an audio player on a podcast website that you want t
   ]}
 />
 
-You can optionally make `layout` a render function, allowing you to create more complex layout arrangements. For example, you can use this to create a secondary nested layout within a subsection of your app.
+You can optionally make `layout` a render function, allowing you to create more complex layout arrangements. For
+example, you can use this to create a secondary nested layout within a subsection of your app.
 
 <TabbedCodeExamples
   examples={[
@@ -253,7 +262,10 @@ You can optionally make `layout` a render function, allowing you to create more 
 
 ## Scroll regions
 
-When navigating between pages, Inertia will automatically reset the scroll position to the top of the body (unless disabled via the `preserve-scroll` functionality). Depending on your app, you may have nested scroll containers within your layout, and these will not be reset by default. You can tell Inertia to also reset these areas by adding a `scroll-region` attribute.
+When navigating between pages, Inertia will automatically reset the scroll position to the top of the body (unless
+disabled via the `preserve-scroll` functionality). Depending on your app, you may have nested scroll containers within
+your layout, and these will not be reset by default. You can tell Inertia to also reset these areas by adding a
+`scroll-region` attribute.
 
 ```html
 <div class="overflow-y-auto" scroll-region>

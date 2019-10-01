@@ -12,13 +12,16 @@ export const meta = {
 
 ## Defining routes
 
-With Inertia all routing is defined server-side. Meaning you don't need Vue Router or React Router. Simply create routes using your server-side framework of choice.
+With Inertia all routing is defined server-side. Meaning you don't need Vue Router or React Router. Simply create routes
+using your server-side framework of choice.
 
 ## Generating URLs
 
-Some server-side frameworks allow you to generate URLs from named routes. However, you will not have access to those helpers client-side. Here are a couple ways to still used named routes with Inertia.
+Some server-side frameworks allow you to generate URLs from named routes. However, you will not have access to those
+helpers client-side. Here are a couple ways to still used named routes with Inertia.
 
-The first option is to generate URLs server-side and include them as props. Notice in this example how we're passing the `edit_url` and `create_url` to the `Users` component.
+The first option is to generate URLs server-side and include them as props. Notice in this example how we're passing the
+`edit_url` and `create_url` to the `Users` component.
 
 ```php
 class UsersController
@@ -42,7 +45,8 @@ class UsersController
 }
 ```
 
-Another option is to make your route definitions available client-side as JSON, and then use this to generate URLs from your named routes.
+Another option is to make your route definitions available client-side as JSON, and then use this to generate URLs from
+your named routes.
 
 ```php
 <script>
@@ -50,7 +54,9 @@ Another option is to make your route definitions available client-side as JSON, 
 </script>
 ```
 
-If you're using Laravel, the <a href="https://github.com/tightenco/ziggy">Ziggy</a> library does this for you automatically via a global `route()` function. If you're using Ziggy with Vue.js, it's helpful to make this function available as a custom `$route` property so you can use it directly in your templates.
+If you're using Laravel, the <a href="https://github.com/tightenco/ziggy">Ziggy</a> library does this for you
+automatically via a global `route()` function. If you're using Ziggy with Vue.js, it's helpful to make this function
+available as a custom `$route` property so you can use it directly in your templates.
 
 ```js
 Vue.prototype.$route = (...args) => route(...args).url()

@@ -16,11 +16,14 @@ export const meta = {
 
 # Shared data
 
-Sometimes need to access certain data on numerous pages within your application. For example, a common use-case for this is showing the current user in the site header. Passing this data manually in each response isn't practical. In these situations shared data can be useful.
+Sometimes need to access certain data on numerous pages within your application. For example, a common use-case for this
+is showing the current user in the site header. Passing this data manually in each response isn't practical. In these
+situations shared data can be useful.
 
 ## Sharing data
 
-The server-side adapters provide a way to preassign shared data which each request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller.
+The server-side adapters provide a way to preassign shared data which each request. This is typically done outside of
+your controllers. Shared data will be automatically merged with the page props provided in your controller.
 
 <TabbedCodeExamples
   examples={[
@@ -87,7 +90,9 @@ The server-side adapters provide a way to preassign shared data which each reque
 
 ## Accessing shared data
 
-Once you've shared the data server-side, you'll then be able to access it within your page components as props. Shared data can even be accessed in non-page components, although not as props in those cases. Here's an example of how to do this in a layout component.
+Once you've shared the data server-side, you'll then be able to access it within your page components as props. Shared
+data can even be accessed in non-page components, although not as props in those cases. Here's an example of how to do
+this in a layout component.
 
 <TabbedCodeExamples
   examples={[
@@ -168,9 +173,11 @@ Once you've shared the data server-side, you'll then be able to access it within
 
 ## Flash messages
 
-Another great use-case for shared data is flash messages. These are messages stored in the session only for the next request. You'll often set a flash message after completing a task and before redirecting to a different page.
+Another great use-case for shared data is flash messages. These are messages stored in the session only for the next
+request. You'll often set a flash message after completing a task and before redirecting to a different page.
 
-Here's a simple way to implement flash messages in your Inertia applications. First, share the flash message on each request.
+Here's a simple way to implement flash messages in your Inertia applications. First, share the flash message on each
+request.
 
 <TabbedCodeExamples
   examples={[

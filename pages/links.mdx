@@ -18,11 +18,14 @@ export const meta = {
 
 # Links
 
-To create links within an Inertia app you'll need to use the Inertia link component. This is a light wrapper around a standard anchor link that intercepts click events and prevents full page reloads from occurring. This is how Inertia provides a single-page app experience.
+To create links within an Inertia app you'll need to use the Inertia link component. This is a light wrapper around a
+standard anchor link that intercepts click events and prevents full page reloads from occurring. This is how Inertia
+provides a single-page app experience.
 
 ## Creating links
 
-To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the underlying `<a>` tag.
+To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the
+underlying `<a>` tag.
 
 <TabbedCodeExamples
   examples={[
@@ -52,7 +55,8 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
 
 ## Method
 
-You can specify the method for an Inertia link request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
+You can specify the method for an Inertia link request. The default is `GET`, but you can also use `POST`, `PUT`,
+`PATCH`, and `DELETE`.
 
 <TabbedCodeExamples
   examples={[
@@ -112,7 +116,10 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
 
 ## Replace
 
-You can specify the browser history behaviour. By default page visits push (new) state (`window.history.pushState`) into the history, however it's also possible to replace state (`window.history.replaceState`) by setting the `replace` attribute to true. This will cause the visit to replace the current history state, instead of adding a new history state to the stack.
+You can specify the browser history behaviour. By default page visits push (new) state (`window.history.pushState`) into
+the history, however it's also possible to replace state (`window.history.replaceState`) by setting the `replace`
+attribute to true. This will cause the visit to replace the current history state, instead of adding a new history state
+to the stack.
 
 <TabbedCodeExamples
   examples={[
@@ -142,7 +149,9 @@ You can specify the browser history behaviour. By default page visits push (new)
 
 ## Preserve state
 
-You can preserve a page component's local state using the `preserve-state` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
+You can preserve a page component's local state using the `preserve-state` attribute. This will prevent a page component
+from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields,
+and can also maintain a focused input.
 
 <TabbedCodeExamples
   examples={[
@@ -175,7 +184,9 @@ You can preserve a page component's local state using the `preserve-state` attri
 
 ## Preserve scroll
 
-By default page visits will automatically reset the scroll position back to the top of the page (and any [scroll regions](/pages#scroll-regions) you've defined). You can use the `preserve-scroll` attribute to disable this behaviour.
+By default page visits will automatically reset the scroll position back to the top of the page (and any
+[scroll regions](/pages#scroll-regions) you've defined). You can use the `preserve-scroll` attribute to disable this
+behaviour.
 
 <TabbedCodeExamples
   examples={[

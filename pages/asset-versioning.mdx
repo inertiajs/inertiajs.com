@@ -14,11 +14,15 @@ export const meta = {
 
 # Asset versioning
 
-One common challenge with single-page apps is refreshing site assets when they've been changed. Inertia makes this easy by optionally tracking the current version of your site assets. In the event that an asset changes, Inertia will automatically make a hard page visit instead of a normal ajax visit on the next request.
+One common challenge with single-page apps is refreshing site assets when they've been changed. Inertia makes this easy
+by optionally tracking the current version of your site assets. In the event that an asset changes, Inertia will
+automatically make a hard page visit instead of a normal ajax visit on the next request.
 
 ## Configuring
 
-To enable automatic asset refreshing, you simply need to tell Inertia what the current version of your assets is. This can be any value, a number, letters, or a file hash. It doesn't matter, as long as it changes when your assets have been updated.
+To enable automatic asset refreshing, you simply need to tell Inertia what the current version of your assets is. This
+can be any value, a number, letters, or a file hash. It doesn't matter, as long as it changes when your assets have been
+updated.
 
 <TabbedCodeExamples
   examples={[
@@ -52,6 +56,9 @@ To enable automatic asset refreshing, you simply need to tell Inertia what the c
 
 ## Cache busting
 
-Asset refreshing in Inertia works on the assumption that a hard page visit will trigger your assets to reload. However, Inertia doesn't actually do anything to force this. Typically this is done with some form of cache busting. For example, appending a version query parameter to the end of your asset URLs.
+Asset refreshing in Inertia works on the assumption that a hard page visit will trigger your assets to reload. However,
+Inertia doesn't actually do anything to force this. Typically this is done with some form of cache busting. For example,
+appending a version query parameter to the end of your asset URLs.
 
-If you're using Laravel Mix, you can do this automatically by enabling [versioning](https://laravel.com/docs/mix#versioning-and-cache-busting) in your `webpack.mix.js` file.
+If you're using Laravel Mix, you can do this automatically by enabling
+[versioning](https://laravel.com/docs/mix#versioning-and-cache-busting) in your `webpack.mix.js` file.

@@ -16,11 +16,14 @@ export const meta = {
 
 # How it works
 
-The magic of Inertia is in the server-side responses. When your app first loads, a full `html` page is returned. However, all subsequent page visits are done via `xhr`, with only `json` returned. This allows the single-page app functionality, since Inertia doesn't have to reboot the JavaScript framework on each page load.
+The magic of Inertia is in the server-side responses. When your app first loads, a full `html` page is returned.
+However, all subsequent page visits are done via `xhr`, with only `json` returned. This allows the single-page app
+functionality, since Inertia doesn't have to reboot the JavaScript framework on each page load.
 
 ## The page object
 
-Inertia shares page data between the server and the front-end using a `page` object. This object includes the necessary information required to render the page component, update the history state, and track the application's asset version.
+Inertia shares page data between the server and the front-end using a `page` object. This object includes the necessary
+information required to render the page component, update the history state, and track the application's asset version.
 
 The `page` object includes four attributes:
 
@@ -31,9 +34,11 @@ The `page` object includes four attributes:
 
 ## HTML responses
 
-When an Inertia app first loads, a full `html` response is returned from the server. This includes your site assets in the `<head>` and a root `<div>` in the body.
+When an Inertia app first loads, a full `html` response is returned from the server. This includes your site assets in
+the `<head>` and a root `<div>` in the body.
 
-The root `<div>` includes a `data-page` attribute with a `json` encoded version of the initial page object. Inertia uses this to boot your JavaScript application.
+The root `<div>` includes a `data-page` attribute with a `json` encoded version of the initial page object. Inertia uses
+this to boot your JavaScript application.
 
 ```twig
 <html>
@@ -58,9 +63,12 @@ The root `<div>` includes a `data-page` attribute with a `json` encoded version 
 
 ## XHR responses
 
-Since Inertia is a framework for building single-page applications, all subsequent page visits are made as `xhr` requests.
+Since Inertia is a framework for building single-page applications, all subsequent page visits are made as `xhr`
+requests.
 
-Rather than returning a full `html` response on subsequent page visits, Inertia simply returns a `json` response of the page object. This `json` response is in the exact same format as the page object encoded in the initial `data-page` attribute.
+Rather than returning a full `html` response on subsequent page visits, Inertia simply returns a `json` response of the
+page object. This `json` response is in the exact same format as the page object encoded in the initial `data-page`
+attribute.
 
 ```json
 {
@@ -78,8 +86,11 @@ Rather than returning a full `html` response on subsequent page visits, Inertia 
 }
 ```
 
-All `xhr` responses have an `X-Inertia` header set to `true`. If you're creating your own server-side adapter, you can use this header to detect an Inertia response.
+All `xhr` responses have an `X-Inertia` header set to `true`. If you're creating your own server-side adapter, you can
+use this header to detect an Inertia response.
 
-All `xhr` responses also include an `X-Inertia-Version` header used for auto refreshing assets. You can learn more about that on the [asset versioning](/asset-versioning) page.
+All `xhr` responses also include an `X-Inertia-Version` header used for auto refreshing assets. You can learn more about
+that on the [asset versioning](/asset-versioning) page.
 
-Finally, all `xhr` responses have the `Vary` header set to `Accept`. This tells the browser that a page can be loaded in two different formats: `html` and `json`.
+Finally, all `xhr` responses have the `Vary` header set to `Accept`. This tells the browser that a page can be loaded in
+two different formats: `html` and `json`.

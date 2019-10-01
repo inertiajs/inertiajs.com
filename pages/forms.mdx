@@ -17,7 +17,8 @@ export const meta = {
 
 ## Submitting forms
 
-While it's possible to make classic form submissions with Inertia, it's not recommended, as they cause full page reloads. Instead, it's better to intercept form submissions and then make the [request](/requests) using Inertia.
+While it's possible to make classic form submissions with Inertia, it's not recommended, as they cause full page
+reloads. Instead, it's better to intercept form submissions and then make the [request](/requests) using Inertia.
 
 <TabbedCodeExamples
   examples={[
@@ -73,7 +74,9 @@ While it's possible to make classic form submissions with Inertia, it's not reco
   ]}
 />
 
-Unlike a classic ajax submitted form, with Inertia you don't handle the post submission behaviour client-side. Rather, you do this server-side using a [redirect](/redirects). And, of course, there is nothing stopping you from redirecting right back to the page that you're on.
+Unlike a classic ajax submitted form, with Inertia you don't handle the post submission behaviour client-side. Rather,
+you do this server-side using a [redirect](/redirects). And, of course, there is nothing stopping you from redirecting
+right back to the page that you're on.
 
 <TabbedCodeExamples
   examples={[
@@ -123,11 +126,16 @@ Unlike a classic ajax submitted form, with Inertia you don't handle the post sub
 
 ## Server-side validation
 
-Handling server-side validation errors (`422` responses) in Inertia works a little different than a classic ajax-driven form, where you catch the validation errors in the response and then update the form state. The trick is to handle the validation errors more like a server-side framework.
+Handling server-side validation errors (`422` responses) in Inertia works a little different than a classic ajax-driven
+form, where you catch the validation errors in the response and then update the form state. The trick is to handle the
+validation errors more like a server-side framework.
 
-First, you submit your form using Inertia. If there are validation errors, you redirect server-side back to your form page, including the errors in the session. Your server-side framework likely already does this automatically.
+First, you submit your form using Inertia. If there are validation errors, you redirect server-side back to your form
+page, including the errors in the session. Your server-side framework likely already does this automatically.
 
-From there you need to send those error messages to your form page component. You can do this in your controller, but it's better to simply do this automatically for all your page components. You can use the Inertia [share](/shared-data) functionality to accomplish this.
+From there you need to send those error messages to your form page component. You can do this in your controller, but
+it's better to simply do this automatically for all your page components. You can use the Inertia [share](/shared-data)
+functionality to accomplish this.
 
 <TabbedCodeExamples
   examples={[
@@ -156,7 +164,9 @@ From there you need to send those error messages to your form page component. Yo
   ]}
 />
 
-Now the validation errors will be available as part of your page props, and since they are reactive your template will automatically display them. Here's an updated version of the form example above that displays server-side validation errors.
+Now the validation errors will be available as part of your page props, and since they are reactive your template will
+automatically display them. Here's an updated version of the form example above that displays server-side validation
+errors.
 
 <TabbedCodeExamples
   examples={[
@@ -216,11 +226,13 @@ Now the validation errors will be available as part of your page props, and sinc
   ]}
 />
 
-While this is very similar to how you would normally do classic server-side form submissions, this approach is much nicer, since you're not reloading the whole page and rehydrating form input data.
+While this is very similar to how you would normally do classic server-side form submissions, this approach is much
+nicer, since you're not reloading the whole page and rehydrating form input data.
 
 ## File uploads
 
-The trick to uploading files with Inertia (via XHR) is using the `FormData` object. Here is a simple example of using `FormData` with Inertia.
+The trick to uploading files with Inertia (via XHR) is using the `FormData` object. Here is a simple example of using
+`FormData` with Inertia.
 
 ```js
 var data = new FormData()
@@ -237,4 +249,6 @@ You can learn more about `FormData` interface [here](https://developer.mozilla.o
 
 ## Classic XHR submits
 
-Using Inertia to submit forms works well for the vast majority of situations. However, in the event that you'd like more fine-grain control over the form submission, there's nothing stopping you from making a classic XHR request. An excellent library to use here is [axios](https://github.com/axios/axios), which is what Inertia uses under the hood.
+Using Inertia to submit forms works well for the vast majority of situations. However, in the event that you'd like more
+fine-grain control over the form submission, there's nothing stopping you from making a classic XHR request. An
+excellent library to use here is [axios](https://github.com/axios/axios), which is what Inertia uses under the hood.

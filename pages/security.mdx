@@ -16,13 +16,18 @@ export const meta = {
 
 ## Authentication
 
-One of the benefits of using Inertia is that you don't need a special authentication system to connect to your data provider (API), such as OAuth. Also, since your data is provided via your controllers, and housed on the same domain as your JavaScript components, you don't have to worry about setting up CORS.
+One of the benefits of using Inertia is that you don't need a special authentication system to connect to your data
+provider (API), such as OAuth. Also, since your data is provided via your controllers, and housed on the same domain as
+your JavaScript components, you don't have to worry about setting up CORS.
 
-Rather, with Inertia you can simply use whatever authentication system your server-side framework ships with. Typically this will be a session based auth system.
+Rather, with Inertia you can simply use whatever authentication system your server-side framework ships with. Typically
+this will be a session based auth system.
 
 ## Authorization
 
-With Inertia, authorization is best handled server-side in your policies. However, you may be wondering how to check against your policies from within your JavaScript page components, since you won't have access to your server-side helpers. The simplest approach here is to pass your authorization checks as props to your page components.
+With Inertia, authorization is best handled server-side in your policies. However, you may be wondering how to check
+against your policies from within your JavaScript page components, since you won't have access to your server-side
+helpers. The simplest approach here is to pass your authorization checks as props to your page components.
 
 <TabbedCodeExamples
   examples={[
@@ -65,9 +70,11 @@ With Inertia, authorization is best handled server-side in your policies. Howeve
 
 ## CSRF protection
 
-If your web framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that each Inertia requests includes the necessary token for `POST`, `PUT`, `PATCH` and `DELETE` requests.
+If your web framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that each Inertia
+requests includes the necessary token for `POST`, `PUT`, `PATCH` and `DELETE` requests.
 
-One solution is to include the CSRF token as a prop on every response. You can then use the token when making Inertia requests.
+One solution is to include the CSRF token as a prop on every response. You can then use the token when making Inertia
+requests.
 
 ```js
 this.$inertia.post('/users', {
@@ -77,12 +84,18 @@ this.$inertia.post('/users', {
 })
 ```
 
-You can even use the <a href="/shared-data">shared data</a> functionality to automatically include the `csrf_token` with each response.
+You can even use the <a href="/shared-data">shared data</a> functionality to automatically include the `csrf_token` with
+each response.
 
-However, a better approach is to use the CSRF functionality already built into [axios](https://github.com/axios/axios) for this. Axios is the HTTP library that Inertia uses under the hood.
+However, a better approach is to use the CSRF functionality already built into [axios](https://github.com/axios/axios)
+for this. Axios is the HTTP library that Inertia uses under the hood.
 
-Axios automatically checks for the existence of an `XSRF-TOKEN` cookie. If it's present, it will then include the token in an `X-CSRF-TOKEN` header for any requests it makes.
+Axios automatically checks for the existence of an `XSRF-TOKEN` cookie. If it's present, it will then include the token
+in an `X-CSRF-TOKEN` header for any requests it makes.
 
-The easiest way to implement this is using server-side middleware. Simply include the `XSRF-TOKEN` cookie on each response, and then verify the token using the `X-CSRF-TOKEN` header sent in the requests from axios.
+The easiest way to implement this is using server-side middleware. Simply include the `XSRF-TOKEN` cookie on each
+response, and then verify the token using the `X-CSRF-TOKEN` header sent in the requests from axios.
 
-Some frameworks, such as [Laravel](https://github.com/laravel/framework/blob/5.8/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php#L176-L188), do this automatically, meaning there is no configuration required.
+Some frameworks, such as
+[Laravel](https://github.com/laravel/framework/blob/5.8/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php#L176-L188),
+do this automatically, meaning there is no configuration required.

@@ -17,7 +17,8 @@ export const meta = {
 
 # Requests
 
-In addition to [creating links](/links), it's also very common to manually make Inertia visits. The following methods are available. Take note of the defaults.
+In addition to [creating links](/links), it's also very common to manually make Inertia visits. The following methods
+are available. Take note of the defaults.
 
 <TabbedCodeExamples
   examples={[
@@ -187,16 +188,25 @@ Note, the `reload` method automatically uses the current URL.
 
 ## History state
 
-By default page visits push (new) state (`history.pushState`) into the history, however it's also possible to replace state (`history.replaceState`) by setting the `replace` option to `true`. This will cause the visit to replace the current history state, instead of adding a new history state to the stack.
+By default page visits push (new) state (`history.pushState`) into the history, however it's also possible to replace
+state (`history.replaceState`) by setting the `replace` option to `true`. This will cause the visit to replace the
+current history state, instead of adding a new history state to the stack.
 
 ## Local component state
 
-By default page visits to the same page will force a fresh page component instance. However, in certain situations you may want to keep the existing page instance in order to preserve some local state. You can do this by setting the `preserveState` option to `true`.
+By default page visits to the same page will force a fresh page component instance. However, in certain situations you
+may want to keep the existing page instance in order to preserve some local state. You can do this by setting the
+`preserveState` option to `true`.
 
 ## Scroll management
 
-By default page visits will automatically reset the scroll position back to the top of the page (and any [scroll regions](/pages#scroll-regions) you've defined). You can use the `preserveScroll` option to disable this behaviour.
+By default page visits will automatically reset the scroll position back to the top of the page (and any
+[scroll regions](/pages#scroll-regions) you've defined). You can use the `preserveScroll` option to disable this
+behaviour.
 
 ## Partial reloads
 
-The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the _same page_. This feature is called partial reloads, and can be a helpful performance optimization if it's acceptable that some page data becomes stale. For partial reloads to be effective, be sure to use [lazy evaluation](/responses#lazy-evaluation) server-side.
+The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the _same
+page_. This feature is called partial reloads, and can be a helpful performance optimization if it's acceptable that
+some page data becomes stale. For partial reloads to be effective, be sure to use
+[lazy evaluation](/responses#lazy-evaluation) server-side.
