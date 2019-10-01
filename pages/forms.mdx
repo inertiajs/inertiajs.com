@@ -1,9 +1,232 @@
+import dedent from 'dedent-js'
 import Layout from '../components/Layout'
-import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
-export const meta = { title: 'Forms' }
+export const meta = {
+  title: 'Forms',
+  links: [
+    { url: '#submitting-forms', name: 'Submitting forms' },
+    { url: '#server-side-validation', name: 'Server-side validation' },
+    { url: '#file-uploads', name: 'File uploads' },
+    { url: '#classic-xhr-submits', name: 'Classic XHR submits' },
+  ],
+}
 
 # Forms
 
-<Notice>This section is still being developed.</Notice>
+## Submitting forms
+
+While it's possible to make classic form submissions with Inertia, it's not recommended, as they cause full page reloads. Instead, it's better to intercept form submissions and then make the [request](/requests) using Inertia.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <form @submit.prevent="submit">
+            <label for="first_name">First name:</label>
+            <input id="first_name" v-model="form.first_name" />
+            <label for="last_name">Last name:</label>
+            <input id="last_name" v-model="form.last_name" />
+            <label for="email">Email:</label>
+            <input id="email" v-model="form.email" />
+            <button type="submit">Submit</button>
+          </form>
+        </template>\n
+        <script>
+        export default {
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+                email: null,
+              },
+            }
+          },
+          methods: {
+            submit() {
+              this.$inertia.post('/users', this.form)
+            },
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        // todo
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        // todo
+      `,
+    },
+  ]}
+/>
+
+Unlike a classic ajax submitted form, with Inertia you don't handle the post submission behaviour client-side. Rather, you do this server-side using a [redirect](/redirects). And, of course, there is nothing stopping you from redirecting right back to the page that you're on.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        class UsersController extends Controller
+        {
+            public function index()
+            {
+                return Inertia::render('Users/Index', [
+                  'users' => User::all(),
+                ]);
+            }\n
+            public function store()
+            {
+                User::create(
+                    Request::validate([
+                        'first_name' => ['required', 'max:50'],
+                        'last_name' => ['required', 'max:50'],
+                        'email' => ['required', 'max:50', 'email'],
+                    ])
+                );\n
+                return Redirect::route('users');
+            }
+        }
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+## Server-side validation
+
+Handling server-side validation errors (`422` responses) in Inertia works a little different than a classic ajax-driven form, where you catch the validation errors in the response and then update the form state. The trick is to handle the validation errors more like a server-side framework.
+
+First, you submit your form using Inertia. If there are validation errors, you redirect server-side back to your form page, including the errors in the session. Your server-side framework likely already does this automatically.
+
+From there you need to send those error messages to your form page component. You can do this in your controller, but it's better to simply do this automatically for all your page components. You can use the Inertia [share](/shared-data) functionality to accomplish this.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        use Illuminate\\Support\\Facades\\Session;\n
+        Inertia::share([
+            'errors' => function () {
+                return Session::get('errors')
+                    ? Session::get('errors')->getBag('default')->getMessages()
+                    : (object) [];
+            },
+        ]);
+      `,
+      description: 'Place this code in your AppServiceProvider boot method.',
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+Now the validation errors will be available as part of your page props, and since they are reactive your template will automatically display them. Here's an updated version of the form example above that displays server-side validation errors.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <form @submit.prevent="submit">
+            <label for="first_name">First name:</label>
+            <input id="first_name" v-model="form.first_name" />
+            <div v-if="$page.errors.first_name">{{ $page.errors.first_name[0] }}</div>
+            <label for="last_name">Last name:</label>
+            <input id="last_name" v-model="form.last_name" />
+            <div v-if="$page.errors.last_name">{{ $page.errors.last_name[0] }}</div>
+            <label for="email">Email:</label>
+            <input id="email" v-model="form.email" />
+            <div v-if="$page.errors.email">{{ $page.errors.email[0] }}</div>
+            <button type="submit">Submit</button>
+          </form>
+        </template>\n
+        <script>
+        export default {
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+                email: null,
+              },
+            }
+          },
+          methods: {
+            submit() {
+              this.$inertia.post('/users', this.form)
+            },
+          },
+        }
+        </script>
+      `,
+      description: `In Vue page props are also available via the $page property.`,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        // todo
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        // todo
+      `,
+    },
+  ]}
+/>
+
+And while it's very similar to how you would normally do classic server-side form submissions, this approach is much nicer, since you're not reloading the whole page and rehydrating form input data.
+
+## File uploads
+
+The trick to uploading files with Inertia (via XHR) is using the `FormData` object. Here is a simple example of using `FormData` with Inertia.
+
+```js
+var data = new FormData()
+data.append('first_name', first_name || '')
+data.append('last_name', last_name || '')
+data.append('email', email || '')
+data.append('password', password || '')
+data.append('photo', photo || '')
+
+Inertia.post('/users', data)
+```
+
+You can learn more about `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+
+## Classic XHR submits
+
+Using Inertia to submit forms works well for the vast majority of situations. However, in the event that you'd like more fine-grain control over the form submission, there's nothing stopping you from making a classic XHR request. An excellent library to use here is [axios](https://github.com/axios/axios), which is what Inertia uses under the hood.

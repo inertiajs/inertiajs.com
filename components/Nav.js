@@ -63,11 +63,6 @@ export default ({ className }) => (
         </Link>
       </li>
       <li className="mt-4">
-        <Link href="/file-uploads">
-          <a className="hover:underline font-medium text-gray-700">File uploads</a>
-        </Link>
-      </li>
-      <li className="mt-4">
         <Link href="/shared-data">
           <a className="hover:underline font-medium text-gray-700">Shared data</a>
         </Link>
