@@ -48,6 +48,15 @@ export default function Layout({ meta, children }) {
           content="Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers."
         />
         <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@reinink" />
+        <meta name="twitter:title" content="Inertia.js - The Modern Monolith" />
+        <meta
+          name="twitter:description"
+          content="Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers."
+        />
+        <meta name="twitter:image" content="https://inertiajs.com/static/preview.png" />
+        <meta name="twitter:creator" content="@reinink" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140425344-1"></script>
       </Head>
       <div className="text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
