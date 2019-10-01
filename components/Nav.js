@@ -6,8 +6,8 @@ export default ({ className }) => {
 
   function linkClass(path) {
     return router.pathname === path
-      ? `block px-2 py-2 rounded font-medium bg-purple-200 text-purple-800`
-      : `inline-block px-2 py-2 hover:text-purple-800 hover:underline font-medium text-gray-700`
+      ? `block px-2 py-2 rounded font-medium bg-indigo-200 text-blue-800`
+      : `inline-block px-2 py-2 hover:text-blue-700 hover:underline font-medium text-gray-700`
   }
 
   return (

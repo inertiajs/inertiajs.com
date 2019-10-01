@@ -211,7 +211,7 @@ export default function Layout({ meta, children }) {
                   {meta.links.map((link, index) => (
                     <li className="mt-4" key={index}>
                       <Link href={link.url}>
-                        <a className="hover:text-purple-800 hover:underline font-medium text-gray-700">{link.name}</a>
+                        <a className="hover:text-blue-700 hover:underline font-medium text-gray-700">{link.name}</a>
                       </Link>
                     </li>
                   ))}
