@@ -13,6 +13,7 @@ export default function Layout({ meta, children }) {
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
+      // Carbon Ads
       var s = document.createElement('script')
       s.setAttribute('async', '')
       s.src = '//cdn.carbonads.com/carbon.js?serve=CE7DCKJ7&placement=inertiajscom'
@@ -20,6 +21,14 @@ export default function Layout({ meta, children }) {
       var adElement = document.getElementById('ad')
       adElement.innerHTML = ''
       adElement.appendChild(s)
+
+      // Google Analytics
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'UA-140425344-1')
     }
   })
 
@@ -35,6 +44,7 @@ export default function Layout({ meta, children }) {
           content="Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers."
         />
         <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140425344-1"></script>
       </Head>
       <div className="text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 relative">
