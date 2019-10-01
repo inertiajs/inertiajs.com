@@ -2,13 +2,13 @@ import Layout from '../components/Layout'
 
 export default Layout
 export const meta = {
-	title: 'Installation',
-	links: [
-		{ url: '#top', name: 'Introduction' },
-		{ url: '#official-adapters', name: 'Official adapters' },
-		{ url: '#client-side-setup', name: 'Client-side setup' },
-		{ url: '#server-side-setup', name: 'Server-side setup' },
-	],
+  title: 'Installation',
+  links: [
+    { url: '#top', name: 'Introduction' },
+    { url: '#official-adapters', name: 'Official adapters' },
+    { url: '#server-side-setup', name: 'Server-side setup' },
+    { url: '#client-side-setup', name: 'Client-side setup' },
+  ],
 }
 
 # Installation
@@ -23,10 +23,10 @@ To use Inertia you need both a server-side adapter as well as a client-side adap
 - [Laravel](https://github.com/inertiajs/inertia-laravel)
 - [Rails](https://github.com/inertiajs/inertia-rails)
 
-## Client-side setup
-
-Please see the <a href="/client-side-setup">client-side setup</a> page.
-
 ## Server-side setup
 
-Please see the <a href="/server-side-setup">server-side setup</a> page.
+The first step when using Inertia is to configure your server-side framework. This primarily includes setting up a root template and updating your endpoints to return Inertia responses. See the <a href="/server-side-setup">server-side setup</a> page for more details.
+
+## Client-side setup
+
+Once you have your server-side framework configured, you then need to setup your client-side framework. This primarily includes updating your main JavaScript file to boot the Inertia app. Please see the <a href="/client-side-setup">client-side setup</a> page for more details.
