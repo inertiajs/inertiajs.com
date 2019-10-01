@@ -9,6 +9,7 @@ export const meta = {
   links: [
     { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#initialize-app', name: 'Initialize app' },
+    { url: '#loading-indicator', name: 'Loading indicator' },
     { url: '#code-splitting', name: 'Code splitting' },
   ],
 }
@@ -108,6 +109,15 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
 />
 
 The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
+## Loading indicator
+
+Since Inertia requests are made via XHR, there's no default browser loading indicator. To solve this, Inertia ships with [NProgress.js](https://ricostacruz.com/nprogress/), a nice little progress bar library. Be sure to include the [nprogress.css](https://github.com/rstacruz/nprogress/blob/master/nprogress.css) in your project, otherwise you won't see it.
+
+<Notice>
+  In the future we intend to give more control over the handling of the loading indicator. See this{' '}
+  <a href="https://github.com/inertiajs/inertia/issues/9">issue</a> for more information.
+</Notice>
 
 ## Code splitting
 
