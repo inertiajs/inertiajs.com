@@ -71,4 +71,40 @@ In this example we're passing a single prop, called `event`, which contains four
 
 ## Lazy evaluation
 
-add
+When using [partial reloads](/requests#partial-reloads) it's best to wrap the props (data) in a closure, so that it will only be evaulated if it's required.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        class UsersController extends Controller
+        {
+            public function index()
+            {
+                return Inertia::render('Users', [
+                    // Lazily evaluated (only run if required)
+                    'companies' => function () {
+                        return Company::orderBy('name')
+                            ->get()
+                            ->only('id', 'name');
+                    },
+                    // Evaluated immediately
+                    'organizations' => User::orderBy('name')
+                        ->paginate()
+                        ->only('id', 'name'),
+                ]);
+            }
+        }
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        # add
+      `,
+    },
+  ]}
+/>
