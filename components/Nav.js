@@ -72,19 +72,14 @@ export default ({ className }) => (
           <a className="hover:underline font-medium text-gray-700">Shared data</a>
         </Link>
       </li>
-      <li className="mt-4">
-        <Link href="/csrf-protection">
-          <a className="hover:underline font-medium text-gray-700">CSRF protection</a>
-        </Link>
-      </li>
-      <li className="mt-4">
-        <Link href="/authorization">
-          <a className="hover:underline font-medium text-gray-700">Authorization</a>
-        </Link>
-      </li>
     </ul>
     <div className="mt-12 text-xs font-bold uppercase text-gray-500 tracking-widest">Advanced</div>
     <ul>
+      <li className="mt-4">
+        <Link href="/security">
+          <a className="hover:underline font-medium text-gray-700">Security</a>
+        </Link>
+      </li>
       <li className="mt-4">
         <Link href="/error-handling">
           <a className="hover:underline font-medium text-gray-700">Error handling</a>
