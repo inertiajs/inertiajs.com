@@ -19,7 +19,8 @@ The challenge is, if you're making an XHR request (which Inertia does), and you 
 
 Inertia solves this by showing all non-Inertia responses in a modal. Meaning you get the same beautiful error-reporting, even though you've made that request over XHR!
 
-<div className="my-6 relative" style={{ paddingTop: '80.5%' }}>
+<div className="my-6 relative rounded overflow-hidden bg-gray-500" style={{ paddingTop: '80.5%' }}>
+  <div className="absolute inset-0 w-full h-full flex items-center justify-center text-sm">Loading&hellip;</div>
   <iframe
     className="absolute inset-0 w-full h-full"
     src="https://player.vimeo.com/video/363562630?autoplay=1&loop=1&muted=1&background=1"
