@@ -3,7 +3,11 @@ module.exports = {
     fontFamily: {
       sans: ['Gilroy', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      width: {
+        44: '11rem',
+      },
+    },
   },
   variants: {},
   plugins: [],

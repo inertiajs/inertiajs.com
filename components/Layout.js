@@ -202,7 +202,7 @@ export default function Layout({ meta, children }) {
         <div className="flex-1 overflow-hidden md:pl-12 lg:pl-16 xl:pl-16 xl:pr-20 leading-relaxed text-lg" id="top">
           <MDXProvider components={MarkdownComponents} children={children} />
         </div>
-        <div className="hidden xl:block w-40 flex-shrink-0 relative -mt-8">
+        <div className="hidden xl:block w-44 flex-shrink-0 relative -mt-8">
           <div className="pt-8 sticky top-0">
             {meta.links && (
               <div className="mb-12">
