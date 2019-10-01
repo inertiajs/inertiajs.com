@@ -21,15 +21,19 @@ export default function Layout({ meta, children }) {
       var adElement = document.getElementById('ad')
       adElement.innerHTML = ''
       adElement.appendChild(s)
-
-      // Google Analytics
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      gtag('config', 'UA-140425344-1')
     }
+
+    // Google Analytics
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+    gtag('config', 'UA-140425344-1', {
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+      page_title: window.document.title,
+    })
   })
 
   return (
