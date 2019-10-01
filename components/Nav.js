@@ -10,6 +10,11 @@ export default ({ className }) => (
         </Link>
       </li>
       <li className="mt-4">
+        <Link href="/how-it-works">
+          <a className="hover:underline font-medium text-gray-700">How it works</a>
+        </Link>
+      </li>
+      <li className="mt-4">
         <Link href="/installation">
           <a className="hover:underline font-medium text-gray-700">Installation</a>
         </Link>
