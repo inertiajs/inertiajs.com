@@ -16,9 +16,9 @@ export const meta = {
 
 ## Creating responses
 
-To create an Inertia response in your application, we recommend using one of our <a href="/server-side-setup">server-side adapters</a>.
-
 In your controller, provide both the name of the JavaScript page component, as well as any props (data) for the page.
+
+In this example we're passing a single prop, called `event`, which contains four attributes (`id`, `title`, `start_date` and `description`) to the `Event/Show` page component.
 
 <TabbedCodeExamples
   examples={[
@@ -61,8 +61,6 @@ In your controller, provide both the name of the JavaScript page component, as w
     },
   ]}
 />
-
-In this example we're passing a single prop, called `event`, which contains four attributes (`id`, `title`, `start_date` and `description`) to the `Event/Show` page component.
 
 <Notice>
   To ensure that pages load quickly, only return the minimum data required for the page. Also, be aware that all data
