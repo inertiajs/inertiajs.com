@@ -42,7 +42,7 @@ export default function Layout({ meta, children }) {
       className="leading-none font-sans text-gray-800 antialiased"
     >
       <Head>
-        <title>{meta.title}</title>
+        <title>{meta.title ? `${meta.title} - Inertia.js` : `Inertia.js - The Modern Monolith`}</title>
         <meta
           type="description"
           content="Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers."
