@@ -26,7 +26,6 @@ The server-side adapters provide a way to preassign shared data which each reque
   examples={[
     {
       name: 'Laravel',
-      description: 'Place this code in your AppServiceProvider boot method.',
       language: 'php',
       code: dedent`
         // Synchronously
@@ -40,7 +39,43 @@ The server-side adapters provide a way to preassign shared data which each reque
                     'last_name' => Auth::user()->last_name,
                 ];
             }
-        });
+        });\n
+        // Multiple values
+        Inertia::share([
+            // Synchronously
+            'app' => [
+                'name' => Config::get('app.name')
+            ],
+            // Lazily
+            'auth' => function () {
+                return [
+                    'user' => Auth::user() ? [
+                        'id' => Auth::user()->id,
+                        'first_name' => Auth::user()->first_name,
+                        'last_name' => Auth::user()->last_name,
+                    ] : null
+                ];
+            }
+        ]);
+      `,
+      description: 'Place this code in your AppServiceProvider boot method.',
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        # Synchronously
+        inertia_share app_name: env['app.name']\n
+        # Lazily
+        inertia_share do
+          if logged_in?
+            {
+              'auth.user' => {id: logged_in_user.id}
+            }
+          end
+        end\n
+        # Lazily
+        inertia_share user_count: lambda { User.count }
       `,
     },
   ]}
@@ -151,6 +186,13 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
                 'message' => Session::get('message'),
             ];
         });
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        # todo
       `,
     },
   ]}
