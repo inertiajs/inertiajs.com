@@ -34,7 +34,7 @@ Inertia will automatically follow this redirect and update the page accordingly.
             {
                 User::create(
                     Request::validate([
-                        'nam' => ['required', 'max:50'],
+                        'name' => ['required', 'max:50'],
                         'email' => ['required', 'max:50', 'email'],
                     ])
                 );\n
