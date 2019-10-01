@@ -5,7 +5,15 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Links',
-  links: [{ url: '#top', name: 'Introduction' }, { url: '#creating-links', name: 'Creating links' }],
+  links: [
+    { url: '#top', name: 'Introduction' },
+    { url: '#creating-links', name: 'Creating links' },
+    { url: '#method', name: 'Method' },
+    { url: '#data', name: 'Data' },
+    { url: '#replace', name: 'Replace' },
+    { url: '#preserve-state', name: 'Preserve state' },
+    { url: '#preserve-scroll', name: 'Preserve scroll' },
+  ],
 }
 
 # Links
@@ -42,35 +50,9 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
   ]}
 />
 
-You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserve-scroll` attributes.
+## Method
 
-<TabbedCodeExamples
-  examples={[
-    {
-      name: 'Vue',
-      language: 'twig',
-      code: dedent`
-        <inertia-link href="/" replace preserve-scroll>Home</inertia-link>
-      `,
-    },
-    {
-      name: 'React',
-      language: 'html',
-      code: dedent`
-        <InertiaLink replace preserve-scroll href="/">Home</InertiaLink>
-      `,
-    },
-    {
-      name: 'Svelte',
-      language: 'html',
-      code: dedent`
-        <InertiaLink href="/" preserveScroll replace>Home</InertiaLink>
-      `,
-    },
-  ]}
-/>
-
-You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
+You can specify the method for an Inertia link request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
 <TabbedCodeExamples
   examples={[
@@ -98,7 +80,9 @@ You can also specify the method for the request. The default is `GET`, but you c
   ]}
 />
 
-You can add data using the `data` attribute:
+## Data
+
+You can add data using the `data` attribute. This can be an `object`, or a `FormData` instance.
 
 <TabbedCodeExamples
   examples={[
@@ -126,7 +110,39 @@ You can add data using the `data` attribute:
   ]}
 />
 
-You can also preserve a page component's local state using the `preserve-state` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
+## Replace
+
+You can specify the browser history behaviour. By default page visits push (new) state (`window.history.pushState`) into the history, however it's also possible to replace state (`window.history.replaceState`) by setting the `replace` attribute to true. This will cause the visit to replace the current history state, instead of adding a new history state to the stack.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/" replace>Home</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink replace href="/">Home</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/" replace>Home</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+## Preserve state
+
+You can preserve a page component's local state using the `preserve-state` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
 
 <TabbedCodeExamples
   examples={[
@@ -152,6 +168,36 @@ You can also preserve a page component's local state using the `preserve-state` 
       code: dedent`
         <input on:change={handleChange} value={query} />
         <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+## Preserve scroll
+
+By default page visits will automatically reset the scroll position back to the top of the page (and any [scroll regions](/pages#scroll-regions) you've defined). You can use the `preserve-scroll` attribute to disable this behaviour.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/" preserve-scroll>Home</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink preserve-scroll href="/">Home</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/" preserveScroll>Home</InertiaLink>
       `,
     },
   ]}
