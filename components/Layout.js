@@ -1,7 +1,8 @@
 import Nav from './Nav'
-import dedent from 'dedent-js'
 import Head from 'next/head'
 import Link from 'next/link'
+import dedent from 'dedent-js'
+import Mousetrap from 'mousetrap'
 import { MDXProvider } from '@mdx-js/react'
 import TabbedCodeExamples from './TabbedCodeExamples'
 import MarkdownComponents from './MarkdownComponents'
@@ -12,6 +13,20 @@ export default function Layout({ meta, children }) {
   const [showMobileNav, setShowMobileNav] = useState(false)
 
   useEffect(() => {
+    // Algolia DocSearch
+    docsearch({
+      apiKey: 'ea9f3351550104420cd3c7b4e2b9b7b1',
+      indexName: 'inertiajs',
+      inputSelector: '#docsearch',
+      debug: false,
+    })
+
+    // Add shortcut to search input when pressing the "/" key
+    Mousetrap.bind('/', function(e) {
+      e.preventDefault()
+      document.getElementById('docsearch').focus()
+    })
+
     if (process.env.NODE_ENV === 'production') {
       // Carbon Ads
       var s = document.createElement('script')
@@ -57,6 +72,8 @@ export default function Layout({ meta, children }) {
         />
         <meta name="twitter:image" content="https://inertiajs.com/static/preview.png" />
         <meta name="twitter:creator" content="@reinink" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+        <script defer src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140425344-1"></script>
       </Head>
       <div className="text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
@@ -99,6 +116,18 @@ export default function Layout({ meta, children }) {
               )}
             </div>
             <div className="hidden md:flex items-center text-white">
+              <div className="mr-5 relative">
+                <input
+                  id="docsearch"
+                  placeholder="Search…"
+                  className="py-1 pl-8 w-40 lg:w-56 focus:outline-none block appearance-none bg-white rounded-full text-sm leading-normal font-medium text-gray-700"
+                />
+                <div className="pointer-events-none absolute inset-y-0 left-0 pl-2 flex items-center">
+                  <svg className="fill-current pointer-events-none text-gray-500 w-4 h-4" viewBox="0 0 20 20">
+                    <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+                  </svg>
+                </div>
+              </div>
               <a className="block flex items-center hover:text-purple-900 mr-5" href="https://github.com/inertiajs">
                 <svg className="fill-current w-6 h-6" viewBox="0 0 20 20">
                   <title>GitHub</title>
