@@ -116,12 +116,12 @@ Once you've shared the data server-side, you'll then be able to access it within
     },
     {
       name: 'React',
-      description: 'Access shared data using the usePageProps() hook.',
+      description: 'Access shared data using the usePage() hook.',
       language: 'jsx',
       code: dedent`
-        import { InertiaLink, usePageProps } from '@inertiajs/inertia-react'\n
+        import { InertiaLink, usePage } from '@inertiajs/inertia-react'\n
         export default function Layout({ children }) {
-          const { auth } = usePageProps()\n
+          const { auth } = usePage()\n
           return (
             <main>
               <header>
@@ -224,9 +224,9 @@ Next, display the flash message in a front-end component, such as the site layou
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import { usePageProps } from '@inertiajs/inertia-react'\n
+        import { usePage } from '@inertiajs/inertia-react'\n
         export default function Layout({ children }) {
-          const { flash } = usePageProps()\n
+          const { flash } = usePage()\n
           return (
             <main>
               <header></header>
