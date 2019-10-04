@@ -55,7 +55,7 @@ To mitigate this issue, you can tell Inertia which local component state to cach
       description: 'Use the "useRememberedState" hook to cache local state.',
       language: 'jsx',
       code: dedent`
-        import { useRememberedState } from 'inertia-react'
+        import { useRememberedState } from '@inertiajs/inertia-react'
         import React from 'react'\n
         export default function Profile() {
           const [formState, setFormState] = useRememberedState({
@@ -128,7 +128,7 @@ If you have multiple instances of the same component on the page, be sure to inc
       language: 'jsx',
       code:
         dedent`
-        import { useRememberedState } from 'inertia-react'
+        import { useRememberedState } from '@inertiajs/inertia-react'
         import React from 'react'\n
         export default function Profile() {
           const [formState, setFormState] = useRememberedState(
