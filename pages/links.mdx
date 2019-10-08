@@ -13,6 +13,7 @@ export const meta = {
     { url: '#replace', name: 'Replace' },
     { url: '#preserve-state', name: 'Preserve state' },
     { url: '#preserve-scroll', name: 'Preserve scroll' },
+    { url: '#changing-the-tag', name: 'Changing the tag'},
   ],
 }
 
@@ -198,6 +199,26 @@ By default page visits will automatically reset the scroll position back to the 
       language: 'html',
       code: dedent`
         <InertiaLink href="/" preserveScroll>Home</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+## Changing the tag
+
+By default the InertiaLink component will render a `<a>` tag. You can overwrite the default tag and use your own components instead. This will be useful when using a component framework for example.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/" v-slot="{ href, navigate }">
+            <button :href="href" @click="navigate">
+                Home
+            </button>
+        </inertia-link>
       `,
     },
   ]}
