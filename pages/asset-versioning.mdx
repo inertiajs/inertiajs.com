@@ -38,12 +38,12 @@ To enable automatic asset refreshing, you simply need to tell Inertia what the c
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        Inertia.configure do |config|
+        InertiaRails.configure do |config|
           config.version = '1.0'
         end\n
         # You can also use lazy evaluation
-        Inertia.configure do |config|
-          config.version = lambda { Version.last }
+        InertiaRails.configure do |config|
+          config.version = lambda { InertiaRails::Version.last }
         end
       `,
     },
