@@ -51,7 +51,7 @@ Inertia will automatically follow this redirect and update the page accordingly.
           def index
             render inertia: 'Users/Index', props: {users: User.all}
           end\n
-          def store
+          def create
             User.create params.require(:user).permit(:name, :email)\n
             redirect_to users_path
           end
