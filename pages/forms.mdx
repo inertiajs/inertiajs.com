@@ -60,8 +60,8 @@ While it's possible to make classic form submissions with Inertia, it's not reco
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import React, { useState } from 'react'
-        import { Inertia } from '@inertiajs/inertia'\n
+        import { Inertia } from '@inertiajs/inertia'
+        import React, { useState } from 'react'\n
         export default function Edit() {
           const [values, setValues] = useState({
             first_name: null,
@@ -232,9 +232,9 @@ Now the validation errors will be available as part of your page props, and sinc
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import React, { useState } from 'react'
         import { Inertia } from '@inertiajs/inertia'
-        import { usePage } from '@inertiajs/inertia-react'\n
+        import { usePage } from '@inertiajs/inertia-react'
+        import React, { useState } from 'react'\n
         export default function Edit() {
           const { errors } = usePage()\n
           const [values, setValues] = useState({
