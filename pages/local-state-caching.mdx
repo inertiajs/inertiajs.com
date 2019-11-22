@@ -76,7 +76,7 @@ To mitigate this issue, you can tell Inertia which local component state to cach
       language: 'html',
       code: dedent`
         <script>
-          import { Inertia, remember } from 'inertia-svelte'\n
+          import { Inertia, remember } from '@inertiajs/inertia-svelte'\n
           let form = remember({
             first_name: null,
             last_name: null,
@@ -156,7 +156,7 @@ those instances. For example, `Users/Edit:{id}`.
       code:
         dedent`
         <script>
-          import { Inertia, page, remember } from 'inertia-svelte'\n
+          import { Inertia, page, remember } from '@inertiajs/inertia-svelte'\n
           $: ({ user } = $page)\n
           let form = remember({
             first_name: null,

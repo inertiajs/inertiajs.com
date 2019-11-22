@@ -34,7 +34,7 @@ Install the Inertia server-side adapters using the preferred package manager for
       language: 'bash',
       description: 'Install via RubyGems',
       code: dedent`
-        gem install inertia-rails
+        gem install inertia_rails
       `,
     },
   ]}
@@ -70,7 +70,7 @@ Next, setup the root template that will be loaded on the first page visit. This 
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        Inertia.configure do |config|
+        InertiaRails.configure do |config|
           config.layout = 'inertia' # uses layouts/inertia.html.erb
         end
       `,
@@ -98,7 +98,7 @@ more information.
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        Inertia.configure do |config|
+        InertiaRails.configure do |config|
           config.version = '1.0'
         end
       `,

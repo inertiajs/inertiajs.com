@@ -49,7 +49,7 @@ export default function Layout({ meta, children }) {
         page_title: window.document.title,
       })
     }
-  })
+  }, [])
 
   return (
     <div

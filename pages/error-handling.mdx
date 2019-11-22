@@ -93,7 +93,7 @@ an example error page component you can use as a starting point.
                 503: '503: Service Unavailable',
                 500: '500: Server Error',
                 404: '404: Page Not Found',
-                403: '404: Forbidden',
+                403: '403: Forbidden',
               }[this.status]
             },
             description() {
@@ -111,9 +111,29 @@ an example error page component you can use as a starting point.
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
-        // todo
+        import React from 'react'\n
+        export default function ErrorPage({ status }) {
+          const title = {
+            503: '503: Service Unavailable',
+            500: '500: Server Error',
+            404: '404: Page Not Found',
+            403: '403: Forbidden',
+          }[status]\n
+          const description = {
+            503: 'Sorry, we are doing some maintenance. Please check back soon.',
+            500: 'Whoops, something went wrong on our servers.',
+            404: 'Sorry, the page you are looking for could not be found.',
+            403: 'Sorry, you are forbidden from accessing this page.',
+          }[this.status]\n
+          return (
+            <div>
+              <h1>{title}</h1>
+              <div>{description}</div>
+            </div>
+          )
+        }
       `,
     },
     {

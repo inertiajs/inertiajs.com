@@ -85,7 +85,7 @@ framework with the base Inertia page component.
         render(
           <InertiaApp
             initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent={name => require(\`./Pages/\${name}\`).default},
+            resolveComponent={name => require(\`./Pages/\${name}\`).default}
           />,
           app
         )

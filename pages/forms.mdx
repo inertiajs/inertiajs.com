@@ -61,7 +61,36 @@ reloads. Instead, it's better to intercept form submissions and then make the [r
       name: 'React',
       language: 'jsx',
       code: dedent`
-        // todo
+        import { Inertia } from '@inertiajs/inertia'
+        import React, { useState } from 'react'\n
+        export default function Edit() {
+          const [values, setValues] = useState({
+            first_name: null,
+            last_name: null,
+            email: null,
+          })\n
+          function handleChange(e) {
+            setValues(values => ({
+              ...values,
+              [e.target.id]: e.target.value,
+            }))
+          }\n
+          function handleSubmit(e) {
+            e.preventDefault()
+            Inertia.post('/users', values)
+          }\n
+          return (
+            <form onSubmit={handleSubmit}>
+              <label for="first_name">First name:</label>
+              <input id="first_name" value={values.first_name} onChange={handleChange} />
+              <label for="last_name">Last name:</label>
+              <input id="last_name" value={values.last_name} onChange={handleChange} />
+              <label for="email">Email:</label>
+              <input id="email" value={values.email} onChange={handleChange} />
+              <button type="submit">Submit</button>
+            </form>
+          )
+        }
       `,
     },
     {
@@ -114,7 +143,7 @@ right back to the page that you're on.
           def index
             render inertia: 'Users/Index', props: {users: User.all}
           end\n
-          def store
+          def create
             User.create params.require(:user).permit(:first_name, :last_name, :email)\n
             redirect_to users_path
           end
@@ -213,7 +242,41 @@ errors.
       name: 'React',
       language: 'jsx',
       code: dedent`
-        // todo
+        import { Inertia } from '@inertiajs/inertia'
+        import { usePage } from '@inertiajs/inertia-react'
+        import React, { useState } from 'react'\n
+        export default function Edit() {
+          const { errors } = usePage()\n
+          const [values, setValues] = useState({
+            first_name: null,
+            last_name: null,
+            email: null,
+          })\n
+          function handleChange(e) {
+            setValues(values => ({
+              ...values,
+              [e.target.id]: e.target.value,
+            }))
+          }\n
+          function handleSubmit(e) {
+            e.preventDefault()
+            Inertia.post('/users', values)
+          }\n
+          return (
+            <form onSubmit={handleSubmit}>
+              <label for="first_name">First name:</label>
+              <input id="first_name" value={values.first_name} onChange={handleChange} />
+              {errors.first_name && <div>{errors.first_name[0]}</div>}
+              <label for="last_name">Last name:</label>
+              <input id="last_name" value={values.last_name} onChange={handleChange} />
+              {errors.last_name && <div>{errors.last_name[0]}</div>}
+              <label for="email">Email:</label>
+              <input id="email" value={values.email} onChange={handleChange} />
+              {errors.email && <div>{errors.email[0]}</div>}
+              <button type="submit">Submit</button>
+            </form>
+          )
+        }
       `,
     },
     {

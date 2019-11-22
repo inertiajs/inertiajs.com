@@ -22,8 +22,8 @@ situations shared data can be useful.
 
 ## Sharing data
 
-The server-side adapters provide a way to preassign shared data which each request. This is typically done outside of
-your controllers. Shared data will be automatically merged with the page props provided in your controller.
+The server-side adapters provide a way to preassign shared data for each request. This is typically done outside of your
+controllers. Shared data will be automatically merged with the page props provided in your controller.
 
 <TabbedCodeExamples
   examples={[
@@ -150,7 +150,7 @@ this in a layout component.
       language: 'html',
       code: dedent`
         <script>
-          import { InertiaLink, page } from 'inertia-svelte'
+          import { InertiaLink, page } from '@inertiajs/inertia-svelte'
         </script>\n
         <main>
           <header>
@@ -254,7 +254,7 @@ Next, display the flash message in a front-end component, such as the site layou
       language: 'html',
       code: dedent`
         <script>
-          import { page } from 'inertia-svelte'
+          import { page } from '@inertiajs/inertia-svelte'
         </script>\n
         <main>
           <header></header>

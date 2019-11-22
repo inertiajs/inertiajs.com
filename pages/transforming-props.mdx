@@ -45,7 +45,7 @@ you may have a collection of errors that you want to convert into a custom `Erro
         render(
           <Inertia
             initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent={name => require(\`./Pages/\${name}\`).default},
+            resolveComponent={name => require(\`./Pages/\${name}\`).default}
             transformProps={props => {
               return {
                 ...props,
