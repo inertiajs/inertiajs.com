@@ -39,11 +39,16 @@ In production you'll want to return a proper Inertia error response instead of r
       name: 'Laravel',
       language: 'php',
       code: dedent`
+       /**
+        * Default Laravel location: App\\Exceptions\\Handler.php
+        */ \n
         use Inertia\\Inertia;\n
         public function render($request, Exception $exception)
         {
             $response = parent::render($request, $exception);\n
-            if ($request->header('X-Inertia') && in_array($response->status(), [500, 503, 404, 403])) {
+            if (App::environment('production')
+                && $request->header('X-Inertia')
+                && in_array($response->status(), [500, 503, 404, 403])) {
                 return Inertia::render('Error', ['status' => $response->status()])
                     ->toResponse($request)
                     ->setStatusCode($response->status());
