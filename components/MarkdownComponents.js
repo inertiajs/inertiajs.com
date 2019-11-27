@@ -11,13 +11,17 @@ function kebabCase(str) {
 
 export default {
   h1: props => <h1 {...props} className="mb-12 text-4xl font-bold text-gray-700 leading-none" />,
-  h2: props => (
-    <h2
-      id={kebabCase(props.children)}
-      className="mt-16 mb-4 text-2xl font-bold text-gray-700 leading-none"
-      {...props}
-    />
-  ),
+  h2: props => {
+    return props.className ? (
+      <h2 {...props} />
+    ) : (
+      <h2
+        id={kebabCase(props.children)}
+        className="mt-16 mb-4 text-2xl font-bold text-gray-700 leading-none"
+        {...props}
+      />
+    )
+  },
   h3: props => (
     <h3 id={kebabCase(props.children)} className="mt-16 mb-4 text-xl font-bold text-gray-700 leading-none" {...props} />
   ),

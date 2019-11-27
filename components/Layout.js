@@ -76,6 +76,26 @@ export default function Layout({ meta, children }) {
         <script defer src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140425344-1"></script>
       </Head>
+      {meta.sponsor && (
+        <div
+          className="px-6 md:px-12 xl:px-0 py-4 text-md font-medium flex items-center justify-center"
+          css={{ background: '#92eee2' }}
+        >
+          <svg
+            className="w-5 h-5 fill-current text-purple-500 flex-shrink-0"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z" />
+          </svg>
+          <div className="mx-2">Sponsor the ongoing development of Inertia.js.</div>
+          <Link href="/sponsors">
+            <a className="px-3 py-1 bg-purple-500 hover:bg-purple-600 rounded-full text-xs text-white leading-tight whitespace-no-wrap">
+              Learn more
+            </a>
+          </Link>
+        </div>
+      )}
       <div className="text-white" css={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 relative">
           <div className="overflow-hidden absolute top-0 left-0 w-full h-full">
@@ -226,6 +246,7 @@ export default function Layout({ meta, children }) {
           )}
         </div>
       </div>
+
       <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 py-12 md:py-24 flex">
         <Nav className="hidden md:block md:w-48 lg:w-56 flex-shrink-0 border-r" />
         <div className="flex-1 overflow-hidden md:pl-12 lg:pl-16 xl:pl-16 xl:pr-20 leading-relaxed text-lg" id="top">

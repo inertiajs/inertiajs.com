@@ -12,13 +12,20 @@ export default ({ className }) => {
 
   return (
     <nav className={className}>
-      <div className="mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
       <ul>
         <li className="md:pr-3">
           <Link href="/">
             <a className={linkClass('/')}>Introduction</a>
           </Link>
         </li>
+        <li className="md:pr-3">
+          <Link href="/sponsors">
+            <a className={linkClass('/sponsors')}>Sponsors</a>
+          </Link>
+        </li>
+      </ul>
+      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
+      <ul>
         <li className="md:pr-3">
           <Link href="/how-it-works">
             <a className={linkClass('/how-it-works')}>How it works</a>

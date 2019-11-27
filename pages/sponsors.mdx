@@ -1,0 +1,92 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Sponsors',
+  links: [
+    { url: '#our-official-sponsors', name: 'Our official sponsors' },
+    { url: '#become-a-sponsor', name: 'Become a sponsor' },
+  ],
+  sponsors: [
+    { username: 'frankspin89', id: '4480104', since: 'Nov 2019' },
+    { username: 'inxilpro', id: '21592', since: 'Nov 2019' },
+    { username: 'freekmurze', id: '483853', since: 'Nov 2019' },
+    { username: 'fourstacks', id: '6280211', since: 'Nov 2019' },
+    { username: 'robindrost', id: '588012', since: 'Nov 2019' },
+    { username: 'mkellyxp', id: '6528226', since: 'Nov 2019' },
+    { username: 'novelnet', id: '31067676', since: 'Nov 2019' },
+    { username: 'stefanbauer', id: '3192662', since: 'Nov 2019' },
+    { username: 'michaeldyrynda', id: '558441', since: 'Nov 2019' },
+    { username: 'ledermann', id: '3557', since: 'Nov 2019' },
+    { username: 'Juhlinus', id: '12988164', since: 'Nov 2019' },
+  ],
+}
+
+# Sponsors
+
+## Our official sponsors
+
+We are so grateful for our existing sponsors! Thank you!
+
+<div className="mt-8 flex flex-wrap -ml-4">
+  {meta.sponsors.map((sponsor, index) => (
+    <div className="w-full md:w-1/2 pl-4 pb-4">
+      <div className="rounded flex items-center">
+        <a href={`https://github.com/${sponsor.username}`}>
+          <img
+            className="w-16 h-16 rounded shadow"
+            alt={`@${sponsor.username}`}
+            src={`https://avatars0.githubusercontent.com/u/${sponsor.id}?s=150&amp;v=4`}
+          />
+        </a>
+        <div className="pl-4 leading-none">
+          <a href={`https://github.com/${sponsor.username}`} className="text-base font-bold text-gray-700">
+            @{sponsor.username}
+          </a>
+          <div className="mt-2 text-sm text-gray-600">Sponsor since {sponsor.since}</div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<h2 id="become-a-sponsor" className="mt-16 mb-4 text-2xl font-bold text-gray-700 leading-none flex items-center">
+  Become a sponsor
+  <svg
+    className="ml-2 w-5 h-5 fill-current text-purple-500 flex-shrink-0"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+  >
+    <path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z" />
+  </svg>
+</h2>
+
+<div className="mt-6">
+  <img
+    className="w-32 h-32 ml-4 mb-4 rounded float-right"
+    src="https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg"
+    alt="Jonathan Reinink"
+  />
+  <p className="pt-0">
+    Hi there! My name is Jonathan Reinink, and I am the creator of Inertia. I am really excited for the future of this
+    project. Inertia is literally changing how people build classic server-driven web apps.
+  </p>
+  <p>
+    That said, this is easily my most ambitious project to date and it still requires a ton of development. If you use
+    Inertia, please consider becoming an official sponsor. Any little bit helps, and it's really easy to do through
+    GitHub sponsors.
+  </p>
+  <p>
+    By becoming a sponsor, you'll help ensure the future success of this project. We'll also give you a public shoutout
+    on Twitter, and will list you with our other sponsors above.
+  </p>
+  <p>Thanks so much for your consideration.</p>
+  <a
+    className="mt-2 inline-block px-8 py-3 bg-purple-500 hover:bg-purple-600 rounded-full text-sm font-medium text-white"
+    href="https://github.com/sponsors/reinink"
+  >
+    Become a sponsor now
+  </a>
+</div>
