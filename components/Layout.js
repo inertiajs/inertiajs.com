@@ -63,15 +63,16 @@ export default function Layout({ meta, children }) {
           content="Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers."
         />
         <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@reinink" />
-        <meta name="twitter:title" content="Inertia.js - The Modern Monolith" />
-        <meta
-          name="twitter:description"
-          content="Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers."
-        />
-        <meta name="twitter:image" content="https://inertiajs.com/static/preview.png" />
-        <meta name="twitter:creator" content="@reinink" />
+        {meta.twitter && (
+          <React.Fragment>
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@reinink" />
+            <meta name="twitter:creator" content="@reinink" />
+            <meta name="twitter:title" content={meta.twitter.title} />
+            <meta name="twitter:description" content={meta.twitter.description} />
+            <meta name="twitter:image" content={meta.twitter.image} />
+          </React.Fragment>
+        )}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
         <script defer src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140425344-1"></script>
