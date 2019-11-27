@@ -58,19 +58,16 @@ export default function Layout({ meta, children }) {
     >
       <Head>
         <title>{meta.title ? `${meta.title} - Inertia.js` : `Inertia.js - The Modern Monolith`}</title>
-        <meta
-          type="description"
-          content="Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers."
-        />
+        {meta.description && <meta type="description" content={meta.description} />}
         <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
-        {meta.twitter && (
+        {meta.twitterCardImage && (
           <React.Fragment>
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:site" content="@reinink" />
             <meta name="twitter:creator" content="@reinink" />
-            <meta name="twitter:title" content={meta.twitter.title} />
-            <meta name="twitter:description" content={meta.twitter.description} />
-            <meta name="twitter:image" content={meta.twitter.image} />
+            <meta name="twitter:title" content={`Inertia.js - ${meta.title ? meta.title : 'The Modern Monolith'}`} />
+            <meta name="twitter:description" content={meta.description} />
+            <meta name="twitter:image" content={meta.twitterCardImage} />
           </React.Fragment>
         )}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
