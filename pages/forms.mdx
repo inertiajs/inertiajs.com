@@ -94,9 +94,28 @@ While it's possible to make classic form submissions with Inertia, it's not reco
     },
     {
       name: 'Svelte',
-      language: 'js',
+      language: 'html',
       code: dedent`
-        // todo
+        <script>
+          import { Inertia } from '@inertiajs/inertia'\n
+          let values = {
+            first_name: null,
+            last_name: null,
+            email: null,
+          }\n
+          function handleSubmit() {
+            Inertia.post('/users', values)
+          }
+        </script>\n
+        <form on:submit|preventDefault={handleSubmit}>
+          <label for="first_name">First name:</label>
+          <input id="first_name" bind:value={values.first_name}>\n
+          <label for="last_name">Last name:</label>
+          <input id="last_name" bind:value={values.last_name}>\n
+          <label for="email">Email:</label>
+          <input id="email" bind:value={values.email}>\n
+          <button type="submit">Submit</button>
+        </form>
       `,
     },
   ]}
@@ -271,9 +290,33 @@ Now the validation errors will be available as part of your page props, and sinc
     },
     {
       name: 'Svelte',
-      language: 'js',
+      language: 'html',
       code: dedent`
-        // todo
+        <script>
+          import { Inertia } from '@inertiajs/inertia'
+          import { page } from '@inertiajs/inertia-svelte'\n
+          $: ({ errors } = $page)\n
+          let values = {
+            first_name: null,
+            last_name: null,
+            email: null,
+          }\n
+          function handleSubmit() {
+            Inertia.post('/users', values)
+          }
+        </script>\n
+        <form on:submit|preventDefault={handleSubmit}>
+          <label for="first_name">First name:</label>
+          <input id="first_name" bind:value={values.first_name}>
+          {#if errors.first_name}<div>{errors.first_name[0]}</div>{/if}\n
+          <label for="last_name">Last name:</label>
+          <input id="last_name" bind:value={values.last_name}>
+          {#if errors.last_name}<div>{errors.last_name[0]}</div>{/if}\n
+          <label for="email">Email:</label>
+          <input id="email" bind:value={values.email}>
+          {#if errors.email}<div>{errors.email[0]}</div>{/if}\n
+          <button type="submit">Submit</button>
+        </form>
       `,
     },
   ]}
