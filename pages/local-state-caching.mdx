@@ -70,22 +70,14 @@ To mitigate this issue, you can tell Inertia which local component state to cach
     {
       name: 'Svelte',
       description: 'Use the "remember" store to cache local state.',
-      language: 'html',
+      language: 'js',
       code: dedent`
-        <script>
-          import { Inertia, remember } from '@inertiajs/inertia-svelte'\n
-          let form = remember({
-            first_name: null,
-            last_name: null,
-          })
-        </script>\n
-        <form on:submit|preventDefault={() => Inertia.post('/contact', $form)}>
-          <label for="first_name">First Name:</label>
-          <input id="first_name" bind:value={$form.first_name}></div>\n
-          <label for="last_name">Last name:</label>
-          <input id="last_name" bind:value={$form.last_name}></div>\n
-          <button type="submit">Save</button>
-        </form>
+        import { remember } from '@inertiajs/inertia-svelte'\n
+        let form = remember({
+          first_name: null,
+          last_name: null,
+        })\n
+        // ...
       `,
     },
   ]}
@@ -147,20 +139,17 @@ If you have multiple instances of the same component on the page, be sure to inc
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'js',
       code:
         dedent`
-        <script>
-          import { Inertia, page, remember } from '@inertiajs/inertia-svelte'\n
-          $: ({ user } = $page)\n
+          import { page, remember } from '@inertiajs/inertia-svelte'\n
           let form = remember({
             first_name: null,
             last_name: null,
           }, ` +
-        `\`Users/Edit:\${user.id}\`` +
+        `\`Users/Edit:\${$page.user.id}\`` +
         dedent`)\n
           // ...
-        </script>
       `,
     },
   ]}
