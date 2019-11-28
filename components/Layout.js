@@ -265,7 +265,7 @@ export default function Layout({ meta, children }) {
       <div className="max-w-6xl mx-auto md:px-12 xl:px-0 py-12 md:py-24 flex">
         <Nav className="hidden md:block md:w-48 lg:w-56 flex-shrink-0 border-r" />
         <div
-          className="flex-1 md:overflow-hidden px-6 md:pl-12 md:pr-0 lg:pl-16 xl:pl-16 xl:pr-20 leading-relaxed text-lg"
+          className="flex-1 overflow-hidden px-6 md:pl-12 md:pr-0 lg:pl-16 xl:pl-16 xl:pr-20 leading-relaxed text-lg"
           id="top"
         >
           <MDXProvider components={MarkdownComponents} children={children} />
