@@ -56,7 +56,27 @@ In production you'll want to return a proper Inertia error response instead of r
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        # todo
+        # app/controllers/exceptions_controller.rb
+        class ExceptionsController < ActionController::Base
+          def show
+            render inertia: 'Error', props: {
+              status: request.path_info[1..-1].to_i
+            }
+          end
+        end
+        
+        # config/application.rb
+        module MyApplication
+          class Application < Rails::Application
+            # ...
+            config.exceptions_app = ->(env) { ExceptionsController.action(:show).call(env) }
+          end
+        end
+        
+        # Delete static error pages
+        # $ rm public/404.html
+        # $ rm public/422.html
+        # $ rm public/500.html
       `,
     },
   ]}
