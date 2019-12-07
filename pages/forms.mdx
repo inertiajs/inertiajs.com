@@ -198,7 +198,26 @@ From there you need to send those error messages to your form page component. Yo
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        # todo
+        class ApplicationController < ActionController::Base
+          inertia_share errors: -> {
+            session.delete(:errors) || []
+          }
+        end
+        
+        class ContactsController < ApplicationController
+          def create
+            contact = Contact.new(contact_params)
+            
+            if contact.save
+              redirect_to contacts_path, notice: 'Contact created.'
+            else
+              # Place the errors in the session, so they are available
+              # after the redirect
+              session[:errors] = contact.errors
+              redirect_to new_contact_path
+            end
+          end
+        end
       `,
     },
   ]}
