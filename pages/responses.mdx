@@ -102,7 +102,24 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        # add
+        class UsersController < ApplicationController
+          def index
+            render inertia: 'Users/Index', props: {
+              # Lazily evaluated (only run if required)
+              companies: -> {
+                Company.
+                  order(:name).
+                  as_json(only: [ :id, :name ])
+              },
+              
+              # Evaluated immediately
+              users: User.
+                order(:name).
+                paginate(params[:page]).
+                as_json(only: [ :id, :name ])
+            }
+          end
+        end
       `,
     },
   ]}
