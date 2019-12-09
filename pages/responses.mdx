@@ -82,7 +82,7 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
         {
             public function index()
             {
-                return Inertia::render('Users', [
+                return Inertia::render('Users/Index', [
                     // Lazily evaluated (only run if required)
                     'companies' => function () {
                         return Company::orderBy('name')
@@ -90,7 +90,7 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
                             ->only('id', 'name');
                     },
                     // Evaluated immediately
-                    'organizations' => User::orderBy('name')
+                    'users' => User::orderBy('name')
                         ->paginate()
                         ->only('id', 'name'),
                 ]);
