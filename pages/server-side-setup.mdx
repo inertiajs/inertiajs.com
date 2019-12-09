@@ -135,10 +135,14 @@ That's it, you're all ready to go server-side! From here you can start creating 
       language: 'ruby',
       code: dedent`
         class EventsController < ApplicationController
-          def index
-            render inertia: 'Events',
+          def show
+            @event = Event.find(params[:id])
+            
+            render inertia: 'Event/Show',
               props: {
-                events: Event.all
+                event: @event.as_json(
+                  only: [ :id, :title, :start_date, :description ]
+                )
               }
           end
         end
