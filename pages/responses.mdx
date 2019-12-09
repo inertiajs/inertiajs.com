@@ -50,10 +50,14 @@ In this example we're passing a single prop, called `event`, which contains four
       language: 'ruby',
       code: dedent`
         class EventsController < ApplicationController
-          def index
-            render inertia: 'Events',
+          def show
+            event = Event.find(params[:id])
+            
+            render inertia: 'Event/Show',
               props: {
-                events: Event.all
+                event: event.as_json(
+                  only: [ :id, :title, :start_date, :description ]
+                )
               }
           end
         end
