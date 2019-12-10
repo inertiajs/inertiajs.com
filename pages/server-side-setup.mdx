@@ -31,10 +31,10 @@ Install the Inertia server-side adapters using the preferred package manager for
     },
     {
       name: 'Rails',
-      language: 'bash',
-      description: 'Install via RubyGems',
+      language: 'ruby',
+      description: 'Add this to your Gemfile',
       code: dedent`
-        gem install inertia_rails
+        gem 'inertia_rails'
       `,
     },
   ]}
@@ -135,10 +135,14 @@ That's it, you're all ready to go server-side! From here you can start creating 
       language: 'ruby',
       code: dedent`
         class EventsController < ApplicationController
-          def index
-            render inertia: 'Events',
+          def show
+            event = Event.find(params[:id])
+            
+            render inertia: 'Event/Show',
               props: {
-                events: Event.all
+                event: event.as_json(
+                  only: [ :id, :title, :start_date, :description ]
+                )
               }
           end
         end
