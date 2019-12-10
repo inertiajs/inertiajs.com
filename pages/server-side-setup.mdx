@@ -136,11 +136,11 @@ That's it, you're all ready to go server-side! From here you can start creating 
       code: dedent`
         class EventsController < ApplicationController
           def show
-            @event = Event.find(params[:id])
+            event = Event.find(params[:id])
             
             render inertia: 'Event/Show',
               props: {
-                event: @event.as_json(
+                event: event.as_json(
                   only: [ :id, :title, :start_date, :description ]
                 )
               }
