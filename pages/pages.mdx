@@ -187,7 +187,10 @@ For example, maybe you have an audio player on a podcast website that you want t
         <script>
           import Layout from '@/Shared/Layout'\n
           export default {
-            layout: Layout,
+            // Using a render function
+            layout: (h, page) => h(Layout, [page]),\n
+            // Using the shorthand
+            layout: Layout,\n
             props: {
               user: Object,
             },
