@@ -11,6 +11,7 @@ export const meta = {
     { url: '#creating-layouts', name: 'Creating layouts' },
     { url: '#persistent-layouts', name: 'Persistent layouts' },
     { url: '#scroll-regions', name: 'Scroll regions' },
+    { url: '#title-and-meta-tags', name: 'Title and meta tags' },
   ],
 }
 
@@ -35,7 +36,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
           </layout>
         </template>\n
         <script>
-          import Layout from '@/Shared/Layout'\n
+          import Layout from './Layout'\n
           export default {
             components: {
               Layout,
@@ -52,7 +53,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
       language: 'jsx',
       code: dedent`
         import React from 'react'
-        import Layout from '@/Shared/Layout'\n
+        import Layout from './Layout'\n
         export default function Welcome({ user }) {
           return (
             <Layout title="Welcome">
@@ -68,7 +69,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
       language: 'html',
       code: dedent`
         <script>
-          import Layout from '@/Shared/Layout.svelte'\n
+          import Layout from './Layout.svelte'\n
           export let user
         </script>\n
         <Layout title="Welcome">
@@ -185,9 +186,12 @@ For example, maybe you have an audio player on a podcast website that you want t
           </div>
         </template>\n
         <script>
-          import Layout from '@/Shared/Layout'\n
+          import Layout from './Layout'\n
           export default {
-            layout: Layout,
+            // Using a render function
+            layout: (h, page) => h(Layout, [page]),\n
+            // Using the shorthand
+            layout: Layout,\n
             props: {
               user: Object,
             },
@@ -198,7 +202,20 @@ For example, maybe you have an audio player on a podcast website that you want t
     {
       name: 'React',
       language: 'jsx',
-      code: `// Coming soon`,
+      code: dedent`
+        import React from 'react'
+        import Layout from './Layout'\n
+        const Home = ({ user }) => {
+          return (
+            <>
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            </>
+          )
+        }\n
+        Home.layout = page => <Layout children={page} title="Welcome" />\n
+        export default Home
+      `,
     },
     {
       name: 'Svelte',
@@ -208,7 +225,7 @@ For example, maybe you have an audio player on a podcast website that you want t
   ]}
 />
 
-You can optionally make `layout` a render function, allowing you to create more complex layout arrangements. For example, you can use this to create a secondary nested layout within a subsection of your app.
+You can also create more complex layout arrangements using nested layouts.
 
 <TabbedCodeExamples
   examples={[
@@ -241,7 +258,25 @@ You can optionally make `layout` a render function, allowing you to create more 
     {
       name: 'React',
       language: 'jsx',
-      code: `// Coming soon`,
+      code: dedent`
+        import React from 'react'
+        import SiteLayout from './SiteLayout'
+        import NestedLayout from './NestedLayout'\n
+        const Home = ({ user }) => {
+          return (
+            <>
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            </>
+          )
+        }\n
+        Home.layout = page => (
+          <SiteLayout title="Welcome">
+            <NestedLayout children={page} />
+          </SiteLayout>
+        )\n
+        export default Home
+      `,
     },
     {
       name: 'Svelte',
@@ -260,3 +295,67 @@ When navigating between pages, Inertia will automatically reset the scroll posit
   <!-- Your page content -->
 </div>
 ```
+
+## Title and meta tags
+
+While it's possible to pass title and meta tag props from pages to layouts (as illustrated above), it's often easier to manage this using a document head library like [Vue Meta](https://github.com/nuxt/vue-meta) or [React Helmet](https://github.com/nfl/react-helmet).
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <layout>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </layout>
+        </template>\n
+        <script>
+          import Layout from './Layout'\n
+          export default {
+            metaInfo() {
+              return {
+                title: \`Welcome \${this.user.name}\`,
+              }
+            },
+            components: {
+              Layout,
+            },
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import React from 'react'
+        import Layout from './Layout'
+        import {Helmet} from "react-helmet"\n
+        export default function Welcome({ user }) {
+          return (
+            <Layout>
+              <Helmet>
+                <title>Welcome {user.name}</title>
+              </Helmet>
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            </Layout>
+          )
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: `// Coming soon`,
+    },
+  ]}
+/>
+
+Further, if it's critical for your application to set the page title and meta tags server-side, you can use [root template data](/responses#root-template-data) to accomplish this.
