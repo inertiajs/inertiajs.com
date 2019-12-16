@@ -11,6 +11,7 @@ export const meta = {
     { url: '#creating-layouts', name: 'Creating layouts' },
     { url: '#persistent-layouts', name: 'Persistent layouts' },
     { url: '#scroll-regions', name: 'Scroll regions' },
+    { url: '#title-and-meta-tags', name: 'Title and meta tags' },
   ],
 }
 
@@ -294,3 +295,67 @@ When navigating between pages, Inertia will automatically reset the scroll posit
   <!-- Your page content -->
 </div>
 ```
+
+## Title and meta tags
+
+While it's possible to pass title and meta tag props from pages to layouts (as illustrated above), it's often easier to manage this using a document head library like [Vue Meta](https://github.com/nuxt/vue-meta) or [React Helmet](https://github.com/nfl/react-helmet).
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <layout>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </layout>
+        </template>\n
+        <script>
+          import Layout from './Layout'\n
+          export default {
+            metaInfo() {
+              return {
+                title: \`Welcome \${this.user.name}\`,
+              }
+            },
+            components: {
+              Layout,
+            },
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import React from 'react'
+        import Layout from './Layout'
+        import {Helmet} from "react-helmet"\n
+        export default function Welcome({ user }) {
+          return (
+            <Layout>
+              <Helmet>
+                <title>Welcome {user.name}</title>
+              </Helmet>
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            </Layout>
+          )
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: `// Coming soon`,
+    },
+  ]}
+/>
+
+Further, if it's critical for your application to set the page title and meta tags server-side, you can use [root template data](/responses#root-template-data) to accomplish this.
