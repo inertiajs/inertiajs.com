@@ -35,7 +35,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
           </layout>
         </template>\n
         <script>
-          import Layout from '@/Shared/Layout'\n
+          import Layout from './Layout'\n
           export default {
             components: {
               Layout,
@@ -52,7 +52,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
       language: 'jsx',
       code: dedent`
         import React from 'react'
-        import Layout from '@/Shared/Layout'\n
+        import Layout from './Layout'\n
         export default function Welcome({ user }) {
           return (
             <Layout title="Welcome">
@@ -68,7 +68,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
       language: 'html',
       code: dedent`
         <script>
-          import Layout from '@/Shared/Layout.svelte'\n
+          import Layout from './Layout.svelte'\n
           export let user
         </script>\n
         <Layout title="Welcome">
@@ -185,7 +185,7 @@ For example, maybe you have an audio player on a podcast website that you want t
           </div>
         </template>\n
         <script>
-          import Layout from '@/Shared/Layout'\n
+          import Layout from './Layout'\n
           export default {
             // Using a render function
             layout: (h, page) => h(Layout, [page]),\n
