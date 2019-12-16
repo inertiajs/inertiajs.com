@@ -213,7 +213,7 @@ For example, maybe you have an audio player on a podcast website that you want t
             </>
           )
         }\n
-        Home.layout = child => <Layout children={child} title="Welcome" />\n
+        Home.layout = page => <Layout children={page} title="Welcome" />\n
         export default Home
       `,
     },
@@ -270,9 +270,9 @@ You can also create more complex layout arrangements using nested layouts.
             </>
           )
         }\n
-        Home.layout = child => (
+        Home.layout = page => (
           <SiteLayout title="Welcome">
-            <NestedLayout children={child} />
+            <NestedLayout children={page} />
           </SiteLayout>
         )\n
         export default Home
