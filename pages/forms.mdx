@@ -69,10 +69,10 @@ While it's possible to make classic form submissions with Inertia, it's not reco
             email: null,
           })\n
           function handleChange(e) {
-            setValues(values => ({
+            setValues({
               ...values,
               [e.target.id]: e.target.value,
-            }))
+            })
           }\n
           function handleSubmit(e) {
             e.preventDefault()
@@ -80,11 +80,11 @@ While it's possible to make classic form submissions with Inertia, it's not reco
           }\n
           return (
             <form onSubmit={handleSubmit}>
-              <label for="first_name">First name:</label>
+              <label htmlFor="first_name">First name:</label>
               <input id="first_name" value={values.first_name} onChange={handleChange} />
-              <label for="last_name">Last name:</label>
+              <label htmlFor="last_name">Last name:</label>
               <input id="last_name" value={values.last_name} onChange={handleChange} />
-              <label for="email">Email:</label>
+              <label htmlFor="email">Email:</label>
               <input id="email" value={values.email} onChange={handleChange} />
               <button type="submit">Submit</button>
             </form>
