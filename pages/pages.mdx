@@ -201,7 +201,20 @@ For example, maybe you have an audio player on a podcast website that you want t
     {
       name: 'React',
       language: 'jsx',
-      code: `// Coming soon`,
+      code: dedent`
+        import React from 'react'
+        import Layout from './Layout'\n
+        const Home = ({ user }) => {
+          return (
+            <React.Fragment>
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            </React.Fragment>
+          )
+        }\n
+        Home.layout = child => <Layout children={child} title="Welcome" />\n
+        export default Home
+      `,
     },
     {
       name: 'Svelte',
@@ -211,7 +224,7 @@ For example, maybe you have an audio player on a podcast website that you want t
   ]}
 />
 
-You can optionally make `layout` a render function, allowing you to create more complex layout arrangements. For example, you can use this to create a secondary nested layout within a subsection of your app.
+You can also create more complex layout arrangements using nested layouts.
 
 <TabbedCodeExamples
   examples={[
@@ -244,7 +257,25 @@ You can optionally make `layout` a render function, allowing you to create more 
     {
       name: 'React',
       language: 'jsx',
-      code: `// Coming soon`,
+      code: dedent`
+        import React from 'react'
+        import SiteLayout from './SiteLayout'
+        import NestedLayout from './NestedLayout'\n
+        const Home = ({ user }) => {
+          return (
+            <React.Fragment>
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            </React.Fragment>
+          )
+        }\n
+        Home.layout = child => (
+          <SiteLayout title="Welcome">
+            <NestedLayout children={child} />
+          </SiteLayout>
+        )\n
+        export default Home
+      `,
     },
     {
       name: 'Svelte',
