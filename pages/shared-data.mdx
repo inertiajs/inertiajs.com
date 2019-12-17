@@ -192,7 +192,13 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        # todo
+        class ApplicationController < ActionController::Base
+          inertia_share flash: -> {
+            {
+              message: flash.notice
+            }
+          }
+        end
       `,
     },
   ]}
