@@ -64,15 +64,17 @@ While it's possible to make classic form submissions with Inertia, it's not reco
         import React, { useState } from 'react'\n
         export default function Edit() {
           const [values, setValues] = useState({
-            first_name: null,
-            last_name: null,
-            email: null,
+            first_name: "",
+            last_name: "",
+            email: "",
           })\n
           function handleChange(e) {
-            setValues({
-              ...values,
-              [e.target.id]: e.target.value,
-            })
+            const key = e.target.id;
+            const value = e.target.value
+            setValues(values => ({
+                ...values,
+                [key]: value,
+            }))
           }\n
           function handleSubmit(e) {
             e.preventDefault()
