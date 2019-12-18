@@ -14,7 +14,7 @@ The only thing that's different is your view layer. Instead of using server-side
 
 But simply creating your front-end in JavaScript doesn't give you a single-page app experience. If you were to click a link, your browser would make a full page visit, which would then cause your client-side framework to have to reboot on subsequent page loads. This is where Inertia comes in.
 
-At it's core Inertia is essentially a client-side routing library. It allows you to make page visits without forcing a full page reload. This is done using the `<inertia-link>` component, a light wrapper around a normal anchor link. When you click an Inertia link, Inertia intercepts the click and makes the visit via XHR instead. You can also make these visits programmatically in JavaScript using `Inertia.visit()`.
+At its core Inertia is essentially a client-side routing library. It allows you to make page visits without forcing a full page reload. This is done using the `<inertia-link>` component, a light wrapper around a normal anchor link. When you click an Inertia link, Inertia intercepts the click and makes the visit via XHR instead. You can also make these visits programmatically in JavaScript using `Inertia.visit()`.
 
 When Inertia makes an XHR visit, the server detects that it's an Inertia visit, and instead of returning a full HTML response, only returns a JSON response with the JavaScript page component name and data (props). Inertia then dynamically swaps out the previous page component with the new page component, and updates the history state.
 
