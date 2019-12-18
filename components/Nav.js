@@ -29,7 +29,7 @@ export default ({ className }) => {
           </Link>
         </li>
       </ul>
-      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
+      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
       <ul>
         <li className="md:pr-3">
           <Link href="/who-is-it-for">
@@ -65,7 +65,7 @@ export default ({ className }) => {
           </Link>
         </li>
       </ul>
-      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
+      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">The basics</div>
       <ul>
         <li className="md:pr-3">
           <Link href="/routing">
