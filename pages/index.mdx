@@ -9,8 +9,8 @@ export const meta = {
   twitterCardImage: 'https://inertiajs.com/static/previews/home.png',
   links: [
     { url: '#top', name: 'Introduction' },
-    { url: '#newsletter', name: 'Join the newsletter' },
-    { url: '#framework-adapters', name: 'Framework adapters' },
+    { url: '#not-a-framework', name: 'Not a framework' },
+    { url: '#join-the-newsletter', name: 'Join the newsletter' },
   ],
 }
 
@@ -22,7 +22,15 @@ Inertia allows you to create fully client-side rendered, single-page apps, witho
 
 Inertia has no client-side routing, nor does it require an API. Simply build controllers and page views like you've always done!
 
-<div id="newsletter" className="mt-12 p-8 rounded-lg text-white" style={{ background: '#303f6d' }}>
+See the [who is it for](/who-is-it-for) and [how it works](/how-it-works) pages to learn more.
+
+## Not a framework
+
+Inertia isn't a framework, nor is it a replacement to your existing server-side or client-side frameworks. Rather, it's designed to work with them. Think of Inertia as glue that connects the two. Inertia does this via adapters. We currently have three official client-side adapters (React, Vue.js, and Svelte) and two server-side adapters (Laravel and Rails).
+
+## Join the newsletter
+
+<div className="mt-8 p-8 rounded-lg text-white" style={{ background: '#303f6d' }}>
   <div className="sm:flex sm:items-center">
     <a className="flex-shrink-0 block w-24 h-24 rounded-full overflow-hidden mr-5" href="https://twitter.com/reinink">
       <img className="w-full h-full" src="/static/img/jonathan.png" alt="Jonathan Reinink" />
@@ -72,7 +80,3 @@ Inertia has no client-side routing, nor does it require an API. Simply build con
   </form>
   <script type="text/javascript" src="https://js.createsend1.com/javascript/copypastesubscribeformlogic.js"></script>
 </div>
-
-## Framework adapters
-
-Inertia isn't a replacement to your existing server-side or client-side frameworks. Rather, it's designed to work with them. Think of Inertia as glue that connects the two. Inertia does this via adapters. We currently have three official client-side adapters (React, Vue.js, and Svelte) and two server-side adapters (Laravel and Rails).
