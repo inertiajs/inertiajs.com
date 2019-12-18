@@ -19,6 +19,11 @@ export default ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
+          <Link href="/demo-application">
+            <a className={linkClass('/demo-application')}>Demo app</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
           <Link href="/sponsors">
             <a className={linkClass('/sponsors')}>Sponsors</a>
           </Link>
