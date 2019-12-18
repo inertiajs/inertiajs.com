@@ -32,6 +32,14 @@ export default ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
+          <Link href="/the-protocol">
+            <a className={linkClass('/the-protocol')}>The protocol</a>
+          </Link>
+        </li>
+      </ul>
+      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
+      <ul>
+        <li className="md:pr-3">
           <Link href="/installation">
             <a className={linkClass('/installation')}>Installation</a>
           </Link>
