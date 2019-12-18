@@ -1,7 +1,5 @@
-import dedent from 'dedent-js'
 import Layout from '../components/Layout'
 import Notice from '../components/Notice'
-import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = {
@@ -11,9 +9,13 @@ export const meta = {
 
 # Demo application
 
-If you'd like to see a complete working demo application built with Inertia.js, see [Ping CRM](https://github.com/inertiajs/pingcrm). This application is built using Laravel and Vue.js.
+We've setup a demo app for Inertia.js, called [Ping CRM](https://demo.inertiajs.com). This application is built using Laravel and Vue.js. You can find the source code on [GitHub](https://github.com/inertiajs/pingcrm).
 
-<a href="https://github.com/inertiajs/pingcrm">
+<Notice>
+  The Ping CRM demo is hosted on Heroku, and the database is reset every hour. Please be respectful when editing data.
+</Notice>
+
+<a href="https://demo.inertiajs.com">
   <img className="w-full h-auto rounded" src="/static/pingcrm.png" alt="Ping CRM" />
 </a>
 
