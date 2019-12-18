@@ -19,18 +19,36 @@ export default ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
+          <Link href="/demo-application">
+            <a className={linkClass('/demo-application')}>Demo app</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
           <Link href="/sponsors">
             <a className={linkClass('/sponsors')}>Sponsors</a>
           </Link>
         </li>
       </ul>
-      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
+      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
       <ul>
+        <li className="md:pr-3">
+          <Link href="/who-is-it-for">
+            <a className={linkClass('/who-is-it-for')}>Who is it for</a>
+          </Link>
+        </li>
         <li className="md:pr-3">
           <Link href="/how-it-works">
             <a className={linkClass('/how-it-works')}>How it works</a>
           </Link>
         </li>
+        <li className="md:pr-3">
+          <Link href="/the-protocol">
+            <a className={linkClass('/the-protocol')}>The protocol</a>
+          </Link>
+        </li>
+      </ul>
+      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Getting started</div>
+      <ul>
         <li className="md:pr-3">
           <Link href="/installation">
             <a className={linkClass('/installation')}>Installation</a>
@@ -47,7 +65,7 @@ export default ({ className }) => {
           </Link>
         </li>
       </ul>
-      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
+      <div className="mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">The basics</div>
       <ul>
         <li className="md:pr-3">
           <Link href="/routing">

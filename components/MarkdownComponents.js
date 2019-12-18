@@ -26,9 +26,10 @@ export default {
     <h3 id={kebabCase(props.children)} className="mt-16 mb-4 text-xl font-bold text-gray-700 leading-none" {...props} />
   ),
   p: props => <p className="my-6" {...props} />,
-  ol: props => <ol className="list-decimal list-inside" {...props} />,
-  ul: props => <ul className="list-disc list-inside" {...props} />,
+  ol: props => <ol className="pl-8 list-decimal" {...props} />,
+  ul: props => <ul className="pl-8 list-disc" {...props} />,
   li: props => <li className="my-1" {...props} />,
+  strong: props => <strong className="font-bold text-gray-700" {...props} />,
   a: props => {
     return props.className ? (
       <a {...props} />
