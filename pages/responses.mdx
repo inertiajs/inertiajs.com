@@ -51,8 +51,7 @@ In this example we're passing a single prop, called `event`, which contains four
       code: dedent`
         class EventsController < ApplicationController
           def show
-            event = Event.find(params[:id])
-            
+            event = Event.find(params[:id])\n
             render inertia: 'Event/Show',
               props: {
                 event: event.as_json(
