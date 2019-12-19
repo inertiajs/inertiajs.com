@@ -25,7 +25,7 @@ The very first request to an Inertia app is just a regular full-page browser req
 
 This HTML response includes the site assets (CSS, JavaScript) as well as a root `<div>` in the body. The root `<div>` serves as a mounting point for the client-side app, and includes a `data-page` attribute with a JSON encoded [page object](#the-page-object) for the initial page. Inertia uses this information to boot your client-side framework, and display the initial page component.
 
-<div className="rounded" style={{ background: '#202e59' }}>
+<div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
   <div className="pt-6 px-6 text-white font-mono text-sm">
     <div className="text-gray-600 font-bold text-xs uppercase">Request</div>
     <div className="mt-1">
@@ -64,7 +64,7 @@ Once an Inertia app has been booted, all subsequent request to the site are made
 
 When the server detects the `X-Inertia` header, instead of responding with a full HTML document, it instead returns a JSON response with an encoded [page object](#the-page-object).
 
-<div className="rounded" style={{ background: '#202e59' }}>
+<div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
   <div className="pt-6 px-6 text-white font-mono text-sm">
     <div className="text-gray-600 font-bold text-xs uppercase">Request</div>
     <div className="mt-1">
@@ -132,7 +132,7 @@ Note, `409 Conflict` responses are only sent for `GET` requests, and not for `PO
 
 Finally, in the event that flash session data exists when a `409 Conflict` response occurs, the server will automatically reflash this data.
 
-<div className="rounded" style={{ background: '#202e59' }}>
+<div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
   <div className="p-6 text-white font-mono text-sm">
     <div className="text-gray-600 font-bold text-xs uppercase">Request</div>
     <div className="mt-1">
@@ -168,7 +168,7 @@ The `X-Inertia-Partial-Data` header is a comma separated list of the desired pro
 
 The `X-Inertia-Partial-Component` header includes the name of the component that is being partially reloaded. This is necessary, since partial reloads only work for requests made to the same page component. If the final destination is different for whatever reason (eg. the user was logged out and is now on the login page), then no partial reloading will occur.
 
-<div className="rounded" style={{ background: '#202e59' }}>
+<div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
   <div className="pt-6 px-6 text-white font-mono text-sm">
     <div className="text-gray-600 font-bold text-xs uppercase">Request</div>
     <div className="mt-1">
