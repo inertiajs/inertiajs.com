@@ -18,7 +18,7 @@
     "postcss-nested": "^4.1.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-syntax-highlighter": "^11.0.2",
+    "react-syntax-highlighter": "^12.2.1",
     "tailwindcss": "^1.0.5"
   }
 }
