@@ -89,13 +89,12 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
                     // Lazily evaluated (only run if required)
                     'companies' => function () {
                         return Company::orderBy('name')
-                            ->get()
-                            ->only('id', 'name');
+                            ->get('id', 'name');
                     },
                     // Evaluated immediately
                     'users' => User::orderBy('name')
-                        ->paginate()
-                        ->only('id', 'name'),
+                        ->select('id', 'name')
+                        ->paginate(),
                 ]);
             }
         }
