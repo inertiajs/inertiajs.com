@@ -108,7 +108,13 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
   ]}
 />
 
+
 The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+
+## Framework differences
+
+If you are using React or Svelte you need to import the components you want to use from their respective library. If you are using Vue then this is already handled in the initialization. 
+See the <a href="/links">links</a> section on how to do this.
 
 ## Loading indicator
 
