@@ -34,7 +34,7 @@ The server-side adapters provide a way to preassign shared data for each request
         Inertia::share('auth.user', function () {
             if (Auth::user()) {
                 return [
-                    'id' => Auth::user()->id,
+                    'id' => Auth::id(),
                     'first_name' => Auth::user()->first_name,
                     'last_name' => Auth::user()->last_name,
                 ];
@@ -50,7 +50,7 @@ The server-side adapters provide a way to preassign shared data for each request
             'auth' => function () {
                 return [
                     'user' => Auth::user() ? [
-                        'id' => Auth::user()->id,
+                        'id' => Auth::id(),
                         'first_name' => Auth::user()->first_name,
                         'last_name' => Auth::user()->last_name,
                     ] : null
