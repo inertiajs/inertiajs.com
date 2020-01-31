@@ -5,7 +5,10 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Redirects',
-  links: [{ url: '#top', name: 'Making redirects' }, { url: '#303-response-code', name: '303 response code' }],
+  links: [
+    { url: '#top', name: 'Making redirects' },
+    { url: '#303-response-code', name: '303 response code' },
+  ],
 }
 
 # Redirects
@@ -56,6 +59,33 @@ Inertia will automatically follow this redirect and update the page accordingly.
             redirect_to users_path
           end
         end
+      `,
+    },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        component name="users" {\n
+            property name="inertia" inject="@cbInertia";
+            property name="userService" inject="quickService:User";\n
+            function index( event, rc, prc ) {
+                return inertia( "Users/Index", {
+                    "users": userService.all().map( function( user ) {
+                        return user.getMemento();
+                    } );
+                } );
+            }\n
+            function store( event, rc, prc ) {
+                userService.create(
+                    validateOrFail( target = rc, constraints = {
+                        "first_name": { "required": true, "max": 50 },
+                        "last_name": { "required": true, "max": 50 },
+                        "email": { "required": true, "max": 50 , "type": "email" },
+                    } )
+                );\n
+                relocate( "users" );
+            }
+        }
       `,
     },
   ]}

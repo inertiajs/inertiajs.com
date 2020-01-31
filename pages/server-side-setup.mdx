@@ -37,6 +37,14 @@ Install the Inertia server-side adapters using the preferred package manager for
         gem 'inertia_rails'
       `,
     },
+    {
+      name: 'ColdBox',
+      language: 'bash',
+      code: dedent`
+        box install cbInertia
+      `,
+      description: 'Install via CommandBox and ForgeBox',
+    },
   ]}
 />
 
@@ -75,6 +83,32 @@ Next, setup the root template that will be loaded on the first page visit. This 
       `,
       description: `Inertia Rails automatically uses your default application layout. If you'd like to change that, you can do so via the Inertia config.`,
     },
+    {
+      name: 'ColdBox',
+      language: 'markup',
+      code: dedent`
+        <cfoutput>
+        <!DOCTYPE html>
+        <html class="h-full bg-grey-lighter">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+            <title>Quick Tailwind Inertia Template</title>
+            <link rel="stylesheet" href="#html.elixirPath( "/css/app.css" )#">
+        </head>
+        <body class="font-sans leading-none text-grey-darkest antialiased">
+            <div>
+                #renderView()#
+            </div>
+            <script src="#html.elixirPath( "/js/runtime.js" )#"></script>
+            <script src="#html.elixirPath( "/js/vendor.js" )#"></script>
+            <script src="#html.elixirPath( "/js/app.js" )#"></script>
+        </body>
+        </html>
+        </cfoutput>
+      `,
+      description: `By default the ColdBox adapter will set the view to cbInertia:main.index. Your layout should include your assets and a renderView call. cbInertia will insert the required view automatically.`,
+    },
   ]}
 />
 
@@ -98,6 +132,24 @@ While not required, it's highly recommended that you also configure automatic as
         InertiaRails.configure do |config|
           config.version = '1.0'
         end
+      `,
+    },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        // config/ColdBox.cfc
+        component {
+            function configure() {
+                moduleSettings = {
+                    "cbInertia": {
+                        "version": function() {
+                            return "1.0.0";
+                        }
+                    }
+                };
+            }
+        }
       `,
     },
   ]}
@@ -146,6 +198,23 @@ That's it, you're all ready to go server-side! From here you can start creating 
               }
           end
         end
+      `,
+    },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        component name="events" {\n
+            property name="inertia" inject="@cbInertia";
+            property name="eventService" inject="quickService:Event";\n
+            function show( event, rc, prc ) {
+                inertia.render( "Event/Show", {
+                    "event": eventService
+                        .findOrFail( rc.id )
+                        .getMemento()
+                } );
+            }
+        }
       `,
     },
   ]}

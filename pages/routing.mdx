@@ -5,7 +5,10 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Routing',
-  links: [{ url: '#top', name: 'Defining routes' }, { url: '#generating-routes', name: 'Generating URLs' }],
+  links: [
+    { url: '#top', name: 'Defining routes' },
+    { url: '#generating-routes', name: 'Generating URLs' },
+  ],
 }
 
 # Routing
@@ -43,7 +46,7 @@ The first option is to generate URLs server-side and include them as props. Noti
                 ]);
             }
         }
-      `
+      `,
     },
     {
       name: 'Rails',
@@ -63,7 +66,30 @@ The first option is to generate URLs server-side and include them as props. Noti
             }
           end
         end
-      `
+      `,
+    },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        component name="users" {\n
+            property name="inertia" inject="@cbInertia";
+            property name="userService" inject="quickService:User";\n
+            function index( event, rc, prc ) {
+                inertia.render( "Users/Index", {
+                    "users": userService.all().map( function( user ) {
+                        return {
+                            "id": user.getId(),
+                            "name": user.getName(),
+                            "email": user.getEmail(),
+                            "edit_url": "/users/#user.getId()#/edit",
+                        };
+                    } ),
+                    "create_url": "/users/create",
+                } );
+            }
+        }
+      `,
     },
   ]}
 />

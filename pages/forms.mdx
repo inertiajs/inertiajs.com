@@ -168,6 +168,44 @@ Unlike a classic ajax submitted form, with Inertia you don't handle the post sub
         end
       `,
     },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        component name="users" {\n
+            property name="inertia" inject="@cbInertia";
+            property name="userService" inject="quickService:User";\n
+            function index( event, rc, prc ) {
+                return inertia( "Users/Index", {
+                    "users": userService.all()
+                        .map( function( user ) {
+                            return user.getMemento();
+                        } )
+                } );
+            }\n
+            function store( event, rc, prc ) {
+                userService.create(
+                    validateOrFail( target = rc, constraints = {
+                        "first_name": {
+                            "required": true,
+                            "max": 50
+                        },
+                        "last_name": {
+                            "required": true,
+                            "max": 50
+                        },
+                        "email": {
+                            "required": true,
+                            "max": 50 ,
+                            "type": "email"
+                        },
+                    } )
+                );\n
+                relocate( "users" );
+            }
+        }
+      `,
+    },
   ]}
 />
 
@@ -202,6 +240,24 @@ From there you need to send those error messages to your form page component. Yo
       code: dedent`
         # todo
       `,
+    },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        component {\n
+            property name="inertia" inject="provider:@cbInertia";
+            property name="flash" inject="coldbox:flash";\n
+            function preProcess( event ) {
+                inertia.share( {
+                    "errors": function() {
+                        return flash.get( "errors", {} );
+                    }
+                } );
+            }\n
+        }
+      `,
+      description: 'Place this code in a registered preProcess interceptor.',
     },
   ]}
 />
@@ -328,7 +384,7 @@ While this is very similar to how you would normally do classic server-side form
 
 ## File uploads
 
-The trick to uploading files with Inertia (via XHR) is using the `FormData` object. Here is a simple example of using `FormData` with Inertia.
+The trick to uploading files with Inertia (via XHR) is using the `FormData` object. Here is a simple example of using `FormData` with Inertia.
 
 ```js
 var data = new FormData()

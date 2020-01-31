@@ -63,6 +63,26 @@ In this example we're passing a single prop, called `event`, which contains four
       `,
       description: `To make an Inertia response, use the inertia renderer. This renderer takes the component name, and allows you to pass props and view_data as an options hash.`,
     },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        component name="events" {\n
+            property name="inertia" inject="@cbInertia";\n
+            function show( event, rc, prc ) {
+                inertia.render( "Event/Show", {
+                    "event": event.getOnly( [
+                        "id",
+                        "title",
+                        "start_date",
+                        "description"
+                    ] )
+                } );
+            }
+        }
+      `,
+      description: `To make an Inertia response, use the Inertia render function or the inertia() shorthand. This method takes the component name, and allows you to pass props.`,
+    },
   ]}
 />
 
@@ -112,8 +132,7 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
                 Company.
                   order(:name).
                   as_json(only: [ :id, :name ])
-              },
-              
+              },\n
               # Evaluated immediately
               users: User.
                 order(:name).
@@ -122,6 +141,30 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
             }
           end
         end
+      `,
+    },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        component name="users" {\n
+            property name="inertia" inject="@cbInertia";
+            property name="userService" inject="quickService:User";
+            property name="companyService" inject="quickService:Company";\n
+            function index( event, rc, prc ) {
+                inertia.render( "Users/Index", {
+                    // Lazily evaluated (only run if required)
+                    "companies": function () {
+                        return companySerivce.orderBy( "name" )
+                            .get( [ "id", "name" ] );
+                    },
+                    // Evaluated immediately
+                    "users": userService.orderBy( "name" )
+                        .select( [ "id", "name" ] )
+                        .paginate()
+                } );
+            }
+        }
       `,
     },
   ]}
@@ -149,6 +192,14 @@ There are situations where you may want to access your prop data in your root Bl
       `,
       description: `These props are available via the page variable.`,
     },
+    {
+      name: 'ColdBox',
+      language: 'markup',
+      code: dedent`
+        <meta name="twitter:title" content="#prc.inertia__page.props.event.title#">
+      `,
+      description: `These props are available via the inertia__page variable in the prc scope.`,
+    },
   ]}
 />
 
@@ -173,6 +224,15 @@ Sometimes you may even want to provide data that will not be sent to your JavaSc
       `,
       description: `Do this using the "view_data" option`,
     },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        prc.meta = myEvent.meta;
+        inertia.render( "Event", { "event": myEvent } );
+      `,
+      description: `Anything in the rc or prc scope will be availble to your view and not the JavaScript component.`,
+    },
   ]}
 />
 
@@ -192,6 +252,13 @@ You can then access this variable like a regular template variable.
       language: 'erb',
       code: dedent`
         <meta name="description" content="<%= meta %>">
+      `,
+    },
+    {
+      name: 'ColdBox',
+      language: 'markup',
+      code: dedent`
+        <meta name="description" content="#prc.meta#">
       `,
     },
   ]}

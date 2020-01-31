@@ -78,6 +78,42 @@ The server-side adapters provide a way to preassign shared data for each request
         inertia_share user_count: lambda { User.count }
       `,
     },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        // Synchronously
+        inertia.share( "app.name", getSetting( "appName" ) );\n
+        // Lazily
+        inertia.share( "auth.user", function () {
+            if ( auth().check() ) {
+                return {
+                    "id": auth().user().getId(),
+                    "first_name": auth().user().getFirstName(),
+                    "last_name": auth().user().getLastName()
+                };
+            }
+        } );\n
+        // Multiple values
+        inertia.share( {
+            // Synchronously
+            "app": {
+                "name": getSetting( "appName" )
+            },
+            // Lazily
+            "auth": function() {
+                if ( auth().check() ) {
+                    return {
+                        "id": auth().user().getId(),
+                        "first_name": auth().user().getFirstName(),
+                        "last_name": auth().user().getLastName()
+                    };
+                }
+            }
+        } );
+      `,
+      description: 'Place this code in a registered preProcess interceptor.',
+    },
   ]}
 />
 
@@ -199,6 +235,18 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
             }
           }
         end
+      `,
+    },
+    {
+      name: 'ColdBox',
+      description: 'Place this code in a registered preProcess interceptor.',
+      language: 'javascript',
+      code: dedent`
+        inertia.share( "flash", function() {
+            return {
+                "message": flash.get( "message", "" )
+            };
+        } );
       `,
     },
   ]}

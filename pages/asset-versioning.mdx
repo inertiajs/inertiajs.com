@@ -54,6 +54,28 @@ To enable automatic asset refreshing, you simply need to tell Inertia what the c
         end
       `,
     },
+    {
+      name: 'ColdBox',
+      language: 'javascript',
+      code: dedent`
+        // config/ColdBox.cfc
+        component {
+            function configure() {
+                moduleSettings = {
+                    "cbInertia": {
+                        "version": function() {
+                            // If you're using ColdBox Elixir, you can
+                            // use the rev-manifest.json for this.
+                            return hash(
+                                fileRead( "/includes/rev-manifest.json" )
+                            );
+                        }
+                    }
+                };
+            }
+        }
+      `,
+    },
   ]}
 />
 
