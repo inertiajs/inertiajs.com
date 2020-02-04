@@ -1,0 +1,201 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Pagination',
+  links: [
+    { url: '#registering-a-paginator', name: 'Registering a paginator' },
+    { url: '#creating-pagination-component', name: 'Creating pagination component' },
+    { url: '#paginating-a-response', name: 'Paginating a response' },
+    { url: '#using-the-paginator', name: 'Using the paginator' },
+  ],
+}
+
+# Pagination
+
+## Registering a paginator
+
+When working with large sets of data, you may need to paginate your response. You can register a length aware paginator that will provide you with the number of pages in the response.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        use Illuminate\\Support\\Collection;
+        use Illuminate\\Pagination\\UrlWindow;
+        use Illuminate\\Support\\Facades\\Request;
+        use Illuminate\\Support\\ServiceProvider;
+        use Illuminate\\Pagination\\LengthAwarePaginator;\n
+        class AppServiceProvider extends ServiceProvider
+        {
+            public function register()
+            {
+                $this->registerLengthAwarePaginator();
+            }\n
+            protected function registerLengthAwarePaginator()
+            {
+                $this->app->bind(LengthAwarePaginator::class, function ($app, $values) {
+                    return new class(...array_values($values)) extends LengthAwarePaginator {
+                        public function only(...$attributes)
+                        {
+                            return $this->transform(function ($item) use ($attributes) {
+                                return $item->only($attributes);
+                            });
+                        }\n
+                        public function transform($callback)
+                        {
+                            $this->items->transform($callback);\n
+                            return $this;
+                        }\n
+                        public function toArray()
+                        {
+                            return [
+                                'data' => $this->items->toArray(),
+                                'links' => $this->links(),
+                            ];
+                        }\n
+                        public function links($view = null, $data = [])
+                        {
+                            $this->appends(Request::all());
+                            $window = UrlWindow::make($this);
+                            $elements = array_filter([
+                                $window['first'],
+                                is_array($window['slider']) ? '...' : null,
+                                $window['slider'],
+                                is_array($window['last']) ? '...' : null,
+                                $window['last'],
+                            ]);
+                            return Collection::make($elements)->flatMap(function ($item) {
+                                if (is_array($item)) {
+                                    return Collection::make($item)->map(function ($url, $page) {
+                                        return [
+                                            'url' => $url,
+                                            'label' => $page,
+                                            'active' => $this->currentPage() === $page,
+                                        ];
+                                    });
+                                } else {
+                                    return [
+                                        [
+                                            'url' => null,
+                                            'label' => '...',
+                                            'active' => false,
+                                        ],
+                                    ];
+                                }
+                            })->prepend([
+                                'url' => $this->previousPageUrl(),
+                                'label' => 'Previous',
+                                'active' => false,
+                            ])->push([
+                                'url' => $this->nextPageUrl(),
+                                'label' => 'Next',
+                                'active' => false,
+                            ]);
+                        }
+                    };
+                });
+            }
+        }
+    `,
+    },
+  ]}
+/>
+
+## Creating pagination component
+
+To navigate the paginated response you will need a component to do that. The component shown below accepts a named prop called `links` of type `Array`.
+
+<TabbedCodeExamples
+    examples={[
+        {
+        name: 'Vue.js',
+        language: 'twig',
+        code: dedent`
+        <template>
+          <div class="mt-6 -mb-1 flex flex-wrap">
+            <template v-for="(link, key) in links">
+              <div v-if="link.url === null" :key="key" class="mr-1 mb-1 px-4 py-3 text-sm border rounded text-gray-400" :class="{ 'ml-auto': link.label === 'Next' }">{{ link.label }}</div>
+              <inertia-link v-else :key="key" class="mr-1 mb-1 px-4 py-3 text-sm border rounded hover:bg-white focus:border-indigo-500 focus:text-indigo-500" :class="{ 'bg-white': link.active, 'ml-auto': link.label === 'Next' }" :href="link.url">{{ link.label }}</inertia-link>
+            </template>
+          </div>
+        </template>\n
+        <script>
+        export default {
+          props: {
+              links: Array,
+          },
+        }
+        </script>
+        `,
+        },
+    ]}
+/>
+
+## Paginating a response
+
+To use the registered paginator you must paginate your response in your controller.
+
+In this example we're getting all Events in the the order of newest first with `latest()`. Then paginating the response with 20 items per page and then transforming each `Event` to pass the `id` and `title` props.
+
+<TabbedCodeExamples
+    examples={[
+        {
+        name: 'Laravel',
+        language: 'php',
+        code: dedent`
+            use Inertia\\Inertia;
+            use App\\Models\\Event;\n
+            class EventsController extends Controller
+            {
+              public function index()
+              {
+                return Inertia::render('Event/Index', [
+                  'events' => Event::latest()
+                    ->paginate(20)
+                    ->transform(function ($event) {
+                      return [
+                        'id'    => $event->id,
+                        'title' => $event->title,
+                      ];
+                    })
+                ]);
+              }
+            }
+        `
+        }
+    ]}
+/>
+
+## Using the paginator
+
+Now you have a paginated response you will need to use the pagination component that we created earlier.
+
+In the example below we're using the `events` prop that we passed from our controller and passing it to the pagination component, we're accessing the `links` property from the `events` object. `links` is an `Array` that is created by the `paginate()` method we used in our controller.
+
+<TabbedCodeExamples
+    examples={[
+        {
+        name: 'Vue.js',
+        language: 'twig',
+        code: dedent`
+        <template>
+          <div>
+            <pagination :links="events.links"></pagination
+          </div>
+        </template>\n
+        <script>
+        export default {
+          props: {
+            events: Object,
+          },
+        }
+        </script>
+        `,
+        },
+    ]}
+/>
