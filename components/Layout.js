@@ -130,7 +130,7 @@ export default function Layout({ meta, children }) {
                 </svg>
               </button>
               {showMobileNav && (
-                <Nav className="absolute top-0 right-0 -mt-4 p-8 bg-white shadow-xl rounded z-50 whitespace-no-wrap" />
+                <Nav className="absolute top-0 right-0 -mt-4 px-6 pb-6 bg-white shadow-xl rounded z-50 whitespace-no-wrap" />
               )}
             </div>
             <div className="hidden md:flex items-center text-white">
