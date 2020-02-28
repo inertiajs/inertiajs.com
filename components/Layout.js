@@ -71,7 +71,7 @@ export default function Layout({ meta, children }) {
           </React.Fragment>
         )}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
-        <script defer src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140425344-1"></script>
       </Head>
       {meta.sponsor && (
