@@ -103,3 +103,33 @@ Axios automatically checks for the existence of an `XSRF-TOKEN` cookie. If it's 
 The easiest way to implement this is using server-side middleware. Simply include the `XSRF-TOKEN` cookie on each response, and then verify the token using the `X-CSRF-TOKEN` header sent in the requests from axios.
 
 Some frameworks, such as [Laravel](https://github.com/laravel/framework/blob/5.8/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php#L176-L188), do this automatically, meaning there is no configuration required.
+
+When using Laravel with Laravel Echo and authorizing private channels, you may encounter a 419 (TokenMismatchException) after the session expires and the user is forced to log back in. This is caused by the CSRF token not being refreshed after logging back in.
+
+To solve this issue using the `Pusher` client you'll need a custom authorizer like this:
+
+```js
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    forceTLS: true,
+    authorizer: (channel, options) => {
+        return {
+            authorize: (socketId, callback) => {
+                axios.post('/broadcasting/auth', {
+                    socket_id: socketId,
+                    channel_name: channel.name
+                })
+                    .then(response => {
+                        callback(false, response.data);
+                    })
+                    .catch(error => {
+                        callback(true, error);
+                    });
+            }
+        };
+    },
+});
+```
+
