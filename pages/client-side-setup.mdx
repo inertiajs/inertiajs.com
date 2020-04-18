@@ -80,14 +80,16 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
         import { InertiaApp } from '@inertiajs/inertia-react'
         import React from 'react'
         import { render } from 'react-dom'\n
-        const app = document.getElementById('app')\n
-        render(
-          <InertiaApp
-            initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent={name => require(\`./Pages/\${name}\`).default}
-          />,
-          app
-        )
+        document.addEventListener('DOMContentLoaded', () => {
+          const app = document.getElementById('app')
+          render(
+            <InertiaApp
+              initialPage={JSON.parse(app.dataset.page)}
+              resolveComponent={name => require(`./Pages/${name}`).default}
+            />,
+            app
+          )
+        })
       `,
     },
     {
