@@ -159,7 +159,7 @@ You can preserve a page component's local state using the `preserve-state` attri
       language: 'html',
       code: dedent`
         <input onChange={this.handleChange} value={query} />
-        <InertiaLink href="/search" data={query} preserve-state>Search</InertiaLink>
+        <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
       `,
     },
     {
@@ -190,7 +190,7 @@ By default page visits will automatically reset the scroll position back to the 
       name: 'React',
       language: 'html',
       code: dedent`
-        <InertiaLink preserve-scroll href="/">Home</InertiaLink>
+        <InertiaLink preserveScroll href="/">Home</InertiaLink>
       `,
     },
     {
