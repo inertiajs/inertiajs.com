@@ -202,3 +202,33 @@ By default page visits will automatically reset the scroll position back to the 
     },
   ]}
 />
+
+## Partial reloads
+
+The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the _same page_. This feature is called partial reloads, and can be a helpful performance optimization if it's acceptable that some page data becomes stale. For partial reloads to be effective, be sure to use [lazy evaluation](/responses#lazy-evaluation) server-side.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/" :only="['someProps']">Home</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/" only={['someProps']}>Home</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/" only={['someProps']}>Home</InertiaLink>
+      `,
+    },
+  ]}
+/>
