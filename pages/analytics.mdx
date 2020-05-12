@@ -5,18 +5,12 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
 export const meta = {
-  title: 'Analytics and Events',
+  title: 'Analytics',
 }
 
-# Analytics and Events
+# Analytics
 
-Is it possible to do any analytics in Inertia based apps?
-
-Yes, it is! In a Vue.js app, generally just put this in the mounted() callback of your base layout file.
-
-<Notice>
-  Keep in mind that it will likely be reworked when inertia introduces a new events system. See <a href="https://github.com/inertiajs/inertia/issues/66">this issue</a> for more information
-</Notice>
+It's possible to add analytics to your InertiaJS app by declaring it in the VueJS mounted() callback of your layout file.
 
 <TabbedCodeExamples
   examples={[
@@ -33,7 +27,8 @@ Yes, it is! In a Vue.js app, generally just put this in the mounted() callback o
             url: String,
           },
           mounted() {
-            // Google Analytics via GTM
+            // for example, Google Analytics via Google Tag Manager
+            var dataLayer = window.dataLayer || [];
             dataLayer.push({
                 'event': 'pageView',
                 'virtualUrl': this.$inertia.page.url;,
