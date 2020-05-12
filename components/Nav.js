@@ -139,8 +139,8 @@ export default ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
-          <Link href="/analytics-and-events">
-            <a className={linkClass('/analytics-and-events')}>Analytics &amp; Events</a>
+          <Link href="/analytics">
+            <a className={linkClass('/analytics')}>Analytics</a>
           </Link>
         </li>
       </ul>
