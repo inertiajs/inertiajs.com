@@ -1,0 +1,48 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Analytics and Events',
+}
+
+# Analytics and Events
+
+Is it possible to do any analytics in Inertia based apps?
+
+Yes, it is! In a Vue.js app, generally just put this in the mounted() callback of your base layout file.
+
+<Notice>
+  Keep in mind that it will likely be reworked when inertia introduces a new events system. See <a href="https://github.com/inertiajs/inertia/issues/66">this issue</a> for more information
+</Notice>
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        <template>
+        // your layout
+        </template>
+        <script>\n
+        export default {
+          props: {
+            url: String,
+          },
+          mounted() {
+            // Google Analytics via GTM
+            dataLayer.push({
+                'event': 'pageView',
+                'virtualUrl': this.$inertia.page.url;,
+            });
+          }
+        }
+        </script>
+      `,
+    },
+  ]}
+/>
+
