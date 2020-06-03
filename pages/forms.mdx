@@ -326,6 +326,10 @@ Now the validation errors will be available as part of your page props, and sinc
 
 While this is very similar to how you would normally do classic server-side form submissions, this approach is much nicer, since you're not reloading the whole page and rehydrating form input data.
 
+## Old input data
+
+While you can save the old input data to session storage and reuse it when rendering server-side, session storage is not available client-side. You need to copy and store the data from the props client-side as they are updated and overwritten when you redirect back to the form component with validation errors.
+
 ## File uploads
 
 The trick to uploading files with Inertia (via XHR) is using the `FormData` object. Here is a simple example of using `FormData` with Inertia.
