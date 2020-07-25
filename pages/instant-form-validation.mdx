@@ -1,0 +1,155 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Instant form validation',
+  links: [{ url: '#top', name: 'Introduction' }, { url: '#setup-client-side', name: 'Setup client side' }, { url: '#setup-server-side', name: 'Setup server side' }],
+}
+
+# Instant form validation
+
+Validation in Inertia.js works out of the box as you'd expect. 
+
+However, you might want a more reactive validation to your form requests.
+
+Enter; instant form validations!
+
+<div className="my-6 relative rounded overflow-hidden bg-gray-500" style={{ paddingTop: '65.5%' }}>
+  <div className="absolute inset-0 w-full h-full flex items-center justify-center text-sm">Loading&hellip;</div>
+  <iframe
+    className="absolute inset-0 w-full h-full"
+    src="https://player.vimeo.com/video/441572812?autoplay=1&loop=1&muted=1&background=1"
+  ></iframe>
+</div>
+
+## Setup client side
+
+We need to pass a flag to the server side indicating when we want to validate only. If we don't do this, then the data will instantly be saved when the validation passes. Note the `validate` property set to `true` as the second argument for the `this.$inertia.post()` method.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue',
+      language: 'twig',
+      code: dedent`
+      <script>
+        export default {
+          watch: {
+            form: {
+              handler: function() {
+                this.$inertia.post('organizations', {...this.form, validate: true});
+              },
+              deep: true,
+            },
+          }
+        }
+      </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        https://reactjs.org/docs/forms.html#handling-multiple-inputs
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        https://github.com/sveltejs/svelte/issues/2727#issuecomment-493486681
+      `,
+    },
+  ]}
+/>
+
+It is recommended to using something like the [lodash `debounce`](https://lodash.com/docs/4.17.15#debounce) function as to not send a request for every keystroke.
+## Setup server side
+
+Making use of instant form validation requires us to create what is referred to as a [“form request”](https://laravel.com/docs/7.x/validation#form-request-validation) in Laravel.
+
+These form requests have a `passedValidation` method that we can override.
+
+We check for the validate parameter being passed. 
+
+The `get` method on the `request` object takes an optional default value as a second parameter. [(`public function get($key, $default = null)`)](https://github.com/symfony/symfony/blob/5.0/src/Symfony/Component/HttpFoundation/ParameterBag.php#L67-L77)
+
+If we are only validating the request, then we will throw a [`ValidatedException`](/instant-form-validation#validated-exception).
+
+### Custom Form Request
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+      namespace App\\Http\\Requests;\n
+      use Illuminate\\Foundation\\Http\\FormRequest;\n
+      class CustomFormRequest extends FormRequest
+      {
+          /**
+           * Get the validation rules that apply to the request.
+           *
+           * @return array
+           */
+          public function rules()
+          {
+              return [
+                  // Your validation rules here
+              ];
+          }\n
+          /**
+           * Handle a passed validation attempt.
+           *
+           * @return void
+           */
+          public function passedValidation()
+          {
+              if ($this->request->get('validate', false)) {
+                  throw new \\App\\Exceptions\\ValidatedException();
+              }
+          }
+      }
+      `,
+    }
+  ]}
+/>
+
+### ValidatedException
+
+In this validation exception we redirect back to the route where the form is, like we do after we've stored data, the difference being that we didn't store anything.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+    namespace App\\Exceptions;\n
+    use Exception;
+    use Illuminate\\Http\\Request;
+    use Illuminate\\Support\\Facades\\Redirect;\n
+    class ValidatedException extends Exception
+    {
+        /**
+         * Render the exception into an HTTP response.
+         *
+         * @param  \\Illuminate\\Http\\Request  $request
+         * @return \\Illuminate\\Http\\Response
+         */
+        public function render(Request $request)
+        {
+            return Redirect::back();
+        }
+    }
+      `,
+    }
+  ]}
+/>
+
+## Conclusion
+
+That's it, you're ready to get your forms validated instantly!

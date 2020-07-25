@@ -171,6 +171,11 @@ export default ({ className }) => {
             <a className={linkClass('/server-side-rendering')}>Server-side rendering</a>
           </Link>
         </li>
+        <li className="md:pr-3">
+          <Link href="/instant-form-validation">
+            <a className={linkClass('/instant-form-validation')}>Instant form validation</a>
+          </Link>
+        </li>
       </ul>
     </nav>
   )
