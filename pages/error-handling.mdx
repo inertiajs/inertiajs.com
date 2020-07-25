@@ -46,7 +46,6 @@ In production you'll want to return a proper Inertia error response instead of r
         {
             $response = parent::render($request, $exception);\n
             if (App::environment('production')
-                && $request->header('X-Inertia')
                 && in_array($response->status(), [500, 503, 404, 403])
             ) {
                 return Inertia::render('Error', ['status' => $response->status()])
