@@ -10,6 +10,7 @@ export const meta = {
     { url: '#creating-responses', name: 'Creating responses' },
     { url: '#lazy-evaluation', name: 'Lazy evaluation' },
     { url: '#root-template-data', name: 'Root template data' },
+    { url: '#maximum-response-size', name: 'Maximum response size' },
   ],
 }
 
@@ -196,3 +197,7 @@ You can then access this variable like a regular template variable.
     },
   ]}
 />
+
+## Maximum response size
+
+To enable client-side history navigation, all Inertia server responses are stored in the browser's history state. It's good to be aware that some browsers impose a size limit on how much data can be saved there. For example, [Firefox](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) has a size limit of 640k characters. This is generally much more than you'll ever need, but it's good to be aware of this when building an Inertia application.
