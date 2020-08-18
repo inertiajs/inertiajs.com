@@ -317,7 +317,6 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
         <script>
           import Layout from './Layout'\n
           export default {
-            // Don't forget to install & configure vue-meta: https://github.com/nuxt/vue-meta
             metaInfo() {
               return {
                 title: \`Welcome \${this.user.name}\`,
@@ -332,6 +331,7 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
           }
         </script>
       `,
+      description: "Don't forget to install and configure Vue Meta package.",
     },
     {
       name: 'React',
@@ -343,7 +343,6 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
         export default function Welcome({ user }) {
           return (
             <Layout>
-              {/* Don't forget to install React Helmet: https://github.com/nfl/react-helmet */}
               <Helmet>
                 <title>Welcome {user.name}</title>
               </Helmet>
@@ -353,6 +352,7 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
           )
         }
       `,
+      description: "Don't forget to install and configure React Helmet package.",
     },
     {
       name: 'Svelte',
