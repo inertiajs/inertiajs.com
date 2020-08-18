@@ -1,16 +1,12 @@
 import React from 'react'
-import App, { Container } from 'next/app'
-import '../static/tailwind.css'
+import App from 'next/app'
+import '../public/tailwind.css'
 
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
 
-    return (
-      <Container>
-        <Component {...pageProps} />
-      </Container>
-    )
+    return <Component {...pageProps} />
   }
 }
 

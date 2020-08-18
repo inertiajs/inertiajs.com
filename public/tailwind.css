@@ -1,0 +1,82 @@
+/* purgecss start ignore */
+@tailwind base;
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-bold.woff2') format('woff2'), url('/fonts/gilroy-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-bold-italic.woff2') format('woff2'), url('/fonts/gilroy-bold-italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-light.woff2') format('woff2'), url('/fonts/gilroy-light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-light-italic.woff2') format('woff2'), url('/fonts/gilroy-light-italic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-medium.woff2') format('woff2'), url('/fonts/gilroy-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-medium-italic.woff2') format('woff2'), url('/fonts/gilroy-medium-italic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-regular.woff2') format('woff2'), url('/fonts/gilroy-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-regular-italic.woff2') format('woff2'),
+    url('/fonts/gilroy-regular-italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+.carbon-wrap {
+  @apply block;
+}
+
+.carbon-img {
+  @apply block mb-3;
+
+  img {
+    @apply block;
+  }
+}
+
+.carbon-text {
+  @apply block text-sm leading-snug mb-2;
+}
+
+.carbon-poweredby {
+  @apply text-xs text-gray-500;
+}
+
+@tailwind components;
+@tailwind utilities;

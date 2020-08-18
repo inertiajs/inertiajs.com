@@ -59,7 +59,7 @@ export default function Layout({ meta, children }) {
       <Head>
         <title>{meta.title ? `${meta.title} - Inertia.js` : `Inertia.js - The Modern Monolith`}</title>
         {meta.description && <meta type="description" content={meta.description} />}
-        <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         {meta.twitterCardImage && (
           <React.Fragment>
             <meta name="twitter:card" content="summary_large_image" />

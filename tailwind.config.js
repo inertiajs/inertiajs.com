@@ -1,4 +1,5 @@
 module.exports = {
+  purge: ['./pages/**/*.mdx', './pages/**/*.js', './components/**/*.mdx', './components/**/*.js'],
   theme: {
     fontFamily: {
       sans: ['Gilroy', 'sans-serif'],
