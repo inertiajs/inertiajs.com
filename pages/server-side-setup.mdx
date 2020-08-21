@@ -67,13 +67,22 @@ Next, setup the root template that will be loaded on the first page visit. This 
     },
     {
       name: 'Rails',
-      language: 'ruby',
+      language: 'erb',
       code: dedent`
-        InertiaRails.configure do |config|
-          config.layout = 'inertia' # uses layouts/inertia.html.erb
-        end
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <%= stylesheet_pack_tag 'application' %>
+            <%= javascript_pack_tag 'application', defer: true %>
+          </head>
+          <body>
+            <%= yield %>
+          </body>
+        </html>
       `,
-      description: `Inertia Rails automatically uses your default application layout. If you'd like to change that, you can do so via the Inertia config.`,
+      description: `By default the Rails adapter will use the application.html.erb view. This template should include your assets, as well as the yield command. If you'd like to use a different root view, you can change it using InertiaRails.configure.`,
     },
   ]}
 />
