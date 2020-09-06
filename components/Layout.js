@@ -190,7 +190,7 @@ export default function Layout({ meta, children }) {
                             {
                                 $users = User::active()
                                     ->orderByName()
-                                    ->get(['id', 'name', 'email']);
+                                    ->get('id', 'name', 'email');
 
                                 return Inertia::render('Users', [
                                     'users' => $users
