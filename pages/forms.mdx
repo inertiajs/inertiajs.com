@@ -179,6 +179,8 @@ First, you submit your form using Inertia. If there are validation errors, you r
 
 From there you need to send those error messages to your form page component. You can do this in your controller, but it's better to simply do this automatically for all your page components. You can use the Inertia [share](/shared-data) functionality to accomplish this.
 
+Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/inertiajs/inertia-laravel/releases/tag/v0.2.9)), do this automatically, making the validation errors available via the `errors` prop. However, if you'd like to share them manually (maybe you'd like the errors in a different format), you can still do this:
+
 <TabbedCodeExamples
   examples={[
     {
