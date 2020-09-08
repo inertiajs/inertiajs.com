@@ -12,6 +12,7 @@ export const meta = {
     { url: '#local-component-state', name: 'Local component state' },
     { url: '#scroll-management', name: 'Scroll management' },
     { url: '#partial-reloads', name: 'Partial reloads' },
+    { url: '#custom-headers', name: 'Custom headers' },
   ],
 }
 
@@ -33,6 +34,7 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         this.$inertia.replace(url, {
           method: 'get',
@@ -40,6 +42,7 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         this.$inertia.reload({
           method: 'get',
@@ -47,30 +50,35 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         this.$inertia.post(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         this.$inertia.put(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         this.$inertia.patch(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         this.$inertia.delete(url, {
           replace: false,
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })
       `,
     },
@@ -86,6 +94,7 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.replace(url, {
           method: 'get',
@@ -93,6 +102,7 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.reload({
           method: 'get',
@@ -100,30 +110,35 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.post(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.put(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.patch(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.delete(url, {
           replace: false,
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })
       `,
     },
@@ -139,6 +154,7 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.replace(url, {
           method: 'get',
@@ -146,6 +162,7 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.reload({
           method: 'get',
@@ -153,30 +170,35 @@ In addition to [creating links](/links), it's also very common to manually make 
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.post(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.put(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.patch(url, data, {
           replace: false,
           preserveState: true,
           preserveScroll: false,
           only: [],
+          headers: {},
         })\n
         Inertia.delete(url, {
           replace: false,
           preserveState: false,
           preserveScroll: false,
           only: [],
+          headers: {},
         })
       `,
     },
@@ -200,3 +222,23 @@ By default page visits will automatically reset the scroll position back to the 
 ## Partial reloads
 
 The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the _same page_. This feature is called partial reloads, and can be a helpful performance optimization if it's acceptable that some page data becomes stale. For partial reloads to be effective, be sure to use [lazy evaluation](/responses#lazy-evaluation) server-side.
+
+## Custom headers
+
+The `headers` option allows you to add additional custom headers to a request. Do note that Inertia's headers take priority and therefore cannot be overwritten.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.visit('/users', {
+  headers: {
+    'Custom-Header': 'value',
+  },
+})
+
+Inertia.post('/users', data, {
+  headers: {
+    'Custom-Header': 'value',
+  },
+})
+```
