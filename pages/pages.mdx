@@ -245,11 +245,14 @@ You can also create more complex layout arrangements using nested layouts.
           import SiteLayout from './SiteLayout'
           import NestedLayout from './NestedLayout'\n
           export default {
+            // Using a render function
             layout: (h, page) => {
               return h(SiteLayout, [
                 h(NestedLayout, [page]),
               ])
-            },
+            },\n
+            // Using the shorthand
+            layout: [SiteLayout, NestedLayout],\n
             props: {
               user: Object,
             },
