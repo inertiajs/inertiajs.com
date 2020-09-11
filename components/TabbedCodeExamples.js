@@ -1,8 +1,58 @@
 import Code from './Code'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
+let globalState = '';
+const listeners = new Set();
+
+const setGlobalState = (nextGlobalState) => {
+  globalState = nextGlobalState;
+  listeners.forEach(listener => listener());
+};
+
+const useGlobalState = () => {
+  const [state, setState] = useState(globalState);
+  useEffect(() => {
+    const listener = () => {
+      setState(globalState);
+    };
+    listeners.add(listener);
+    listener(); // in case it's already changed
+    return () => listeners.delete(listener); // cleanup
+  }, []);
+  return [state, setGlobalState];
+};
 
 export default ({ className, examples, height }) => {
+  const [tabHash, setTabHash] = useGlobalState('')
   const [activeTab, setActiveTab] = useState(0)
+
+  useEffect(() => {
+    let hash = window.location.hash;
+
+    if (hash) {
+      hash = hash.substr(1);
+      let hashIndex = examples.findIndex(example => example.name.toLowerCase() == hash.toLowerCase());
+
+      if (hashIndex >= 0) {
+        return setTabHash(hash);
+      }
+
+    }
+  }, []);
+
+  useEffect(() => {
+    let hashIndex = examples.findIndex(example => example.name.toLowerCase() == tabHash.toLowerCase());
+    let index = hashIndex >= 0 ? hashIndex : 0;
+
+    setActiveTab(index);
+  }, [tabHash]);
+
+  const setTab = (tabIndex) => {
+    let hash = examples[tabIndex].name.toLowerCase();
+    window.location.hash = '#' + hash;
+
+    setTabHash(hash);
+  }
 
   return (
     <div className={className}>
@@ -11,7 +61,7 @@ export default ({ className, examples, height }) => {
           <button
             key={index}
             type="button"
-            onClick={() => setActiveTab(index)}
+            onClick={() => setTab(index)}
             className="focus:outline-none text-sm text-gray-500 hover:text-gray-200 font-medium px-3 sm:px-6 pt-3 pb-2 rounded-t mr-1"
             css={index === activeTab ? { color: 'white', background: '#202e59' } : {}}
           >
