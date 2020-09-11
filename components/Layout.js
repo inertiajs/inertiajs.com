@@ -8,9 +8,41 @@ import TabbedCodeExamples from './TabbedCodeExamples'
 import MarkdownComponents from './MarkdownComponents'
 import React, { useState, useEffect, useRef } from 'react'
 
+export const CodeTabContext = React.createContext()
+
+const getFromLocalStorage = (key, defaultValue = 0) => {
+  if (typeof window === 'undefined') {
+    return defaultValue
+  }
+
+  return parseInt(localStorage.getItem(key) || defaultValue)
+}
+
 export default function Layout({ meta, children }) {
   const mobileNav = useRef(null)
   const [showMobileNav, setShowMobileNav] = useState(false)
+  const initialTabValue = 0;
+  const [codeTabs, setCodeTabsState] = useState({
+    client: initialTabValue,
+    server: initialTabValue,
+  })
+
+  const setCodeTabs = (newValue) => {
+    setCodeTabsState(newValue);
+    localStorage.setItem('currentClientSideTab', newValue.client);
+    localStorage.setItem('currentServerSideTab', newValue.server);
+  };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    setCodeTabsState({
+      client: getFromLocalStorage('currentClientSideTab'),
+      server: getFromLocalStorage('currentServerSideTab'),
+    })
+  }, [initialTabValue])
 
   useEffect(() => {
     // Algolia DocSearch
@@ -279,7 +311,9 @@ export default function Layout({ meta, children }) {
           className="flex-1 overflow-hidden px-6 md:pl-12 md:pr-0 lg:pl-16 xl:pl-16 xl:pr-20 leading-relaxed text-lg"
           id="top"
         >
-          <MDXProvider components={MarkdownComponents} children={children} />
+          <CodeTabContext.Provider value={[codeTabs, setCodeTabs]}>
+            <MDXProvider components={MarkdownComponents} children={children} />
+          </CodeTabContext.Provider>
         </div>
         <div className="hidden xl:block w-44 flex-shrink-0 relative -mt-8">
           <div className="pt-8 sticky top-0">
