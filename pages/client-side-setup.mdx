@@ -21,8 +21,10 @@ export const meta = {
 Install the Inertia client-side adapters using NPM or Yarn.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue.js',
       language: 'bash',
       code: dedent`
@@ -31,6 +33,7 @@ Install the Inertia client-side adapters using NPM or Yarn.
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'bash',
       code: dedent`
@@ -39,6 +42,7 @@ Install the Inertia client-side adapters using NPM or Yarn.
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'bash',
       code: dedent`
@@ -54,8 +58,10 @@ Install the Inertia client-side adapters using NPM or Yarn.
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing the client-side framework with the base Inertia page component.
 
 <TabbedCodeExamples
-  examples={[
+ type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue.js',
       language: 'js',
       code: dedent`
@@ -74,6 +80,7 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -91,6 +98,7 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'js',
       code: dedent`
@@ -147,8 +155,10 @@ Next, create a `.babelrc` file in your project with the following:
 Finally, update the `resolveComponent` callback in your app initialization to use `import` instead of `require`.
 
 <TabbedCodeExamples
-  examples={[
+ type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue.js',
       language: 'js',
       code: dedent`
@@ -167,6 +177,7 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -184,6 +195,7 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'js',
       code: dedent`

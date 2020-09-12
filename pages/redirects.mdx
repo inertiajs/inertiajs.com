@@ -17,8 +17,10 @@ For example, if you're creating a new user, have your "store" endpoint return a 
 Inertia will automatically follow this redirect and update the page accordingly. Here's a simplified example.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -44,6 +46,7 @@ Inertia will automatically follow this redirect and update the page accordingly.
       `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`

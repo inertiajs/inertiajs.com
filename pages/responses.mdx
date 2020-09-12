@@ -23,8 +23,10 @@ In your controller, provide both the name of the JavaScript page component, as w
 In this example we're passing a single prop, called `event`, which contains four attributes (`id`, `title`, `start_date` and `description`) to the `Event/Show` page component.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -47,6 +49,7 @@ In this example we're passing a single prop, called `event`, which contains four
       description: `To make an Inertia response, use the Inertia render function. This method takes the component name, and allows you to pass props and view data.`,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -77,8 +80,10 @@ In this example we're passing a single prop, called `event`, which contains four
 When using [partial reloads](/requests#partial-reloads) it's best to wrap the props (data) in a closure, so that it will only be evaluated if it's required.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -102,6 +107,7 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
       `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -133,8 +139,10 @@ When using [partial reloads](/requests#partial-reloads) it's best to wrap the pr
 There are situations where you may want to access your prop data in your root Blade template. For example, you may want to add a meta description tag, Twitter card meta tags, or Facebook Open Graph meta tags.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'twig',
       code: dedent`
@@ -143,6 +151,7 @@ There are situations where you may want to access your prop data in your root Bl
       description: `These props are available via the $page variable.`,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'erb',
       code: dedent`
@@ -156,8 +165,10 @@ There are situations where you may want to access your prop data in your root Bl
 Sometimes you may even want to provide data that will not be sent to your JavaScript component.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -167,6 +178,7 @@ Sometimes you may even want to provide data that will not be sent to your JavaSc
       description: `Do this using the withViewData() method.`,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -180,8 +192,10 @@ Sometimes you may even want to provide data that will not be sent to your JavaSc
 You can then access this variable like a regular template variable.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'twig',
       code: dedent`
@@ -189,6 +203,7 @@ You can then access this variable like a regular template variable.
       `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'erb',
       code: dedent`

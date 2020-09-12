@@ -25,8 +25,10 @@ To create links within an Inertia app you'll need to use the Inertia link compon
 To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the underlying `<a>` tag.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -34,6 +36,7 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'html',
       code: dedent`
@@ -41,6 +44,7 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -55,8 +59,10 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
 You can specify the method for an Inertia link request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -64,6 +70,7 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'html',
       code: dedent`
@@ -71,6 +78,7 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -80,13 +88,16 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
   ]}
 />
 
+
 ## Data
 
 You can add data using the `data` attribute. This can be an `object`, or a `FormData` instance.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -94,6 +105,7 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'html',
       code: dedent`
@@ -101,6 +113,7 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -110,13 +123,16 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
   ]}
 />
 
+
 ## Replace
 
 You can specify the browser history behaviour. By default page visits push (new) state (`window.history.pushState`) into the history, however it's also possible to replace state (`window.history.replaceState`) by setting the `replace` attribute to true. This will cause the visit to replace the current history state, instead of adding a new history state to the stack.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -124,6 +140,7 @@ You can specify the browser history behaviour. By default page visits push (new)
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'html',
       code: dedent`
@@ -131,6 +148,7 @@ You can specify the browser history behaviour. By default page visits push (new)
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -140,13 +158,16 @@ You can specify the browser history behaviour. By default page visits push (new)
   ]}
 />
 
+
 ## Preserve state
 
 You can preserve a page component's local state using the `preserve-state` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -155,6 +176,7 @@ You can preserve a page component's local state using the `preserve-state` attri
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'html',
       code: dedent`
@@ -163,6 +185,7 @@ You can preserve a page component's local state using the `preserve-state` attri
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -173,13 +196,16 @@ You can preserve a page component's local state using the `preserve-state` attri
   ]}
 />
 
+
 ## Preserve scroll
 
 By default page visits will automatically reset the scroll position back to the top of the page (and any [scroll regions](/pages#scroll-regions) you've defined). You can use the `preserve-scroll` attribute to disable this behaviour.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -187,6 +213,7 @@ By default page visits will automatically reset the scroll position back to the 
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'html',
       code: dedent`
@@ -194,6 +221,7 @@ By default page visits will automatically reset the scroll position back to the 
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -203,13 +231,16 @@ By default page visits will automatically reset the scroll position back to the 
   ]}
 />
 
+
 ## Partial reloads
 
 The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the _same page_. This feature is called partial reloads, and can be a helpful performance optimization if it's acceptable that some page data becomes stale. For partial reloads to be effective, be sure to use [lazy evaluation](/responses#lazy-evaluation) server-side.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -217,6 +248,7 @@ The `only` option allows you to request a subset of the props (data) from the se
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'html',
       code: dedent`
@@ -224,6 +256,7 @@ The `only` option allows you to request a subset of the props (data) from the se
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`

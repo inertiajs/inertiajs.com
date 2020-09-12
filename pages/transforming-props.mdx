@@ -10,8 +10,10 @@ export const meta = { title: 'Transforming props' }
 Sometimes it can be useful to transform the props client-side before they are passed to the page component. For example, you may have a collection of errors that you want to convert into a custom `Error` object. You can do this using the `transformProps` callback.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'js',
       code: dedent`
@@ -33,6 +35,7 @@ Sometimes it can be useful to transform the props client-side before they are pa
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -56,6 +59,7 @@ Sometimes it can be useful to transform the props client-side before they are pa
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'js',
       code: dedent`

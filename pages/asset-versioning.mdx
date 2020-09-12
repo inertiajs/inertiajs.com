@@ -21,8 +21,10 @@ One common challenge with single-page apps is refreshing site assets when they'v
 To enable automatic asset refreshing, you simply need to tell Inertia what the current version of your assets is. This can be any `string` (letters, numbers, or a file hash), as long as it changes when your assets have been updated.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -42,6 +44,7 @@ To enable automatic asset refreshing, you simply need to tell Inertia what the c
       `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`

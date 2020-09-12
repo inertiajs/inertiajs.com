@@ -20,8 +20,10 @@ export const meta = {
 Install the Inertia server-side adapters using the preferred package manager for that language or framework.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'bash',
       code: dedent`
@@ -30,6 +32,7 @@ Install the Inertia server-side adapters using the preferred package manager for
       description: 'Install via Composer',
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       description: 'Add this to your Gemfile',
@@ -45,8 +48,10 @@ Install the Inertia server-side adapters using the preferred package manager for
 Next, setup the root template that will be loaded on the first page visit. This will be used to load your site assets (CSS and JavaScript), and will also contain a root `<div>` to boot your JavaScript application in.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'twig',
       code: dedent`
@@ -66,6 +71,7 @@ Next, setup the root template that will be loaded on the first page visit. This 
       description: `By default the Laravel adapter will use the app.blade.php view. This template should include your assets, as well as the @inertia directive. If you'd like to use a different root view, you can change it using Inertia::setRootView().`,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -83,8 +89,10 @@ Next, setup the root template that will be loaded on the first page visit. This 
 While not required, it's highly recommended that you also configure automatic asset refreshing. To do this you simply need to tell Inertia what the current version of your assets is. See the [asset versioning](/asset-versioning) page for more information.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -92,6 +100,7 @@ While not required, it's highly recommended that you also configure automatic as
       `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -108,8 +117,10 @@ While not required, it's highly recommended that you also configure automatic as
 That's it, you're all ready to go server-side! From here you can start creating Inertia responses. See the [responses](/responses) page for more information.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -131,6 +142,7 @@ That's it, you're all ready to go server-side! From here you can start creating 
       `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`

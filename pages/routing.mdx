@@ -5,7 +5,10 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Routing',
-  links: [{ url: '#top', name: 'Defining routes' }, { url: '#generating-routes', name: 'Generating URLs' }],
+  links: [
+    { url: '#top', name: 'Defining routes' },
+    { url: '#generating-routes', name: 'Generating URLs' },
+  ],
 }
 
 # Routing
@@ -21,8 +24,10 @@ Some server-side frameworks allow you to generate URLs from named routes. Howeve
 The first option is to generate URLs server-side and include them as props. Notice in this example how we're passing the `edit_url` and `create_url` to the `Users/Index` component.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -43,9 +48,10 @@ The first option is to generate URLs server-side and include them as props. Noti
                 ]);
             }
         }
-      `
+      `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -63,7 +69,7 @@ The first option is to generate URLs server-side and include them as props. Noti
             }
           end
         end
-      `
+      `,
     },
   ]}
 />

@@ -20,8 +20,10 @@ export const meta = {
 While it's possible to make classic form submissions with Inertia, it's not recommended, as they cause full page reloads. Instead, it's better to intercept form submissions and then make the [request](/requests) using Inertia.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue.js',
       language: 'twig',
       code: dedent`
@@ -57,6 +59,7 @@ While it's possible to make classic form submissions with Inertia, it's not reco
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -95,6 +98,7 @@ While it's possible to make classic form submissions with Inertia, it's not reco
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -126,8 +130,10 @@ While it's possible to make classic form submissions with Inertia, it's not reco
 Unlike a classic ajax submitted form, with Inertia you don't handle the post submission behaviour client-side. Rather, you do this server-side using a [redirect](/redirects). And, of course, there is nothing stopping you from redirecting right back to the page that you're on.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -154,6 +160,7 @@ Unlike a classic ajax submitted form, with Inertia you don't handle the post sub
       `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -182,8 +189,10 @@ From there you need to send those error messages to your form page component. Yo
 Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/inertiajs/inertia-laravel/releases/tag/v0.2.9)), do this automatically, making the validation errors available via the `errors` prop. However, if you'd like to share them manually (maybe you'd like the errors in a different format), you can still do this:
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -199,6 +208,7 @@ Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/in
       description: 'Place this code in your AppServiceProvider boot method.',
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -211,8 +221,10 @@ Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/in
 Now the validation errors will be available as part of your page props, and since they are reactive your template will automatically display them. Here's an updated version of the form example above that displays server-side validation errors.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue.js',
       language: 'twig',
       code: dedent`
@@ -252,6 +264,7 @@ Now the validation errors will be available as part of your page props, and sinc
       description: `In Vue page props are also available via the $page property.`,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -293,6 +306,7 @@ Now the validation errors will be available as part of your page props, and sinc
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`

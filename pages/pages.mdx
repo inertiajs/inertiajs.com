@@ -24,8 +24,10 @@ With Inertia, each page in your application has its own controller and correspon
 Pages are simply JavaScript components. There is nothing particularly special about them. Pages receive data from the controllers as props. Here's an example of a simple page component.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -49,6 +51,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -65,6 +68,7 @@ Pages are simply JavaScript components. There is nothing particularly special ab
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -86,8 +90,10 @@ Pages are simply JavaScript components. There is nothing particularly special ab
 While not required, for most projects it makes sense to create a site layout that your pages can extend. Notice in our page example above that we're wrapping the page content within a `<layout>` component. Here's an example of such a component. There is nothing Inertia specific here. This is just a standard JavaScript component.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -121,6 +127,7 @@ While not required, for most projects it makes sense to create a site layout tha
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -144,6 +151,7 @@ While not required, for most projects it makes sense to create a site layout tha
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`
@@ -176,8 +184,10 @@ While it's simple to implement layouts as children of the page components, it do
 For example, maybe you have an audio player on a podcast website that you want to continue playing as users navigate the site. Or, maybe you simply want to maintain the scroll position in your navigation between page visits. In these situations, using the persistent layouts feature in Inertia is a better choice.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -202,6 +212,7 @@ For example, maybe you have an audio player on a podcast website that you want t
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -220,6 +231,7 @@ For example, maybe you have an audio player on a podcast website that you want t
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'js',
       code: `// Coming soon`,
@@ -230,8 +242,10 @@ For example, maybe you have an audio player on a podcast website that you want t
 You can also create more complex layout arrangements using nested layouts.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -261,6 +275,7 @@ You can also create more complex layout arrangements using nested layouts.
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -284,6 +299,7 @@ You can also create more complex layout arrangements using nested layouts.
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'js',
       code: `// Coming soon`,
@@ -306,8 +322,10 @@ When navigating between pages, Inertia will automatically reset the scroll posit
 While it's possible to pass title and meta tag props from pages to layouts (as illustrated above), it's often easier to manage this using a document head library like [Vue Meta](https://github.com/nuxt/vue-meta) or [React Helmet](https://github.com/nfl/react-helmet).
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -337,6 +355,7 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
       description: "Don't forget to install and configure the Vue Meta package.",
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -358,6 +377,7 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
       description: "Don't forget to install and configure the React Helmet package.",
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'js',
       code: `// Coming soon`,

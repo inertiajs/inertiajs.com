@@ -23,8 +23,10 @@ Sometimes you need to access certain data on numerous pages within your applicat
 The server-side adapters provide a way to preassign shared data for each request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller.
 
 <TabbedCodeExamples
-  examples={[
+ type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       language: 'php',
       code: dedent`
@@ -61,6 +63,7 @@ The server-side adapters provide a way to preassign shared data for each request
       description: 'Place this code in your AppServiceProvider boot method.',
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -90,8 +93,10 @@ The server-side adapters provide a way to preassign shared data for each request
 Once you've shared the data server-side, you'll then be able to access it within your page components as props. Shared data can even be accessed in non-page components, although not as props in those cases. Here's an example of how to do this in a layout component.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       description: 'Access shared data using the $page property.',
       language: 'twig',
@@ -115,6 +120,7 @@ Once you've shared the data server-side, you'll then be able to access it within
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       description: 'Access shared data using the usePage() hook.',
       language: 'jsx',
@@ -140,6 +146,7 @@ Once you've shared the data server-side, you'll then be able to access it within
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       description: 'Access shared data using the $page store.',
       language: 'html',
@@ -173,8 +180,10 @@ Another great use-case for shared data is flash messages. These are messages sto
 Here's a simple way to implement flash messages in your Inertia applications. First, share the flash message on each request.
 
 <TabbedCodeExamples
-  examples={[
+  type="backend"
+  snippets={[
     {
+      framework: 'laravel',
       name: 'Laravel',
       description: 'Place this code in your AppServiceProvider boot method.',
       language: 'php',
@@ -189,6 +198,7 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
       `,
     },
     {
+      framework: 'rails',
       name: 'Rails',
       language: 'ruby',
       code: dedent`
@@ -207,8 +217,10 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
 Next, display the flash message in a front-end component, such as the site layout.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'twig',
       code: dedent`
@@ -227,6 +239,7 @@ Next, display the flash message in a front-end component, such as the site layou
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code: dedent`
@@ -249,6 +262,7 @@ Next, display the flash message in a front-end component, such as the site layou
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'html',
       code: dedent`

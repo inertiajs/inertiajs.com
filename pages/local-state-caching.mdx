@@ -23,8 +23,10 @@ For example, if a user partially completes a form, then navigates away, and then
 To mitigate this issue, you can tell Inertia which local component state to cache in the browser history.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       description: 'Use the "remember" property to cache local state.',
       language: 'js',
@@ -51,6 +53,7 @@ To mitigate this issue, you can tell Inertia which local component state to cach
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       description: 'Use the "useRememberedState" hook to cache local state.',
       language: 'jsx',
@@ -68,6 +71,7 @@ To mitigate this issue, you can tell Inertia which local component state to cach
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       description: 'Use the "remember" store to cache local state.',
       language: 'js',
@@ -90,8 +94,10 @@ If your page contains multiple components using the remember functionality, you'
 If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
 
 <TabbedCodeExamples
-  examples={[
+  type="frontend"
+  snippets={[
     {
+      framework: 'vue',
       name: 'Vue',
       language: 'js',
       code:
@@ -116,6 +122,7 @@ If you have multiple instances of the same component on the page, be sure to inc
       `,
     },
     {
+      framework: 'react',
       name: 'React',
       language: 'jsx',
       code:
@@ -138,6 +145,7 @@ If you have multiple instances of the same component on the page, be sure to inc
       `,
     },
     {
+      framework: 'svelte',
       name: 'Svelte',
       language: 'js',
       code:
