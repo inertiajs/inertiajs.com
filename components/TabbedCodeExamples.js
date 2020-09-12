@@ -5,11 +5,11 @@ import { CodeTabContext } from './Layout'
 
 const guessTabType = (tabNames) => {
   if (tabNames.includes('laravel')) {
-    return 'server'
+    return 'backend'
   }
 
   if (tabNames.includes('vue.js') || tabNames.includes('vue')) {
-    return 'client'
+    return 'frontend'
   }
 
   return 'unknown'
@@ -18,7 +18,8 @@ const guessTabType = (tabNames) => {
 export default ({ className, examples, height }) => {
   const [codeTabs, setCodeTabs] = useContext(CodeTabContext) || useState({unknown: 0})
   const tabType = guessTabType(examples.map(example => example.name.toLowerCase()))
-  const activeTab = codeTabs[tabType] ?? 0
+  const exampleIndex = examples.findIndex(example => codeTabs[tabType] === example.name.toLowerCase())
+  const activeTab = exampleIndex < 0 ? 0 : exampleIndex
 
   return (
     <div className={className}>
@@ -27,7 +28,7 @@ export default ({ className, examples, height }) => {
           <button
             key={index}
             type="button"
-            onClick={() => setCodeTabs({...codeTabs, [tabType]: index})}
+            onClick={() => setCodeTabs({...codeTabs, [tabType]: example.name.toLowerCase()})}
             className="focus:outline-none text-sm text-gray-500 hover:text-gray-200 font-medium px-3 sm:px-6 pt-3 pb-2 rounded-t mr-1"
             css={index === activeTab ? { color: 'white', background: '#202e59' } : {}}
           >

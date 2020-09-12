@@ -10,12 +10,18 @@ import React, { useState, useEffect, useRef } from 'react'
 
 export const CodeTabContext = React.createContext()
 
-const getFromLocalStorage = (key, defaultValue = 0) => {
+const getCurrentTabValue = (tabType, defaultValue) => {
   if (typeof window === 'undefined') {
     return defaultValue
   }
 
-  return parseInt(localStorage.getItem(key) || defaultValue)
+  const urlParam = new URLSearchParams(window.location.search).get(tabType)
+
+  if (urlParam) {
+    return urlParam.toLowerCase()
+  }
+
+  return localStorage.getItem(`current${tabType.charAt(0).toUpperCase() + tabType.slice(1)}Tab`) || defaultValue
 }
 
 export default function Layout({ meta, children }) {
@@ -23,14 +29,14 @@ export default function Layout({ meta, children }) {
   const [showMobileNav, setShowMobileNav] = useState(false)
   const initialTabValue = 0;
   const [codeTabs, setCodeTabsState] = useState({
-    client: initialTabValue,
-    server: initialTabValue,
+    frontend: initialTabValue,
+    backend: initialTabValue,
   })
 
-  const setCodeTabs = (newValue) => {
-    setCodeTabsState(newValue);
-    localStorage.setItem('currentClientSideTab', newValue.client);
-    localStorage.setItem('currentServerSideTab', newValue.server);
+  const setCodeTabs = (value) => {
+    setCodeTabsState(value);
+    localStorage.setItem('currentFrontendTab', value.frontend);
+    localStorage.setItem('currentBackendTab', value.backend);
   };
 
   useEffect(() => {
@@ -39,8 +45,8 @@ export default function Layout({ meta, children }) {
     }
 
     setCodeTabsState({
-      client: getFromLocalStorage('currentClientSideTab'),
-      server: getFromLocalStorage('currentServerSideTab'),
+      frontend: getCurrentTabValue('frontend', 'vue.js'),
+      backend: getCurrentTabValue('backend', 'laravel'),
     })
   }, [initialTabValue])
 
