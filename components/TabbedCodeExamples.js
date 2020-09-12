@@ -28,15 +28,15 @@ export default ({ className, examples, height }) => {
 
   useEffect(() => {
     let hash = window.location.hash;
+    hash = hash.length > 1 ? hash.substr(1) : window.localStorage.getItem('inertia.activeTab');
 
     if (hash) {
-      hash = hash.substr(1);
       let hashIndex = examples.findIndex(example => example.name.toLowerCase() == hash.toLowerCase());
 
       if (hashIndex >= 0) {
-        return setTabHash(hash);
+        setHash(hash);
+        setTabHash(hash);
       }
-
     }
   }, []);
 
@@ -47,10 +47,15 @@ export default ({ className, examples, height }) => {
     setActiveTab(index);
   }, [tabHash]);
 
+  const setHash = (hash) => {
+    window.location.hash = '#' + hash;
+    window.localStorage.setItem('inertia.activeTab', hash);
+  }
+
   const setTab = (tabIndex) => {
     let hash = examples[tabIndex].name.toLowerCase();
-    window.location.hash = '#' + hash;
 
+    setHash(hash);
     setTabHash(hash);
   }
 
