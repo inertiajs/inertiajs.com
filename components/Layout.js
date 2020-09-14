@@ -8,9 +8,39 @@ import TabbedCodeExamples from './TabbedCodeExamples'
 import MarkdownComponents from './MarkdownComponents'
 import React, { useState, useEffect, useRef } from 'react'
 
+export const CodeTabContext = React.createContext()
+
+const getCurrentCodeTab = tabType => {
+  const param = new URLSearchParams(location.search).get(tabType)
+  return param ? param.toLowerCase() : localStorage.getItem('tab.' + tabType)
+}
+
 export default function Layout({ meta, children }) {
   const mobileNav = useRef(null)
   const [showMobileNav, setShowMobileNav] = useState(false)
+
+  const [codeTabs, setCodeTabsState] = useState({
+    frontend: 'vue.js',
+    backend: 'laravel',
+  })
+
+  const setCodeTabs = value => {
+    setCodeTabsState(value)
+
+    const params = new URLSearchParams(location.search)
+    params.set('frontend', value.frontend)
+    params.set('backend', value.backend)
+
+    localStorage.setItem('tab.frontend', value.frontend)
+    localStorage.setItem('tab.backend', value.backend)
+  }
+
+  useEffect(() => {
+    setCodeTabs({
+      frontend: getCurrentCodeTab('frontend') || 'vue.js',
+      backend: getCurrentCodeTab('backend') || 'laravel',
+    })
+  }, [])
 
   useEffect(() => {
     // Algolia DocSearch
@@ -279,7 +309,9 @@ export default function Layout({ meta, children }) {
           className="flex-1 overflow-hidden px-6 md:pl-12 md:pr-0 lg:pl-16 xl:pl-16 xl:pr-20 leading-relaxed text-lg"
           id="top"
         >
-          <MDXProvider components={MarkdownComponents} children={children} />
+          <CodeTabContext.Provider value={[codeTabs, setCodeTabs]}>
+            <MDXProvider components={MarkdownComponents} children={children} />
+          </CodeTabContext.Provider>
         </div>
         <div className="hidden xl:block w-44 flex-shrink-0 relative -mt-8">
           <div className="pt-8 sticky top-0">

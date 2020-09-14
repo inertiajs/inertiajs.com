@@ -27,7 +27,7 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue',
+      name: 'Vue.js',
       language: 'twig',
       code: dedent`
         <inertia-link href="/">Home</inertia-link>
@@ -57,7 +57,7 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue',
+      name: 'Vue.js',
       language: 'twig',
       code: dedent`
         <inertia-link href="/logout" method="post">Logout</inertia-link>
@@ -87,7 +87,7 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue',
+      name: 'Vue.js',
       language: 'twig',
       code: dedent`
         <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
@@ -117,7 +117,7 @@ You can specify the browser history behaviour. By default page visits push (new)
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue',
+      name: 'Vue.js',
       language: 'twig',
       code: dedent`
         <inertia-link href="/" replace>Home</inertia-link>
@@ -147,7 +147,7 @@ You can preserve a page component's local state using the `preserve-state` attri
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue',
+      name: 'Vue.js',
       language: 'twig',
       code: dedent`
         <input v-model="query" type="text" />
@@ -180,7 +180,7 @@ By default page visits will automatically reset the scroll position back to the 
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue',
+      name: 'Vue.js',
       language: 'twig',
       code: dedent`
         <inertia-link href="/" preserve-scroll>Home</inertia-link>
@@ -210,7 +210,7 @@ The `only` option allows you to request a subset of the props (data) from the se
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue',
+      name: 'Vue.js',
       language: 'twig',
       code: dedent`
         <inertia-link href="/" :only="['someProps']">Home</inertia-link>
