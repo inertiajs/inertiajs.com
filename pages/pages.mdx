@@ -148,7 +148,7 @@ While not required, for most projects it makes sense to create a site layout tha
       language: 'html',
       code: dedent`
         <script>
-          import { InertiaLink } from '@inertiajs/inertia-svelte'\n
+          import { inertia } from '@inertiajs/inertia-svelte'\n
           export let title
         </script>\n
         <svelte:head>
@@ -156,9 +156,9 @@ While not required, for most projects it makes sense to create a site layout tha
         </svelte:head>\n
         <main>
           <header>
-            <InertiaLink href="/">Home</InertiaLink>
-            <InertiaLink href="/about">About</InertiaLink>
-            <InertiaLink href="/contact">Contact</InertiaLink>
+            <a use:inertia href="/">Home</a>
+            <a use:inertia href="/about">About</a>
+            <a use:inertia href="/contact">Contact</a>
           </header>\n
           <article>
             <slot />
@@ -221,8 +221,18 @@ For example, maybe you have an audio player on a podcast website that you want t
     },
     {
       name: 'Svelte',
-      language: 'js',
-      code: `// Coming soon`,
+      language: 'html',
+      code: dedent`
+        <script context="module">
+          import Layout from './Layout.svelte'
+          export const layout = Layout
+        </script>\n
+        <script>
+          export let user
+        </script>\n
+        <h1>Welcome</h1>
+        <p>Hello {user.name}, welcome to your first Inertia app!</p>
+      `,
     },
   ]}
 />
@@ -285,8 +295,19 @@ You can also create more complex layout arrangements using nested layouts.
     },
     {
       name: 'Svelte',
-      language: 'js',
-      code: `// Coming soon`,
+      language: 'html',
+      code: dedent`
+        <script context="module">
+          import SiteLayout from './SiteLayout.svelte'
+          import NestedLayout from './NestedLayout.svelte'
+          export const layout = [SiteLayout, NestedLayout]
+        </script>\n
+        <script>
+          export let user
+        </script>\n
+        <h1>Welcome</h1>
+        <p>Hello {user.name}, welcome to your first Inertia app!</p>
+      `,
     },
   ]}
 />
@@ -303,7 +324,7 @@ When navigating between pages, Inertia will automatically reset the scroll posit
 
 ## Title and meta tags
 
-While it's possible to pass title and meta tag props from pages to layouts (as illustrated above), it's often easier to manage this using a document head library like [Vue Meta](https://github.com/nuxt/vue-meta) or [React Helmet](https://github.com/nfl/react-helmet).
+While it's possible to pass title and meta tag props from pages to layouts (as illustrated above), it's often easier to manage this using a document head library like [Vue Meta](https://github.com/nuxt/vue-meta) or [React Helmet](https://github.com/nfl/react-helmet). Svelte has built-in support for manipulating the document head with the `<svelte:head>` element.
 
 <TabbedCodeExamples
   examples={[
@@ -359,8 +380,21 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
     },
     {
       name: 'Svelte',
-      language: 'js',
-      code: `// Coming soon`,
+      language: 'html',
+      code: dedent`
+        <script context="module">
+          import Layout from './Layout.svelte'
+          export const layout = Layout
+        </script>\n
+        <script>
+          export let user
+        </script>\n
+        <svelte:head>
+            <title>Welcome {user.name}</title>
+        </svelte:head>\n
+        <h1>Welcome</h1>
+        <p>Hello {user.name}, welcome to your first Inertia app!</p>
+      `,
     },
   ]}
 />

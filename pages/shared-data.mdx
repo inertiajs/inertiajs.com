@@ -145,15 +145,15 @@ Once you've shared the data server-side, you'll then be able to access it within
       language: 'html',
       code: dedent`
         <script>
-          import { InertiaLink, page } from '@inertiajs/inertia-svelte'
+          import { inertia, page } from '@inertiajs/inertia-svelte'
         </script>\n
         <main>
           <header>
             <div>You are logged in as: {$page.auth.user.name}</div>
             <nav>
-              <InertiaLink href="/">Home</InertiaLink>
-              <InertiaLink href="/about">About</InertiaLink>
-              <InertiaLink href="/contact">Contact</InertiaLink>
+              <a use:inertia href="/">Home</a>
+              <a use:inertia href="/about">About</a>
+              <a use:inertia href="/contact">Contact</a>
             </nav>
           </header>
           <content>

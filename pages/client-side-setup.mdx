@@ -100,7 +100,7 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
           target: app,
           props: {
             initialPage: JSON.parse(app.dataset.page),
-            resolveComponent: name => require(\`./Pages/\${name}.svelte\`).default,
+            resolveComponent: name => require(\`./Pages/\${name}.svelte\`),
           },
         })
       `,
@@ -193,7 +193,7 @@ Finally, update the `resolveComponent` callback in your app initialization to us
           target: app,
           props: {
             initialPage: JSON.parse(app.dataset.page),
-            resolveComponent: name => import(\`./Pages/\${name}.svelte\`).then(module => module.default),
+            resolveComponent: name => import(\`./Pages/\${name}.svelte\`),
           },
         })
       `,
