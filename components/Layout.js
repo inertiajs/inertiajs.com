@@ -10,9 +10,9 @@ import React, { useState, useEffect, useRef } from 'react'
 
 export const CodeTabContext = React.createContext()
 
-const getCurrentCodeTab = (tabType) => {
-  const param = new URLSearchParams(location.search).get(tabType);
-  return param ? param.toLowerCase() : localStorage.getItem('tab.' + tabType);
+const getCurrentCodeTab = tabType => {
+  const param = new URLSearchParams(location.search).get(tabType)
+  return param ? param.toLowerCase() : localStorage.getItem('tab.' + tabType)
 }
 
 export default function Layout({ meta, children }) {
@@ -24,16 +24,15 @@ export default function Layout({ meta, children }) {
     backend: 'laravel',
   })
 
-  const setCodeTabs = (value) => {
-    setCodeTabsState(value);
+  const setCodeTabs = value => {
+    setCodeTabsState(value)
 
-    const params = new URLSearchParams(location.search);
-    params.set('frontend', value.frontend);
-    params.set('backend', value.backend);
-    history.replaceState(history.state, '', '?' + params.toString());
+    const params = new URLSearchParams(location.search)
+    params.set('frontend', value.frontend)
+    params.set('backend', value.backend)
 
-    localStorage.setItem('tab.frontend', value.frontend);
-    localStorage.setItem('tab.backend', value.backend);
+    localStorage.setItem('tab.frontend', value.frontend)
+    localStorage.setItem('tab.backend', value.backend)
   }
 
   useEffect(() => {
