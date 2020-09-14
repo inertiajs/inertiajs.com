@@ -297,9 +297,8 @@ Now the validation errors will be available as part of your page props, and sinc
       language: 'html',
       code: dedent`
         <script>
-          import { Inertia } from '@inertiajs/inertia'
-          import { page } from '@inertiajs/inertia-svelte'\n
-          $: ({ errors } = $page)\n
+          import { Inertia } from '@inertiajs/inertia'\n
+          export let errors = {}\n
           let values = {
             first_name: null,
             last_name: null,
@@ -312,13 +311,13 @@ Now the validation errors will be available as part of your page props, and sinc
         <form on:submit|preventDefault={handleSubmit}>
           <label for="first_name">First name:</label>
           <input id="first_name" bind:value={values.first_name}>
-          {#if errors.first_name}<div>{errors.first_name[0]}</div>{/if}\n
+          {#if errors.first_name}<div>{errors.first_name}</div>{/if}\n
           <label for="last_name">Last name:</label>
           <input id="last_name" bind:value={values.last_name}>
-          {#if errors.last_name}<div>{errors.last_name[0]}</div>{/if}\n
+          {#if errors.last_name}<div>{errors.last_name}</div>{/if}\n
           <label for="email">Email:</label>
           <input id="email" bind:value={values.email}>
-          {#if errors.email}<div>{errors.email[0]}</div>{/if}\n
+          {#if errors.email}<div>{errors.email}</div>{/if}\n
           <button type="submit">Submit</button>
         </form>
       `,
