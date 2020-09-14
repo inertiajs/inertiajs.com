@@ -148,7 +148,7 @@ While not required, for most projects it makes sense to create a site layout tha
       language: 'html',
       code: dedent`
         <script>
-          import { InertiaLink } from '@inertiajs/inertia-svelte'\n
+          import { inertia } from '@inertiajs/inertia-svelte'\n
           export let title
         </script>\n
         <svelte:head>
@@ -156,9 +156,9 @@ While not required, for most projects it makes sense to create a site layout tha
         </svelte:head>\n
         <main>
           <header>
-            <InertiaLink href="/">Home</InertiaLink>
-            <InertiaLink href="/about">About</InertiaLink>
-            <InertiaLink href="/contact">Contact</InertiaLink>
+            <a use:inertia href="/">Home</a>
+            <a use:inertia href="/about">About</a>
+            <a use:inertia href="/contact">Contact</a>
           </header>\n
           <article>
             <slot />

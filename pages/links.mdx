@@ -45,8 +45,11 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
       name: 'Svelte',
       language: 'html',
       code: dedent`
+        <a href="/" use:inertia>Home</a>\n
+        <!-- or -->\n
         <InertiaLink href="/">Home</InertiaLink>
       `,
+      description: "The use:inertia directive can be applied to any HTML element.",
     },
   ]}
 />
@@ -75,6 +78,8 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
       name: 'Svelte',
       language: 'html',
       code: dedent`
+        <a href="/logout" use:inertia="{{ method: 'post' }}">Logout</a>\n
+        <!-- or -->\n
         <InertiaLink href="/logout" method="post">Logout</InertiaLink>
       `,
     },
@@ -135,7 +140,9 @@ The `headers` option allows you to add custom headers to an Inertia link. Do not
       name: 'Svelte',
       language: 'html',
       code: dedent`
-        <InertiaLink href="/endpoint" headers={{ foo: bar }}>Save</InertiaLink>
+        <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>\n
+        <!-- or -->\n
+        <InertiaLink href="/endpoint" headers={{ foo: bar}}>Save</InertiaLink>
       `,
     },
   ]}
@@ -165,6 +172,8 @@ You can specify the browser history behaviour. By default page visits push (new)
       name: 'Svelte',
       language: 'html',
       code: dedent`
+        <a href="/" use:inertia="{{ replace: true }}">Home</a>\n
+        <!-- or -->\n
         <InertiaLink href="/" replace>Home</InertiaLink>
       `,
     },
@@ -198,6 +207,8 @@ You can preserve a page component's local state using the `preserve-state` attri
       language: 'html',
       code: dedent`
         <input on:change={handleChange} value={query} />
+        <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>\n
+        <!-- or -->\n
         <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
       `,
     },
@@ -228,6 +239,8 @@ By default page visits will automatically reset the scroll position back to the 
       name: 'Svelte',
       language: 'html',
       code: dedent`
+        <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
+        <!-- or -->\n
         <InertiaLink href="/" preserveScroll>Home</InertiaLink>
       `,
     },
@@ -258,6 +271,8 @@ The `only` option allows you to request a subset of the props (data) from the se
       name: 'Svelte',
       language: 'html',
       code: dedent`
+        <a href="/" use:inertia="{{ only: ['someProps'] }}">Home</a>\n
+        <!-- or -->\n
         <InertiaLink href="/" only={['someProps']}>Home</InertiaLink>
       `,
     },
