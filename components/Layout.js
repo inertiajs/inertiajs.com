@@ -27,10 +27,6 @@ export default function Layout({ meta, children }) {
   const setCodeTabs = value => {
     setCodeTabsState(value)
 
-    const params = new URLSearchParams(location.search)
-    params.set('frontend', value.frontend)
-    params.set('backend', value.backend)
-
     localStorage.setItem('tab.frontend', value.frontend)
     localStorage.setItem('tab.backend', value.backend)
   }
