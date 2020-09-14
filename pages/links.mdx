@@ -97,14 +97,44 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
       name: 'React',
       language: 'html',
       code: dedent`
-        <InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
+        <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
       language: 'html',
       code: dedent`
-        <InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
+        <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+## Headers
+
+The `headers` option allows you to add custom headers to an Inertia link. Do note that Inertia's headers take priority and therefore cannot be overwritten.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/endpoint" headers={{ foo: bar }}>Save</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <InertiaLink href="/endpoint" headers={{ foo: bar }}>Save</InertiaLink>
       `,
     },
   ]}
