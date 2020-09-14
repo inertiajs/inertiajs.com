@@ -30,7 +30,7 @@ export default function Layout({ meta, children }) {
     const params = new URLSearchParams(location.search);
     params.set('frontend', value.frontend);
     params.set('backend', value.backend);
-    history.replaceState(null, null, '?' + params.toString());
+    history.replaceState(history.state, '', '?' + params.toString());
 
     localStorage.setItem('tab.frontend', value.frontend);
     localStorage.setItem('tab.backend', value.backend);
