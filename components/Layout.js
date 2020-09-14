@@ -10,45 +10,38 @@ import React, { useState, useEffect, useRef } from 'react'
 
 export const CodeTabContext = React.createContext()
 
-const getCurrentTabValue = (tabType, defaultValue) => {
-  if (typeof window === 'undefined') {
-    return defaultValue
-  }
-
-  const urlParam = new URLSearchParams(window.location.search).get(tabType)
-
-  if (urlParam) {
-    return urlParam.toLowerCase()
-  }
-
-  return localStorage.getItem(`current${tabType.charAt(0).toUpperCase() + tabType.slice(1)}Tab`) || defaultValue
+const getCurrentCodeTab = (tabType) => {
+  const param = new URLSearchParams(location.search).get(tabType);
+  return param ? param.toLowerCase() : localStorage.getItem('tab.' + tabType);
 }
 
 export default function Layout({ meta, children }) {
   const mobileNav = useRef(null)
   const [showMobileNav, setShowMobileNav] = useState(false)
-  const initialTabValue = 0;
+
   const [codeTabs, setCodeTabsState] = useState({
-    frontend: initialTabValue,
-    backend: initialTabValue,
+    frontend: 'vue.js',
+    backend: 'laravel',
   })
 
   const setCodeTabs = (value) => {
     setCodeTabsState(value);
-    localStorage.setItem('currentFrontendTab', value.frontend);
-    localStorage.setItem('currentBackendTab', value.backend);
-  };
+
+    const params = new URLSearchParams(location.search);
+    params.set('frontend', value.frontend);
+    params.set('backend', value.backend);
+    history.replaceState(history.state, '', '?' + params.toString());
+
+    localStorage.setItem('tab.frontend', value.frontend);
+    localStorage.setItem('tab.backend', value.backend);
+  }
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      return
-    }
-
-    setCodeTabsState({
-      frontend: getCurrentTabValue('frontend', 'vue.js'),
-      backend: getCurrentTabValue('backend', 'laravel'),
+    setCodeTabs({
+      frontend: getCurrentCodeTab('frontend') || 'vue.js',
+      backend: getCurrentCodeTab('backend') || 'laravel',
     })
-  }, [initialTabValue])
+  }, [])
 
   useEffect(() => {
     // Algolia DocSearch

@@ -8,11 +8,9 @@ const guessTabType = (tabNames) => {
     return 'backend'
   }
 
-  if (tabNames.includes('vue.js') || tabNames.includes('vue')) {
+  if (tabNames.includes('vue.js')) {
     return 'frontend'
   }
-
-  return 'unknown'
 }
 
 export default ({ className, examples, height }) => {
