@@ -176,16 +176,18 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
   examples={[
     {
       name: 'Laravel',
-      description: 'Place this code in your AppServiceProvider boot method.',
+      description: 'Place this code in your AppServiceProvider register method.',
       language: 'php',
       code: dedent`
-        use Session;
+        use Illuminate\Support\Facades\Session;
         use Inertia\\Inertia;\n
-        Inertia::share('flash', function () {
-            return [
-                'message' => Session::get('message'),
-            ];
-        });
+        Inertia::share([
+            'flash' => function () {
+                return [
+                    'message' => Session::get('message'),
+                ];
+            }
+        ]);
       `,
     },
     {
@@ -204,7 +206,9 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
   ]}
 />
 
-Next, display the flash message in a front-end component, such as the site layout.
+Any message type (message, success, ...) added to the session in your application will be available in your front end component.
+
+Next, display the flash message in a front-end component, such as the site layout. You can add more message types 
 
 <TabbedCodeExamples
   examples={[
