@@ -85,7 +85,19 @@ document.removeEventListener(startEventListener)
 
 ## Cancelling events
 
-Some events (`start`, `invalid`, `error`) support cancellation, allowing you to prevent Inertia's default behaviour. Just like native events, if only one event listener calls `event.preventDefault()` or returns `false`, the event will be cancelled.
+Some events (`start`, `invalid`, `error`) support cancellation, allowing you to prevent Inertia's default behaviour. Just like native events, if only one event listener calls `event.preventDefault()`, the event will be cancelled.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('start', event => {
+  if (!confirm('Are you sure you want to navigate away?')) {
+    event.preventDefault()
+  }
+})
+```
+
+As a convenience, if you register your event listener using `Inertia.on()`, you can also cancel the event by returning `false` from the listener.
 
 ```js
 import { Inertia } from '@inertiajs/inertia'
