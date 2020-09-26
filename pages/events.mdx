@@ -137,7 +137,7 @@ The `progress` event fires as progress increments during file uploads.
 import { Inertia } from '@inertiajs/inertia'
 
 Inertia.on('progress', event => {
-  this.form.progress = e.detail.progress.percentage
+  this.form.progress = event.detail.progress.percentage
 })
 ```
 
