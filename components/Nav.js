@@ -142,6 +142,11 @@ export default ({ className }) => {
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Advanced</div>
       <ul>
         <li className="md:pr-3">
+          <Link href="/events">
+            <a className={linkClass('/events')}>Events</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
           <Link href="/security">
             <a className={linkClass('/security')}>Security</a>
           </Link>

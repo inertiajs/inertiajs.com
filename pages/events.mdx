@@ -1,0 +1,240 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Events',
+  links: [
+    { url: '#registering-listeners', name: 'Registering listeners' },
+    { url: '#removing-listeners', name: 'Removing listeners' },
+    { url: '#cancelling-events', name: 'Cancelling events' },
+    { url: '#start', name: 'Start' },
+    { url: '#progress', name: 'Progress' },
+    { url: '#success', name: 'Success' },
+    { url: '#invalid', name: 'Invalid' },
+    { url: '#error', name: 'Error' },
+    { url: '#finish', name: 'Finish' },
+    { url: '#navigate', name: 'Navigate' },
+    { url: '#event-callbacks', name: 'Event callbacks' },
+  ],
+}
+
+# Events
+
+Inertia provides an event system that allows you to "hook into" the various lifecycle events of the library.
+
+## Registering listeners
+
+To register an event listener, use the `Inertia.on()` method.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('start', event => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`)
+})
+```
+
+Under the hood Inertia uses native browser events, so you can also work with them that way as well. Just be sure to append `inertia:` to the event name.
+
+```js
+document.addEventListener('inertia:start', event => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`)
+})
+```
+
+## Removing listeners
+
+When you register an event listener, Inertia automatically returns you a callback to remove the event listener.
+
+```js
+let removeStartEventListener = Inertia.on('start', event => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`)
+})
+
+// Remove the listener
+removeStartEventListener()
+```
+
+Combined with a destroyed hook, you can automatically remove the event listener when you navigate to a different page.
+
+```js
+export default {
+  mounted() {
+    this.$once(
+      'hook:destroyed',
+      Inertia.on('start', event => {
+        console.log(`Starting a visit to ${event.detail.visit.url}`)
+      })
+    )
+  },
+}
+```
+
+Alternatively, if you're using native browser events, you can remove the event listener using `removeEventListener()`.
+
+```js
+let startEventListener = document.addEventListener('inertia:start', event => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`)
+})
+
+// Remove the listener
+document.removeEventListener(startEventListener)
+```
+
+## Cancelling events
+
+Some events (`start`, `invalid`, `error`) support cancellation, allowing you to prevent Inertia's default behaviour. Just like native events, if only one event listener calls `event.preventDefault()` or returns `false`, the event will be cancelled.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('start', event => {
+  return confirm('Are you sure you want to navigate away?')
+})
+```
+
+## Start
+
+The `start` event fires before a request is made to the server. This is useful for displaying loading indicators and for intercepting visits.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('start', event => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`)
+})
+```
+
+Cancel the `start` event to prevent the visit from happening.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('start', event => {
+  return confirm('Are you sure you want to navigate away?')
+})
+```
+
+## Progress
+
+The `progress` event fires as progress increments during file uploads.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('progress', event => {
+  this.form.progress = e.detail.progress.percentage
+})
+```
+
+The `progress` event is not cancelable.
+
+## Success
+
+The `success` event fires on successful page visits. Note, this does _not_ include history visits.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('success', event => {
+  console.log(`Successfully made a visit to ${event.detail.page.url}`)
+})
+```
+
+The `success` event is not cancelable.
+
+## Invalid
+
+The `invalid` event fires when a non-Inertia response is received from the server, such as an `html` or `json` response. A valid Inertia response is one that has the `X-Inertia` header set to `true` with a `json` payload containing [the page object](/the-protocol#the-page-object).
+
+This event is fired for all response types, including `200`, `400`, and `500` response codes.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('invalid', event => {
+  console.log(`An invalid Inertia response was received.`)
+  console.log(event.detail.response)
+})
+```
+
+Cancel the `invalid` event to prevent Inertia from showing the non-Inertia response modal.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('invalid', event => {
+  event.preventDefault()
+  // Handle the invalid response yourself
+})
+```
+
+## Error
+
+The `error` event fires on unexpected XHR errors, such as network interruptions, and for errors generated in the `resolveComponent()` callback.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('error', event => {
+  console.log(`An unexpected error occurred during an Inertia visit.`)
+  console.log(event.detail.error)
+})
+```
+
+Cancel the `error` event to prevent the error from being thrown.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('error', event => {
+  event.preventDefault()
+  // Handle the error yourself
+})
+```
+
+Note, this event will _not_ fire for XHR requests that receive `400` and `500` level responses, or for non-Inertia responses, as these situations are handled in other ways by Inertia. See the [error handling](/error-handling) page for more information.
+
+## Finish
+
+The `finish` event fires after an XHR request has completed for both successful and unsuccessful responses. This event is useful for hiding loading indicators.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('finish', event => {
+  NProgress.stop()
+})
+```
+
+The `finish` event is not cancelable.
+
+## Navigate
+
+The `navigate` event fires on successful page visits, as well as when navigating through history. This event is useful for tracking analytics and things of that nature.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('navigate', event => {
+  console.log(`Navigated to ${event.detail.page.url}`)
+})
+```
+
+The `navigate` event is not cancelable.
+
+## Event callbacks
+
+In addition to the global events, Inertia also provides a number of event callbacks when manually making Inertia visits.
+
+```js
+Inertia.visit(url, {
+  onCancelToken: cancelToken => {},
+  onStart: visit => {},
+  onProgress: progress => {},
+  onSuccess: page => {},
+  onFinish: () => {},
+})
+```
