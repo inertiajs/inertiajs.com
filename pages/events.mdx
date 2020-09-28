@@ -80,7 +80,7 @@ let startEventListener = document.addEventListener('inertia:start', event => {
 })
 
 // Remove the listener
-document.removeEventListener(startEventListener)
+document.removeEventListener('inertia:start', startEventListener)
 ```
 
 ## Cancelling events
