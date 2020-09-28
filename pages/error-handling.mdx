@@ -6,12 +6,12 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Error handling',
-  links: [{ url: '#in-development', name: 'In development' }, { url: '#in-production', name: 'In production' }],
+  links: [{ url: '#development', name: 'Development' }, { url: '#production', name: 'Production' }],
 }
 
 # Error handling
 
-## In development
+## Development
 
 One of the nice things about working with a server-side framework is the built-in exception handling you get for free. For example, Laravel ships with [Ignition](https://github.com/facade/ignition), a beautiful error reporting tool which displays a nicely formatted stack trace in local development.
 
@@ -29,7 +29,7 @@ Inertia solves this by showing all non-Inertia responses in a modal. Meaning you
 
 <Notice>Note, the modal behaviour is only intended for development purposes.</Notice>
 
-## In production
+## Production
 
 In production you'll want to return a proper Inertia error response instead of relying on the modal behaviour. To do this you'll need to update your framework's default exception handler to return a custom error page.
 
@@ -38,19 +38,27 @@ In production you'll want to return a proper Inertia error response instead of r
     {
       name: 'Laravel',
       language: 'php',
-      description: 'Default Laravel location: App\\Exceptions\\Handler.php',
+      description: 'Extend the render() method in your App\\Exceptions\\Handler.php.',
       code: dedent`
-        use Inertia\\Inertia;
-        use Illuminate\\Support\\Facades\\App;\n
-        public function render($request, Exception $exception)
+        use Throwable;
+        use Inertia\\Inertia;\n
+        /**
+         * Prepare exception for rendering.
+         *
+         * @param  \\Throwable  $e
+         * @return \\Throwable
+         */
+        public function render($request, Throwable $e)
         {
-            $response = parent::render($request, $exception);\n
-            if (App::environment('production')
-                && in_array($response->status(), [500, 503, 404, 403])
-            ) {
+            $response = parent::render($request, $e);\n
+            if (!app()->environment('local') && in_array($response->status(), [500, 503, 404, 403])) {
                 return Inertia::render('Error', ['status' => $response->status()])
                     ->toResponse($request)
                     ->setStatusCode($response->status());
+            } else if ($response->status() === 419) {
+                return back()->with([
+                    'message' => 'The page expired, please try again.',
+                ]);
             }\n
             return $response;
         }

@@ -1,0 +1,94 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'CSRF protection',
+  links: [{ url: '#development', name: 'Making requests' }, { url: '#production', name: 'Handling mismatches' }],
+}
+
+# CSRF protection
+
+## Making requests
+
+If your web framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that each Inertia requests includes the necessary token for `POST`, `PUT`, `PATCH` and `DELETE` requests.
+
+One solution is to include the CSRF token as a prop on every response. You can then use the token when making Inertia requests.
+
+```js
+this.$inertia.post('/users', {
+  name: this.name,
+  email: this.email,
+  _token: this.$page.csrf_token,
+})
+```
+
+You can even use the <a href="/shared-data">shared data</a> functionality to automatically include the `csrf_token` with each response.
+
+However, a better approach is to use the CSRF functionality already built into [axios](https://github.com/axios/axios) for this. Axios is the HTTP library that Inertia uses under the hood.
+
+Axios automatically checks for the existence of an `XSRF-TOKEN` cookie. If it's present, it will then include the token in an `X-XSRF-TOKEN` header for any requests it makes.
+
+The easiest way to implement this is using server-side middleware. Simply include the `XSRF-TOKEN` cookie on each response, and then verify the token using the `X-XSRF-TOKEN` header sent in the requests from axios.
+
+Some frameworks, such as [Laravel](https://github.com/laravel/framework/blob/5.8/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php#L176-L188), do this automatically, meaning there is no configuration required.
+
+<Notice>
+  If you're using Laravel, be sure to omit the <inlineCode class="bg-gray-600">csrf-token</inlineCode> meta tag from
+  your project, as this will prevent the CSRF token from refreshing properly.
+</Notice>
+
+## Handling mismatches
+
+When a CSRF token mismatch occurs, your web framework will likely throw an exception that results in an error response. For example, in Laravel a `TokenMismatchException` is thrown, which results in a `419` error page. Since that isn't a valid Inertia response, the error is shown in a modal.
+
+<video controls>
+  <source src="/mp4/csrf-mismatch-modal.mp4" type="video/mp4" />
+</video>
+
+But, this isn't a great user experience. A better way to handle these errors is to return a redirect back to the previous page, along with a flash message that the page expired. This will result in a valid Inertia response, with the flash message available as a prop, which you can then display to the user. Note, you'll need to share your [flash messages](/shared-data#flash-messages) with Inertia.js for this to work.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      description: 'Extend the render() method in your App\\Exceptions\\Handler.php.',
+      code: dedent`
+        use Throwable;
+        use Inertia\\Inertia;\n
+        /**
+         * Prepare exception for rendering.
+         *
+         * @param  \\Throwable  $e
+         * @return \\Throwable
+         */
+        public function render($request, Throwable $e)
+        {
+            $response = parent::render($request, $e);\n
+            if ($response->status() === 419) {
+                return back()->with([
+                    'message' => 'The page expired, please try again.',
+                ]);
+            }\n
+            return $response;
+        }
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+The end result is a much better experience for your users. Instead of seeing the error modal, they are instead presented with a message that the "page expired", and are asked to try again.
+
+<video controls>
+  <source src="/mp4/csrf-mismatch-warning.mp4" type="video/mp4" />
+</video>

@@ -147,8 +147,18 @@ export default ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
-          <Link href="/security">
-            <a className={linkClass('/security')}>Security</a>
+          <Link href="/authentication">
+            <a className={linkClass('/authentication')}>Authentication</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/authorization">
+            <a className={linkClass('/authorization')}>Authorization</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/csrf-protection">
+            <a className={linkClass('/csrf-protection')}>CSRF protection</a>
           </Link>
         </li>
         <li className="md:pr-3">
