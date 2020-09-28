@@ -1,0 +1,71 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Scroll management',
+  links: [
+    { url: '#scroll-resetting', name: 'Scroll resetting' },
+    { url: '#scroll-preservation', name: 'Scroll preservation' },
+    { url: '#scroll-regions', name: 'Scroll regions' },
+  ],
+}
+
+# Scroll management
+
+## Scroll resetting
+
+When navigating between pages, Inertia mimics default browser behaviour by automatically resetting the scroll position of the document body (as well as any [scroll regions](#scroll-regions) you've defined), back to the top. Further, Inertia keeps track of the scroll position of each page and automatically restores that scroll position as you navigate forward and back in history.
+
+## Scroll preservation
+
+Sometimes it's desirable to prevent the default scroll resetting when making visits. You can disable this behaviour using the `preserveScroll` option when manually [making visits](/requests).
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.visit(url, {
+  preserveScroll: false,
+})
+```
+
+This is also possible with [Inertia links](/links) using the `preserve-scroll` attribute.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/" preserve-scroll>Home</inertia-link>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'html',
+      code: dedent`
+        <InertiaLink preserveScroll href="/">Home</InertiaLink>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
+        <!-- or -->\n
+        <InertiaLink href="/" preserveScroll>Home</InertiaLink>
+      `,
+    },
+  ]}
+/>
+
+## Scroll regions
+
+If your app doesn't use document body scrolling, but instead has scrollable elements (using the `overflow` CSS property), scroll resetting will not work. In these situations you must tell Inertia which scrollable elements to manage by adding a `scroll-region` attribute.
+
+```html
+<div class="overflow-y-auto" scroll-region>
+  <!-- Your page content -->
+</div>
+```

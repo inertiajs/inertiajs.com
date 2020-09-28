@@ -147,6 +147,11 @@ export default ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
+          <Link href="/scroll-management">
+            <a className={linkClass('/scroll-management')}>Scroll management</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
           <Link href="/authentication">
             <a className={linkClass('/authentication')}>Authentication</a>
           </Link>

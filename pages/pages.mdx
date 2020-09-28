@@ -10,7 +10,6 @@ export const meta = {
     { url: '#creating-pages', name: 'Creating pages' },
     { url: '#creating-layouts', name: 'Creating layouts' },
     { url: '#persistent-layouts', name: 'Persistent layouts' },
-    { url: '#scroll-regions', name: 'Scroll regions' },
     { url: '#title-and-meta-tags', name: 'Title and meta tags' },
   ],
 }
@@ -311,16 +310,6 @@ You can also create more complex layout arrangements using nested layouts.
     },
   ]}
 />
-
-## Scroll regions
-
-When navigating between pages, Inertia will automatically reset the scroll position to the top of the body (unless disabled via the `preserve-scroll` functionality). Depending on your app, you may have nested scroll containers within your layout, and these will not be reset by default. You can tell Inertia to also reset these areas by adding a `scroll-region` attribute.
-
-```html
-<div class="overflow-y-auto" scroll-region>
-  <!-- Your page content -->
-</div>
-```
 
 ## Title and meta tags
 
