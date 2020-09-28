@@ -8,7 +8,6 @@ export const meta = {
   title: 'Responses',
   links: [
     { url: '#creating-responses', name: 'Creating responses' },
-    { url: '#lazy-evaluation', name: 'Lazy evaluation' },
     { url: '#root-template-data', name: 'Root template data' },
     { url: '#maximum-response-size', name: 'Maximum response size' },
   ],
@@ -71,62 +70,6 @@ In this example we're passing a single prop, called `event`, which contains four
   To ensure that pages load quickly, only return the minimum data required for the page. Also, be aware that all data
   returned from the controllers will be visible client-side, so be sure to omit sensitive information.
 </Notice>
-
-## Lazy evaluation
-
-When using [partial reloads](/requests#partial-reloads) it's best to wrap the props (data) in a closure, so that it will only be evaluated if it's required.
-
-<TabbedCodeExamples
-  examples={[
-    {
-      name: 'Laravel',
-      language: 'php',
-      code: dedent`
-        class UsersController extends Controller
-        {
-            public function index()
-            {
-                return Inertia::render('Users/Index', [
-                    // Lazily evaluated (only run if required)
-                    'companies' => function () {
-                        return Company::orderBy('name')
-                            ->get('id', 'name');
-                    },
-                    // Evaluated immediately
-                    'users' => User::orderBy('name')
-                        ->select('id', 'name')
-                        ->paginate(),
-                ]);
-            }
-        }
-      `,
-    },
-    {
-      name: 'Rails',
-      language: 'ruby',
-      code: dedent`
-        class UsersController < ApplicationController
-          def index
-            render inertia: 'Users/Index', props: {
-              # Lazily evaluated (only run if required)
-              companies: -> {
-                Company.
-                  order(:name).
-                  as_json(only: [ :id, :name ])
-              },
-              
-              # Evaluated immediately
-              users: User.
-                order(:name).
-                paginate(params[:page]).
-                as_json(only: [ :id, :name ])
-            }
-          end
-        end
-      `,
-    },
-  ]}
-/>
 
 ## Root template data
 

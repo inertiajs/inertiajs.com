@@ -14,6 +14,7 @@ export const meta = {
     { url: '#replace', name: 'Replace' },
     { url: '#preserve-state', name: 'Preserve state' },
     { url: '#preserve-scroll', name: 'Preserve scroll' },
+    { url: '#partial-reloads', name: 'Partial reloads' },
   ],
 }
 
@@ -251,7 +252,7 @@ For more information, see the [scroll management](/scroll-management) page.
 
 ## Partial reloads
 
-The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the _same page_. This feature is called partial reloads, and can be a helpful performance optimization if it's acceptable that some page data becomes stale. For partial reloads to be effective, be sure to use [lazy evaluation](/responses#lazy-evaluation) server-side.
+The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the same page.
 
 <TabbedCodeExamples
   examples={[
@@ -259,24 +260,26 @@ The `only` option allows you to request a subset of the props (data) from the se
       name: 'Vue.js',
       language: 'twig',
       code: dedent`
-        <inertia-link href="/" :only="['someProps']">Home</inertia-link>
+        <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
       `,
     },
     {
       name: 'React',
       language: 'html',
       code: dedent`
-        <InertiaLink href="/" only={['someProps']}>Home</InertiaLink>
+        <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
       language: 'html',
       code: dedent`
-        <a href="/" use:inertia="{{ only: ['someProps'] }}">Home</a>\n
+        <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
         <!-- or -->\n
-        <InertiaLink href="/" only={['someProps']}>Home</InertiaLink>
+        <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
   ]}
 />
+
+For more information, see the [partial reloads](/partial-reloads) page.
