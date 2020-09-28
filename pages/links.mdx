@@ -217,7 +217,7 @@ You can preserve a page component's local state using the `preserve-state` attri
 
 ## Preserve scroll
 
-By default page visits will automatically reset the scroll position back to the top of the page (and any [scroll regions](/pages#scroll-regions) you've defined). You can use the `preserve-scroll` attribute to disable this behaviour.
+You can use the `preserve-scroll` attribute to prevent Inertia from automatically resetting the scroll position when making the visit.
 
 <TabbedCodeExamples
   examples={[
@@ -246,6 +246,8 @@ By default page visits will automatically reset the scroll position back to the 
     },
   ]}
 />
+
+For more information, see the [scroll management](/scroll-management) page.
 
 ## Partial reloads
 
