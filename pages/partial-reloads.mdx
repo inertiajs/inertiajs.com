@@ -54,14 +54,14 @@ It's also possible to perform partial reloads with Inertia links using the `only
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
         <!-- or -->\n

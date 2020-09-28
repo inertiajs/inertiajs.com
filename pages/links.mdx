@@ -30,21 +30,21 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
   examples={[
     {
       name: 'Vue.js',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
         <inertia-link href="/">Home</inertia-link>
       `,
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink href="/">Home</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <a href="/" use:inertia>Home</a>\n
         <!-- or -->\n
@@ -63,21 +63,21 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
   examples={[
     {
       name: 'Vue.js',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
         <inertia-link href="/logout" method="post">Logout</inertia-link>
       `,
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink href="/logout" method="post">Logout</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <a href="/logout" use:inertia="{{ method: 'post' }}">Logout</a>\n
         <!-- or -->\n
@@ -95,21 +95,21 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
   examples={[
     {
       name: 'Vue.js',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
         <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
       `,
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
       `,
@@ -125,21 +125,21 @@ The `headers` option allows you to add custom headers to an Inertia link. Do not
   examples={[
     {
       name: 'Vue.js',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
         <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
       `,
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink href="/endpoint" headers={{ foo: bar }}>Save</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>\n
         <!-- or -->\n
@@ -157,21 +157,21 @@ You can specify the browser history behaviour. By default page visits push (new)
   examples={[
     {
       name: 'Vue.js',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
         <inertia-link href="/" replace>Home</inertia-link>
       `,
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink replace href="/">Home</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <a href="/" use:inertia="{{ replace: true }}">Home</a>\n
         <!-- or -->\n
@@ -189,7 +189,7 @@ You can preserve a page component's local state using the `preserve-state` attri
   examples={[
     {
       name: 'Vue.js',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
         <input v-model="query" type="text" />
         <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
@@ -197,7 +197,7 @@ You can preserve a page component's local state using the `preserve-state` attri
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <input onChange={this.handleChange} value={query} />
         <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
@@ -205,7 +205,7 @@ You can preserve a page component's local state using the `preserve-state` attri
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <input on:change={handleChange} value={query} />
         <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>\n
@@ -224,21 +224,21 @@ You can use the `preserve-scroll` attribute to prevent Inertia from automaticall
   examples={[
     {
       name: 'Vue.js',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
         <inertia-link href="/" preserve-scroll>Home</inertia-link>
       `,
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink preserveScroll href="/">Home</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
         <!-- or -->\n
@@ -258,21 +258,21 @@ The `only` option allows you to request a subset of the props (data) from the se
   examples={[
     {
       name: 'Vue.js',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
         <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
       `,
     },
     {
       name: 'React',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
         <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
         <!-- or -->\n
