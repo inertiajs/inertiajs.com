@@ -75,9 +75,11 @@ export default {
 Alternatively, if you're using native browser events, you can remove the event listener using `removeEventListener()`.
 
 ```js
-let startEventListener = document.addEventListener('inertia:start', event => {
+let startEventListener = event => {
   console.log(`Starting a visit to ${event.detail.visit.url}`)
-})
+}
+
+document.addEventListener('inertia:start', startEventListener)
 
 // Remove the listener
 document.removeEventListener('inertia:start', startEventListener)
