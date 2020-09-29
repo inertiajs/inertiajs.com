@@ -38,7 +38,7 @@ const theme = {
   inserted: { color: 'green' },
 }
 
-export default ({ className, language, height, children }) => (
+const Code = ({ className, language, height, children }) => (
   <SyntaxHighlighter
     className={className}
     language={language}
@@ -53,3 +53,5 @@ export default ({ className, language, height, children }) => (
     }}
   />
 )
+
+export default Code

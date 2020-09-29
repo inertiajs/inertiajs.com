@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export default ({ className }) => {
+const Nav = ({ className }) => {
   const router = useRouter()
 
   function linkClass(path) {
@@ -200,3 +200,5 @@ export default ({ className }) => {
     </nav>
   )
 }
+
+export default Nav
