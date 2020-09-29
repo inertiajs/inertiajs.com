@@ -1,0 +1,306 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Manual visits',
+  links: [
+    { url: '#method', name: 'method' },
+    { url: '#data', name: 'data' },
+    { url: '#replace', name: 'replace' },
+    { url: '#preserve-state', name: 'preserveState' },
+    { url: '#preserve-scroll', name: 'preserveScroll' },
+    { url: '#only', name: 'only' },
+    { url: '#headers', name: 'headers' },
+    { url: '#on-cancel-token', name: 'onCancelToken' },
+    { url: '#on-cancel', name: 'onCancel' },
+    { url: '#on-start', name: 'onStart' },
+    { url: '#on-progress', name: 'onProgress' },
+    { url: '#on-success', name: 'onSuccess' },
+    { url: '#on-finish', name: 'onFinish' },
+  ],
+}
+
+# Manual visits
+
+In addition to [creating links](/links), it's also possible to manually make Inertia visits. This can be done using the `Inertia.visit()` method.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        // import { Inertia } from '@inertiajs/inertia'\n
+        this.$inertia.visit(url, {
+          method: 'get',
+          data: {},
+          replace: false,
+          preserveState: false,
+          preserveScroll: false,
+          only: [],
+          headers: {},
+          onCancelToken: cancelToken => {},
+          onCancel: () => {},
+          onStart: visit => {},
+          onProgress: progress => {},
+          onSuccess: page => {},
+          onFinish: () => {},
+        })
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'\n
+        Inertia.visit(url, {
+          method: 'get',
+          data: {},
+          replace: false,
+          preserveState: false,
+          preserveScroll: false,
+          only: [],
+          headers: {},
+          onCancelToken: cancelToken => {},
+          onCancel: () => {},
+          onStart: visit => {},
+          onProgress: progress => {},
+          onSuccess: page => {},
+          onFinish: () => {},
+        })
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'\n
+        Inertia.visit(url, {
+          method: 'get',
+          data: {},
+          replace: false,
+          preserveState: false,
+          preserveScroll: false,
+          only: [],
+          headers: {},
+          onCancelToken: cancelToken => {},
+          onCancel: () => {},
+          onStart: visit => {},
+          onProgress: progress => {},
+          onSuccess: page => {},
+          onFinish: () => {},
+        })
+      `,
+    },
+  ]}
+/>
+
+In addition to `Inertia.visit()`, there are also the following shortcut methods. These methods have the same options as `Inertia.visit()`, except where not applicable.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        // import { Inertia } from '@inertiajs/inertia'\n
+        this.$inertia.replace(url, {
+          replace: true,        // fixed
+          preserveState: true,  // default
+        })\n
+        this.$inertia.reload()  // Uses current URL\n
+        this.$inertia.post(url, data, {
+          method: 'post',       // fixed
+          preserveState: true,  // default
+        })\n
+        this.$inertia.put(url, data, {
+          method: 'put',        // fixed
+          preserveState: true,  // default
+        })\n
+        this.$inertia.patch(url, data, {
+          method: 'patch',      // fixed
+          preserveState: true,  // default
+        })\n
+        this.$inertia.delete(url, {
+          method: 'delete',     // fixed
+        })
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'\n
+        Inertia.replace(url, {
+          replace: true,        // fixed
+          preserveState: true,  // default
+        })\n
+        Inertia.reload()        // Uses current URL\n
+        Inertia.post(url, data, {
+          method: 'post',       // fixed
+          preserveState: true,  // default
+        })\n
+        Inertia.put(url, data, {
+          method: 'put',        // fixed
+          preserveState: true,  // default
+        })\n
+        Inertia.patch(url, data, {
+          method: 'patch',      // fixed
+          preserveState: true,  // default
+        })\n
+        Inertia.delete(url, {
+          method: 'delete',     // fixed
+        })
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'\n
+        Inertia.replace(url, {
+          replace: true,        // fixed
+          preserveState: true,  // default
+        })\n
+        Inertia.reload()        // Uses current URL\n
+        Inertia.post(url, data, {
+          method: 'post',       // fixed
+          preserveState: true,  // default
+        })\n
+        Inertia.put(url, data, {
+          method: 'put',        // fixed
+          preserveState: true,  // default
+        })\n
+        Inertia.patch(url, data, {
+          method: 'patch',      // fixed
+          preserveState: true,  // default
+        })\n
+        Inertia.delete(url, {
+          method: 'delete',     // fixed
+        })
+      `,
+    },
+  ]}
+/>
+
+## method
+
+Use the `method` option to set the request method to `get`, `post`, `put`, `patch` or `delete`. The default is `get`.
+
+```js
+Inertia.visit(url, {
+  method: 'post',
+})
+```
+
+Generally it's preferred to use one of the shortcut methods instead. For example, instead of using `method: 'post'`, use `Inertia.post()` instead.
+
+## data
+
+Use the `data` option to add data to the request.
+
+```js
+Inertia.visit(url, {
+  data: {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+  },
+})
+```
+
+## replace
+
+By default page visits push (new) state (`history.pushState`) into the history, however it's also possible to replace state (`history.replaceState`) by setting the `replace` option to `true`. This will cause the visit to replace the current history state, instead of adding a new history state to the stack.
+
+## preserveState
+
+By default page visits to the same page will force a fresh page component instance. However, in certain situations you may want to keep the existing page instance in order to preserve some local state. You can do this by setting the `preserveState` option to `true`.
+
+## preserveScroll
+
+For more information about the `preserveScroll` option, see the [scroll management](/scroll-management) page.
+
+## only
+
+For more information about the `only` option, see the [partial reloads](/partial-reloads) page.
+
+## headers
+
+The `headers` option allows you to add additional custom headers to a request. Note that the Inertia headers take priority and therefore cannot be overwritten.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.visit('/users', {
+  headers: {
+    'Custom-Header': 'value',
+  },
+})
+
+Inertia.post('/users', data, {
+  headers: {
+    'Custom-Header': 'value',
+  },
+})
+```
+
+## onCancelToken
+
+```js
+Inertia.post('/users', data, {
+  onCancelToken: token => (this.cancelToken = true),
+})
+```
+
+## onCancel
+
+```js
+Inertia.post('/users', data, {
+  onCancel: () => {
+    // Handle visit cancellation
+  },
+})
+```
+
+## onStart
+
+```js
+Inertia.post('/users', data, {
+  onStart: visit => {
+    // Handle visit start
+  },
+})
+```
+
+## onProgress
+
+```js
+Inertia.post('/users', data, {
+  onProgress: progress => {
+    // Handle visit progress
+  },
+})
+```
+
+## onSuccess
+
+```js
+Inertia.post('/users', data, {
+  onSuccess: page => {
+    // Handle visit success
+  },
+})
+```
+
+## onFinish
+
+```js
+Inertia.post('/users', data, {
+  onSuccess: () => {
+    // Handle visit finish
+  },
+})
+```

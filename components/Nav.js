@@ -109,16 +109,6 @@ const Nav = ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
-          <Link href="/requests">
-            <a className={linkClass('/requests')}>Requests</a>
-          </Link>
-        </li>
-        <li className="md:pr-3">
-          <Link href="/redirects">
-            <a className={linkClass('/redirects')}>Redirects</a>
-          </Link>
-        </li>
-        <li className="md:pr-3">
           <Link href="/pages">
             <a className={linkClass('/pages')}>Pages</a>
           </Link>
@@ -126,6 +116,16 @@ const Nav = ({ className }) => {
         <li className="md:pr-3">
           <Link href="/links">
             <a className={linkClass('/links')}>Links</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/manual-visits">
+            <a className={linkClass('/manual-visits')}>Manual visits</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/redirects">
+            <a className={linkClass('/redirects')}>Redirects</a>
           </Link>
         </li>
         <li className="md:pr-3">
