@@ -23,11 +23,7 @@ When navigating between pages, Inertia mimics default browser behaviour by autom
 Sometimes it's desirable to prevent the default scroll resetting when making visits. You can disable this behaviour using the `preserveScroll` option when manually [making visits](/requests).
 
 ```js
-import { Inertia } from '@inertiajs/inertia'
-
-Inertia.visit(url, {
-  preserveScroll: false,
-})
+Inertia.visit(url, { preserveScroll: true })
 ```
 
 This is also possible with [Inertia links](/links) using the `preserve-scroll` attribute.

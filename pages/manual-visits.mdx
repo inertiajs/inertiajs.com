@@ -1,0 +1,338 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import Notice from '../components/Notice'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Manual visits',
+  links: [
+    { url: '#method', name: 'Method' },
+    { url: '#data', name: 'Data' },
+    { url: '#browser-history', name: 'Browser history' },
+    { url: '#component-state', name: 'Component state' },
+    { url: '#scroll-preservation', name: 'Scroll preservation' },
+    { url: '#partial-reloads', name: 'Partial reloads' },
+    { url: '#custom-headers', name: 'Custom headers' },
+    { url: '#visit-cancellation', name: 'Visit cancellation' },
+    { url: '#event-callbacks', name: 'Event callbacks' },
+    { url: '#promise-deprecation', name: 'Promise deprecation' },
+  ],
+}
+
+# Manual visits
+
+In addition to [creating links](/links), it's also possible to manually make Inertia visits. This is done using the `Inertia.visit()` method.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        // import { Inertia } from '@inertiajs/inertia'\n
+        this.$inertia.visit(url, {
+          method: 'get',
+          data: {},
+          replace: false,
+          preserveState: false,
+          preserveScroll: false,
+          only: [],
+          headers: {},
+          onCancelToken: cancelToken => {},
+          onCancel: () => {},
+          onStart: visit => {},
+          onProgress: progress => {},
+          onSuccess: page => {},
+          onFinish: () => {},
+        })
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'\n
+        Inertia.visit(url, {
+          method: 'get',
+          data: {},
+          replace: false,
+          preserveState: false,
+          preserveScroll: false,
+          only: [],
+          headers: {},
+          onCancelToken: cancelToken => {},
+          onCancel: () => {},
+          onStart: visit => {},
+          onProgress: progress => {},
+          onSuccess: page => {},
+          onFinish: () => {},
+        })
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'\n
+        Inertia.visit(url, {
+          method: 'get',
+          data: {},
+          replace: false,
+          preserveState: false,
+          preserveScroll: false,
+          only: [],
+          headers: {},
+          onCancelToken: cancelToken => {},
+          onCancel: () => {},
+          onStart: visit => {},
+          onProgress: progress => {},
+          onSuccess: page => {},
+          onFinish: () => {},
+        })
+      `,
+    },
+  ]}
+/>
+
+However, generally it's preferred to use one of the shortcut methods instead. These methods share all the same options as `Inertia.visit()`.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        // import { Inertia } from '@inertiajs/inertia'\n
+        this.$inertia.get(url, data, options)
+        this.$inertia.post(url, data, options)
+        this.$inertia.put(url, data, options)
+        this.$inertia.patch(url, data, options)
+        this.$inertia.delete(url, options)
+        this.$inertia.replace(url, options)
+        this.$inertia.reload(options) // Uses the current URL
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'\n
+        Inertia.get(url, data, options)
+        Inertia.post(url, data, options)
+        Inertia.put(url, data, options)
+        Inertia.patch(url, data, options)
+        Inertia.delete(url, options)
+        Inertia.replace(url, options)
+        Inertia.reload(options) // Uses the current URL
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'\n
+        Inertia.get(url, data, options)
+        Inertia.post(url, data, options)
+        Inertia.put(url, data, options)
+        Inertia.patch(url, data, options)
+        Inertia.delete(url, options)
+        Inertia.replace(url, options)
+        Inertia.reload(options) // Uses the current URL
+      `,
+    },
+  ]}
+/>
+
+## Method
+
+Use the `method` option to set the request method to `get`, `post`, `put`, `patch` or `delete`. The default is `get`.
+
+```js
+Inertia.visit(url, { method: 'post' })
+```
+
+## Data
+
+Use the `data` option to add data to the request.
+
+```js
+Inertia.visit('/users', {
+  method: 'post',
+  data: {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+  },
+})
+```
+
+As a convenience, the `get()`, `post()`, `put()` and `patch()` methods all include `data` as the second argument.
+
+```js
+Inertia.post('/users', {
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+})
+```
+
+## Browser history
+
+When making visits, Inertia automatically adds a new entry into the browser history. However, it's also possible to replace the current history entry using by setting the `replace` option to `true`.
+
+```js
+Inertia.get('/users', { search: 'John' }, { replace: true })
+```
+
+As a shortcut, you can use `replace()` method to automatically do this.
+
+```js
+Inertia.replace('/users', { search: 'John' })
+```
+
+<Notice>
+  Note that visits made to the same URL (including query strings) automatically set <inlineCode>replace</inlineCode> to{' '}
+  <inlineCode>true</inlineCode>.
+</Notice>
+
+## Component state
+
+By default page visits to the same page force a fresh page component instance, which clears out any local state, such as form inputs, scroll positions and focus states.
+
+In certain situations it's necessary to preserve the page component state. For example, when submitting a form, you need to preserve the your form data in the event that validation errors come back.
+
+This can be done by setting the `preserveState` option to `true`.
+
+```js
+Inertia.get('/users', { search: 'John' }, { preserveState: true })
+```
+
+For convenience, the `post()`, `put()`, `patch()` and `replace()` methods autmatically set `preserveState` to `true`.
+
+## Scroll preservation
+
+When navigating between pages, Inertia mimics default browser behaviour by automatically resetting the scroll position of the document body (as well as any [scroll regions](/scroll-management#scroll-regions) you've defined), back to the top. Use the `preserveScroll` option to disable this behaviour.
+
+```js
+Inertia.visit(url, { preserveScroll: true })
+```
+
+For more information, see the [scroll management](/scroll-management) page.
+
+## Partial reloads
+
+The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the same page.
+
+```js
+Inertia.visit('/users', { search: 'John' }, { only: ['users'] })
+```
+
+For more information, see the [partial reloads](/partial-reloads) page.
+
+## Custom headers
+
+The `headers` option allows you to add custom headers to a request.
+
+```js
+Inertia.post('/users', data, {
+  headers: {
+    'Custom-Header': 'value',
+  },
+})
+```
+
+<Notice>The Inertia headers take priority and therefore cannot be overwritten.</Notice>
+
+## Visit cancellation
+
+You can cancel an visit using a cancel token, which Inertia automatically generates and provides via the `onCancelToken()` callback prior to making the visit.
+
+```js
+Inertia.post('/users', data, {
+  onCancelToken: token => (this.cancelToken = true),
+})
+
+// Cancel the visit
+this.cancelToken.cancel()
+```
+
+When a visit is cancelled, both the `onCancel()` and `onFinish()` event callbacks will be called.
+
+## Event callbacks
+
+In addition to the [global events](/events), Inertia also provides a number of per visit event callbacks.
+
+```js
+Inertia.post('/users', data, {
+  onStart: visit => {},
+  onProgress: progress => {},
+  onSuccess: page => {},
+  onCancel: () => {},
+  onFinish: () => {},
+})
+```
+
+Returning `false` from the `onStart()` callback will cause the visit to be cancelled.
+
+```js
+Inertia.delete(`/users/${user.id}`, {
+  onStart: () => confirm('Are you sure you want to delete this user?'),
+})
+```
+
+It's also possible to return a promise from the `onSuccess()` callback. This will delay the "finish" event until the promise has resolved.
+
+```js
+Inertia.post(url, {
+  onSuccess: () => {
+    return Promise.all([
+      this.doThing(),
+      this.doAnotherThing()
+    ])
+  }
+  onFinish: () => {
+    // This won't be called until doThing()
+    // and doAnotherThing() have finished.
+  },
+})
+```
+
+## Promise deprecation
+
+As of `v0.3.0`, Inertia deprecated the promise that is returned from `Inertia.visit()`. If you call `then()`, `catch()` or `finally()` on an Inertia visit, you will now get the following console warning:
+
+<div class="py-4 px-6 border-l-4 border-orange-300 bg-orange-100 text-orange-900 text-sm font-mono">
+  <div>
+    Inertia.js visit promises have been deprecated and will be removed in a future release. Please use the new visit
+    event callbacks instead.
+  </div>
+  <div class="mt-4">Learn more at https://inertiajs.com/manual-visits#promise-deprecation</div>
+</div>
+
+The preferred approach is to use the new [event callbacks](#event-callbacks) instead. For example, instead of using `then()`, use the `onSuccess()` callback instead.
+
+```js
+Inertia.post('/profile', data, {
+  onSuccess: () => {
+    // Handle success event
+  },
+})
+```
+
+Instead of using `finally()`, use the `onFinish()` callback instead.
+
+```js
+Inertia.post('/profile', data, {
+  onFinish: () => {
+    // Handle finish event
+  },
+})
+```
+
+And instead of using `catch()`, it's better to handle these unexpected errors using a global error event handler.
+
+```js
+Inertia.on('error', event => {
+  event.preventDefault()
+  // Handle the error yourself
+})
+```
