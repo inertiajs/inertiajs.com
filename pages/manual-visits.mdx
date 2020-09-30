@@ -248,7 +248,7 @@ You can cancel an visit using a cancel token, which Inertia automatically genera
 
 ```js
 Inertia.post('/users', data, {
-  onCancelToken: token => (this.cancelToken = true),
+  onCancelToken: cancelToken => (this.cancelToken = cancelToken),
 })
 
 // Cancel the visit
