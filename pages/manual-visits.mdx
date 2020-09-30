@@ -198,7 +198,7 @@ Inertia.replace('/users', { search: 'John' })
 
 By default page visits to the same page force a fresh page component instance, which clears out any local state, such as form inputs, scroll positions and focus states.
 
-In certain situations it's necessary to preserve the page component state. For example, when submitting a form, you need to preserve the your form data in the event that validation errors come back.
+In certain situations it's necessary to preserve the page component state. For example, when submitting a form, you need to preserve your form data in the event that validation errors come back.
 
 This can be done by setting the `preserveState` option to `true`.
 
@@ -244,7 +244,7 @@ Inertia.post('/users', data, {
 
 ## Visit cancellation
 
-You can cancel an visit using a cancel token, which Inertia automatically generates and provides via the `onCancelToken()` callback prior to making the visit.
+You can cancel a visit using a cancel token, which Inertia automatically generates and provides via the `onCancelToken()` callback prior to making the visit.
 
 ```js
 Inertia.post('/users', data, {
@@ -259,7 +259,7 @@ When a visit is cancelled, both the `onCancel()` and `onFinish()` event callback
 
 ## Event callbacks
 
-In addition to the [global events](/events), Inertia also provides a number of per visit event callbacks.
+In addition to the [global events](/events), Inertia also provides a number of per-visit event callbacks.
 
 ```js
 Inertia.post('/users', data, {
@@ -308,7 +308,7 @@ As of `v0.3.0`, Inertia deprecated the promise that is returned from `Inertia.vi
   <div class="mt-4">Learn more at https://inertiajs.com/manual-visits#promise-deprecation</div>
 </div>
 
-The preferred approach is to use the new [event callbacks](#event-callbacks) instead. For example, instead of using `then()`, use the `onSuccess()` callback instead.
+The preferred approach is to use the new [event callbacks](#event-callbacks) instead. For example, instead of using `then()`, use the `onSuccess()` callback.
 
 ```js
 Inertia.post('/profile', data, {
@@ -318,7 +318,7 @@ Inertia.post('/profile', data, {
 })
 ```
 
-Instead of using `finally()`, use the `onFinish()` callback instead.
+Instead of using `finally()`, use the `onFinish()` callback.
 
 ```js
 Inertia.post('/profile', data, {
