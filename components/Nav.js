@@ -76,23 +76,16 @@ const Nav = ({ className }) => {
           </Link>
         </li>
       </ul>
-      <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">
-        Getting started
-      </div>
+      <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Installation</div>
       <ul>
         <li className="md:pr-3">
-          <Link href="/installation">
-            <a className={linkClass('/installation')}>Installation</a>
-          </Link>
-        </li>
-        <li className="md:pr-3">
           <Link href="/server-side-setup">
-            <a className={linkClass('/server-side-setup')}>Server-side setup</a>
+            <a className={linkClass('/server-side-setup')}>Server-side</a>
           </Link>
         </li>
         <li className="md:pr-3">
           <Link href="/client-side-setup">
-            <a className={linkClass('/client-side-setup')}>Client-side setup</a>
+            <a className={linkClass('/client-side-setup')}>Client-side</a>
           </Link>
         </li>
       </ul>

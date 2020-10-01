@@ -16,6 +16,8 @@ export const meta = {
 
 # Client-side setup
 
+Once you have your [server-side framework configured](/server-side-setup), you then need to setup your client-side framework. Inertia currently provides support for React, Vue.js, and Svelte.
+
 ## Install dependencies
 
 Install the Inertia client-side adapters using NPM or Yarn.
@@ -108,18 +110,45 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
   ]}
 />
 
-The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
+The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and should return a page component instance.
 
 ## Loading indicator
 
-Since Inertia requests are made via XHR, there's no default browser loading indicator. To solve this, Inertia ships with [NProgress.js](https://ricostacruz.com/nprogress/), a nice little progress bar library. Be sure to include the [nprogress.css](https://github.com/rstacruz/nprogress/blob/master/nprogress.css) in your project, otherwise you won't see it.
+Since Inertia requests are made via XHR, there's no default browser loading indicator. To solve this, Inertia provides an optional [progress package](https://github.com/inertiajs/progress) that integrates with [NProgress.js](https://ricostacruz.com/nprogress/), a nice little progress bar library.
 
-<Notice>
-  The loading indicator is only shown if a request takes longer than 250ms. To test it locally, you'll need to force a
-  request to take longer than this.
-</Notice>
+Start by installing it:
 
-In the future we intend to give more control over the handling of the loading indicator. See this <a href="https://github.com/inertiajs/inertia/issues/9">issue</a> for more information.
+```bash
+npm install @inertiajs/progress
+yarn add @inertiajs/progress
+```
+
+Once it's been installed, initialize it in your app.
+
+```js
+import { InertiaProgress } from '@inertiajs/progress'
+
+InertiaProgress.init()
+```
+
+It also comes with a number of customization options, which you can pass to the `init()` method.
+
+```js
+InertiaProgress.init({
+  // The delay after which the progress bar will
+  // appear during navigation, in milliseconds.
+  delay: 250,
+
+  // The color of the progress bar.
+  color: '#29d',
+
+  // Whether to include the default NProgress styles.
+  includeCSS: true,
+
+  // Whether the NProgress spinner will be shown.
+  showSpinner: false,
+})
+```
 
 ## Code splitting
 
