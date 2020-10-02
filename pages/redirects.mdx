@@ -5,7 +5,11 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Redirects',
-  links: [{ url: '#top', name: 'Making redirects' }, { url: '#303-response-code', name: '303 response code' }],
+  links: [
+    { url: '#top', name: 'Making redirects' },
+    { url: '#303-response-code', name: '303 response code' },
+    { url: '#external-redirects', name: 'External redirects' },
+  ],
 }
 
 # Redirects
@@ -66,3 +70,28 @@ Inertia will automatically follow this redirect and update the page accordingly.
 Note, when redirecting after a `PUT`, `PATCH` or `DELETE` request you must use a `303` response code, otherwise the subsequent request will not be treated as a `GET` request. A `303` redirect is the same as a `302` except that the follow-up request is explicitly changed to a `GET` request.
 
 If you're using one of our official server-side adapters, redirects will automatically be converted.
+
+## External redirects
+
+Sometimes it's necessary to redirect to an external website, or even another non-Inertia endpoint in your app, within an Inertia request. This is possible using a server-side initiated `window.location` visit.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        return Inertia::location($url);
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+This will generate a `409 Conflict` response, which includes the destination URL in the `X-Inertia-Location` header. Client-side, Inertia will detect this response and automatically do a `window.location = url` visit.
