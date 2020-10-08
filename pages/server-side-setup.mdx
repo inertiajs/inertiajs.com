@@ -89,6 +89,33 @@ Next, setup the root template that will be loaded on the first page visit. This 
   ]}
 />
 
+## Middlware
+
+Inertia needs to register a middleware in order to deal with things like version conflicts and redirects. Normally, you won't have to worry about this since Inertia will automatically register the middleware into your framework's middleware stack. If you need more control, you can also manually register the middleware into your middleware stack.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        use Inertia\\Middleware;\n
+        class Kernel extends HttpKernel
+        {
+            protected $middlewareGroups = [
+                // ...\n
+                'custom-group' => [
+                    Middleware::class,
+                ],
+            ];
+        }
+      `,
+      description:
+        'By default, the Laravel adapter will append the middleware to the "web" middleware group. If you want to change this default, you can modify the intertia.middleware_group configuration setting.',
+    },
+  ]}
+/>
+
 ## Asset versioning
 
 While not required, it's highly recommended that you also configure automatic asset refreshing. To do this you simply need to tell Inertia what the current version of your assets is. See the [asset versioning](/asset-versioning) page for more information.
