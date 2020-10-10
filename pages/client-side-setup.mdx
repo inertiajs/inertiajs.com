@@ -61,9 +61,9 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'Vue.js',
       language: 'js',
       code: dedent`
-        import { InertiaApp } from '@inertiajs/inertia-vue'
+        import { InertiaApp, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
-        Vue.use(InertiaApp)\n
+        Vue.use(plugin)\n
         const app = document.getElementById('app')\n
         new Vue({
           render: h => h(InertiaApp, {
