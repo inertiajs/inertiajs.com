@@ -72,7 +72,7 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
         createApp({
           render: () => h(app, {
             initialPage: JSON.parse(el.dataset.page),
-            resolveComponent: name => import(\`@/Pages/\${name}\`).then(module => module.default),
+            resolveComponent: name => require(\`./Pages/\${name}\`).default,
           })
         }).use(plugin).mount(el)\n\n
         /*
@@ -200,50 +200,21 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       name: 'Vue.js',
       language: 'js',
       code: dedent`
-        import { app, plugin } from '@inertiajs/inertia-vue'
-        import Vue from 'vue'\n
-        Vue.use(plugin)\n
-        const app = document.getElementById('app')\n
-        new Vue({
-          render: h => h(app, {
-            props: {
-              initialPage: JSON.parse(app.dataset.page),
-              resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
-            },
-          }),
-        }).$mount(app)
+        resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
       `,
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import { app } from '@inertiajs/inertia-react'
-        import React from 'react'
-        import { render } from 'react-dom'\n
-        const app = document.getElementById('app')\n
-        render(
-          <app
-            initialPage={JSON.parse(app.dataset.page)}
-            resolveComponent={name => import(\`./Pages/\${name}\`).then(module => module.default)}
-          />,
-          app
-        )
+        resolveComponent={name => import(\`./Pages/\${name}\`).then(module => module.default)}
       `,
     },
     {
       name: 'Svelte',
       language: 'js',
       code: dedent`
-        import { app } from '@inertiajs/inertia-svelte'\n
-        const app = document.getElementById('app')\n
-        new app({
-          target: app,
-          props: {
-            initialPage: JSON.parse(app.dataset.page),
-            resolveComponent: name => import(\`./Pages/\${name}.svelte\`),
-          },
-        })
+        resolveComponent: name => import(\`./Pages/\${name}.svelte\`),
       `,
     },
   ]}
