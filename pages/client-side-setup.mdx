@@ -181,9 +181,9 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       name: 'Vue.js',
       language: 'js',
       code: dedent`
-        import { InertiaApp } from '@inertiajs/inertia-vue'
+        import { InertiaApp, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
-        Vue.use(InertiaApp)\n
+        Vue.use(plugin)\n
         const app = document.getElementById('app')\n
         new Vue({
           render: h => h(InertiaApp, {
