@@ -16,33 +16,28 @@ Sometimes it can be useful to transform the props client-side before they are pa
       language: 'js',
       code: dedent`
         new Vue({
-          render: h =>
-            h(Inertia, {
-              props: {
-                initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: name => require(\`./Pages/\${name}\`).default,
-                transformProps: props => {
-                  return {
-                    ...props,
-                    errors: new Errors(props.errors),
-                  }
-                },
+          render: h => h(app, {
+            props: {
+              initialPage: JSON.parse(el.dataset.page),
+              resolveComponent: name => require(\`./Pages/\${name}\`).default,
+              transformProps: props => {
+                return {
+                  ...props,
+                  errors: new Errors(props.errors),
+                }
               },
-            }),
-        }).$mount(app)
+            },
+          }),
+        }).$mount(el)
       `,
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import { Inertia } from '@inertiajs/inertia'
-        import React from 'react'
-        import { render } from 'react-dom'\n
-        const app = document.getElementById('app')\n
         render(
-          <Inertia
-            initialPage={JSON.parse(app.dataset.page)}
+          <app
+            initialPage={JSON.parse(el.dataset.page)}
             resolveComponent={name => require(\`./Pages/\${name}\`).default}
             transformProps={props => {
               return {
@@ -51,7 +46,7 @@ Sometimes it can be useful to transform the props client-side before they are pa
               }
             }}
           />,
-          app
+          el
         )
       `,
     },
@@ -59,13 +54,11 @@ Sometimes it can be useful to transform the props client-side before they are pa
       name: 'Svelte',
       language: 'js',
       code: dedent`
-        import { InertiaApp } from '@inertiajs/inertia-svelte'\n
-        const app = document.getElementById('app')\n
-        new InertiaApp({
-          target: app,
+        new app({
+          target: el,
           props: {
-            initialPage: JSON.parse(app.dataset.page),
-            resolveComponent: name => import(\`./Pages/\${name}.svelte\`),
+            initialPage: JSON.parse(el.dataset.page),
+            resolveComponent: name => require(\`./Pages/\${name}.svelte\`),
             transformProps: props => {
               return {
                 ...props,

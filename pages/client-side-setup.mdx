@@ -61,34 +61,34 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'Vue.js',
       language: 'js',
       code: dedent`
-        import { InertiaApp, plugin } from '@inertiajs/inertia-vue'
+        import { app, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
         Vue.use(plugin)\n
-        const app = document.getElementById('app')\n
+        const el = document.getElementById('app')\n
         new Vue({
-          render: h => h(InertiaApp, {
+          render: h => h(app, {
             props: {
-              initialPage: JSON.parse(app.dataset.page),
+              initialPage: JSON.parse(el.dataset.page),
               resolveComponent: name => require(\`./Pages/\${name}\`).default,
             },
           }),
-        }).$mount(app)
+        }).$mount(el)
       `,
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import { InertiaApp } from '@inertiajs/inertia-react'
+        import { app } from '@inertiajs/inertia-react'
         import React from 'react'
         import { render } from 'react-dom'\n
-        const app = document.getElementById('app')\n
+        const el = document.getElementById('app')\n
         render(
-          <InertiaApp
-            initialPage={JSON.parse(app.dataset.page)}
+          <app
+            initialPage={JSON.parse(el.dataset.page)}
             resolveComponent={name => require(\`./Pages/\${name}\`).default}
           />,
-          app
+          el
         )
       `,
     },
@@ -96,12 +96,12 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'Svelte',
       language: 'js',
       code: dedent`
-        import { InertiaApp } from '@inertiajs/inertia-svelte'\n
-        const app = document.getElementById('app')\n
-        new InertiaApp({
-          target: app,
+        import { app } from '@inertiajs/inertia-svelte'\n
+        const el = document.getElementById('app')\n
+        new app({
+          target: el,
           props: {
-            initialPage: JSON.parse(app.dataset.page),
+            initialPage: JSON.parse(el.dataset.page),
             resolveComponent: name => require(\`./Pages/\${name}.svelte\`),
           },
         })
@@ -181,12 +181,12 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       name: 'Vue.js',
       language: 'js',
       code: dedent`
-        import { InertiaApp, plugin } from '@inertiajs/inertia-vue'
+        import { app, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
         Vue.use(plugin)\n
         const app = document.getElementById('app')\n
         new Vue({
-          render: h => h(InertiaApp, {
+          render: h => h(app, {
             props: {
               initialPage: JSON.parse(app.dataset.page),
               resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
@@ -199,12 +199,12 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import { InertiaApp } from '@inertiajs/inertia-react'
+        import { app } from '@inertiajs/inertia-react'
         import React from 'react'
         import { render } from 'react-dom'\n
         const app = document.getElementById('app')\n
         render(
-          <InertiaApp
+          <app
             initialPage={JSON.parse(app.dataset.page)}
             resolveComponent={name => import(\`./Pages/\${name}\`).then(module => module.default)}
           />,
@@ -216,9 +216,9 @@ Finally, update the `resolveComponent` callback in your app initialization to us
       name: 'Svelte',
       language: 'js',
       code: dedent`
-        import { InertiaApp } from '@inertiajs/inertia-svelte'\n
+        import { app } from '@inertiajs/inertia-svelte'\n
         const app = document.getElementById('app')\n
-        new InertiaApp({
+        new app({
           target: app,
           props: {
             initialPage: JSON.parse(app.dataset.page),
