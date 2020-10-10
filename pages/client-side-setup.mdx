@@ -61,6 +61,25 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'Vue.js',
       language: 'js',
       code: dedent`
+        /*
+        |----------------------------------------------------------------
+        | Vue 3
+        |----------------------------------------------------------------
+        */\n
+        import { createApp, h } from 'vue'
+        import { app, plugin } from '@inertiajs/inertia-vue3'\n
+        const el = document.getElementById('app')\n
+        createApp({
+          render: () => h(app, {
+            initialPage: JSON.parse(el.dataset.page),
+            resolveComponent: name => import(\`@/Pages/\${name}\`).then(module => module.default),
+          })
+        }).use(plugin).mount(el)\n\n
+        /*
+        |----------------------------------------------------------------
+        | Vue 2
+        |----------------------------------------------------------------
+        */\n
         import { app, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
         Vue.use(plugin)\n
