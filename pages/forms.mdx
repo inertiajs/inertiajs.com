@@ -159,7 +159,7 @@ Unlike a classic ajax submitted form, with Inertia you don't handle the post sub
       code: dedent`
         class UsersController < ApplicationController
           def index
-            render inertia: 'Users/Index', props: {users: User.all}
+            render inertia: 'Users/Index', props: { users: User.all }
           end\n
           def create
             User.create params.require(:user).permit(:first_name, :last_name, :email)\n
