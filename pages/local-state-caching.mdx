@@ -99,9 +99,9 @@ If you have multiple instances of the same component on the page, be sure to inc
         {
           remember: {
             data: ['form'],
-            key: () =>` +
-        `\`Users/Edit:\${this.user.id}\`` +
-        dedent`,
+            key() {
+              \`Users/Edit:\${this.user.id}\`
+            }
           },
           data() {
             return {
