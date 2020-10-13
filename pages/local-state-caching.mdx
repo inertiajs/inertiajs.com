@@ -147,7 +147,7 @@ If you have multiple instances of the same component on the page, be sure to inc
             first_name: null,
             last_name: null,
           }, ` +
-        `\`Users/Edit:\${$page.user.id}\`` +
+        `\`Users/Edit:\${$page.props.user.id}\`` +
         dedent`)\n
           // ...
       `,
