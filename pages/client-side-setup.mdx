@@ -67,10 +67,10 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
         |----------------------------------------------------------------
         */\n
         import { createApp, h } from 'vue'
-        import { app, plugin } from '@inertiajs/inertia-vue3'\n
+        import { App, plugin } from '@inertiajs/inertia-vue3'\n
         const el = document.getElementById('app')\n
         createApp({
-          render: () => h(app, {
+          render: () => h(App, {
             initialPage: JSON.parse(el.dataset.page),
             resolveComponent: name => require(\`./Pages/\${name}\`).default,
           })
@@ -80,12 +80,12 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
         | Vue 2
         |----------------------------------------------------------------
         */\n
-        import { app, plugin } from '@inertiajs/inertia-vue'
+        import { App, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
         Vue.use(plugin)\n
         const el = document.getElementById('app')\n
         new Vue({
-          render: h => h(app, {
+          render: h => h(App, {
             props: {
               initialPage: JSON.parse(el.dataset.page),
               resolveComponent: name => require(\`./Pages/\${name}\`).default,
@@ -98,12 +98,12 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'React',
       language: 'jsx',
       code: dedent`
-        import { app } from '@inertiajs/inertia-react'
+        import { App } from '@inertiajs/inertia-react'
         import React from 'react'
         import { render } from 'react-dom'\n
         const el = document.getElementById('app')\n
         render(
-          <app
+          <App
             initialPage={JSON.parse(el.dataset.page)}
             resolveComponent={name => require(\`./Pages/\${name}\`).default}
           />,
@@ -115,9 +115,9 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
       name: 'Svelte',
       language: 'js',
       code: dedent`
-        import { app } from '@inertiajs/inertia-svelte'\n
+        import { App } from '@inertiajs/inertia-svelte'\n
         const el = document.getElementById('app')\n
-        new app({
+        new App({
           target: el,
           props: {
             initialPage: JSON.parse(el.dataset.page),
