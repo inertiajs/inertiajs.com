@@ -36,11 +36,13 @@ This is also possible with [Inertia links](/links) using the `preserve-scroll` a
       code: dedent`
         <inertia-link href="/" preserve-scroll>Home</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink preserveScroll href="/">Home</InertiaLink>
       `,
     },
@@ -48,8 +50,8 @@ This is also possible with [Inertia links](/links) using the `preserve-scroll` a
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
-        <!-- or -->\n
         <InertiaLink href="/" preserveScroll>Home</InertiaLink>
       `,
     },

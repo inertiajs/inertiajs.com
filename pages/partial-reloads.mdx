@@ -51,11 +51,13 @@ It's also possible to perform partial reloads with Inertia links using the `only
       code: dedent`
         <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
@@ -63,8 +65,8 @@ It's also possible to perform partial reloads with Inertia links using the `only
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
-        <!-- or -->\n
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },

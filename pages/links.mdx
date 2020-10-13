@@ -34,11 +34,13 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
       code: dedent`
         <inertia-link href="/">Home</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/">Home</InertiaLink>
       `,
     },
@@ -46,8 +48,8 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/" use:inertia>Home</a>\n
-        <!-- or -->\n
         <InertiaLink href="/">Home</InertiaLink>
       `,
       description: 'The use:inertia directive can be applied to any HTML element.',
@@ -67,11 +69,13 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
       code: dedent`
         <inertia-link href="/logout" method="post">Logout</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/logout" method="post">Logout</InertiaLink>
       `,
     },
@@ -79,8 +83,8 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/logout" use:inertia="{{ method: 'post' }}">Logout</a>\n
-        <!-- or -->\n
         <InertiaLink href="/logout" method="post">Logout</InertiaLink>
       `,
     },
@@ -99,11 +103,13 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
       code: dedent`
         <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
       `,
     },
@@ -111,6 +117,7 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-svelte'\n
         <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
       `,
     },
@@ -129,11 +136,13 @@ The `headers` option allows you to add custom headers to an Inertia link. Do not
       code: dedent`
         <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/endpoint" headers={{ foo: bar }}>Save</InertiaLink>
       `,
     },
@@ -141,8 +150,8 @@ The `headers` option allows you to add custom headers to an Inertia link. Do not
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>\n
-        <!-- or -->\n
         <InertiaLink href="/endpoint" headers={{ foo: bar}}>Save</InertiaLink>
       `,
     },
@@ -161,11 +170,13 @@ You can specify the browser history behaviour. By default page visits push (new)
       code: dedent`
         <inertia-link href="/" replace>Home</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink replace href="/">Home</InertiaLink>
       `,
     },
@@ -173,8 +184,8 @@ You can specify the browser history behaviour. By default page visits push (new)
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/" use:inertia="{{ replace: true }}">Home</a>\n
-        <!-- or -->\n
         <InertiaLink href="/" replace>Home</InertiaLink>
       `,
     },
@@ -191,15 +202,17 @@ You can preserve a page component's local state using the `preserve-state` attri
       name: 'Vue.js',
       language: 'jsx',
       code: dedent`
-        <input v-model="query" type="text" />
+        <input v-model="query" type="text" />\n
         <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
-        <input onChange={this.handleChange} value={query} />
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
+        <input onChange={this.handleChange} value={query} />\n
         <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
       `,
     },
@@ -207,9 +220,9 @@ You can preserve a page component's local state using the `preserve-state` attri
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
-        <input on:change={handleChange} value={query} />
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+        <input on:change={handleChange} value={query} />\n
         <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>\n
-        <!-- or -->\n
         <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
       `,
     },
@@ -228,11 +241,13 @@ You can use the `preserve-scroll` attribute to prevent Inertia from automaticall
       code: dedent`
         <inertia-link href="/" preserve-scroll>Home</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink preserveScroll href="/">Home</InertiaLink>
       `,
     },
@@ -240,8 +255,8 @@ You can use the `preserve-scroll` attribute to prevent Inertia from automaticall
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
-        <!-- or -->\n
         <InertiaLink href="/" preserveScroll>Home</InertiaLink>
       `,
     },
@@ -262,11 +277,13 @@ The `only` option allows you to request a subset of the props (data) from the se
       code: dedent`
         <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
@@ -274,8 +291,8 @@ The `only` option allows you to request a subset of the props (data) from the se
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
-        <!-- or -->\n
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
