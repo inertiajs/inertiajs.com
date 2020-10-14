@@ -33,13 +33,12 @@ In this example we're passing a single prop, called `event`, which contains four
             public function show(Event $event)
             {
                 return Inertia::render('Event/Show', [
-                    'event' => $event->only(
-                        'id',
-                        'title',
-                        'start_date',
-                        'description'
-                    ),
-                ]);
+                    'event' => $event->only('id', 'title', 'start_date', 'description'),
+                ]);\n
+                // Alternatively, you can use the inertia() helper
+                return inertia('Event/Show', [
+                    'event' => $event->only('id', 'title', 'start_date', 'description'),
+                ]);\n
             }
         }
       `,
