@@ -219,7 +219,7 @@ The `finish` event fires after an XHR request has completed for both successful 
 import { Inertia } from '@inertiajs/inertia'
 
 Inertia.on('finish', event => {
-  NProgress.stop()
+  NProgress.done()
 })
 ```
 
