@@ -320,10 +320,11 @@ If you're using persistent layouts, it's possible to set a default page layout i
 ```js
 import Layout from './Layout'
 
-resolveComponent: name => import(`./Pages/${name}`).then(({ default: page }) => {
-  page.layout = page.layout === undefined ? Layout : page.layout
-  return page
-}),
+resolveComponent: name => import(`./Pages/${name}`)
+  .then(({ default: page }) => {
+    page.layout = page.layout === undefined ? Layout : page.layout
+    return page
+  }),
 ```
 
 This will automatically set the page layout to `Layout` if a layout has not already been set for that page. If needed, you can disable the default layout on specific pages by setting the `layout` to `null`.
@@ -333,12 +334,13 @@ You can even go a step further and conditionally set the default page layout bas
 ```js
 import Layout from './Layout'
 
-resolveComponent: name => import(`./Pages/${name}`).then(({ default: page }) => {
-  if (!name.startsWith('Public/') && page.layout === undefined) {
-    page.layout = Layout
-  }
-  return page
-}),
+resolveComponent: name => import(`./Pages/${name}`)
+  .then(({ default: page }) => {
+    if (page.layout === undefined && !name.startsWith('Public/')) {
+      page.layout = Layout
+    }
+    return page
+  }),
 ```
 
 ## Title and meta tags
