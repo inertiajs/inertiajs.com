@@ -320,9 +320,9 @@ If you're using persistent layouts, it's possible to set a default page layout i
 ```js
 import Layout from './Layout'
 
-resolveComponent: name => import(`@/Pages/${name}`).then(({ default: component }) => {
-  component.layout = component.layout === undefined ? Layout : component.layout
-  return component
+resolveComponent: name => import(`./Pages/${name}`).then(({ default: page }) => {
+  page.layout = page.layout === undefined ? Layout : page.layout
+  return page
 }),
 ```
 
@@ -333,11 +333,11 @@ You can even go a step further and conditionally set the default page layout bas
 ```js
 import Layout from './Layout'
 
-resolveComponent: name => import(`@/Pages/${name}`).then(({ default: component }) => {
-  if (!name.startsWith('Public/') && component.layout === undefined) {
-    component.layout = Layout
+resolveComponent: name => import(`./Pages/${name}`).then(({ default: page }) => {
+  if (!name.startsWith('Public/') && page.layout === undefined) {
+    page.layout = Layout
   }
-  return component
+  return page
 }),
 ```
 
