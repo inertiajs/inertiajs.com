@@ -10,6 +10,7 @@ export const meta = {
     { url: '#creating-pages', name: 'Creating pages' },
     { url: '#creating-layouts', name: 'Creating layouts' },
     { url: '#persistent-layouts', name: 'Persistent layouts' },
+    { url: '#default-layouts', name: 'Default layouts' },
     { url: '#title-and-meta-tags', name: 'Title and meta tags' },
   ],
 }
@@ -311,6 +312,34 @@ You can also create more complex layout arrangements using nested layouts.
     },
   ]}
 />
+
+## Default layouts
+
+If you're using persistent layouts, it's possible to set a default page layout in the `resolveComponent()` callback.
+
+```js
+import Layout from './Layout'
+
+resolveComponent: name => import(`@/Pages/${name}`).then(({ default: component }) => {
+  component.layout = component.layout === undefined ? Layout : component.layout
+  return component
+}),
+```
+
+This will automatically set the page layout to `Layout` if a layout has not already been set for that page. If needed, you can disable the default layout on specific pages by setting the `layout` to `null`.
+
+You can even go a step further and conditionally set the default page layout based on the page `name`, which is available to the `resolveComponent()` method. For example, maybe you don't want the default layout applied to your public pages.
+
+```js
+import Layout from './Layout'
+
+resolveComponent: name => import(`@/Pages/${name}`).then(({ default: component }) => {
+  if (!name.startsWith('Public/') && component.layout === undefined) {
+    component.layout = Layout
+  }
+  return component
+}),
+```
 
 ## Title and meta tags
 
