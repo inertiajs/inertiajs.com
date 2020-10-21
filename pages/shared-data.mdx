@@ -28,37 +28,41 @@ The server-side adapters provide a way to preassign shared data for each request
       name: 'Laravel',
       language: 'php',
       code: dedent`
+        /*
+        |----------------------------------------------------------------
+        | Via the HandleInertiaRequests middleware (recommended)
+        |----------------------------------------------------------------
+        */\n
+        class HandleInertiaRequests extends Middleware
+        {
+            public function share(Request $request)
+            {
+                return array_merge(parent::share($request), [\n
+                    // Synchronously
+                    'appName' => config('app.name'),\n
+                    // Lazily
+                    'user' => fn () => $request->user()
+                        ? $request->user()->only('id', 'name', 'email')
+                        : null,
+                ]);
+            }
+        }\n
+        /*
+        |----------------------------------------------------------------
+        | Manually
+        |----------------------------------------------------------------
+        */\n
+        use Inertia\\Inertia;\n
         // Synchronously
-        Inertia::share('app.name', Config::get('app.name'));\n
+        Inertia::share('appName', config('app.name'));\n
         // Lazily
-        Inertia::share('auth.user', function () {
-            if (Auth::user()) {
-                return [
-                    'id' => Auth::user()->id,
-                    'first_name' => Auth::user()->first_name,
-                    'last_name' => Auth::user()->last_name,
-                ];
-            }
-        });\n
-        // Multiple values
-        Inertia::share([
-            // Synchronously
-            'app' => [
-                'name' => Config::get('app.name')
-            ],
-            // Lazily
-            'auth' => function () {
-                return [
-                    'user' => Auth::user() ? [
-                        'id' => Auth::user()->id,
-                        'first_name' => Auth::user()->first_name,
-                        'last_name' => Auth::user()->last_name,
-                    ] : null
-                ];
-            }
-        ]);
+        Inertia::share('user', fn (Request $request) => $request->user()
+            ? $request->user()->only('id', 'name', 'email')
+            : null
+        );
       `,
-      description: 'Place this code in your AppServiceProvider boot method.',
+      description:
+        'The HandleInertiaRequests middleware provides a "share" method where you can define the data that is automatically shared with each Inertia response.',
     },
     {
       name: 'Rails',
@@ -176,16 +180,19 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
   examples={[
     {
       name: 'Laravel',
-      description: 'Place this code in your AppServiceProvider boot method.',
       language: 'php',
       code: dedent`
-        use Session;
-        use Inertia\\Inertia;\n
-        Inertia::share('flash', function () {
-            return [
-                'message' => Session::get('message'),
-            ];
-        });
+        class HandleInertiaRequests extends Middleware
+        {
+            public function share(Request $request)
+            {
+                return array_merge(parent::share($request), [
+                    'flash' => [
+                        'message' => fn () => $request->session()->get('message')
+                    ],
+                ]);
+            }
+        }
       `,
     },
     {

@@ -187,16 +187,19 @@ Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/in
       name: 'Laravel',
       language: 'php',
       code: dedent`
-        use Illuminate\\Support\\Facades\\Session;\n
-        Inertia::share([
-            'errors' => function () {
-                return Session::get('errors')
-                    ? Session::get('errors')->getBag('default')->getMessages()
-                    : (object) [];
-            },
-        ]);
+        class HandleInertiaRequests extends Middleware
+        {
+            public function share(Request $request)
+            {
+                return array_merge(parent::share($request), [
+                    'errors' => fn () => $request->session()->get('errors')
+                        ? $request->session()->get('errors')->getBag('default')->getMessages()
+                        : (object) [];
+                    },
+                ]);
+            }
+        }
       `,
-      description: 'Place this code in your AppServiceProvider boot method.',
     },
     {
       name: 'Rails',
