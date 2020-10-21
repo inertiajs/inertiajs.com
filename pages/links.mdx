@@ -91,6 +91,45 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
   ]}
 />
 
+## As
+
+You can use the `as` attribute to change how an Inertia link is rendered.
+By default Inertia renders link as anchor `<a>` elements.
+However, for non-GET requests it is recommended to use other elements, like `<button>`, to prevent opening non-GET links in a new tab.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/logout" as="button" method="post" type="button">Logout</inertia-link>\n
+        <!-- Renders: <button type="button">Logout</button> -->
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
+        <InertiaLink href="/logout" as="button" method="post" type="button">Logout</InertiaLink>\n
+        <!-- Renders: <button type="button">Logout</button> -->
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        import { inertia } from '@inertiajs/inertia-svelte'\n
+        <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>\n
+        <!-- Renders: <button type="button">Logout</button> -->
+      `,
+      description: 'Svelte does not support dynamic elements yet, but you can use the inertia directive with the same results.'
+    },
+  ]}
+/>
+
 ## Data
 
 You can add data using the `data` attribute. This can be an `object`, or a `FormData` instance.
