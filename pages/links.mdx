@@ -1,5 +1,6 @@
 import dedent from 'dedent-js'
 import Layout from '../components/Layout'
+import Notice from '../components/Notice'
 import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
@@ -20,11 +21,11 @@ export const meta = {
 
 # Links
 
-To create links within an Inertia app you'll need to use the Inertia link component. This is a light wrapper around a standard anchor link that intercepts click events and prevents full page reloads from occurring. This is how Inertia provides a single-page app experience.
+To create links within an Inertia app you'll need to use the Inertia link component. This is a light wrapper around a standard anchor `<a>` link that intercepts click events and prevents full page reloads from occurring. This is how Inertia provides a single-page app experience.
 
 ## Creating links
 
-To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the underlying `<a>` tag.
+To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the underlying tag.
 
 <TabbedCodeExamples
   examples={[
@@ -56,6 +57,51 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
     },
   ]}
 />
+
+By default Inertia renders links as anchor `<a>` elements. However, you can change the tag using the `as` attribute.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/logout" method="post" as="button" type="button">Logout</inertia-link>\n
+        // Renders as:
+        <button type="button">Logout</button>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
+        <InertiaLink href="/logout" method="post" as="button" type="button">Logout</InertiaLink>\n
+        // Renders as:
+        <button type="button">Logout</button>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        import { inertia } from '@inertiajs/inertia-svelte'\n
+        <button href="/logout" use:inertia="{{ method: 'post' }}" type="button">Logout</button>\n
+        // Renders as:
+        <button type="button">Logout</button>
+      `,
+      description:
+        'Svelte does not support dynamic elements yet, but you can use the inertia directive to achieve the same results.',
+    },
+  ]}
+/>
+
+<Notice>
+  Creating <inlineCode>POST</inlineCode>/<inlineCode>PUT</inlineCode>/<inlineCode>PATCH</inlineCode>/
+  <inlineCode>DELETE</inlineCode> anchor <inlineCode>&lt;a&gt;</inlineCode> links is discouraged as it causes "Open Link
+  in New Tab/Window" accessibility issues. Instead, consider using a more appropriate element, such as a{' '}
+  <inlineCode>&lt;button&gt;</inlineCode>.
+</Notice>
 
 ## Method
 
