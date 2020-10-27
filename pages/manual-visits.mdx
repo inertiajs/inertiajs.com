@@ -186,15 +186,8 @@ When making visits, Inertia automatically adds a new entry into the browser hist
 Inertia.get('/users', { search: 'John' }, { replace: true })
 ```
 
-As a shortcut, you can use `replace()` method to automatically do this.
-
-```js
-Inertia.replace('/users', { data: { search: 'John' } })
-```
-
 <Notice>
-  Note that visits made to the same URL (including query strings) automatically set <inlineCode>replace</inlineCode> to{' '}
-  <inlineCode>true</inlineCode>.
+  Visits made to the same URL automatically set <inlineCode>replace</inlineCode> to <inlineCode>true</inlineCode>.
 </Notice>
 
 ## Component state
