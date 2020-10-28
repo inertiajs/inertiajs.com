@@ -91,7 +91,7 @@ That's it, you now have a working page loading indicator! As you navigate from o
 
 ### Handling cancelled visits
 
-However, while this implementation works great for visits that finish properly, it would be nice to handle cancelled visits a little better. First, for interrupted visits (those that get cancelled as a result of a new visit) the progress bar should simply be reset back to the start position. Second, for manually cancelled visits, the progress bar should be immediately removed from the page.
+While this implementation works great for visits that finish properly, it would be nice to handle cancelled visits a little better. First, for interrupted visits (those that get cancelled as a result of a new visit) the progress bar should simply be reset back to the start position. Second, for manually cancelled visits, the progress bar should be immediately removed from the page.
 
 We can do this by inspecting the `event.detail.visit` object that's provided to the finish event.
 
