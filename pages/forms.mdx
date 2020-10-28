@@ -194,8 +194,7 @@ Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/in
                 return array_merge(parent::share($request), [
                     'errors' => fn () => $request->session()->get('errors')
                         ? $request->session()->get('errors')->getBag('default')->getMessages()
-                        : (object) [];
-                    },
+                        : (object) []
                 ]);
             }
         }
