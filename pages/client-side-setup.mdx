@@ -9,7 +9,7 @@ export const meta = {
   links: [
     { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#initialize-app', name: 'Initialize app' },
-    { url: '#loading-indicator', name: 'Loading indicator' },
+    { url: '#progress-indicator', name: 'Progress indicator' },
     { url: '#code-splitting', name: 'Code splitting' },
   ],
 }
@@ -131,11 +131,11 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
 
 The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and should return a page component instance.
 
-## Loading indicator
+## Progress indicator
 
-Since Inertia requests are made via XHR, there's no default browser loading indicator. To solve this, Inertia provides an optional [progress package](https://github.com/inertiajs/progress) that integrates with [NProgress.js](https://ricostacruz.com/nprogress/), a nice little progress bar library.
+Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one page to another. To solve this, Inertia provides an optional [progress](https://github.com/inertiajs/progress) library, which shows a loading bar whenever you make an Inertia visit.
 
-Start by installing it:
+To use it, start by installing it:
 
 ```bash
 npm install @inertiajs/progress
@@ -150,24 +150,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 InertiaProgress.init()
 ```
 
-It also comes with a number of customization options, which you can pass to the `init()` method.
-
-```js
-InertiaProgress.init({
-  // The delay after which the progress bar will
-  // appear during navigation, in milliseconds.
-  delay: 250,
-
-  // The color of the progress bar.
-  color: '#29d',
-
-  // Whether to include the default NProgress styles.
-  includeCSS: true,
-
-  // Whether the NProgress spinner will be shown.
-  showSpinner: false,
-})
-```
+It also provides a number of customization options, which you can learn more about on the [progress indicators](/progress-indicators) page.
 
 ## Code splitting
 
