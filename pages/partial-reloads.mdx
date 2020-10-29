@@ -85,23 +85,20 @@ When Inertia performs a visit, it will determine which data is required, and onl
       name: 'Laravel',
       language: 'php',
       code: dedent`
-        class UsersController extends Controller
-        {
-            public function index()
-            {
-                return Inertia::render('Users/Index', [
-                    // Lazily evaluated (only run if required)
-                    'companies' => function () {
-                        return Company::orderBy('name')
-                            ->get('id', 'name');
-                    },
-                    // Evaluated immediately
-                    'users' => User::orderBy('name')
-                        ->select('id', 'name')
-                        ->paginate(),
-                ]);
-            }
-        }
+        return Inertia::render('Users/Index', [\n
+            // ALWAYS included on first visit
+            // OPTIONALLY included on partial reloads
+            // ALWAYS evaluated
+            'users' => User::get(),\n
+            // ALWAYS included on first visit
+            // OPTIONALLY included on partial reloads
+            // ONLY evaluated when needed
+            'users' => fn () => User::get(),\n
+            // NEVER included on first visit
+            // OPTIONALLY included on partial reloads
+            // ONLY evaluated when needed
+            'users' => Inertia::lazy(fn () => User::get()),
+        ]);
       `,
     },
     {
@@ -110,19 +107,15 @@ When Inertia performs a visit, it will determine which data is required, and onl
       code: dedent`
         class UsersController < ApplicationController
           def index
-            render inertia: 'Users/Index', props: {
-              # Lazily evaluated (only run if required)
-              companies: -> {
-                Company.
-                  order(:name).
-                  as_json(only: [ :id, :name ])
-              },
-              
-              # Evaluated immediately
-              users: User.
-                order(:name).
-                paginate(params[:page]).
-                as_json(only: [ :id, :name ])
+            render inertia: 'Users/Index', props: {\n
+              # ALWAYS included on first visit
+              # OPTIONALLY included on partial reloads
+              # ALWAYS evaluated
+              users: User.as_json()\n
+              # ALWAYS included on first visit
+              # OPTIONALLY included on partial reloads
+              # ONLY evaluated when needed
+              users: -> { User.as_json() },
             }
           end
         end
@@ -130,3 +123,5 @@ When Inertia performs a visit, it will determine which data is required, and onl
     },
   ]}
 />
+
+Notice how in the Laravel adapter you can use `Inertia::lazy()` to even prevent the prop from being included on the initial page visit. We [hope to bring](https://github.com/inertiajs/inertia-rails/issues/51) this feature to the Rails adapter soon.
