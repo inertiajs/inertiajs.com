@@ -62,8 +62,34 @@ This is also possible with [Inertia links](/links) using the `preserve-scroll` a
 
 If your app doesn't use document body scrolling, but instead has scrollable elements (using the `overflow` CSS property), scroll resetting will not work. In these situations you must tell Inertia which scrollable elements to manage by adding a `scroll-region` attribute.
 
-```html
-<div class="overflow-y-auto" scroll-region>
-  <!-- Your page content -->
-</div>
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'jsx',
+      code: dedent`
+        <div class="overflow-y-auto" scroll-region>
+          <!-- Your page content -->
+        </div>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        <div className="overflow-y-auto" scroll-region="true">
+          {/* Your page content */}
+        </div>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        <div class="overflow-y-auto" scroll-region>
+          <!-- Your page content -->
+        </div>
+      `,
+    },
+  ]}
+/>
