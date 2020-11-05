@@ -25,13 +25,21 @@ Install the Inertia client-side adapters using NPM or Yarn.
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue.js 2',
       language: 'bash',
       code: dedent`
         npm install @inertiajs/inertia @inertiajs/inertia-vue
         yarn add @inertiajs/inertia @inertiajs/inertia-vue
       `,
     },
+    {
+          name: 'Vue.js 3',
+          language: 'bash',
+          code: dedent`
+            npm install @inertiajs/inertia @inertiajs/inertia-vue3
+            yarn add @inertiajs/inertia @inertiajs/inertia-vue3
+          `,
+        },
     {
       name: 'React',
       language: 'bash',
@@ -58,28 +66,9 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue.js 2',
       language: 'js',
       code: dedent`
-        /*
-        |----------------------------------------------------------------
-        | Vue 3
-        |----------------------------------------------------------------
-        */\n
-        import { createApp, h } from 'vue'
-        import { App, plugin } from '@inertiajs/inertia-vue3'\n
-        const el = document.getElementById('app')\n
-        createApp({
-          render: () => h(App, {
-            initialPage: JSON.parse(el.dataset.page),
-            resolveComponent: name => require(\`./Pages/\${name}\`).default,
-          })
-        }).use(plugin).mount(el)\n\n
-        /*
-        |----------------------------------------------------------------
-        | Vue 2
-        |----------------------------------------------------------------
-        */\n
         import { App, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
         Vue.use(plugin)\n
@@ -92,6 +81,21 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
             },
           }),
         }).$mount(el)
+      `,
+    },
+    {
+      name: 'Vue.js 3',
+      language: 'js',
+      code: dedent`
+        import { createApp, h } from 'vue'
+        import { App, plugin } from '@inertiajs/inertia-vue3'\n
+        const el = document.getElementById('app')\n
+        createApp({
+          render: () => h(App, {
+            initialPage: JSON.parse(el.dataset.page),
+            resolveComponent: name => require(\`./Pages/\${name}\`).default,
+          })
+        }).use(plugin).mount(el)\n\n
       `,
     },
     {
