@@ -115,7 +115,11 @@ When Inertia performs a visit, it will determine which data is required, and onl
               # ALWAYS included on first visit
               # OPTIONALLY included on partial reloads
               # ONLY evaluated when needed
-              users: -> { User.as_json() },
+              users: -> { User.as_json() },\n
+              # NEVER included on first visit
+              # OPTIONALLY included on partial reloads
+              # ONLY evaluated when needed
+              users: InertiaRails.lazy(-> { User.as_json }),
             }
           end
         end
