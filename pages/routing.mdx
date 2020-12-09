@@ -14,6 +14,29 @@ export const meta = {
 
 With Inertia all routing is defined server-side. Meaning you don't need Vue Router or React Router. Simply create routes using your server-side framework of choice.
 
+## Route Helpers
+
+If you have a page that doesn't need a corresponding controller method, like an FAQ or About page, you can route directly to a component.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Laravel',
+      language: 'php',
+      code: dedent`
+        Route::inertia('/about', 'AboutComponent');
+      `,
+    },
+    {
+      name: 'Rails',
+      language: 'ruby',
+      code: dedent`
+        inertia 'about' => 'AboutComponent'
+      `,
+    }
+  ]}
+/>
+
 ## Generating URLs
 
 Some server-side frameworks allow you to generate URLs from named routes. However, you will not have access to those helpers client-side. Here are a couple ways to still use named routes with Inertia.
