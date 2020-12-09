@@ -5,7 +5,11 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Routing',
-  links: [{ url: '#top', name: 'Defining routes' }, { url: '#generating-routes', name: 'Generating URLs' }],
+  links: [
+    { url: '#top', name: 'Defining routes' },
+    { url: '#route-helpers', name: 'Route helpers' },
+    { url: '#generating-routes', name: 'Generating URLs' },
+  ],
 }
 
 # Routing
@@ -14,9 +18,9 @@ export const meta = {
 
 With Inertia all routing is defined server-side. Meaning you don't need Vue Router or React Router. Simply create routes using your server-side framework of choice.
 
-## Route Helpers
+## Route helpers
 
-If you have a page that doesn't need a corresponding controller method, like an FAQ or About page, you can route directly to a component.
+If you have a page that doesn't need a corresponding controller method, like an FAQ or about page, you can route directly to a component.
 
 <TabbedCodeExamples
   examples={[
@@ -33,7 +37,7 @@ If you have a page that doesn't need a corresponding controller method, like an 
       code: dedent`
         inertia 'about' => 'AboutComponent'
       `,
-    }
+    },
   ]}
 />
 
@@ -66,7 +70,7 @@ The first option is to generate URLs server-side and include them as props. Noti
                 ]);
             }
         }
-      `
+      `,
     },
     {
       name: 'Rails',
@@ -86,7 +90,7 @@ The first option is to generate URLs server-side and include them as props. Noti
             }
           end
         end
-      `
+      `,
     },
   ]}
 />
