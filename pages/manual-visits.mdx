@@ -330,7 +330,7 @@ Inertia.post('/profile', data, {
 And instead of using `catch()`, it's better to handle these unexpected errors using a global error event handler.
 
 ```js
-Inertia.on('error', (event) => {
+Inertia.on('exception', (event) => {
   event.preventDefault()
   // Handle the error yourself
 })
