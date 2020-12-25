@@ -333,20 +333,22 @@ While this is very similar to how you would normally do classic server-side form
 
 ## File uploads
 
-The trick to uploading files with Inertia (via XHR) is using the `FormData` object. Here is a simple example of using `FormData` with Inertia.
+The trick to uploading files with Inertia is using the `FormData` object, since that's what's required to submit a `multipart/form-data` request via XHR. Here is a simple example of using `FormData` with Inertia.
 
 ```js
 var data = new FormData()
-data.append('first_name', first_name || '')
-data.append('last_name', last_name || '')
+data.append('name', name || '')
 data.append('email', email || '')
 data.append('password', password || '')
+data.append('is_admin', is_admin ? '1' : '0')
 data.append('photo', photo || '')
 
 Inertia.post('/users', data)
 ```
 
-You can learn more about `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+However, as of version `0.8.0`, Inertia automatically detects if the visit includes any files (even nested files), and then converts the data to a `FormData` object if needed.
+
+You can learn more about the `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
 
 ## Classic XHR submits
 
