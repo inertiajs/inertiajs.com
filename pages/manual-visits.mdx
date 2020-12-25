@@ -45,6 +45,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           onStart: visit => {},
           onProgress: progress => {},
           onSuccess: page => {},
+          onError: errors => {},
           onFinish: () => {},
         })
       `,
@@ -68,6 +69,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           onStart: visit => {},
           onProgress: progress => {},
           onSuccess: page => {},
+          onError: errors => {},
           onFinish: () => {},
         })
       `,
@@ -91,6 +93,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           onStart: visit => {},
           onProgress: progress => {},
           onSuccess: page => {},
+          onError: errors => {},
           onFinish: () => {},
         })
       `,
@@ -265,6 +268,7 @@ Inertia.post('/users', data, {
   onStart: (visit) => {},
   onProgress: (progress) => {},
   onSuccess: (page) => {},
+  onError: (errors) => {},
   onCancel: () => {},
   onFinish: () => {},
 })
@@ -313,6 +317,9 @@ The preferred approach is to use the new [event callbacks](#event-callbacks) ins
 Inertia.post('/profile', data, {
   onSuccess: () => {
     // Handle success event
+  },
+  onError: (errors) => {
+    // Handle validation errors
   },
 })
 ```
