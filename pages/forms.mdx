@@ -9,6 +9,7 @@ export const meta = {
     { url: '#submitting-forms', name: 'Submitting forms' },
     { url: '#server-side-validation', name: 'Server-side validation' },
     { url: '#file-uploads', name: 'File uploads' },
+    { url: '#form-helper', name: 'Form helper' },
     { url: '#classic-xhr-submits', name: 'Classic XHR submits' },
   ],
 }
@@ -349,6 +350,108 @@ Inertia.post('/users', data)
 However, as of version `0.8.0`, Inertia automatically detects if the visit includes any files (even nested files), and then converts the data to a `FormData` object if needed.
 
 You can learn more about the `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+
+## Form helper
+
+Included in `inertia-vue@v0.5.0` and `inertia-vue3@v0.3.0` is a new form helper. Here's how to use it:
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <form @submit.prevent="form.post('/login')">
+            <!-- email -->
+            <input type="text" v-model="form.email">
+            <div v-if="form.errors.email">{{ form.errors.email }}</div>
+            <!-- password -->
+            <input type="password" v-model="form.password">
+            <div v-if="form.errors.password">{{ form.errors.password }}</div>
+            <!-- remember me -->
+            <input type="checkbox" v-model="form.remember"> Remember Me
+            <!-- submit -->
+            <button type="submit" :disabled="form.processing">Login</button>
+          </form>
+        </template>\n
+        <script>
+        /*
+        |----------------------------------------------------------------
+        | Vue 3
+        |----------------------------------------------------------------
+        */\n
+        import { useForm } from '@inertiajs/inertia-vue3'\n
+        export default {
+          setup () {
+            const form = useForm({
+              email: null,
+              password: null,
+              remember: false,
+            })\n
+            return { form }
+          },
+        }\n
+        /*
+        |----------------------------------------------------------------
+        | Vue 2
+        |----------------------------------------------------------------
+        */\n
+        export default {
+          data() {
+            return {
+              form: this.$inertia.form({
+                email: null,
+                password: null,
+                remember: false,
+              }),
+            }
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        # todo
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+Form errors are available via `form.errors`, and can be cleared by calling `form.clearErrors()`. To clear the errors for a specific field, call `form.clearErrors('field', 'anotherfield')`, passing in the field name(s).
+
+To reset the form back to its original state, use the `form.reset()` method. Or, if you want to only reset specific fields, you can call `form.reset('field', 'anotherfield')`. Resetting the form, or specific fields, also automatically clears the errors.
+
+Use the `form.processing` property to track if a form is currently being submitted. This can be helpful for preventing double form submissions, by disabling the submit button.
+
+In the event that you're uploading files, the current progress event is available via the `form.progress` property. This is helpful for showing upload progress. For example:
+
+```jsx
+<progress :value="form.progress.percentage" max="100">
+  {{ form.progress.percentage }}%
+</progress>
+```
+
+Finally, if you need to modify the form data before it's sent to the server, you can do this via the `transform()` method.
+
+```js
+this.form
+  .transform(data => ({
+    ...data,
+    remember: data.remember ? 'on' : '',
+  }))
+  .post('/login')
+```
 
 ## Classic XHR submits
 
