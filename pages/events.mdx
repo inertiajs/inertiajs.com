@@ -233,7 +233,7 @@ Cancel the `exception` event to prevent the error from being thrown.
 ```js
 import { Inertia } from '@inertiajs/inertia'
 
-Inertia.on('error', (event) => {
+Inertia.on('exception', (event) => {
   event.preventDefault()
   // Handle the error yourself
 })
