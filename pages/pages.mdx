@@ -191,7 +191,7 @@ For example, maybe you have an audio player on a podcast website that you want t
         <script>
           import Layout from './Layout'\n
           export default {
-            // Using a render function
+            // Using a render function (required for class based components)
             layout: (h, page) => h(Layout, [page]),\n
             // Using the shorthand
             layout: Layout,\n
@@ -256,7 +256,7 @@ You can also create more complex layout arrangements using nested layouts.
           import SiteLayout from './SiteLayout'
           import NestedLayout from './NestedLayout'\n
           export default {
-            // Using a render function
+            // Using a render function (required for class based components)
             layout: (h, page) => {
               return h(SiteLayout, [
                 h(NestedLayout, [page]),
@@ -322,7 +322,11 @@ import Layout from './Layout'
 
 resolveComponent: name => import(`./Pages/${name}`)
   .then(({ default: page }) => {
+    // Using a render function (required for class based components)
+    page.layout = page.layout === undefined ? (h, page) => h(Layout, [page]) : page.layout
+    // Using the shorthand
     page.layout = page.layout === undefined ? Layout : page.layout
+
     return page
   }),
 ```
@@ -337,6 +341,9 @@ import Layout from './Layout'
 resolveComponent: name => import(`./Pages/${name}`)
   .then(({ default: page }) => {
     if (page.layout === undefined && !name.startsWith('Public/')) {
+      // Using a render function (required for class based components)
+      page.layout = (h, page) => h(Layout, [page])
+      // Using the shorthand
       page.layout = Layout
     }
     return page
