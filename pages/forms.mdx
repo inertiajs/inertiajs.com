@@ -193,7 +193,7 @@ You can learn more about the `FormData` interface [here](https://developer.mozil
 
 ## Form helper
 
-Included in `inertia-vue@v0.5.0` and `inertia-vue3@v0.3.0` is a new form helper, which helps reduce the boilerplate required for a typical form. Here's how to use it:
+Since working with forms is so common, Inertia comes with a form helper designed to help reduce the amount of boilerplate needed for typical forms. Here's how to use it:
 
 <TabbedCodeExamples
   examples={[
@@ -268,21 +268,7 @@ Included in `inertia-vue@v0.5.0` and `inertia-vue3@v0.3.0` is a new form helper,
   ]}
 />
 
-Form errors are available via `form.errors`, and can be cleared by calling `form.clearErrors()`. To clear the errors for a specific field, call `form.clearErrors('field', 'anotherfield')`, passing in the field name(s).
-
-To reset the form back to its original state, use the `form.reset()` method. Or, if you want to only reset specific fields, you can call `form.reset('field', 'anotherfield')`. Resetting the form, or specific fields, also automatically clears the errors.
-
-Use the `form.processing` property to track if a form is currently being submitted. This can be helpful for preventing double form submissions, by disabling the submit button.
-
-In the event that you're uploading files, the current progress event is available via the `form.progress` property. This is helpful for showing upload progress. For example:
-
-```jsx
-<progress :value="form.progress.percentage" max="100">
-  {{ form.progress.percentage }}%
-</progress>
-```
-
-Finally, if you need to modify the form data before it's sent to the server, you can do this via the `transform()` method.
+If you need to modify the form data before it's sent to the server, you can do this via the `transform()` method.
 
 ```js
 this.form
@@ -291,6 +277,48 @@ this.form
     remember: data.remember ? 'on' : '',
   }))
   .post('/login')
+```
+
+You can use the `form.processing` property to track if a form is currently being submitted. This can be helpful for preventing double form submissions, by disabling the submit button.
+
+```jsx
+<button type="submit" :disabled="form.processing">Submit</button>
+```
+
+In the event that you're uploading files, the current progress event is available via the `form.progress` property. This is helpful for showing upload progress. For example:
+
+```jsx
+<progress v-if="form.progress" :value="form.progress.percentage" max="100">
+  {{ form.progress.percentage }}%
+</progress>
+```
+
+In the event there are form errors, they are available via the `form.errors` property.
+
+```jsx
+<div v-if="form.errors.email">{{ form.errors.email }}</div>
+```
+
+To check if a form has any errors, use the `form.hasErrors` property. To clear form errors, use `form.clearErrors()` method.
+
+```js
+// Clear all errors
+form.clearErrors()
+
+// Clear errors for specific fields
+form.clearErrors('field', 'anotherfield')
+```
+
+When a form has been successfully submitted, the `form.wasSuccessful` property will be `true`. In addition to this, there is also a `form.recentlySuccessful` property, which will be set to `true` for two seconds after a successful form submission. This is helpful for showing temporary success messages.
+
+To reset the form values back to their original values, use the `form.reset()` method. Note, this will reset the values back to the initial values that were provided when you called `Inertia.form()`.
+
+```js
+// Reset the form
+form.reset()
+
+// Reset specific fields
+form.reset('field', 'anotherfield')
 ```
 
 ## Server-side validation
