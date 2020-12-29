@@ -13,6 +13,7 @@ export const meta = {
     { url: '#component-state', name: 'Component state' },
     { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
+    { url: '#error-bags', name: 'Error bags' },
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#visit-cancellation', name: 'Visit cancellation' },
     { url: '#event-callbacks', name: 'Event callbacks' },
@@ -39,6 +40,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           preserveScroll: false,
           only: [],
           headers: {},
+          errorBag = null,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
@@ -63,6 +65,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           preserveScroll: false,
           only: [],
           headers: {},
+          errorBag = null,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
@@ -87,6 +90,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           preserveScroll: false,
           only: [],
           headers: {},
+          errorBag = null,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
@@ -228,6 +232,18 @@ Inertia.visit('/users', { search: 'John' }, { only: ['users'] })
 ```
 
 For more information, see the [partial reloads](/partial-reloads) page.
+
+## Error bags
+
+For pages that have more than one form, it's possible to run into conflicts when displaying validation errors if two forms share the same field names. To get around this, you can use error bags. Error bags scope the validation errors returned from the server within a unique key specific to that form.
+
+```js
+Inertia.post('/companies', data, {
+  errorBag: 'createCompany',
+})
+```
+
+For more information, see the [validation](/validation#error-bags) page.
 
 ## Custom headers
 

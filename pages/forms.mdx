@@ -7,9 +7,9 @@ export const meta = {
   title: 'Forms',
   links: [
     { url: '#submitting-forms', name: 'Submitting forms' },
-    { url: '#server-side-validation', name: 'Server-side validation' },
     { url: '#file-uploads', name: 'File uploads' },
     { url: '#form-helper', name: 'Form helper' },
+    { url: '#server-side-validation', name: 'Server-side validation' },
     { url: '#classic-xhr-submits', name: 'Classic XHR submits' },
   ],
 }
@@ -172,166 +172,6 @@ Unlike a classic ajax submitted form, with Inertia you don't handle the post sub
   ]}
 />
 
-## Server-side validation
-
-Handling server-side validation errors (`422` responses) in Inertia works a little different than a classic ajax-driven form, where you catch the validation errors in the response and then update the form state. The trick is to handle the validation errors more like a server-side framework.
-
-First, you submit your form using Inertia. If there are validation errors, you redirect server-side back to your form page, including the errors in the session. Your server-side framework likely already does this automatically.
-
-From there you need to send those error messages to your form page component. You can do this in your controller, but it's better to simply do this automatically for all your page components. You can use the Inertia [share](/shared-data) functionality to accomplish this.
-
-Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/inertiajs/inertia-laravel/releases/tag/v0.2.9)), do this automatically, making the validation errors available via the `errors` prop. However, if you'd like to share them manually (maybe you'd like the errors in a different format), you can still do this:
-
-<TabbedCodeExamples
-  examples={[
-    {
-      name: 'Laravel',
-      language: 'php',
-      code: dedent`
-        class HandleInertiaRequests extends Middleware
-        {
-            public function share(Request $request)
-            {
-                return array_merge(parent::share($request), [
-                    'errors' => fn () => $request->session()->get('errors')
-                        ? $request->session()->get('errors')->getBag('default')->getMessages()
-                        : (object) []
-                ]);
-            }
-        }
-      `,
-    },
-    {
-      name: 'Rails',
-      language: 'ruby',
-      code: dedent`
-        # todo
-      `,
-    },
-  ]}
-/>
-
-Now the validation errors will be available as part of your page props, and since they are reactive your template will automatically display them. Here's an updated version of the form example above that displays server-side validation errors.
-
-<TabbedCodeExamples
-  examples={[
-    {
-      name: 'Vue.js',
-      language: 'twig',
-      code: dedent`
-        <template>
-          <form @submit.prevent="submit">
-            <label for="first_name">First name:</label>
-            <input id="first_name" v-model="form.first_name" />
-            <div v-if="errors.first_name">{{ errors.first_name[0] }}</div>
-            <label for="last_name">Last name:</label>
-            <input id="last_name" v-model="form.last_name" />
-            <div v-if="errors.last_name">{{ errors.last_name[0] }}</div>
-            <label for="email">Email:</label>
-            <input id="email" v-model="form.email" />
-            <div v-if="errors.email">{{ errors.email[0] }}</div>
-            <button type="submit">Submit</button>
-          </form>
-        </template>\n
-        <script>
-        export default {
-          props: {
-            errors: Object,
-          },
-          data() {
-            return {
-              form: {
-                first_name: null,
-                last_name: null,
-                email: null,
-              },
-            }
-          },
-          methods: {
-            submit() {
-              this.$inertia.post('/users', this.form)
-            },
-          },
-        }
-        </script>
-      `,
-    },
-    {
-      name: 'React',
-      language: 'jsx',
-      code: dedent`
-        import { Inertia } from '@inertiajs/inertia'
-        import { usePage } from '@inertiajs/inertia-react'
-        import React, { useState } from 'react'\n
-        export default function Edit() {
-          const { errors } = usePage().props\n
-          const [values, setValues] = useState({
-            first_name: null,
-            last_name: null,
-            email: null,
-          })\n
-          function handleChange(e) {
-            setValues(values => ({
-              ...values,
-              [e.target.id]: e.target.value,
-            }))
-          }\n
-          function handleSubmit(e) {
-            e.preventDefault()
-            Inertia.post('/users', values)
-          }\n
-          return (
-            <form onSubmit={handleSubmit}>
-              <label for="first_name">First name:</label>
-              <input id="first_name" value={values.first_name} onChange={handleChange} />
-              {errors.first_name && <div>{errors.first_name[0]}</div>}
-              <label for="last_name">Last name:</label>
-              <input id="last_name" value={values.last_name} onChange={handleChange} />
-              {errors.last_name && <div>{errors.last_name[0]}</div>}
-              <label for="email">Email:</label>
-              <input id="email" value={values.email} onChange={handleChange} />
-              {errors.email && <div>{errors.email[0]}</div>}
-              <button type="submit">Submit</button>
-            </form>
-          )
-        }
-      `,
-    },
-    {
-      name: 'Svelte',
-      language: 'html',
-      code: dedent`
-        <script>
-          import { Inertia } from '@inertiajs/inertia'\n
-          export let errors = {}\n
-          let values = {
-            first_name: null,
-            last_name: null,
-            email: null,
-          }\n
-          function handleSubmit() {
-            Inertia.post('/users', values)
-          }
-        </script>\n
-        <form on:submit|preventDefault={handleSubmit}>
-          <label for="first_name">First name:</label>
-          <input id="first_name" bind:value={values.first_name}>
-          {#if errors.first_name}<div>{errors.first_name}</div>{/if}\n
-          <label for="last_name">Last name:</label>
-          <input id="last_name" bind:value={values.last_name}>
-          {#if errors.last_name}<div>{errors.last_name}</div>{/if}\n
-          <label for="email">Email:</label>
-          <input id="email" bind:value={values.email}>
-          {#if errors.email}<div>{errors.email}</div>{/if}\n
-          <button type="submit">Submit</button>
-        </form>
-      `,
-    },
-  ]}
-/>
-
-While this is very similar to how you would normally do classic server-side form submissions, this approach is much nicer, since you're not reloading the whole page and rehydrating form input data.
-
 ## File uploads
 
 The trick to uploading files with Inertia is using the `FormData` object, since that's what's required to submit a `multipart/form-data` request via XHR. Here is a simple example of using `FormData` with Inertia.
@@ -353,7 +193,7 @@ You can learn more about the `FormData` interface [here](https://developer.mozil
 
 ## Form helper
 
-Included in `inertia-vue@v0.5.0` and `inertia-vue3@v0.3.0` is a new form helper, which helps reduce the boilerplate required for a typical form. Here's how to use it:
+Since working with forms is so common, Inertia comes with a form helper designed to help reduce the amount of boilerplate needed for typical forms. Here's how to use it:
 
 <TabbedCodeExamples
   examples={[
@@ -428,30 +268,62 @@ Included in `inertia-vue@v0.5.0` and `inertia-vue3@v0.3.0` is a new form helper,
   ]}
 />
 
-Form errors are available via `form.errors`, and can be cleared by calling `form.clearErrors()`. To clear the errors for a specific field, call `form.clearErrors('field', 'anotherfield')`, passing in the field name(s).
-
-To reset the form back to its original state, use the `form.reset()` method. Or, if you want to only reset specific fields, you can call `form.reset('field', 'anotherfield')`. Resetting the form, or specific fields, also automatically clears the errors.
-
-Use the `form.processing` property to track if a form is currently being submitted. This can be helpful for preventing double form submissions, by disabling the submit button.
-
-In the event that you're uploading files, the current progress event is available via the `form.progress` property. This is helpful for showing upload progress. For example:
-
-```jsx
-<progress :value="form.progress.percentage" max="100">
-  {{ form.progress.percentage }}%
-</progress>
-```
-
-Finally, if you need to modify the form data before it's sent to the server, you can do this via the `transform()` method.
+If you need to modify the form data before it's sent to the server, you can do this via the `transform()` method.
 
 ```js
 this.form
-  .transform(data => ({
+  .transform((data) => ({
     ...data,
     remember: data.remember ? 'on' : '',
   }))
   .post('/login')
 ```
+
+You can use the `form.processing` property to track if a form is currently being submitted. This can be helpful for preventing double form submissions, by disabling the submit button.
+
+```jsx
+<button type="submit" :disabled="form.processing">Submit</button>
+```
+
+In the event that you're uploading files, the current progress event is available via the `form.progress` property. This is helpful for showing upload progress. For example:
+
+```jsx
+<progress v-if="form.progress" :value="form.progress.percentage" max="100">
+  {{ form.progress.percentage }}%
+</progress>
+```
+
+In the event there are form errors, they are available via the `form.errors` property.
+
+```jsx
+<div v-if="form.errors.email">{{ form.errors.email }}</div>
+```
+
+To check if a form has any errors, use the `form.hasErrors` property. To clear form errors, use `form.clearErrors()` method.
+
+```js
+// Clear all errors
+form.clearErrors()
+
+// Clear errors for specific fields
+form.clearErrors('field', 'anotherfield')
+```
+
+When a form has been successfully submitted, the `form.wasSuccessful` property will be `true`. In addition to this, there is also a `form.recentlySuccessful` property, which will be set to `true` for two seconds after a successful form submission. This is helpful for showing temporary success messages.
+
+To reset the form values back to their original values, use the `form.reset()` method. Note, this will reset the values back to the initial values that were provided when you called `Inertia.form()`.
+
+```js
+// Reset the form
+form.reset()
+
+// Reset specific fields
+form.reset('field', 'anotherfield')
+```
+
+## Server-side validation
+
+Handling server-side validation errors in Inertia works a little different than a classic ajax-driven form, where you catch the validation errors from `422` responses and manually update the form's error state. That's because Inertia never receives `422` responses. Rather, Inertia operates much more like a standard full page form submission. See the [validation page](/validation) for more information.
 
 ## Classic XHR submits
 
