@@ -265,7 +265,7 @@ export default function Layout({ meta, children }) {
 
       {meta.sponsor && (
         <div className="bg-gray-200">
-          <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 py-4 flex items-center justify-start overflow-x-scroll">
+          <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 py-4 flex items-center justify-start overflow-x-auto">
             <div className="mr-6 text-md font-medium text-gray-600">
               <div className="md:hidden">Sponsors:</div>
               <div className="hidden md:block">Our business sponsors:</div>
