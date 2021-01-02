@@ -211,6 +211,14 @@ This can be done by setting the `preserveState` option to `true`.
 Inertia.get('/users', { search: 'John' }, { preserveState: true })
 ```
 
+You can also lazily evaluate the `preserveState` option based on the response by providing a callback.
+
+```js
+Inertia.post('/users', data, {
+  preserveState: (page) => Object.keys(page.props.errors).length,
+})
+```
+
 For convenience, the `post`, `put`, `patch`, `delete` and `reload` methods all default `preserveState` to `true`.
 
 ## Scroll preservation
