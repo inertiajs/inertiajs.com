@@ -14,7 +14,7 @@ When navigating browser history, Inertia restores pages using prop data cached i
 
 For example, if a user partially completes a form, then navigates away, and then returns back, the form will be reset and their work will be lost.
 
-To mitigate this issue, you can tell Inertia what local component state to save in the browser history.
+To mitigate this issue, you can tell Inertia which local component state to save in the browser history.
 
 <TabbedCodeExamples
   examples={[
@@ -77,7 +77,7 @@ To mitigate this issue, you can tell Inertia what local component state to save 
   ]}
 />
 
-Now, whenever your local page component state changes, Inertia will automatically save this data to the history state, and will restore it on history navigation.
+Now, whenever your local `form` state changes, Inertia will automatically save this data to the history state, and restore it on history navigation.
 
 ## Multiple components
 
