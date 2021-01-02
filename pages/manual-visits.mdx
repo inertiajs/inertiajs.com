@@ -221,6 +221,14 @@ When navigating between pages, Inertia mimics default browser behaviour by autom
 Inertia.visit(url, { preserveScroll: true })
 ```
 
+You can also lazily evaluate the `preserveScroll` option based on the response by providing a callback.
+
+```js
+Inertia.post('/users', data, {
+  preserveScroll: (page) => Object.keys(page.props.errors).length,
+})
+```
+
 For more information, see the [scroll management](/scroll-management) page.
 
 ## Partial reloads

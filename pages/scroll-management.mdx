@@ -26,7 +26,15 @@ Sometimes it's desirable to prevent the default scroll resetting when making vis
 Inertia.visit(url, { preserveScroll: true })
 ```
 
-This is also possible with [Inertia links](/links) using the `preserve-scroll` attribute.
+You can also lazily evaluate the `preserveScroll` option based on the response by providing a callback.
+
+```js
+Inertia.post('/users', data, {
+  preserveScroll: (page) => Object.keys(page.props.errors).length,
+})
+```
+
+You can also preserve the scroll position with [Inertia links](/links) using the `preserve-scroll` attribute.
 
 <TabbedCodeExamples
   examples={[
