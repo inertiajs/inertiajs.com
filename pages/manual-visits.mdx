@@ -314,7 +314,7 @@ Inertia.delete(`/users/${user.id}`, {
 })
 ```
 
-It's also possible to return a promise from the `onSuccess()` callback. This will delay the "finish" event until the promise has resolved.
+It's also possible to return a promise from the `onSuccess()` and `onError()` callbacks. This will delay the "finish" event until the promise has resolved.
 
 ```js
 Inertia.post(url, {
