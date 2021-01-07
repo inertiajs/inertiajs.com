@@ -217,7 +217,9 @@ export default function Layout({ meta, children }) {
                                 $users = User::active()
                                     ->orderByName()
                                     ->get()
-                                    ->only('id', 'name', 'email');
+                                    ->map(function ($user) {
+                                      return $user->only(['id', 'name', 'email']);
+                                    });
 
                                 return Inertia::render('Users', [
                                     'users' => $users
