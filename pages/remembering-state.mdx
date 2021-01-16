@@ -144,7 +144,9 @@ If you have multiple instances of the same component on the page using the remem
         {
           remember: {
             data: ['form'],
-            key: () => \`Users/Edit:\${this.user.id}\`,
+            key: function () {
+              return \`Users/Edit:\${this.user.id}\`
+            },
           },
           data() {
             return {
