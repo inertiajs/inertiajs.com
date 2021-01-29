@@ -321,6 +321,71 @@ form.reset()
 form.reset('field', 'anotherfield')
 ```
 
+In order to send `PUT` requests using the form helper's `.post()` method, specify this in the `_method` property when initializing the form.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'twig',
+      code: dedent`
+        <script>
+        /*
+        |----------------------------------------------------------------
+        | Vue 3
+        |----------------------------------------------------------------
+        */\n
+        import { useForm } from '@inertiajs/inertia-vue3'\n
+        export default {
+          setup () {
+            const form = useForm({
+              _method:'PUT'
+              email: null,
+              password: null,
+              remember: false,
+            })\n
+            return { form }
+          },
+        }\n
+        /*
+        |----------------------------------------------------------------
+        | Vue 2
+        |----------------------------------------------------------------
+        */\n
+        export default {
+          data() {
+            return {
+              form: this.$inertia.form({
+                _method:'PUT'
+                email: null,
+                password: null,
+                remember: false,
+              }),
+            }
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        # todo
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+
+
 ## Server-side validation
 
 Handling server-side validation errors in Inertia works a little different than a classic ajax-driven form, where you catch the validation errors from `422` responses and manually update the form's error state. That's because Inertia never receives `422` responses. Rather, Inertia operates much more like a standard full page form submission. See the [validation page](/validation) for more information.
