@@ -219,7 +219,7 @@ The only thing that changes is the `errors` prop, which now contains the validat
 
 Since Inertia apps never generate `422` responses, Inertia needs another way to determine if a response includes validation errors. To do this, Inertia checks the `page.props.errors` object for the existence of any errors. In the event that errors are present, the `onError()` callback will be called instead of the `onSuccess()` callback.
 
-If you're applications shares errors using a different prop than `errors`, you must tell Inertia how to resolve these errors. This can be done using the `resolveErrors()` callback, applied at the adapter level.
+If your application shares errors using a different prop than `errors`, you must tell Inertia how to resolve these errors. This can be done using the `resolveErrors()` callback, applied at the adapter level.
 
 <TabbedCodeExamples
   examples={[
