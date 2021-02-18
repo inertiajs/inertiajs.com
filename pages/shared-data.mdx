@@ -97,13 +97,13 @@ Once you've shared the data server-side, you'll then be able to access it within
   examples={[
     {
       name: 'Vue.js',
-      description: 'Access shared data using the $page property.',
+      description: 'Access shared data using the $page property or the usePage() hook.',
       language: 'twig',
       code: dedent`
         <template>
           <main>
             <header>
-              <div>You are logged in as: {{ $page.props.auth.user.name }}</div>
+              <div>You are logged in as: {{ user.name }}</div>
               <nav>
                 <inertia-link href="/">Home</inertia-link>
                 <inertia-link href="/about">About</inertia-link>
@@ -115,7 +115,34 @@ Once you've shared the data server-side, you'll then be able to access it within
             </content>
             <footer></footer>
           </main>
-        </template>
+        </template>\n
+        <script>
+          /*
+          |----------------------------------------------------------------
+          | Vue 3
+          |----------------------------------------------------------------
+          */\n
+          import { computed } from 'vue'
+          import { usePage } from '@inertiajs/inertia-vue3'\n
+          export default {
+            setup() {
+              const user = computed(() => usePage().props.value.auth.user)
+              return { user }
+            },
+          }\n
+          /*
+          |----------------------------------------------------------------
+          | Vue 2
+          |----------------------------------------------------------------
+          */\n
+          export default {
+            computed: {
+              user() {
+                return this.$page.props.auth.user
+              }
+            }
+          }
+        </script>
       `,
     },
     {
