@@ -420,4 +420,14 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
   ]}
 />
 
+If you're using Vue 3, you can alternatively use the [teleport](https://v3.vuejs.org/guide/teleport.html) feature for this:
+
+```twig
+<template>
+  <teleport to="head">
+    <title>Welcome {{ user.name }}</title>
+  </teleport>
+</template>
+```
+
 Further, if it's critical for your application to set the page title and meta tags server-side, you can use [root template data](/responses#root-template-data) to accomplish this.
