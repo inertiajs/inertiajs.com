@@ -1,5 +1,6 @@
 import dedent from 'dedent-js'
 import Layout from '../components/Layout'
+import Notice from '../components/Notice'
 import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
@@ -187,7 +188,10 @@ data.append('photo', photo || '')
 Inertia.post('/users', data)
 ```
 
-However, as of version `0.8.0`, Inertia automatically detects if the visit includes any files (even nested files), and then converts the data to a `FormData` object if needed.
+<Notice>
+  However, as of version <inlineCode>0.8.0</inlineCode>, Inertia automatically detects if the visit includes any files
+  (even nested files), and then converts the data to a <inlineCode>FormData</inlineCode> object if needed.
+</Notice>
 
 You can learn more about the `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
 
