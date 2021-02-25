@@ -259,7 +259,27 @@ Since working with forms is so common, Inertia comes with a form helper designed
       name: 'React',
       language: 'jsx',
       code: dedent`
-        # todo
+        import React from 'react'
+        import { useForm } from '@inertiajs/inertia-react'\n
+        const { data, setData, post, processing, errors } = useForm({
+          name: '',
+          email: '',
+          remember: '',
+        })\n
+        function submit(e) {
+          e.preventDefault()
+          post('/login')
+        }\n
+        return (
+          <form onSubmit={submit}>
+            <input type="text" value={data.email} onChange={e => setData('email', e.target.value)} />
+            {errors.email && <div>{errors.email}</div>}
+            <input type="password" value={data.password} onChange={e => setData('password', e.target.value)} />
+            {errors.password && <div>{errors.password}</div>}
+            <input type="checkbox" value={data.remember} onChange={e => setData('remember', e.target.value)} /> Remember Me
+            <button type="submit" disabled={processing}>Login</button>
+          </form>
+        )
       `,
     },
     {
@@ -274,56 +294,205 @@ Since working with forms is so common, Inertia comes with a form helper designed
 
 If you need to modify the form data before it's sent to the server, you can do this via the `transform()` method.
 
-```js
-this.form
-  .transform((data) => ({
-    ...data,
-    remember: data.remember ? 'on' : '',
-  }))
-  .post('/login')
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        this.form
+          .transform((data) => ({
+            ...data,
+            remember: data.remember ? 'on' : '',
+          }))
+          .post('/login')
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        const { transform } = useForm()\n
+        transform((data) => ({
+          ...data,
+          remember: data.remember ? 'on' : '',
+        }))
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
 
-You can use the `form.processing` property to track if a form is currently being submitted. This can be helpful for preventing double form submissions, by disabling the submit button.
+You can use the `processing` property to track if a form is currently being submitted. This can be helpful for preventing double form submissions, by disabling the submit button.
 
-```jsx
-<button type="submit" :disabled="form.processing">Submit</button>
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'jsx',
+      code: dedent`
+        <button type="submit" :disabled="form.processing">Submit</button>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        const { processing } = useForm()\n
+        <button type="submit" disabled={processing}>Submit</button>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
 
-In the event that you're uploading files, the current progress event is available via the `form.progress` property. This is helpful for showing upload progress. For example:
+In the event that you're uploading files, the current progress event is available via the `progress` property. This is helpful for showing upload progress. For example:
 
-```jsx
-<progress v-if="form.progress" :value="form.progress.percentage" max="100">
-  {{ form.progress.percentage }}%
-</progress>
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'jsx',
+      code: dedent`
+        <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+          {{ form.progress.percentage }}%
+        </progress>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        const { progress } = useForm()\n
+        {progress && (
+          <progress value={progress.percentage} max="100">
+            {progress.percentage}%
+          </progress>
+        )}
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
 
-In the event there are form errors, they are available via the `form.errors` property.
+In the event there are form errors, they are available via the `errors` property.
 
-```jsx
-<div v-if="form.errors.email">{{ form.errors.email }}</div>
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'jsx',
+      code: dedent`
+        <div v-if="form.errors.email">{{ form.errors.email }}</div>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        const { errors } = useForm()\n
+        {errors.email && <div>{errors.email}</div>}
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
 
-To check if a form has any errors, use the `form.hasErrors` property. To clear form errors, use `form.clearErrors()` method.
+To check if a form has any errors, use the `hasErrors` property. To clear form errors, use the `clearErrors()` method.
 
-```js
-// Clear all errors
-form.clearErrors()
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        // Clear all errors
+        form.clearErrors()\n
+        // Clear errors for specific fields
+        form.clearErrors('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        const { clearErrors } = useForm()\n
+        // Clear all errors
+        clearErrors()\n
+        // Clear errors for specific fields
+        clearErrors('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
 
-// Clear errors for specific fields
-form.clearErrors('field', 'anotherfield')
-```
+When a form has been successfully submitted, the `wasSuccessful` property will be `true`. In addition to this, there is also a `recentlySuccessful` property, which will be set to `true` for two seconds after a successful form submission. This is helpful for showing temporary success messages.
 
-When a form has been successfully submitted, the `form.wasSuccessful` property will be `true`. In addition to this, there is also a `form.recentlySuccessful` property, which will be set to `true` for two seconds after a successful form submission. This is helpful for showing temporary success messages.
+To reset the form values back to their original values, use the `reset()` method. Note, this will reset the values back to the initial values that were provided when you first instantiated the form helper.
 
-To reset the form values back to their original values, use the `form.reset()` method. Note, this will reset the values back to the initial values that were provided when you called `Inertia.form()`.
-
-```js
-// Reset the form
-form.reset()
-
-// Reset specific fields
-form.reset('field', 'anotherfield')
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue.js',
+      language: 'js',
+      code: dedent`
+        // Reset the form
+        form.reset()\n
+        // Reset specific fields
+        form.reset('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        const { reset } = useForm()\n
+        // Reset the form
+        reset()\n
+        // Reset specific fields
+        reset('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
 
 ## Server-side validation
 
