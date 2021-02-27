@@ -5,7 +5,7 @@ const Nav = ({ className }) => {
   const router = useRouter()
 
   function linkClass(path) {
-    return router.pathname === path
+    return (path === '/' && router.pathname === '/') || (path !== '/' && router.pathname.startsWith(path))
       ? `block -ml-3 pl-3 pr-2 py-1 md:py-2 font-medium border-l-4 rounded-r border-purple-400 bg-purple-100 text-purple-700`
       : `inline-block py-1 md:py-2 hover:text-blue-700 hover:underline font-medium text-gray-700`
   }
@@ -55,6 +55,11 @@ const Nav = ({ className }) => {
         <li className="md:pr-3">
           <Link href="/sponsors">
             <a className={linkClass('/sponsors')}>Sponsors</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/releases">
+            <a className={linkClass('/releases')}>Releases</a>
           </Link>
         </li>
       </ul>
