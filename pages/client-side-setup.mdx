@@ -79,6 +79,29 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
             resolveComponent: name => require(\`./Pages/\${name}\`).default,
           })
         }).use(plugin).mount(el)\n\n
+        
+        /*
+        |----------------------------------------------------------------
+        | Vue 3 and vitejs
+        |----------------------------------------------------------------
+        */\n
+        import { createApp, h } from 'vue'
+        import { App, plugin } from '@inertiajs/inertia-vue3'
+        import "vite/dynamic-import-polyfill"
+        const pages = import.meta.glob('./Pages/**/*.vue')
+        const el = document.getElementById('app')\n
+        createApp({
+          render: () => h(App, {
+            initialPage: JSON.parse(el.dataset.page),
+            resolveComponent: async name => {
+                const importPage = pages[\`./Pages/\${name}.vue\`]
+                if (!importPage) throw new Error(\`Unknown page \${name}. Is it located under Pages with a .vue extension?\`)
+                return importPage().then(component => {
+                    return component.default;
+                })
+            },
+          })
+        }).use(plugin).mount(el)\n\n
         /*
         |----------------------------------------------------------------
         | Vue 2
