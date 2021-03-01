@@ -1,0 +1,72 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia-vue@v0.5.0',
+}
+
+<h1>inertia-vue@v0.5.0</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on December 23, 2020</div>
+
+## New form helper
+
+This release includes a new form helper, inspired by the form helper included in [Jetstream](https://jetstream.laravel.com). Here's how to use it:
+
+```twig
+<template>
+  <form @submit.prevent="form.post('/login')">
+    <!-- email -->
+    <input type="text" v-model="form.email" />
+    <div v-if="form.errors.email">{{ form.errors.email }}</div>
+    <!-- password -->
+    <input type="password" v-model="form.password" />
+    <div v-if="form.errors.password">{{ form.errors.password }}</div>
+    <!-- remember me -->
+    <input type="checkbox" v-model="form.remember" /> Remember Me
+    <!-- submit -->
+    <button type="submit" :disabled="form.processing">Login</button>
+  </form>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      form: this.$inertia.form({
+        email: null,
+        password: null,
+        remember: false,
+      }),
+    }
+  },
+}
+</script>
+```
+
+It also comes with a `form.reset()` helper for resetting the form back to its original state. Or, if you want to only reset specific fields, you can call `form.reset('field', 'anotherfield')`.
+
+Also, in the event that you're uploading files, the current progress event is available at `form.progress`, which makes it really easy to show upload progress in your views:
+
+```twig
+<progress :value="form.progress.percentage" max="100">{{ form.progress.percentage }}%</progress>
+```
+
+Also, if you need to modify the data before it's sent to the server, you can do this via the `transform()` function:
+
+```js
+this.form
+  .transform((data) => ({
+    ...data,
+    remember: data.remember ? 'on' : '',
+  }))
+  .post('/login')
+```
+
+## Improved validation error handling
+
+This release adds a new optional `resolveErrors` setting. You can read more about this in the corresponding [Inertia release](/releases/inertia-0.8.0).
+
+## Update Inertia dependency - BREAKING CHANGE ⚠️
+
+When upgrading to this release, be sure to also upgrade `@inertiajs/inertia` to `v0.8.0`.

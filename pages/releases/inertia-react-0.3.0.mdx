@@ -1,0 +1,23 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia-react@v0.3.0',
+}
+
+<h1>inertia-react@v0.3.0</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on October 9, 2020</div>
+
+- Added new `app` and `link` named exports, and have deprecated `InertiaApp` and `InertiaLink`.
+- Added the visit event callbacks to the `<InertiaLink>` component ([#240](https://github.com/inertiajs/inertia/pull/240)).
+- Added nested layouts shorthand ([#241](https://github.com/inertiajs/inertia/pull/241)).
+- Updated the `usePage()` hook to return the full `page` object, instead of just the props.
+- Updated `InertiaLink` component to support references ([#185](https://github.com/inertiajs/inertia/pull/185)).
+- [INTERNAL] Removed `transformProps()` call, since this is now now done in Inertia core.
+
+## Breaking changes
+
+This release updates the `usePage()` hook to return the full `page` object, instead of just the page `props`. The purpose of this change is to better reflect what the [page object](https://inertiajs.com/the-protocol#the-page-object) is, and to make the other properties within the page object available to you, such as the `url`, `version` and `component` name. The upgrade path here is straightforward—simply append `.props` to all instances of then `page` object returned from `usePage()`.
+
+This release also requires version `0.4.0` of the `@inertiajs/inertia` package. Please be sure to update your dependencies accordingly.

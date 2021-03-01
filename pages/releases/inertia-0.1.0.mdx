@@ -1,0 +1,72 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia@v0.1.0',
+}
+
+<h1>inertia@v0.1.0</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on August 13, 2019</div>
+
+So yes, to answer your question, Inertia.js is now safe to use in production. 🎉 Of course, we're still working toward a 1.0 release, and the API is subject to change. However, you can now lock in your dependency versions and use the library safely.
+
+You'll need to update your applications. Please review the instructions below. You can also see an example of this update on the Ping CRM demo app [here](https://github.com/inertiajs/pingcrm/commit/14352710ad577e45062a49d19a6a6d441e958fb6).
+
+## 1. Update your JavaScript dependencies
+
+First, you'll need to update your existing dependency to use the new NPM package name:
+
+- `inertia/inertia-vue` becomes `@inertiajs/inertia-vue`
+- `inertia/inertia-react` becomes `@inertiajs/inertia-react`
+
+Be sure to lock these in at `^0.1.0`. For example:
+
+```js
+"@inertiajs/inertia-vue": "^0.1.0",
+```
+
+Second, you need to add `@inertiajs/inertia` as a dependency as well. It's no longer automatically included with the adapters.
+
+```sh
+npm install @inertiajs/inertia
+```
+
+## 2. Update your imports
+
+We've removed all default exports and are now using named exports.
+
+```js
+// Before
+import Inertia from 'inertia-vue'
+import Inertia from 'inertia-react'
+
+// After
+import { InertiaApp } from '@inertiajs/inertia-vue'
+import { InertiaApp } from '@inertiajs/inertia-react'
+```
+
+If you're using Vue.js, you'll need to update the plugin:
+
+```js
+// Before
+Vue.use(Inertia)
+
+// After
+Vue.use(InertiaApp)
+```
+
+If you were previously importing Inertia from one of the adapters, you now need to import that directly.
+
+```js
+// Before
+import { Inertia } from 'inertia-vue'
+import { Inertia } from 'inertia-react'
+
+// After
+import { Inertia } from 'inertia'
+```
+
+## 3. Update your PHP dependencies
+
+If you are currently using the `inertiajs/inertia-laravel` adapter, be sure to set your version to `^0.1`. This library has now been tagged as well. Note, there were some breaking changes made recently to how `Inertia::share()` works.
