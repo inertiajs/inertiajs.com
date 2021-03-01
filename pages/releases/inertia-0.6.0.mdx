@@ -12,11 +12,11 @@ export const meta = {
 
 ## Changes
 
-- Fixed issue where the `finish` event was firing in the wrong sequence for cancelled visits (#290).
-- Added new `before` global event and `onBefore()` event callback (#290).
-- Removed the ability to cancel the `start` global event and `onStart()` event callback (#290).
-- Updated the `Inertia.reload()` method to always preserve the state and scroll position (#293).
-- Added a deprecation notice for `Inertia.replace()` method (#294).
+- Fixed issue where the `finish` event was firing in the wrong sequence for cancelled visits ([#290](https://github.com/inertiajs/inertia/pull/290)).
+- Added new `before` global event and `onBefore()` event callback ([#290](https://github.com/inertiajs/inertia/pull/290)).
+- Removed the ability to cancel the `start` global event and `onStart()` event callback ([#290](https://github.com/inertiajs/inertia/pull/290)).
+- Updated the `Inertia.reload()` method to always preserve the state and scroll position ([#293](https://github.com/inertiajs/inertia/pull/293)).
+- Added a deprecation notice for `Inertia.replace()` method ([#294](https://github.com/inertiajs/inertia/pull/294)).
 
 ## Start event is no longer cancelable (breaking change)
 
@@ -40,7 +40,7 @@ Inertia.delete(`/users/${user.id}`, {
 
 As well as from the Inertia link:
 
-```vue
+```twig
 <inertia-link :href="`/users/${user.id}`" method="post" @before="confirmDelete">Delete user<inertia-link>
 ```
 

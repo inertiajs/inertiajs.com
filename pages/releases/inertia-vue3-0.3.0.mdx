@@ -14,7 +14,7 @@ export const meta = {
 
 This release includes a new form helper, inspired by the form helper included in [Jetstream](https://jetstream.laravel.com). Here's how to use it:
 
-```vue
+```twig
 <template>
   <form @submit.prevent="form.post('/login')">
     <!-- email -->
@@ -67,7 +67,7 @@ It also comes with a `form.reset()` helper for resetting the form back to its or
 
 Also, in the event that you're uploading files, the current progress event is available at `form.progress`, which makes it really easy to show upload progress in your views:
 
-```vue
+```twig
 <progress :value="form.progress.percentage" max="100">{{ form.progress.percentage }}%</progress>
 ```
 
@@ -84,7 +84,7 @@ this.form
 
 ## Improved validation error handling
 
-This release adds a new optional `resolveErrors` setting. You can read more about this in the corresponding [Inertia release](https://github.com/inertiajs/inertia/releases/tag/v0.8.0).
+This release adds a new optional `resolveErrors` setting. You can read more about this in the corresponding [Inertia release](/releases/inertia-0.8.0).
 
 ## Update Inertia dependency - BREAKING CHANGE ⚠️
 
