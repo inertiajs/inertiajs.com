@@ -7,3 +7,8 @@ export const meta = {
 }
 
 <h1>inertia@v0.3.4</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on September 24, 2020</div>
+
+- Reverted [0.3.3](https://github.com/inertiajs/inertia/releases) change that fired a "finish" event if the "start" event was cancelled (dc1a958).
+- Added the ability to cancel a visit from the `onStart()` callback (#233).

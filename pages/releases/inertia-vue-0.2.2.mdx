@@ -7,3 +7,35 @@ export const meta = {
 }
 
 <h1>inertia-vue@v0.2.2</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on September 8, 2020</div>
+
+This release adds a new array shorthand for nested layouts, thanks to @claudiodekker (#201).
+
+Previously, if you wanted nested layouts, you had to use a callback like this:
+
+```vue
+<script>
+import SiteLayout from './SiteLayout'
+import NestedLayout from './NestedLayout'
+
+export default {
+  layout: (h, page) => {
+    return h(SiteLayout, [h(NestedLayout, [page])])
+  },
+}
+</script>
+```
+
+Using this new array shorthand, you can now do it like this:
+
+```vue
+<script>
+import SiteLayout from './SiteLayout'
+import NestedLayout from './NestedLayout'
+
+export default {
+  layout: [SiteLayout, NestedLayout],
+}
+</script>
+```
