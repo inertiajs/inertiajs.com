@@ -1,0 +1,35 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia-laravel@v0.3.3',
+}
+
+<h1>inertia-laravel@v0.3.3</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on October 29, 2020</div>
+
+This release adds the ability to define "lazy props". ([#175](https://github.com/inertiajs/inertia-laravel/pull/175))
+
+Lazy props are data that's not included on the initial visit to a page. These properties only get included on partial reloads, using the `only` option. This is useful for "expensive" data, such as requests to 3rd party APIs, that are not needed on the initial visit to a page.
+
+You can mark a prop as lazy using the new `Inertia::lazy()` method:
+
+```php
+return Inertia::render('Users/Index', [
+    'users' => User::paginate('id', 'name', 'email'),
+    'companies' => Inertia::lazy(fn () => Company::get('id', 'name')),
+]);
+```
+
+Then, to load this prop later on, you perform a partial reload from your page component, either using a link:
+
+```js
+<inertia-link class="hover:underline" href="/users" :only="['companies']">Load companies</inertia-link>
+```
+
+Or by doing this programatically:
+
+```js
+Inertia.reload({ only: ['companies'] })
+```
