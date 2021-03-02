@@ -1,0 +1,59 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia-laravel@v0.2.9',
+}
+
+<h1>inertia-laravel@v0.2.9</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on September 5, 2020</div>
+
+Inertia.js now automatically shares validation errors ([#135](https://github.com/inertiajs/inertia-laravel/pull/135)) via the `errors` prop.
+
+Previously you had to manually share these in your app service provider, like this:
+
+```php
+Inertia::share([
+    'errors' => function () {
+        return Session::get('errors')
+            ? Session::get('errors')->getBag('default')->getMessages()
+            : (object) [];
+    },
+]);
+```
+
+However, unlike the above implementation, the automatically shared errors are flattened to one error per field:
+
+```js
+errors: {
+  name: 'The name field is required.',
+  email: 'The email field is required.',
+}
+```
+
+This is done to prevent having to always pick the first error from an array (`errors.name[0]`). We decided to do it this way based on feedback from the community [via Twitter](https://twitter.com/reinink/status/1300516500105842689).
+
+This is a non-breaking change, meaning if you prefer the old behaviour (multiple errors per field), you can continue manually sharing the validation errors in your app service provider. Inertia.js will only automatically share the errors if the `errors` key is not already registered.
+
+This update also supports named error bags, which are automatically scoped using the error bag name. For example:
+
+```js
+errors: {
+  createUser: {
+    name: 'The name field is required.',
+    email: 'The email field is required.',
+  }
+}
+```
+
+Named error bags are useful when you have multiple forms on the same page, and need a way to differentiate between the errors for one form and another. Also, coming is Laravel 8 is the ability to define error bags client-side (https://github.com/laravel/framework/commit/3624a82ea5e36dbad1645975e558dfd8c063d730), instead of having to do this in your controllers. Here's an example of how you could use this:
+
+```js
+this.$inertia.post('/users', {
+  ...this.form,
+  _error_bag: 'CreateUser',
+})
+```
+
+By providing the `_error_bag` value here, Laravel and Inertia.js will automatically scope the validation errors to the `CreateUser` key.
