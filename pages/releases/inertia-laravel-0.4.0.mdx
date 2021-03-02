@@ -1,0 +1,63 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia-laravel@v0.4.0',
+}
+
+<h1>inertia-laravel@v0.4.0</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on March 2, 2021</div>
+
+This release merges [@claudiodekker](https://github.com/claudiodekker)'s excellent [Inertia Laravel Testing Helpers](https://github.com/claudiodekker/inertia-laravel-testing) package into this adapter ([#220](https://github.com/inertiajs/inertia-laravel/pull/220)).
+
+## Example usage
+
+```php
+use Inertia\Testing\Assert;
+
+class PodcastsControllerTest extends TestCase
+{
+    public function test_can_view_podcast()
+    {
+        $this->get('/podcasts/41')
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Podcasts/Show')
+                ->has('podcast', fn (Assert $page) => $page
+                    ->where('id', $podcast->id)
+                    ->where('subject', 'The Laravel Podcast')
+                    ->where('description', 'The Laravel Podcast brings you Laravel and PHP development news and discussion.')
+                    ->has('seasons', 4)
+                    ->has('seasons.4.episodes', 21)
+                    ->has('host', fn (Assert $page) => $page
+                        ->where('id', 1)
+                        ->where('name', 'Matt Stauffer')
+                    )
+                    ->has('subscribers', 7, fn (Assert $page) => $page
+                        ->where('id', 2)
+                        ->where('name', 'Claudio Dekker')
+                        ->where('platform', 'Apple Podcasts')
+                        ->etc()
+                        ->missing('email')
+                        ->missing('password')
+                    )
+                )
+            );
+    }
+}
+```
+
+## Documentation
+
+Until we're able to add the documentation for these testing helpers to this website, please see the old docs [here](https://github.com/claudiodekker/inertia-laravel-testing/tree/a5ac8d372e456534f5ad2e07a6875e0f27c6a73d).
+
+## Migrating
+
+To migrate from `inertia-laravel-testing` to the `inertia-laravel` adapter, follow these steps:
+
+1. In your `composer.json` file, remove the `claudiodekker/inertia-laravel-testing` dependency.
+2. In your `composer.json` file, update the `inertiajs/inertia-laravel` version to `^0.4.0`.
+3. Run `composer update`.
+4. Search and replace `use ClaudioDekker\Inertia\Assert;` with `use Inertia\Testing\Assert;` in your project.
+
+That's it. All your tests should still be passing.
