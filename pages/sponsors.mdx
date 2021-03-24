@@ -1,6 +1,7 @@
 import dedent from 'dedent-js'
 import Layout from '../components/Layout'
 import TabbedCodeExamples from '../components/TabbedCodeExamples'
+import sponsors from '../sponsors.json'
 
 export default Layout
 export const meta = {
@@ -12,109 +13,6 @@ export const meta = {
     { url: '#become-a-sponsor', name: 'Become a sponsor' },
     { url: '#business-sponsors', name: 'Business sponsors' },
     { url: '#community-sponsors', name: 'Community sponsors' },
-  ],
-  sponsors: [
-    { username: 'frankspin89', id: '4480104', since: 'Nov 2019' },
-    { username: 'inxilpro', id: '21592', since: 'Nov 2019' },
-    { username: 'freekmurze', id: '483853', since: 'Nov 2019' },
-    { username: 'fourstacks', id: '6280211', since: 'Nov 2019' },
-    { username: 'robindrost', id: '588012', since: 'Nov 2019' },
-    { username: 'mkellyxp', id: '6528226', since: 'Nov 2019' },
-    { username: 'novelnet', id: '31067676', since: 'Nov 2019' },
-    { username: 'stefanbauer', id: '3192662', since: 'Nov 2019' },
-    { username: 'michaeldyrynda', id: '558441', since: 'Nov 2019' },
-    { username: 'ledermann', id: '3557', since: 'Nov 2019' },
-    { username: 'Juhlinus', id: '12988164', since: 'Nov 2019' },
-    { username: 'PollieDev', id: '12276548', since: 'Nov 2019' },
-    { username: 'jamesburrow23', id: '16297677', since: 'Nov 2019' },
-    { username: 'sandulat', id: '7345874', since: 'Nov 2019' },
-    { username: 'aldo555', id: '6016996', since: 'Nov 2019' },
-    { username: 'pepeloper', id: '9825719', since: 'Nov 2019' },
-    { username: 'Cannonb4ll', id: '3110750', since: 'Nov 2019' },
-    { username: 'davidjr82', id: '4275886', since: 'Nov 2019' },
-    { username: 'devcircus', id: '18542852', since: 'Nov 2019' },
-    { username: 'JonasPardon', id: '10206461', since: 'Nov 2019' },
-    { username: 'vardyb', id: '5463577', since: 'Nov 2019' },
-    { username: 'jackmcdade', id: '44739', since: 'Nov 2019' },
-    { username: 'ryangjchandler', id: '41837763', since: 'Nov 2019' },
-    { username: 'jetwes', id: '1346373', since: 'Nov 2019' },
-    { username: 'nathanhipps', id: '8235520', since: 'Nov 2019' },
-    { username: 'gregupton', id: '54643782', since: 'Dec 2019' },
-    { username: 'TheDoctor0', id: '16612504', since: 'Dec 2019' },
-    { username: 'troygilbert', id: '146465', since: 'Dec 2019' },
-    { username: 'mrmonat', id: '17597850', since: 'Dec 2019' },
-    { username: 'kitar', id: '157844', since: 'Dec 2019' },
-    { username: 'hermanschutte', id: '767120', since: 'Dec 2019' },
-    { username: 'dpointeck', id: '4588597', since: 'Dec 2019' },
-    { username: 'driesvints', id: '594614', since: 'Dec 2019' },
-    { username: 'petersuhm', id: '1430546', since: 'Dec 2019' },
-    { username: 'damcclean', id: '19637309', since: 'Dec 2019' },
-    { username: 'taylorotwell', id: '463230', since: 'Dec 2019' },
-    { username: 'trevorgreenleaf', id: '1332315', since: 'Dec 2019' },
-    { username: 'Kaama21', id: '21002136', since: 'Dec 2019' },
-    { username: 'ninjaparade', id: '228899', since: 'Jan 2020' },
-    { username: 'juicyfish', id: '32151712', since: 'Jan 2020' },
-    { username: 'jasoncharnes', id: '3144140', since: 'Jan 2020' },
-    { username: 'slovenianGooner', id: '1257629', since: 'Jan 2020' },
-    { username: 'mlantz', id: '1065551', since: 'Jan 2020' },
-    { username: 'cullymason', id: '755063', since: 'Jan 2020' },
-    { username: 'edgrosvenor', id: '1053395', since: 'Jan 2020' },
-    { username: 'anthonysexton', id: '858300', since: 'Jan 2020' },
-    { username: 'KieranHolroyd', id: '25421864', since: 'Feb 2020' },
-    { username: 'josephmancuso', id: '20172538', since: 'Feb 2020' },
-    { username: 'jkudish', id: '260253', since: 'Feb 2020' },
-    { username: 'alexleeelkins', id: '6634697', since: 'Feb 2020' },
-    { username: 'mckenziearts', id: '14105989', since: 'Feb 2020' },
-    { username: 'marvinrabe', id: '515860', since: 'Feb 2020' },
-    { username: 'MikeElghali', id: '2301050', since: 'Feb 2020' },
-    { username: 'JoeriAben', id: '4263996', since: 'Mar 2020' },
-    { username: 'top-offerten', id: '61965317', since: 'Mar 2020' },
-    { username: 'dbpolito', id: '347400', since: 'Mar 2020' },
-    { username: 'Neophen', id: '6092928', since: 'Apr 2020' },
-    { username: 'barryvdh', id: '973269', since: 'Apr 2020' },
-    { username: 'AmezmoOfficial', id: '62684897', since: 'Apr 2020' },
-    { username: 'guido4000', id: '505155', since: 'May 2020' },
-    { username: 'Jarrid', id: '8340930', since: 'May 2020' },
-    { username: 'PiranhaGeorge', id: '203654', since: 'May 2020' },
-    { username: 'phillipsharring', id: '11220', since: 'May 2020' },
-    { username: 'liamjoc', id: '65899150', since: 'May 2020' },
-    { username: 'zarsi', id: '24716811', since: 'June 2020' },
-    { username: 'francescomugnai', id: '38673', since: 'June 2020' },
-    { username: 'nckrtl', id: '18613261', since: 'June 2020' },
-    { username: 'mdpoulter', id: '1091085', since: 'July 2020' },
-    { username: 'claudiodekker', id: '1752195', since: 'July 2020' },
-    { username: 'mikeburrelljr', id: '270162', since: 'August 2020' },
-    { username: 'zaherg', id: '27624', since: 'August 2020' },
-    { username: 'MianSaleem', id: '5428120', since: 'August 2020' },
-    { username: 'igerslike', id: '12662462', since: 'September 2020' },
-    { username: 'andreiio', id: '1569300', since: 'September 2020' },
-    { username: 'goaround', id: '5927337', since: 'September 2020' },
-    { username: 'Larsklopstra', id: '25669876', since: 'October 2020' },
-    { username: 'lostdesign', id: '5164617', since: 'October 2020' },
-    { username: 'stancl', id: '33033094', since: 'October 2020' },
-    { username: 'scottzirkel', id: '1329131', since: 'October 2020' },
-    { username: 'horaceho', id: '6657', since: 'October 2020' },
-    { username: 'bdweix', id: '25019620', since: 'October 2020' },
-    { username: 'ajnsn', id: '13928621', since: 'October 2020' },
-    { username: 'ericlbarnes', id: '116662', since: 'October 2020' },
-    { username: 'andriy-andriyuk', id: '862427', since: 'October 2020' },
-    { username: 'weavdale', id: '68517144', since: 'October 2020' },
-    { username: 'ksassnowski', id: '5139098', since: 'October 2020' },
-    { username: 'TimodeWinter-tdw', id: '52080998', since: 'October 2020' },
-    { username: 'muhametsherifi', id: '17104163', since: 'November 2020' },
-    { username: 'devingray', id: '11573528', since: 'November 2020' },
-    { username: 'leeloop7', id: '46476605', since: 'November 2020' },
-    { username: 'wilburpowery', id: '15817188', since: 'December 2020' },
-    { username: 'akaunting', id: '26357771', since: 'December 2020' },
-    { username: 'RobertBoes', id: '2871897', since: 'December 2020' },
-    { username: 'taylormaguire', id: '18236969', since: 'January 2021' },
-    { username: 'HazJ', id: '20573863', since: 'February 2021' },
-    { username: 'GuidoHendriks', id: '5393965', since: 'February 2021' },
-    { username: 'lucasromanojf', id: '3661610', since: 'February 2021' },
-    { username: 'stephenhowells', id: '436173', since: 'February 2021' },
-    { username: 'programodo', id: '74748875', since: 'March 2021' },
-    { username: 'xyNNN', id: '1929750', since: 'March 2021' },
-    { username: 'vedovelli', id: '151001', since: 'March 2021' },
   ],
 }
 
@@ -390,21 +288,23 @@ A huge thanks to our business sponsors, whose significant support helps push Ine
 We are so grateful for our community sponsors! Thank you!
 
 <div className="mt-12 flex flex-wrap -ml-4">
-  {meta.sponsors.map((sponsor, index) => (
-    <div key={sponsor.username} className="w-full md:w-1/2 pl-4 pb-4">
+  {sponsors.data.user.sponsorshipsAsMaintainer.nodes.map((sponsor, index) => (
+    <div key={sponsor.sponsorEntity.login} className="w-full md:w-1/2 pl-4 pb-4">
       <div className="rounded flex items-center">
-        <a href={`https://github.com/${sponsor.username}`}>
+        <a href={`https://github.com/${sponsor.sponsorEntity.login}`}>
           <img
             className="w-16 h-16 rounded shadow"
-            alt={sponsor.username}
-            src={`https://avatars.githubusercontent.com/u/${sponsor.id}?s=150`}
+            alt={sponsor.sponsorEntity.login}
+            src={sponsor.sponsorEntity.avatarUrl}
           />
         </a>
         <div className="pl-4 leading-none">
-          <a href={`https://github.com/${sponsor.username}`} className="text-base font-bold text-gray-700">
-            {sponsor.username}
+          <a href={`https://github.com/${sponsor.sponsorEntity.login}`} className="text-base font-bold text-gray-700">
+            {sponsor.sponsorEntity.login}
           </a>
-          <div className="mt-2 text-sm text-gray-600">Sponsor since {sponsor.since}</div>
+          <div className="mt-2 text-sm text-gray-600">
+            Sponsor since {new Date(sponsor.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+          </div>
         </div>
       </div>
     </div>
