@@ -28,7 +28,32 @@ In addition to [creating links](/links), it's also possible to manually make Ine
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        // import { Inertia } from '@inertiajs/inertia'\n
+        this.$inertia.visit(url, {
+          method: 'get',
+          data: {},
+          replace: false,
+          preserveState: false,
+          preserveScroll: false,
+          only: [],
+          headers: {},
+          errorBag: null,
+          onCancelToken: cancelToken => {},
+          onCancel: () => {},
+          onBefore: visit => {},
+          onStart: visit => {},
+          onProgress: progress => {},
+          onSuccess: page => {},
+          onError: errors => {},
+          onFinish: () => {},
+        })
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         // import { Inertia } from '@inertiajs/inertia'\n
@@ -110,7 +135,21 @@ However, generally it's preferred to use one of the shortcut methods instead. Th
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        // import { Inertia } from '@inertiajs/inertia'\n
+        this.$inertia.get(url, data, options)
+        this.$inertia.post(url, data, options)
+        this.$inertia.put(url, data, options)
+        this.$inertia.patch(url, data, options)
+        this.$inertia.delete(url, options)
+        this.$inertia.replace(url, options)
+        this.$inertia.reload(options) // Uses the current URL
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         // import { Inertia } from '@inertiajs/inertia'\n

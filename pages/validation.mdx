@@ -91,7 +91,48 @@ Since validation errors are made available client-side as page component props, 
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <form @submit.prevent="submit">
+            <label for="first_name">First name:</label>
+            <input id="first_name" v-model="form.first_name" />
+            <div v-if="errors.first_name">{{ errors.first_name }}</div>
+            <label for="last_name">Last name:</label>
+            <input id="last_name" v-model="form.last_name" />
+            <div v-if="errors.last_name">{{ errors.last_name }}</div>
+            <label for="email">Email:</label>
+            <input id="email" v-model="form.email" />
+            <div v-if="errors.email">{{ errors.email }}</div>
+            <button type="submit">Submit</button>
+          </form>
+        </template>\n
+        <script>
+        export default {
+          props: {
+            errors: Object,
+          },
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+                email: null,
+              },
+            }
+          },
+          methods: {
+            submit() {
+              this.$inertia.post('/users', this.form)
+            },
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>
@@ -224,29 +265,9 @@ If your application shares errors using a different prop than `errors`, you must
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'js',
       code: dedent`
-        /*
-        |----------------------------------------------------------------
-        | Vue 3
-        |----------------------------------------------------------------
-        */\n
-        import { createApp, h } from 'vue'
-        import { App, plugin } from '@inertiajs/inertia-vue3'\n
-        const el = document.getElementById('app')\n
-        createApp({
-          render: () => h(App, {
-            initialPage: JSON.parse(el.dataset.page),
-            resolveComponent: name => require(\`./Pages/\${name}\`).default,
-            resolveErrors: page => (page.props.errors || {}),
-          })
-        }).use(plugin).mount(el)\n\n
-        /*
-        |----------------------------------------------------------------
-        | Vue 2
-        |----------------------------------------------------------------
-        */\n
         import { App, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
         Vue.use(plugin)\n
@@ -260,6 +281,22 @@ If your application shares errors using a different prop than `errors`, you must
             },
           }),
         }).$mount(el)
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        import { createApp, h } from 'vue'
+        import { App, plugin } from '@inertiajs/inertia-vue3'\n
+        const el = document.getElementById('app')\n
+        createApp({
+          render: () => h(App, {
+            initialPage: JSON.parse(el.dataset.page),
+            resolveComponent: name => require(\`./Pages/\${name}\`).default,
+            resolveErrors: page => (page.props.errors || {}),
+          })
+        }).use(plugin).mount(el)\n\n
       `,
     },
     {

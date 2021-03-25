@@ -16,7 +16,7 @@ export const meta = {
 
 # Client-side setup
 
-Once you have your [server-side framework configured](/server-side-setup), you then need to setup your client-side framework. Inertia currently provides support for React, Vue.js, and Svelte.
+Once you have your [server-side framework configured](/server-side-setup), you then need to setup your client-side framework. Inertia currently provides support for React, Vue, and Svelte.
 
 ## Install dependencies
 
@@ -25,15 +25,19 @@ Install the Inertia client-side adapters using NPM or Yarn.
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'bash',
       code: dedent`
-        # Vue 3
-        npm install @inertiajs/inertia @inertiajs/inertia-vue3
-        yarn add @inertiajs/inertia @inertiajs/inertia-vue3\n
-        # Vue 2
         npm install @inertiajs/inertia @inertiajs/inertia-vue
         yarn add @inertiajs/inertia @inertiajs/inertia-vue
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'bash',
+      code: dedent`
+        npm install @inertiajs/inertia @inertiajs/inertia-vue3
+        yarn add @inertiajs/inertia @inertiajs/inertia-vue3
       `,
     },
     {
@@ -62,28 +66,9 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'js',
       code: dedent`
-        /*
-        |----------------------------------------------------------------
-        | Vue 3
-        |----------------------------------------------------------------
-        */\n
-        import { createApp, h } from 'vue'
-        import { App, plugin } from '@inertiajs/inertia-vue3'\n
-        const el = document.getElementById('app')\n
-        createApp({
-          render: () => h(App, {
-            initialPage: JSON.parse(el.dataset.page),
-            resolveComponent: name => require(\`./Pages/\${name}\`).default,
-          })
-        }).use(plugin).mount(el)\n\n
-        /*
-        |----------------------------------------------------------------
-        | Vue 2
-        |----------------------------------------------------------------
-        */\n
         import { App, plugin } from '@inertiajs/inertia-vue'
         import Vue from 'vue'\n
         Vue.use(plugin)\n
@@ -96,6 +81,21 @@ Next, update your main JavaScript file to boot your Inertia app. All we're doing
             },
           }),
         }).$mount(el)
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        import { createApp, h } from 'vue'
+        import { App, plugin } from '@inertiajs/inertia-vue3'\n
+        const el = document.getElementById('app')\n
+        createApp({
+          render: () => h(App, {
+            initialPage: JSON.parse(el.dataset.page),
+            resolveComponent: name => require(\`./Pages/\${name}\`).default,
+          })
+        }).use(plugin).mount(el)\n\n
       `,
     },
     {
@@ -184,7 +184,14 @@ Finally, update the `resolveComponent` callback in your app initialization to us
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),

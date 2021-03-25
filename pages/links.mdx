@@ -30,7 +30,15 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/">Home</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/">Home</inertia-link>
@@ -63,7 +71,16 @@ By default Inertia renders links as anchor `<a>` elements. However, you can chan
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/logout" method="post" as="button" type="button">Logout</inertia-link>\n
+        // Renders as:
+        <button type="button">Logout</button>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/logout" method="post" as="button" type="button">Logout</inertia-link>\n
@@ -110,7 +127,15 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/logout" method="post">Logout</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/logout" method="post">Logout</inertia-link>
@@ -144,7 +169,15 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
@@ -177,7 +210,15 @@ The `headers` option allows you to add custom headers to an Inertia link. Do not
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
@@ -211,7 +252,15 @@ You can specify the browser history behaviour. By default page visits push (new)
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/" replace>Home</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/" replace>Home</inertia-link>
@@ -245,7 +294,16 @@ You can preserve a page component's local state using the `preserve-state` attri
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <input v-model="query" type="text" />\n
+        <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <input v-model="query" type="text" />\n
@@ -282,7 +340,15 @@ You can use the `preserve-scroll` attribute to prevent Inertia from automaticall
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/" preserve-scroll>Home</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/" preserve-scroll>Home</inertia-link>
@@ -318,7 +384,15 @@ The `only` option allows you to request a subset of the props (data) from the se
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>

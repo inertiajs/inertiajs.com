@@ -12,7 +12,7 @@ export const CodeTabContext = React.createContext()
 
 const getCurrentCodeTab = (tabType) => {
   const param = new URLSearchParams(location.search).get(tabType)
-  return param ? param.toLowerCase() : localStorage.getItem('tab.' + tabType)
+  return param ? param : localStorage.getItem('tab.' + tabType)
 }
 
 export default function Layout({ meta, children }) {
@@ -20,8 +20,8 @@ export default function Layout({ meta, children }) {
   const [showMobileNav, setShowMobileNav] = useState(false)
 
   const [codeTabs, setCodeTabsState] = useState({
-    frontend: 'vue.js',
-    backend: 'laravel',
+    frontend: 'Vue 3',
+    backend: 'Laravel',
   })
 
   const setCodeTabs = (value) => {
@@ -33,8 +33,8 @@ export default function Layout({ meta, children }) {
 
   useEffect(() => {
     setCodeTabs({
-      frontend: getCurrentCodeTab('frontend') || 'vue.js',
-      backend: getCurrentCodeTab('backend') || 'laravel',
+      frontend: getCurrentCodeTab('frontend') || 'Vue 3',
+      backend: getCurrentCodeTab('backend') || 'Laravel',
     })
   }, [])
 

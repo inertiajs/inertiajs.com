@@ -24,7 +24,42 @@ While it's possible to make classic form submissions with Inertia, it's not reco
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <form @submit.prevent="submit">
+            <label for="first_name">First name:</label>
+            <input id="first_name" v-model="form.first_name" />
+            <label for="last_name">Last name:</label>
+            <input id="last_name" v-model="form.last_name" />
+            <label for="email">Email:</label>
+            <input id="email" v-model="form.email" />
+            <button type="submit">Submit</button>
+          </form>
+        </template>\n
+        <script>
+        export default {
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+                email: null,
+              },
+            }
+          },
+          methods: {
+            submit() {
+              this.$inertia.post('/users', this.form)
+            },
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>
@@ -202,7 +237,7 @@ Since working with forms is so common, Inertia comes with a form helper designed
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'twig',
       code: dedent`
         <template>
@@ -220,27 +255,6 @@ Since working with forms is so common, Inertia comes with a form helper designed
           </form>
         </template>\n
         <script>
-        /*
-        |----------------------------------------------------------------
-        | Vue 3
-        |----------------------------------------------------------------
-        */\n
-        import { useForm } from '@inertiajs/inertia-vue3'\n
-        export default {
-          setup () {
-            const form = useForm({
-              email: null,
-              password: null,
-              remember: false,
-            })\n
-            return { form }
-          },
-        }\n
-        /*
-        |----------------------------------------------------------------
-        | Vue 2
-        |----------------------------------------------------------------
-        */\n
         export default {
           data() {
             return {
@@ -250,6 +264,39 @@ Since working with forms is so common, Inertia comes with a form helper designed
                 remember: false,
               }),
             }
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <form @submit.prevent="form.post('/login')">
+            <!-- email -->
+            <input type="text" v-model="form.email">
+            <div v-if="form.errors.email">{{ form.errors.email }}</div>
+            <!-- password -->
+            <input type="password" v-model="form.password">
+            <div v-if="form.errors.password">{{ form.errors.password }}</div>
+            <!-- remember me -->
+            <input type="checkbox" v-model="form.remember"> Remember Me
+            <!-- submit -->
+            <button type="submit" :disabled="form.processing">Login</button>
+          </form>
+        </template>\n
+        <script>
+        import { useForm } from '@inertiajs/inertia-vue3'\n
+        export default {
+          setup () {
+            const form = useForm({
+              email: null,
+              password: null,
+              remember: false,
+            })\n
+            return { form }
           },
         }
         </script>
@@ -297,7 +344,18 @@ To submit the form, use the `get`, `post`, `put`, `patch` and `delete` methods.
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        form.get(url, options)
+        form.post(url, options)
+        form.put(url, options)
+        form.patch(url, options)
+        form.delete(url, options)
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         form.get(url, options)
@@ -334,7 +392,17 @@ The submit methods support all the regular [visit options](/manual-visits), such
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        form.post('/profile', {
+          preserveScroll: true,
+          onSuccess: () => form.reset('password'),
+        })
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         form.post('/profile', {
@@ -369,7 +437,19 @@ If you need to modify the form data before it's sent to the server, you can do t
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        form
+          .transform((data) => ({
+            ...data,
+            remember: data.remember ? 'on' : '',
+          }))
+          .post('/login')
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         form
@@ -406,7 +486,14 @@ You can use the `processing` property to track if a form is currently being subm
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <button type="submit" :disabled="form.processing">Submit</button>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <button type="submit" :disabled="form.processing">Submit</button>
@@ -435,7 +522,16 @@ In the event that you're uploading files, the current progress event is availabl
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+          {{ form.progress.percentage }}%
+        </progress>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <progress v-if="form.progress" :value="form.progress.percentage" max="100">
@@ -470,7 +566,14 @@ In the event there are form errors, they are available via the `errors` property
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <div v-if="form.errors.email">{{ form.errors.email }}</div>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <div v-if="form.errors.email">{{ form.errors.email }}</div>
@@ -499,7 +602,17 @@ To check if a form has any errors, use the `hasErrors` property. To clear form e
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        // Clear all errors
+        form.clearErrors()\n
+        // Clear errors for specific fields
+        form.clearErrors('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         // Clear all errors
@@ -536,7 +649,17 @@ To reset the form values back to their original values, use the `reset()` method
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        // Reset the form
+        form.reset()\n
+        // Reset specific fields
+        form.reset('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         // Reset the form

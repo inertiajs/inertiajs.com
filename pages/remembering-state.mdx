@@ -5,7 +5,10 @@ import TabbedCodeExamples from '../components/TabbedCodeExamples'
 export default Layout
 export const meta = {
   title: 'Remembering state',
-  links: [{ url: '#top', name: 'Introduction' }, { url: '#multiple-components', name: 'Multiple components' }],
+  links: [
+    { url: '#top', name: 'Introduction' },
+    { url: '#multiple-components', name: 'Multiple components' },
+  ],
 }
 
 # Remembering state
@@ -19,7 +22,33 @@ To mitigate this issue, you can tell Inertia which local component state to save
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      description: 'Use the "remember" property.',
+      language: 'js',
+      code: dedent`
+        {
+          // Option 1: Object
+          remember: {
+            data: ['form'],
+          },\n
+          // Option 2: Array
+          remember: ['form'],\n
+          // Option 3: String
+          remember: 'form',\n
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+                // ...
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'Vue 3',
       description: 'Use the "remember" property.',
       language: 'js',
       code: dedent`
@@ -86,7 +115,27 @@ If your page contains multiple components that use the remember functionality, y
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        {
+          remember: {
+            data: ['form'],
+            key: 'Users/Create',
+          },
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         {
@@ -138,7 +187,27 @@ If you have multiple instances of the same component on the page using the remem
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        {
+          remember: {
+            data: ['form'],
+            key: () => \`Users/Edit:\${this.user.id}\`,
+          },
+          data() {
+            return {
+              form: {
+                first_name: this.user.first_name,
+                last_name: this.user.last_name,
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         {
