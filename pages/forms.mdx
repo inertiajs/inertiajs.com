@@ -230,6 +230,13 @@ Inertia.post('/users', data)
 
 You can learn more about the `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
 
+<Notice>
+  Uploading files via <inlineCode>put</inlineCode> or <inlineCode>patch</inlineCode> is not supported in Laravel.
+  Instead, make the request via <inlineCode>post</inlineCode>, including a <inlineCode>_method</inlineCode> field set to{' '}
+  <inlineCode>put</inlineCode> or <inlineCode>patch</inlineCode>. This is called{' '}
+  <a href="https://laravel.com/docs/8.x/routing#form-method-spoofing">form method spoofing</a>.
+</Notice>
+
 ## Form helper
 
 Since working with forms is so common, Inertia comes with a form helper designed to help reduce the amount of boilerplate needed for typical forms. Here's how to use it:

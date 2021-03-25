@@ -203,6 +203,13 @@ Use the `method` option to set the request method to `get`, `post`, `put`, `patc
 Inertia.visit(url, { method: 'post' })
 ```
 
+<Notice>
+  Uploading files via <inlineCode>put</inlineCode> or <inlineCode>patch</inlineCode> is not supported in Laravel.
+  Instead, make the request via <inlineCode>post</inlineCode>, including a <inlineCode>_method</inlineCode> field set to{' '}
+  <inlineCode>put</inlineCode> or <inlineCode>patch</inlineCode>. This is called{' '}
+  <a href="https://laravel.com/docs/8.x/routing#form-method-spoofing">form method spoofing</a>.
+</Notice>
+
 ## Data
 
 Use the `data` option to add data to the request.
