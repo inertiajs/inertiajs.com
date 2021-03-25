@@ -60,9 +60,9 @@ This HTML response includes the site assets (CSS, JavaScript) as well as a root 
 
 ## Inertia responses
 
-Once an Inertia app has been booted, all subsequent request to the site are made via XHR with a special `X-Inertia` header set to `true`. This header indicates that the request is being made by Inertia, and isn't a standard full-page visit.
+Once an Inertia app has been booted, all subsequent requests to the site are made via XHR with a special `X-Inertia` header set to `true`. This header indicates that the request is being made by Inertia, and isn't a standard full-page visit.
 
-When the server detects the `X-Inertia` header, instead of responding with a full HTML document, it instead returns a JSON response with an encoded [page object](#the-page-object).
+When the server detects the `X-Inertia` header, instead of responding with a full HTML document, it returns a JSON response with an encoded [page object](#the-page-object).
 
 <div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
   <div className="pt-6 px-6 text-white font-mono text-sm">

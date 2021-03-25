@@ -26,20 +26,29 @@ To enable automatic asset refreshing, you simply need to tell Inertia what the c
       name: 'Laravel',
       language: 'php',
       code: dedent`
-        use Inertia\\Inertia;\n
-        class AppServiceProvider extends ServiceProvider
+        /*
+        |----------------------------------------------------------------
+        | Via the HandleInertiaRequests middleware (recommended)
+        |----------------------------------------------------------------
+        */\n
+        class HandleInertiaRequests extends Middleware
         {
-            public function boot()
+            public function version(Request $request)
             {
-              Inertia::version($version);\n
-              // If you're using Laravel Mix, you can
-              // use the mix-manifest.json for this.
-              Inertia::version(function () {
-                  return md5_file(public_path('mix-manifest.json'));
-              });
+                return parent::version($request);
             }
-        }
+        }\n
+        /*
+        |----------------------------------------------------------------
+        | Manually
+        |----------------------------------------------------------------
+        */\n
+        use Inertia\\Inertia;\n
+        Inertia::version($version);
+        Inertia::version(fn () => $version); // Lazily
       `,
+      description:
+        'The HandleInertiaRequests middleware provides a sensible default for Laravel applications, which uses either a hash of the "app.asset_url" config value or the mix-manifest.json file.',
     },
     {
       name: 'Rails',

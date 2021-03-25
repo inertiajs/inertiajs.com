@@ -28,37 +28,41 @@ The server-side adapters provide a way to preassign shared data for each request
       name: 'Laravel',
       language: 'php',
       code: dedent`
+        /*
+        |----------------------------------------------------------------
+        | Via the HandleInertiaRequests middleware (recommended)
+        |----------------------------------------------------------------
+        */\n
+        class HandleInertiaRequests extends Middleware
+        {
+            public function share(Request $request)
+            {
+                return array_merge(parent::share($request), [\n
+                    // Synchronously
+                    'appName' => config('app.name'),\n
+                    // Lazily
+                    'user' => fn () => $request->user()
+                        ? $request->user()->only('id', 'name', 'email')
+                        : null,
+                ]);
+            }
+        }\n
+        /*
+        |----------------------------------------------------------------
+        | Manually
+        |----------------------------------------------------------------
+        */\n
+        use Inertia\\Inertia;\n
         // Synchronously
-        Inertia::share('app.name', Config::get('app.name'));\n
+        Inertia::share('appName', config('app.name'));\n
         // Lazily
-        Inertia::share('auth.user', function () {
-            if (Auth::user()) {
-                return [
-                    'id' => Auth::user()->id,
-                    'first_name' => Auth::user()->first_name,
-                    'last_name' => Auth::user()->last_name,
-                ];
-            }
-        });\n
-        // Multiple values
-        Inertia::share([
-            // Synchronously
-            'app' => [
-                'name' => Config::get('app.name')
-            ],
-            // Lazily
-            'auth' => function () {
-                return [
-                    'user' => Auth::user() ? [
-                        'id' => Auth::user()->id,
-                        'first_name' => Auth::user()->first_name,
-                        'last_name' => Auth::user()->last_name,
-                    ] : null
-                ];
-            }
-        ]);
+        Inertia::share('user', fn (Request $request) => $request->user()
+            ? $request->user()->only('id', 'name', 'email')
+            : null
+        );
       `,
-      description: 'Place this code in your AppServiceProvider boot method.',
+      description:
+        'The HandleInertiaRequests middleware provides a "share" method where you can define the data that is automatically shared with each Inertia response.',
     },
     {
       name: 'Rails',
@@ -92,14 +96,14 @@ Once you've shared the data server-side, you'll then be able to access it within
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
-      description: 'Access shared data using the $page property.',
+      name: 'Vue 2',
+      description: 'Access shared data using the $page property or the usePage() hook.',
       language: 'twig',
       code: dedent`
         <template>
           <main>
             <header>
-              <div>You are logged in as: {{ $page.auth.user.name }}</div>
+              <div>You are logged in as: {{ user.name }}</div>
               <nav>
                 <inertia-link href="/">Home</inertia-link>
                 <inertia-link href="/about">About</inertia-link>
@@ -111,7 +115,49 @@ Once you've shared the data server-side, you'll then be able to access it within
             </content>
             <footer></footer>
           </main>
-        </template>
+        </template>\n
+        <script>
+          export default {
+            computed: {
+              user() {
+                return this.$page.props.auth.user
+              }
+            }
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      description: 'Access shared data using the $page property or the usePage() hook.',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header>
+              <div>You are logged in as: {{ user.name }}</div>
+              <nav>
+                <inertia-link href="/">Home</inertia-link>
+                <inertia-link href="/about">About</inertia-link>
+                <inertia-link href="/contact">Contact</inertia-link>
+              </nav>
+            </header>
+            <content>
+              <slot />
+            </content>
+            <footer></footer>
+          </main>
+        </template>\n
+        <script>
+          import { computed } from 'vue'
+          import { usePage } from '@inertiajs/inertia-vue3'\n
+          export default {
+            setup() {
+              const user = computed(() => usePage().props.value.auth.user)
+              return { user }
+            },
+          }
+        </script>
       `,
     },
     {
@@ -121,7 +167,7 @@ Once you've shared the data server-side, you'll then be able to access it within
       code: dedent`
         import { InertiaLink, usePage } from '@inertiajs/inertia-react'\n
         export default function Layout({ children }) {
-          const { auth } = usePage()\n
+          const { auth } = usePage().props\n
           return (
             <main>
               <header>
@@ -149,7 +195,7 @@ Once you've shared the data server-side, you'll then be able to access it within
         </script>\n
         <main>
           <header>
-            <div>You are logged in as: {$page.auth.user.name}</div>
+            <div>You are logged in as: {$page.props.auth.user.name}</div>
             <nav>
               <a use:inertia href="/">Home</a>
               <a use:inertia href="/about">About</a>
@@ -176,16 +222,19 @@ Here's a simple way to implement flash messages in your Inertia applications. Fi
   examples={[
     {
       name: 'Laravel',
-      description: 'Place this code in your AppServiceProvider boot method.',
       language: 'php',
       code: dedent`
-        use Session;
-        use Inertia\\Inertia;\n
-        Inertia::share('flash', function () {
-            return [
-                'message' => Session::get('message'),
-            ];
-        });
+        class HandleInertiaRequests extends Middleware
+        {
+            public function share(Request $request)
+            {
+                return array_merge(parent::share($request), [
+                    'flash' => [
+                        'message' => fn () => $request->session()->get('message')
+                    ],
+                ]);
+            }
+        }
       `,
     },
     {
@@ -209,15 +258,33 @@ Next, display the flash message in a front-end component, such as the site layou
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'twig',
       code: dedent`
         <template>
           <main>
             <header></header>
             <content>
-              <div v-if="$page.flash.message" class="alert">
-                {{ $page.flash.message }}
+              <div v-if="$page.props.flash.message" class="alert">
+                {{ $page.props.flash.message }}
+              </div>
+              <slot />
+            </content>
+            <footer></footer>
+          </main>
+        </template>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header></header>
+            <content>
+              <div v-if="$page.props.flash.message" class="alert">
+                {{ $page.props.flash.message }}
               </div>
               <slot />
             </content>
@@ -232,7 +299,7 @@ Next, display the flash message in a front-end component, such as the site layou
       code: dedent`
         import { usePage } from '@inertiajs/inertia-react'\n
         export default function Layout({ children }) {
-          const { flash } = usePage()\n
+          const { flash } = usePage().props\n
           return (
             <main>
               <header></header>
@@ -258,8 +325,8 @@ Next, display the flash message in a front-end component, such as the site layou
         <main>
           <header></header>
           <content>
-            {#if $page.flash.message}
-              <div class="alert">{$page.flash.message}</div>
+            {#if $page.props.flash.message}
+              <div class="alert">{$page.props.flash.message}</div>
             {/if}
             <slot />
           </content>

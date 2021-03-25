@@ -1,0 +1,259 @@
+import dedent from 'dedent-js'
+import Layout from '../components/Layout'
+import TabbedCodeExamples from '../components/TabbedCodeExamples'
+
+export default Layout
+export const meta = {
+  title: 'Remembering state',
+  links: [
+    { url: '#top', name: 'Introduction' },
+    { url: '#multiple-components', name: 'Multiple components' },
+  ],
+}
+
+# Remembering state
+
+When navigating browser history, Inertia restores pages using prop data cached in history state. Inertia does not, however, restore local page component state, since this is beyond its reach. This can lead to outdated pages in your browser history.
+
+For example, if a user partially completes a form, then navigates away, and then returns back, the form will be reset and their work will be lost.
+
+To mitigate this issue, you can tell Inertia which local component state to save in the browser history.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      description: 'Use the "remember" property.',
+      language: 'js',
+      code: dedent`
+        {
+          // Option 1: Object
+          remember: {
+            data: ['form'],
+          },\n
+          // Option 2: Array
+          remember: ['form'],\n
+          // Option 3: String
+          remember: 'form',\n
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+                // ...
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'Vue 3',
+      description: 'Use the "remember" property.',
+      language: 'js',
+      code: dedent`
+        {
+          // Option 1: Object
+          remember: {
+            data: ['form'],
+          },\n
+          // Option 2: Array
+          remember: ['form'],\n
+          // Option 3: String
+          remember: 'form',\n
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+                // ...
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'React',
+      description: 'Use the "useRememberedState" hook.',
+      language: 'jsx',
+      code: dedent`
+        import { useRememberedState } from '@inertiajs/inertia-react'
+        import React from 'react'\n
+        export default function Profile() {
+          const [formState, setFormState] = useRememberedState({
+            first_name: null,
+            last_name: null,
+            // ...
+          })\n
+          // ...
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      description: 'Use the "remember" store.',
+      language: 'js',
+      code: dedent`
+        import { remember } from '@inertiajs/inertia-svelte'\n
+        let form = remember({
+          first_name: null,
+          last_name: null,
+        })\n
+        // ...
+      `,
+    },
+  ]}
+/>
+
+Now, whenever your local `form` state changes, Inertia will automatically save this data to the history state, and restore it on history navigation.
+
+## Multiple components
+
+If your page contains multiple components that use the remember functionality, you'll need to provide a unique identifier for each component, so that Inertia knows which data to restore to each component.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        {
+          remember: {
+            data: ['form'],
+            key: 'Users/Create',
+          },
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        {
+          remember: {
+            data: ['form'],
+            key: 'Users/Create',
+          },
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { useRememberedState } from '@inertiajs/inertia-react'
+        import React from 'react'\n
+        export default function Profile() {
+          const [formState, setFormState] = useRememberedState({
+            first_name: null,
+            last_name: null,
+          }, 'Users/Create')\n
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+          import { page, remember } from '@inertiajs/inertia-svelte'\n
+          let form = remember({
+            first_name: null,
+            last_name: null,
+          }, 'Users/Create')\n
+      `,
+    },
+  ]}
+/>
+
+If you have multiple instances of the same component on the page using the remember functionality, be sure to also include a unique identifier for each component instance.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        {
+          remember: {
+            data: ['form'],
+            key() {
+              return \`Users/Edit:\${this.user.id}\`
+            }
+          },
+          data() {
+            return {
+              form: {
+                first_name: this.user.first_name,
+                last_name: this.user.last_name,
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        {
+          remember: {
+            data: ['form'],
+            key() {
+              return \`Users/Edit:\${this.user.id}\`
+            }
+          },
+          data() {
+            return {
+              form: {
+                first_name: this.user.first_name,
+                last_name: this.user.last_name,
+              },
+            }
+          },
+        }
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { useRememberedState } from '@inertiajs/inertia-react'
+        import React from 'react'\n
+        export default function Profile() {
+          const [formState, setFormState] = useRememberedState({
+            first_name: props.user.first_name,
+            last_name: props.user.last_name,
+          }, \`Users/Edit:\${this.user.id}\`)
+        }
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+          import { page, remember } from '@inertiajs/inertia-svelte'\n
+          let form = remember({
+            first_name: $page.props.user.first_name,
+            last_name: $page.props.user.last_name,
+          }, \`Users/Edit:\${$page.props.user.id}\`)
+      `,
+    },
+  ]}
+/>

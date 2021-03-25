@@ -1,0 +1,77 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia@v0.8.0',
+}
+
+<h1>inertia@v0.8.0</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on December 23, 2020</div>
+
+## Automatic FormData conversion
+
+Previously to upload files via with Inertia, you had to manually convert your data from an object to a `FormData` object, since that's what's required to submit a `multipart/form-data` request. This process was particularly painful, as it meant manually converting booleans, null values, and more to a `FormData` compatible version.
+
+Inertia now handles this all for you automatically. Simply pass your data as an object, and Inertia will detect if any files are present (even nested files), and it will automatically convert the data to a `FormData` object.
+
+```diff
+- const data = new FormData()
+- data.append('name', form.name || '')
+- data.append('email', form.email || '')
+- data.append('is_admin', form.is_admin ? '1' : '0')
+- data.append('photo', form.photo || '')
+
+Inertia.post('/users', data)
+```
+
+## Improved validation error handling - BREAKING CHANGE ⚠️
+
+This release of Inertia improves on how validation errors are handled. In particular, the `onSuccess` callback is no longer called when validation errors are present. We've also added a new `onError` callback, which runs when validation errors are present.
+
+```js
+Inertia.post('/users', data, {
+  onSuccess() {
+    // Only called when no validation errors are present
+  },
+  onError(errors) {
+    // Called when validation errors are present
+  },
+})
+```
+
+By default, Inertia detects if validation errors are present by looking at the `$page.prop.errors` property. This can be customized using a new (optional) `resolveErrors` setting, applied at the adapter level.
+
+```js
+new Vue({
+  render: (h) =>
+    h(App, {
+      props: {
+        initialPage: JSON.parse(el.dataset.page),
+        resolveComponent: (name) => require(`./Pages/${name}`).default,
+        resolveErrors: (page) => page.props.errors || {}, // Customize if needed
+      },
+    }),
+}).$mount(el)
+```
+
+To maintain parity between the visit callbacks and the global events, we've repurposed the existing global `error` event for validation errors, and the previous global `error` event has been renamed to `exception`, which in hindsight is a more appropriate name anyway.
+
+Finally, we've added a new `errorBag` option when making Inertia visits. The purpose of this feature is to allow you to automatically scope the validation errors returned from the server within a key you specify. For example, instead of getting `$page.props.errors`, you can get `$page.props.loginCredentialsForm.errors`. This can be really helpful in situations where you have multiple forms on a single page, and don't want validation errors from one form to leak into another.
+
+```js
+Inertia.put('/profile', data, {
+  errorBag: loginCredentialsForm,
+})
+```
+
+Note that your server-side adapter must also support this feature in order for this to work. The Laravel adapter has already been updated to support this, so be sure to upgrade to [version 0.3.5](https://github.com/inertiajs/inertia-laravel/releases/tag/v0.3.5).
+
+## Adapter upgrade required - BREAKING CHANGE ⚠️
+
+When upgrading to this release, be sure to also upgrade your Vue/React/Svelte adapter to the following version:
+
+- `"@inertiajs/inertia-react": "0.5.0"`
+- `"@inertiajs/inertia-svelte": "0.6.0"`
+- `"@inertiajs/inertia-vue": "0.5.0"`
+- `"@inertiajs/inertia-vue3": "0.3.0"`

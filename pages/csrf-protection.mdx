@@ -24,7 +24,7 @@ One solution is to include the CSRF token as a prop on every response. You can t
 this.$inertia.post('/users', {
   name: this.name,
   email: this.email,
-  _token: this.$page.csrf_token,
+  _token: this.$page.props.csrf_token,
 })
 ```
 

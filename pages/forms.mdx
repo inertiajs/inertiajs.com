@@ -1,5 +1,6 @@
 import dedent from 'dedent-js'
 import Layout from '../components/Layout'
+import Notice from '../components/Notice'
 import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
@@ -7,8 +8,9 @@ export const meta = {
   title: 'Forms',
   links: [
     { url: '#submitting-forms', name: 'Submitting forms' },
-    { url: '#server-side-validation', name: 'Server-side validation' },
     { url: '#file-uploads', name: 'File uploads' },
+    { url: '#form-helper', name: 'Form helper' },
+    { url: '#server-side-validation', name: 'Server-side validation' },
     { url: '#classic-xhr-submits', name: 'Classic XHR submits' },
   ],
 }
@@ -22,7 +24,42 @@ While it's possible to make classic form submissions with Inertia, it's not reco
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <form @submit.prevent="submit">
+            <label for="first_name">First name:</label>
+            <input id="first_name" v-model="form.first_name" />
+            <label for="last_name">Last name:</label>
+            <input id="last_name" v-model="form.last_name" />
+            <label for="email">Email:</label>
+            <input id="email" v-model="form.email" />
+            <button type="submit">Submit</button>
+          </form>
+        </template>\n
+        <script>
+        export default {
+          data() {
+            return {
+              form: {
+                first_name: null,
+                last_name: null,
+                email: null,
+              },
+            }
+          },
+          methods: {
+            submit() {
+              this.$inertia.post('/users', this.form)
+            },
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>
@@ -159,7 +196,7 @@ Unlike a classic ajax submitted form, with Inertia you don't handle the post sub
       code: dedent`
         class UsersController < ApplicationController
           def index
-            render inertia: 'Users/Index', props: {users: User.all}
+            render inertia: 'Users/Index', props: { users: User.all }
           end\n
           def create
             User.create params.require(:user).permit(:first_name, :last_name, :email)\n
@@ -171,36 +208,130 @@ Unlike a classic ajax submitted form, with Inertia you don't handle the post sub
   ]}
 />
 
-## Server-side validation
+## File uploads
 
-Handling server-side validation errors (`422` responses) in Inertia works a little different than a classic ajax-driven form, where you catch the validation errors in the response and then update the form state. The trick is to handle the validation errors more like a server-side framework.
+The trick to uploading files with Inertia is using the `FormData` object, since that's what's required to submit a `multipart/form-data` request via XHR. Here is a simple example of using `FormData` with Inertia.
 
-First, you submit your form using Inertia. If there are validation errors, you redirect server-side back to your form page, including the errors in the session. Your server-side framework likely already does this automatically.
+```js
+var data = new FormData()
+data.append('name', name || '')
+data.append('email', email || '')
+data.append('password', password || '')
+data.append('is_admin', is_admin ? '1' : '0')
+data.append('photo', photo || '')
 
-From there you need to send those error messages to your form page component. You can do this in your controller, but it's better to simply do this automatically for all your page components. You can use the Inertia [share](/shared-data) functionality to accomplish this.
+Inertia.post('/users', data)
+```
 
-Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/inertiajs/inertia-laravel/releases/tag/v0.2.9)), do this automatically, making the validation errors available via the `errors` prop. However, if you'd like to share them manually (maybe you'd like the errors in a different format), you can still do this:
+<Notice>
+  However, as of version <inlineCode>0.8.0</inlineCode>, Inertia automatically detects if the visit includes any files
+  (even nested files), and then converts the data to a <inlineCode>FormData</inlineCode> object if needed.
+</Notice>
+
+You can learn more about the `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+
+## Form helper
+
+Since working with forms is so common, Inertia comes with a form helper designed to help reduce the amount of boilerplate needed for typical forms. Here's how to use it:
 
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Laravel',
-      language: 'php',
+      name: 'Vue 2',
+      language: 'twig',
       code: dedent`
-        use Illuminate\\Support\\Facades\\Session;\n
-        Inertia::share([
-            'errors' => function () {
-                return Session::get('errors')
-                    ? Session::get('errors')->getBag('default')->getMessages()
-                    : (object) [];
-            },
-        ]);
+        <template>
+          <form @submit.prevent="form.post('/login')">
+            <!-- email -->
+            <input type="text" v-model="form.email">
+            <div v-if="form.errors.email">{{ form.errors.email }}</div>
+            <!-- password -->
+            <input type="password" v-model="form.password">
+            <div v-if="form.errors.password">{{ form.errors.password }}</div>
+            <!-- remember me -->
+            <input type="checkbox" v-model="form.remember"> Remember Me
+            <!-- submit -->
+            <button type="submit" :disabled="form.processing">Login</button>
+          </form>
+        </template>\n
+        <script>
+        export default {
+          data() {
+            return {
+              form: this.$inertia.form({
+                email: null,
+                password: null,
+                remember: false,
+              }),
+            }
+          },
+        }
+        </script>
       `,
-      description: 'Place this code in your AppServiceProvider boot method.',
     },
     {
-      name: 'Rails',
-      language: 'ruby',
+      name: 'Vue 3',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <form @submit.prevent="form.post('/login')">
+            <!-- email -->
+            <input type="text" v-model="form.email">
+            <div v-if="form.errors.email">{{ form.errors.email }}</div>
+            <!-- password -->
+            <input type="password" v-model="form.password">
+            <div v-if="form.errors.password">{{ form.errors.password }}</div>
+            <!-- remember me -->
+            <input type="checkbox" v-model="form.remember"> Remember Me
+            <!-- submit -->
+            <button type="submit" :disabled="form.processing">Login</button>
+          </form>
+        </template>\n
+        <script>
+        import { useForm } from '@inertiajs/inertia-vue3'\n
+        export default {
+          setup () {
+            const form = useForm({
+              email: null,
+              password: null,
+              remember: false,
+            })\n
+            return { form }
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import React from 'react'
+        import { useForm } from '@inertiajs/inertia-react'\n
+        const { data, setData, post, processing, errors } = useForm({
+          name: '',
+          email: '',
+          remember: '',
+        })\n
+        function submit(e) {
+          e.preventDefault()
+          post('/login')
+        }\n
+        return (
+          <form onSubmit={submit}>
+            <input type="text" value={data.email} onChange={e => setData('email', e.target.value)} />
+            {errors.email && <div>{errors.email}</div>}
+            <input type="password" value={data.password} onChange={e => setData('password', e.target.value)} />
+            {errors.password && <div>{errors.password}</div>}
+            <input type="checkbox" value={data.remember} onChange={e => setData('remember', e.target.value)} /> Remember Me
+            <button type="submit" disabled={processing}>Login</button>
+          </form>
+        )
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
       code: dedent`
         # todo
       `,
@@ -208,141 +339,359 @@ Some adapters, such as the Laravel adapter (as of [v0.2.9](https://github.com/in
   ]}
 />
 
-Now the validation errors will be available as part of your page props, and since they are reactive your template will automatically display them. Here's an updated version of the form example above that displays server-side validation errors.
+To submit the form, use the `get`, `post`, `put`, `patch` and `delete` methods.
 
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
-      language: 'twig',
+      name: 'Vue 2',
+      language: 'js',
       code: dedent`
-        <template>
-          <form @submit.prevent="submit">
-            <label for="first_name">First name:</label>
-            <input id="first_name" v-model="form.first_name" />
-            <div v-if="$page.errors.first_name">{{ $page.errors.first_name[0] }}</div>
-            <label for="last_name">Last name:</label>
-            <input id="last_name" v-model="form.last_name" />
-            <div v-if="$page.errors.last_name">{{ $page.errors.last_name[0] }}</div>
-            <label for="email">Email:</label>
-            <input id="email" v-model="form.email" />
-            <div v-if="$page.errors.email">{{ $page.errors.email[0] }}</div>
-            <button type="submit">Submit</button>
-          </form>
-        </template>\n
-        <script>
-        export default {
-          data() {
-            return {
-              form: {
-                first_name: null,
-                last_name: null,
-                email: null,
-              },
-            }
-          },
-          methods: {
-            submit() {
-              this.$inertia.post('/users', this.form)
-            },
-          },
-        }
-        </script>
+        form.get(url, options)
+        form.post(url, options)
+        form.put(url, options)
+        form.patch(url, options)
+        form.delete(url, options)
       `,
-      description: `In Vue page props are also available via the $page property.`,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        form.get(url, options)
+        form.post(url, options)
+        form.put(url, options)
+        form.patch(url, options)
+        form.delete(url, options)
+      `,
     },
     {
       name: 'React',
-      language: 'jsx',
+      language: 'js',
       code: dedent`
-        import { Inertia } from '@inertiajs/inertia'
-        import { usePage } from '@inertiajs/inertia-react'
-        import React, { useState } from 'react'\n
-        export default function Edit() {
-          const { errors } = usePage()\n
-          const [values, setValues] = useState({
-            first_name: null,
-            last_name: null,
-            email: null,
-          })\n
-          function handleChange(e) {
-            setValues(values => ({
-              ...values,
-              [e.target.id]: e.target.value,
-            }))
-          }\n
-          function handleSubmit(e) {
-            e.preventDefault()
-            Inertia.post('/users', values)
-          }\n
-          return (
-            <form onSubmit={handleSubmit}>
-              <label for="first_name">First name:</label>
-              <input id="first_name" value={values.first_name} onChange={handleChange} />
-              {errors.first_name && <div>{errors.first_name[0]}</div>}
-              <label for="last_name">Last name:</label>
-              <input id="last_name" value={values.last_name} onChange={handleChange} />
-              {errors.last_name && <div>{errors.last_name[0]}</div>}
-              <label for="email">Email:</label>
-              <input id="email" value={values.email} onChange={handleChange} />
-              {errors.email && <div>{errors.email[0]}</div>}
-              <button type="submit">Submit</button>
-            </form>
-          )
-        }
+        const { get, post, put, patch, delete: destroy } = useForm({ ... })\n
+        get(url, options)
+        post(url, options)
+        put(url, options)
+        patch(url, options)
+        destroy(url, options)
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'js',
       code: dedent`
-        <script>
-          import { Inertia } from '@inertiajs/inertia'\n
-          export let errors = {}\n
-          let values = {
-            first_name: null,
-            last_name: null,
-            email: null,
-          }\n
-          function handleSubmit() {
-            Inertia.post('/users', values)
-          }
-        </script>\n
-        <form on:submit|preventDefault={handleSubmit}>
-          <label for="first_name">First name:</label>
-          <input id="first_name" bind:value={values.first_name}>
-          {#if errors.first_name}<div>{errors.first_name}</div>{/if}\n
-          <label for="last_name">Last name:</label>
-          <input id="last_name" bind:value={values.last_name}>
-          {#if errors.last_name}<div>{errors.last_name}</div>{/if}\n
-          <label for="email">Email:</label>
-          <input id="email" bind:value={values.email}>
-          {#if errors.email}<div>{errors.email}</div>{/if}\n
-          <button type="submit">Submit</button>
-        </form>
+        # todo
       `,
     },
   ]}
 />
 
-While this is very similar to how you would normally do classic server-side form submissions, this approach is much nicer, since you're not reloading the whole page and rehydrating form input data.
+The submit methods support all the regular [visit options](/manual-visits), such as `preserveState`, `preserveScroll`, and the event callbacks. This can be helpful for performing tasks on successful form submissions, such as resetting inputs.
 
-## File uploads
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        form.post('/profile', {
+          preserveScroll: true,
+          onSuccess: () => form.reset('password'),
+        })
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        form.post('/profile', {
+          preserveScroll: true,
+          onSuccess: () => form.reset('password'),
+        })
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+      const { post, reset } = useForm({ ... })\n
+      post('/profile', {
+        preserveScroll: true,
+        onSuccess: () => reset('password'),
+      })
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
 
-The trick to uploading files with Inertia (via XHR) is using the `FormData` object. Here is a simple example of using `FormData` with Inertia.
+If you need to modify the form data before it's sent to the server, you can do this via the `transform()` method.
 
-```js
-var data = new FormData()
-data.append('first_name', first_name || '')
-data.append('last_name', last_name || '')
-data.append('email', email || '')
-data.append('password', password || '')
-data.append('photo', photo || '')
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        form
+          .transform((data) => ({
+            ...data,
+            remember: data.remember ? 'on' : '',
+          }))
+          .post('/login')
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        form
+          .transform((data) => ({
+            ...data,
+            remember: data.remember ? 'on' : '',
+          }))
+          .post('/login')
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        const { transform } = useForm({ ... })\n
+        transform((data) => ({
+          ...data,
+          remember: data.remember ? 'on' : '',
+        }))
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
 
-Inertia.post('/users', data)
-```
+You can use the `processing` property to track if a form is currently being submitted. This can be helpful for preventing double form submissions, by disabling the submit button.
 
-You can learn more about `FormData` interface [here](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <button type="submit" :disabled="form.processing">Submit</button>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <button type="submit" :disabled="form.processing">Submit</button>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        const { processing } = useForm({ ... })\n
+        <button type="submit" disabled={processing}>Submit</button>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+In the event that you're uploading files, the current progress event is available via the `progress` property. This is helpful for showing upload progress. For example:
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+          {{ form.progress.percentage }}%
+        </progress>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+          {{ form.progress.percentage }}%
+        </progress>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        const { progress } = useForm({ ... })\n
+        {progress && (
+          <progress value={progress.percentage} max="100">
+            {progress.percentage}%
+          </progress>
+        )}
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+In the event there are form errors, they are available via the `errors` property.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <div v-if="form.errors.email">{{ form.errors.email }}</div>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <div v-if="form.errors.email">{{ form.errors.email }}</div>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        const { errors } = useForm({ ... })\n
+        {errors.email && <div>{errors.email}</div>}
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+To check if a form has any errors, use the `hasErrors` property. To clear form errors, use the `clearErrors()` method.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        // Clear all errors
+        form.clearErrors()\n
+        // Clear errors for specific fields
+        form.clearErrors('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        // Clear all errors
+        form.clearErrors()\n
+        // Clear errors for specific fields
+        form.clearErrors('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        const { clearErrors } = useForm({ ... })\n
+        // Clear all errors
+        clearErrors()\n
+        // Clear errors for specific fields
+        clearErrors('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+When a form has been successfully submitted, the `wasSuccessful` property will be `true`. In addition to this, there is also a `recentlySuccessful` property, which will be set to `true` for two seconds after a successful form submission. This is helpful for showing temporary success messages.
+
+To reset the form values back to their original values, use the `reset()` method. Note, this will reset the values back to the initial values that were provided when you first instantiated the form helper.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        // Reset the form
+        form.reset()\n
+        // Reset specific fields
+        form.reset('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        // Reset the form
+        form.reset()\n
+        // Reset specific fields
+        form.reset('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        const { reset } = useForm({ ... })\n
+        // Reset the form
+        reset()\n
+        // Reset specific fields
+        reset('field', 'anotherfield')
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        # todo
+      `,
+    },
+  ]}
+/>
+
+## Server-side validation
+
+Handling server-side validation errors in Inertia works a little different than a classic ajax-driven form, where you catch the validation errors from `422` responses and manually update the form's error state. That's because Inertia never receives `422` responses. Rather, Inertia operates much more like a standard full page form submission. See the [validation page](/validation) for more information.
 
 ## Classic XHR submits
 

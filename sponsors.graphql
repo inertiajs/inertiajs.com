@@ -1,0 +1,21 @@
+{
+  user(login: "reinink") {
+    sponsorshipsAsMaintainer(first: 100, orderBy: { field: CREATED_AT, direction: ASC }) {
+      nodes {
+        createdAt
+        sponsorEntity {
+          ... on User {
+            avatarUrl
+            login
+            name
+          }
+          ... on Organization {
+            avatarUrl
+            login
+            name
+          }
+        }
+      }
+    }
+  }
+}

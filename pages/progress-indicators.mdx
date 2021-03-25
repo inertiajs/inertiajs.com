@@ -1,0 +1,212 @@
+import Layout from '../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'Progress indicators',
+  links: [
+    { url: '#default', name: 'Default' },
+    { url: '#custom', name: 'Custom' },
+  ],
+}
+
+# Progress indicators
+
+Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one page to another. To solve this, Inertia provides an optional [progress](https://github.com/inertiajs/progress) library, which shows a loading bar whenever you make an Inertia visit. It's also possible to setup your own custom page loading indicators. This page explains both approaches.
+
+## Default
+
+Inertia's default progress library (`@inertiajs/progress`) is a light wrapper around [NProgress](https://ricostacruz.com/nprogress/). This library shows, updates, and hides the NProgress loading bar by listening to Inertia page visit [events](/events).
+
+To use it, start by installing it:
+
+```bash
+npm install @inertiajs/progress
+yarn add @inertiajs/progress
+```
+
+Once it's been installed, initialize it in your app.
+
+```js
+import { InertiaProgress } from '@inertiajs/progress'
+
+InertiaProgress.init()
+```
+
+It also provides a number of customization options, which you pass to the `init()` method.
+
+```js
+InertiaProgress.init({
+  // The delay after which the progress bar will
+  // appear during navigation, in milliseconds.
+  delay: 250,
+
+  // The color of the progress bar.
+  color: '#29d',
+
+  // Whether to include the default NProgress styles.
+  includeCSS: true,
+
+  // Whether the NProgress spinner will be shown.
+  showSpinner: false,
+})
+```
+
+## Custom
+
+It's also possible to setup your own custom page loading indicators, using Inertia [events](/events). Here's how to do this, using the [NProgress](https://ricostacruz.com/nprogress/) library as an example.
+
+First, install the NProgress library.
+
+```bash
+npm install nprogress
+yarn add nprogress
+```
+
+You'll need to add the NProgress [styles](https://github.com/rstacruz/nprogress/blob/master/nprogress.css) to your project. You can do this using the CDN version.
+
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+```
+
+Next, import both `NProgress` and `Inertia` into your application.
+
+```js
+import NProgress from 'nprogress'
+import { Inertia } from '@inertiajs/inertia'
+```
+
+Next, let's add a `start` event listener. We'll use this listener to show the progress bar when a new Inertia visit begins.
+
+```js
+Inertia.on('start', () => NProgress.start())
+```
+
+Next, let's add a `finish` event listener to hide the progress bar when the page visit finishes.
+
+```js
+Inertia.on('finish', () => NProgress.done())
+```
+
+That's it, you now have a working page loading indicator! As you navigate from one page to another, the progress bar will be added and removed from the page.
+
+### Handling cancelled visits
+
+While this implementation works great for visits that finish properly, it would be nice to handle cancelled visits a little better. First, for interrupted visits (those that get cancelled as a result of a new visit) the progress bar should simply be reset back to the start position. Second, for manually cancelled visits, the progress bar should be immediately removed from the page.
+
+We can do this by inspecting the `event.detail.visit` object that's provided to the finish event.
+
+```js
+Inertia.on('finish', (event) => {
+  if (event.detail.visit.completed) {
+    NProgress.done()
+  } else if (event.detail.visit.interrupted) {
+    NProgress.set(0)
+  } else if (event.detail.visit.cancelled) {
+    NProgress.done()
+    NProgress.remove()
+  }
+})
+```
+
+Much better!
+
+### File upload progress
+
+Let's take this a step further yet. When files are being uploaded, it would be great to update the loading indicator to reflect the upload progress. This can be done using the `progress` event.
+
+```js
+Inertia.on('progress', (event) => {
+  if (event.detail.progress.percentage) {
+    NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+  }
+})
+```
+
+Now, instead of the progress bar "trickling" while the files are being uploaded, it will actually update it's position based on the progress of the request. We limit the progress here to 90%, since we still need to wait for a response from the server.
+
+### Loading indicator delay
+
+The last thing we're going to implement is a loading indicator delay. It's often preferable to delay showing the loading indicator until a request has taken longer than `250ms`-`500ms`. This prevents the loading indicator from appearing constantly on quick page visits, which can be visually distracting.
+
+To implement the delay behaviour, we'll use the `setTimeout` and `clearTimeout` functions. Let's start by defining a variable to keep track of the timeout.
+
+```js
+let timeout = null
+```
+
+Next, let's update the `start` event listener to start a new timeout that will show the progress bar after `250ms`.
+
+```js
+Inertia.on('start', () => {
+  timeout = setTimeout(() => NProgress.start(), 250)
+})
+```
+
+Next, we'll update the `finish` event listener to clear any existing timeouts, in the event that the page visit finishes before the timeout does.
+
+```js
+Inertia.on('finish', (event) => {
+  clearTimeout(timeout)
+  // ...
+})
+```
+
+We also need to check in the `finish` event listener if the progress bar has actually started, otherwise we'll inadvertently cause it to show before the timeout has finished.
+
+```js
+Inertia.on('finish', (event) => {
+  clearTimeout(timeout)
+  if (!NProgress.isStarted()) {
+    return
+  }
+  // ...
+})
+```
+
+And finally, we need to do the same check in the `progress` event listener.
+
+```js
+Inertia.on('progress', event => {
+  if (!NProgress.isStarted()) {
+    return
+  }
+  // ...
+}
+```
+
+That's it, you now have a beautiful custom page loading indicator!
+
+### Complete example
+
+For your quick reference, here is the full source code of the final version.
+
+```js
+import NProgress from 'nprogress'
+import { Inertia } from '@inertiajs/inertia'
+
+let timeout = null
+
+Inertia.on('start', () => {
+  timeout = setTimeout(() => NProgress.start(), 250)
+})
+
+Inertia.on('progress', (event) => {
+  if (NProgress.isStarted() && event.detail.progress.percentage) {
+    NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+  }
+})
+
+Inertia.on('finish', (event) => {
+  clearTimeout(timeout)
+  if (!NProgress.isStarted()) {
+    return
+  } else if (event.detail.visit.completed) {
+    NProgress.done()
+  } else if (event.detail.visit.interrupted) {
+    NProgress.set(0)
+  } else if (event.detail.visit.cancelled) {
+    NProgress.done()
+    NProgress.remove()
+  }
+})
+```

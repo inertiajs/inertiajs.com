@@ -12,11 +12,31 @@ Sometimes it can be useful to transform the props client-side before they are pa
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'js',
       code: dedent`
         new Vue({
-          render: h => h(app, {
+          render: h => h(App, {
+            props: {
+              initialPage: JSON.parse(el.dataset.page),
+              resolveComponent: name => require(\`./Pages/\${name}\`).default,
+              transformProps: props => {
+                return {
+                  ...props,
+                  errors: new Errors(props.errors),
+                }
+              },
+            },
+          }),
+        }).$mount(el)
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        new Vue({
+          render: h => h(App, {
             props: {
               initialPage: JSON.parse(el.dataset.page),
               resolveComponent: name => require(\`./Pages/\${name}\`).default,
@@ -36,7 +56,7 @@ Sometimes it can be useful to transform the props client-side before they are pa
       language: 'jsx',
       code: dedent`
         render(
-          <app
+          <App
             initialPage={JSON.parse(el.dataset.page)}
             resolveComponent={name => require(\`./Pages/\${name}\`).default}
             transformProps={props => {
@@ -54,7 +74,7 @@ Sometimes it can be useful to transform the props client-side before they are pa
       name: 'Svelte',
       language: 'js',
       code: dedent`
-        new app({
+        new App({
           target: el,
           props: {
             initialPage: JSON.parse(el.dataset.page),

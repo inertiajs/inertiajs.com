@@ -1,5 +1,6 @@
 import dedent from 'dedent-js'
 import Layout from '../components/Layout'
+import Notice from '../components/Notice'
 import TabbedCodeExamples from '../components/TabbedCodeExamples'
 
 export default Layout
@@ -20,25 +21,35 @@ export const meta = {
 
 # Links
 
-To create links within an Inertia app you'll need to use the Inertia link component. This is a light wrapper around a standard anchor link that intercepts click events and prevents full page reloads from occurring. This is how Inertia provides a single-page app experience.
+To create links within an Inertia app you'll need to use the Inertia link component. This is a light wrapper around a standard anchor `<a>` link that intercepts click events and prevents full page reloads from occurring. This is how Inertia provides a single-page app experience.
 
 ## Creating links
 
-To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the underlying `<a>` tag.
+To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to the underlying tag.
 
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/">Home</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/">Home</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/">Home</InertiaLink>
       `,
     },
@@ -46,14 +57,68 @@ To create an Inertia link, use the Inertia link component. Note, any attributes 
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/" use:inertia>Home</a>\n
-        <!-- or -->\n
         <InertiaLink href="/">Home</InertiaLink>
       `,
       description: 'The use:inertia directive can be applied to any HTML element.',
     },
   ]}
 />
+
+By default Inertia renders links as anchor `<a>` elements. However, you can change the tag using the `as` attribute.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/logout" method="post" as="button" type="button">Logout</inertia-link>\n
+        // Renders as:
+        <button type="button">Logout</button>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/logout" method="post" as="button" type="button">Logout</inertia-link>\n
+        // Renders as:
+        <button type="button">Logout</button>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
+        <InertiaLink href="/logout" method="post" as="button" type="button">Logout</InertiaLink>\n
+        // Renders as:
+        <button type="button">Logout</button>
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        import { inertia } from '@inertiajs/inertia-svelte'\n
+        <button href="/logout" use:inertia="{{ method: 'post' }}" type="button">Logout</button>\n
+        // Renders as:
+        <button type="button">Logout</button>
+      `,
+      description:
+        'Svelte does not support dynamic elements yet, but you can use the inertia directive to achieve the same results.',
+    },
+  ]}
+/>
+
+<Notice>
+  Creating <inlineCode>POST</inlineCode>/<inlineCode>PUT</inlineCode>/<inlineCode>PATCH</inlineCode>/
+  <inlineCode>DELETE</inlineCode> anchor <inlineCode>&lt;a&gt;</inlineCode> links is discouraged as it causes "Open Link
+  in New Tab/Window" accessibility issues. Instead, consider using a more appropriate element, such as a{' '}
+  <inlineCode>&lt;button&gt;</inlineCode>.
+</Notice>
 
 ## Method
 
@@ -62,16 +127,26 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/logout" method="post">Logout</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/logout" method="post">Logout</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/logout" method="post">Logout</InertiaLink>
       `,
     },
@@ -79,8 +154,8 @@ You can specify the method for an Inertia link request. The default is `GET`, bu
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/logout" use:inertia="{{ method: 'post' }}">Logout</a>\n
-        <!-- or -->\n
         <InertiaLink href="/logout" method="post">Logout</InertiaLink>
       `,
     },
@@ -94,16 +169,26 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
       `,
     },
@@ -111,6 +196,7 @@ You can add data using the `data` attribute. This can be an `object`, or a `Form
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-svelte'\n
         <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
       `,
     },
@@ -124,16 +210,26 @@ The `headers` option allows you to add custom headers to an Inertia link. Do not
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/endpoint" headers={{ foo: bar }}>Save</InertiaLink>
       `,
     },
@@ -141,8 +237,8 @@ The `headers` option allows you to add custom headers to an Inertia link. Do not
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>\n
-        <!-- or -->\n
         <InertiaLink href="/endpoint" headers={{ foo: bar}}>Save</InertiaLink>
       `,
     },
@@ -156,16 +252,26 @@ You can specify the browser history behaviour. By default page visits push (new)
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/" replace>Home</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/" replace>Home</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink replace href="/">Home</InertiaLink>
       `,
     },
@@ -173,8 +279,8 @@ You can specify the browser history behaviour. By default page visits push (new)
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/" use:inertia="{{ replace: true }}">Home</a>\n
-        <!-- or -->\n
         <InertiaLink href="/" replace>Home</InertiaLink>
       `,
     },
@@ -188,18 +294,29 @@ You can preserve a page component's local state using the `preserve-state` attri
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'jsx',
       code: dedent`
-        <input v-model="query" type="text" />
+        <input v-model="query" type="text" />\n
         <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <input v-model="query" type="text" />\n
+        <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
-        <input onChange={this.handleChange} value={query} />
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
+        <input onChange={this.handleChange} value={query} />\n
         <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
       `,
     },
@@ -207,9 +324,9 @@ You can preserve a page component's local state using the `preserve-state` attri
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
-        <input on:change={handleChange} value={query} />
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+        <input on:change={handleChange} value={query} />\n
         <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>\n
-        <!-- or -->\n
         <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
       `,
     },
@@ -223,16 +340,26 @@ You can use the `preserve-scroll` attribute to prevent Inertia from automaticall
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/" preserve-scroll>Home</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/" preserve-scroll>Home</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink preserveScroll href="/">Home</InertiaLink>
       `,
     },
@@ -240,8 +367,8 @@ You can use the `preserve-scroll` attribute to prevent Inertia from automaticall
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
-        <!-- or -->\n
         <InertiaLink href="/" preserveScroll>Home</InertiaLink>
       `,
     },
@@ -257,16 +384,26 @@ The `only` option allows you to request a subset of the props (data) from the se
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
@@ -274,8 +411,8 @@ The `only` option allows you to request a subset of the props (data) from the se
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
-        <!-- or -->\n
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },

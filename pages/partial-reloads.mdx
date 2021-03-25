@@ -8,7 +8,7 @@ export const meta = {
   title: 'Partial reloads',
   links: [
     { url: '#top', name: 'Introduction' },
-    { url: '#making-partial-reloads', name: 'Making partial visits' },
+    { url: '#making-partial-visits', name: 'Making partial visits' },
     { url: '#lazy-data-evaluation', name: 'Lazy data evaluation' },
   ],
 }
@@ -46,16 +46,26 @@ It's also possible to perform partial reloads with Inertia links using the `only
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'twig',
       code: dedent`
         <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
       `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { InertiaLink } from '@inertiajs/inertia-react'\n
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
@@ -63,8 +73,8 @@ It's also possible to perform partial reloads with Inertia links using the `only
       name: 'Svelte',
       language: 'jsx',
       code: dedent`
+        import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
         <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
-        <!-- or -->\n
         <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
       `,
     },
@@ -83,23 +93,20 @@ When Inertia performs a visit, it will determine which data is required, and onl
       name: 'Laravel',
       language: 'php',
       code: dedent`
-        class UsersController extends Controller
-        {
-            public function index()
-            {
-                return Inertia::render('Users/Index', [
-                    // Lazily evaluated (only run if required)
-                    'companies' => function () {
-                        return Company::orderBy('name')
-                            ->get('id', 'name');
-                    },
-                    // Evaluated immediately
-                    'users' => User::orderBy('name')
-                        ->select('id', 'name')
-                        ->paginate(),
-                ]);
-            }
-        }
+        return Inertia::render('Users/Index', [\n
+            // ALWAYS included on first visit
+            // OPTIONALLY included on partial reloads
+            // ALWAYS evaluated
+            'users' => User::get(),\n
+            // ALWAYS included on first visit
+            // OPTIONALLY included on partial reloads
+            // ONLY evaluated when needed
+            'users' => fn () => User::get(),\n
+            // NEVER included on first visit
+            // OPTIONALLY included on partial reloads
+            // ONLY evaluated when needed
+            'users' => Inertia::lazy(fn () => User::get()),
+        ]);
       `,
     },
     {
@@ -108,19 +115,19 @@ When Inertia performs a visit, it will determine which data is required, and onl
       code: dedent`
         class UsersController < ApplicationController
           def index
-            render inertia: 'Users/Index', props: {
-              # Lazily evaluated (only run if required)
-              companies: -> {
-                Company.
-                  order(:name).
-                  as_json(only: [ :id, :name ])
-              },
-              
-              # Evaluated immediately
-              users: User.
-                order(:name).
-                paginate(params[:page]).
-                as_json(only: [ :id, :name ])
+            render inertia: 'Users/Index', props: {\n
+              # ALWAYS included on first visit
+              # OPTIONALLY included on partial reloads
+              # ALWAYS evaluated
+              users: User.as_json()\n
+              # ALWAYS included on first visit
+              # OPTIONALLY included on partial reloads
+              # ONLY evaluated when needed
+              users: -> { User.as_json() },\n
+              # NEVER included on first visit
+              # OPTIONALLY included on partial reloads
+              # ONLY evaluated when needed
+              users: InertiaRails.lazy(-> { User.as_json }),
             }
           end
         end

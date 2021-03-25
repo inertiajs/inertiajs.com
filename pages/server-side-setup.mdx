@@ -8,7 +8,7 @@ export const meta = {
   links: [
     { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#root-template', name: 'Root template' },
-    { url: '#asset-versioning', name: 'Asset versioning' },
+    { url: '#middleware', name: 'Middleware' },
     { url: '#creating-responses', name: 'Creating responses' },
   ],
 }
@@ -89,30 +89,24 @@ Next, setup the root template that will be loaded on the first page visit. This 
   ]}
 />
 
-## Asset versioning
+## Middleware
 
-While not required, it's highly recommended that you also configure automatic asset refreshing. To do this you simply need to tell Inertia what the current version of your assets is. See the [asset versioning](/asset-versioning) page for more information.
+Next, setup the Inertia middleware. In the Rails adapter, this is configured automatically for you. However, in Laravel you need to publish the `HandleInertiaRequests` middleware to your application, which can be done using this artisan command:
 
-<TabbedCodeExamples
-  examples={[
-    {
-      name: 'Laravel',
-      language: 'php',
-      code: dedent`
-        Inertia::version($version);
-      `,
-    },
-    {
-      name: 'Rails',
-      language: 'ruby',
-      code: dedent`
-        InertiaRails.configure do |config|
-          config.version = '1.0'
-        end
-      `,
-    },
-  ]}
-/>
+```sh
+php artisan inertia:middleware
+```
+
+Once generated, register the `HandleInertiaRequests` middleware in your `App\Http\Kernel`, as the <u>last item</u> in your `web` middleware group.
+
+```php
+'web' => [
+    // ...
+    \App\Http\Middleware\HandleInertiaRequests::class,
+],
+```
+
+This middleware provides a `version()` method for setting your [asset version](/asset-versioning), and a `share()` method for setting [shared data](/shared-data). Please see those pages for more information.
 
 ## Creating responses
 
