@@ -1,0 +1,141 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia@v0.3.0',
+}
+
+<h1>inertia@v0.3.0</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on September 24, 2020</div>
+
+## Global events
+
+This release adds a new event system to Inertia.js, allowing developers to "hook into" the various lifecycle events of the library. Here's how to use it:
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('start', (event) => {
+  console.log(`Starting a visit to ${event.detail.visit.url}`)
+})
+```
+
+When you register an event, Inertia automatically returns you a callback to unregister the event. Combined with a destroyed hook, you can do something like this to automatically unregister the event when you navigate to a different page.
+
+```js
+export default {
+  mounted() {
+    this.$once(
+      'hook:destroyed',
+      Inertia.on('start', (event) => {
+        if (!confirm('Are you sure you want to navigate away?')) {
+          event.preventDefault()
+        }
+      })
+    )
+  },
+}
+```
+
+Under the hood this uses native browser events, so you can also work with them that way. For example:
+
+```js
+document.addEventListener('inertia:start', (event) => {
+  console.log(`starting a visit to ${event.detail.visit.url}`)
+})
+```
+
+Some events support cancellation, allowing you to prevent Inertia's default behaviour. Just like native events, if only one event listener calls `event.preventDefault()`, the event will be cancelled.
+
+Here is a complete list of all the available events:
+
+| Name       | Description                                                                                                                                                                                                                                                                                            | Detail              | Cancelable                                 |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- | ------------------------------------------ |
+| `start`    | Fires before a request is made to the server. Useful for displaying loading indicators and for listening to and intercepting visits.                                                                                                                                                                   | `e.detail.visit`    | Yes, prevents visit from being made.       |
+| `progress` | Fires whenever a progress event is emitted during a file upload.                                                                                                                                                                                                                                       | `e.detail.progress` | No                                         |
+| `success`  | Fires on successful page visits.                                                                                                                                                                                                                                                                       | `e.detail.page`     | No                                         |
+| `invalid`  | Fires when a non-Inertia response is received, for all response levels (200, 400 and 500).                                                                                                                                                                                                             | `e.detail.response` | Yes, prevents the modal from being shown.  |
+| `error`    | Fires on unexpected XHR errors (such as network interruptions) and for errors generated in the `resolveComponent()` callback. Will NOT fire for XHR requests that receive a response (even if they are 400/500 level responses).                                                                       | `e.detail.error`    | Yes, prevents the error from being thrown. |
+| `finish`   | Fires after an XHR request is made to the server, for both successful and unsuccessful responses. Useful for hiding loading indicators.                                                                                                                                                                | N/A                 | No                                         |
+| `navigate` | Fires when a new state is pushed into the history (initial visit and on `history.pushState`), or when navigating history (`popstate`). Does not fire for `history.replaceState` events. These are considered "successful" page navigation events, useful for tracking analytics, and things like that. | `e.detail.page`     | No                                         |
+
+## Event callbacks
+
+In addition to the global events, this release adds a number of visit event callbacks.
+
+```js
+Inertia.post('/users', data, {
+  onCancelToken: (cancelToken) => {},
+  onCancel: (visit) => {},
+  onStart: (visit) => {},
+  onProgress: (progress) => {},
+  onSuccess: (page) => {},
+  onFinish: () => {},
+})
+```
+
+## Visit promise deprecated
+
+This release deprecates the promise that is returned from `Inertia.visit()`. If you call `then()`, `catch()` or `finally()` on an Inertia visit, you'll get the following warning:
+
+> Inertia.js visit promises have been deprecated and will be removed in a future release. Please use the new visit event callbacks instead.
+>
+> Learn more at https://inertiajs.com/events
+
+The recommended approach is to use the new event callbacks instead. For example, instead of using `then()`, use `onSuccess()`:
+
+```js
+Inertia.post('/profile', data, {
+  onSuccess: () => {
+    if (this.errors.isEmpty()) {
+      this.form.password = null
+    }
+  },
+})
+```
+
+And, instead of using `finally()`, use `onFinish()` instead:
+
+```js
+Inertia.post('/profile', data, {
+  onFinish: () => (this.sending = false),
+})
+```
+
+## NProgress removed (breaking change)
+
+This PR removes the direct NProgress integration, since the new event system makes this so easy to do outside of Inertia core. This behaviour is now available via a first-class package called [@inertiajs/progress](https://github.com/inertiajs/progress).
+
+To add the new progress library to your project, first install the package:
+
+```bash
+npm install @inertiajs/progress
+yarn add @inertiajs/progress
+```
+
+Once it's been installed, initialize it in your app:
+
+```js
+import { InertiaProgress } from '@inertiajs/progress'
+
+InertiaProgress.init({
+  // The delay after which the progress bar will
+  // appear during navigation, in milliseconds.
+  delay: 250,
+
+  // The color of the progress bar.
+  color: '#29d',
+
+  // Whether to include the default NProgress styles.
+  includeCSS: true,
+
+  // Whether the NProgress spinner will be shown.
+  showSpinner: false,
+})
+```
+
+## Other changes
+
+- Restored lazy evaluation of `preserveScroll` and `preserveState` ([#231](https://github.com/inertiajs/inertia/pull/231)).
+- Scroll region improvements (refactored to a single scroll event listener).

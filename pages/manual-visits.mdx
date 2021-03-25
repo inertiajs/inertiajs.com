@@ -13,6 +13,7 @@ export const meta = {
     { url: '#component-state', name: 'Component state' },
     { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
+    { url: '#error-bags', name: 'Error bags' },
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#visit-cancellation', name: 'Visit cancellation' },
     { url: '#event-callbacks', name: 'Event callbacks' },
@@ -27,7 +28,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
       language: 'js',
       code: dedent`
         // import { Inertia } from '@inertiajs/inertia'\n
@@ -39,12 +40,39 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           preserveScroll: false,
           only: [],
           headers: {},
+          errorBag: null,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
           onStart: visit => {},
           onProgress: progress => {},
           onSuccess: page => {},
+          onError: errors => {},
+          onFinish: () => {},
+        })
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        // import { Inertia } from '@inertiajs/inertia'\n
+        this.$inertia.visit(url, {
+          method: 'get',
+          data: {},
+          replace: false,
+          preserveState: false,
+          preserveScroll: false,
+          only: [],
+          headers: {},
+          errorBag: null,
+          onCancelToken: cancelToken => {},
+          onCancel: () => {},
+          onBefore: visit => {},
+          onStart: visit => {},
+          onProgress: progress => {},
+          onSuccess: page => {},
+          onError: errors => {},
           onFinish: () => {},
         })
       `,
@@ -62,12 +90,14 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           preserveScroll: false,
           only: [],
           headers: {},
+          errorBag: null,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
           onStart: visit => {},
           onProgress: progress => {},
           onSuccess: page => {},
+          onError: errors => {},
           onFinish: () => {},
         })
       `,
@@ -85,12 +115,14 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           preserveScroll: false,
           only: [],
           headers: {},
+          errorBag: null,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
           onStart: visit => {},
           onProgress: progress => {},
           onSuccess: page => {},
+          onError: errors => {},
           onFinish: () => {},
         })
       `,
@@ -103,7 +135,21 @@ However, generally it's preferred to use one of the shortcut methods instead. Th
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        // import { Inertia } from '@inertiajs/inertia'\n
+        this.$inertia.get(url, data, options)
+        this.$inertia.post(url, data, options)
+        this.$inertia.put(url, data, options)
+        this.$inertia.patch(url, data, options)
+        this.$inertia.delete(url, options)
+        this.$inertia.replace(url, options)
+        this.$inertia.reload(options) // Uses the current URL
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         // import { Inertia } from '@inertiajs/inertia'\n
@@ -157,6 +203,13 @@ Use the `method` option to set the request method to `get`, `post`, `put`, `patc
 Inertia.visit(url, { method: 'post' })
 ```
 
+<Notice>
+  Uploading files via <inlineCode>put</inlineCode> or <inlineCode>patch</inlineCode> is not supported in Laravel.
+  Instead, make the request via <inlineCode>post</inlineCode>, including a <inlineCode>_method</inlineCode> field set to{' '}
+  <inlineCode>put</inlineCode> or <inlineCode>patch</inlineCode>. This is called{' '}
+  <a href="https://laravel.com/docs/8.x/routing#form-method-spoofing">form method spoofing</a>.
+</Notice>
+
 ## Data
 
 Use the `data` option to add data to the request.
@@ -204,6 +257,14 @@ This can be done by setting the `preserveState` option to `true`.
 Inertia.get('/users', { search: 'John' }, { preserveState: true })
 ```
 
+You can also lazily evaluate the `preserveState` option based on the response by providing a callback.
+
+```js
+Inertia.post('/users', data, {
+  preserveState: (page) => Object.keys(page.props.errors).length,
+})
+```
+
 For convenience, the `post`, `put`, `patch`, `delete` and `reload` methods all default `preserveState` to `true`.
 
 ## Scroll preservation
@@ -212,6 +273,14 @@ When navigating between pages, Inertia mimics default browser behaviour by autom
 
 ```js
 Inertia.visit(url, { preserveScroll: true })
+```
+
+You can also lazily evaluate the `preserveScroll` option based on the response by providing a callback.
+
+```js
+Inertia.post('/users', data, {
+  preserveScroll: (page) => Object.keys(page.props.errors).length,
+})
 ```
 
 For more information, see the [scroll management](/scroll-management) page.
@@ -225,6 +294,18 @@ Inertia.visit('/users', { search: 'John' }, { only: ['users'] })
 ```
 
 For more information, see the [partial reloads](/partial-reloads) page.
+
+## Error bags
+
+For pages that have more than one form, it's possible to run into conflicts when displaying validation errors if two forms share the same field names. To get around this, you can use error bags. Error bags scope the validation errors returned from the server within a unique key specific to that form.
+
+```js
+Inertia.post('/companies', data, {
+  errorBag: 'createCompany',
+})
+```
+
+For more information, see the [validation](/validation#error-bags) page.
 
 ## Custom headers
 
@@ -265,6 +346,7 @@ Inertia.post('/users', data, {
   onStart: (visit) => {},
   onProgress: (progress) => {},
   onSuccess: (page) => {},
+  onError: (errors) => {},
   onCancel: () => {},
   onFinish: () => {},
 })
@@ -278,7 +360,7 @@ Inertia.delete(`/users/${user.id}`, {
 })
 ```
 
-It's also possible to return a promise from the `onSuccess()` callback. This will delay the "finish" event until the promise has resolved.
+It's also possible to return a promise from the `onSuccess()` and `onError()` callbacks. This will delay the "finish" event until the promise has resolved.
 
 ```js
 Inertia.post(url, {
@@ -314,6 +396,9 @@ Inertia.post('/profile', data, {
   onSuccess: () => {
     // Handle success event
   },
+  onError: (errors) => {
+    // Handle validation errors
+  },
 })
 ```
 
@@ -330,7 +415,7 @@ Inertia.post('/profile', data, {
 And instead of using `catch()`, it's better to handle these unexpected errors using a global error event handler.
 
 ```js
-Inertia.on('error', (event) => {
+Inertia.on('exception', (event) => {
   event.preventDefault()
   // Handle the error yourself
 })

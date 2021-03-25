@@ -2,27 +2,80 @@ import Layout from '../components/Layout'
 
 export default Layout
 export const meta = {
-  title: 'Server-side rendering',
+  title: 'Server-side rendering (SSR)',
   links: [
-    { url: '#not-supported', name: 'Not supported' },
-    { url: '#prerendering-services', name: 'Prerendering services' },
-    { url: '#prerendering-services-laravel', name: 'Laravel' },
-    { url: '#prerendering-services-javascript-nodejs-based-services', name: 'Javascript/Node.js-based services' },
+    { url: '#top', name: 'Introduction' },
+    { url: '#how-it-works', name: 'How it works' },
+    { url: '#requirements', name: 'Requirements' },
+    { url: '#demo-app', name: 'Demo app' },
   ],
 }
 
-# Server-side rendering
+# Server-side rendering (SSR)
 
-## Not supported
+Server-side rendering (SSR) an Inertia app can improve search engine optimization (SEO), and can also reduce the time to [first contentful paint](https://web.dev/fcp/) (FCP). To this point, Inertia has not offered server-side rendering. However, official support [is coming](https://twitter.com/reinink/status/1374373761147760654)! This feature will be made available to [our sponsors](/sponsors) first. Please consider supporting this project! 💜
 
-Inertia does not currently support server-side rendering. If that's a priority for your application, Inertia may not be the right choice for you. That said, we believe server-side rendering to be technically possible with Inertia, and are likely to revisit this in the future.
+## How it works
 
-## Prerendering services
+The challenge with server-side rendering JavaScript frameworks like Vue, React and Svelte is that they were designed to render in the browser, not on a server. Fortunately, thanks to [Node.js](https://nodejs.org/), it's now possible to also render these frameworks server-side!
 
-## Laravel
+Vue, React and Svelte all offer SSR tooling, which Inertia can take advantage of. Here's how it works:
 
-**[Depictr](https://github.com/juhlinus/depictr)** - A package developed by [Linus Juhlin](https://twitter.com/juhlinus), which renders static pages for search engine crawlers.
+<ol>
+  <li className="pb-6 font-bold text-gray-700">
+    <div>A request comes into your server-side framework</div>
+    <div className="mt-1 text-base font-medium text-gray-600">
+      Your requests and responses are still <em>fully managed</em> by your server-side framework of choice. Your routes,
+      middleware, and controllers prepare the Inertia response, just like a normal Inertia app.
+    </div>
+  </li>
+  <li className="pb-6 font-bold text-gray-700">
+    <div>Inertia makes a request to a local Node SSR server</div>
+    <div className="mt-1 text-base font-medium text-gray-600">
+      Right before your app sends the full page response to the browser, Inertia takes the{' '}
+      <a href="/the-protocol#the-page-object">page object</a> for that response and sends it via HTTP to a local Node
+      SSR server.
+    </div>
+  </li>
+  <li className="pb-6 font-bold text-gray-700">
+    <div>The Node SSR server renders the page component as HTML</div>
+    <div className="mt-1 text-base font-medium text-gray-600">
+      Using the page object that was provided, the Node server knows what Vue/React/Svelte page component to render, and
+      which props to pass it. It then returns the rendered HTML back to your app.
+    </div>
+  </li>
+  <li className="font-bold text-gray-700">
+    <div>Your app inserts the pre-rendered HTML in the response</div>
+    <div className="mt-1 text-base font-medium text-gray-600">
+      Now that your app has the pre-rendered HTML for the page, it can include it in the HTML response sent to the
+      browser. When the client-side framework boots, it is able to "hydrate" the server-side rendered HTML, instead of
+      re-rendering the whole page.
+    </div>
+  </li>
+</ol>
 
-## Javascript/Node.js-based services
+What's awesome here is that, because of Inertia's architecture, the `page` object sent to the Node SSR server always includes all the necessary data (props) needed for the page component to render.
 
-Some Inertia users are successfully using services like [Prerender.io](https://prerender.io), [Prerender.cloud](https://www.prerender.cloud) and [Rendertron](https://github.com/GoogleChrome/rendertron) to generate and cache HTML versions of their Inertia websites, and then serve that content to bots for SEO purposes.
+Meaning, you don't run into any asynchronous data loading issues when doing server-side rendering with Inertia. It's very fast. Our tests show that it takes between `2ms-50ms` to render a page, depending on its complexity.
+
+Also, keep in mind that Inertia only needs to do server-side rendering for the _first page load_. From that point on, you're in "SPA mode", and you just get normal Inertia XHR responses back.
+
+## Requirements
+
+Okay, what are the gotchas? There are a few technical requirements to be aware of.
+
+First, since we're using Node to do the server-side rendering, you'll need Node installed on your server. Fortunately, since Node is often used for build steps, it's very common for it to be installed.
+
+Second, you need to run a small background Node process. If you're using a modern hosting platform like [Heroku](https://dashboard.heroku.com/) or [Laravel Forge](https://forge.laravel.com/), it's quite straightforward to setup. _(Technically you could avoid running the background Node process, and just shell out to Node directly. However, since Node takes about `250ms` to boot up, this approach comes at a pretty significant performance penalty.)_
+
+Third, you are now building an app that must be able to run in both the browser and in Node. These are sometimes called "universal" or "isomorphic" apps. Generally speaking this is quite manageable. You just need to be aware of this when reaching for `window` or `document`, as these don't exist in Node.
+
+## Demo app
+
+Wondering what a server-side rendered Inertia app feels like? We've setup the Ping CRM demo app in "SSR mode" so you can find out.
+
+You can find it at [ssr-demo.inertiajs.com](https://ssr-demo.inertiajs.com).
+
+Be sure to view the source to see the HTML coming back from the server. Or, even better, login, disable JavaScript, and then click around the app. The pages load, even though JavaScript is disabled! 🤩
+
+This demo app is running on a small Digital Ocean droplet, managed by Laravel Forge.

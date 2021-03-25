@@ -42,7 +42,7 @@ Inertia will automatically follow this redirect and update the page accordingly.
                         'email' => ['required', 'max:50', 'email'],
                     ])
                 );\n
-                return Redirect::route('users');
+                return Redirect::route('users.index');
             }
         }
       `,
@@ -88,7 +88,7 @@ Sometimes it's necessary to redirect to an external website, or even another non
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        # todo
+        inertia_location index_path
       `,
     },
   ]}

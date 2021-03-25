@@ -1,0 +1,78 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia@v0.6.0',
+}
+
+<h1>inertia@v0.6.0</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on October 27, 2020</div>
+
+## Changes
+
+- Fixed issue where the `finish` event was firing in the wrong sequence for cancelled visits ([#290](https://github.com/inertiajs/inertia/pull/290)).
+- Added new `before` global event and `onBefore()` event callback ([#290](https://github.com/inertiajs/inertia/pull/290)).
+- Removed the ability to cancel the `start` global event and `onStart()` event callback ([#290](https://github.com/inertiajs/inertia/pull/290)).
+- Updated the `Inertia.reload()` method to always preserve the state and scroll position ([#293](https://github.com/inertiajs/inertia/pull/293)).
+- Added a deprecation notice for `Inertia.replace()` method ([#294](https://github.com/inertiajs/inertia/pull/294)).
+
+## Start event is no longer cancelable (breaking change)
+
+Previously, to cancel a visit, you would call `event.preventDefault()` from a `start` global event listener. You could also cancel a visit by returning `false` from the `onStart()` event callback. This is no longer possible with the `start` event. Instead, you can now do this with the `before` event:
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('before', (event) => {
+  return confirm('Are you sure you want to navigate away?')
+})
+```
+
+This can also be done from the new `onBefore()` event callback:
+
+```js
+Inertia.delete(`/users/${user.id}`, {
+  onBefore: () => confirm('Are you sure you want to delete this user?'),
+})
+```
+
+As well as from the Inertia link:
+
+```twig
+<inertia-link :href="`/users/${user.id}`" method="post" @before="confirmDelete">Delete user<inertia-link>
+```
+
+## Inertia.reload() now always preserves state and scroll position (low risk)
+
+The `Inertia.reload()` method exists as a shortcut to reload a page's props, similar to how `location.reload()` works. However, unlike `location.reload()`, this method was previously not preserving the scroll position. This release updates this method to now always preserve the scroll position. We've also updated the method to always preserve the component state. Previously this method had `preserveState` set `true` by default, but it could be overwritten via the `options`. This is no longer possible.
+
+The goal here is to underline the purpose of this method, which is to reload the current URL while maintaining the current component state (`preserveState: true`) as well as the current scroll position (`preserveScroll: true`). If you need different behaviour than this, simply use one of the other methods, such as `Inertia.get()`, and manually set these options.
+
+## Inertia.replace() deprecated
+
+This release deprecates the `Inertia.replace()` method. This method has numerous issues with it:
+
+1. This method signature is different than the other methods, in that it doesn't have a second argument for `data`.
+2. This method arbitrarily sets `preserveState: true`, without any indication that it's doing this.
+3. The amount of times you need to set `replace: true` (the whole purpose of this method) is actually very rare, since Inertia automatically does this for visits made to the same URL.
+
+For these reasons, we have deprecated it and will be removing it in an upcoming release. Here's how to update your apps:
+
+```js
+//  Before
+Inertia.replace('/users', { data: { search: 'John' } })
+
+// If you're visiting the same endpoint:
+Inertia.get('/users', { search: 'John' })
+
+// If you're visiting a different endpoint:
+Inertia.get('/users', { search: 'John' }, { replace: true })
+
+// If you need state preserved:
+Inertia.get('/users', { search: 'John' }, { preserveState: true })
+```
+
+## Progress improvements (breaking change)
+
+This release corresponds to the `@inertiajs/progress` version `0.2.0` release, which updates the progress library to take advantage of the improved "finish" event handling. If you're using `@inertiajs/progress`, be sure to upgrade to `^0.2.0` at the same time, otherwise you'll run into issues with the progress bar not being removed properly.

@@ -8,7 +8,7 @@ export const meta = {
   title: 'Partial reloads',
   links: [
     { url: '#top', name: 'Introduction' },
-    { url: '#making-partial-reloads', name: 'Making partial visits' },
+    { url: '#making-partial-visits', name: 'Making partial visits' },
     { url: '#lazy-data-evaluation', name: 'Lazy data evaluation' },
   ],
 }
@@ -46,7 +46,15 @@ It's also possible to perform partial reloads with Inertia links using the `only
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
@@ -115,7 +123,11 @@ When Inertia performs a visit, it will determine which data is required, and onl
               # ALWAYS included on first visit
               # OPTIONALLY included on partial reloads
               # ONLY evaluated when needed
-              users: -> { User.as_json() },
+              users: -> { User.as_json() },\n
+              # NEVER included on first visit
+              # OPTIONALLY included on partial reloads
+              # ONLY evaluated when needed
+              users: InertiaRails.lazy(-> { User.as_json }),
             }
           end
         end
@@ -123,5 +135,3 @@ When Inertia performs a visit, it will determine which data is required, and onl
     },
   ]}
 />
-
-Notice how in the Laravel adapter you can use `Inertia::lazy()` to even prevent the prop from being included on the initial page visit. We [hope to bring](https://github.com/inertiajs/inertia-rails/issues/51) this feature to the Rails adapter soon.

@@ -1,0 +1,86 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia-svelte@v0.3.0',
+}
+
+<h1>inertia-svelte@v0.3.0</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on September 9, 2020</div>
+
+This is a big release thanks to the excellent work done by [@pedroborges](https://github.com/pedroborges), the maintainer of the Svelte adapter. 👏
+
+## Persistent layouts
+
+This release adds support for persistent layouts (#203). Page components can now declare a persistent layout from inside the `<script context="module">` block:
+
+```svelte
+<script context="module">
+  import Layout from '@/Shared/Layout.svelte'
+  export const layout = Layout
+</script>
+```
+
+Alternatively, you can also use the short array syntax to declare nested layouts:
+
+```svelte
+<script context="module">
+  import Layout from '@/Shared/Layout.svelte'
+  import DashboardLayout from '@/Shared/DashboardLayout.svelte'
+  export const layout = [Layout, DashboardLayout]
+</script>
+```
+
+This is a breaking change (hence the `0.3.0` release), since it requires that the `resolveComponent` closure passed to `InertiaApp` return the page module and not just the default export.
+
+```diff
+import { InertiaApp } from '@inertiajs/inertia-svelte'
+
+const app = document.getElementById('app')
+
+new InertiaApp({
+  target: app,
+  props: {
+    initialPage: JSON.parse(app.dataset.page),
+    resolveComponent: name =>
+-      import(`@/Pages/${name}.svelte`).then(module => module.default),
++      import(`@/Pages/${name}.svelte`),
+  },
+})
+```
+
+## New "use:inertia" directive
+
+This release also includes a new `use:inertia` directive (#206), which can be used instead of the `InertiaLink` component to add Inertia behaviour to any element.
+
+```svelte
+<script>
+  import { inertia } from '@inertiajs/inertia-svelte'
+</script>
+
+<a href="/users" use:inertia>Users</a>
+
+<button
+  use:inertia={{ href: '/users/100', method: 'post', data: { '_method': 'delete' }}}
+  class="btn-indigo"
+  on:click={() => alert('User deleted')}>
+  Delete
+</button>
+
+<a
+  href="/users/100"
+  use:inertia={{ method: 'post', data: { '_method': 'put', 'visited': true }}}>
+  Visited
+</a>
+```
+
+## Headers prop
+
+Finally, this release includes the addition of a new `headers` prop on the `InertiaLink` component (#204).
+
+```js
+<InertiaLink href="/" headers={{ foo: bar }}>
+  Home
+</InertiaLink>
+```

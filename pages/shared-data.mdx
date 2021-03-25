@@ -96,14 +96,14 @@ Once you've shared the data server-side, you'll then be able to access it within
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
-      description: 'Access shared data using the $page property.',
+      name: 'Vue 2',
+      description: 'Access shared data using the $page property or the usePage() hook.',
       language: 'twig',
       code: dedent`
         <template>
           <main>
             <header>
-              <div>You are logged in as: {{ $page.props.auth.user.name }}</div>
+              <div>You are logged in as: {{ user.name }}</div>
               <nav>
                 <inertia-link href="/">Home</inertia-link>
                 <inertia-link href="/about">About</inertia-link>
@@ -115,7 +115,49 @@ Once you've shared the data server-side, you'll then be able to access it within
             </content>
             <footer></footer>
           </main>
-        </template>
+        </template>\n
+        <script>
+          export default {
+            computed: {
+              user() {
+                return this.$page.props.auth.user
+              }
+            }
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      description: 'Access shared data using the $page property or the usePage() hook.',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header>
+              <div>You are logged in as: {{ user.name }}</div>
+              <nav>
+                <inertia-link href="/">Home</inertia-link>
+                <inertia-link href="/about">About</inertia-link>
+                <inertia-link href="/contact">Contact</inertia-link>
+              </nav>
+            </header>
+            <content>
+              <slot />
+            </content>
+            <footer></footer>
+          </main>
+        </template>\n
+        <script>
+          import { computed } from 'vue'
+          import { usePage } from '@inertiajs/inertia-vue3'\n
+          export default {
+            setup() {
+              const user = computed(() => usePage().props.value.auth.user)
+              return { user }
+            },
+          }
+        </script>
       `,
     },
     {
@@ -216,7 +258,25 @@ Next, display the flash message in a front-end component, such as the site layou
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header></header>
+            <content>
+              <div v-if="$page.props.flash.message" class="alert">
+                {{ $page.props.flash.message }}
+              </div>
+              <slot />
+            </content>
+            <footer></footer>
+          </main>
+        </template>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>

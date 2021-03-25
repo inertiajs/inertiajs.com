@@ -13,8 +13,9 @@ export const meta = {
     { url: '#start', name: 'Start' },
     { url: '#progress', name: 'Progress' },
     { url: '#success', name: 'Success' },
-    { url: '#invalid', name: 'Invalid' },
     { url: '#error', name: 'Error' },
+    { url: '#invalid', name: 'Invalid' },
+    { url: '#exception', name: 'Exception' },
     { url: '#finish', name: 'Finish' },
     { url: '#navigate', name: 'Navigate' },
     { url: '#event-callbacks', name: 'Event callbacks' },
@@ -88,12 +89,12 @@ document.removeEventListener('inertia:start', startEventListener)
 
 ## Cancelling events
 
-Some events (`start`, `invalid`, `error`) support cancellation, allowing you to prevent Inertia's default behaviour. Just like native events, if only one event listener calls `event.preventDefault()`, the event will be cancelled.
+Some events (`before`, `invalid`, `error`) support cancellation, allowing you to prevent Inertia's default behaviour. Just like native events, if only one event listener calls `event.preventDefault()`, the event will be cancelled.
 
 ```js
 import { Inertia } from '@inertiajs/inertia'
 
-Inertia.on('start', (event) => {
+Inertia.on('before', (event) => {
   if (!confirm('Are you sure you want to navigate away?')) {
     event.preventDefault()
   }
@@ -105,7 +106,7 @@ As a convenience, if you register your event listener using `Inertia.on()`, you 
 ```js
 import { Inertia } from '@inertiajs/inertia'
 
-Inertia.on('start', (event) => {
+Inertia.on('before', (event) => {
   return confirm('Are you sure you want to navigate away?')
 })
 ```
@@ -162,7 +163,7 @@ The `progress` event is not cancelable.
 
 ## Success
 
-The `success` event fires on successful page visits. Note, this does _not_ include history visits.
+The `success` event fires on successful page visits, unless validation errors are present. Note, this does _not_ include history visits.
 
 ```js
 import { Inertia } from '@inertiajs/inertia'
@@ -173,6 +174,20 @@ Inertia.on('success', (event) => {
 ```
 
 The `success` event is not cancelable.
+
+## Error
+
+The `error` event fires when validation errors are present on "successful" page visits.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+Inertia.on('error', (errors) => {
+  console.log(errors)
+})
+```
+
+The `error` event is not cancelable.
 
 ## Invalid
 
@@ -200,25 +215,25 @@ Inertia.on('invalid', (event) => {
 })
 ```
 
-## Error
+## Exception
 
-The `error` event fires on unexpected XHR errors, such as network interruptions, and for errors generated in the `resolveComponent()` callback.
+The `exception` event fires on unexpected XHR errors, such as network interruptions, and for errors generated in the `resolveComponent()` callback.
 
 ```js
 import { Inertia } from '@inertiajs/inertia'
 
-Inertia.on('error', (event) => {
+Inertia.on('exception', (event) => {
   console.log(`An unexpected error occurred during an Inertia visit.`)
   console.log(event.detail.error)
 })
 ```
 
-Cancel the `error` event to prevent the error from being thrown.
+Cancel the `exception` event to prevent the error from being thrown.
 
 ```js
 import { Inertia } from '@inertiajs/inertia'
 
-Inertia.on('error', (event) => {
+Inertia.on('exception', (event) => {
   event.preventDefault()
   // Handle the error yourself
 })

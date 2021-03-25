@@ -1,0 +1,562 @@
+{
+  "data": {
+    "user": {
+      "sponsorshipsAsMaintainer": {
+        "nodes": [
+          {
+            "createdAt": "2019-11-05T03:04:00Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/21592?u=82e4b54376a216ae3a75f5e0ea2348f35070129d&v=4",
+              "login": "inxilpro",
+              "name": "Chris Morrell"
+            }
+          },
+          {
+            "createdAt": "2019-11-06T19:35:41Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/6280211?v=4",
+              "login": "fourstacks",
+              "name": "John Wyles"
+            }
+          },
+          {
+            "createdAt": "2019-11-07T19:43:14Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/588012?u=ae561d4f7f8c07127df4aef9c357e6ceb169edf2&v=4",
+              "login": "robindrost",
+              "name": "robindrost"
+            }
+          },
+          {
+            "createdAt": "2019-11-11T23:23:19Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/558441?u=93d82087d27e54d0a464a1d290471ad3a74135ac&v=4",
+              "login": "michaeldyrynda",
+              "name": "Michael Dyrynda"
+            }
+          },
+          {
+            "createdAt": "2019-11-18T09:16:42Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/3557?u=323dbfb2c8a7e2bd527d2c4e231dcfab518033c1&v=4",
+              "login": "ledermann",
+              "name": "Georg Ledermann"
+            }
+          },
+          {
+            "createdAt": "2019-11-27T07:46:45Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/12988164?u=b5f3f2f4ed00761bc38a18f69c9b3f548835a3ec&v=4",
+              "login": "Juhlinus",
+              "name": "Linus Juhlin"
+            }
+          },
+          {
+            "createdAt": "2019-11-27T16:44:06Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/12276548?u=2b01bf5edc561f8c38dfb2cfa6f65c0888637e54&v=4",
+              "login": "PollieDev",
+              "name": "Pollie"
+            }
+          },
+          {
+            "createdAt": "2019-11-27T17:00:56Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/16297677?u=854a74df0f9cd10ea14cda05f52b98b6a6a506c7&v=4",
+              "login": "jamesburrow23",
+              "name": "James Burrow"
+            }
+          },
+          {
+            "createdAt": "2019-11-27T18:01:17Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/6016996?u=aa078a91dd2970d048793f7c4532cd5b80589623&v=4",
+              "login": "aldo555",
+              "name": "Aldo Dumitrescu"
+            }
+          },
+          {
+            "createdAt": "2019-11-28T07:59:53Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/3110750?u=491e77e20cb9c91d83bcac26049669e1b4a9572b&v=4",
+              "login": "Cannonb4ll",
+              "name": "Dennis Smink"
+            }
+          },
+          {
+            "createdAt": "2019-11-28T21:44:20Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/18542852?u=65241a85b9694d2f23f19e4eb486872cb2e74465&v=4",
+              "login": "devcircus",
+              "name": "Clayton Stone"
+            }
+          },
+          {
+            "createdAt": "2019-11-29T11:10:34Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/10206461?u=f58afa6af8a4a8364052d703979e3380b12ba010&v=4",
+              "login": "JonasPardon",
+              "name": "Jonas Pardon"
+            }
+          },
+          {
+            "createdAt": "2019-11-30T04:43:23Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/44739?u=2b4baacdf781daffd9dcc2a18bb0634a2570da67&v=4",
+              "login": "jackmcdade",
+              "name": "Jack McDade"
+            }
+          },
+          {
+            "createdAt": "2019-11-30T21:47:15Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/8235520?v=4",
+              "login": "nathanhipps",
+              "name": "Nathan Hipps"
+            }
+          },
+          {
+            "createdAt": "2019-12-01T15:46:39Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/54643782?u=4621991b7d1ec49cdb9e0f0de1a84569dc349746&v=4",
+              "login": "gregupton",
+              "name": "Greg Upton"
+            }
+          },
+          {
+            "createdAt": "2019-12-03T16:40:33Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/146465?v=4",
+              "login": "troygilbert",
+              "name": "Troy Gilbert"
+            }
+          },
+          {
+            "createdAt": "2019-12-10T11:36:55Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/157844?u=1b13ef4d6fc455509b624f587574e5ab11d6d227&v=4",
+              "login": "kitar",
+              "name": "Satoshi Kita"
+            }
+          },
+          {
+            "createdAt": "2019-12-11T17:57:00Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/767120?u=78c7626bbe55f37ab5ab1bd76c0fbd81870455cb&v=4",
+              "login": "hermanschutte",
+              "name": "Herman Schutte"
+            }
+          },
+          {
+            "createdAt": "2019-12-13T21:10:41Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/594614?v=4",
+              "login": "driesvints",
+              "name": "Dries Vints"
+            }
+          },
+          {
+            "createdAt": "2019-12-14T08:52:15Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1430546?v=4",
+              "login": "petersuhm",
+              "name": "Peter Suhm"
+            }
+          },
+          {
+            "createdAt": "2019-12-20T20:31:04Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/463230?u=0c486fbe3a30dadd5c5981a9fbc3a0d269ca0c33&v=4",
+              "login": "taylorotwell",
+              "name": "Taylor Otwell"
+            }
+          },
+          {
+            "createdAt": "2019-12-20T21:59:58Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1332315?u=6d3fd628a8f5cd670eb947de27999dbb10fc34b8&v=4",
+              "login": "trevorgreenleaf",
+              "name": "Trevor Greenleaf"
+            }
+          },
+          {
+            "createdAt": "2020-01-02T18:14:32Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/228899?u=b7e53f46e44130b6314684f5d3fc343d5a2fdeb4&v=4",
+              "login": "ninjaparade",
+              "name": "Ninja"
+            }
+          },
+          {
+            "createdAt": "2020-01-08T18:24:25Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/3144140?v=4",
+              "login": "jasoncharnes",
+              "name": "Jason Charnes"
+            }
+          },
+          {
+            "createdAt": "2020-01-27T15:30:51Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1065551?u=cae0d44e90d3c4f6c02a994974439d7342e71617&v=4",
+              "login": "mlantz",
+              "name": "Matt Lantz"
+            }
+          },
+          {
+            "createdAt": "2020-01-27T17:43:04Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/755063?u=11ed786b736431f6dd9b6b1ba4a820274472bb3e&v=4",
+              "login": "cullymason",
+              "name": "Cully Mason"
+            }
+          },
+          {
+            "createdAt": "2020-01-27T18:24:49Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1053395?u=736fe05783ca11d46d92e7bd3d027c874be93660&v=4",
+              "login": "edgrosvenor",
+              "name": "Ed Grosvenor"
+            }
+          },
+          {
+            "createdAt": "2020-02-06T22:22:36Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/260253?v=4",
+              "login": "jkudish",
+              "name": "Joey Kudish"
+            }
+          },
+          {
+            "createdAt": "2020-02-21T09:00:26Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/2301050?u=32f9c06c712a63545aefebd56a114b348d119e78&v=4",
+              "login": "MikeElghali",
+              "name": "Mike-e"
+            }
+          },
+          {
+            "createdAt": "2020-03-04T15:56:39Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/4263996?u=a5abbaec4403836667b5ca506189541f01a9292c&v=4",
+              "login": "JoeriAben",
+              "name": "Joeri Aben"
+            }
+          },
+          {
+            "createdAt": "2020-03-11T15:33:40Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/61965317?u=878264da3a5f92e0e08da0651418be1fdfb91478&v=4",
+              "login": "top-offerten",
+              "name": "top-offerten.ch"
+            }
+          },
+          {
+            "createdAt": "2020-03-11T21:01:25Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/347400?u=d4827035f604e4b3b937c1bd1ade725e94f383f1&v=4",
+              "login": "dbpolito",
+              "name": "Daniel Polito"
+            }
+          },
+          {
+            "createdAt": "2020-04-13T07:59:52Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/6092928?u=e93fb57e877bf1c1cba76c37b9950e3c4ad66bf3&v=4",
+              "login": "Neophen",
+              "name": "Mykolas Mankevicius"
+            }
+          },
+          {
+            "createdAt": "2020-05-13T12:41:27Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/8340930?v=4",
+              "login": "Jarrid",
+              "name": null
+            }
+          },
+          {
+            "createdAt": "2020-05-14T01:01:32Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/203654?u=c358678b17f5ec8bf223c803cb4ce17ab7a19298&v=4",
+              "login": "PiranhaGeorge",
+              "name": "George Palmer"
+            }
+          },
+          {
+            "createdAt": "2020-05-26T21:45:19Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/65899150?u=6b64bd7745b4c8739933dd1d1d3302878ce243a0&v=4",
+              "login": "liamjoc",
+              "name": "Liam O'Connor"
+            }
+          },
+          {
+            "createdAt": "2020-06-29T05:54:25Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/24716811?u=73a0aee770afcfb60c73be334704ed2d10bcf555&v=4",
+              "login": "zarsi",
+              "name": "Jarkko Hiukka"
+            }
+          },
+          {
+            "createdAt": "2020-06-30T14:36:16Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/38673?u=a4f7107396742abc1400c16d76b47e8543622262&v=4",
+              "login": "francescomugnai",
+              "name": "Francesco Mugnai"
+            }
+          },
+          {
+            "createdAt": "2020-06-30T18:01:25Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/18613261?u=3fc60709e7652fb49dd36a146f2c31bc88cc72c8&v=4",
+              "login": "nckrtl",
+              "name": "Nick"
+            }
+          },
+          {
+            "createdAt": "2020-07-03T15:18:27Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1091085?u=0df875e8632a7348365734613ac5fefc5afb9c90&v=4",
+              "login": "mdpoulter",
+              "name": "Matthew Poulter"
+            }
+          },
+          {
+            "createdAt": "2020-07-31T07:39:41Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1752195?u=4219d307075f995a1fdd6f503dc509b6f720d003&v=4",
+              "login": "claudiodekker",
+              "name": "Claudio Dekker"
+            }
+          },
+          {
+            "createdAt": "2020-08-04T21:02:12Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/270162?u=53be5121ab7ea5d0e5a2275ef1145300af3bef6b&v=4",
+              "login": "mikeburrelljr",
+              "name": "Mike Burrell, Jr."
+            }
+          },
+          {
+            "createdAt": "2020-08-07T09:04:35Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/5428120?v=4",
+              "login": "MianSaleem",
+              "name": "Mian Saleem"
+            }
+          },
+          {
+            "createdAt": "2020-09-04T11:08:11Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/12662462?u=50ef77d66fd236b20f426739c4fd31bc33abd9eb&v=4",
+              "login": "igerslike",
+              "name": null
+            }
+          },
+          {
+            "createdAt": "2020-09-09T12:07:43Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1569300?v=4",
+              "login": "andreiio",
+              "name": "Andrei Ioniță"
+            }
+          },
+          {
+            "createdAt": "2020-09-26T15:11:31Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/5927337?v=4",
+              "login": "goaround",
+              "name": "Johannes Kinast"
+            }
+          },
+          {
+            "createdAt": "2020-10-06T12:14:34Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/5164617?u=02394a01181698cb9a3272e9efbf93c9411f4d07&v=4",
+              "login": "lostdesign",
+              "name": "wellá"
+            }
+          },
+          {
+            "createdAt": "2020-10-06T21:55:20Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/33033094?u=af2f8c68849665a7827be80ba26c1131efff2642&v=4",
+              "login": "stancl",
+              "name": "Samuel Štancl"
+            }
+          },
+          {
+            "createdAt": "2020-10-10T16:24:00Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1329131?u=c6ad65b68d857fd478d86a189a25d54f61fff5bc&v=4",
+              "login": "scottzirkel",
+              "name": "Scott Zirkel"
+            }
+          },
+          {
+            "createdAt": "2020-10-11T10:04:01Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/6657?u=0e994845ae6559b63b6363294904781ec8282fd0&v=4",
+              "login": "horaceho",
+              "name": "Horace Ho"
+            }
+          },
+          {
+            "createdAt": "2020-10-12T21:43:38Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/25019620?u=94b69220b4ff962e75c34bd0a2cac5df73e89004&v=4",
+              "login": "bdweix",
+              "name": "Branick Weix"
+            }
+          },
+          {
+            "createdAt": "2020-10-13T18:37:22Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/13928621?u=d76f09ff5eb4c676c102fdbc448638655abfce6a&v=4",
+              "login": "ajnsn",
+              "name": "Alexander Jensen"
+            }
+          },
+          {
+            "createdAt": "2020-10-15T12:54:38Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/116662?u=2f2cdba858983a58d07b75abfede7914b77bfd16&v=4",
+              "login": "ericlbarnes",
+              "name": "Eric Barnes"
+            }
+          },
+          {
+            "createdAt": "2020-10-21T04:23:08Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/5139098?u=047aabe9393a1ca0ce1b46828aeff40e724eb08a&v=4",
+              "login": "ksassnowski",
+              "name": "Kai Sassnowski"
+            }
+          },
+          {
+            "createdAt": "2020-11-17T05:50:51Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/11573528?u=f70558ac43b6ff0a9462b2ea083d34ed3acaf463&v=4",
+              "login": "devingray",
+              "name": "Devin Gray"
+            }
+          },
+          {
+            "createdAt": "2020-11-24T21:28:36Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/12473463?u=3244121fa8a42a358803d92b59abebf8246e9d9e&v=4",
+              "login": "timmurphydev",
+              "name": "Tim Murphy"
+            }
+          },
+          {
+            "createdAt": "2020-11-26T06:38:42Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/46476605?v=4",
+              "login": "leeloop7",
+              "name": null
+            }
+          },
+          {
+            "createdAt": "2020-12-07T16:20:52Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/15817188?u=49d1d7579915fbfc7dd29b736ae4dbd0fcfc8891&v=4",
+              "login": "wilburpowery",
+              "name": "Wilbur Powery "
+            }
+          },
+          {
+            "createdAt": "2020-12-28T14:43:52Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/26357771?v=4",
+              "login": "akaunting",
+              "name": "Akaunting"
+            }
+          },
+          {
+            "createdAt": "2020-12-28T23:14:09Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/2871897?u=89fd00ce7e9a0672f3e748ac3200d5f2911739c4&v=4",
+              "login": "RobertBoes",
+              "name": "Robert Boes"
+            }
+          },
+          {
+            "createdAt": "2021-01-02T16:53:20Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/18236969?u=ed66080e9c15e089a2d446da8698ea6ad948cd3a&v=4",
+              "login": "taylormaguire",
+              "name": "Taylor Maguire"
+            }
+          },
+          {
+            "createdAt": "2021-02-02T18:09:00Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/20573863?u=fb11119c0dd20a8bfda4fd458ae27ffa0f377950&v=4",
+              "login": "HazJ",
+              "name": "Haz"
+            }
+          },
+          {
+            "createdAt": "2021-02-16T10:46:05Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/5393965?u=7a6d373d753b0041596fdfcd35c57d95cc5b48bb&v=4",
+              "login": "GuidoHendriks",
+              "name": "Guido Hendriks"
+            }
+          },
+          {
+            "createdAt": "2021-02-19T22:29:09Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/3661610?v=4",
+              "login": "lucasromanojf",
+              "name": "Lucas Romano"
+            }
+          },
+          {
+            "createdAt": "2021-02-24T01:00:14Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/436173?v=4",
+              "login": "stephenhowells",
+              "name": "Stephen Howells"
+            }
+          },
+          {
+            "createdAt": "2021-03-10T00:21:31Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/74748875?v=4",
+              "login": "programodo",
+              "name": "Programodo"
+            }
+          },
+          {
+            "createdAt": "2021-03-15T16:36:04Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1929750?u=2580a0e6a510809d008a8bd6eca0afe11d4c9c68&v=4",
+              "login": "xyNNN",
+              "name": "Philipp Bräutigam"
+            }
+          },
+          {
+            "createdAt": "2021-03-19T10:04:43Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/151001?u=b812180d156e47df1a233a8b1b7812d99319541e&v=4",
+              "login": "vedovelli",
+              "name": "Fábio Vedovelli"
+            }
+          },
+          {
+            "createdAt": "2021-03-24T02:06:33Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/3442006?u=68bcf32be90927ef1ff7f6a2f9e9e60ae107d94b&v=4",
+              "login": "neilgilmour",
+              "name": "Neil Gilmour"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
