@@ -26,7 +26,30 @@ Pages are simply JavaScript components. There is nothing particularly special ab
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <layout title="Welcome">
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </layout>
+        </template>\n
+        <script>
+          import Layout from './Layout'\n
+          export default {
+            components: {
+              Layout,
+            },
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>
@@ -88,7 +111,41 @@ While not required, for most projects it makes sense to create a site layout tha
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <main>
+            <header>
+              <inertia-link href="/">Home</inertia-link>
+              <inertia-link href="/about">About</inertia-link>
+              <inertia-link href="/contact">Contact</inertia-link>
+            </header>
+            <article>
+              <slot />
+            </article>
+          </main>
+        </template>\n
+        <script>
+          export default {
+            props: {
+              title: String,
+            },
+            watch: {
+              title: {
+                immediate: true,
+                handler(title) {
+                  document.title = title
+                },
+              },
+            },
+          }
+        </script>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>
@@ -179,7 +236,31 @@ For example, maybe you have an audio player on a podcast website that you want t
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <div>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </div>
+        </template>\n
+        <script>
+          import Layout from './Layout'\n
+          export default {
+            // Using a render function
+            layout: (h, page) => h(Layout, [page]),\n
+            // Using the shorthand
+            layout: Layout,\n
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>
@@ -243,7 +324,36 @@ You can also create more complex layout arrangements using nested layouts.
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <div>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </div>
+        </template>\n
+        <script>
+          import SiteLayout from './SiteLayout'
+          import NestedLayout from './NestedLayout'\n
+          export default {
+            // Using a render function
+            layout: (h, page) => {
+              return h(SiteLayout, [
+                h(NestedLayout, [page]),
+              ])
+            },\n
+            // Using the shorthand
+            layout: [SiteLayout, NestedLayout],\n
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>
@@ -320,7 +430,21 @@ If you're using persistent layouts, it's possible to set a default page layout i
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        import Layout from './Layout'\n
+        resolveComponent: name => import(\`./Pages/\${name}\`)
+          .then(({ default: page }) => {
+            if (page.layout === undefined) {
+              page.layout = Layout
+            }
+            return page
+          }),
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         import Layout from './Layout'\n
@@ -371,7 +495,21 @@ You can even go a step further and conditionally set the default page layout bas
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        import Layout from './Layout'\n
+        resolveComponent: name => import(\`./Pages/\${name}\`)
+          .then(({ default: page }) => {
+            if (page.layout === undefined && !name.startsWith('Public/')) {
+              page.layout = Layout
+            }
+            return page
+          }),
+      `,
+    },
+    {
+      name: 'Vue 3',
       language: 'js',
       code: dedent`
         import Layout from './Layout'\n
@@ -422,7 +560,36 @@ While it's possible to pass title and meta tag props from pages to layouts (as i
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <template>
+          <layout>
+            <h1>Welcome</h1>
+            <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+          </layout>
+        </template>\n
+        <script>
+          import Layout from './Layout'\n
+          export default {
+            metaInfo() {
+              return {
+                title: \`Welcome \${this.user.name}\`,
+              }
+            },
+            components: {
+              Layout,
+            },
+            props: {
+              user: Object,
+            },
+          }
+        </script>
+      `,
+      description: "Don't forget to install and configure the Vue Meta package.",
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <template>

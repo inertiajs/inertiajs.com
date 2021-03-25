@@ -39,7 +39,15 @@ You can also preserve the scroll position with [Inertia links](/links) using the
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        <inertia-link href="/" preserve-scroll>Home</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'jsx',
       code: dedent`
         <inertia-link href="/" preserve-scroll>Home</inertia-link>

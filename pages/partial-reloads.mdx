@@ -46,7 +46,15 @@ It's also possible to perform partial reloads with Inertia links using the `only
 <TabbedCodeExamples
   examples={[
     {
-      name: 'Vue.js',
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+      `,
+      description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
+    },
+    {
+      name: 'Vue 3',
       language: 'twig',
       code: dedent`
         <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
@@ -127,4 +135,3 @@ When Inertia performs a visit, it will determine which data is required, and onl
     },
   ]}
 />
-
