@@ -354,6 +354,7 @@ To submit the form, use the `get`, `post`, `put`, `patch` and `delete` methods.
       name: 'Vue 2',
       language: 'js',
       code: dedent`
+        form.submit(method, url, options)
         form.get(url, options)
         form.post(url, options)
         form.put(url, options)
@@ -365,6 +366,7 @@ To submit the form, use the `get`, `post`, `put`, `patch` and `delete` methods.
       name: 'Vue 3',
       language: 'js',
       code: dedent`
+        form.submit(method, url, options)
         form.get(url, options)
         form.post(url, options)
         form.put(url, options)
@@ -376,7 +378,8 @@ To submit the form, use the `get`, `post`, `put`, `patch` and `delete` methods.
       name: 'React',
       language: 'js',
       code: dedent`
-        const { get, post, put, patch, delete: destroy } = useForm({ ... })\n
+        const { submit, get, post, put, patch, delete: destroy } = useForm({ ... })\n
+        submit(method, url, options)
         get(url, options)
         post(url, options)
         put(url, options)
