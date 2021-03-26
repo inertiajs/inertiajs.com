@@ -41,7 +41,7 @@ The server-side adapters provide a way to preassign shared data for each request
                     // Synchronously
                     'appName' => config('app.name'),\n
                     // Lazily
-                    'user' => fn () => $request->user()
+                    'auth.user' => fn () => $request->user()
                         ? $request->user()->only('id', 'name', 'email')
                         : null,
                 ]);
