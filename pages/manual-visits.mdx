@@ -50,7 +50,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           onProgress: progress => {},
           onSuccess: page => {},
           onError: errors => {},
-          onFinish: () => {},
+          onFinish: visit => {},
         })
       `,
     },
@@ -76,7 +76,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           onProgress: progress => {},
           onSuccess: page => {},
           onError: errors => {},
-          onFinish: () => {},
+          onFinish: visit => {},
         })
       `,
     },
@@ -102,7 +102,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           onProgress: progress => {},
           onSuccess: page => {},
           onError: errors => {},
-          onFinish: () => {},
+          onFinish: visit => {},
         })
       `,
     },
@@ -128,7 +128,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           onProgress: progress => {},
           onSuccess: page => {},
           onError: errors => {},
-          onFinish: () => {},
+          onFinish: visit => {},
         })
       `,
     },
@@ -365,7 +365,7 @@ Inertia.post('/users', data, {
   onSuccess: (page) => {},
   onError: (errors) => {},
   onCancel: () => {},
-  onFinish: () => {},
+  onFinish: visit => {},
 })
 ```
 
@@ -387,7 +387,7 @@ Inertia.post(url, {
       this.doAnotherThing()
     ])
   }
-  onFinish: () => {
+  onFinish: visit => {
     // This won't be called until doThing()
     // and doAnotherThing() have finished.
   },
@@ -423,7 +423,7 @@ Instead of using `finally()`, use the `onFinish()` callback.
 
 ```js
 Inertia.post('/profile', data, {
-  onFinish: () => {
+  onFinish: visit => {
     // Handle finish event
   },
 })
