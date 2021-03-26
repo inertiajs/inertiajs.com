@@ -1,0 +1,77 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia-svelte@v0.6.2',
+}
+
+<h1>inertia-svelte@v0.6.2</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on March 26, 2021</div>
+
+- Added form helper ([#558](https://github.com/inertiajs/inertia/pull/558), [#575](https://github.com/inertiajs/inertia/pull/575)).
+- Renamed link component to fix compilation conflicts ([#549](https://github.com/inertiajs/inertia/pull/549)).
+- Improved render component for nested layouts ([#529](https://github.com/inertiajs/inertia/pull/529)).
+
+## New form helper
+
+This release adds a new form helper to the Svelte adapter, similar to the existing form helpers in the Vue 2, Vue 3 and React adapters. This was contributed by [@mariojankovic](https://github.com/mariojankovic). It is designed to help reduce the amount of boilerplate needed for typical forms. Here's how to use it:
+
+```html
+<script>
+import { useForm } from '@inertiajs/inertia-svelte'
+
+import TextInput from './TextInput'
+import LoadingButton from './LoadingButton'
+
+let form = useForm({
+  name: null,
+  email: null,
+})
+
+function submit() {
+  $form.post('/users')
+}
+</script>
+
+<form on:submit|preventDefault={submit}>
+  <TextInput type="text" bind:value={$form.name} error="$form.errors.name" />
+  <TextInput type="text" bind:value={$form.email} error="$form.errors.email" />
+  <LoadingButton loading={$form.processing} type="submit">Submit</LoadingButton>
+</form>
+```
+
+The form helper also accepts a second "options" argument. This lets you set a form `key`, needed if there are multiple forms on the page. You can also disable the automatic remember behaviour by setting the `remember` option to `false`.
+
+```js
+let form = useForm({
+  email: null,
+  password: null,
+}, {
+  key: 'login',
+  remember: false,
+})
+```
+
+Here are a complete list of all the available form properties:
+
+- `form.errors`
+- `form.hasErrors`
+- `form.processing`
+- `form.progress`
+- `form.wasSuccessful`
+- `form.recentlySuccessful`
+
+And here is a complete list of all the available form methods:
+
+- `form.reset()`
+- `form.reset(...fields)`
+- `form.clearErrors()`
+- `form.clearErrors(...fields)`
+- `form.transform(callback)`
+- `form.submit(method, url, options)`
+- `form.get(url, options)`
+- `form.post(url, options)`
+- `form.put(url, options)`
+- `form.patch(url, options)`
+- `form.delete(url, options)`
