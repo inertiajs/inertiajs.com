@@ -14,6 +14,7 @@ export const meta = {
     { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
     { url: '#error-bags', name: 'Error bags' },
+    { url: '#file-uploads', name: 'File uploads' },
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#visit-cancellation', name: 'Visit cancellation' },
     { url: '#event-callbacks', name: 'Event callbacks' },
@@ -41,6 +42,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           only: [],
           headers: {},
           errorBag: null,
+          forceFormData: false,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
@@ -66,6 +68,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           only: [],
           headers: {},
           errorBag: null,
+          forceFormData: false,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
@@ -91,6 +94,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           only: [],
           headers: {},
           errorBag: null,
+          forceFormData: false,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
@@ -116,6 +120,7 @@ In addition to [creating links](/links), it's also possible to manually make Ine
           only: [],
           headers: {},
           errorBag: null,
+          forceFormData: false,
           onCancelToken: cancelToken => {},
           onCancel: () => {},
           onBefore: visit => {},
@@ -306,6 +311,18 @@ Inertia.post('/companies', data, {
 ```
 
 For more information, see the [validation](/validation#error-bags) page.
+
+## File uploads
+
+When making visits, Inertia automatically detects if the visit includes any files (even nested files), and then converts the data to a `FormData` object.
+
+If  you'd like the visit to always use a `FormData` object, you can force this using the `forceFormData` option.
+
+```js
+Inertia.post('/companies', data, {
+  forceFormData: true,
+})
+```
 
 ## Custom headers
 
