@@ -1,0 +1,64 @@
+import Layout from '../../components/Layout'
+
+export default Layout
+export const meta = {
+  title: 'inertia-vue3@v0.3.6',
+}
+
+<h1>inertia-vue3@v0.3.6</h1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on March 26, 2021</div>
+
+- Updated form helper to automatically remember form data ([#575](https://github.com/inertiajs/inertia/pull/575)).
+- Added new form helper options ([#575](https://github.com/inertiajs/inertia/pull/575)).
+- Add typescript definitions ([#502](https://github.com/inertiajs/inertia/pull/502)).
+- Updated form helper to ensure `preserveScroll` and `preserveState` callbacks have latest form data ([#410](https://github.com/inertiajs/inertia/pull/410)).
+- Fixed bug with self-closing Inertia links ([#306](https://github.com/inertiajs/inertia/pull/306)).
+
+## Automatic remembering of form data
+
+The form helper now automatically remembers form data and errors. Previously you had to do this manually:
+
+```js
+// Options API
+remember: 'form'
+
+// Composition API
+useRemember(useForm({ ... }))
+```
+
+Doing this automatically is not only easier, but it's also more in line with default browser behaviour.
+
+If you need to disable this behaviour, you can do that using the new `remember` form helper option (see below).
+
+## Form helper options
+
+The form helper now accepts a second "options" argument. This lets you set a form `key`, needed if there are multiple forms on the page. You can also disable the automatic remember behaviour by setting the `remember` option to `false`.
+
+```js
+let form = useForm({
+  email: null,
+  password: null,
+}, {
+  key: 'login',
+  remember: false,
+})
+```
+
+## Form visit callback improvements
+
+This release fixes a tricky, edge case issue with the form helper, where the `preserveState` and `preserveScroll` visit callbacks didn't have access to the updated form state until it was too late.
+
+```js
+preserveScroll: () => this.form.hasErrors, // old form values
+preserveState: () => this.form.hasErrors,  // old form values
+```
+
+The workaround was to use the `page` object passed to these callbacks instead. Unfortunately, this is kind of verbose.
+
+```js
+preserveScroll: (page) => Object.keys(page.props.errors).length > 0,
+preserveState: (page) => Object.keys(page.props.errors).length > 0,
+```
+
+This issue has now been corrected, and you can reference the form helper methods and properties directly within these callbacks without issue.
