@@ -132,6 +132,11 @@ const Nav = ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
+          <Link href="/file-uploads">
+            <a className={linkClass('/file-uploads')}>File uploads</a>
+          </Link>
+        </li>
+        <li className="md:pr-3">
           <Link href="/validation">
             <a className={linkClass('/validation')}>Validation</a>
           </Link>

@@ -314,15 +314,15 @@ For more information, see the [validation](/validation#error-bags) page.
 
 ## File uploads
 
-When making visits, Inertia automatically detects if the visit includes any files (even nested files), and then converts the data to a `FormData` object.
-
-If  you'd like the visit to always use a `FormData` object, you can force this using the `forceFormData` option.
+When making visits that include files, Inertia will automatically convert the request data into a `FormData` object. If you'd like the visit to always use a `FormData` object, you can force this using the `forceFormData` option.
 
 ```js
 Inertia.post('/companies', data, {
   forceFormData: true,
 })
 ```
+
+See the [file uploads](/file-uploads) page for more information.
 
 ## Custom headers
 
