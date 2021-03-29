@@ -310,7 +310,7 @@
           {
             "createdAt": "2020-06-30T18:01:25Z",
             "sponsorEntity": {
-              "avatarUrl": "https://avatars.githubusercontent.com/u/18613261?u=3fc60709e7652fb49dd36a146f2c31bc88cc72c8&v=4",
+              "avatarUrl": "https://avatars.githubusercontent.com/u/18613261?u=fa5b6961e544163122540ce7f71263254a79d58e&v=4",
               "login": "nckrtl",
               "name": "Nick"
             }
@@ -553,6 +553,70 @@
               "avatarUrl": "https://avatars.githubusercontent.com/u/3442006?u=68bcf32be90927ef1ff7f6a2f9e9e60ae107d94b&v=4",
               "login": "neilgilmour",
               "name": "Neil Gilmour"
+            }
+          },
+          {
+            "createdAt": "2021-03-25T00:48:47Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/58970?v=4",
+              "login": "davidhemphill",
+              "name": "David Hemphill"
+            }
+          },
+          {
+            "createdAt": "2021-03-26T11:00:36Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/68274157?v=4",
+              "login": "craigrileyuk",
+              "name": "Craig Riley"
+            }
+          },
+          {
+            "createdAt": "2021-03-26T22:33:36Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/29180903?u=8bac9a3e0caef2934870a4503302ccc7b0f08222&v=4",
+              "login": "dillingham",
+              "name": "Brian Dillingham"
+            }
+          },
+          {
+            "createdAt": "2021-03-28T06:06:13Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/2814277?u=d8ac11d005793c2a872c422de38120c242045016&v=4",
+              "login": "Olindn",
+              "name": null
+            }
+          },
+          {
+            "createdAt": "2021-03-28T20:15:41Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/42443219?u=94a84885b074e48dc380f3afc4c443297a7c7bfa&v=4",
+              "login": "camilbinas",
+              "name": "Camil Binas"
+            }
+          },
+          {
+            "createdAt": "2021-03-29T19:56:53Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/649677?u=c1ed65fb8e25237f6ea5e71e8c1a086fe760c5b8&v=4",
+              "login": "nhedger",
+              "name": "Nicolas Hedger"
+            }
+          },
+          {
+            "createdAt": "2021-03-29T20:53:19Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/3351013?u=5fb88ce570f8b4f5a45be9e857dc7547f1ded171&v=4",
+              "login": "bjorkgard",
+              "name": "Nathanael Björkgård"
+            }
+          },
+          {
+            "createdAt": "2021-03-29T21:15:04Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/13042804?u=47262cb31e2954001454451f87014ac7d7472dfb&v=4",
+              "login": "jerredhurst",
+              "name": "Jerred Hurst"
             }
           }
         ]
