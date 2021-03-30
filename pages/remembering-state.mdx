@@ -10,6 +10,7 @@ export const meta = {
     { url: '#top', name: 'Introduction' },
     { url: '#saving-local-state', name: 'Saving local state' },
     { url: '#multiple-components', name: 'Multiple components' },
+    { url: '#manually-saving-state', name: 'Manually saving state' },
   ],
 }
 
@@ -256,3 +257,19 @@ If you have multiple instances of the same component on the page using the remem
     },
   ]}
 />
+
+## Manually saving state
+
+The `remember` property in Vue 2, and the `useRemember` hook in Vue 3, React and Svelte all watch for data changes, and automatically save those changes to the history state, and then restore it on page load.
+
+However, it's possible to also manage this manually using the underling `remember()` and `restore()` methods in Inertia.
+
+```js
+import { Inertia } from '@inertiajs/inertia'
+
+// Save local component state to history state
+Inertia.remember(data, 'my-key')
+
+// Restore local component state from history state
+let data = Inertia.restore('my-key')
+```
