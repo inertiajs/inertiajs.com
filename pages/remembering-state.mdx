@@ -218,11 +218,11 @@ If you have multiple instances of the same component on the page using the remem
       code: dedent`
         import { useRemember } from '@inertiajs/inertia-vue3'\n
         export default {
-          setup() {
+          setup(props) {
             const form = useRemember({
                 first_name: null,
                 last_name: null,
-            }, \`Users/Edit:\${this.user.id}\`)\n
+            }, \`Users/Edit:\${props.user.id}\`)\n
             return { form }
           },
         }
