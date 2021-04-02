@@ -78,7 +78,16 @@ In order for your server-side validation errors to be available client-side, you
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        # todo
+        class UsersController < ApplicationController
+          def create
+            user = User.create(user_params)\n
+            if user.persisted?
+              redirect_to users_path
+            else
+              redirect_to new_user_path, inertia: { errors: user.errors }
+            end
+          end
+        end
       `,
     },
   ]}
