@@ -722,7 +722,7 @@ To reset the form values back to their original values, use the `reset()` method
   ]}
 />
 
-By default form helper data and errors are automatically [remembered](/remembering-state) in history state. If you need to disable this behaviour, you can do that using the form helper `remember` option.
+To have form helper data and errors automatically [remembered](/remembering-state) in history state, you can provide a unique form key as the first argument when instantiating your form.
 
 <TabbedCodeExamples
   examples={[
@@ -730,9 +730,8 @@ By default form helper data and errors are automatically [remembered](/rememberi
       name: 'Vue 2',
       language: 'js',
       code: dedent`
-        this.$inertia.form(data, {
-          remember: false,
-        })
+        this.$inertia.form('CreateUser', data)
+        this.$inertia.form(\`EditUser:\${this.user.id}\`, data)
       `,
     },
     {
@@ -740,9 +739,8 @@ By default form helper data and errors are automatically [remembered](/rememberi
       language: 'js',
       code: dedent`
         import { useForm } from '@inertiajs/inertia-vue3'\n
-        const form = useForm(data, {
-          remember: false,
-        })
+        const form = useForm('CreateUser', data)
+        const form = useForm(\`EditUser:\${user.id}\`, data)
       `,
     },
     {
@@ -750,9 +748,8 @@ By default form helper data and errors are automatically [remembered](/rememberi
       language: 'js',
       code: dedent`
         import { useForm } from '@inertiajs/inertia-react'\n
-        const form = useForm(data, {
-          remember: false,
-        })
+        const form = useForm('CreateUser', data)
+        const form = useForm(\`EditUser:\${user.id}\`, data)
       `,
     },
     {
@@ -760,61 +757,12 @@ By default form helper data and errors are automatically [remembered](/rememberi
       language: 'js',
       code: dedent`
         import { useForm } from '@inertiajs/inertia-svelte'\n
-        const form = useForm(data, {
-          remember: false,
-        })
+        const form = useForm('CreateUser', data)
+        const form = useForm(\`EditUser:\${user.id}\`, data)
       `,
     },
   ]}
 />
-
-If your page contains multiple components that use the remember functionality, you need to provide a unique key for each component, so that Inertia knows which data to restore to each component. You can do that using the form helper `key` option.
-
-<TabbedCodeExamples
-  examples={[
-    {
-      name: 'Vue 2',
-      language: 'js',
-      code: dedent`
-        this.$inertia.form(data, {
-          key: 'Auth/Login'
-        })
-      `,
-    },
-    {
-      name: 'Vue 3',
-      language: 'js',
-      code: dedent`
-        import { useForm } from '@inertiajs/inertia-vue3'\n
-        const form = useForm(data, {
-          key: 'Auth/Login'
-        })
-      `,
-    },
-    {
-      name: 'React',
-      language: 'js',
-      code: dedent`
-        import { useForm } from '@inertiajs/inertia-react'\n
-        const form = useForm(data, {
-          key: 'Auth/Login'
-        })
-      `,
-    },
-    {
-      name: 'Svelte',
-      language: 'js',
-      code: dedent`
-        import { useForm } from '@inertiajs/inertia-svelte'\n
-        const form = useForm(data, {
-          key: 'Auth/Login'
-        })
-      `,
-    },
-  ]}
-/>
-
-You can read more about remembering multiple components on the [remembering state](/remembering-state#multiple-components) page.
 
 ## File uploads
 
