@@ -300,14 +300,6 @@
             }
           },
           {
-            "createdAt": "2020-06-30T14:36:16Z",
-            "sponsorEntity": {
-              "avatarUrl": "https://avatars.githubusercontent.com/u/38673?u=a4f7107396742abc1400c16d76b47e8543622262&v=4",
-              "login": "francescomugnai",
-              "name": "Francesco Mugnai"
-            }
-          },
-          {
             "createdAt": "2020-06-30T18:01:25Z",
             "sponsorEntity": {
               "avatarUrl": "https://avatars.githubusercontent.com/u/18613261?u=fa5b6961e544163122540ce7f71263254a79d58e&v=4",
@@ -460,14 +452,6 @@
             }
           },
           {
-            "createdAt": "2020-12-07T16:20:52Z",
-            "sponsorEntity": {
-              "avatarUrl": "https://avatars.githubusercontent.com/u/15817188?u=49d1d7579915fbfc7dd29b736ae4dbd0fcfc8891&v=4",
-              "login": "wilburpowery",
-              "name": "Wilbur Powery "
-            }
-          },
-          {
             "createdAt": "2020-12-28T14:43:52Z",
             "sponsorEntity": {
               "avatarUrl": "https://avatars.githubusercontent.com/u/26357771?v=4",
@@ -494,7 +478,7 @@
           {
             "createdAt": "2021-02-02T18:09:00Z",
             "sponsorEntity": {
-              "avatarUrl": "https://avatars.githubusercontent.com/u/20573863?u=fb11119c0dd20a8bfda4fd458ae27ffa0f377950&v=4",
+              "avatarUrl": "https://avatars.githubusercontent.com/u/20573863?u=dfdc95baeb12809c21a60de747163055d9e08132&v=4",
               "login": "HazJ",
               "name": "Haz"
             }
@@ -617,6 +601,30 @@
               "avatarUrl": "https://avatars.githubusercontent.com/u/13042804?u=47262cb31e2954001454451f87014ac7d7472dfb&v=4",
               "login": "jerredhurst",
               "name": "Jerred Hurst"
+            }
+          },
+          {
+            "createdAt": "2021-03-30T18:32:12Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/1648007?v=4",
+              "login": "bmikulic",
+              "name": null
+            }
+          },
+          {
+            "createdAt": "2021-04-01T12:50:49Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/6431835?u=77aa305168999c254e9d1dbc987a11502131f223&v=4",
+              "login": "brianakidd",
+              "name": "Brian Kidd"
+            }
+          },
+          {
+            "createdAt": "2021-04-01T22:11:32Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/15585?v=4",
+              "login": "mixr",
+              "name": "Reiner Dieterich"
             }
           }
         ]
