@@ -220,14 +220,6 @@
             }
           },
           {
-            "createdAt": "2020-02-06T22:22:36Z",
-            "sponsorEntity": {
-              "avatarUrl": "https://avatars.githubusercontent.com/u/260253?v=4",
-              "login": "jkudish",
-              "name": "Joey Kudish"
-            }
-          },
-          {
             "createdAt": "2020-02-21T09:00:26Z",
             "sponsorEntity": {
               "avatarUrl": "https://avatars.githubusercontent.com/u/2301050?u=32f9c06c712a63545aefebd56a114b348d119e78&v=4",
@@ -361,14 +353,6 @@
               "avatarUrl": "https://avatars.githubusercontent.com/u/5927337?v=4",
               "login": "goaround",
               "name": "Johannes Kinast"
-            }
-          },
-          {
-            "createdAt": "2020-10-06T12:14:34Z",
-            "sponsorEntity": {
-              "avatarUrl": "https://avatars.githubusercontent.com/u/5164617?u=02394a01181698cb9a3272e9efbf93c9411f4d07&v=4",
-              "login": "lostdesign",
-              "name": "wellá"
             }
           },
           {
@@ -625,6 +609,30 @@
               "avatarUrl": "https://avatars.githubusercontent.com/u/15585?v=4",
               "login": "mixr",
               "name": "Reiner Dieterich"
+            }
+          },
+          {
+            "createdAt": "2021-04-06T14:57:26Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/46318243?u=bc1635220f1201e3c505808ca1e0442dbd1a3e1e&v=4",
+              "login": "njones101",
+              "name": null
+            }
+          },
+          {
+            "createdAt": "2021-04-07T08:11:23Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/585890?v=4",
+              "login": "goyote",
+              "name": "Goyo"
+            }
+          },
+          {
+            "createdAt": "2021-04-07T12:33:36Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/39373080?u=37e51891c98a0902bbe9ef16b322276f5f82fb8b&v=4",
+              "login": "SteadfastCollective",
+              "name": "Steadfast Collective"
             }
           }
         ]
