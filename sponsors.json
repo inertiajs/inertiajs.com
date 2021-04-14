@@ -550,7 +550,7 @@
           {
             "createdAt": "2021-03-28T06:06:13Z",
             "sponsorEntity": {
-              "avatarUrl": "https://avatars.githubusercontent.com/u/2814277?u=d8ac11d005793c2a872c422de38120c242045016&v=4",
+              "avatarUrl": "https://avatars.githubusercontent.com/u/2814277?u=764a754c16f3d8a3c78bd439a884a64620408637&v=4",
               "login": "Olindn",
               "name": null
             }
@@ -633,6 +633,38 @@
               "avatarUrl": "https://avatars.githubusercontent.com/u/39373080?u=37e51891c98a0902bbe9ef16b322276f5f82fb8b&v=4",
               "login": "SteadfastCollective",
               "name": "Steadfast Collective"
+            }
+          },
+          {
+            "createdAt": "2021-04-09T04:43:58Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/9354830?v=4",
+              "login": "isaackearl",
+              "name": "Isaac Earl"
+            }
+          },
+          {
+            "createdAt": "2021-04-11T16:46:43Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/66511791?u=3440276260c4e0c36b3ee210e1ecda6a4c94fade&v=4",
+              "login": "ollivr",
+              "name": "Ollivr"
+            }
+          },
+          {
+            "createdAt": "2021-04-12T19:45:17Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/82412352?v=4",
+              "login": "financeirotalenses",
+              "name": null
+            }
+          },
+          {
+            "createdAt": "2021-04-14T17:39:48Z",
+            "sponsorEntity": {
+              "avatarUrl": "https://avatars.githubusercontent.com/u/9700987?v=4",
+              "login": "mikestechshop",
+              "name": "Mike's Tech Shop"
             }
           }
         ]
