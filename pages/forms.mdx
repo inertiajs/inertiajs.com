@@ -722,6 +722,42 @@ To reset the form values back to their original values, use the `reset()` method
   ]}
 />
 
+To cancel a form submission, use the `cancel()` method.
+
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        this.form.cancel()
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        form.cancel()
+      `,
+    },
+    {
+      name: 'React',
+      language: 'js',
+      code: dedent`
+        const { cancel } = useForm({ ... })\n
+        cancel()
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'js',
+      code: dedent`
+        $form.cancel()
+      `,
+    },
+  ]}
+/>
+
 To have form helper data and errors automatically [remembered](/remembering-state) in history state, you can provide a unique form key as the first argument when instantiating your form.
 
 <TabbedCodeExamples
