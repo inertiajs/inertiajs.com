@@ -84,7 +84,11 @@ But, this isn't a great user experience. A better way to handle these errors is 
       name: 'Rails',
       language: 'ruby',
       code: dedent`
-        # todo
+        class ApplicationController < ActionController::Base
+          rescue_from ActionController::InvalidAuthenticityToken do
+            redirect_back fallback_location: '/', notice: 'The page expired, please try again.'
+          end
+        end
       `,
     },
   ]}
