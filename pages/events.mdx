@@ -59,20 +59,71 @@ let removeStartEventListener = Inertia.on('start', (event) => {
 removeStartEventListener()
 ```
 
-Combined with a destroyed hook, you can automatically remove the event listener when you navigate to a different page.
+Combined with hooks, you can automatically remove the event listener on component unmount.
 
-```js
-export default {
-  mounted() {
-    this.$once(
-      'hook:destroyed',
-      Inertia.on('start', (event) => {
-        console.log(`Starting a visit to ${event.detail.visit.url}`)
-      })
-    )
-  },
-}
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'jsx',
+      code: dedent`
+        export default {
+          mounted() {
+            this.$once(
+              'hook:destroyed',
+              this.$inertia.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            )
+          },
+        }
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'jsx',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'
+        import { onUnmounted } from 'vue'\n
+        export default {
+          setup() {
+            onUnmounted(
+              Inertia.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            )
+          },
+        }
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'
+        import React, { useEffect } from 'react'\n
+        useEffect(() => {
+          return Inertia.on('start', (event) => {
+            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+          })
+        }, [])
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'jsx',
+      code: dedent`
+        import { Inertia } from '@inertiajs/inertia'
+        import { onMount } from 'svelte'\n
+        onMount(() => {
+          return Inertia.on('start', (event) => {
+            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+          })
+        })
+      `,
+    },
+  ]}
+/>
 
 Alternatively, if you're using native browser events, you can remove the event listener using `removeEventListener()`.
 
