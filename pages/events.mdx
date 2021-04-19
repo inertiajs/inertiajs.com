@@ -73,7 +73,7 @@ Combined with hooks, you can automatically remove the event listener on componen
             this.$once(
               'hook:destroyed',
               Inertia.on('start', (event) => {
-                console.log(`Starting a visit to ${event.detail.visit.url}`)
+                console.log(\`Starting a visit to ${event.detail.visit.url}\`);
               })
             )
           },
@@ -91,7 +91,7 @@ Combined with hooks, you can automatically remove the event listener on componen
             this.$once(
               'hook:destroyed',
               Inertia.on('start', (event) => {
-                console.log(`Starting a visit to ${event.detail.visit.url}`)
+                console.log(\`Starting a visit to ${event.detail.visit.url}\`);
               })
             )
           },
@@ -105,7 +105,7 @@ Combined with hooks, you can automatically remove the event listener on componen
       code: dedent`
         useEffect(() => {
           return Inertia.on('start', (event) => {
-            console.log(`Starting a visit to ${event.detail.visit.url}`)
+            console.log(\`Starting a visit to ${event.detail.visit.url}\`);
           });
         }, []);
       `,
@@ -118,7 +118,7 @@ Combined with hooks, you can automatically remove the event listener on componen
           import { onMount } from 'svelte';
           onMount(() => {
             return Inertia.on('start', (event) => {
-              console.log(`Starting a visit to ${event.detail.visit.url}`)
+              console.log(\`Starting a visit to ${event.detail.visit.url}\`)
             });
           });
         </script>
