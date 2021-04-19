@@ -65,63 +65,61 @@ Combined with hooks, you can automatically remove the event listener on componen
   examples={[
     {
       name: 'Vue 2',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
-        <script>
         export default {
           mounted() {
             this.$once(
               'hook:destroyed',
-              Inertia.on('start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`);
+              this.$inertia.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
             )
           },
         }
-        </script>
       `,
     },
     {
       name: 'Vue 3',
-      language: 'twig',
+      language: 'jsx',
       code: dedent`
-        <script>
+        import { Inertia } from '@inertiajs/inertia'
+        import { onUnmounted } from 'vue'\n
         export default {
-          mounted() {
-            this.$once(
-              'hook:destroyed',
+          setup() {
+            onUnmounted(
               Inertia.on('start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`);
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
             )
           },
         }
-        </script>
       `,
     },
     {
       name: 'React',
       language: 'jsx',
       code: dedent`
+        import { Inertia } from '@inertiajs/inertia'
+        import React, { useEffect } from 'react'\n
         useEffect(() => {
           return Inertia.on('start', (event) => {
-            console.log(\`Starting a visit to \${event.detail.visit.url}\`);
-          });
-        }, []);
+            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+          })
+        }, [])
       `,
     },
     {
       name: 'Svelte',
-      language: 'html',
+      language: 'jsx',
       code: dedent`
-        <script>
-          import { onMount } from 'svelte';
-          onMount(() => {
-            return Inertia.on('start', (event) => {
-              console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-            });
-          });
-        </script>
+        import { Inertia } from '@inertiajs/inertia'
+        import { onMount } from 'svelte'\n
+        onMount(() => {
+          return Inertia.on('start', (event) => {
+            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+          })
+        })
       `,
     },
   ]}
