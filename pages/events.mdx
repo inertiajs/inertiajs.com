@@ -59,20 +59,73 @@ let removeStartEventListener = Inertia.on('start', (event) => {
 removeStartEventListener()
 ```
 
-Combined with a destroyed hook, you can automatically remove the event listener when you navigate to a different page.
+Combined with hooks, you can automatically remove the event listener on component unmount.
 
-```js
-export default {
-  mounted() {
-    this.$once(
-      'hook:destroyed',
-      Inertia.on('start', (event) => {
-        console.log(`Starting a visit to ${event.detail.visit.url}`)
-      })
-    )
-  },
-}
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'twig',
+      code: dedent`
+        <script>
+        export default {
+          mounted() {
+            this.$once(
+              'hook:destroyed',
+              Inertia.on('start', (event) => {
+                console.log(`Starting a visit to ${event.detail.visit.url}`)
+              })
+            )
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'twig',
+      code: dedent`
+        <script>
+        export default {
+          mounted() {
+            this.$once(
+              'hook:destroyed',
+              Inertia.on('start', (event) => {
+                console.log(`Starting a visit to ${event.detail.visit.url}`)
+              })
+            )
+          },
+        }
+        </script>
+      `,
+    },
+    {
+      name: 'React',
+      language: 'jsx',
+      code: dedent`
+        useEffect(() => {
+          return Inertia.on('start', (event) => {
+            console.log(`Starting a visit to ${event.detail.visit.url}`)
+          });
+        }, []);
+      `,
+    },
+    {
+      name: 'Svelte',
+      language: 'html',
+      code: dedent`
+        <script>
+          import { onMount } from 'svelte';
+          onMount(() => {
+            return Inertia.on('start', (event) => {
+              console.log(`Starting a visit to ${event.detail.visit.url}`)
+            });
+          });
+        </script>
+      `,
+    },
+  ]}
+/>
 
 Alternatively, if you're using native browser events, you can remove the event listener using `removeEventListener()`.
 
