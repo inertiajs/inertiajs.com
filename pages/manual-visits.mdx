@@ -377,6 +377,15 @@ Inertia.delete(`/users/${user.id}`, {
 })
 ```
 
+The `onError()` callback is fired when the Inertia response contains a non empty `errors` prop. It won't fire when a request returns an error response code. If you want to intercept non 200 error codes check the [Error handling section](https://inertiajs.com/error-handling) of the docs.
+
+
+```js
+Inertia.post(`/users/${user.id}`, {
+  onError: () => alert('Please check your fields.'),
+})
+```
+
 It's also possible to return a promise from the `onSuccess()` and `onError()` callbacks. This will delay the "finish" event until the promise has resolved.
 
 ```js
