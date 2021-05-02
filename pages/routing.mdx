@@ -105,9 +105,27 @@ Another option is to make your route definitions available client-side as JSON, 
 
 If you're using Laravel, the <a href="https://github.com/tightenco/ziggy">Ziggy</a> library does this for you automatically via a global `route()` function. If you're using Ziggy with Vue, it's helpful to make this function available as a custom `$route` property so you can use it directly in your templates.
 
-```js
-Vue.prototype.$route = route
-```
+<TabbedCodeExamples
+  examples={[
+    {
+      name: 'Vue 2',
+      language: 'js',
+      code: dedent`
+        Vue.prototype.$route = route
+      `,
+    },
+    {
+      name: 'Vue 3',
+      language: 'js',
+      code: dedent`
+        const app = createApp({
+          // init app and resolve components...
+        })
+        app.config.globalProperties.$route = route
+      `,
+    }
+  ]}
+/>
 
 ```html
 <inertia-link :href="$route('users.create')">Create User</inertia-link>
