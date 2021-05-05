@@ -1030,7 +1030,7 @@
             "node": {
               "createdAt": "2021-04-21T08:01:10Z",
               "sponsorEntity": {
-                "avatarUrl": "https://avatars.githubusercontent.com/u/2213104?v=4",
+                "avatarUrl": "https://avatars.githubusercontent.com/u/2213104?u=5bd31ba23b43363ab5cefc5a8a791b747c1cab13&v=4",
                 "login": "a-botermans",
                 "name": "Aurélien Botermans"
               }
@@ -1157,6 +1157,39 @@
               }
             },
             "cursor": "MTA1"
+          },
+          {
+            "node": {
+              "createdAt": "2021-05-03T09:55:02Z",
+              "sponsorEntity": {
+                "avatarUrl": "https://avatars.githubusercontent.com/u/30417702?v=4",
+                "login": "jpeters8889",
+                "name": "Jamie Peters"
+              }
+            },
+            "cursor": "MTA2"
+          },
+          {
+            "node": {
+              "createdAt": "2021-05-04T10:55:03Z",
+              "sponsorEntity": {
+                "avatarUrl": "https://avatars.githubusercontent.com/u/704020?u=7ac6cea59365243eb20dc5b0f54d5b080ec66a81&v=4",
+                "login": "desaintflorent",
+                "name": "Thibaut"
+              }
+            },
+            "cursor": "MTA3"
+          },
+          {
+            "node": {
+              "createdAt": "2021-05-04T16:25:35Z",
+              "sponsorEntity": {
+                "avatarUrl": "https://avatars.githubusercontent.com/u/1706381?u=de24389b783de3a80216610aa138903f367743ab&v=4",
+                "login": "thetutlage",
+                "name": "Harminder Virk"
+              }
+            },
+            "cursor": "MTA4"
           }
         ]
       }
