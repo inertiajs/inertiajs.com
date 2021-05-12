@@ -294,7 +294,7 @@ Since working with forms is so common, Inertia comes with a form helper designed
         const { data, setData, post, processing, errors } = useForm({
           email: '',
           password: '',
-          remember: '',
+          remember: false,
         })\n
         function submit(e) {
           e.preventDefault()
@@ -306,7 +306,7 @@ Since working with forms is so common, Inertia comes with a form helper designed
             {errors.email && <div>{errors.email}</div>}
             <input type="password" value={data.password} onChange={e => setData('password', e.target.value)} />
             {errors.password && <div>{errors.password}</div>}
-            <input type="checkbox" value={data.remember} onChange={e => setData('remember', e.target.value)} /> Remember Me
+            <input type="checkbox" checked={data.remember} onChange={e => setData('remember', e.target.checked)} /> Remember Me
             <button type="submit" disabled={processing}>Login</button>
           </form>
         )
