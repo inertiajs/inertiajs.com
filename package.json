@@ -1,24 +1,28 @@
 {
-  "scripts": {
-    "dev": "next",
-    "prod": "next build && next export",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@emotion/babel-preset-css-prop": "^10.0.27",
-    "@emotion/core": "^10.0.35",
-    "@fullhuman/postcss-purgecss": "^1.2.0",
-    "@mdx-js/loader": "^1.6.16",
-    "@next/mdx": "^9.5.2",
-    "@zeit/next-css": "^1.0.1",
-    "autoprefixer": "^9.8.6",
-    "dedent-js": "^1.0.1",
-    "mousetrap": "^1.6.5",
-    "next": "^9.5.2",
-    "postcss-nested": "^4.2.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-syntax-highlighter": "^12.2.1",
-    "tailwindcss": "^1.6.3"
-  }
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "dependencies": {
+        "@babel/preset-react": "^7.13.13",
+        "@inertiajs/inertia": "^0.8.7",
+        "@inertiajs/inertia-react": "^0.5.12",
+        "autoprefixer": "^10.2.5",
+        "axios": "^0.21",
+        "dedent-js": "^1.0.1",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "mousetrap": "^1.6.5",
+        "postcss": "^8.1.14",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-syntax-highlighter": "^12.2.1",
+        "tailwindcss": "^1.6.3"
+    }
 }

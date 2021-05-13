@@ -1,0 +1,73 @@
+import Layout from '../../components/Layout'
+
+const meta = {
+  title: 'inertia-vue@v0.5.6',
+}
+
+<H1>inertia-vue@v0.5.6</H1>
+
+<div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on March 26, 2021</div>
+
+- Updated form helper to automatically remember form data ([#575](https://github.com/inertiajs/inertia/pull/575)).
+- Added new form helper options ([#575](https://github.com/inertiajs/inertia/pull/575)).
+- Fixed bug with remembering `null` form data ([#417](https://github.com/inertiajs/inertia/issues/417), [#575](https://github.com/inertiajs/inertia/pull/575)).
+- Fixed bug with accessing form state in visit callbacks ([#410](https://github.com/inertiajs/inertia/pull/410)).
+- Fixed bug with deep cloning default form data ([#455](https://github.com/inertiajs/inertia/issues/455), [#575](https://github.com/inertiajs/inertia/pull/575)).
+- Fixed bug with remembering array form values ([#552](https://github.com/inertiajs/inertia/issues/552), [#575](https://github.com/inertiajs/inertia/pull/575)).
+- Fixed bug with resetting array form values ([#553](https://github.com/inertiajs/inertia/issues/553), [#575](https://github.com/inertiajs/inertia/pull/575)).
+- Added Cypress test suite ([#395](https://github.com/inertiajs/inertia/pull/395)).
+
+<H2>Automatic remembering of form data</H2>
+
+The form helper now automatically remembers form data and errors. Previously you had to do this manually:
+
+```js
+remember: 'form'
+```
+
+Doing this automatically is not only easier, but it's also more in line with default browser behaviour.
+
+If you need to disable this behaviour, you can do that using the new `remember` form helper option (see below).
+
+<H2>Form helper options</H2>
+
+The form helper now accepts a second "options" argument. This lets you set a form `key`, needed if there are multiple forms on the page. You can also disable the automatic remember behaviour by setting the `remember` option to `false`.
+
+```js
+this.$inertia.form({
+  email: null,
+  password: null,
+}, {
+  key: 'login',
+  remember: false,
+})
+```
+
+<H2>Fixed issue with accessing form state in visit callbacks</H2>
+
+This release fixes a tricky, edge case issue with the form helper, where the `preserveState` and `preserveScroll` visit callbacks didn't have access to the updated form state until it was too late.
+
+```js
+preserveScroll: () => this.form.hasErrors, // old form values
+preserveState: () => this.form.hasErrors,  // old form values
+```
+
+The workaround was to use the `page` object passed to these callbacks instead. Unfortunately, this is kind of verbose.
+
+```js
+preserveScroll: (page) => Object.keys(page.props.errors).length > 0,
+preserveState: (page) => Object.keys(page.props.errors).length > 0,
+```
+
+This issue has now been corrected, and you can reference the form helper methods and properties directly within these callbacks without issue.
+
+const Page = () => {
+  return (
+    <>
+    </>
+  )
+}
+
+Page.layout = (page) => <Layout children={page} meta={meta} />
+
+export default Page
