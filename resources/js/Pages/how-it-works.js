@@ -1,10 +1,5 @@
 import dedent from 'dedent-js'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import Layout from '../Components/Layout'
-import Strong from '../Components/Strong'
-import InlineCode from '../Components/InlineCode'
+import { A, Code, H1, Layout, P, Strong } from '../Components'
 
 const meta = {
   title: 'How it works',
@@ -31,10 +26,10 @@ const Page = () => {
       </P>
       <P>
         At its core Inertia is essentially a client-side routing library. It allows you to make page visits without
-        forcing a full page reload. This is done using the <InlineCode>{`<inertia-link>`}</InlineCode> component, a
-        light wrapper around a normal anchor link. When you click an Inertia link, Inertia intercepts the click and
-        makes the visit via XHR instead. Worth noting, you can also make these visits programmatically in JavaScript
-        using <InlineCode>Inertia.visit()</InlineCode>.
+        forcing a full page reload. This is done using the <Code>{`<inertia-link>`}</Code> component, a light wrapper
+        around a normal anchor link. When you click an Inertia link, Inertia intercepts the click and makes the visit
+        via XHR instead. Worth noting, you can also make these visits programmatically in JavaScript using{' '}
+        <Code>Inertia.visit()</Code>.
       </P>
       <P>
         When Inertia makes an XHR visit, the server detects that it's an Inertia visit, and instead of returning a full

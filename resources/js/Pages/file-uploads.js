@@ -1,13 +1,5 @@
 import dedent from 'dedent-js'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import Code from '../Components/Code'
-import Layout from '../Components/Layout'
-import Notice from '../Components/Notice'
-import InlineCode from '../Components/InlineCode'
-import TabbedCode from '../Components/TabbedCode'
+import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'File uploads',
@@ -25,34 +17,33 @@ const Page = () => {
       <H2>FormData conversion</H2>
       <P>
         When making visits that include files (even nested files), Inertia will automatically convert the request data
-        into a <InlineCode>FormData</InlineCode> object. This is necessary, since that's what's required to submit a{' '}
-        <InlineCode>multipart/form-data</InlineCode>
-        request via XHR.
+        into a <Code>FormData</Code> object. This is necessary, since that's what's required to submit a{' '}
+        <Code>multipart/form-data</Code> request via XHR.
       </P>
       <P>
-        If you'd like the visit to always use a <InlineCode>FormData</InlineCode> object, you can force this using the{' '}
-        <InlineCode>forceFormData</InlineCode> option.
+        If you'd like the visit to always use a <Code>FormData</Code> object, you can force this using the{' '}
+        <Code>forceFormData</Code> option.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           Inertia.post('/users', data, {
             forceFormData: true,
           })
         `}
       />
       <P>
-        You can learn more about the <InlineCode>FormData</InlineCode> interface{' '}
+        You can learn more about the <Code>FormData</Code> interface{' '}
         <A href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">here</A>.
       </P>
       <Notice>
         Note, prior to <a href="/releases/inertia-0.8.0">version 0.8.0</a>, Inertia did not automatically convert
-        requests to <InlineCode>FormData</InlineCode>, and you'll need to manually do this.
+        requests to <Code>FormData</Code>, and you'll need to manually do this.
       </Notice>
       <H2>File upload example</H2>
       <P>
-        Here is an example of uploading a file with Inertia using a form. This example includes both a{' '}
-        <InlineCode>name</InlineCode> text input and an <InlineCode>avatar</InlineCode> file input.
+        Here is an example of uploading a file with Inertia using a form. This example includes both a <Code>name</Code>{' '}
+        text input and an <Code>avatar</Code> file input.
       </P>
       <TabbedCode
         examples={[
@@ -182,22 +173,22 @@ const Page = () => {
       </P>
       <H2>Multipart limitations</H2>
       <P>
-        Uploading files using a <InlineCode>multipart/form-data</InlineCode> request is not natively supported in some
-        languages for the <InlineCode>put</InlineCode>,<InlineCode>patch</InlineCode> or <InlineCode>delete</InlineCode>{' '}
-        methods. The workaround here is to simply upload files using <InlineCode>post</InlineCode> instead.
+        Uploading files using a <Code>multipart/form-data</Code> request is not natively supported in some languages for
+        the <Code>put</Code>,<Code>patch</Code> or <Code>delete</Code> methods. The workaround here is to simply upload
+        files using <Code>post</Code> instead.
       </P>
       <P>
         Some frameworks, such as <a href="https://laravel.com/docs/8.x/routing#form-method-spoofing">Laravel</a> and{' '}
         <a href="https://guides.rubyonrails.org/form_helpers.html#how-do-forms-with-patch-put-or-delete-methods-work-questionmark">
           Rails
         </a>
-        , support form method spoofing, which allows you to upload the files using <InlineCode>post</InlineCode>, but
-        have the framework handle the request as a <InlineCode>put</InlineCode> or <InlineCode>patch</InlineCode>{' '}
-        request. This is done by including a <InlineCode>_method</InlineCode> attribute in the data of your request.
+        , support form method spoofing, which allows you to upload the files using <Code>post</Code>, but have the
+        framework handle the request as a <Code>put</Code> or <Code>patch</Code> request. This is done by including a{' '}
+        <Code>_method</Code> attribute in the data of your request.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           Inertia.post(\`/users/\${user.id}\`, {
             _method: 'put',
             avatar: form.avatar,

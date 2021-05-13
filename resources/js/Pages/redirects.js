@@ -1,10 +1,5 @@
 import dedent from 'dedent-js'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import Layout from '../Components/Layout'
-import InlineCode from '../Components/InlineCode'
-import TabbedCode from '../Components/TabbedCode'
+import { Code, H1, H2, Layout, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Redirects',
@@ -20,8 +15,8 @@ const Page = () => {
     <>
       <H1>Redirects</H1>
       <P>
-        When making a non-GET Inertia request, via <InlineCode>{`<inertia-link>`}</InlineCode> or manually, be sure to
-        always respond with a proper Inertia response.
+        When making a non-GET Inertia request, via <Code>{`<inertia-link>`}</Code> or manually, be sure to always
+        respond with a proper Inertia response.
       </P>
       <P>
         For example, if you're creating a new user, have your "store" endpoint return a redirect back to a standard GET
@@ -76,18 +71,16 @@ const Page = () => {
       />
       <H2>303 response code</H2>
       <P>
-        Note, when redirecting after a <InlineCode>PUT</InlineCode>, <InlineCode>PATCH</InlineCode> or{' '}
-        <InlineCode>DELETE</InlineCode> request you must use a <InlineCode>303</InlineCode> response code, otherwise the
-        subsequent request will not be treated as a <InlineCode>GET</InlineCode> request. A <InlineCode>303</InlineCode>{' '}
-        redirect is the same as a <InlineCode>302</InlineCode> except that the follow-up request is explicitly changed
-        to a <InlineCode>GET</InlineCode> request.
+        Note, when redirecting after a <Code>PUT</Code>, <Code>PATCH</Code> or <Code>DELETE</Code> request you must use
+        a <Code>303</Code> response code, otherwise the subsequent request will not be treated as a <Code>GET</Code>{' '}
+        request. A <Code>303</Code> redirect is the same as a <Code>302</Code> except that the follow-up request is
+        explicitly changed to a <Code>GET</Code> request.
       </P>
       <P>If you're using one of our official server-side adapters, redirects will automatically be converted.</P>
       <H2>External redirects</H2>
       <P>
         Sometimes it's necessary to redirect to an external website, or even another non-Inertia endpoint in your app,
-        within an Inertia request. This is possible using a server-side initiated{' '}
-        <InlineCode>window.location</InlineCode> visit.
+        within an Inertia request. This is possible using a server-side initiated <Code>window.location</Code> visit.
       </P>
       <TabbedCode
         examples={[
@@ -108,9 +101,9 @@ const Page = () => {
         ]}
       />
       <P>
-        This will generate a <InlineCode>409 Conflict</InlineCode> response, which includes the destination URL in the{' '}
-        <InlineCode>X-Inertia-Location</InlineCode> header. Client-side, Inertia will detect this response and
-        automatically do a <InlineCode>window.location = url</InlineCode> visit.
+        This will generate a <Code>409 Conflict</Code> response, which includes the destination URL in the{' '}
+        <Code>X-Inertia-Location</Code> header. Client-side, Inertia will detect this response and automatically do a{' '}
+        <Code>window.location = url</Code> visit.
       </P>
     </>
   )

@@ -1,4 +1,4 @@
-import Code from './Code'
+import CodeBlock from './CodeBlock'
 import React, { useContext, useState } from 'react'
 
 import { CodeTabContext } from './Layout'
@@ -34,9 +34,12 @@ const TabbedCode = ({ className, examples, height }) => {
           </button>
         ))}
       </div>
-      <Code className="p-6 leading-normal" language={examples[activeTab].language} height={height}>
-        {examples[activeTab].code}
-      </Code>
+      <CodeBlock
+        height={height}
+        className="p-6 leading-normal"
+        language={examples[activeTab].language}
+        children={examples[activeTab].code}
+      />
       {examples[activeTab].description && (
         <div className="p-4 text-sm font-medium text-white flex items-baseline" style={{ background: '#303f6d' }}>
           <div className="flex-shrink-0 w-4 h-4 fill-current mr-2">

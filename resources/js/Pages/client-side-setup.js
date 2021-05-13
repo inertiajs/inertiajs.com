@@ -1,13 +1,5 @@
 import dedent from 'dedent-js'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import Code from '../Components/Code'
-import Layout from '../Components/Layout'
-import Notice from '../Components/Notice'
-import InlineCode from '../Components/InlineCode'
-import TabbedCode from '../Components/TabbedCode'
+import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Client-side setup',
@@ -140,8 +132,8 @@ const Page = () => {
         ]}
       />
       <P>
-        The <InlineCode>resolveComponent</InlineCode> is a callback that tells Inertia how to load a page component. It
-        receives a page name (string), and should return a page component instance.
+        The <Code>resolveComponent</Code> is a callback that tells Inertia how to load a page component. It receives a
+        page name (string), and should return a page component instance.
       </P>
       <H2>Progress indicator</H2>
       <P>
@@ -151,17 +143,17 @@ const Page = () => {
         make an Inertia visit.
       </P>
       <P>To use it, start by installing it:</P>
-      <Code
+      <CodeBlock
         language="bash"
-        code={dedent`
+        children={dedent`
           npm install @inertiajs/progress
           yarn add @inertiajs/progress
         `}
       />
       <P>Once it's been installed, initialize it in your app.</P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { InertiaProgress } from '@inertiajs/progress'\n
           InertiaProgress.init()
         `}
@@ -176,19 +168,19 @@ const Page = () => {
         <A href="https://github.com/tc39/proposal-dynamic-import">dynamic imports</A>. You'll need a Babel plugin to
         make this work. First, install the plugin:
       </P>
-      <Code
+      <CodeBlock
         language="bash"
-        code={dedent`
+        children={dedent`
           npm install @babel/plugin-syntax-dynamic-import
           yarn add @babel/plugin-syntax-dynamic-import
         `}
       />
       <P>
-        Next, create a <InlineCode>.babelrc</InlineCode> file in your project with the following:
+        Next, create a <Code>.babelrc</Code> file in your project with the following:
       </P>
-      <Code
+      <CodeBlock
         language="json"
-        code={dedent`
+        children={dedent`
           {
             "plugins": ["@babel/plugin-syntax-dynamic-import"]
           }
@@ -201,8 +193,8 @@ const Page = () => {
         As a workaround, you need to drop Mix entirely or upgrade to Laravel Mix 6.
       </Notice>
       <P>
-        Finally, update the <InlineCode>resolveComponent</InlineCode> callback in your app initialization to use{' '}
-        <InlineCode>import</InlineCode> instead of <InlineCode>require</InlineCode>.
+        Finally, update the <Code>resolveComponent</Code> callback in your app initialization to use <Code>import</Code>{' '}
+        instead of <Code>require</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -240,9 +232,9 @@ const Page = () => {
         Consider using cache busting to force browsers to load the latest version of your assets. To do this, add the
         following to your webpack config:
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           output: {
             chunkFilename: 'js/[name].js?id=[chunkhash]',
           }

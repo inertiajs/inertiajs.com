@@ -1,12 +1,5 @@
 import dedent from 'dedent-js'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import Code from '../Components/Code'
-import Layout from '../Components/Layout'
-import InlineCode from '../Components/InlineCode'
-import TabbedCode from '../Components/TabbedCode'
+import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Pages',
@@ -116,9 +109,9 @@ const Page = () => {
       <H2>Creating layouts</H2>
       <P>
         While not required, for most projects it makes sense to create a site layout that your pages can extend. Notice
-        in our page example above that we're wrapping the page content within a <InlineCode>{`<layout>`}</InlineCode>{' '}
-        component. Here's an example of such a component. There is nothing Inertia specific here. This is just a
-        standard JavaScript component.
+        in our page example above that we're wrapping the page content within a <Code>{`<layout>`}</Code> component.
+        Here's an example of such a component. There is nothing Inertia specific here. This is just a standard
+        JavaScript component.
       </P>
       <TabbedCode
         examples={[
@@ -437,7 +430,7 @@ const Page = () => {
       <H2>Default layouts</H2>
       <P>
         If you're using persistent layouts, it's possible to set a default page layout in the{' '}
-        <InlineCode>resolveComponent()</InlineCode> callback.
+        <Code>resolveComponent()</Code> callback.
       </P>
       <TabbedCode
         examples={[
@@ -500,14 +493,14 @@ const Page = () => {
         ]}
       />
       <P>
-        This will automatically set the page layout to <InlineCode>Layout</InlineCode> if a layout has not already been
-        set for that page. If needed, you can disable the default layout on specific pages by setting the{' '}
-        <InlineCode>layout</InlineCode> to <InlineCode>null</InlineCode>.
+        This will automatically set the page layout to <Code>Layout</Code> if a layout has not already been set for that
+        page. If needed, you can disable the default layout on specific pages by setting the <Code>layout</Code> to{' '}
+        <Code>null</Code>.
       </P>
       <P>
-        You can even go a step further and conditionally set the default page layout based on the page{' '}
-        <InlineCode>name</InlineCode>, which is available to the <InlineCode>resolveComponent()</InlineCode> method. For
-        example, maybe you don't want the default layout applied to your public pages.
+        You can even go a step further and conditionally set the default page layout based on the page <Code>name</Code>
+        , which is available to the <Code>resolveComponent()</Code> method. For example, maybe you don't want the
+        default layout applied to your public pages.
       </P>
       <TabbedCode
         examples={[
@@ -574,7 +567,7 @@ const Page = () => {
         While it's possible to pass title and meta tag props from pages to layouts (as illustrated above), it's often
         easier to manage this using a document head library like <A href="https://github.com/nuxt/vue-meta">Vue Meta</A>{' '}
         or <A href="https://github.com/nfl/react-helmet">React Helmet</A>. Svelte has built-in support for manipulating
-        the document head with the <InlineCode>{`<svelte:head>`}</InlineCode> element.
+        the document head with the <Code>{`<svelte:head>`}</Code> element.
       </P>
       <TabbedCode
         examples={[
@@ -681,9 +674,9 @@ const Page = () => {
         If you're using Vue 3, you can alternatively use the{' '}
         <A href="https://v3.vuejs.org/guide/teleport.html">teleport</A> feature for this:
       </P>
-      <Code
+      <CodeBlock
         language="twig"
-        code={dedent`
+        children={dedent`
           <template>
             <teleport to="head">
               <title>Welcome {{ user.name }}</title>

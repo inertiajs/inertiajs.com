@@ -1,11 +1,5 @@
 import dedent from 'dedent-js'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import Layout from '../Components/Layout'
-import InlineCode from '../Components/InlineCode'
-import TabbedCode from '../Components/TabbedCode'
+import { A, Code, H1, H2, Layout, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Asset versioning',
@@ -28,8 +22,8 @@ const Page = () => {
       <H2>Configuring</H2>
       <P>
         To enable automatic asset refreshing, you simply need to tell Inertia what the current version of your assets
-        is. This can be any <InlineCode>string</InlineCode> (letters, numbers, or a file hash), as long as it changes
-        when your assets have been updated.
+        is. This can be any <Code>string</Code> (letters, numbers, or a file hash), as long as it changes when your
+        assets have been updated.
       </P>
       <TabbedCode
         examples={[
@@ -85,7 +79,7 @@ const Page = () => {
       <P>
         If you're using Laravel Mix, you can do this automatically by enabling{' '}
         <A href="https://laravel.com/docs/mix#versioning-and-cache-busting">versioning</A> in your{' '}
-        <InlineCode>webpack.mix.js</InlineCode> file.
+        <Code>webpack.mix.js</Code> file.
       </P>
     </>
   )

@@ -1,12 +1,5 @@
 import dedent from 'dedent-js'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import Code from '../Components/Code'
-import Layout from '../Components/Layout'
-import InlineCode from '../Components/InlineCode'
-import TabbedCode from '../Components/TabbedCode'
+import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Events',
@@ -36,11 +29,11 @@ const Page = () => {
       </P>
       <H2>Registering listeners</H2>
       <P>
-        To register an event listener, use the <InlineCode>Inertia.on()</InlineCode> method.
+        To register an event listener, use the <Code>Inertia.on()</Code> method.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('start', (event) => {
             console.log(\`Starting a visit to \${event.detail.visit.url}\`)
@@ -49,11 +42,11 @@ const Page = () => {
       />
       <P>
         Under the hood Inertia uses native browser events, so you can also work with them that way as well. Just be sure
-        to append <InlineCode>inertia:</InlineCode> to the event name.
+        to append <Code>inertia:</Code> to the event name.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           document.addEventListener('inertia:start', (event) => {
             console.log(\`Starting a visit to \${event.detail.visit.url}\`)
           })
@@ -63,9 +56,9 @@ const Page = () => {
       <P>
         When you register an event listener, Inertia automatically returns you a callback to remove the event listener.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           let removeStartEventListener = Inertia.on('start', (event) => {
             console.log(\`Starting a visit to \${event.detail.visit.url}\`)
           })\n
@@ -139,11 +132,11 @@ const Page = () => {
       />
       <P>
         Alternatively, if you're using native browser events, you can remove the event listener using{' '}
-        <InlineCode>removeEventListener()</InlineCode>.
+        <Code>removeEventListener()</Code>.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           let startEventListener = (event) => {
             console.log(\`Starting a visit to \${event.detail.visit.url}\`)
           }\n
@@ -154,13 +147,13 @@ const Page = () => {
       />
       <H2>Cancelling events</H2>
       <P>
-        Some events (<InlineCode>before</InlineCode>, <InlineCode>invalid</InlineCode>, <InlineCode>error</InlineCode>)
-        support cancellation, allowing you to prevent Inertia's default behaviour. Just like native events, if only one
-        event listener calls <InlineCode>event.preventDefault()</InlineCode>, the event will be cancelled.
+        Some events (<Code>before</Code>, <Code>invalid</Code>, <Code>error</Code>) support cancellation, allowing you
+        to prevent Inertia's default behaviour. Just like native events, if only one event listener calls{' '}
+        <Code>event.preventDefault()</Code>, the event will be cancelled.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('before', (event) => {
             if (!confirm('Are you sure you want to navigate away?')) {
@@ -170,12 +163,12 @@ const Page = () => {
         `}
       />
       <P>
-        As a convenience, if you register your event listener using <InlineCode>Inertia.on()</InlineCode>, you can also
-        cancel the event by returning <InlineCode>false</InlineCode> from the listener.
+        As a convenience, if you register your event listener using <Code>Inertia.on()</Code>, you can also cancel the
+        event by returning <Code>false</Code> from the listener.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('before', (event) => {
             return confirm('Are you sure you want to navigate away?')
@@ -184,12 +177,12 @@ const Page = () => {
       />
       <H2>Before</H2>
       <P>
-        The <InlineCode>before</InlineCode> event fires when a request is about to be made to the server. This is useful
-        for intercepting visits.
+        The <Code>before</Code> event fires when a request is about to be made to the server. This is useful for
+        intercepting visits.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('before', (event) => {
             console.log(\`About to make a visit to \${event.detail.visit.url}\`)
@@ -197,9 +190,9 @@ const Page = () => {
         `}
       />
       <P>The primary purpose of this event is to allow you to prevent a visit from happening.</P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('before', (event) => {
             return confirm('Are you sure you want to navigate away?')
@@ -208,12 +201,12 @@ const Page = () => {
       />
       <H2>Start</H2>
       <P>
-        The <InlineCode>start</InlineCode> event fires when a request to the server has started. This is useful for
-        displaying loading indicators.
+        The <Code>start</Code> event fires when a request to the server has started. This is useful for displaying
+        loading indicators.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('start', (event) => {
             console.log(\`Starting a visit to \${event.detail.visit.url}\`)
@@ -221,15 +214,15 @@ const Page = () => {
         `}
       />
       <P>
-        The <InlineCode>start</InlineCode> event is not cancelable.
+        The <Code>start</Code> event is not cancelable.
       </P>
       <H2>Progress</H2>
       <P>
-        The <InlineCode>progress</InlineCode> event fires as progress increments during file uploads.
+        The <Code>progress</Code> event fires as progress increments during file uploads.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('progress', (event) => {
             this.form.progress = event.detail.progress.percentage
@@ -237,16 +230,16 @@ const Page = () => {
         `}
       />
       <P>
-        The <InlineCode>progress</InlineCode> event is not cancelable.
+        The <Code>progress</Code> event is not cancelable.
       </P>
       <H2>Success</H2>
       <P>
-        The <InlineCode>success</InlineCode> event fires on successful page visits, unless validation errors are
-        present. Note, this does <em>not</em> include history visits.
+        The <Code>success</Code> event fires on successful page visits, unless validation errors are present. Note, this
+        does <em>not</em> include history visits.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('success', (event) => {
             console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
@@ -254,15 +247,15 @@ const Page = () => {
         `}
       />
       <P>
-        The <InlineCode>success</InlineCode> event is not cancelable.
+        The <Code>success</Code> event is not cancelable.
       </P>
       <H2>Error</H2>
       <P>
-        The <InlineCode>error</InlineCode> event fires when validation errors are present on "successful" page visits.
+        The <Code>error</Code> event fires when validation errors are present on "successful" page visits.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('error', (errors) => {
             console.log(errors)
@@ -270,23 +263,22 @@ const Page = () => {
         `}
       />
       <P>
-        The <InlineCode>error</InlineCode> event is not cancelable.
+        The <Code>error</Code> event is not cancelable.
       </P>
       <H2>Invalid</H2>
       <P>
-        The <InlineCode>invalid</InlineCode> event fires when a non-Inertia response is received from the server, such
-        as an <InlineCode>html</InlineCode> or <InlineCode>json</InlineCode>
-        response. A valid Inertia response is one that has the <InlineCode>X-Inertia</InlineCode> header set to{' '}
-        <InlineCode>true</InlineCode> with a <InlineCode>json</InlineCode> payload containing{' '}
+        The <Code>invalid</Code> event fires when a non-Inertia response is received from the server, such as an{' '}
+        <Code>html</Code> or <Code>json</Code> response. A valid Inertia response is one that has the{' '}
+        <Code>X-Inertia</Code> header set to <Code>true</Code> with a <Code>json</Code> payload containing{' '}
         <A href="/the-protocol#the-page-object">the page object</A>.
       </P>
       <P>
-        This event is fired for all response types, including <InlineCode>200</InlineCode>, <InlineCode>400</InlineCode>
-        , and <InlineCode>500</InlineCode> response codes.
+        This event is fired for all response types, including <Code>200</Code>, <Code>400</Code>, and <Code>500</Code>{' '}
+        response codes.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('invalid', (event) => {
             console.log(\`An invalid Inertia response was received.\`)
@@ -295,12 +287,11 @@ const Page = () => {
         `}
       />
       <P>
-        Cancel the <InlineCode>invalid</InlineCode> event to prevent Inertia from showing the non-Inertia response
-        modal.
+        Cancel the <Code>invalid</Code> event to prevent Inertia from showing the non-Inertia response modal.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('invalid', (event) => {
             event.preventDefault()
@@ -310,12 +301,12 @@ const Page = () => {
       />
       <H2>Exception</H2>
       <P>
-        The <InlineCode>exception</InlineCode> event fires on unexpected XHR errors, such as network interruptions, and
-        for errors generated in the <InlineCode>resolveComponent()</InlineCode> callback.
+        The <Code>exception</Code> event fires on unexpected XHR errors, such as network interruptions, and for errors
+        generated in the <Code>resolveComponent()</Code> callback.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('exception', (event) => {
             console.log(\`An unexpected error occurred during an Inertia visit.\`)
@@ -324,11 +315,11 @@ const Page = () => {
         `}
       />
       <P>
-        Cancel the <InlineCode>exception</InlineCode> event to prevent the error from being thrown.
+        Cancel the <Code>exception</Code> event to prevent the error from being thrown.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('exception', (event) => {
             event.preventDefault()
@@ -337,18 +328,18 @@ const Page = () => {
         `}
       />
       <P>
-        Note, this event will <em>not</em> fire for XHR requests that receive <InlineCode>400</InlineCode> and{' '}
-        <InlineCode>500</InlineCode> level responses, or for non-Inertia responses, as these situations are handled in
-        other ways by Inertia. See the <A href="/error-handling">error handling</A> page for more information.
+        Note, this event will <em>not</em> fire for XHR requests that receive <Code>400</Code> and <Code>500</Code>{' '}
+        level responses, or for non-Inertia responses, as these situations are handled in other ways by Inertia. See the{' '}
+        <A href="/error-handling">error handling</A> page for more information.
       </P>
       <H2>Finish</H2>
       <P>
-        The <InlineCode>finish</InlineCode> event fires after an XHR request has completed for both successful and
-        unsuccessful responses. This event is useful for hiding loading indicators.
+        The <Code>finish</Code> event fires after an XHR request has completed for both successful and unsuccessful
+        responses. This event is useful for hiding loading indicators.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('finish', (event) => {
             NProgress.done()
@@ -356,16 +347,16 @@ const Page = () => {
         `}
       />
       <P>
-        The <InlineCode>finish</InlineCode> event is not cancelable.
+        The <Code>finish</Code> event is not cancelable.
       </P>
       <H2>Navigate</H2>
       <P>
-        The <InlineCode>navigate</InlineCode> event fires on successful page visits, as well as when navigating through
-        history. This event is useful for tracking analytics and things of that nature.
+        The <Code>navigate</Code> event fires on successful page visits, as well as when navigating through history.
+        This event is useful for tracking analytics and things of that nature.
       </P>
-      <Code
+      <CodeBlock
         language="js"
-        code={dedent`
+        children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('navigate', (event) => {
             console.log(\`Navigated to \${event.detail.page.url}\`)
@@ -373,7 +364,7 @@ const Page = () => {
         `}
       />
       <P>
-        The <InlineCode>navigate</InlineCode> event is not cancelable.
+        The <Code>navigate</Code> event is not cancelable.
       </P>
       <H2>Event callbacks</H2>
       <P>
