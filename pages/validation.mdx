@@ -320,7 +320,7 @@ If your application shares errors using a different prop than `errors`, you must
           <App
             initialPage={JSON.parse(el.dataset.page)}
             resolveComponent={name => require(\`./Pages/\${name}\`).default}
-            resolveErrors={page => (page.props.errors || {})},
+            resolveErrors={page => (page.props.errors || {})}
           />,
           el
         )
