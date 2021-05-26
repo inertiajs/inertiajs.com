@@ -244,6 +244,6 @@ const Page = () => {
   )
 }
 
-Page.layout = (page) => <Layout children={page} meta={meta} />
+Page.layout = page => <Layout children={page} meta={meta} />
 
 export default Page

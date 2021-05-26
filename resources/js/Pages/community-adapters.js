@@ -1,9 +1,4 @@
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import Li from '../Components/Li'
-import Ul from '../Components/Ul'
-import Layout from '../Components/Layout'
+import { A, H1, Layout, Li, P, Ul } from '../Components'
 
 const meta = {
   title: 'Community adapters',
@@ -86,6 +81,6 @@ const Page = () => {
   )
 }
 
-Page.layout = (page) => <Layout children={page} meta={meta} />
+Page.layout = page => <Layout children={page} meta={meta} />
 
 export default Page

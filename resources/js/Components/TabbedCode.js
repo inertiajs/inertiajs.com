@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 
 import { CodeTabContext } from './Layout'
 
-const guessTabType = (tabNames) => {
+const guessTabType = tabNames => {
   if (tabNames.includes('Laravel')) {
     return 'backend'
   }
@@ -15,8 +15,8 @@ const guessTabType = (tabNames) => {
 
 const TabbedCode = ({ className, examples, height }) => {
   const [codeTabs, setCodeTabs] = useContext(CodeTabContext) || useState({ unknown: 0 })
-  const tabType = guessTabType(examples.map((example) => example.name))
-  const exampleIndex = examples.findIndex((example) => codeTabs[tabType] === example.name)
+  const tabType = guessTabType(examples.map(example => example.name))
+  const exampleIndex = examples.findIndex(example => codeTabs[tabType] === example.name)
   const activeTab = exampleIndex < 0 ? 0 : exampleIndex
 
   return (

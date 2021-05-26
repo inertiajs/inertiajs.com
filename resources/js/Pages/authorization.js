@@ -1,9 +1,5 @@
 import dedent from 'dedent-js'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import Layout from '../Components/Layout'
-import Notice from '../Components/Notice'
-import TabbedCode from '../Components/TabbedCode'
+import { H1, Layout, Notice, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Authorization',
@@ -78,6 +74,6 @@ const Page = () => {
   )
 }
 
-Page.layout = (page) => <Layout children={page} meta={meta} />
+Page.layout = page => <Layout children={page} meta={meta} />
 
 export default Page

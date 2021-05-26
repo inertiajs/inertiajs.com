@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 export const CodeTabContext = React.createContext()
 
-const getCurrentCodeTab = (tabType) => {
+const getCurrentCodeTab = tabType => {
   const param = new URLSearchParams(location.search).get(tabType)
   return param ? param : localStorage.getItem('tab.' + tabType)
 }
@@ -21,7 +21,7 @@ export default function Layout({ meta, children }) {
     backend: 'Laravel',
   })
 
-  const setCodeTabs = (value) => {
+  const setCodeTabs = value => {
     setCodeTabsState(value)
 
     localStorage.setItem('tab.frontend', value.frontend)
@@ -78,7 +78,7 @@ export default function Layout({ meta, children }) {
 
   return (
     <div
-      onClick={(e) => setShowMobileNav(mobileNav.current.contains(e.target))}
+      onClick={e => setShowMobileNav(mobileNav.current.contains(e.target))}
       className="leading-none font-sans text-gray-800 antialiased"
     >
       {meta.sponsor && (

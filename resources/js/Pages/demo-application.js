@@ -1,12 +1,5 @@
 import React from 'react'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import Li from '../Components/Li'
-import Ul from '../Components/Ul'
-import Layout from '../Components/Layout'
-import Notice from '../Components/Notice'
+import { A, H1, H2, Layout, Li, Notice, P, Ul } from '../Components'
 
 const meta = {
   title: 'Demo application',
@@ -65,6 +58,6 @@ const Page = () => {
   )
 }
 
-Page.layout = (page) => <Layout children={page} meta={meta} />
+Page.layout = page => <Layout children={page} meta={meta} />
 
 export default Page

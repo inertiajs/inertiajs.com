@@ -1,7 +1,5 @@
 import React from 'react'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import Layout from '../Components/Layout'
+import { H1, Layout, P } from '../Components'
 
 const meta = {
   title: 'Authentication',
@@ -24,6 +22,6 @@ const Page = () => {
   )
 }
 
-Page.layout = (page) => <Layout children={page} meta={meta} />
+Page.layout = page => <Layout children={page} meta={meta} />
 
 export default Page

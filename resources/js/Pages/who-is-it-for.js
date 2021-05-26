@@ -1,11 +1,5 @@
 import dedent from 'dedent-js'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import Layout from '../Components/Layout'
-import Notice from '../Components/Notice'
-import Strong from '../Components/Strong'
-import TabbedCode from '../Components/TabbedCode'
+import { A, H1, Layout, Notice, P, Strong, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Who is Inertia.js for?',
@@ -49,6 +43,6 @@ const Page = () => {
   )
 }
 
-Page.layout = (page) => <Layout children={page} meta={meta} />
+Page.layout = page => <Layout children={page} meta={meta} />
 
 export default Page
