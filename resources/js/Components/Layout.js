@@ -2,8 +2,8 @@ import Nav from './Nav'
 import dedent from 'dedent-js'
 import Mousetrap from 'mousetrap'
 import TabbedCode from './TabbedCode'
-import React, { useState, useEffect, useRef } from 'react'
 import { InertiaLink } from '@inertiajs/inertia-react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export const CodeTabContext = React.createContext()
 
