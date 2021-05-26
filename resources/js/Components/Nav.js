@@ -1,9 +1,10 @@
-import { InertiaLink } from '@inertiajs/inertia-react'
+import { InertiaLink, usePage } from '@inertiajs/inertia-react'
 
 const Nav = ({ className }) => {
+  const page = usePage()
 
   function linkClass(path) {
-    return false
+    return (path === '/' && path === page.url) || (path !== '/' && page.url.startsWith(path))
       ? `block -ml-3 pl-3 pr-2 py-1 md:py-2 font-medium border-l-4 rounded-r border-purple-400 bg-purple-100 text-purple-700`
       : `inline-block py-1 md:py-2 hover:text-blue-700 hover:underline font-medium text-gray-700`
   }
