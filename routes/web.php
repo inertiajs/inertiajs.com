@@ -15,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('{page?}', function($page = 'index') {
+    if (!file_exists(resource_path("js/Pages/$page.js"))) {
+        App::abort(404);
+    }
+
     return Inertia::render($page);
 });
