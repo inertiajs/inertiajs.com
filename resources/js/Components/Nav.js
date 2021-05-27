@@ -202,11 +202,6 @@ const Nav = ({ className }) => {
           </InertiaLink>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/transforming-props" className={linkClass('/transforming-props')}>
-            Transforming props
-          </InertiaLink>
-        </li>
-        <li className="md:pr-3">
           <InertiaLink href="/server-side-rendering" className={linkClass('/server-side-rendering')}>
             Server-side rendering
           </InertiaLink>
