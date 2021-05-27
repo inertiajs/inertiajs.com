@@ -1,6 +1,5 @@
 import dedent from 'dedent-js'
-import Layout from '../Components/Layout'
-import TabbedCode from '../Components/TabbedCode'
+import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Remembering state',
