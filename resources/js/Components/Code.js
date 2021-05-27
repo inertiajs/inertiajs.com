@@ -1,3 +1,4 @@
-export default function Code(props) {
-  return <code {...props} className="font-mono text-sm bg-gray-200 rounded p-1 whitespace-no-wrap" />
+export default function Code({ color, ...props }) {
+  const bgClass = color === 'orange' ? 'bg-orange-300' : 'bg-gray-200'
+  return <code {...props} className={`font-mono text-sm rounded p-1 whitespace-no-wrap ${bgClass}`} />
 }
