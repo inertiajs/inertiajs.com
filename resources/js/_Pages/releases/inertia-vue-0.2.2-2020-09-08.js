@@ -1,0 +1,43 @@
+import Layout from '@/Components/Layout'
+
+const meta = {
+  title: 'inertia-vue@v0.2.2',
+}
+
+const Page = () => {
+  return (
+    <>
+      <H1>inertia-vue@v0.2.2</H1>
+      <div className="-mt-8 mb-12 text-base font-medium text-gray-600">Published on September 8, 2020</div>
+      This release adds a new array shorthand for nested layouts, thanks to [@claudiodekker](https://github.com/claudiodekker) ([#201](https://github.com/inertiajs/inertia/pull/201)).
+      Previously, if you wanted nested layouts, you had to use a callback like this:
+      ```twig
+      <script>
+      import SiteLayout from './SiteLayout'
+      import NestedLayout from './NestedLayout'
+
+      export default {
+        layout: (h, page) => {
+          return h(SiteLayout, [h(NestedLayout, [page])])
+        },
+      }
+      </script>
+      ```
+      Using this new array shorthand, you can now do it like this:
+      ```twig
+      <script>
+      import SiteLayout from './SiteLayout'
+      import NestedLayout from './NestedLayout'
+
+      export default {
+        layout: [SiteLayout, NestedLayout],
+      }
+      </script>
+      ```
+    </>
+  )
+}
+
+Page.layout = (page) => <Layout children={page} meta={meta} />
+
+export default Page
