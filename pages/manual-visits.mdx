@@ -158,13 +158,13 @@ However, generally it's preferred to use one of the shortcut methods instead. Th
       language: 'js',
       code: dedent`
         // import { Inertia } from '@inertiajs/inertia'\n
-        this.$inertia.get(url, data, options)
-        this.$inertia.post(url, data, options)
-        this.$inertia.put(url, data, options)
-        this.$inertia.patch(url, data, options)
-        this.$inertia.delete(url, options)
-        this.$inertia.replace(url, options)
-        this.$inertia.reload(options) // Uses the current URL
+        Inertia.get(url, data, options)
+        Inertia.post(url, data, options)
+        Inertia.put(url, data, options)
+        Inertia.patch(url, data, options)
+        Inertia.delete(url, options)
+        Inertia.replace(url, options)
+        Inertia.reload(options) // Uses the current URL
       `,
     },
     {
