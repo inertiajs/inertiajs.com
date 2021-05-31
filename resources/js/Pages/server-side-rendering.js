@@ -71,8 +71,8 @@ const Page = () => {
         complexity.
       </P>
       <P>
-        Also, keep in mind that Inertia only needs to do server-side rendering for the _first page load_. From that
-        point on, you're in "SPA mode", and you just get normal Inertia XHR responses back.
+        Also, keep in mind that Inertia only needs to do server-side rendering for the <em>first page load</em>. From
+        that point on, you're in "SPA mode", and you just get normal Inertia XHR responses back.
       </P>
       <H2>Requirements</H2>
       <P>Okay, what are the gotchas? There are a few technical requirements to be aware of.</P>
@@ -83,9 +83,12 @@ const Page = () => {
       <P>
         Second, you need to run a small background Node process. If you're using a modern hosting platform like{' '}
         <A href="https://dashboard.heroku.com/">Heroku</A> or <A href="https://forge.laravel.com/">Laravel Forge</A>,
-        it's quite straightforward to setup. _(Technically you could avoid running the background Node process, and just
-        shell out to Node directly. However, since Node takes about <Code>250ms</Code> to boot up, this approach comes
-        at a pretty significant performance penalty.)_
+        it's quite straightforward to setup.{' '}
+        <em>
+          (Technically you could avoid running the background Node process, and just shell out to Node directly.
+          However, since Node takes about <Code>250ms</Code> to boot up, this approach comes at a pretty significant
+          performance penalty.)
+        </em>
       </P>
       <P>
         Third, you are now building an app that must be able to run in both the browser and in Node. These are sometimes
