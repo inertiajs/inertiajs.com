@@ -1,4 +1,5 @@
-import { A, Code, H1, H2, Layout, Ol, P } from '../Components'
+import React from 'react'
+import { A, Code, H1, H2, Layout, Ol, P } from '@/Components'
 
 const meta = {
   title: 'Server-side rendering (SSR)',

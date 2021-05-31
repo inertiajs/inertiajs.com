@@ -1,6 +1,6 @@
-import dedent from 'dedent-js'
+import React from 'react'
 import sponsors from '../../../sponsors.json'
-import { Layout, H1, H2, P, TabbedCode } from '../Components'
+import { H1, H2, Layout, P } from '@/Components'
 
 const meta = {
   title: 'Sponsors',

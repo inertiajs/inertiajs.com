@@ -1,5 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import { A, H1, H2, Layout, Notice, P, TabbedCode } from '../Components'
+import { A, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Error handling',

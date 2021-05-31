@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
-import { A, H1, Layout, Notice, P, Strong, TabbedCode } from '../Components'
+import React from 'react'
+import { A, H1, Layout, P, Strong } from '@/Components'
 
 const meta = {
   title: 'Who is Inertia.js for?',

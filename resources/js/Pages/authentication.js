@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1, Layout, P } from '../Components'
+import { H1, Layout, P } from '@/Components'
 
 const meta = {
   title: 'Authentication',

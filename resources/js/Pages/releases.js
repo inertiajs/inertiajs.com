@@ -1,4 +1,5 @@
-import { A, H1, H2, Layout } from '../Components'
+import React from 'react'
+import { A, H1, H2, Layout } from '@/Components'
 
 const meta = {
   title: 'Releases',

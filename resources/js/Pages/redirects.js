@@ -1,5 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import { Code, H1, H2, Layout, P, TabbedCode } from '../Components'
+import { Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Redirects',

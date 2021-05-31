@@ -1,12 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import Layout from '../Components/Layout'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import H3 from '../Components/H3'
-import P from '../Components/P'
-import A from '../Components/A'
-import Code from '../Components/Code'
-import CodeBlock from '../Components/CodeBlock'
+import { A, Code, CodeBlock, H1, H2, H3, Layout, P } from '../Components'
 
 const meta = {
   title: 'Progress indicators',

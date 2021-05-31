@@ -1,5 +1,5 @@
 import React from 'react'
-import { A, H1, H2, Layout, Li, Notice, P, Ul } from '../Components'
+import { A, H1, H2, Layout, Li, Notice, P, Ul } from '@/Components'
 
 const meta = {
   title: 'Demo application',

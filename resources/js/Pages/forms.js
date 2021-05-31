@@ -1,5 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '../Components'
+import { A, Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Forms',

@@ -1,5 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, Li, Notice, Ol, P, Strong } from '../Components'
+import { A, Code, CodeBlock, H1, H2, Layout, Li, Notice, Ol, P, Strong } from '@/Components'
 
 const meta = {
   title: 'The protocol',

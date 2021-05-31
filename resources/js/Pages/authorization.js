@@ -1,5 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import { H1, Layout, Notice, P, TabbedCode } from '../Components'
+import { H1, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Authorization',

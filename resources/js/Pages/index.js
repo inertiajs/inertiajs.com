@@ -1,5 +1,5 @@
 import React from 'react'
-import { A, H1, H2, Layout, P } from '../Components'
+import { A, H1, H2, Layout, P } from '@/Components'
 
 const meta = {
   title: 'Home',

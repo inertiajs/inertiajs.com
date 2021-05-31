@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
-import { A, Code, H1, Layout, P, Strong } from '../Components'
+import React from 'react'
+import { A, Code, H1, Layout, P, Strong } from '@/Components'
 
 const meta = {
   title: 'How it works',

@@ -1,12 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import Layout from '../Components/Layout'
-import TabbedCode from '../Components/TabbedCode'
-import Code from '../Components/Code'
-import CodeBlock from '../Components/CodeBlock'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
-import P from '../Components/P'
-import A from '../Components/A'
+import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '../Components'
 
 const meta = {
   title: 'Validation',

@@ -1,4 +1,5 @@
-import { A, H1, Layout, Li, P, Ul } from '../Components'
+import React from 'react'
+import { A, H1, Layout, Li, P, Ul } from '@/Components'
 
 const meta = {
   title: 'Community adapters',

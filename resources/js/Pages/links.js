@@ -1,12 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import Layout from '../Components/Layout'
-import Notice from '../Components/Notice'
-import TabbedCode from '../Components/TabbedCode'
-import Code from '../Components/Code'
-import A from '../Components/A'
-import P from '../Components/P'
-import H1 from '../Components/H1'
-import H2 from '../Components/H2'
+import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Links',
