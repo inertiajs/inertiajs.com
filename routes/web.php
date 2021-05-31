@@ -33,7 +33,7 @@ Route::get('/releases', function() {
                     'version' => $parts[1],
                     'date' => Date::createFromDate($parts[2], $parts[3], $parts[4])->format('F j, Y'),
                 ];
-            })
+            })->sortByDesc('version')->values()
     ]);
 });
 
