@@ -118,9 +118,10 @@ const Page = () => {
         ]}
       />
       <Notice>
-        Creating <Code>POST</Code>/<Code>PUT</Code>/<Code>PATCH</Code>/<Code>DELETE</Code> anchor <Code>&lt;a&gt;</Code>{' '}
-        links is discouraged as it causes "Open Link in New Tab/Window" accessibility issues. Instead, consider using a
-        more appropriate element, such as a <Code>&lt;button&gt;</Code>.
+        Creating <Code color="orange">POST</Code>/<Code color="orange">PUT</Code>/<Code color="orange">PATCH</Code>/
+        <Code color="orange">DELETE</Code> anchor <Code color="orange">{'<a>'}</Code> links is discouraged as it causes
+        "Open Link in New Tab/Window" accessibility issues. Instead, consider using a more appropriate element, such as
+        a <Code color="orange">{'<button>'}</Code>.
       </Notice>
       <H2>Method</H2>
       <P>

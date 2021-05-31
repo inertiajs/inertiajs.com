@@ -39,7 +39,7 @@ const Page = () => {
       </P>
       <Notice>
         Note, prior to <a href="/releases/inertia-0.8.0">version 0.8.0</a>, Inertia did not automatically convert
-        requests to <Code>FormData</Code>, and you'll need to manually do this.
+        requests to <Code color="orange">FormData</Code>, and you'll need to manually do this.
       </Notice>
       <H2>File upload example</H2>
       <P>

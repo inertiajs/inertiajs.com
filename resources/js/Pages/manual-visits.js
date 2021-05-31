@@ -215,9 +215,10 @@ const Page = () => {
         `}
       />
       <Notice>
-        Uploading files via <Code>put</Code> or <Code>patch</Code> is not supported in Laravel. Instead, make the
-        request via <Code>post</Code>, including a <Code>_method</Code> field set to <Code>put</Code> or{' '}
-        <Code>patch</Code>. This is called{' '}
+        Uploading files via <Code color="orange">put</Code> or <Code color="orange">patch</Code> is not supported in
+        Laravel. Instead, make the request via <Code color="orange">post</Code>, including a{' '}
+        <Code color="orange">_method</Code> field set to <Code color="orange">put</Code> or{' '}
+        <Code color="orange">patch</Code>. This is called{' '}
         <A href="https://laravel.com/docs/8.x/routing#form-method-spoofing">form method spoofing</A>.
       </Notice>
       <H2>Data</H2>
@@ -261,7 +262,8 @@ const Page = () => {
         `}
       />
       <Notice>
-        Visits made to the same URL automatically set <Code>replace</Code> to <Code>true</Code>.
+        Visits made to the same URL automatically set <Code color="orange">replace</Code> to{' '}
+        <Code color="orange">true</Code>.
       </Notice>
       <H2>Component state</H2>
       <P>
