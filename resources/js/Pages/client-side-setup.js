@@ -165,6 +165,15 @@ const Page = () => {
       </P>
       <H2>Code splitting</H2>
       <P>
+        Code splitting breaks apart the various pages of your application into smaller bundles, which are then loaded on
+        demand when visiting new pages. This can significantly reduce the size of the initial JavaScript bundle,
+        improving the time to first render.
+      </P>
+      <Notice>
+        While code splitting is helpful for very large projects, it does require extra requests when visiting new pages.
+        Generally speaking, if you're able to use a single bundle, your app is going to feel snappier.
+      </Notice>
+      <P>
         To use code splitting with Inertia you'll need to enable{' '}
         <A href="https://github.com/tc39/proposal-dynamic-import">dynamic imports</A>. You'll need a Babel plugin to
         make this work. First, install the plugin:
@@ -188,10 +197,8 @@ const Page = () => {
         `}
       />
       <Notice>
-        If you're using Laravel Mix 4, the dynamic imports Babel plugin is already configured. However, there is a known
-        issue with Laravel Mix 4 when using dynamic imports where you cannot use styles within Vue files due to a
-        Webpack <a href="https://github.com/JeffreyWay/laravel-mix/issues/1856#issuecomment-448082909">limitation</a>.
-        As a workaround, you need to drop Mix entirely or upgrade to Laravel Mix 6.
+        If you're using Laravel Mix, the dynamic imports Babel plugin is already configured. However, we recommend using
+        Laravel Mix 6, as there are known issues with older versions.
       </Notice>
       <P>
         Finally, update the <Code>resolveComponent</Code> callback in your app initialization to use <Code>import</Code>{' '}
