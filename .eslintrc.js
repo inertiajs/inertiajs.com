@@ -7,4 +7,8 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/prop-types': 'off',
   },
+  env: {
+    browser: true,
+    node: true,
+  },
 }

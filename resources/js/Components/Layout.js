@@ -2,6 +2,7 @@ import Nav from './Nav'
 import dedent from 'dedent-js'
 import Mousetrap from 'mousetrap'
 import TabbedCode from './TabbedCode'
+import { Inertia } from '@inertiajs/inertia'
 import React, { useState, useEffect, useRef } from 'react'
 import { InertiaHead, InertiaLink } from '@inertiajs/inertia-react'
 
@@ -23,7 +24,6 @@ export default function Layout({ meta, children }) {
 
   const setCodeTabs = value => {
     setCodeTabsState(value)
-
     localStorage.setItem('tab.frontend', value.frontend)
     localStorage.setItem('tab.backend', value.backend)
   }
@@ -33,12 +33,9 @@ export default function Layout({ meta, children }) {
       frontend: getCurrentCodeTab('frontend') || 'Vue 3',
       backend: getCurrentCodeTab('backend') || 'Laravel',
     })
-  }, [])
 
-  /*
-  useEffect(() => {
     // Algolia DocSearch
-    docsearch({
+    window.docsearch({
       apiKey: 'ea9f3351550104420cd3c7b4e2b9b7b1',
       indexName: 'inertiajs',
       inputSelector: '#docsearch',
@@ -51,8 +48,8 @@ export default function Layout({ meta, children }) {
       document.getElementById('docsearch').focus()
     })
 
-    if (process.env.NODE_ENV === 'production') {
-      // Carbon Ads
+    // Carbon Ads
+    Inertia.on('navigate', () => {
       var s = document.createElement('script')
       s.setAttribute('async', '')
       s.src = '//cdn.carbonads.com/carbon.js?serve=CE7DCKJ7&placement=inertiajscom'
@@ -60,21 +57,8 @@ export default function Layout({ meta, children }) {
       var adElement = document.getElementById('ad')
       adElement.innerHTML = ''
       adElement.appendChild(s)
-
-      // Google Analytics
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      gtag('config', 'UA-140425344-1', {
-        page_location: window.location.href,
-        page_path: window.location.pathname,
-        page_title: window.document.title,
-      })
-    }
+    })
   }, [])
-  */
 
   return (
     <>
