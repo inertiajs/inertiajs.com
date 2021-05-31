@@ -1,8 +1,8 @@
-import Nav from './Nav'
 import dedent from 'dedent-js'
 import Mousetrap from 'mousetrap'
-import TabbedCode from './TabbedCode'
+import Nav from '@/Components/Nav'
 import { Inertia } from '@inertiajs/inertia'
+import TabbedCode from '@/Components/TabbedCode'
 import React, { useState, useEffect, useRef } from 'react'
 import { InertiaHead, InertiaLink } from '@inertiajs/inertia-react'
 

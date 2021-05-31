@@ -1,4 +1,4 @@
-import CodeBlock from './CodeBlock'
+import CodeBlock from '@/Components/CodeBlock'
 import React, { useContext, useState } from 'react'
 
 import { CodeTabContext } from './Layout'
