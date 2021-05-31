@@ -20,13 +20,16 @@
         "eslint": "^7.27.0",
         "eslint-plugin-import": "^2.23.4",
         "eslint-plugin-react": "^7.24.0",
+        "express": "^4.17.1",
         "laravel-mix": "^6.0.6",
+        "laravel-mix-merge-manifest": "^2.0.0",
         "lodash": "^4.17.19",
         "mousetrap": "^1.6.5",
         "postcss": "^8.1.14",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-syntax-highlighter": "^12.2.1",
-        "tailwindcss": "^1.6.3"
+        "tailwindcss": "^1.6.3",
+        "webpack-node-externals": "^3.0.0"
     }
 }

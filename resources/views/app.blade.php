@@ -1,3 +1,10 @@
+@php
+try {
+  $ssr = Http::post('http://localhost:8080/render', $page)->throw()->json();
+} catch (Exception $e) {
+  $ssr = null;
+}
+@endphp
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,8 +16,15 @@
     <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" defer></script>
     <script src="https://www.googletagmanager.com/gtag/js?id=UA-140425344-1" async></script>
     <script src="{{ mix('/js/app.js') }}" defer></script>
+    @foreach($ssr['head'] ?? [] as $element)
+      {!! $element !!}
+    @endforeach
   </head>
   <body>
-    @inertia
+    @if ($ssr)
+      {!! $ssr['body'] !!}
+    @else
+      @inertia
+    @endif
   </body>
 </html>
