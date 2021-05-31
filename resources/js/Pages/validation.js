@@ -26,8 +26,8 @@ const Page = () => {
       </P>
       <P>
         First, you submit your form using Inertia. In the event that there are server-side validation errors, you don't
-        immediately return those errors as a <Code>422</Code> JSON response. Instead, you redirect (server-side) back to
-        the form page you are on, flashing the validation errors in the session. Frameworks like Laravel do this
+        return those errors as a <Code>422</Code> JSON response. Instead, you redirect (server-side) back to the form
+        page you are on, flashing the validation errors in the session. Some frameworks, such as Laravel, do this
         automatically.
       </P>
       <P>
