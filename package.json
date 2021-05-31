@@ -15,7 +15,7 @@
         "@inertiajs/inertia": "^0.9.0",
         "@inertiajs/inertia-react": "^0.6.0",
         "@inertiajs/progress": "^0.2.5",
-        "autoprefixer": "^10.2.5",
+        "autoprefixer": "^10.2.6",
         "axios": "^0.21",
         "dedent-js": "^1.0.1",
         "eslint": "^7.27.0",
@@ -26,11 +26,11 @@
         "laravel-mix-merge-manifest": "^2.0.0",
         "lodash": "^4.17.19",
         "mousetrap": "^1.6.5",
-        "postcss": "^8.1.14",
+        "postcss": "^8.3.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-syntax-highlighter": "^12.2.1",
-        "tailwindcss": "^1.6.3",
+        "tailwindcss": "^2.1.2",
         "webpack-node-externals": "^3.0.0"
     }
 }

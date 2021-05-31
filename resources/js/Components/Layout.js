@@ -89,7 +89,7 @@ export default function Layout({ meta, children }) {
             <div className="mx-2">Support the ongoing development of Inertia.js.</div>
             <InertiaLink
               href="/sponsors"
-              className="px-3 py-1 bg-purple-500 hover:bg-purple-600 rounded-full text-xs text-white leading-tight whitespace-no-wrap"
+              className="px-3 py-1 bg-purple-500 hover:bg-purple-600 rounded-full text-xs text-white leading-tight whitespace-nowrap"
             >
               Learn more
             </InertiaLink>
@@ -129,7 +129,7 @@ export default function Layout({ meta, children }) {
                   </svg>
                 </button>
                 {showMobileNav && (
-                  <Nav className="absolute top-0 right-0 -mt-4 px-6 pb-6 bg-white shadow-xl rounded z-50 whitespace-no-wrap" />
+                  <Nav className="absolute top-0 right-0 -mt-4 px-6 pb-6 bg-white shadow-xl rounded z-50 whitespace-nowrap" />
                 )}
               </div>
               <div className="hidden md:flex items-center text-white">
@@ -137,7 +137,7 @@ export default function Layout({ meta, children }) {
                   <input
                     id="docsearch"
                     placeholder="Search…"
-                    className="py-1 pl-8 w-40 lg:w-56 focus:outline-none block appearance-none bg-white rounded-full text-sm leading-normal font-medium text-gray-700"
+                    className="py-1 pl-8 w-40 lg:w-56 focus:outline-none block appearance-none bg-white rounded-full text-sm leading-normal font-medium placeholder-gray-500 text-gray-700"
                   />
                   <div className="pointer-events-none absolute inset-y-0 left-0 pl-2 flex items-center">
                     <svg className="fill-current pointer-events-none text-gray-500 w-4 h-4" viewBox="0 0 20 20">
@@ -245,7 +245,7 @@ export default function Layout({ meta, children }) {
             <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 py-4 flex items-center justify-start overflow-x-auto">
               <div className="mr-6 text-md font-medium text-gray-600">
                 <div className="md:hidden">Sponsors:</div>
-                <div className="hidden md:block whitespace-no-wrap">Our sponsors:</div>
+                <div className="hidden md:block whitespace-nowrap">Our sponsors:</div>
               </div>
               <a className="text-gray-600 hover:text-gray-800 mr-6" href="https://www.aryeo.com" title="Aryeo">
                 <svg className="w-auto h-5 fill-current" viewBox="0 0 1000 260">

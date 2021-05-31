@@ -79,7 +79,7 @@ const Page = () => {
             </svg>
             <input
               id="email"
-              className="flex-1 appearance-none bg-transparent text-gray-700 font-semibold text-base md:text-lg focus:outline-none js-cm-email-input"
+              className="flex-1 appearance-none bg-transparent placeholder-gray-500 text-gray-700 font-semibold text-base md:text-lg focus:outline-none js-cm-email-input"
               name="cm-otkdihj-otkdihj"
               type="email"
               required
@@ -87,7 +87,7 @@ const Page = () => {
             />
           </label>
           <button
-            className="appearance-none text-lg md:text-xl text-white font-semibold bg-purple-500 px-6 md:px-12 rounded-r whitespace-no-wrap focus:outline-none hover:bg-purple-400 focus:bg-purple-400 active:bg-purple-400 js-cm-submit-button"
+            className="appearance-none text-lg md:text-xl text-white font-semibold bg-purple-500 px-6 md:px-12 rounded-r whitespace-nowrap focus:outline-none hover:bg-purple-400 focus:bg-purple-400 active:bg-purple-400 js-cm-submit-button"
             type="submit"
           >
             Join
