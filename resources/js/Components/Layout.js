@@ -168,9 +168,9 @@ export default function Layout({ meta, children }) {
             {meta.hero && (
               <div className="lg:mt-16 relative flex flex-wrap items-start">
                 <div className="w-full lg:w-1/2 mt-4">
-                  <h1 className="text-4xl lg:text-5xl leading-tight font-light">
+                  <div className="text-4xl lg:text-5xl leading-tight font-light">
                     Build single-page apps, <strong className="font-bold">without building an API.</strong>
-                  </h1>
+                  </div>
                   <p className="mt-8 text-lg lg:text-xl leading-relaxed max-w-md pr-2">
                     Inertia.js lets you{' '}
                     <strong className="font-bold" style={{ color: '#92eee2' }}>
