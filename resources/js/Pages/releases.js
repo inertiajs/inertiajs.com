@@ -1,5 +1,5 @@
 import React from 'react'
-import { A, H1, H2, Layout } from '@/Components'
+import { A, H1, H2, Layout, Li, Ul } from '@/Components'
 
 const meta = {
   title: 'Releases',
@@ -31,16 +31,16 @@ const Page = ({ releases }) => {
       {libraries.map(library => (
         <div key={library}>
           <H2>{library}</H2>
-          <ul>
+          <Ul>
             {releases
               .filter(release => release.library === library)
               .map(release => (
-                <li key={release.slug}>
+                <Li key={release.slug}>
                   <A href={`/releases/${release.slug}`}>v{release.version}</A>
                   <span className="ml-2 text-sm text-gray-600">({release.date})</span>
-                </li>
+                </Li>
               ))}
-          </ul>
+          </Ul>
         </div>
       ))}
     </>
