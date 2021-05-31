@@ -1,3 +1,4 @@
+import React from 'react'
 import { A, H1, Layout, Li, Ul } from '@/Components'
 
 const meta = {

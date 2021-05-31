@@ -1,3 +1,4 @@
+import React from 'react'
 import dedent from 'dedent-js'
 import { A, Code, CodeBlock, H1, H2, Layout, Li, P, Ul } from '@/Components'
 

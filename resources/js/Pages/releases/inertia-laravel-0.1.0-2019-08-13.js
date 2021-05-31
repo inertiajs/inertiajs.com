@@ -1,3 +1,4 @@
+import React from 'react'
 import { H1, Layout, Li, Ul } from '@/Components'
 
 const meta = {
@@ -16,6 +17,6 @@ const Page = () => {
   )
 }
 
-Page.layout = (page) => <Layout children={page} meta={meta} />
+Page.layout = page => <Layout children={page} meta={meta} />
 
 export default Page

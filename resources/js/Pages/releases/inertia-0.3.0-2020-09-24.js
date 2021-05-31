@@ -1,5 +1,6 @@
+import React from 'react'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, Li, Ol, P, Strong, Ul } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Layout, Li, P, Ul } from '@/Components'
 
 const meta = {
   title: 'inertia@v0.3.0',

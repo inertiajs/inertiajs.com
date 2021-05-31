@@ -1,4 +1,5 @@
-import { A, Code, CodeBlock, H1, H2, Layout, Li, Ol, P, Strong, Ul } from '@/Components'
+import React from 'react'
+import { H1, Layout, Li, Ul } from '@/Components'
 
 const meta = {
   title: 'inertia@v0.6.2',
