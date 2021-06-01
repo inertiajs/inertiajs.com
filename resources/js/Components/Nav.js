@@ -115,6 +115,11 @@ const Nav = ({ className }) => {
           </InertiaLink>
         </li>
         <li className="md:pr-3">
+          <InertiaLink href="/title-and-meta" className={linkClass('/title-and-meta')}>
+            Title & meta
+          </InertiaLink>
+        </li>
+        <li className="md:pr-3">
           <InertiaLink href="/links" className={linkClass('/links')}>
             Links
           </InertiaLink>

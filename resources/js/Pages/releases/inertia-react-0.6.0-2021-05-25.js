@@ -1,5 +1,6 @@
 import React from 'react'
-import { A, Code, H1, Layout, Li, P, Ul } from '@/Components'
+import dedent from 'dedent-js'
+import { A, Code, CodeBlock, H1, H2, Layout, Li, P, Ul } from '@/Components'
 
 const meta = {
   title: 'inertia-react@0.6.0',
@@ -49,6 +50,28 @@ const Page = () => {
       <P>
         This is a breaking change that requires also updating to{' '}
         <A href="/releases/inertia-0.9.0-2021-05-25">inertia@0.9.0</A>.
+      </P>
+      <H2 id="new-inertia-head-component">New Inertia head component</H2>
+      <P>
+        This release adds a new <Code>InertiaHead</Code> component, intended to make working with the document{' '}
+        <Code>{'<head>'}</Code> easier. This is a first-class alternative to libraries like React Helmet. It works both
+        in the browser, and also when server-side rendering (SSR).
+      </P>
+      <P>
+        To use it, add the <Code>InertiaHead</Code> component to your pages:
+      </P>
+      <CodeBlock
+        language="jsx"
+        children={dedent`
+          import { InertiaHead } from '@inertiajs/inertia-react'\n
+          <InertiaHead>
+            <title>Your page title</title>
+            <meta name="description" content="Your page description" />
+          </InertiaHead>
+        `}
+      />
+      <P>
+        See the <A href="/title-and-meta">title & meta page</A> for full documentation.
       </P>
     </>
   )

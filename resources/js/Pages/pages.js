@@ -1,6 +1,6 @@
 import React from 'react'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import { Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Pages',
@@ -10,7 +10,6 @@ const meta = {
     { url: '#creating-layouts', name: 'Creating layouts' },
     { url: '#persistent-layouts', name: 'Persistent layouts' },
     { url: '#default-layouts', name: 'Default layouts' },
-    { url: '#title-and-meta-tags', name: 'Title and meta tags' },
   ],
 }
 
@@ -34,7 +33,8 @@ const Page = () => {
             language: 'twig',
             code: dedent`
               <template>
-                <layout title="Welcome">
+                <layout>
+                  <inertia-head title="Welcome" />
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </layout>
@@ -57,7 +57,8 @@ const Page = () => {
             language: 'twig',
             code: dedent`
               <template>
-                <layout title="Welcome">
+                <layout>
+                  <inertia-head title="Welcome" />
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </layout>
@@ -80,10 +81,12 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import React from 'react'
-              import Layout from './Layout'\n
+              import Layout from './Layout'
+              import { InertiaHead } from '@inertiajs/inertia-react'\n
               export default function Welcome({ user }) {
                 return (
-                  <Layout title="Welcome">
+                  <Layout>
+                    <InertiaHead title="Welcome" />
                     <H1>Welcome</H1>
                     <p>Hello {user.name}, welcome to your first Inertia app!</p>
                   </Layout>
@@ -99,7 +102,10 @@ const Page = () => {
                 import Layout from './Layout.svelte'\n
                 export let user
               </script>\n
-              <Layout title="Welcome">
+              <Layout>
+                <svelte:head>
+                  <title>Welcome</title>
+                </svelte:head>
                 <H1>Welcome</H1>
                 <p>Hello {user.name}, welcome to your first Inertia app!</p>
               </Layout>
@@ -131,22 +137,7 @@ const Page = () => {
                     <slot />
                   </article>
                 </main>
-              </template>\n
-              <script>
-                export default {
-                  props: {
-                    title: String,
-                  },
-                  watch: {
-                    title: {
-                      immediate: true,
-                      handler(title) {
-                        document.title = title
-                      },
-                    },
-                  },
-                }
-              </script>
+              </template>
             `,
             description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
@@ -165,22 +156,7 @@ const Page = () => {
                     <slot />
                   </article>
                 </main>
-              </template>\n
-              <script>
-                export default {
-                  props: {
-                    title: String,
-                  },
-                  watch: {
-                    title: {
-                      immediate: true,
-                      handler(title) {
-                        document.title = title
-                      },
-                    },
-                  },
-                }
-              </script>
+              </template>
             `,
             description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
@@ -190,17 +166,14 @@ const Page = () => {
             code: dedent`
               import React, { useEffect } from 'react'
               import { InertiaLink } from '@inertiajs/inertia-react'\n
-              export default function Layout({ title, children }) {
-                useEffect(() => {
-                  document.title = title;
-                }, [title])\n
+              export default function Layout({ children }) {
                 return (
                   <main>
                     <header>
                       <InertiaLink href="/">Home</InertiaLink>
                       <InertiaLink href="/about">About</InertiaLink>
                       <InertiaLink href="/contact">Contact</InertiaLink>
-                    </header>\n
+                    </header>
                     <article>{children}</article>
                   </main>
                 )
@@ -212,18 +185,14 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import { inertia } from '@inertiajs/inertia-svelte'\n
-                export let title
+                import { inertia } from '@inertiajs/inertia-svelte'
               </script>\n
-              <svelte:head>
-                  <title>{title}</title>
-              </svelte:head>\n
               <main>
                 <header>
                   <a use:inertia href="/">Home</a>
                   <a use:inertia href="/about">About</a>
                   <a use:inertia href="/contact">Contact</a>
-                </header>\n
+                </header>
                 <article>
                   <slot />
                 </article>
@@ -563,132 +532,6 @@ const Page = () => {
           },
         ]}
       />
-      <H2>Title and meta tags</H2>
-      <P>
-        While it's possible to pass title and meta tag props from pages to layouts (as illustrated above), it's often
-        easier to manage this using a document head library like <A href="https://github.com/nuxt/vue-meta">Vue Meta</A>{' '}
-        or <A href="https://github.com/nfl/react-helmet">React Helmet</A>. Svelte has built-in support for manipulating
-        the document head with the <Code>{`<svelte:head>`}</Code> element.
-      </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue 2',
-            language: 'twig',
-            code: dedent`
-              <template>
-                <layout>
-                  <H1>Welcome</H1>
-                  <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </layout>
-              </template>\n
-              <script>
-                import Layout from './Layout'\n
-                export default {
-                  metaInfo() {
-                    return {
-                      title: \`Welcome \${this.user.name}\`,
-                    }
-                  },
-                  components: {
-                    Layout,
-                  },
-                  props: {
-                    user: Object,
-                  },
-                }
-              </script>
-            `,
-            description: "Don't forget to install and configure the Vue Meta package.",
-          },
-          {
-            name: 'Vue 3',
-            language: 'twig',
-            code: dedent`
-              <template>
-                <layout>
-                  <H1>Welcome</H1>
-                  <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </layout>
-              </template>\n
-              <script>
-                import Layout from './Layout'\n
-                export default {
-                  metaInfo() {
-                    return {
-                      title: \`Welcome \${this.user.name}\`,
-                    }
-                  },
-                  components: {
-                    Layout,
-                  },
-                  props: {
-                    user: Object,
-                  },
-                }
-              </script>
-            `,
-            description: "Don't forget to install and configure the Vue Meta package.",
-          },
-          {
-            name: 'React',
-            language: 'jsx',
-            code: dedent`
-              import React from 'react'
-              import Layout from './Layout'
-              import {Helmet} from "react-helmet"\n
-              export default function Welcome({ user }) {
-                return (
-                  <Layout>
-                    <Helmet>
-                      <title>Welcome {user.name}</title>
-                    </Helmet>
-                    <H1>Welcome</H1>
-                    <p>Hello {user.name}, welcome to your first Inertia app!</p>
-                  </Layout>
-                )
-              }
-            `,
-            description: "Don't forget to install and configure the React Helmet package.",
-          },
-          {
-            name: 'Svelte',
-            language: 'html',
-            code: dedent`
-              <script context="module">
-                import Layout from './Layout.svelte'
-                export const layout = Layout
-              </script>\n
-              <script>
-                export let user
-              </script>\n
-              <svelte:head>
-                  <title>Welcome {user.name}</title>
-              </svelte:head>\n
-              <H1>Welcome</H1>
-              <p>Hello {user.name}, welcome to your first Inertia app!</p>
-            `,
-          },
-        ]}
-      />
-      <P>
-        If you're using Vue 3, you can alternatively use the{' '}
-        <A href="https://v3.vuejs.org/guide/teleport.html">teleport</A> feature for this:
-      </P>
-      <CodeBlock
-        language="twig"
-        children={dedent`
-          <template>
-            <teleport to="head">
-              <title>Welcome {{ user.name }}</title>
-            </teleport>
-          </template>
-        `}
-      />
-      <P>
-        Further, if it's critical for your application to set the page title and meta tags server-side, you can use{' '}
-        <A href="/responses#root-template-data">root template data</A> to accomplish this.
-      </P>
     </>
   )
 }
