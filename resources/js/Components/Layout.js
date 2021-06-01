@@ -3,7 +3,7 @@ import Mousetrap from 'mousetrap'
 import Nav from '@/Components/Nav'
 import { Inertia } from '@inertiajs/inertia'
 import TabbedCode from '@/Components/TabbedCode'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { InertiaHead, InertiaLink } from '@inertiajs/inertia-react'
 
 export const CodeTabContext = React.createContext()
