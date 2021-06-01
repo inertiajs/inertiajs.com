@@ -1,6 +1,6 @@
 import React from 'react'
 import dedent from 'dedent-js'
-import { A, Code, Notice, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import { Code, Notice, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Title & meta',
@@ -8,6 +8,7 @@ const meta = {
     { url: '#head-component', name: 'Head component' },
     { url: '#title-shorthand', name: 'Title shorthand' },
     { url: '#multiple-instances', name: 'Multiple instances' },
+    { url: '#extending', name: 'Extending' },
   ],
 }
 
@@ -199,6 +200,109 @@ const Page = () => {
             <meta name="description" content="This is my about page description" />
           </head>
         `}
+      />
+      <H2>Extending</H2>
+      <P>
+        In a real app, it can be helpful to create a custom head component that uses the <Code>{'<inertia-head>'}</Code>{' '}
+        component. This gives you a place to set app-wide defaults, such as appending the app name to the page title.
+        Here's a simple example of what this could look like.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'twig',
+            code: dedent`
+              <template>
+                <inertia-head :title="title ? \`\${title} - My App\` : 'My App'">
+                  <slot />
+                </inertia-head>
+              </template>\n
+              <script>
+              export default {
+                props: {
+                  title: String,
+                },
+              }
+              </script>
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'twig',
+            code: dedent`
+              <template>
+                <inertia-head :title="title ? \`\${title} - My App\` : 'My App'">
+                  <slot />
+                </inertia-head>
+              </template>\n
+              <script>
+              export default {
+                props: {
+                  title: String,
+                },
+              }
+              </script>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import React from 'react'
+              import { InertiaHead } from '@inertiajs/inertia-react'\n
+              const Site = ({ title, children }) => {
+                return (
+                  <InertiaHead>
+                    <title>{title ? \`\${title} - My App\` : 'My App'}</title>
+                    {children}
+                  </InertiaHead>
+                )
+              }\n
+              export default Site
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Not supported
+            `,
+          },
+        ]}
+      />
+      <P>And then use this custom component in your pages:</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'twig',
+            code: dedent`
+              <site-head title="About" />
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'twig',
+            code: dedent`
+              <site-head title="About" />
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+            <SiteHead title="About">
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Not supported
+            `,
+          },
+        ]}
       />
     </>
   )
