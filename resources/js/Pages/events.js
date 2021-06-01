@@ -303,7 +303,7 @@ const Page = () => {
       <H2>Exception</H2>
       <P>
         The <Code>exception</Code> event fires on unexpected XHR errors, such as network interruptions, and for errors
-        generated in the <Code>resolveComponent()</Code> callback.
+        generated when resolving page components.
       </P>
       <CodeBlock
         language="js"

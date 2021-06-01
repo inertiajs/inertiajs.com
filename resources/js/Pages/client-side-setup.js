@@ -61,7 +61,7 @@ const Page = () => {
       <H2>Initialize app</H2>
       <P>
         Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing the
-        client-side framework with the base Inertia page component.
+        client-side framework with the base Inertia component.
       </P>
       <TabbedCode
         examples={[
@@ -69,18 +69,16 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { App, plugin } from '@inertiajs/inertia-vue'
-              import Vue from 'vue'\n
-              Vue.use(plugin)\n
-              const el = document.getElementById('app')\n
-              new Vue({
-                render: h => h(App, {
-                  props: {
-                    initialPage: JSON.parse(el.dataset.page),
-                    resolveComponent: name => require(\`./Pages/\${name}\`).default,
-                  },
-                }),
-              }).$mount(el)
+              import Vue from 'vue'
+              import { createInertiaApp } from '@inertiajs/inertia-vue'\n
+              createInertiaApp({
+                resolve: name => require(\`./Pages/\${name}\`),
+                setup({ el, app, props }) {
+                  new Vue({
+                    render: h => h(app, props),
+                  }).$mount(el)
+                },
+              })
             `,
           },
           {
@@ -88,44 +86,41 @@ const Page = () => {
             language: 'js',
             code: dedent`
               import { createApp, h } from 'vue'
-              import { App, plugin } from '@inertiajs/inertia-vue3'\n
-              const el = document.getElementById('app')\n
-              createApp({
-                render: () => h(App, {
-                  initialPage: JSON.parse(el.dataset.page),
-                  resolveComponent: name => require(\`./Pages/\${name}\`).default,
-                })
-              }).use(plugin).mount(el)\n\n
+              import { createInertiaApp } from '@inertiajs/inertia-vue3'\n
+              createInertiaApp({
+                resolve: (name) => import(\`./Pages/\${name}\`),
+                setup({ el, app, props, plugin }) {
+                  createApp({ render: () => h(app, props) })
+                    .use(plugin)
+                    .mount(el)
+                },
+              })
             `,
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { App } from '@inertiajs/inertia-react'
               import React from 'react'
-              import { render } from 'react-dom'\n
-              const el = document.getElementById('app')\n
-              render(
-                <App
-                  initialPage={JSON.parse(el.dataset.page)}
-                  resolveComponent={name => require(\`./Pages/\${name}\`).default}
-                />,
-                el
-              )
+              import { render } from 'react-dom'
+              import { createInertiaApp } from '@inertiajs/inertia-react'\n
+              createInertiaApp({
+                resolve: name => require(\`./Pages/\${name}\`),
+                setup({ el, App, props }) {
+                  render(<App {...props} />, el)
+                },
+              })
             `,
           },
           {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { App } from '@inertiajs/inertia-svelte'\n
-              const el = document.getElementById('app')\n
-              new App({
-                target: el,
-                props: {
-                  initialPage: JSON.parse(el.dataset.page),
-                  resolveComponent: name => require(\`./Pages/\${name}.svelte\`),
+              import { createInertiaApp } from '@inertiajs/inertia-svelte'\n
+              createInertiaApp({
+                resolve: (name) => import(\`@/Pages/\${name}.svelte\`),
+                setup({ el, App, props }) {
+                  new App({ target: el, props })
                 },
               })
             `,
@@ -133,8 +128,8 @@ const Page = () => {
         ]}
       />
       <P>
-        The <Code>resolveComponent</Code> is a callback that tells Inertia how to load a page component. It receives a
-        page name (string), and should return a page component instance.
+        The <Code>resolve</Code> callback tells Inertia how to load a page component. It receives a page name (string),
+        and should return a page component module.
       </P>
       <H2>Progress indicator</H2>
       <P>
@@ -201,8 +196,8 @@ const Page = () => {
         Laravel Mix 6, as there are known issues with older versions.
       </Notice>
       <P>
-        Finally, update the <Code>resolveComponent</Code> callback in your app initialization to use <Code>import</Code>{' '}
-        instead of <Code>require</Code>.
+        Finally, update the <Code>resolve</Code> callback in your app initialization to use <Code>import</Code> instead
+        of <Code>require</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -210,28 +205,28 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
+              resolve: name => import(\`./Pages/\${name}\`),
             `,
           },
           {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              resolveComponent: name => import(\`./Pages/\${name}\`).then(module => module.default),
+              resolve: name => import(\`./Pages/\${name}\`),
             `,
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              resolveComponent={name => import(\`./Pages/\${name}\`).then(module => module.default)}
+              resolve: name => import(\`./Pages/\${name}\`),
             `,
           },
           {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              resolveComponent: name => import(\`./Pages/\${name}.svelte\`),
+              resolve: name => import(\`./Pages/\${name}.svelte\`),
             `,
           },
         ]}

@@ -1,6 +1,6 @@
 import React from 'react'
 import dedent from 'dedent-js'
-import { Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import { Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Pages',
@@ -399,68 +399,22 @@ const Page = () => {
       />
       <H2>Default layouts</H2>
       <P>
-        If you're using persistent layouts, it's possible to set a default page layout in the{' '}
-        <Code>resolveComponent()</Code> callback.
+        If you're using persistent layouts, it's possible to set a default page layout in the <Code>resolve</Code>{' '}
+        callback.
       </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'\n
-              resolveComponent: name => import(\`./Pages/\${name}\`)
-                .then(({ default: page }) => {
-                  if (page.layout === undefined) {
-                    page.layout = Layout
-                  }
-                  return page
-                }),
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'\n
-              resolveComponent: name => import(\`./Pages/\${name}\`)
-                .then(({ default: page }) => {
-                  if (page.layout === undefined) {
-                    page.layout = Layout
-                  }
-                  return page
-                }),
-            `,
-          },
-          {
-            name: 'React',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'\n
-              resolveComponent: name => import(\`./Pages/\${name}\`)
-                .then(({ default: page }) => {
-                  if (page.layout === undefined) {
-                    page.layout = Layout
-                  }
-                  return page
-                }),
-            `,
-          },
-          {
-            name: 'Svelte',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'\n
-              resolveComponent: name => import(\`./Pages/\${name}\`)
-                .then(page => {
-                  if (page.layout === undefined) {
-                    page.layout = Layout
-                  }
-                  return page
-                }),
-            `,
-          },
-        ]}
+      <CodeBlock
+        language="js"
+        children={dedent`
+          import Layout from './Layout'\n
+          createInertiaApp({
+            resolve: name => {
+              const page = require(\`./Pages/\${name}\`).default
+              page.layout = page.layout || Layout
+              return page
+            },
+            // ...
+          })
+        `}
       />
       <P>
         This will automatically set the page layout to <Code>Layout</Code> if a layout has not already been set for that
@@ -469,68 +423,24 @@ const Page = () => {
       </P>
       <P>
         You can even go a step further and conditionally set the default page layout based on the page <Code>name</Code>
-        , which is available to the <Code>resolveComponent()</Code> method. For example, maybe you don't want the
-        default layout applied to your public pages.
+        , which is available to the <Code>resolve()</Code> method. For example, maybe you don't want the default layout
+        applied to your public pages.
       </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'\n
-              resolveComponent: name => import(\`./Pages/\${name}\`)
-                .then(({ default: page }) => {
-                  if (page.layout === undefined && !name.startsWith('Public/')) {
-                    page.layout = Layout
-                  }
-                  return page
-                }),
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'\n
-              resolveComponent: name => import(\`./Pages/\${name}\`)
-                .then(({ default: page }) => {
-                  if (page.layout === undefined && !name.startsWith('Public/')) {
-                    page.layout = Layout
-                  }
-                  return page
-                }),
-            `,
-          },
-          {
-            name: 'React',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'\n
-              resolveComponent: name => import(\`./Pages/\${name}\`)
-                .then(({ default: page }) => {
-                  if (page.layout === undefined && !name.startsWith('Public/')) {
-                    page.layout = Layout
-                  }
-                  return page
-                }),
-            `,
-          },
-          {
-            name: 'Svelte',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'\n
-              resolveComponent: name => import(\`./Pages/\${name}\`)
-                .then(page => {
-                  if (page.layout === undefined && !name.startsWith('Public/')) {
-                    page.layout = Layout
-                  }
-                  return page
-                }),
-            `,
-          },
-        ]}
+      <CodeBlock
+        language="js"
+        children={dedent`
+          import Layout from './Layout'\n
+          createInertiaApp({
+            resolve: name => {
+              const page = require(\`./Pages/\${name}\`).default
+              if (page.layout === undefined && !name.startsWith('Public/')) {
+                page.layout = Layout
+              }
+              return page
+            },
+            // ...
+          })
+        `}
       />
     </>
   )
