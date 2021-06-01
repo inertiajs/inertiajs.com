@@ -50,13 +50,17 @@ export default function Layout({ meta, children }) {
 
     // Carbon Ads
     Inertia.on('navigate', () => {
-      var s = document.createElement('script')
-      s.setAttribute('async', '')
-      s.src = '//cdn.carbonads.com/carbon.js?serve=CE7DCKJ7&placement=inertiajscom'
-      s.id = '_carbonads_js'
+      const carbonScript = document.getElementById('_carbonads_projs')
+      if (carbonScript) {
+        carbonScript.parentNode.removeChild(carbonScript)
+      }
+      const adScript = document.createElement('script')
+      adScript.setAttribute('async', '')
+      adScript.src = '//cdn.carbonads.com/carbon.js?serve=CE7DCKJ7&placement=inertiajscom'
+      adScript.id = '_carbonads_js'
       var adElement = document.getElementById('ad')
       adElement.innerHTML = ''
-      adElement.appendChild(s)
+      adElement.appendChild(adScript)
     })
   }, [])
 
