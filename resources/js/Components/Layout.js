@@ -14,8 +14,12 @@ const getCurrentCodeTab = tabType => {
 }
 
 export default function Layout({ meta, children }) {
-  const mobileNav = useRef(null)
   const [showMobileNav, setShowMobileNav] = useState(false)
+
+  function toggleMobileNav(event) {
+    event.stopPropagation()
+    setShowMobileNav(!showMobileNav)
+  }
 
   const [codeTabs, setCodeTabsState] = useState({
     frontend: 'Vue 3',
@@ -78,10 +82,7 @@ export default function Layout({ meta, children }) {
         {meta.twitterCardImage && <meta name="twitter:description" content={meta.description} />}
         {meta.twitterCardImage && <meta name="twitter:image" content={meta.twitterCardImage} />}
       </InertiaHead>
-      <div
-        onClick={e => setShowMobileNav(mobileNav.current.contains(e.target))}
-        className="leading-none font-sans text-gray-800 antialiased"
-      >
+      <div onClick={() => setShowMobileNav(false)} className="leading-none font-sans text-gray-800 antialiased">
         {meta.sponsor && (
           <div
             className="px-6 md:px-12 xl:px-0 py-4 text-md font-medium flex items-center justify-center"
@@ -126,7 +127,7 @@ export default function Layout({ meta, children }) {
                   <path d="M11.1 2.2H6.6v13.5h-2V2.2H0V.3h11.1v1.9zM29.1.3v15.4h-2V8.8h-7.5v6.9h-2V.3h2v6.5h7.5V.3h2zM46 13.8v1.9h-9.2V.3h9.1v1.9h-7V7h6.5v1.9h-6.5v4.9H46zM77.2 15.7h-2v-12l-5 8.4h-.3l-5-8.4v12h-2V.3h2.3L70 8.4 74.9.3h2.3v15.4zM84 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.4 0 5.9-2.6 5.9-6zM120.2 8c0 4.3-3.1 7.7-7.3 7.7h-6V.3h6c4.2 0 7.3 3.4 7.3 7.7zm-2 0c0-3.3-2.2-5.8-5.3-5.8h-4v11.5h4c3.1.1 5.3-2.5 5.3-5.7zM136.2 13.8v1.9H127V.3h9.1v1.9h-7V7h6.5v1.9h-6.5v4.9h7.1zM148.8 9.8h-3.6v5.9h-2V.3h6.2c2.6 0 4.8 2.1 4.8 4.8 0 2-1.3 3.8-3.2 4.5l3.6 6.2h-2.3l-3.5-6zm-3.6-1.9h4.1c1.5 0 2.8-1.3 2.8-2.9 0-1.6-1.2-2.9-2.8-2.9h-4.1v5.8zM172.6.3v15.4H171l-8-11.5v11.5h-2V.3h1.7l7.9 11.5V.3h2zM204.6 15.7h-2v-12l-5 8.4h-.3l-5-8.4v12h-2V.3h2.3l4.9 8.1 4.9-8.1h2.3v15.4zM211.5 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.3 0 5.9-2.6 5.9-6zM245.9.3v15.4h-1.6l-7.9-11.5v11.5h-2V.3h1.7l7.9 11.5V.3h1.9zM252.8 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.3 0 5.9-2.6 5.9-6zM284.3 13.8v1.9h-8.7V.3h2v13.5h6.7zM292.8.3v15.4h-2V.3h2zM310.3 2.2h-4.6v13.5h-2V2.2h-4.5V.3h11.1v1.9zM328.3.3v15.4h-2V8.8h-7.5v6.9h-2V.3h2v6.5h7.5V.3h2z" />
                 </svg>
               </InertiaLink>
-              <div ref={mobileNav} className="md:hidden relative z-10">
+              <div onClick={toggleMobileNav} className="md:hidden relative z-10">
                 <button className="block focus:outline-none" type="button">
                   <svg className="block fill-current text-white w-6 h-6" viewBox="0 0 20 20">
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
