@@ -820,6 +820,43 @@ const Page = () => {
           },
         ]}
       />
+      <P>
+        To check if a form has any changes, use the <Code>isDirty</Code> property.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'twig',
+            code: dedent`
+              <div v-if="form.isDirty">There are unsaved form changes.</div>
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'twig',
+            code: dedent`
+              <div v-if="form.isDirty">There are unsaved form changes.</div>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              {errors.isDirty && <div>There are unsaved form changes.</div>}
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              {#if $form.isDirty}
+                <div>There are unsaved form changes.</div>
+              {/if}
+            `,
+          },
+        ]}
+      />
       <H2>File uploads</H2>
       <P>
         When making visits that include files, Inertia will automatically convert the request data into a{' '}
