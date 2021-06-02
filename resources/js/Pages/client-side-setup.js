@@ -131,6 +131,19 @@ const Page = () => {
         The <Code>resolve</Code> callback tells Inertia how to load a page component. It receives a page name (string),
         and should return a page component module.
       </P>
+      <P>
+        By default, Inertia assumes that you have a root element with an <Code>id</Code> of <Code>app</Code>. If
+        different, you can change this using the <Code>id</Code> property.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          createInertiaApp({
+            id: 'my-app',
+            // ...
+          })
+        `}
+      />
       <H2>Progress indicator</H2>
       <P>
         Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one
