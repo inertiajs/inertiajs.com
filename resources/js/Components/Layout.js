@@ -84,17 +84,13 @@ export default function Layout({ meta, children }) {
       </InertiaHead>
       <div onClick={() => setShowMobileNav(false)} className="leading-none font-sans text-gray-800 antialiased">
         {meta.sponsor && (
-          <div
-            className="px-6 md:px-12 xl:px-0 py-4 text-md font-medium flex items-center justify-center"
-            style={{ background: '#92eee2' }}
-          >
-            <svg className="w-5 h-5 fill-current text-purple-500 flex-shrink-0" viewBox="0 0 20 20">
-              <path d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z" />
-            </svg>
-            <div className="mx-2">Support the ongoing development of Inertia.js.</div>
+          <div className="px-6 md:px-12 xl:px-0 py-4 text-md font-medium flex items-center justify-center bg-[#fde9b1]">
+            <div className="mx-2">
+              🚀 Server-side rendering (SSR) is now <span className="whitespace-nowrap">in early access</span>!
+            </div>
             <InertiaLink
-              href="/sponsors"
-              className="px-3 py-1 bg-purple-500 hover:bg-purple-600 rounded-full text-xs text-white leading-tight whitespace-nowrap"
+              href="/server-side-rendering"
+              className="px-3 py-1 bg-orange-500 hover:bg-orange-600 rounded-full text-xs text-white leading-tight whitespace-nowrap"
             >
               Learn more
             </InertiaLink>

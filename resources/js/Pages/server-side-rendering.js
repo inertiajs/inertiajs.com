@@ -1,5 +1,5 @@
 import React from 'react'
-import { A, Code, H1, H2, Layout, Ol, P } from '@/Components'
+import { A, Code, H1, H2, Layout, Notice, Ol, P } from '@/Components'
 
 const meta = {
   title: 'Server-side rendering (SSR)',
@@ -15,18 +15,27 @@ const Page = () => {
   return (
     <>
       <H1>Server-side rendering (SSR)</H1>
+      <Notice>
+        This feature is currently in early access, and is only available to{' '}
+        <A href="/sponsors" color="orange">
+          our sponsors
+        </A>
+        . To gain access to this feature now, please support this project financially by{' '}
+        <A href="https://github.com/sponsors/reinink" color="orange">
+          becoming a sponsor
+        </A>
+        . 🧡
+      </Notice>
       <P>
-        Server-side rendering (SSR) an Inertia app can improve search engine optimization (SEO), and can also reduce the
-        time to <A href="https://web.dev/fcp/">first contentful paint</A> (FCP). To this point, Inertia has not offered
-        server-side rendering. However, official support{' '}
-        <A href="https://twitter.com/reinink/status/1374373761147760654">is coming</A>! This feature will be made
-        available to <A href="/sponsors">our sponsors</A> first. Please consider supporting this project! 💜
+        While Inertia apps are client-side rendered (using Vue, React, or Svelte), it's also possible to have them first
+        rendered server-side on the first page load. This can improve search engine optimization (SEO) and also reduce
+        the time to <A href="https://web.dev/fcp/">first contentful paint</A> (FCP).
       </P>
       <H2>How it works</H2>
       <P>
         The challenge with server-side rendering JavaScript frameworks like Vue, React and Svelte is that they were
         designed to render in the browser, not on a server. Fortunately, thanks to{' '}
-        <A href="https://nodejs.org/">Node.js</A>, it's now possible to also render these frameworks server-side!
+        <A href="https://nodejs.org/">Node.js</A>, it's possible to also render these frameworks server-side!
       </P>
       <P>Vue, React and Svelte all offer SSR tooling, which Inertia can take advantage of. Here's how it works:</P>
       <Ol>
@@ -74,6 +83,11 @@ const Page = () => {
         Also, keep in mind that Inertia only needs to do server-side rendering for the <em>first page load</em>. From
         that point on, you're in "SPA mode", and you just get normal Inertia XHR responses back.
       </P>
+      <Notice>
+        Inertia SSR does not pre-render your pages at build time, but rather server-side renders them on demand, just
+        like a classic server-side rendered application. Which means it works for pages that contain dynamic content,
+        like the currently authenticated user, or data from a database.
+      </Notice>
       <H2>Requirements</H2>
       <P>Okay, what are the gotchas? There are a few technical requirements to be aware of.</P>
       <P>
