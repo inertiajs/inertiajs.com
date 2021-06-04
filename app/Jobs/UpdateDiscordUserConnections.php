@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\DiscordUser;
-use App\Services\Discord\DiscordApi;
+use App\Services\Discord\Discord;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -55,7 +55,7 @@ class UpdateDiscordUserConnections implements ShouldQueue
      */
     public function handle()
     {
-        $response = DiscordApi::actingAs($this->user)->getJson('/users/@me/connections');
+        $response = Discord::asUser($this->user)->getJson('/users/@me/connections');
 
         $connections = Collection::make($response)
             ->filter(fn ($connection) => ! ($connection['revoked'] ?? false))
@@ -63,6 +63,11 @@ class UpdateDiscordUserConnections implements ShouldQueue
             ->mapWithKeys(fn ($item) => [$item['type'] => $item['name']]);
 
         $this->user->github_account = $connections->get('github');
-        $this->user->save();
+
+        if ($this->user->isDirty()) {
+            $this->user->save();
+
+            dispatch(new UpdateDiscordRoleAssignment($this->user));
+        }
     }
 }

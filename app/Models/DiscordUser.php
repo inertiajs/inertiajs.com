@@ -15,4 +15,13 @@ class DiscordUser extends Model
      * @var bool
      */
     protected static $unguarded = true;
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'has_sponsor_role' => 'boolean',
+    ];
 }

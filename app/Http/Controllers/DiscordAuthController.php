@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\UpdateDiscordUserConnections;
 use App\Models\DiscordUser;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
@@ -43,7 +44,7 @@ class DiscordAuthController extends Controller
 
         try {
             $credentials = Socialite::driver('discord')->user();
-        } catch (InvalidStateException $exception) {
+        } catch (InvalidStateException | ClientException $exception) {
             return redirect()->route('discord.auth');
         }
 

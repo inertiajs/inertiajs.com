@@ -3,15 +3,26 @@
 namespace Tests\Unit\Services\Discord;
 
 use App\Models\DiscordUser;
-use App\Services\Discord\DiscordApi;
+use App\Services\Discord\Discord;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-class DiscordApiTest extends TestCase
+class UserTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config([
+            'services.discord.client_id' => '012',
+            'services.discord.client_secret' => '123',
+        ]);
+    }
 
     /** @test */
     public function it_does_not_automatically_renew_tokens_if_the_access_token_is_still_valid(): void
@@ -28,7 +39,7 @@ class DiscordApiTest extends TestCase
             'refresh_token' => 'refresh-token',
         ]);
 
-        $response = DiscordApi::actingAs($user)->getJson('/fake-request');
+        $response = Discord::asUser($user)->getJson('/fake-request');
 
         Http::assertSentCount(1);
         $this->assertEquals('successful', $response['status']);
@@ -55,9 +66,16 @@ class DiscordApiTest extends TestCase
             'refresh_token' => 'old-refresh-token',
         ]);
 
-        $response = DiscordApi::actingAs($user)->getJson('/fake-request');
+        $response = Discord::asUser($user)->getJson('/fake-request');
 
         Http::assertSentCount(3);
+        Http::assertSent(function (Request $request) {
+            return $request->isForm()
+                && $request->method() === 'POST'
+                && $request->url() === 'https://discord.com/api/oauth2/token'
+                && $request->body() === 'client_id=012&client_secret=123&grant_type=refresh_token&refresh_token=old-refresh-token';
+        });
+
         $this->assertEquals('successful', $response['status']);
         tap($user->fresh(), function (DiscordUser $user) {
             $this->assertEquals('new-access-token', $user->access_token);
@@ -79,7 +97,7 @@ class DiscordApiTest extends TestCase
         ]);
 
         try {
-            DiscordApi::actingAs($user)->getJson('/fake-request');
+            Discord::asUser($user)->getJson('/fake-request');
         } catch (RequestException $exception) {
             Http::assertSentCount(2);
             $this->assertEquals('invalid-token', $exception->response->body());
@@ -114,7 +132,7 @@ class DiscordApiTest extends TestCase
         ]);
 
         try {
-            DiscordApi::actingAs($user)->getJson('/fake-request');
+            Discord::asUser($user)->getJson('/fake-request');
         } catch (RequestException $exception) {
             Http::assertSentCount(3);
             $this->assertEquals('unauthorized', $exception->response->body());

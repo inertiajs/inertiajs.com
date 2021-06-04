@@ -2,15 +2,24 @@
 
 namespace Tests\Unit\Jobs;
 
+use App\Jobs\UpdateDiscordRoleAssignment;
 use App\Jobs\UpdateDiscordUserConnections;
 use App\Models\DiscordUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class UpdateDiscordUserConnectionsTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Queue::fake();
+    }
 
     protected function prepareFakeResponse($overrides = [])
     {
@@ -49,6 +58,7 @@ class UpdateDiscordUserConnectionsTest extends TestCase
         (new UpdateDiscordUserConnections($user))->handle();
 
         $this->assertEquals('claudiodekker', $user->fresh()->github_account);
+        Queue::assertPushed(UpdateDiscordRoleAssignment::class);
     }
 
     /** @test */
@@ -62,6 +72,7 @@ class UpdateDiscordUserConnectionsTest extends TestCase
         (new UpdateDiscordUserConnections($user))->handle();
 
         $this->assertNull($user->fresh()->github_account);
+        Queue::assertPushed(UpdateDiscordRoleAssignment::class);
     }
 
     /** @test */
@@ -75,6 +86,7 @@ class UpdateDiscordUserConnectionsTest extends TestCase
         (new UpdateDiscordUserConnections($user))->handle();
 
         $this->assertNull($user->fresh()->github_account);
+        Queue::assertNothingPushed();
     }
 
     /** @test */
@@ -88,5 +100,6 @@ class UpdateDiscordUserConnectionsTest extends TestCase
         (new UpdateDiscordUserConnections($user))->handle();
 
         $this->assertNull($user->fresh()->github_account);
+        Queue::assertNothingPushed();
     }
 }

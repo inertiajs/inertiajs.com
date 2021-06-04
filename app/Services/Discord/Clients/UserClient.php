@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Services\Discord;
+namespace App\Services\Discord\Clients;
 
 use App\Models\DiscordUser;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
-class DiscordApi
+class UserClient
 {
     protected DiscordUser $user;
 
-    protected function __construct(DiscordUser $user)
+    public function __construct(DiscordUser $user)
     {
         $this->user = $user;
-    }
-
-    public static function actingAs(DiscordUser $user): self
-    {
-        return new self($user);
     }
 
     protected function renewTokens(): void

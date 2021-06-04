@@ -20,6 +20,7 @@ class CreateDiscordUsersTable extends Migration
             $table->string('access_token');
             $table->string('refresh_token');
             $table->string('github_account')->nullable()->default(null);
+            $table->boolean('has_sponsor_role')->default(false);
             $table->timestamps();
         });
     }
