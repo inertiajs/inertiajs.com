@@ -11,7 +11,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.4.2",
         "laravel/framework": "^8.40",
-        "laravel/tinker": "^2.5"
+        "laravel/socialite": "^5.2",
+        "laravel/tinker": "^2.5",
+        "socialiteproviders/discord": "^4.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
