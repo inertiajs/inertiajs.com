@@ -19,6 +19,7 @@ class CreateDiscordUsersTable extends Migration
             $table->string('nickname');
             $table->string('access_token');
             $table->string('refresh_token');
+            $table->string('github_account')->nullable()->default(null);
             $table->timestamps();
         });
     }

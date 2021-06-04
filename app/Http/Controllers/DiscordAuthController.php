@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UpdateDiscordUserConnections;
 use App\Models\DiscordUser;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -56,6 +57,8 @@ class DiscordAuthController extends Controller
         $user->access_token = $credentials->token;
         $user->refresh_token = $credentials->refreshToken;
         $user->save();
+
+        $this->dispatch(new UpdateDiscordUserConnections($user));
 
         return redirect()->to('https://discord.com/channels/592327939920494592/592327939920494594');
     }
