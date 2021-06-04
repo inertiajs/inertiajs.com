@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,4 +25,15 @@ class DiscordUser extends Model
     protected $casts = [
         'has_sponsor_role' => 'boolean',
     ];
+
+    /**
+     * Only include Discord users with an active connection.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeActive(Builder $query)
+    {
+        return $query->whereNotNull('refresh_token');
+    }
 }

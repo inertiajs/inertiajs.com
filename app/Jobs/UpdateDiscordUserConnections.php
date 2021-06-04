@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\DiscordUser;
 use App\Services\Discord\Discord;
+use App\Services\Discord\Exceptions\InvalidAuthorizationException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -55,7 +56,11 @@ class UpdateDiscordUserConnections implements ShouldQueue
      */
     public function handle()
     {
-        $response = Discord::asUser($this->user)->getJson('/users/@me/connections');
+        try {
+            $response = Discord::asUser($this->user)->getJson('/users/@me/connections');
+        } catch (InvalidAuthorizationException $exception) {
+            $response = Collection::make([]);
+        }
 
         $connections = Collection::make($response)
             ->filter(fn ($connection) => ! ($connection['revoked'] ?? false))

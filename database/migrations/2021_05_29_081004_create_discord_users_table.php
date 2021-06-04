@@ -17,8 +17,8 @@ class CreateDiscordUsersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('discord_id')->index();
             $table->string('nickname');
-            $table->string('access_token');
-            $table->string('refresh_token');
+            $table->string('access_token')->nullable()->default(null);
+            $table->string('refresh_token')->nullable()->default(null);
             $table->string('github_account')->nullable()->default(null);
             $table->boolean('has_sponsor_role')->default(false);
             $table->timestamps();
