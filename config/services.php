@@ -40,4 +40,8 @@ return [
         'bot_token' => env('DISCORD_BOT_TOKEN'),
     ],
 
+    'github' => [
+        'webhook_secret' => env('GITHUB_WEBHOOK_SECRET')
+    ],
+
 ];

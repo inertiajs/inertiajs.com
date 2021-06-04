@@ -44,7 +44,12 @@ class UpdateDiscordRoleAssignment implements ShouldQueue
             return;
         }
 
-        $isSponsoring = GithubSponsor::where('login', $this->user->github_account)->exists();
+        $isSponsoring = GithubSponsor::where('login', $this->user->github_account)
+            ->where(fn ($query) => $query
+                ->whereNull('cancelled_at')
+                ->orWhere('cancelled_at', '>', now())
+            )
+            ->exists();
 
         // Existing Sponsor
         if ($isSponsoring && $this->user->has_sponsor_role) {

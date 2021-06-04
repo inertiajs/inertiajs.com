@@ -23,6 +23,7 @@ class GithubSponsorFactory extends Factory
     {
         return [
             'login' => $this->faker->userName,
+            'is_organization' => $this->faker->boolean,
         ];
     }
 }
