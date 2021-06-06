@@ -62,6 +62,7 @@ class DiscordAuthTest extends TestCase
     /** @test */
     public function it_redirects_back_to_discord_when_the_authorization_callback_was_invalid(): void
     {
+        Http::fake();
         Socialite::shouldReceive('driver->user')->andThrow(InvalidStateException::class);
 
         $this->get('/discord/authorize/callback?code=123&state=456')
