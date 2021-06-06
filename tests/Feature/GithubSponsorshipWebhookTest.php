@@ -35,9 +35,9 @@ class GithubSponsorshipWebhookTest extends TestCase
     /** @test */
     public function it_creates_the_sponsorship_and_assigns_the_sponsor_role_to_existing_discord_users(): void
     {
-        $userA = DiscordUser::factory()->create(['github_account' => 'monalisa', 'has_sponsor_role' => false]);
-        $userB = DiscordUser::factory()->create(['github_account' => 'monalisa', 'has_sponsor_role' => false]);
-        $userC = DiscordUser::factory()->create(['github_account' => 'claudiodekker', 'has_sponsor_role' => false]);
+        $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => false]);
+        $userB = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => false]);
+        $userC = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
 
         $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'))
             ->assertStatus(200);
@@ -55,8 +55,8 @@ class GithubSponsorshipWebhookTest extends TestCase
     public function it_cancels_the_sponsorship_and_revokes_the_sponsor_role_from_applicable_discord_users(): void
     {
         Carbon::setTestNow('2021-01-01 01:23:45');
-        $userA = DiscordUser::factory()->create(['github_account' => 'monalisa', 'has_sponsor_role' => true]);
-        $userB = DiscordUser::factory()->create(['github_account' => 'claudiodekker', 'has_sponsor_role' => true]);
+        $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
+        $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => true]);
         $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => null]);
 
         $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('cancelled'))
@@ -72,8 +72,8 @@ class GithubSponsorshipWebhookTest extends TestCase
     public function it_creates_a_short_term_sponsorship_and_assigns_the_sponsor_role_to_existing_discord_users_when_an_one_time_sponsorship_is_made(): void
     {
         Carbon::setTestNow('2021-01-01 01:23:45');
-        $userA = DiscordUser::factory()->create(['github_account' => 'monalisa', 'has_sponsor_role' => false]);
-        $userB = DiscordUser::factory()->create(['github_account' => 'claudiodekker', 'has_sponsor_role' => false]);
+        $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => false]);
+        $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
         $sponsor = GithubSponsor::factory()->create([
             'login' => 'monalisa',
             'cancelled_at' => now()->subMonth(),
@@ -92,8 +92,8 @@ class GithubSponsorshipWebhookTest extends TestCase
     public function it_registers_the_cancellation_date_when_a_pending_cancellation_is_received(): void
     {
         Carbon::setTestNow('2019-01-01');
-        $userA = DiscordUser::factory()->create(['github_account' => 'monalisa', 'has_sponsor_role' => true]);
-        $userB = DiscordUser::factory()->create(['github_account' => 'claudiodekker', 'has_sponsor_role' => false]);
+        $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
+        $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
         $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => null]);
 
         $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_cancellation'))
@@ -109,8 +109,8 @@ class GithubSponsorshipWebhookTest extends TestCase
     public function it_changes_to_a_short_term_sponsorship_when_the_tier_is_changed_to_an_one_time_sponsorship(): void
     {
         Carbon::setTestNow('2019-01-01');
-        $userA = DiscordUser::factory()->create(['github_account' => 'monalisa', 'has_sponsor_role' => true]);
-        $userB = DiscordUser::factory()->create(['github_account' => 'claudiodekker', 'has_sponsor_role' => false]);
+        $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
+        $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
         $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => null]);
 
         $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_tier_change_to_one_time'))
@@ -126,8 +126,8 @@ class GithubSponsorshipWebhookTest extends TestCase
     public function it_changes_to_an_indefinite_sponsorship_when_the_tier_will_change_to_a_continuous_sponsorship(): void
     {
         Carbon::setTestNow('2019-01-01');
-        $userA = DiscordUser::factory()->create(['github_account' => 'monalisa', 'has_sponsor_role' => true]);
-        $userB = DiscordUser::factory()->create(['github_account' => 'claudiodekker', 'has_sponsor_role' => false]);
+        $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
+        $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
         $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => '2019-12-30 00:00:00']);
 
         $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_tier_change'))
@@ -143,8 +143,8 @@ class GithubSponsorshipWebhookTest extends TestCase
     public function it_changes_to_an_indefinite_sponsorship_when_the_tier_is_changed_to_a_continuous_sponsorship(): void
     {
         Carbon::setTestNow('2019-01-01');
-        $userA = DiscordUser::factory()->create(['github_account' => 'monalisa', 'has_sponsor_role' => true]);
-        $userB = DiscordUser::factory()->create(['github_account' => 'claudiodekker', 'has_sponsor_role' => false]);
+        $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
+        $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
         $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => '2019-12-30 00:00:00']);
 
         $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('tier_changed'))

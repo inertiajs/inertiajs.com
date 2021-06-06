@@ -23,7 +23,7 @@ class UpdateDiscordRoleAssignmentTest extends TestCase
     public function it_assigns_the_sponsor_role_when_the_user_has_their_github_account_linked_and_is_sponsoring_through_github(): void
     {
         $sponsor = GithubSponsor::factory()->create(['login' => 'foo', 'cancelled_at' => null]);
-        $user = DiscordUser::factory()->create(['github_account' => $sponsor->login, 'has_sponsor_role' => false]);
+        $user = DiscordUser::factory()->create(['github_login' => $sponsor->login, 'has_sponsor_role' => false]);
 
         (new UpdateDiscordRoleAssignment($user))->handle();
 
@@ -34,7 +34,7 @@ class UpdateDiscordRoleAssignmentTest extends TestCase
     /** @test */
     public function it_revokes_the_sponsor_role_when_the_user_has_their_github_account_linked_but_stops_sponsoring_through_github(): void
     {
-        $user = DiscordUser::factory()->create(['github_account' => 'foo', 'has_sponsor_role' => true]);
+        $user = DiscordUser::factory()->create(['github_login' => 'foo', 'has_sponsor_role' => true]);
 
         (new UpdateDiscordRoleAssignment($user))->handle();
 
@@ -45,7 +45,7 @@ class UpdateDiscordRoleAssignmentTest extends TestCase
     /** @test */
     public function it_revokes_the_sponsor_role_when_the_user_unlinks_their_github_account(): void
     {
-        $user = DiscordUser::factory()->create(['github_account' => null, 'has_sponsor_role' => true]);
+        $user = DiscordUser::factory()->create(['github_login' => null, 'has_sponsor_role' => true]);
 
         (new UpdateDiscordRoleAssignment($user))->handle();
 
@@ -57,7 +57,7 @@ class UpdateDiscordRoleAssignmentTest extends TestCase
     public function it_does_nothing_when_the_user_already_has_the_sponsor_role_and_has_a_linked_github_sponsor_account(): void
     {
         $sponsor = GithubSponsor::factory()->create(['login' => 'foo', 'cancelled_at' => null]);
-        $user = DiscordUser::factory()->create(['github_account' => $sponsor->login, 'has_sponsor_role' => true]);
+        $user = DiscordUser::factory()->create(['github_login' => $sponsor->login, 'has_sponsor_role' => true]);
 
         (new UpdateDiscordRoleAssignment($user))->handle();
 
@@ -68,7 +68,7 @@ class UpdateDiscordRoleAssignmentTest extends TestCase
     /** @test */
     public function it_does_nothing_when_the_user_already_has_no_sponsor_role_and_also_no_linked_github_account(): void
     {
-        $user = DiscordUser::factory()->create(['github_account' => null, 'has_sponsor_role' => false]);
+        $user = DiscordUser::factory()->create(['github_login' => null, 'has_sponsor_role' => false]);
 
         (new UpdateDiscordRoleAssignment($user))->handle();
 

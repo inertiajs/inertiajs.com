@@ -52,12 +52,12 @@ class UpdateDiscordUserConnectionsTest extends TestCase
     {
         $this->prepareFakeResponse();
         $user = DiscordUser::factory()->create([
-            'github_account' => null,
+            'github_login' => null,
         ]);
 
         (new UpdateDiscordUserConnections($user))->handle();
 
-        $this->assertEquals('claudiodekker', $user->fresh()->github_account);
+        $this->assertEquals('claudiodekker', $user->fresh()->github_login);
         Queue::assertPushed(UpdateDiscordRoleAssignment::class);
     }
 
@@ -66,12 +66,12 @@ class UpdateDiscordUserConnectionsTest extends TestCase
     {
         $this->prepareFakeResponse(['type' => 'google']);
         $user = DiscordUser::factory()->create([
-            'github_account' => 'claudiodekker',
+            'github_login' => 'claudiodekker',
         ]);
 
         (new UpdateDiscordUserConnections($user))->handle();
 
-        $this->assertNull($user->fresh()->github_account);
+        $this->assertNull($user->fresh()->github_login);
         Queue::assertPushed(UpdateDiscordRoleAssignment::class);
     }
 
@@ -80,12 +80,12 @@ class UpdateDiscordUserConnectionsTest extends TestCase
     {
         $this->prepareFakeResponse(['verified' => false]);
         $user = DiscordUser::factory()->create([
-            'github_account' => null,
+            'github_login' => null,
         ]);
 
         (new UpdateDiscordUserConnections($user))->handle();
 
-        $this->assertNull($user->fresh()->github_account);
+        $this->assertNull($user->fresh()->github_login);
         Queue::assertNothingPushed();
     }
 
@@ -94,12 +94,12 @@ class UpdateDiscordUserConnectionsTest extends TestCase
     {
         $this->prepareFakeResponse(['revoked' => true]);
         $user = DiscordUser::factory()->create([
-            'github_account' => null,
+            'github_login' => null,
         ]);
 
         (new UpdateDiscordUserConnections($user))->handle();
 
-        $this->assertNull($user->fresh()->github_account);
+        $this->assertNull($user->fresh()->github_login);
         Queue::assertNothingPushed();
     }
 
@@ -108,7 +108,7 @@ class UpdateDiscordUserConnectionsTest extends TestCase
     {
         Http::fake(['https://discord.com/api*' => Http::response('invalid', 401)]);
         $user = DiscordUser::factory()->create([
-            'github_account' => 'claudiodekker',
+            'github_login' => 'claudiodekker',
             'access_token' => 'abcd',
             'refresh_token' => 'abcd',
         ]);
@@ -116,7 +116,7 @@ class UpdateDiscordUserConnectionsTest extends TestCase
         (new UpdateDiscordUserConnections($user))->handle();
 
         tap($user->fresh(), function (DiscordUser $user) {
-            $this->assertNull($user->github_account);
+            $this->assertNull($user->github_login);
             $this->assertNull($user->access_token);
             $this->assertNull($user->refresh_token);
         });

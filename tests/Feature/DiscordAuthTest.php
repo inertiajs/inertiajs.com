@@ -108,7 +108,7 @@ class DiscordAuthTest extends TestCase
         $this->assertEquals('Claudio Dekker#3220', $user->nickname);
         $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
         $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->refresh_token);
-        $this->assertEquals('claudiodekker', $user->github_account);
+        $this->assertEquals('claudiodekker', $user->github_login);
         $this->assertTrue($user->has_sponsor_role);
     }
 
@@ -148,7 +148,7 @@ class DiscordAuthTest extends TestCase
         $this->assertEquals('Claudio Dekker#3220', $user->nickname);
         $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
         $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->refresh_token);
-        $this->assertEquals('claudiodekker', $user->github_account);
+        $this->assertEquals('claudiodekker', $user->github_login);
         $this->assertFalse($user->has_sponsor_role);
     }
 
@@ -189,7 +189,7 @@ class DiscordAuthTest extends TestCase
         $this->assertEquals('Claudio Dekker#3220', $user->nickname);
         $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
         $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->refresh_token);
-        $this->assertEquals('claudiodekker', $user->github_account);
+        $this->assertEquals('claudiodekker', $user->github_login);
         $this->assertFalse($user->has_sponsor_role);
     }
 
@@ -221,7 +221,7 @@ class DiscordAuthTest extends TestCase
         $this->assertEquals('Claudio Dekker#3220', $user->nickname);
         $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
         $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->refresh_token);
-        $this->assertNull($user->github_account);
+        $this->assertNull($user->github_login);
         $this->assertFalse($user->has_sponsor_role);
     }
 }

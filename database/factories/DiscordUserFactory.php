@@ -26,7 +26,7 @@ class DiscordUserFactory extends Factory
             'nickname' => $this->faker->name,
             'access_token' => $this->faker->uuid,
             'refresh_token' => $this->faker->uuid,
-            'github_account' => $this->faker->userName,
+            'github_login' => $this->faker->userName,
             'has_sponsor_role' => $this->faker->boolean,
         ];
     }

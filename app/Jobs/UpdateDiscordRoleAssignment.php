@@ -35,16 +35,16 @@ class UpdateDiscordRoleAssignment implements ShouldQueue
     public function handle()
     {
         // Github Account Unlinked.
-        if ($this->user->has_sponsor_role && is_null($this->user->github_account)) {
+        if ($this->user->has_sponsor_role && is_null($this->user->github_login)) {
             return $this->revokeSponsorRole();
         }
 
         // No Github Account, and not a sponsor.
-        if (is_null($this->user->github_account)) {
+        if (is_null($this->user->github_login)) {
             return;
         }
 
-        $isSponsoring = GithubSponsor::where('login', $this->user->github_account)
+        $isSponsoring = GithubSponsor::where('login', $this->user->github_login)
             ->where(fn ($query) => $query
                 ->whereNull('cancelled_at')
                 ->orWhere('cancelled_at', '>', now())

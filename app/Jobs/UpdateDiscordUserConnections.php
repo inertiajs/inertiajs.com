@@ -67,7 +67,7 @@ class UpdateDiscordUserConnections implements ShouldQueue
             ->filter(fn ($connection) => $connection['verified'])
             ->mapWithKeys(fn ($item) => [$item['type'] => $item['name']]);
 
-        $this->user->github_account = $connections->get('github');
+        $this->user->github_login = $connections->get('github');
 
         if ($this->user->isDirty()) {
             $this->user->save();

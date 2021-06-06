@@ -33,6 +33,6 @@ class GithubSponsor extends Model
      */
     public function discordUsers(): HasMany
     {
-        return $this->hasMany(DiscordUser::class, 'github_account', 'login');
+        return $this->hasMany(DiscordUser::class, 'github_login', 'login');
     }
 }
