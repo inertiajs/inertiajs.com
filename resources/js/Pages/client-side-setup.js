@@ -88,7 +88,7 @@ const Page = () => {
               import { createApp, h } from 'vue'
               import { createInertiaApp } from '@inertiajs/inertia-vue3'\n
               createInertiaApp({
-                resolve: (name) => import(\`./Pages/\${name}\`),
+                resolve: name => require(\`./Pages/\${name}\`),
                 setup({ el, app, props, plugin }) {
                   createApp({ render: () => h(app, props) })
                     .use(plugin)
@@ -118,7 +118,7 @@ const Page = () => {
             code: dedent`
               import { createInertiaApp } from '@inertiajs/inertia-svelte'\n
               createInertiaApp({
-                resolve: (name) => import(\`@/Pages/\${name}.svelte\`),
+                resolve: name => require(\`@/Pages/\${name}.svelte\`),
                 setup({ el, App, props }) {
                   new App({ target: el, props })
                 },
