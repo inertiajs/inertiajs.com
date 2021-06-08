@@ -38,7 +38,9 @@ Route::get('/releases', function() {
     ]);
 });
 
-Route::get('{page?}', function($page = 'index') {
+Route::get('releases/{slug}', function($slug) {
+    $page = "releases/$slug";
+
     if ($redirect = oldReleaseRedirect($page)) {
         return Redirect::to($redirect, 301);
     }
@@ -47,8 +49,26 @@ Route::get('{page?}', function($page = 'index') {
         App::abort(404);
     }
 
+    $parts = explode('-', $slug);
+
+    if (count($parts) === 6) {
+        $parts[1] = $parts[0].'-'.$parts[1];
+        $parts = array_splice($parts, 1);
+    }
+
+    return Inertia::render($page, [
+        'title' => $parts[0].'@'.$parts[1],
+        'date' => Date::createFromDate($parts[2], $parts[3], $parts[4])->format('F j, Y'),
+    ]);
+});
+
+Route::get('{page?}', function($page = 'index') {
+    if (!file_exists(resource_path("js/Pages/$page.js"))) {
+        App::abort(404);
+    }
+
     return Inertia::render($page);
-})->where('page', '.*');
+});
 
 function oldReleaseRedirect($page) {
     $oldReleases = [
