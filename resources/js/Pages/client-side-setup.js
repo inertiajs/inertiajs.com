@@ -118,7 +118,7 @@ const Page = () => {
             code: dedent`
               import { createInertiaApp } from '@inertiajs/inertia-svelte'\n
               createInertiaApp({
-                resolve: name => require(\`@/Pages/\${name}.svelte\`),
+                resolve: name => require(\`./Pages/\${name}.svelte\`),
                 setup({ el, App, props }) {
                   new App({ target: el, props })
                 },
