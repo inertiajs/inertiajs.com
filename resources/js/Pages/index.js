@@ -2,7 +2,6 @@ import React from 'react'
 import { A, H1, H2, Layout, P } from '@/Components'
 
 const meta = {
-  title: 'Home',
   description:
     'Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers.',
   hero: true,
