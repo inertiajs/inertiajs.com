@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Redirect;
 
 Route::get('/releases', function() {
     return Inertia::render('releases', [
+        'all' => Request::boolean('all'),
         'releases' => Collection::make(glob(resource_path('js/Pages/releases').'/*.js'))
             ->map(function ($path) {
                 $slug = substr(basename($path), 0, -3);
@@ -34,7 +35,14 @@ Route::get('/releases', function() {
                     'version' => $parts[1],
                     'date' => Date::createFromDate($parts[2], $parts[3], $parts[4])->format('F j, Y'),
                 ];
-            })->sortByDesc('version')->values()
+            })
+            ->sortByDesc('version')
+            ->groupBy('library')
+            ->map(function ($releases, $library) {
+                return Request::boolean('all')
+                    ? $releases
+                    : $releases->take(5);
+            })
     ]);
 });
 

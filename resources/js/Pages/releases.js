@@ -14,7 +14,7 @@ const meta = {
   ],
 }
 
-const Page = ({ releases }) => {
+const Page = ({ all, releases }) => {
   const libraries = [
     'inertia',
     'inertia-vue',
@@ -28,18 +28,27 @@ const Page = ({ releases }) => {
   return (
     <>
       <H1>Releases</H1>
+      <div className="-mt-8 mb-12 text-base font-medium text-gray-600">
+        {all ? (
+          <>
+            Showing all (<A href="/releases">show latest</A>)
+          </>
+        ) : (
+          <>
+            Showing the latest (<A href="/releases?all=true">show all</A>)
+          </>
+        )}
+      </div>
       {libraries.map(library => (
         <div key={library}>
           <H2>{library}</H2>
           <Ul>
-            {releases
-              .filter(release => release.library === library)
-              .map(release => (
-                <Li key={release.slug}>
-                  <A href={`/releases/${release.slug}`}>v{release.version}</A>
-                  <span className="ml-2 text-sm text-gray-600">({release.date})</span>
-                </Li>
-              ))}
+            {releases[library].map(release => (
+              <Li key={release.slug}>
+                <A href={`/releases/${release.slug}`}>v{release.version}</A>
+                <span className="ml-2 text-sm text-gray-600">({release.date})</span>
+              </Li>
+            ))}
           </Ul>
         </div>
       ))}
