@@ -20,7 +20,7 @@ const Page = () => {
       <CodeBlock
         language="php"
         children={dedent`
-          use Inertia\Testing\Assert;\n
+          use Inertia\\Testing\\Assert;\n
           class PodcastsControllerTest extends TestCase
           {
               public function test_can_view_podcast()

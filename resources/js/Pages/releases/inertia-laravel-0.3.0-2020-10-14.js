@@ -33,8 +33,8 @@ const Page = () => {
           protected $middlewareGroups = [
               'web' => [
                   ...
-                  \Illuminate\Routing\Middleware\SubstituteBindings::class,
-          +       \App\Http\Middleware\HandleInertiaRequests::class,
+                  \\Illuminate\\Routing\\Middleware\\SubstituteBindings::class,
+          +       \\App\\Http\\Middleware\\HandleInertiaRequests::class,
               ],
         `}
       />
@@ -52,16 +52,16 @@ const Page = () => {
         language="php"
         children={dedent`
           <?php\n
-          namespace App\Http\Middleware;\n
-          use Illuminate\Http\Request;
-          use Inertia\Middleware;\n
+          namespace App\\Http\\Middleware;\n
+          use Illuminate\\Http\\Request;
+          use Inertia\\Middleware;\n
           class HandleInertiaRequests extends Middleware
           {
               /**
                * Determines the current asset version.
                *
                * @see https://inertiajs.com/asset-versioning
-               * @param  \Illuminate\Http\Request  $request
+               * @param  \\Illuminate\\Http\\Request  $request
                * @return string|null
                */
               public function version(Request $request)
@@ -72,7 +72,7 @@ const Page = () => {
                * Defines the props that are shared by default.
                *
                * @see https://inertiajs.com/shared-data
-               * @param  \Illuminate\Http\Request  $request
+               * @param  \\Illuminate\\Http\\Request  $request
                * @return array
                */
               public function share(Request $request)
