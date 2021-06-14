@@ -20,8 +20,7 @@ const Page = () => {
       <H2>Submitting forms</H2>
       <P>
         While it's possible to make classic form submissions with Inertia, it's not recommended, as they cause full page
-        reloads. Instead, it's better to intercept form submissions and then make the <A href="/requests">request</A>{' '}
-        using Inertia.
+        reloads. Instead, it's better to intercept form submissions and then make the request using Inertia.
       </P>
       <TabbedCode
         examples={[
