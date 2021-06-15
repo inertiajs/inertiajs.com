@@ -27,8 +27,8 @@ export default release(
         protected $middlewareGroups = [
             'web' => [
                 ...
-                \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        +       \App\Http\Middleware\HandleInertiaRequests::class,
+                \\Illuminate\\Routing\\Middleware\\SubstituteBindings::class,
+        +       \\App\\Http\\Middleware\\HandleInertiaRequests::class,
             ],
       `}
     />
@@ -46,16 +46,16 @@ export default release(
       language="php"
       children={dedent`
         <?php\n
-        namespace App\Http\Middleware;\n
-        use Illuminate\Http\Request;
-        use Inertia\Middleware;\n
+        namespace App\\Http\\Middleware;\n
+        use Illuminate\\Http\\Request;
+        use Inertia\\Middleware;\n
         class HandleInertiaRequests extends Middleware
         {
             /**
              * Determines the current asset version.
              *
              * @see https://inertiajs.com/asset-versioning
-             * @param  \Illuminate\Http\Request  $request
+             * @param  \\Illuminate\\Http\\Request  $request
              * @return string|null
              */
             public function version(Request $request)
@@ -66,7 +66,7 @@ export default release(
              * Defines the props that are shared by default.
              *
              * @see https://inertiajs.com/shared-data
-             * @param  \Illuminate\Http\Request  $request
+             * @param  \\Illuminate\\Http\\Request  $request
              * @return array
              */
             public function share(Request $request)
