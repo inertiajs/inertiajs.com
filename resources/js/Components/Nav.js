@@ -163,6 +163,11 @@ const Nav = ({ className }) => {
           </InertiaLink>
         </li>
         <li className="md:pr-3">
+          <InertiaLink href="/testing" className={linkClass('/testing')}>
+            Testing
+          </InertiaLink>
+        </li>
+        <li className="md:pr-3">
           <InertiaLink href="/partial-reloads" className={linkClass('/partial-reloads')}>
             Partial reloads
           </InertiaLink>
