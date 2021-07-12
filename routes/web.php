@@ -36,7 +36,7 @@ Route::get('/releases', function() {
                     'date' => Date::createFromDate($parts[2], $parts[3], $parts[4])->format('F j, Y'),
                 ];
             })
-            ->sortByDesc('version')
+            ->sortByDesc('version', SORT_NATURAL)
             ->groupBy('library')
             ->map(function ($releases, $library) {
                 return Request::boolean('all')
