@@ -53,6 +53,9 @@ const Page = () => {
         <Li>
           <A href="https://github.com/aleksblendwerk/pingcrm-symfony">Symfony/Vue</A> by Aleks Seltenreich
         </Li>
+        <Li>
+          <A href="https://github.com/prestancedesign/pingcrm-clojure">Clojure/Vue</A> by Michaël Salihi
+        </Li>
       </Ul>
     </>
   )
