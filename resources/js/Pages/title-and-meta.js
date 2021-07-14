@@ -7,6 +7,7 @@ const meta = {
   links: [
     { url: '#head-component', name: 'Head component' },
     { url: '#title-shorthand', name: 'Title shorthand' },
+    { url: '#title-callback', name: 'Title callback' },
     { url: '#multiple-instances', name: 'Multiple instances' },
     { url: '#extending', name: 'Extending' },
   ],
@@ -106,6 +107,114 @@ const Page = () => {
             code: dedent`
               import { Head } from '@inertiajs/inertia-react'\n
               <Head title="Your page title" />
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Not supported
+            `,
+          },
+        ]}
+      />
+      <H2>Title callback</H2>
+      <P>
+        You can globally modify the page <Code>{'<title>'}</Code> using the <Code>title</Code> callback in the{' '}
+        <Code>createInertiaApp</Code> setup method. A common use case for this is automatically adding an app name
+        before or after each page title.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          createInertiaApp({
+            title: title => \`\${title} - My App\`,
+            // ...
+          })
+        `}
+      />
+      <P>
+        Now when you set a title using the <Code>{'<Head>'}</Code> component, this function will be automatically
+        called.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'jsx',
+            code: dedent`
+              import { Head } from '@inertiajs/inertia-vue'\n
+              <Head title="Home">
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'jsx',
+            code: dedent`
+              import { Head } from '@inertiajs/inertia-vue3'\n
+              <Head title="Home">
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { Head } from '@inertiajs/inertia-react'\n
+              <Head title="Home">
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Not supported
+            `,
+          },
+        ]}
+      />
+      <P>
+        Which, in this example, will result in the following <Code>{'<title>'}</Code> tag:
+      </P>
+      <CodeBlock
+        language="html"
+        children={dedent`
+          <title>Home - My App</title>
+        `}
+      />
+      <P>
+        This also works if you set the title using a <Code>{'<title>'}</Code> tag within your <Code>{'<Head>'}</Code>{' '}
+        component:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'jsx',
+            code: dedent`
+              import { Head } from '@inertiajs/inertia-vue'\n
+              <Head>
+                <title>Home</title>
+              </Head>
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'jsx',
+            code: dedent`
+              import { Head } from '@inertiajs/inertia-vue3'\n
+              <Head>
+                <title>Home</title>
+              </Head>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { Head } from '@inertiajs/inertia-react'\n
+              <Head>
+                <title>Home</title>
+              </Head>
             `,
           },
           {
