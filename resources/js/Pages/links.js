@@ -28,8 +28,8 @@ const Page = () => {
       </P>
       <H2>Creating links</H2>
       <P>
-        To create an Inertia link, use the Inertia link component. Note, any attributes you provide will be proxied to
-        the underlying tag.
+        To create an Inertia link, use the Inertia <Code>{'<Link>'}</Code> component. Note, any attributes you provide
+        will be proxied to the underlying tag.
       </P>
       <TabbedCode
         examples={[
