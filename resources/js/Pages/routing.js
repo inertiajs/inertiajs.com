@@ -125,7 +125,7 @@ const Page = () => {
       <CodeBlock
         language="html"
         children={dedent`
-          <inertia-link :href="$route('users.create')">Create User</inertia-link>
+          <Link :href="$route('users.create')">Create User</Link>
         `}
       />
       <P>

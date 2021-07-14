@@ -55,33 +55,33 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/" preserve-scroll>Home</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/" preserve-scroll>Home</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/" preserve-scroll>Home</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/" preserve-scroll>Home</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink preserveScroll href="/">Home</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link preserveScroll href="/">Home</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
-              <InertiaLink href="/" preserveScroll>Home</InertiaLink>
+              <Link href="/" preserveScroll>Home</Link>
             `,
           },
         ]}

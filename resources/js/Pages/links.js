@@ -37,33 +37,33 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/">Home</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/">Home</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/">Home</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/">Home</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink href="/">Home</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link href="/">Home</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <a href="/" use:inertia>Home</a>\n
-              <InertiaLink href="/">Home</InertiaLink>
+              <Link href="/">Home</Link>
             `,
             description: 'The use:inertia directive can be applied to any HTML element.',
           },
@@ -79,7 +79,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/logout" method="post" as="button" type="button">Logout</inertia-link>\n
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/logout" method="post" as="button" type="button">Logout</Link>\n
               // Renders as:
               <button type="button">Logout</button>
             `,
@@ -88,7 +89,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/logout" method="post" as="button" type="button">Logout</inertia-link>\n
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/logout" method="post" as="button" type="button">Logout</Link>\n
               // Renders as:
               <button type="button">Logout</button>
             `,
@@ -97,8 +99,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink href="/logout" method="post" as="button" type="button">Logout</InertiaLink>\n
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link href="/logout" method="post" as="button" type="button">Logout</Link>\n
               // Renders as:
               <button type="button">Logout</button>
             `,
@@ -134,33 +136,33 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/logout" method="post">Logout</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/logout" method="post">Logout</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/logout" method="post">Logout</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/logout" method="post">Logout</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink href="/logout" method="post">Logout</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link href="/logout" method="post">Logout</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <a href="/logout" use:inertia="{{ method: 'post' }}">Logout</a>\n
-              <InertiaLink href="/logout" method="post">Logout</InertiaLink>
+              <Link href="/logout" method="post">Logout</Link>
             `,
           },
         ]}
@@ -176,32 +178,32 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/endpoint" method="post" :data="{ foo: bar }">Save</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-svelte'\n
-              <InertiaLink href="/endpoint" method="post" data={{ foo: bar }}>Save</InertiaLink>
+              import { Link } from '@inertiajs/inertia-svelte'\n
+              <Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
             `,
           },
         ]}
@@ -217,33 +219,33 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/endpoint" :headers="{ foo: bar }">Save</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink href="/endpoint" headers={{ foo: bar }}>Save</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link href="/endpoint" headers={{ foo: bar }}>Save</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>\n
-              <InertiaLink href="/endpoint" headers={{ foo: bar}}>Save</InertiaLink>
+              <Link href="/endpoint" headers={{ foo: bar}}>Save</Link>
             `,
           },
         ]}
@@ -261,33 +263,33 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/" replace>Home</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/" replace>Home</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/" replace>Home</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/" replace>Home</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink replace href="/">Home</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link replace href="/">Home</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <a href="/" use:inertia="{{ replace: true }}">Home</a>\n
-              <InertiaLink href="/" replace>Home</InertiaLink>
+              <Link href="/" replace>Home</Link>
             `,
           },
         ]}
@@ -304,37 +306,37 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
+              import { Link } from '@inertiajs/inertia-vue'\n
               <input v-model="query" type="text" />\n
-              <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
+              <Link href="/search" :data="{ query }" preserve-state>Search</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
+              import { Link } from '@inertiajs/inertia-vue3'\n
               <input v-model="query" type="text" />\n
-              <inertia-link href="/search" :data="{ query }" preserve-state>Search</inertia-link>
+              <Link href="/search" :data="{ query }" preserve-state>Search</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
+              import { Link } from '@inertiajs/inertia-react'\n
               <input onChange={this.handleChange} value={query} />\n
-              <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
+              <Link href="/search" data={query} preserveState>Search</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <input on:change={handleChange} value={query} />\n
               <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>\n
-              <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
+              <Link href="/search" data={query} preserveState>Search</Link>
             `,
           },
         ]}
@@ -350,33 +352,33 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/" preserve-scroll>Home</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/" preserve-scroll>Home</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/" preserve-scroll>Home</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/" preserve-scroll>Home</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink preserveScroll href="/">Home</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link preserveScroll href="/">Home</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
-              <InertiaLink href="/" preserveScroll>Home</InertiaLink>
+              <Link href="/" preserveScroll>Home</Link>
             `,
           },
         ]}
@@ -395,33 +397,33 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
-              <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
+              <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
         ]}

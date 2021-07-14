@@ -62,35 +62,35 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
-              <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
-              <inertia-link href="/users?active=true" :only="['users']">Show active</inertia-link>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
-              <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
+              import { Link } from '@inertiajs/inertia-react'\n
+              <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
           {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, InertiaLink } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
               <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
-              <InertiaLink href="/users?active=true" only={['users']}>Show active</InertiaLink>
+              <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
         ]}

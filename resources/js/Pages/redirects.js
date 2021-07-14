@@ -16,8 +16,8 @@ const Page = () => {
     <>
       <H1>Redirects</H1>
       <P>
-        When making a non-GET Inertia request, via <Code>{`<inertia-link>`}</Code> or manually, be sure to always
-        respond with a proper Inertia response.
+        When making a non-GET Inertia request, via <Code>{`<Link>`}</Code> or manually, be sure to always respond with a
+        proper Inertia response.
       </P>
       <P>
         For example, if you're creating a new user, have your "store" endpoint return a redirect back to a standard GET

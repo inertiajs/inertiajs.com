@@ -34,15 +34,17 @@ const Page = () => {
             code: dedent`
               <template>
                 <layout>
-                  <inertia-head title="Welcome" />
+                  <Head title="Welcome" />
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </layout>
               </template>\n
               <script>
-                import Layout from './Layout'\n
+                import Layout from './Layout'
+                import { Head } from '@inertiajs/inertia-vue'\n
                 export default {
                   components: {
+                    Head,
                     Layout,
                   },
                   props: {
@@ -58,15 +60,17 @@ const Page = () => {
             code: dedent`
               <template>
                 <layout>
-                  <inertia-head title="Welcome" />
+                  <Head title="Welcome" />
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </layout>
               </template>\n
               <script>
-                import Layout from './Layout'\n
+                import Layout from './Layout'
+                import { Head } from '@inertiajs/inertia-vue3'\n
                 export default {
                   components: {
+                    Head,
                     Layout,
                   },
                   props: {
@@ -82,11 +86,11 @@ const Page = () => {
             code: dedent`
               import React from 'react'
               import Layout from './Layout'
-              import { InertiaHead } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/inertia-react'\n
               export default function Welcome({ user }) {
                 return (
                   <Layout>
-                    <InertiaHead title="Welcome" />
+                    <Head title="Welcome" />
                     <H1>Welcome</H1>
                     <p>Hello {user.name}, welcome to your first Inertia app!</p>
                   </Layout>
@@ -129,17 +133,24 @@ const Page = () => {
               <template>
                 <main>
                   <header>
-                    <inertia-link href="/">Home</inertia-link>
-                    <inertia-link href="/about">About</inertia-link>
-                    <inertia-link href="/contact">Contact</inertia-link>
+                    <Link href="/">Home</Link>
+                    <Link href="/about">About</Link>
+                    <Link href="/contact">Contact</Link>
                   </header>
                   <article>
                     <slot />
                   </article>
                 </main>
-              </template>
+              </template>\n
+              <script>
+              import { Link } from '@inertiajs/inertia-vue'\n
+              export default {
+                components: {
+                  Link,
+                }
+              }
+              </script>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
@@ -148,31 +159,38 @@ const Page = () => {
               <template>
                 <main>
                   <header>
-                    <inertia-link href="/">Home</inertia-link>
-                    <inertia-link href="/about">About</inertia-link>
-                    <inertia-link href="/contact">Contact</inertia-link>
+                    <Link href="/">Home</Link>
+                    <Link href="/about">About</Link>
+                    <Link href="/contact">Contact</Link>
                   </header>
                   <article>
                     <slot />
                   </article>
                 </main>
-              </template>
+              </template>\n
+              <script>
+              import { Link } from '@inertiajs/inertia-vue3'\n
+              export default {
+                components: {
+                  Link,
+                }
+              }
+              </script>
             `,
-            description: 'The <inertia-link> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
               import React, { useEffect } from 'react'
-              import { InertiaLink } from '@inertiajs/inertia-react'\n
+              import { Link } from '@inertiajs/inertia-react'\n
               export default function Layout({ children }) {
                 return (
                   <main>
                     <header>
-                      <InertiaLink href="/">Home</InertiaLink>
-                      <InertiaLink href="/about">About</InertiaLink>
-                      <InertiaLink href="/contact">Contact</InertiaLink>
+                      <Link href="/">Home</Link>
+                      <Link href="/about">About</Link>
+                      <Link href="/contact">Contact</Link>
                     </header>
                     <article>{children}</article>
                   </main>

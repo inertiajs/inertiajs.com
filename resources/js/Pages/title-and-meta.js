@@ -19,50 +19,50 @@ const Page = () => {
       <P>
         Since JavaScript apps are rendered within the document <Code>{'<body>'}</Code>, they are unable to render markup
         to the document <Code>{'<head>'}</Code>, as it's outside of their scope. To help with this, Inertia ships with
-        an <Code>{'<inertia-head>'}</Code> component, which can be used to set the page <Code>{'<title>'}</Code>,{' '}
+        an <Code>{'<Head>'}</Code> component, which can be used to set the page <Code>{'<title>'}</Code>,{' '}
         <Code>{'<meta>'}</Code> tags, and other <Code>{'<head>'}</Code> elements.
       </P>
       <Notice>
-        Note, the <Code color="orange">{'<inertia-head>'}</Code> component is not available in the Svelte adapter, as
-        Svelte already ships with a <Code color="orange">{'<svelte:head>'}</Code> component.
+        Note, the <Code color="orange">{'<Head>'}</Code> component is not available in the Svelte adapter, as Svelte
+        already ships with a <Code color="orange">{'<svelte:head>'}</Code> component.
       </Notice>
       <H2>Head component</H2>
       <P>
-        To add <Code>{'<head>'}</Code> elements to your page, use the <Code>{'<inertia-head>'}</Code> component:
+        To add <Code>{'<head>'}</Code> elements to your page, use the <Code>{'<Head>'}</Code> component:
       </P>
       <TabbedCode
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
-              <inertia-head>
+              import { Head } from '@inertiajs/inertia-vue'\n
+              <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description">
-              </inertia-head>
+              </Head>
             `,
-            description: 'The <inertia-head> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
-              <inertia-head>
+              import { Head } from '@inertiajs/inertia-vue3'\n
+              <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description">
-              </inertia-head>
+              </Head>
             `,
-            description: 'The <inertia-head> component is automatically registered by the Inertia plugin.',
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaHead } from '@inertiajs/inertia-react'\n
-              <InertiaHead>
+              import { Head } from '@inertiajs/inertia-react'\n
+              <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description" />
-              </InertiaHead>
+              </Head>
             `,
           },
           {
@@ -80,30 +80,32 @@ const Page = () => {
       />
       <H2>Title shorthand</H2>
       <P>
-        You can also pass through the page title as a prop to the <Code>{'<inertia-head>'}</Code> component:
+        You can also pass through the page title as a prop to the <Code>{'<Head>'}</Code> component:
       </P>
       <TabbedCode
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
-              <inertia-head title="Your page title" />
+              import { Head } from '@inertiajs/inertia-vue'\n
+              <Head title="Your page title" />
             `,
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
-              <inertia-head title="Your page title" />
+              import { Head } from '@inertiajs/inertia-vue3'\n
+              <Head title="Your page title" />
             `,
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { InertiaHead } from '@inertiajs/inertia-react'\n
-              <InertiaHead title="Your page title" />
+              import { Head } from '@inertiajs/inertia-react'\n
+              <Head title="Your page title" />
             `,
           },
           {
@@ -117,43 +119,47 @@ const Page = () => {
       />
       <H2>Multiple instances</H2>
       <P>
-        It's possible to have multiple instances of the <Code>{'<inertia-head>'}</Code> component throughout your
-        application. For example, your layout can set defaults, and then your pages can overide those defaults.
+        It's possible to have multiple instances of the <Code>{'<Head>'}</Code> component throughout your application.
+        For example, your layout can set defaults, and then your pages can overide those defaults.
       </P>
       <TabbedCode
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
-              <!-- Layout.vue -->\n
-              <inertia-head>
+              // Layout.vue\n
+              import { Head } from '@inertiajs/inertia-vue'\n
+              <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-              </inertia-head>\n
-              <!-- About.vue -->\n
-              <inertia-head>
+              </Head>\n
+              // About.vue\n
+              import { Head } from '@inertiajs/inertia-vue'\n
+              <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
-              </inertia-head>
+              </Head>
             `,
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
-              <!-- Layout.vue -->\n
-              <inertia-head>
+              // Layout.vue\n
+              import { Head } from '@inertiajs/inertia-vue3'\n
+              <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-              </inertia-head>\n
-              <!-- About.vue -->\n
-              <inertia-head>
+              </Head>\n
+              // About.vue\n
+              import { Head } from '@inertiajs/inertia-vue3'\n
+              <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
-              </inertia-head>
+              </Head>
             `,
           },
           {
@@ -161,18 +167,18 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               // Layout.js\n
-              import { InertiaHead } from '@inertiajs/inertia-react'\n
-              <InertiaHead>
+              import { Head } from '@inertiajs/inertia-react'\n
+              <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-              </InertiaHead>\n
+              </Head>\n
               // About.js\n
-              import { InertiaHead } from '@inertiajs/inertia-react'\n
-              <InertiaHead>
+              import { Head } from '@inertiajs/inertia-react'\n
+              <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
-              </InertiaHead>
+              </Head>
             `,
           },
           {
@@ -203,7 +209,7 @@ const Page = () => {
       />
       <H2>Extending</H2>
       <P>
-        In a real app, it can be helpful to create a custom head component that uses the <Code>{'<inertia-head>'}</Code>{' '}
+        In a real app, it can be helpful to create a custom head component that uses the <Code>{'<Head>'}</Code>{' '}
         component. This gives you a place to set app-wide defaults, such as appending the app name to the page title.
         Here's a simple example of what this could look like.
       </P>
@@ -213,13 +219,18 @@ const Page = () => {
             name: 'Vue 2',
             language: 'twig',
             code: dedent`
+              <!-- AppHead.vue -->\n
               <template>
-                <inertia-head :title="title ? \`\${title} - My App\` : 'My App'">
+                <Head :title="title ? \`\${title} - My App\` : 'My App'">
                   <slot />
-                </inertia-head>
+                </Head>
               </template>\n
               <script>
+              import { Head } from '@inertiajs/inertia-vue'\n
               export default {
+                components: {
+                  Head,
+                },
                 props: {
                   title: String,
                 },
@@ -231,13 +242,18 @@ const Page = () => {
             name: 'Vue 3',
             language: 'twig',
             code: dedent`
+              <!-- AppHead.vue -->\n
               <template>
-                <inertia-head :title="title ? \`\${title} - My App\` : 'My App'">
+                <Head :title="title ? \`\${title} - My App\` : 'My App'">
                   <slot />
-                </inertia-head>
+                </Head>
               </template>\n
               <script>
+              import { Head } from '@inertiajs/inertia-vue3'\n
               export default {
+                components: {
+                  Head,
+                },
                 props: {
                   title: String,
                 },
@@ -249,14 +265,15 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
+              // AppHead.js\n
               import React from 'react'
-              import { InertiaHead } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/inertia-react'\n
               const Site = ({ title, children }) => {
                 return (
-                  <InertiaHead>
+                  <Head>
                     <title>{title ? \`\${title} - My App\` : 'My App'}</title>
                     {children}
-                  </InertiaHead>
+                  </Head>
                 )
               }\n
               export default Site
@@ -278,21 +295,21 @@ const Page = () => {
             name: 'Vue 2',
             language: 'twig',
             code: dedent`
-              <site-head title="About" />
+              <AppHead title="About" />
             `,
           },
           {
             name: 'Vue 3',
             language: 'twig',
             code: dedent`
-              <site-head title="About" />
+              <AppHead title="About" />
             `,
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-            <SiteHead title="About">
+            <AppHead title="About">
             `,
           },
           {

@@ -26,9 +26,9 @@ const Page = () => {
       </P>
       <P>
         At its core Inertia is essentially a client-side routing library. It allows you to make page visits without
-        forcing a full page reload. This is done using the <Code>{`<inertia-link>`}</Code> component, a light wrapper
-        around a normal anchor link. When you click an Inertia link, Inertia intercepts the click and makes the visit
-        via XHR instead. Worth noting, you can also make these visits programmatically in JavaScript using{' '}
+        forcing a full page reload. This is done using the <Code>{`<Link>`}</Code> component, a light wrapper around a
+        normal anchor link. When you click an Inertia link, Inertia intercepts the click and makes the visit via XHR
+        instead. Worth noting, you can also make these visits programmatically in JavaScript using{' '}
         <Code>Inertia.visit()</Code>.
       </P>
       <P>

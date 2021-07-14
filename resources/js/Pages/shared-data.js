@@ -102,117 +102,95 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            description: 'Access shared data using the $page property or the usePage() hook.',
             language: 'twig',
             code: dedent`
               <template>
                 <main>
                   <header>
-                    <div>You are logged in as: {{ user.name }}</div>
-                    <nav>
-                      <inertia-link href="/">Home</inertia-link>
-                      <inertia-link href="/about">About</inertia-link>
-                      <inertia-link href="/contact">Contact</inertia-link>
-                    </nav>
+                    You are logged in as: {{ user.name }}
                   </header>
                   <content>
                     <slot />
                   </content>
-                  <footer></footer>
                 </main>
               </template>\n
               <script>
-                export default {
-                  computed: {
-                    user() {
-                      return this.$page.props.auth.user
-                    }
+              export default {
+                computed: {
+                  user() {
+                    return this.$page.props.auth.user
                   }
                 }
+              }
               </script>
             `,
+            description: 'Access shared data using the $page property.',
           },
           {
             name: 'Vue 3',
-            description: 'Access shared data using the $page property or the usePage() hook.',
             language: 'twig',
             code: dedent`
               <template>
                 <main>
                   <header>
-                    <div>You are logged in as: {{ user.name }}</div>
-                    <nav>
-                      <inertia-link href="/">Home</inertia-link>
-                      <inertia-link href="/about">About</inertia-link>
-                      <inertia-link href="/contact">Contact</inertia-link>
-                    </nav>
+                    You are logged in as: {{ user.name }}
                   </header>
                   <content>
                     <slot />
                   </content>
-                  <footer></footer>
                 </main>
               </template>\n
               <script>
-                import { computed } from 'vue'
-                import { usePage } from '@inertiajs/inertia-vue3'\n
-                export default {
-                  setup() {
-                    const user = computed(() => usePage().props.value.auth.user)
-                    return { user }
-                  },
-                }
+              import { computed } from 'vue'
+              import { usePage } from '@inertiajs/inertia-vue3'\n
+              export default {
+                setup() {
+                  const user = computed(() => usePage().props.value.auth.user)
+                  return { user }
+                },
+              }
               </script>
             `,
+            description: 'Access shared data using the $page property or the usePage() hook.',
           },
           {
             name: 'React',
-            description: 'Access shared data using the usePage() hook.',
             language: 'jsx',
             code: dedent`
-              import { InertiaLink, usePage } from '@inertiajs/inertia-react'\n
+              import { usePage } from '@inertiajs/inertia-react'\n
               export default function Layout({ children }) {
                 const { auth } = usePage().props\n
                 return (
                   <main>
                     <header>
-                      <div>You are logged in as: {auth.user.name}</div>
-                      <nav>
-                        <InertiaLink href="/">Home</InertiaLink>
-                        <InertiaLink href="/about">About</InertiaLink>
-                        <InertiaLink href="/contact">Contact</InertiaLink>
-                      </nav>
+                      You are logged in as: {auth.user.name}
                     </header>
-                    <content>{children}</content>
-                    <footer></footer>
+                    <content>
+                      {children}
+                    </content>
                   </main>
                 )
               }
             `,
+            description: 'Access shared data using the usePage() hook.',
           },
           {
             name: 'Svelte',
-            description: 'Access shared data using the $page store.',
             language: 'html',
             code: dedent`
               <script>
-                import { inertia, page } from '@inertiajs/inertia-svelte'
+                import { page } from '@inertiajs/inertia-svelte'
               </script>\n
               <main>
                 <header>
-                  <div>You are logged in as: {$page.props.auth.user.name}</div>
-                  <nav>
-                    <a use:inertia href="/">Home</a>
-                    <a use:inertia href="/about">About</a>
-                    <a use:inertia href="/contact">Contact</a>
-                  </nav>
+                  You are logged in as: {$page.props.auth.user.name}
                 </header>
                 <content>
                   <slot />
                 </content>
-                <footer></footer>
               </main>
             `,
+            description: 'Access shared data using the $page store.',
           },
         ]}
       />
