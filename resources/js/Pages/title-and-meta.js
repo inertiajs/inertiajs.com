@@ -402,15 +402,17 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
+              import AppHead from './AppHead'\n
               <AppHead title="About" />
             `,
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'jsx',
             code: dedent`
+              import AppHead from './AppHead'\n
               <AppHead title="About" />
             `,
           },
@@ -418,7 +420,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-            <AppHead title="About">
+              import AppHead from './AppHead'\n
+              <AppHead title="About">
             `,
           },
           {
