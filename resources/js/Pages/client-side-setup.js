@@ -73,9 +73,9 @@ const Page = () => {
               import { createInertiaApp } from '@inertiajs/inertia-vue'\n
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}\`),
-                setup({ el, app, props }) {
+                setup({ el, App, props }) {
                   new Vue({
-                    render: h => h(app, props),
+                    render: h => h(App, props),
                   }).$mount(el)
                 },
               })
@@ -89,8 +89,8 @@ const Page = () => {
               import { createInertiaApp } from '@inertiajs/inertia-vue3'\n
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}\`),
-                setup({ el, app, props, plugin }) {
-                  createApp({ render: () => h(app, props) })
+                setup({ el, App, props, plugin }) {
+                  createApp({ render: () => h(App, props) })
                     .use(plugin)
                     .mount(el)
                 },
