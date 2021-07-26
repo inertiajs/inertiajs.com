@@ -33,11 +33,11 @@ const Page = () => {
             language: 'twig',
             code: dedent`
               <template>
-                <layout>
+                <Layout>
                   <Head title="Welcome" />
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </layout>
+                </Layout>
               </template>\n
               <script>
                 import Layout from './Layout'
@@ -59,11 +59,11 @@ const Page = () => {
             language: 'twig',
             code: dedent`
               <template>
-                <layout>
+                <Layout>
                   <Head title="Welcome" />
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </layout>
+                </Layout>
               </template>\n
               <script>
                 import Layout from './Layout'
