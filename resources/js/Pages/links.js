@@ -14,6 +14,7 @@ const meta = {
     { url: '#preserve-state', name: 'Preserve state' },
     { url: '#preserve-scroll', name: 'Preserve scroll' },
     { url: '#partial-reloads', name: 'Partial reloads' },
+    { url: '#active-states', name: 'Active states' },
   ],
 }
 
@@ -430,6 +431,85 @@ const Page = () => {
       />
       <P>
         For more information, see the <A href="/partial-reloads">partial reloads</A> page.
+      </P>
+      <H2>Active states</H2>
+      <P>
+        It's often desireable to set an active state for navigation links based on the current page. This can be done in
+        Inertia using the <Code>page</Code> object by doing string comparisons against the <Code>page.url</Code> and{' '}
+        <Code>page.component</Code> properties.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'jsx',
+            code: dedent`
+              import { Link } from '@inertiajs/inertia-vue'\n
+              // URL exact match
+              <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>\n
+              // Component exact match
+              <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>\n
+              // URL starts with (/users, /users/create, /users/1, etc.)
+              <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>\n
+              // Component starts with (Users/Index, Users/Create, Users/Show, etc.)
+              <Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'jsx',
+            code: dedent`
+              import { Link } from '@inertiajs/inertia-vue'\n
+              // URL exact match
+              <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>\n
+              // Component exact match
+              <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>\n
+              // URL starts with (/users, /users/create, /users/1, etc.)
+              <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>\n
+              // Component starts with (Users/Index, Users/Create, Users/Show, etc.)
+              <Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { usePage } from '@inertiajs/inertia-react'\n
+              const { url, component } = usePage()\n
+              // URL exact match
+              <Link href="/users" className={url === '/users' ? 'active' : ''}>Users</Link>\n
+              // Component exact match
+              <Link href="/users" className={component === 'Users/Index' ? 'active' : ''}>Users</Link>\n
+              // URL starts with (/users, /users/create, /users/1, etc.)
+              <Link href="/users" className={url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>\n
+              // Component starts with (Users/Index, Users/Create, Users/Show, etc.)
+              <Link href="/users" className={component.startsWith('Users') === 'Users/Index' ? 'active' : ''}>Users</Link>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'jsx',
+            code: dedent`
+              import { page } from '@inertiajs/inertia-svelte'\n
+              // URL exact match
+              <Link href="/users" class={$page.url === '/users' ? 'active' : ''}>Users</Link>\n
+              // Component exact match
+              <Link href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</Link>\n
+              // URL starts with (/users, /users/create, /users/1, etc.)
+              <Link href="/users" class={$page.url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>\n
+              // Component starts with (Users/Index, Users/Create, Users/Show, etc.)
+              <Link href="/users" class={$page.component.startsWith('Users') === 'Users/Index' ? 'active' : ''}>Users</Link>
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can do exact matches (<Code>===</Code>), or <Code>startsWith()</Code> checks (useful for matching a subset
+        of pages), or even more complex comparisons using regular expressions.
+      </P>
+      <P>
+        What's nice about this approach is that you're not limited to just setting class names. You can use this
+        technique to conditionally render any markup on active state, such as different link text, or even an SVG icon.
       </P>
     </>
   )
