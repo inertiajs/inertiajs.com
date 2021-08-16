@@ -363,7 +363,7 @@ const Page = () => {
                 export default {
                   // Using a render function
                   layout: (h, page) => {
-                    return h(Layout, () => h(GreenLayout, () => page))
+                    return h(SiteLayout, () => h(NestedLayout, () => page))
                   },\n
                   // Using the shorthand
                   layout: [SiteLayout, NestedLayout],\n
