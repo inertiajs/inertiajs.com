@@ -151,7 +151,6 @@ const Page = () => {
               this.$inertia.put(url, data, options)
               this.$inertia.patch(url, data, options)
               this.$inertia.delete(url, options)
-              this.$inertia.replace(url, options)
               this.$inertia.reload(options) // Uses the current URL
             `,
           },
@@ -165,7 +164,6 @@ const Page = () => {
               this.$inertia.put(url, data, options)
               this.$inertia.patch(url, data, options)
               this.$inertia.delete(url, options)
-              this.$inertia.replace(url, options)
               this.$inertia.reload(options) // Uses the current URL
             `,
           },
@@ -179,7 +177,6 @@ const Page = () => {
               Inertia.put(url, data, options)
               Inertia.patch(url, data, options)
               Inertia.delete(url, options)
-              Inertia.replace(url, options)
               Inertia.reload(options) // Uses the current URL
             `,
           },
@@ -193,7 +190,6 @@ const Page = () => {
               Inertia.put(url, data, options)
               Inertia.patch(url, data, options)
               Inertia.delete(url, options)
-              Inertia.replace(url, options)
               Inertia.reload(options) // Uses the current URL
             `,
           },
