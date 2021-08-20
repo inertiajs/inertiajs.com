@@ -15,16 +15,16 @@ class UpdateDiscordRoleAssignment implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public DiscordUser $user;
+    public DiscordUser $discordUser;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(DiscordUser $user)
+    public function __construct(DiscordUser $discordUser)
     {
-        $this->user = $user;
+        $this->discordUser = $discordUser;
     }
 
     /**
@@ -34,54 +34,54 @@ class UpdateDiscordRoleAssignment implements ShouldQueue
      */
     public function handle()
     {
+        $noGithubAccount = is_null($this->discordUser->github_login);
+        $hasSponsorRole = $this->discordUser->has_sponsor_role;
+
         // Github Account Unlinked.
-        if ($this->user->has_sponsor_role && is_null($this->user->github_login)) {
+        if ($noGithubAccount && $hasSponsorRole) {
             return $this->revokeSponsorRole();
         }
 
         // No Github Account, and not a sponsor.
-        if (is_null($this->user->github_login)) {
+        if ($noGithubAccount) {
             return;
         }
 
-        $isSponsoring = GithubSponsor::where('login', $this->user->github_login)
-            ->where(fn ($query) => $query
-                ->whereNull('cancelled_at')
-                ->orWhere('cancelled_at', '>', now())
-            )
-            ->exists();
+        /** @var ?GithubSponsor $githubSponsor */
+        $githubSponsor = optional($this->discordUser->githubUser)->githubSponsor;
+        $isSponsoring = optional($githubSponsor)->sponsoring ?? false;
 
         // Existing Sponsor
-        if ($isSponsoring && $this->user->has_sponsor_role) {
+        if ($isSponsoring && $hasSponsorRole) {
             return;
         }
 
         // New Sponsor
-        if ($isSponsoring && ! $this->user->has_sponsor_role) {
+        if ($isSponsoring && ! $hasSponsorRole) {
             return $this->assignSponsorRole();
         }
 
         // Sponsorship Cancelled
-        if (! $isSponsoring && $this->user->has_sponsor_role) {
+        if (! $isSponsoring && $hasSponsorRole) {
             return $this->revokeSponsorRole();
         }
     }
 
     protected function assignSponsorRole(): void
     {
-        $this->user->has_sponsor_role = true;
+        $this->discordUser->has_sponsor_role = true;
 
-        Discord::asBot()->assignSponsorRole($this->user);
+        Discord::asBot()->assignSponsorRole($this->discordUser);
 
-        $this->user->save();
+        $this->discordUser->save();
     }
 
     protected function revokeSponsorRole(): void
     {
-        $this->user->has_sponsor_role = false;
+        $this->discordUser->has_sponsor_role = false;
 
-        Discord::asBot()->revokeSponsorRole($this->user);
+        Discord::asBot()->revokeSponsorRole($this->discordUser);
 
-        $this->user->save();
+        $this->discordUser->save();
     }
 }

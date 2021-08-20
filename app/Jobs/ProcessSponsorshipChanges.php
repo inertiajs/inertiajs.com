@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Models\DiscordUser;
 use App\Models\GithubSponsor;
+use App\Models\GithubUser;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,16 +15,16 @@ class ProcessSponsorshipChanges implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public GithubSponsor $sponsor;
+    public GithubSponsor $githubSponsor;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(GithubSponsor $sponsor)
+    public function __construct(GithubSponsor $githubSponsor)
     {
-        $this->sponsor = $sponsor;
+        $this->githubSponsor = $githubSponsor;
     }
 
     /**
@@ -34,8 +34,15 @@ class ProcessSponsorshipChanges implements ShouldQueue
      */
     public function handle()
     {
-        $this->sponsor->discordUsers->each(function (DiscordUser $user) {
-            dispatch(new UpdateDiscordRoleAssignment($user));
+        if (! $this->githubSponsor->is_organization) {
+            GithubUser::firstOrCreate(
+                ['github_api_id' => $this->githubSponsor->github_api_id],
+                ['github_api_login' => $this->githubSponsor->github_api_login, 'github_sponsor_id' => $this->githubSponsor->id],
+            );
+        }
+
+        $this->githubSponsor->githubUsers->each(function (GithubUser $githubUser) {
+            dispatch(new UpdateGithubUserPerks($githubUser));
         });
     }
 }

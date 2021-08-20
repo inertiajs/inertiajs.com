@@ -16,12 +16,17 @@ class GithubWebbhooksController extends Controller
      */
     public function sponsorship(GithubWebhookRequest $request)
     {
+        abort_if(! $request->isJson(), 415, 'Content-Type must be application/json');
+        abort_if(! $request->has('sponsorship.sponsor.id'), 422, 'Unsupported Hook Type.');
+
         $action = $request->input('action', 'cancelled');
 
-        $sponsor = GithubSponsor::firstOrNew(
-            ['login' => $request->input('sponsorship.sponsor.login')],
-            ['is_organization' => $request->input('sponsorship.sponsor.type') === 'Organization'],
-        );
+        $sponsor = GithubSponsor::firstOrNew([
+            'github_api_id' => $request->input('sponsorship.sponsor.id'),
+        ], [
+            'github_api_login' => $request->input('sponsorship.sponsor.login'),
+            'is_organization' => $request->input('sponsorship.sponsor.type') === 'Organization',
+        ]);
 
         $oneTimeDonation = $request->input('sponsorship.tier.is_one_time', false);
         $effectiveDate = Carbon::parse($request->input('effective_date', 'now'));

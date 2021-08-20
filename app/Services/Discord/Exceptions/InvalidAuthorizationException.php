@@ -2,16 +2,16 @@
 
 namespace App\Services\Discord\Exceptions;
 
-use Exception;
 use Illuminate\Http\Client\RequestException;
 use RuntimeException;
+use Throwable;
 
 class InvalidAuthorizationException extends RuntimeException
 {
     /**
      * The underlying Exception.
      */
-    public ?Exception $originalException = null;
+    public ?Throwable $originalException = null;
 
     /**
      * Create a new instance of InvalidAuthorizationException using a RequestException.

@@ -28,7 +28,7 @@ class BotTest extends TestCase
     /** @test */
     public function it_assigns_the_sponsor_role(): void
     {
-        $user = DiscordUser::factory()->create(['discord_id' => 345]);
+        $user = DiscordUser::factory()->create(['discord_api_id' => 345]);
 
         Discord::asBot()->assignSponsorRole($user);
 
@@ -43,7 +43,7 @@ class BotTest extends TestCase
     /** @test */
     public function it_revokes_the_sponsor_role(): void
     {
-        $user = DiscordUser::factory()->create(['discord_id' => 345]);
+        $user = DiscordUser::factory()->create(['discord_api_id' => 345]);
 
         Discord::asBot()->revokeSponsorRole($user);
 

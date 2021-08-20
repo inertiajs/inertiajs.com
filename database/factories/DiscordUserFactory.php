@@ -22,10 +22,10 @@ class DiscordUserFactory extends Factory
     public function definition()
     {
         return [
-            'discord_id' => $this->faker->randomNumber(8),
-            'nickname' => $this->faker->name,
-            'access_token' => $this->faker->uuid,
-            'refresh_token' => $this->faker->uuid,
+            'discord_api_id' => $this->faker->randomNumber(8),
+            'discord_api_access_token' => $this->faker->uuid,
+            'discord_api_refresh_token' => $this->faker->uuid,
+            'discord_api_nickname' => $this->faker->name,
             'github_login' => $this->faker->userName,
             'has_sponsor_role' => $this->faker->boolean,
         ];

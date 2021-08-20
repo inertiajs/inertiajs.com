@@ -47,10 +47,10 @@ class DiscordAuthController extends Controller
             return redirect()->route('discord.auth');
         }
 
-        $user = DiscordUser::firstOrNew(['discord_id' => $credentials->id]);
-        $user->nickname = $credentials->getNickname();
-        $user->access_token = $credentials->token;
-        $user->refresh_token = $credentials->refreshToken;
+        $user = DiscordUser::firstOrNew(['discord_api_id' => $credentials->id]);
+        $user->discord_api_nickname = $credentials->getNickname();
+        $user->discord_api_access_token = $credentials->token;
+        $user->discord_api_refresh_token = $credentials->refreshToken;
         $user->save();
 
         dispatch(new UpdateDiscordUserConnections($user));

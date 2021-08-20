@@ -15,7 +15,8 @@ class CreateGithubSponsorsTable extends Migration
     {
         Schema::create('github_sponsors', function (Blueprint $table) {
             $table->id();
-            $table->string('login');
+            $table->unsignedBigInteger('github_api_id');
+            $table->string('github_api_login');
             $table->boolean('is_organization')->default(false);
             $table->timestamp('cancelled_at')->nullable()->default(null);
             $table->timestamps();

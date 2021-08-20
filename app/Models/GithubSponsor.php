@@ -24,15 +24,26 @@ class GithubSponsor extends Model
      */
     protected $casts = [
         'cancelled_at' => 'datetime',
+        'is_organization' => 'bool',
     ];
 
     /**
-     * The Discord users that have this Github account connected to their profiles.
+     * Whether the Sponsorship is still active or not.
+     *
+     * @return bool
+     */
+    public function getSponsoringAttribute()
+    {
+        return is_null($this->cancelled_at) || $this->cancelled_at->isFuture();
+    }
+
+    /**
+     * The Github Users that are benefiting from this Sponsorship.
      *
      * @return HasMany
      */
-    public function discordUsers(): HasMany
+    public function githubUsers(): HasMany
     {
-        return $this->hasMany(DiscordUser::class, 'github_login', 'login');
+        return $this->hasMany(GithubUser::class);
     }
 }

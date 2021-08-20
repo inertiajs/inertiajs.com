@@ -15,10 +15,10 @@ class CreateDiscordUsersTable extends Migration
     {
         Schema::create('discord_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('discord_id')->index();
-            $table->string('nickname');
-            $table->string('access_token')->nullable()->default(null);
-            $table->string('refresh_token')->nullable()->default(null);
+            $table->unsignedBigInteger('discord_api_id')->index();
+            $table->string('discord_api_access_token')->nullable()->default(null);
+            $table->string('discord_api_refresh_token')->nullable()->default(null);
+            $table->string('discord_api_nickname');
             $table->string('github_login')->nullable()->default(null);
             $table->boolean('has_sponsor_role')->default(false);
             $table->timestamps();

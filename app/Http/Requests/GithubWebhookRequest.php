@@ -19,7 +19,7 @@ class GithubWebhookRequest extends FormRequest
         }
 
         $signature = $this->headers->get('X-Hub-Signature-256', '');
-        $hash = 'sha256=' . hash_hmac('sha256', (string) $this->getContent(), $secret);
+        $hash = 'sha256='.hash_hmac('sha256', (string) $this->getContent(), $secret);
 
         return hash_equals($hash, $signature);
     }

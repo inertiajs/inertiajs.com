@@ -109,16 +109,16 @@ class UpdateDiscordUserConnectionsTest extends TestCase
         Http::fake(['https://discord.com/api*' => Http::response('invalid', 401)]);
         $user = DiscordUser::factory()->create([
             'github_login' => 'claudiodekker',
-            'access_token' => 'abcd',
-            'refresh_token' => 'abcd',
+            'discord_api_access_token' => 'abcd',
+            'discord_api_refresh_token' => 'abcd',
         ]);
 
         (new UpdateDiscordUserConnections($user))->handle();
 
         tap($user->fresh(), function (DiscordUser $user) {
             $this->assertNull($user->github_login);
-            $this->assertNull($user->access_token);
-            $this->assertNull($user->refresh_token);
+            $this->assertNull($user->discord_api_access_token);
+            $this->assertNull($user->discord_api_refresh_token);
         });
         Queue::assertPushed(UpdateDiscordRoleAssignment::class);
     }

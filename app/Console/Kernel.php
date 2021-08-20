@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CheckDiscordUsers::class)->everySixHours();
+        $schedule->command(CheckDiscordUsers::class)->hourly();
     }
 
     /**

@@ -36,16 +36,16 @@ class UpdateDiscordUserConnections implements ShouldQueue
     /**
      * @var DiscordUser
      */
-    public $user;
+    public $discordUser;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(DiscordUser $user)
+    public function __construct(DiscordUser $discordUser)
     {
-        $this->user = $user;
+        $this->discordUser = $discordUser;
     }
 
     /**
@@ -57,7 +57,7 @@ class UpdateDiscordUserConnections implements ShouldQueue
     public function handle()
     {
         try {
-            $response = Discord::asUser($this->user)->getJson('/users/@me/connections');
+            $response = Discord::asUser($this->discordUser)->getJson('/users/@me/connections');
         } catch (InvalidAuthorizationException $exception) {
             $response = Collection::make([]);
         }
@@ -67,12 +67,12 @@ class UpdateDiscordUserConnections implements ShouldQueue
             ->filter(fn ($connection) => $connection['verified'])
             ->mapWithKeys(fn ($item) => [$item['type'] => $item['name']]);
 
-        $this->user->github_login = $connections->get('github');
+        $this->discordUser->github_login = $connections->get('github');
 
-        if ($this->user->isDirty()) {
-            $this->user->save();
+        if ($this->discordUser->isDirty()) {
+            $this->discordUser->save();
 
-            dispatch(new UpdateDiscordRoleAssignment($this->user));
+            dispatch(new UpdateDiscordRoleAssignment($this->discordUser));
         }
     }
 }

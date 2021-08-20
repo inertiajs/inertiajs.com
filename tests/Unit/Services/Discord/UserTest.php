@@ -36,8 +36,8 @@ class UserTest extends TestCase
         ]);
 
         $user = DiscordUser::factory()->create([
-            'access_token' => 'access-token',
-            'refresh_token' => 'refresh-token',
+            'discord_api_access_token' => 'access-token',
+            'discord_api_refresh_token' => 'refresh-token',
         ]);
 
         $response = Discord::asUser($user)->getJson('/fake-request');
@@ -63,8 +63,8 @@ class UserTest extends TestCase
         ]);
 
         $user = DiscordUser::factory()->create([
-            'access_token' => 'old-access-token',
-            'refresh_token' => 'old-refresh-token',
+            'discord_api_access_token' => 'old-access-token',
+            'discord_api_refresh_token' => 'old-refresh-token',
         ]);
 
         $response = Discord::asUser($user)->getJson('/fake-request');
@@ -79,8 +79,8 @@ class UserTest extends TestCase
 
         $this->assertEquals('successful', $response['status']);
         tap($user->fresh(), function (DiscordUser $user) {
-            $this->assertEquals('new-access-token', $user->access_token);
-            $this->assertEquals('new-refresh-token', $user->refresh_token);
+            $this->assertEquals('new-access-token', $user->discord_api_access_token);
+            $this->assertEquals('new-refresh-token', $user->discord_api_refresh_token);
         });
     }
 
@@ -99,8 +99,8 @@ class UserTest extends TestCase
         ]);
 
         $user = DiscordUser::factory()->create([
-            'access_token' => 'old-access-token',
-            'refresh_token' => 'old-refresh-token',
+            'discord_api_access_token' => 'old-access-token',
+            'discord_api_refresh_token' => 'old-refresh-token',
         ]);
 
         try {
@@ -109,8 +109,8 @@ class UserTest extends TestCase
             Http::assertSentCount(3);
             $this->assertEquals('unauthorized', $exception->response->body());
             tap($user->fresh(), function (DiscordUser $user) {
-                $this->assertEquals('new-access-token', $user->access_token);
-                $this->assertEquals('new-refresh-token', $user->refresh_token);
+                $this->assertEquals('new-access-token', $user->discord_api_access_token);
+                $this->assertEquals('new-refresh-token', $user->discord_api_refresh_token);
             });
 
             return;
@@ -128,8 +128,8 @@ class UserTest extends TestCase
         ]);
 
         $user = DiscordUser::factory()->create([
-            'access_token' => 'old-access-token',
-            'refresh_token' => 'old-refresh-token',
+            'discord_api_access_token' => 'old-access-token',
+            'discord_api_refresh_token' => 'old-refresh-token',
         ]);
 
         try {
@@ -138,8 +138,8 @@ class UserTest extends TestCase
             Http::assertSentCount(2);
             $this->assertEquals('invalid-token', $exception->originalException->response->body());
             tap($user->fresh(), function (DiscordUser $user) {
-                $this->assertNull($user->access_token);
-                $this->assertNull($user->refresh_token);
+                $this->assertNull($user->discord_api_access_token);
+                $this->assertNull($user->discord_api_refresh_token);
             });
 
             return;

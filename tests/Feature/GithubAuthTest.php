@@ -22,36 +22,36 @@ class GithubAuthTest extends TestCase
             ->setRaw([
                 'login' => 'claudiodekker',
                 'id' => 1752195,
-                "node_id" => "5ca88vy9aUKjLIIXdqr=",
-                "avatar_url" => "https://avatars.githubusercontent.com/u/1752195?v=4",
-                "gravatar_id" => "",
-                "url" => "https://api.github.com/users/claudiodekker",
-                "html_url" => "https://github.com/claudiodekker",
-                "followers_url" => "https://api.github.com/users/claudiodekker/followers",
-                "following_url" => "https://api.github.com/users/claudiodekker/following{/other_user}",
-                "gists_url" => "https://api.github.com/users/claudiodekker/gists{/gist_id}",
-                "starred_url" => "https://api.github.com/users/claudiodekker/starred{/owner}{/repo}",
-                "subscriptions_url" => "https://api.github.com/users/claudiodekker/subscriptions",
-                "organizations_url" => "https://api.github.com/users/claudiodekker/orgs",
-                "repos_url" => "https://api.github.com/users/claudiodekker/repos",
-                "events_url" => "https://api.github.com/users/claudiodekker/events{/privacy}",
-                "received_events_url" => "https://api.github.com/users/claudiodekker/received_events",
-                "type" => "User",
-                "site_admin" => false,
-                "name" => "Claudio Dekker",
-                "company" => null,
-                "blog" => "https://dekker.io",
-                "location" => "Amsterdam, The Netherlands",
-                "email" => null,
-                "hireable" => null,
-                "bio" => "Artisan @laravel ❯ Maintainer @inertiajs  ❯ Open-source enthusiast ❯ VILT is my stack.",
-                "twitter_username" => "claudiodekker",
-                "public_repos" => 27,
-                "public_gists" => 5,
-                "followers" => 144,
-                "following" => 12,
-                "created_at" => "2012-05-18T12:06:13Z",
-                "updated_at" => "2021-06-05T18:34:12Z",
+                'node_id' => '5ca88vy9aUKjLIIXdqr=',
+                'avatar_url' => 'https://avatars.githubusercontent.com/u/1752195?v=4',
+                'gravatar_id' => '',
+                'url' => 'https://api.github.com/users/claudiodekker',
+                'html_url' => 'https://github.com/claudiodekker',
+                'followers_url' => 'https://api.github.com/users/claudiodekker/followers',
+                'following_url' => 'https://api.github.com/users/claudiodekker/following{/other_user}',
+                'gists_url' => 'https://api.github.com/users/claudiodekker/gists{/gist_id}',
+                'starred_url' => 'https://api.github.com/users/claudiodekker/starred{/owner}{/repo}',
+                'subscriptions_url' => 'https://api.github.com/users/claudiodekker/subscriptions',
+                'organizations_url' => 'https://api.github.com/users/claudiodekker/orgs',
+                'repos_url' => 'https://api.github.com/users/claudiodekker/repos',
+                'events_url' => 'https://api.github.com/users/claudiodekker/events{/privacy}',
+                'received_events_url' => 'https://api.github.com/users/claudiodekker/received_events',
+                'type' => 'User',
+                'site_admin' => false,
+                'name' => 'Claudio Dekker',
+                'company' => null,
+                'blog' => 'https://dekker.io',
+                'location' => 'Amsterdam, The Netherlands',
+                'email' => null,
+                'hireable' => null,
+                'bio' => 'Artisan @laravel ❯ Maintainer @inertiajs  ❯ Open-source enthusiast ❯ VILT is my stack.',
+                'twitter_username' => 'claudiodekker',
+                'public_repos' => 27,
+                'public_gists' => 5,
+                'followers' => 144,
+                'following' => 12,
+                'created_at' => '2012-05-18T12:06:13Z',
+                'updated_at' => '2021-06-05T18:34:12Z',
             ])
             ->map([
                 'id' => 1752195,
@@ -90,8 +90,9 @@ class GithubAuthTest extends TestCase
         $this->get('/github/authorize/callback?code=123&state=456')
             ->assertRedirect('https://inertiajs.com');
 
-        $user = GithubUser::where('github_id', 1752195)->firstOrFail();
-        $this->assertEquals('claudiodekker', $user->github_login);
-        $this->assertEquals('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
+        $user = GithubUser::where('github_api_id', 1752195)->firstOrFail();
+        $this->assertNull($user->github_sponsor_id);
+        $this->assertEquals('claudiodekker', $user->github_api_login);
+        $this->assertEquals('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->github_api_access_token);
     }
 }

@@ -24,20 +24,20 @@ class UserClient
                 'client_id' => config('services.discord.client_id'),
                 'client_secret' => config('services.discord.client_secret'),
                 'grant_type' => 'refresh_token',
-                'refresh_token' => $this->user->refresh_token,
+                'refresh_token' => $this->user->discord_api_refresh_token,
             ])
             ->throw()
             ->json();
 
-        $this->user->access_token = $freshToken['access_token'];
-        $this->user->refresh_token = $freshToken['refresh_token'];
+        $this->user->discord_api_access_token = $freshToken['access_token'];
+        $this->user->discord_api_refresh_token = $freshToken['refresh_token'];
         $this->user->save();
     }
 
     protected function revokeTokens(): void
     {
-        $this->user->access_token = null;
-        $this->user->refresh_token = null;
+        $this->user->discord_api_access_token = null;
+        $this->user->discord_api_refresh_token = null;
         $this->user->save();
     }
 
@@ -46,12 +46,12 @@ class UserClient
      */
     public function getJson(string $endpoint)
     {
-        if (is_null($this->user->refresh_token)) {
+        if (is_null($this->user->discord_api_refresh_token)) {
             throw new InvalidAuthorizationException('User does not have any OAuth tokens.');
         }
 
         $request = fn () => Http::baseUrl('https://discord.com/api')
-            ->withToken($this->user->access_token)
+            ->withToken($this->user->discord_api_access_token)
             ->get($endpoint)
             ->throw()
             ->json();

@@ -45,30 +45,30 @@ class CheckDiscordUsersTest extends TestCase
             'https://discord.com/*' => Http::response('invalid', 401),
         ]);
 
-        $userA = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'access_token' => 'foo', 'refresh_token' => 'foo2', 'has_sponsor_role' => true]);
-        $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'access_token' => 'bar', 'refresh_token' => 'bar2', 'has_sponsor_role' => true]);
-        $userC = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'access_token' => 'baz', 'refresh_token' => 'baz2', 'has_sponsor_role' => true]);
+        $userA = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'discord_api_access_token' => 'foo', 'discord_api_refresh_token' => 'foo2', 'has_sponsor_role' => true]);
+        $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'discord_api_access_token' => 'bar', 'discord_api_refresh_token' => 'bar2', 'has_sponsor_role' => true]);
+        $userC = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'discord_api_access_token' => 'baz', 'discord_api_refresh_token' => 'baz2', 'has_sponsor_role' => true]);
 
         Artisan::call(CheckDiscordUsers::class);
 
         tap($userA->fresh(), function (DiscordUser $user) {
             $this->assertEquals('claudiodekker', $user->github_login);
-            $this->assertEquals('foo', $user->access_token);
-            $this->assertEquals('foo2', $user->refresh_token);
+            $this->assertEquals('foo', $user->discord_api_access_token);
+            $this->assertEquals('foo2', $user->discord_api_refresh_token);
             $this->assertTrue($user->has_sponsor_role);
         });
 
         tap($userB->fresh(), function (DiscordUser $user) {
             $this->assertEquals('monalisa', $user->github_login);
-            $this->assertEquals('bar', $user->access_token);
-            $this->assertEquals('bar2', $user->refresh_token);
+            $this->assertEquals('bar', $user->discord_api_access_token);
+            $this->assertEquals('bar2', $user->discord_api_refresh_token);
             $this->assertFalse($user->has_sponsor_role);
         });
 
         tap($userC->fresh(), function (DiscordUser $user) {
             $this->assertNull($user->github_login);
-            $this->assertNull($user->access_token);
-            $this->assertNull($user->refresh_token);
+            $this->assertNull($user->discord_api_access_token);
+            $this->assertNull($user->discord_api_refresh_token);
             $this->assertFalse($user->has_sponsor_role);
         });
     }

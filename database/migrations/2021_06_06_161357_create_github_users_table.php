@@ -15,9 +15,10 @@ class CreateGithubUsersTable extends Migration
     {
         Schema::create('github_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('github_id')->index();
-            $table->string('github_login');
-            $table->string('access_token')->nullable()->default(null);
+            $table->unsignedBigInteger('github_sponsor_id')->nullable()->default(null);
+            $table->unsignedBigInteger('github_api_id');
+            $table->string('github_api_login');
+            $table->string('github_api_access_token')->nullable()->default(null);
             $table->timestamps();
         });
     }

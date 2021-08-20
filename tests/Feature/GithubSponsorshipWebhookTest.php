@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\DiscordUser;
 use App\Models\GithubSponsor;
+use App\Models\GithubUser;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -39,13 +40,10 @@ class GithubSponsorshipWebhookTest extends TestCase
         $userB = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => false]);
         $userC = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
 
-        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'))
+        $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'))
             ->assertStatus(200);
 
-        tap(GithubSponsor::where('login', 'monalisa')->first(), function ($sponsor) {
-            $this->assertNotNull($sponsor);
-            $this->assertNull($sponsor->cancelled_at);
-        });
+        $this->assertNull(GithubSponsor::where('github_api_login', 'monalisa')->firstOrFail()->cancelled_at);
         $this->assertTrue($userA->fresh()->has_sponsor_role);
         $this->assertTrue($userB->fresh()->has_sponsor_role);
         $this->assertFalse($userC->fresh()->has_sponsor_role);
@@ -57,9 +55,12 @@ class GithubSponsorshipWebhookTest extends TestCase
         Carbon::setTestNow('2021-01-01 01:23:45');
         $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
         $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => true]);
-        $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => null]);
+        $sponsor = GithubSponsor::factory()
+            ->monalisa()
+            ->has(GithubUser::factory()->monalisa())
+            ->create(['cancelled_at' => null]);
 
-        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('cancelled'))
+        $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('cancelled'))
             ->assertStatus(200);
 
         $this->assertTrue($sponsor->fresh()->cancelled_at->is(now()));
@@ -74,12 +75,12 @@ class GithubSponsorshipWebhookTest extends TestCase
         Carbon::setTestNow('2021-01-01 01:23:45');
         $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => false]);
         $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
-        $sponsor = GithubSponsor::factory()->create([
-            'login' => 'monalisa',
-            'cancelled_at' => now()->subMonth(),
-        ]);
+        $sponsor = GithubSponsor::factory()
+            ->monalisa()
+            ->has(GithubUser::factory()->monalisa())
+            ->create(['cancelled_at' => now()->subMonth()]);
 
-        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created_one_time'))
+        $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created_one_time'))
             ->assertStatus(200);
 
         $this->assertTrue($sponsor->fresh()->cancelled_at->is(now()->addMonth()));
@@ -94,9 +95,9 @@ class GithubSponsorshipWebhookTest extends TestCase
         Carbon::setTestNow('2019-01-01');
         $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
         $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
-        $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => null]);
+        $sponsor = GithubSponsor::factory()->monalisa()->create(['cancelled_at' => null]);
 
-        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_cancellation'))
+        $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_cancellation'))
             ->assertStatus(200);
 
         $this->assertTrue($sponsor->fresh()->cancelled_at->is(Carbon::parse('2019-12-30T00:00:00+00:00')));
@@ -111,9 +112,9 @@ class GithubSponsorshipWebhookTest extends TestCase
         Carbon::setTestNow('2019-01-01');
         $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
         $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
-        $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => null]);
+        $sponsor = GithubSponsor::factory()->monalisa()->create(['cancelled_at' => null]);
 
-        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_tier_change_to_one_time'))
+        $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_tier_change_to_one_time'))
             ->assertStatus(200);
 
         $this->assertTrue($sponsor->fresh()->cancelled_at->is(Carbon::parse('2019-12-30T00:00:00+00:00')->addMonth()));
@@ -125,18 +126,16 @@ class GithubSponsorshipWebhookTest extends TestCase
     /** @test */
     public function it_changes_to_an_indefinite_sponsorship_when_the_tier_will_change_to_a_continuous_sponsorship(): void
     {
-        Carbon::setTestNow('2019-01-01');
         $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
         $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
-        $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => '2019-12-30 00:00:00']);
+        $sponsor = GithubSponsor::factory()->monalisa()->create(['cancelled_at' => now()->addDay()]);
 
-        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_tier_change'))
+        $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_tier_change'))
             ->assertStatus(200);
 
         $this->assertNull($sponsor->fresh()->cancelled_at);
         $this->assertTrue($userA->fresh()->has_sponsor_role);
         $this->assertFalse($userB->fresh()->has_sponsor_role);
-        Carbon::setTestNow();
     }
 
     /** @test */
@@ -145,9 +144,9 @@ class GithubSponsorshipWebhookTest extends TestCase
         Carbon::setTestNow('2019-01-01');
         $userA = DiscordUser::factory()->create(['github_login' => 'monalisa', 'has_sponsor_role' => true]);
         $userB = DiscordUser::factory()->create(['github_login' => 'claudiodekker', 'has_sponsor_role' => false]);
-        $sponsor = GithubSponsor::factory()->create(['login' => 'monalisa', 'cancelled_at' => '2019-12-30 00:00:00']);
+        $sponsor = GithubSponsor::factory()->monalisa()->create(['cancelled_at' => '2019-12-30 00:00:00']);
 
-        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('tier_changed'))
+        $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('tier_changed'))
             ->assertStatus(200);
 
         $this->assertNull($sponsor->fresh()->cancelled_at);
@@ -157,11 +156,20 @@ class GithubSponsorshipWebhookTest extends TestCase
     }
 
     /** @test */
+    public function it_blocks_the_request_when_the_content_type_is_not_json(): void
+    {
+        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'))
+            ->assertStatus(415);
+
+        $this->assertEmpty(GithubSponsor::all());
+    }
+
+    /** @test */
     public function it_blocks_the_request_when_a_webhook_secret_is_set_and_an_incorrect_or_no_hash_header_is_used(): void
     {
         config(['services.github.webhook_secret' => 'secret']);
 
-        $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'))
+        $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'))
             ->assertStatus(403);
 
         $this->assertEmpty(GithubSponsor::all());
@@ -173,10 +181,10 @@ class GithubSponsorshipWebhookTest extends TestCase
         config(['services.github.webhook_secret' => 'secret']);
         $payload = $this->getSponsorsPayload('created');
 
-        $headers = ['X-Hub-Signature-256' => 'sha256=' . hash_hmac('sha256', json_encode($payload), 'secret')];
+        $headers = ['X-Hub-Signature-256' => 'sha256='.hash_hmac('sha256', json_encode($payload), 'secret')];
         $this->postJson('/api/github/webhooks/sponsorship', $payload, $headers)
             ->assertStatus(200);
 
-        $this->assertTrue(GithubSponsor::where('login', 'monalisa')->exists());
+        $this->assertTrue(GithubSponsor::where('github_api_login', 'monalisa')->exists());
     }
 }

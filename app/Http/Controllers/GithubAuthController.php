@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DiscordUser;
 use App\Models\GithubUser;
 use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Http\Request;
@@ -47,9 +46,9 @@ class GithubAuthController extends Controller
             return redirect()->route('github.auth');
         }
 
-        $user = GithubUser::firstOrNew(['github_id' => $credentials->id]);
-        $user->github_login = $credentials->getNickname();
-        $user->access_token = $credentials->token;
+        $user = GithubUser::firstOrNew(['github_api_id' => $credentials->id]);
+        $user->github_api_login = $credentials->getNickname();
+        $user->github_api_access_token = $credentials->token;
         $user->save();
 
         return redirect()->to('https://inertiajs.com');

@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\DiscordUser;
 use App\Models\GithubSponsor;
+use App\Models\GithubUser;
+use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -51,6 +53,45 @@ class DiscordAuthTest extends TestCase
         Socialite::shouldReceive('driver->user')->andReturn($mockUser);
     }
 
+    protected function fakeDiscordApiConnectionsResponseWithGithubConnection(): PromiseInterface
+    {
+        return Http::response([
+            [
+                'type' => 'github',
+                'id' => '1752195',
+                'name' => 'claudiodekker',
+                'visibility' => 1,
+                'friend_sync' => false,
+                'show_activity' => true,
+                'verified' => true,
+            ],
+            [
+                'type' => 'twitter',
+                'id' => '78721809',
+                'name' => 'ClaudioDekker',
+                'visibility' => 1,
+                'friend_sync' => false,
+                'show_activity' => true,
+                'verified' => true,
+            ],
+        ]);
+    }
+
+    protected function fakeDiscordApiConnectionsResponseWithoutGithubConnection(): PromiseInterface
+    {
+        return Http::response([
+            [
+                'type' => 'twitter',
+                'id' => '78721809',
+                'name' => 'ClaudioDekker',
+                'visibility' => 1,
+                'friend_sync' => false,
+                'show_activity' => true,
+                'verified' => true,
+            ],
+        ]);
+    }
+
     /** @test */
     public function it_redirects_to_discord_in_order_to_authorize(): void
     {
@@ -73,155 +114,89 @@ class DiscordAuthTest extends TestCase
     }
 
     /** @test */
-    public function it_assigns_the_sponsor_role_to_the_user_immediately_if_a_sponsorship_exists_already(): void
+    public function it_assigns_the_sponsor_role_if_a_sponsorship_exists(): void
     {
+        $this->mockSocialiteUserResponse();
+        GithubUser::factory()->claudiodekker()->sponsoring()->create();
         Http::fake([
-            'https://discord.com/api/users/@me/connections' => Http::response([
-                [
-                    'type' => 'github',
-                    'id' => '1752195',
-                    'name' => 'claudiodekker',
-                    'visibility' => 1,
-                    'friend_sync' => false,
-                    'show_activity' => true,
-                    'verified' => true,
-                ],
-                [
-                    'type' => 'twitter',
-                    'id' => '78721809',
-                    'name' => 'ClaudioDekker',
-                    'visibility' => 1,
-                    'friend_sync' => false,
-                    'show_activity' => true,
-                    'verified' => true,
-                ],
-            ]),
+            'https://discord.com/api/users/@me/connections' => $this->fakeDiscordApiConnectionsResponseWithGithubConnection(),
             '*' => Http::response('Fake Response'),
         ]);
-        $this->mockSocialiteUserResponse();
-        GithubSponsor::factory()->create(['login' => 'claudiodekker', 'cancelled_at' => null]);
 
         $this->get('/discord/authorize/callback?code=123&state=456')
             ->assertRedirect('https://discord.com/channels/592327939920494592/592327939920494594');
 
         Http::assertSentCount(2);
-        $user = DiscordUser::where('discord_id', 696628666183975013)->firstOrFail();
-        $this->assertEquals('Claudio Dekker#3220', $user->nickname);
-        $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
-        $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->refresh_token);
+        $user = DiscordUser::where('discord_api_id', 696628666183975013)->firstOrFail();
+        $this->assertEquals('Claudio Dekker#3220', $user->discord_api_nickname);
+        $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->discord_api_access_token);
+        $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->discord_api_refresh_token);
         $this->assertEquals('claudiodekker', $user->github_login);
         $this->assertTrue($user->has_sponsor_role);
     }
 
     /** @test */
-    public function it_does_not_assign_the_sponsor_role_if_no_sponsorship_exists(): void
+    public function it_does_not_assign_the_sponsor_role_when_a_cancelled_sponsorship_exists(): void
     {
+        $this->mockSocialiteUserResponse();
+        GithubUser::factory()->claudiodekker()->cancelledSponsor()->create();
         Http::fake([
-            'https://discord.com/api/users/@me/connections' => Http::response([
-                [
-                    'type' => 'github',
-                    'id' => '1752195',
-                    'name' => 'claudiodekker',
-                    'visibility' => 1,
-                    'friend_sync' => false,
-                    'show_activity' => true,
-                    'verified' => true,
-                ],
-                [
-                    'type' => 'twitter',
-                    'id' => '78721809',
-                    'name' => 'ClaudioDekker',
-                    'visibility' => 1,
-                    'friend_sync' => false,
-                    'show_activity' => true,
-                    'verified' => true,
-                ],
-            ]),
+            'https://discord.com/api/users/@me/connections' => $this->fakeDiscordApiConnectionsResponseWithGithubConnection(),
             '*' => Http::response('Fake Response'),
         ]);
-        $this->mockSocialiteUserResponse();
 
         $this->get('/discord/authorize/callback?code=123&state=456')
             ->assertRedirect('https://discord.com/channels/592327939920494592/592327939920494594');
 
         Http::assertSentCount(1);
-        $user = DiscordUser::where('discord_id', 696628666183975013)->firstOrFail();
-        $this->assertEquals('Claudio Dekker#3220', $user->nickname);
-        $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
-        $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->refresh_token);
+        $user = DiscordUser::where('discord_api_id', 696628666183975013)->firstOrFail();
+        $this->assertEquals('Claudio Dekker#3220', $user->discord_api_nickname);
+        $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->discord_api_access_token);
+        $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->discord_api_refresh_token);
         $this->assertEquals('claudiodekker', $user->github_login);
         $this->assertFalse($user->has_sponsor_role);
     }
 
     /** @test */
-    public function it_does_not_assign_the_sponsor_role_to_the_user_if_a_cancelled_sponsorship_exists(): void
+    public function it_does_not_assign_the_sponsor_role_when_no_sponsorship_exists(): void
     {
+        $this->mockSocialiteUserResponse();
+        GithubUser::factory()->claudiodekker()->create();
         Http::fake([
-            'https://discord.com/api/users/@me/connections' => Http::response([
-                [
-                    'type' => 'github',
-                    'id' => '1752195',
-                    'name' => 'claudiodekker',
-                    'visibility' => 1,
-                    'friend_sync' => false,
-                    'show_activity' => true,
-                    'verified' => true,
-                ],
-                [
-                    'type' => 'twitter',
-                    'id' => '78721809',
-                    'name' => 'ClaudioDekker',
-                    'visibility' => 1,
-                    'friend_sync' => false,
-                    'show_activity' => true,
-                    'verified' => true,
-                ],
-            ]),
+            'https://discord.com/api/users/@me/connections' => $this->fakeDiscordApiConnectionsResponseWithGithubConnection(),
             '*' => Http::response('Fake Response'),
         ]);
-        $this->mockSocialiteUserResponse();
-        GithubSponsor::factory()->create(['login' => 'claudiodekker', 'cancelled_at' => '2020-01-01 00:00:00']);
 
         $this->get('/discord/authorize/callback?code=123&state=456')
             ->assertRedirect('https://discord.com/channels/592327939920494592/592327939920494594');
 
         Http::assertSentCount(1);
-        $user = DiscordUser::where('discord_id', 696628666183975013)->firstOrFail();
-        $this->assertEquals('Claudio Dekker#3220', $user->nickname);
-        $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
-        $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->refresh_token);
+        $user = DiscordUser::where('discord_api_id', 696628666183975013)->firstOrFail();
+        $this->assertEquals('Claudio Dekker#3220', $user->discord_api_nickname);
+        $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->discord_api_access_token);
+        $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->discord_api_refresh_token);
         $this->assertEquals('claudiodekker', $user->github_login);
         $this->assertFalse($user->has_sponsor_role);
     }
 
     /** @test */
-    public function it_does_not_assign_the_sponsor_role_if_the_discord_user_has_no_github_account_connected(): void
+    public function it_does_not_assign_the_sponsor_role_when_no_github_account_is_connected(): void
     {
+        $this->mockSocialiteUserResponse();
+        GithubSponsor::factory()->claudiodekker()->create();
         Http::fake([
-            'https://discord.com/api/users/@me/connections' => Http::response([
-                [
-                    'type' => 'twitter',
-                    'id' => '78721809',
-                    'name' => 'ClaudioDekker',
-                    'visibility' => 1,
-                    'friend_sync' => false,
-                    'show_activity' => true,
-                    'verified' => true,
-                ],
-            ]),
+            'https://discord.com/api/users/@me/connections' => $this->fakeDiscordApiConnectionsResponseWithoutGithubConnection(),
             '*' => Http::response('Fake Response'),
         ]);
-        $this->mockSocialiteUserResponse();
-        GithubSponsor::factory()->create(['login' => 'claudiodekker', 'cancelled_at' => null]);
 
         $this->get('/discord/authorize/callback?code=123&state=456')
             ->assertRedirect('https://discord.com/channels/592327939920494592/592327939920494594');
 
         Http::assertSentCount(1);
-        $user = DiscordUser::where('discord_id', 696628666183975013)->firstOrFail();
-        $this->assertEquals('Claudio Dekker#3220', $user->nickname);
-        $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->access_token);
-        $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->refresh_token);
+        $user = DiscordUser::where('discord_api_id', 696628666183975013)->firstOrFail();
+        $this->assertEquals('Claudio Dekker#3220', $user->discord_api_nickname);
+        $this->assertEquals('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->discord_api_access_token);
+        $this->assertEquals('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->discord_api_refresh_token);
         $this->assertNull($user->github_login);
         $this->assertFalse($user->has_sponsor_role);
     }
