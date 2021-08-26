@@ -39,8 +39,9 @@ class GithubAuthController extends Controller
     {
         $credentials = Socialite::driver('github')->user();
 
-        $user = User::create([
+        $user = User::firstOrCreate([
             'github_api_id' => $credentials->id,
+        ], [
             'github_api_login' => $credentials->getNickname(),
             'github_api_access_token' => $credentials->token,
         ]);

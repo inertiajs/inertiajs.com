@@ -13,16 +13,7 @@ class AuthenticateUsingGithubTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_redirects_to_github_in_order_to_sign_in(): void
-    {
-        Socialite::shouldReceive('driver->setScopes->redirect')->andReturn(Redirect::to('socialite-redirect.test'));
-
-        $this->get('/auth/github')->assertRedirect('socialite-redirect.test');
-    }
-
-    /** @test */
-    public function the_user_can_create_an_account_by_signing_in_using_github(): void
+    protected function mockSocialiteResponse(): void
     {
         Socialite::shouldReceive('driver->user')->andReturn((new OAuthUser())
             ->setToken('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr')
@@ -66,6 +57,20 @@ class AuthenticateUsingGithubTest extends TestCase
                 'name' => 'Claudio Dekker',
                 'avatar' => 'https://avatars.githubusercontent.com/u/1752195?v=4',
             ]));
+    }
+
+    /** @test */
+    public function it_redirects_to_github_in_order_to_sign_in(): void
+    {
+        Socialite::shouldReceive('driver->setScopes->redirect')->andReturn(Redirect::to('socialite-redirect.test'));
+
+        $this->get('/auth/github')->assertRedirect('socialite-redirect.test');
+    }
+
+    /** @test */
+    public function the_user_can_create_an_account_by_signing_in_using_github(): void
+    {
+        $this->mockSocialiteResponse();
         $this->assertEquals(0, User::count());
         $this->assertGuest();
 
@@ -75,5 +80,18 @@ class AuthenticateUsingGithubTest extends TestCase
         $this->assertAuthenticatedAs($user);
         $this->assertEquals('claudiodekker', $user->github_api_login);
         $this->assertEquals('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->github_api_access_token);
+    }
+
+    /** @test */
+    public function the_user_can_sign_in_to_their_existing_account_using_github(): void
+    {
+        $this->mockSocialiteResponse();
+        $user = User::factory()->claudiodekker()->create();
+        $this->assertGuest();
+
+        $this->get('/auth/github/callback?code=123&state=456')->assertRedirect('/');
+
+        $this->assertAuthenticatedAs($user);
+        $this->assertEquals(1, User::count());
     }
 }
