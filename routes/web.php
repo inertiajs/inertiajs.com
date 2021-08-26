@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GithubAuthController;
 use Inertia\Inertia;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
+Route::get('auth/github', [GithubAuthController::class, 'show']);
 Route::get('/releases', function() {
     return Inertia::render('releases', [
         'all' => Request::boolean('all'),
