@@ -46,7 +46,7 @@ Route::get('/releases', function() {
     ]);
 });
 
-Route::get('releases/{slug}', function($slug) {
+Route::get('/releases/{slug}', function($slug) {
     $page = "releases/$slug";
 
     if ($redirect = oldReleaseRedirect($page)) {
