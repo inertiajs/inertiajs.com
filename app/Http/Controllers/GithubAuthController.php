@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class GithubAuthController extends Controller
@@ -31,11 +33,21 @@ class GithubAuthController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $credentials = Socialite::driver('github')->user();
+
+        $user = User::create([
+            'github_api_id' => $credentials->id,
+            'github_api_login' => $credentials->getNickname(),
+            'github_api_access_token' => $credentials->token,
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->to('/');
     }
 
     /**
