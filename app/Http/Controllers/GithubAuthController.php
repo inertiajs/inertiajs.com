@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\InvalidStateException;
 
 class GithubAuthController extends Controller
 {
@@ -37,7 +38,11 @@ class GithubAuthController extends Controller
      */
     public function store(Request $request)
     {
-        $credentials = Socialite::driver('github')->user();
+        try {
+            $credentials = Socialite::driver('github')->user();
+        } catch (InvalidStateException $exception) {
+            return redirect()->to('/');
+        }
 
         $user = User::firstOrCreate([
             'github_api_id' => $credentials->id,

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\InvalidStateException;
 use SocialiteProviders\Manager\OAuth2\User as OAuthUser;
 use Tests\TestCase;
 
@@ -68,11 +69,10 @@ class AuthenticateUsingGithubTest extends TestCase
     }
 
     /** @test */
-    public function the_user_can_create_an_account_by_signing_in_using_github(): void
+    public function the_user_can_create_an_account_by_signing_in(): void
     {
         $this->mockSocialiteResponse();
         $this->assertEquals(0, User::count());
-        $this->assertGuest();
 
         $this->get('/auth/github/callback?code=123&state=456')->assertRedirect('/');
 
@@ -83,15 +83,25 @@ class AuthenticateUsingGithubTest extends TestCase
     }
 
     /** @test */
-    public function the_user_can_sign_in_to_their_existing_account_using_github(): void
+    public function the_user_can_sign_in_to_their_existing_account(): void
     {
         $this->mockSocialiteResponse();
         $user = User::factory()->claudiodekker()->create();
-        $this->assertGuest();
 
         $this->get('/auth/github/callback?code=123&state=456')->assertRedirect('/');
 
         $this->assertAuthenticatedAs($user);
-        $this->assertEquals(1, User::count());
+        $this->assertSame(1, User::count());
+    }
+
+    /** @test */
+    public function the_user_fails_to_sign_in_when_authorization_was_cancelled(): void
+    {
+        Socialite::shouldReceive('driver->user')->andThrow(InvalidStateException::class);
+
+        $this->get('/auth/github/callback?code=123&state=456')->assertRedirect('/');
+
+        $this->assertGuest();
+        $this->assertSame(0, User::count());
     }
 }
