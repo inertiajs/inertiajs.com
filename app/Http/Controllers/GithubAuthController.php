@@ -44,12 +44,13 @@ class GithubAuthController extends Controller
             return redirect()->to('/');
         }
 
-        $user = User::firstOrCreate([
-            'github_api_id' => $credentials->id,
-        ], [
-            'github_api_login' => $credentials->getNickname(),
-            'github_api_access_token' => $credentials->token,
-        ]);
+        $user = User::firstOrNew(['github_api_id' => $credentials->id]);
+        $user->github_api_login = $credentials->getNickname();
+        $user->github_api_access_token = $credentials->token;
+
+        if ($user->isDirty()) {
+            $user->save();
+        }
 
         Auth::login($user);
 

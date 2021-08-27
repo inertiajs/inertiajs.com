@@ -95,6 +95,25 @@ class AuthenticateUsingGithubTest extends TestCase
     }
 
     /** @test */
+    public function outdated_user_credentials_are_updated_automatically(): void
+    {
+        $this->mockSocialiteResponse();
+        $user = User::factory()->claudiodekker()->create([
+            'github_api_login' => 'old-login',
+            'github_api_access_token' => 'old-token',
+        ]);
+
+        $this->get('/auth/github/callback?code=123&state=456')->assertRedirect('/');
+
+        $this->assertAuthenticatedAs($user);
+        $this->assertSame(1, User::count());
+        tap($user->fresh(), function (User $user) {
+            $this->assertSame('claudiodekker', $user->github_api_login);
+            $this->assertSame('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->github_api_access_token);
+        });
+    }
+
+    /** @test */
     public function the_user_fails_to_sign_in_when_authorization_was_cancelled(): void
     {
         Socialite::shouldReceive('driver->user')->andThrow(InvalidStateException::class);
