@@ -61,7 +61,7 @@ class AuthenticateUsingGithubTest extends TestCase
     }
 
     /** @test */
-    public function it_redirects_to_github_in_order_to_sign_in(): void
+    public function guests_are_redirected_to_github_in_order_to_authorize(): void
     {
         Socialite::shouldReceive('driver->setScopes->redirect')->andReturn(Redirect::to('socialite-redirect.test'));
 
@@ -69,7 +69,7 @@ class AuthenticateUsingGithubTest extends TestCase
     }
 
     /** @test */
-    public function the_user_can_create_an_account_by_signing_in(): void
+    public function guests_can_create_an_account_by_authenticating_through_github(): void
     {
         $this->mockSocialiteResponse();
         $this->assertEquals(0, User::count());
@@ -83,7 +83,7 @@ class AuthenticateUsingGithubTest extends TestCase
     }
 
     /** @test */
-    public function the_user_can_sign_in_to_their_existing_account(): void
+    public function guests_can_sign_in_to_their_account_by_authenticating_through_github(): void
     {
         $this->mockSocialiteResponse();
         $user = User::factory()->claudiodekker()->create();
@@ -95,7 +95,7 @@ class AuthenticateUsingGithubTest extends TestCase
     }
 
     /** @test */
-    public function outdated_user_credentials_are_updated_automatically(): void
+    public function outdated_github_credentials_are_automatically_updated_during_sign_in(): void
     {
         $this->mockSocialiteResponse();
         $user = User::factory()->claudiodekker()->create([
@@ -114,7 +114,7 @@ class AuthenticateUsingGithubTest extends TestCase
     }
 
     /** @test */
-    public function the_user_fails_to_sign_in_when_authorization_was_cancelled(): void
+    public function guests_fail_to_sign_in_when_github_authorization_was_rejected(): void
     {
         Socialite::shouldReceive('driver->user')->andThrow(InvalidStateException::class);
 
