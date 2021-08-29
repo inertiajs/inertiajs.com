@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GithubCredentialsUpdated;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,6 +51,7 @@ class GithubAuthController extends Controller
 
         if ($user->isDirty()) {
             $user->save();
+            GithubCredentialsUpdated::dispatch($user);
         }
 
         Auth::login($user);

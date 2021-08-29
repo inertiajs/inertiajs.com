@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Events\GithubCredentialsUpdated;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
@@ -71,6 +73,7 @@ class AuthenticateUsingGithubTest extends TestCase
     /** @test */
     public function guests_can_create_an_account_by_authenticating_through_github(): void
     {
+        Event::fake(GithubCredentialsUpdated::class);
         $this->mockSocialiteResponse();
         $this->assertEquals(0, User::count());
 
@@ -80,11 +83,15 @@ class AuthenticateUsingGithubTest extends TestCase
         $this->assertAuthenticatedAs($user);
         $this->assertEquals('claudiodekker', $user->github_api_login);
         $this->assertEquals('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->github_api_access_token);
+        Event::assertDispatched(GithubCredentialsUpdated::class, function ($event) use ($user) {
+            return $event->user->is($user);
+        });
     }
 
     /** @test */
     public function guests_can_sign_in_to_their_account_by_authenticating_through_github(): void
     {
+        Event::fake(GithubCredentialsUpdated::class);
         $this->mockSocialiteResponse();
         $user = User::factory()->claudiodekker()->create();
 
@@ -92,11 +99,13 @@ class AuthenticateUsingGithubTest extends TestCase
 
         $this->assertAuthenticatedAs($user);
         $this->assertSame(1, User::count());
+        Event::assertNotDispatched(GithubCredentialsUpdated::class);
     }
 
     /** @test */
     public function outdated_github_credentials_are_automatically_updated_during_sign_in(): void
     {
+        Event::fake(GithubCredentialsUpdated::class);
         $this->mockSocialiteResponse();
         $user = User::factory()->claudiodekker()->create([
             'github_api_login' => 'old-login',
@@ -110,6 +119,9 @@ class AuthenticateUsingGithubTest extends TestCase
         tap($user->fresh(), function (User $user) {
             $this->assertSame('claudiodekker', $user->github_api_login);
             $this->assertSame('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->github_api_access_token);
+        });
+        Event::assertDispatched(GithubCredentialsUpdated::class, function ($event) use ($user) {
+            return $event->user->is($user);
         });
     }
 
