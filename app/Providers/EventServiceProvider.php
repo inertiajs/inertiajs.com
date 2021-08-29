@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\GithubCredentialsUpdated;
+use App\Listeners\ScheduleSponsorshipStatusSync;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -16,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        GithubCredentialsUpdated::class => [
+            ScheduleSponsorshipStatusSync::class,
+        ],
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
