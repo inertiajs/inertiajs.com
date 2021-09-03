@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Services\Github\Api as GithubApi;
 use App\Services\Github\Exceptions\BadCredentialsException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -33,6 +34,16 @@ class User extends Authenticatable
         'remember_token',
         'github_api_access_token',
     ];
+
+    /**
+     * The Sponsor of this User.
+     *
+     * @return BelongsTo
+     */
+    public function sponsor(): BelongsTo
+    {
+        return $this->belongsTo(Sponsor::class);
+    }
 
     /**
      * Determine whether the User is currently a Github Sponsor.

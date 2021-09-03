@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Events\UserStartedSponsoring;
+use App\Models\Sponsor;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -35,6 +37,12 @@ class SynchronizeSponsorStatus implements ShouldQueue
      */
     public function handle()
     {
-        //
+        if ($this->user->isGithubSponsor()) {
+            $sponsor = Sponsor::create(['github_api_id' => $this->user->github_api_id]);
+            $this->user->sponsor_id = $sponsor->id;
+            $this->user->save();
+
+            UserStartedSponsoring::dispatch($this->user);
+        }
     }
 }
