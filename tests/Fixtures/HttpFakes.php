@@ -113,4 +113,14 @@ class HttpFakes
             ]),
         ]);
     }
+
+    public static function githubSponsorsInvalidTokenError()
+    {
+        Http::fake([
+            'https://api.github.com/graphql' => Http::response([
+                'message' => 'Bad credentials',
+                'documentation_url' => 'https://docs.github.com/graphql',
+            ], 401),
+        ]);
+    }
 }

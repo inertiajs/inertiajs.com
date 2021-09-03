@@ -2,6 +2,7 @@
 
 namespace App\Services\Github;
 
+use App\Services\Github\Exceptions\BadCredentialsException;
 use Illuminate\Support\Facades\Http;
 
 class Api
@@ -11,6 +12,7 @@ class Api
      *
      * @param string $account
      * @param string $token
+     * @throws BadCredentialsException
      * @return bool
      */
     public function isSponsoring(string $account, string $token): bool
@@ -32,6 +34,10 @@ class Api
                     'account' => $account,
                 ],
             ]);
+
+        if ($response->clientError() && str_contains($response->body(), 'Bad credentials')) {
+            throw new BadCredentialsException($response->body());
+        }
 
         return $response->json('data.user.viewerIsSponsoring', false)
             || $response->json('data.organization.viewerIsSponsoring', false);

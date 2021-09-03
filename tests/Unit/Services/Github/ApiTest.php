@@ -3,6 +3,7 @@
 namespace Tests\Unit\Services\Github;
 
 use App\Services\Github\Api as GithubApi;
+use App\Services\Github\Exceptions\BadCredentialsException;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Tests\Fixtures\HttpFakes;
@@ -76,5 +77,15 @@ class ApiTest extends TestCase
 
             return true;
         });
+    }
+
+    /** @test */
+    public function it_throws_an_exception_when_an_invalid_token_is_used(): void
+    {
+        HttpFakes::githubSponsorsInvalidTokenError();
+
+        $this->expectException(BadCredentialsException::class);
+
+        app(GithubApi::class)->isSponsoring('bar', 'foo');
     }
 }
