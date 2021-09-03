@@ -2,7 +2,6 @@
 
 namespace App\Services\Github;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
 class Api
@@ -23,6 +22,9 @@ class Api
                     query($account: String!) {
                       user(login: $account) {
                         viewerIsSponsoring
+                      },
+                      organization(login: $account) {
+                        viewerIsSponsoring
                       }
                     }
                 EOF,
@@ -31,6 +33,7 @@ class Api
                 ],
             ]);
 
-        return Arr::get($response->json('data'), 'user.viewerIsSponsoring', false);
+        return $response->json('data.user.viewerIsSponsoring', false)
+            || $response->json('data.organization.viewerIsSponsoring', false);
     }
 }

@@ -26,4 +26,21 @@ class ApiTest extends TestCase
             return true;
         });
     }
+
+    /** @test */
+    public function the_github_organization_is_being_sponsored_by_the_token_owner(): void
+    {
+        HttpFakes::githubSponsorsViewerIsSponsoringOrganization();
+
+        $response = app(GithubApi::class)->isSponsoring('bar', 'foo');
+
+        $this->assertTrue($response);
+        Http::assertSentCount(1);
+        Http::assertSent(function (Request $request) {
+            $this->assertSame('Bearer foo', $request->header('Authorization.0'));
+            $this->assertSame('bar', $request->data()['variables']['account']);
+
+            return true;
+        });
+    }
 }
