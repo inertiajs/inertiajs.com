@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiscordConnectionController;
 use App\Http\Controllers\GithubAuthController;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Redirect;
@@ -20,6 +21,10 @@ use Inertia\Inertia;
 Route::prefix('auth/github')->group(function () {
     Route::get('/', [GithubAuthController::class, 'show']);
     Route::get('/callback', [GithubAuthController::class, 'store']);
+});
+
+Route::prefix('/connections/discord/authorize')->group(function () {
+    Route::get('/', [DiscordConnectionController::class, 'show']);
 });
 
 Route::get('/releases', function () {
