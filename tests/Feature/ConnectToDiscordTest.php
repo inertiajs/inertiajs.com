@@ -22,4 +22,12 @@ class ConnectToDiscordTest extends TestCase
 
         $response->assertRedirect('socialite-redirect.test');
     }
+
+    /** @test */
+    public function guests_are_redirected_to_the_github_authorization_page(): void
+    {
+        $response = $this->get('/connections/discord/authorize');
+
+        $response->assertRedirect('/auth/github');
+    }
 }

@@ -23,7 +23,7 @@ Route::prefix('auth/github')->group(function () {
     Route::get('/callback', [GithubAuthController::class, 'store']);
 });
 
-Route::prefix('/connections/discord/authorize')->group(function () {
+Route::middleware('auth')->prefix('/connections/discord/authorize')->group(function () {
     Route::get('/', [DiscordConnectionController::class, 'show']);
 });
 
