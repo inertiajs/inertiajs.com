@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\DiscordConnectionUpdated;
 use App\Events\GithubCredentialsUpdated;
+use App\Listeners\ScheduleDiscordSponsorRoleSync;
 use App\Listeners\ScheduleSponsorshipStatusSync;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -20,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        DiscordConnectionUpdated::class => [
+            ScheduleDiscordSponsorRoleSync::class,
+        ],
         GithubCredentialsUpdated::class => [
             ScheduleSponsorshipStatusSync::class,
         ],
