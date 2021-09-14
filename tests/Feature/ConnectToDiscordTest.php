@@ -111,4 +111,32 @@ class ConnectToDiscordTest extends TestCase
 
         $response->assertStatus(428);
     }
+
+    /** @test */
+    public function it_removes_the_existing_discord_connection_when_connecting_it_to_a_different_user(): void
+    {
+        Event::fake(DiscordConnectionUpdated::class);
+        $this->mockSocialiteResponse();
+        $existingUser = User::factory()->withGithub()->withDiscord()->create(['github_api_id' => '1234']);
+        $newUser = User::factory()->withGithub()->create();
+
+        $this->actingAs($newUser)
+            ->get('/connections/discord/authorize/callback?code=123&state=456')
+            ->assertRedirect('https://discord.com/channels/592327939920494592/592327939920494594');
+
+        tap($existingUser->fresh(), function (User $user) {
+            $this->assertNull($user->discord_api_id);
+            $this->assertNull($user->discord_api_nickname);
+            $this->assertNull($user->discord_api_access_token);
+            $this->assertNull($user->discord_api_refresh_token);
+        });
+        tap($newUser->fresh(), function (User $user) {
+            $this->assertSame(696628666183975013, $user->discord_api_id);
+            $this->assertSame('Claudio Dekker#3220', $user->discord_api_nickname);
+            $this->assertSame('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->discord_api_access_token);
+            $this->assertSame('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->discord_api_refresh_token);
+        });
+        Event::assertDispatched(DiscordConnectionUpdated::class, fn ($event) => $event->user->is($newUser));
+        Event::assertDispatched(DiscordConnectionUpdated::class, fn ($event) => $event->user->is($existingUser));
+    }
 }

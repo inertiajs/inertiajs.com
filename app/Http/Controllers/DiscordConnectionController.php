@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\DiscordConnectionUpdated;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
@@ -43,6 +44,21 @@ class DiscordConnectionController extends Controller
             $credentials = Socialite::driver('discord')->user();
         } catch (InvalidStateException $exception) {
             return redirect()->to('/connections/discord/authorize');
+        }
+
+        $existingUser = User::query()
+            ->where('id', '!=', $request->user()->id)
+            ->where('discord_api_id', $credentials->id)
+            ->first();
+
+        if ($existingUser) {
+            $existingUser->discord_api_id = null;
+            $existingUser->discord_api_nickname = null;
+            $existingUser->discord_api_access_token = null;
+            $existingUser->discord_api_refresh_token = null;
+            $existingUser->save();
+
+            DiscordConnectionUpdated::dispatch($existingUser);
         }
 
         $user = $request->user();
