@@ -16,9 +16,10 @@ class ConnectToDiscordTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function mockSocialiteUserResponse(): void
+    protected function mockSocialiteResponse(): void
     {
-        $mockUser = (new OAuthUser())
+        Socialite::shouldReceive('driver->setScopes->redirect')->andReturn(Redirect::to('/connections/discord/authorize/callback?code=123&state=456'));
+        Socialite::shouldReceive('driver->user')->andReturn((new OAuthUser())
             ->setAccessTokenResponseBody([
                 'access_token' => 'INVALIDxq3Ly5ca88vy9aUKjLIXdqr',
                 'expires_in' => 604800,
@@ -45,20 +46,18 @@ class ConnectToDiscordTest extends TestCase
                 'name' => 'Claudio Dekker',
                 'email' => null,
                 'avatar' => 'https://cdn.discordapp.com/avatars/696628666183975013/32fc945e99042ce4fc6117347cb9b5b7.jpg',
-            ]);
-
-        Socialite::shouldReceive('driver->user')->andReturn($mockUser);
+            ]));
     }
 
     /** @test */
     public function users_are_redirected_to_discord_to_authorize_the_connection(): void
     {
-        Socialite::shouldReceive('driver->setScopes->redirect')->andReturn(Redirect::to('socialite-redirect.test'));
+        $this->mockSocialiteResponse();
 
         $response = $this->actingAs(User::factory()->create())
             ->get('/connections/discord/authorize');
 
-        $response->assertRedirect('socialite-redirect.test');
+        $response->assertRedirect('/connections/discord/authorize/callback?code=123&state=456');
     }
 
     /** @test */
@@ -73,8 +72,8 @@ class ConnectToDiscordTest extends TestCase
     public function users_can_connect_their_discord_account_by_authorizing_the_connection(): void
     {
         Event::fake(DiscordConnectionUpdated::class);
-        $this->mockSocialiteUserResponse();
-        $user = User::factory()->claudiodekker()->create();
+        $this->mockSocialiteResponse();
+        $user = User::factory()->withGithub()->create();
 
         $this->actingAs($user)
             ->get('/connections/discord/authorize/callback?code=123&state=456')
@@ -86,16 +85,14 @@ class ConnectToDiscordTest extends TestCase
             $this->assertSame('INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->discord_api_access_token);
             $this->assertSame('INVALIDb8yS0e3Iau0Pn6Q96yUHr9T', $user->discord_api_refresh_token);
         });
-        Event::assertDispatched(DiscordConnectionUpdated::class, function ($event) use ($user) {
-            return $event->user->is($user);
-        });
+        Event::assertDispatched(DiscordConnectionUpdated::class, fn ($event) => $event->user->is($user));
     }
 
     /** @test */
     public function it_redirects_back_to_discord_when_the_authorization_callback_was_invalid(): void
     {
         Socialite::shouldReceive('driver->user')->andThrow(InvalidStateException::class);
-        $user = User::factory()->claudiodekker()->create();
+        $user = User::factory()->withGithub()->create();
 
         $this->actingAs($user)
             ->get('/connections/discord/authorize/callback?code=123&state=456')
@@ -107,7 +104,7 @@ class ConnectToDiscordTest extends TestCase
     /** @test */
     public function it_aborts_when_the_authorization_was_cancelled(): void
     {
-        $user = User::factory()->claudiodekker()->create();
+        $user = User::factory()->withGithub()->create();
 
         $response = $this->actingAs($user)
             ->get('/connections/discord/authorize/callback?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request&state=aEWGKJ2NLTPCkON29kykkE6Yvz8x65j24oOEn0YO');

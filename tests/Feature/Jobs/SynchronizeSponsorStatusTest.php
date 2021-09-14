@@ -22,7 +22,7 @@ class SynchronizeSponsorStatusTest extends TestCase
     {
         Event::fake(UserStartedSponsoring::class);
         HttpFakes::githubSponsorsViewerIsSponsoringUser();
-        $user = User::factory()->claudiodekker()->create();
+        $user = User::factory()->withGithub()->create();
         $this->assertNull($user->sponsor);
 
         SynchronizeSponsorStatus::dispatch($user);
@@ -31,9 +31,7 @@ class SynchronizeSponsorStatusTest extends TestCase
             $this->assertSame($user->github_api_id, $sponsor->github_api_id);
             $this->assertFalse($sponsor->has_expired);
         });
-        Event::assertDispatched(UserStartedSponsoring::class, function ($event) use ($user) {
-            return $event->user->is($user);
-        });
+        Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
     }
 
     /** @test */
@@ -42,7 +40,7 @@ class SynchronizeSponsorStatusTest extends TestCase
         Carbon::setTestNow('2021-01-01');
         Event::fake(UserStoppedSponsoring::class);
         HttpFakes::githubSponsorsViewerIsNotSponsoringUser();
-        $user = User::factory()->claudiodekker()->for(Sponsor::factory()->claudiodekker())->create();
+        $user = User::factory()->withGithub()->sponsoring()->create();
         $this->assertNotNull($user->sponsor);
 
         SynchronizeSponsorStatus::dispatch($user);
@@ -51,9 +49,7 @@ class SynchronizeSponsorStatusTest extends TestCase
             $this->assertSame($user->github_api_id, $sponsor->github_api_id);
             $this->assertTrue($sponsor->has_expired);
         });
-        Event::assertDispatched(UserStoppedSponsoring::class, function ($event) use ($user) {
-            return $event->user->is($user);
-        });
+        Event::assertDispatched(UserStoppedSponsoring::class, fn ($event) => $event->user->is($user));
         Carbon::setTestNow();
     }
 
@@ -62,7 +58,7 @@ class SynchronizeSponsorStatusTest extends TestCase
     {
         Event::fake([UserStartedSponsoring::class, UserStoppedSponsoring::class]);
         HttpFakes::githubSponsorsViewerIsSponsoringUser();
-        $user = User::factory()->claudiodekker()->for(Sponsor::factory()->claudiodekker())->create();
+        $user = User::factory()->withGithub()->sponsoring()->create();
         $this->assertNotNull($existingSponsor = $user->sponsor);
 
         SynchronizeSponsorStatus::dispatch($user);
@@ -80,7 +76,7 @@ class SynchronizeSponsorStatusTest extends TestCase
     {
         Event::fake([UserStartedSponsoring::class, UserStoppedSponsoring::class]);
         HttpFakes::githubSponsorsViewerIsNotSponsoringUser();
-        $user = User::factory()->claudiodekker()->create();
+        $user = User::factory()->withGithub()->create();
 
         SynchronizeSponsorStatus::dispatch($user);
 
@@ -93,7 +89,7 @@ class SynchronizeSponsorStatusTest extends TestCase
     {
         Event::fake([UserStartedSponsoring::class]);
         HttpFakes::githubSponsorsViewerIsSponsoringUser();
-        $user = User::factory()->claudiodekker()->for(Sponsor::factory()->claudiodekker())->create();
+        $user = User::factory()->withGithub()->sponsoring()->create();
         $user->sponsor->update(['has_expired' => true]);
 
         SynchronizeSponsorStatus::dispatch($user);

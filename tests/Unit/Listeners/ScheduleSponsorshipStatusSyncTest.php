@@ -18,8 +18,6 @@ class ScheduleSponsorshipStatusSyncTest extends TestCase
 
         GithubCredentialsUpdated::dispatch($user);
 
-        Queue::assertPushed(SynchronizeSponsorStatus::class, function ($job) use ($user) {
-            return $job->user->is($user);
-        });
+        Queue::assertPushed(SynchronizeSponsorStatus::class, fn ($job) => $job->user->is($user));
     }
 }

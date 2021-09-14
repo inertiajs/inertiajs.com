@@ -25,16 +25,4 @@ class SponsorFactory extends Factory
             'github_api_id' => $this->faker->unique()->randomNumber(),
         ];
     }
-
-    /**
-     * The Github Sponsor details for 'claudiodekker'.
-     *
-     * @return SponsorFactory
-     */
-    public function claudiodekker(): self
-    {
-        return $this->state([
-            'github_api_id' => 1752195,
-        ]);
-    }
 }

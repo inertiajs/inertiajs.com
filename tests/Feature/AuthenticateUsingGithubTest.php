@@ -84,9 +84,7 @@ class AuthenticateUsingGithubTest extends TestCase
         $this->assertAuthenticatedAs($user);
         $this->assertEquals('claudiodekker', $user->github_api_login);
         $this->assertEquals('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->github_api_access_token);
-        Event::assertDispatched(GithubCredentialsUpdated::class, function ($event) use ($user) {
-            return $event->user->is($user);
-        });
+        Event::assertDispatched(GithubCredentialsUpdated::class, fn ($event) => $event->user->is($user));
     }
 
     /** @test */
@@ -94,7 +92,7 @@ class AuthenticateUsingGithubTest extends TestCase
     {
         Event::fake(GithubCredentialsUpdated::class);
         $this->mockSocialiteResponse();
-        $user = User::factory()->claudiodekker()->create();
+        $user = User::factory()->withGithub()->create();
 
         $this->get('/auth/github/callback?code=123&state=456')->assertRedirect('/');
 
@@ -108,7 +106,7 @@ class AuthenticateUsingGithubTest extends TestCase
     {
         Event::fake(GithubCredentialsUpdated::class);
         $this->mockSocialiteResponse();
-        $user = User::factory()->claudiodekker()->create([
+        $user = User::factory()->withGithub()->create([
             'github_api_login' => 'old-login',
             'github_api_access_token' => 'old-token',
         ]);
@@ -121,9 +119,7 @@ class AuthenticateUsingGithubTest extends TestCase
             $this->assertSame('claudiodekker', $user->github_api_login);
             $this->assertSame('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr', $user->github_api_access_token);
         });
-        Event::assertDispatched(GithubCredentialsUpdated::class, function ($event) use ($user) {
-            return $event->user->is($user);
-        });
+        Event::assertDispatched(GithubCredentialsUpdated::class, fn ($event) => $event->user->is($user));
     }
 
     /** @test */
@@ -142,7 +138,7 @@ class AuthenticateUsingGithubTest extends TestCase
     {
         Event::fake();
         $this->mockSocialiteResponse();
-        $user = User::factory()->claudiodekker()->create();
+        $user = User::factory()->withGithub()->create();
 
         $this->get('/connections/discord/authorize')->assertRedirect('/auth/github');
         $this->get('/auth/github')->assertRedirect('/auth/github/callback?code=123&state=456');
