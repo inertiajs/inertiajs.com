@@ -20,4 +20,15 @@ class ScheduleDiscordSponsorRoleSyncTest extends TestCase
 
         Queue::assertPushed(SynchronizeDiscordSponsorRole::class, fn ($job) => $job->user->is($user));
     }
+
+    /** @test */
+    public function it_does_not_queue_anything_when_there_are_no_connected_discord_credentials(): void
+    {
+        Queue::fake();
+        $user = User::factory()->withGithub()->make();
+
+        DiscordConnectionUpdated::dispatch($user);
+
+        Queue::assertNothingPushed();
+    }
 }
