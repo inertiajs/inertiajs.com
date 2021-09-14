@@ -103,4 +103,15 @@ class ConnectToDiscordTest extends TestCase
 
         $this->assertNull($user->fresh()->discord_api_id);
     }
+
+    /** @test */
+    public function it_aborts_when_the_authorization_was_cancelled(): void
+    {
+        $user = User::factory()->claudiodekker()->create();
+
+        $response = $this->actingAs($user)
+            ->get('/connections/discord/authorize/callback?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request&state=aEWGKJ2NLTPCkON29kykkE6Yvz8x65j24oOEn0YO');
+
+        $response->assertStatus(428);
+    }
 }

@@ -37,6 +37,8 @@ class DiscordConnectionController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if($request->has('error'), 428, $request->get('error_description'));
+
         try {
             $credentials = Socialite::driver('discord')->user();
         } catch (InvalidStateException $exception) {
