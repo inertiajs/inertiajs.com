@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\InvalidStateException;
 use SocialiteProviders\Manager\OAuth2\User as OAuthUser;
 use Tests\TestCase;
 
@@ -88,5 +89,18 @@ class ConnectToDiscordTest extends TestCase
         Event::assertDispatched(DiscordConnectionUpdated::class, function ($event) use ($user) {
             return $event->user->is($user);
         });
+    }
+
+    /** @test */
+    public function it_redirects_back_to_discord_when_the_authorization_callback_was_invalid(): void
+    {
+        Socialite::shouldReceive('driver->user')->andThrow(InvalidStateException::class);
+        $user = User::factory()->claudiodekker()->create();
+
+        $this->actingAs($user)
+            ->get('/connections/discord/authorize/callback?code=123&state=456')
+            ->assertRedirect('/connections/discord/authorize');
+
+        $this->assertNull($user->fresh()->discord_api_id);
     }
 }
