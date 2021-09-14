@@ -18,6 +18,7 @@ class AuthenticateUsingGithubTest extends TestCase
 
     protected function mockSocialiteResponse(): void
     {
+        Socialite::shouldReceive('driver->setScopes->redirect')->andReturn(Redirect::to('/auth/github/callback?code=123&state=456'));
         Socialite::shouldReceive('driver->user')->andReturn((new OAuthUser())
             ->setToken('gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr')
             ->setRaw([
@@ -65,9 +66,9 @@ class AuthenticateUsingGithubTest extends TestCase
     /** @test */
     public function guests_are_redirected_to_github_in_order_to_authorize(): void
     {
-        Socialite::shouldReceive('driver->setScopes->redirect')->andReturn(Redirect::to('socialite-redirect.test'));
+        $this->mockSocialiteResponse();
 
-        $this->get('/auth/github')->assertRedirect('socialite-redirect.test');
+        $this->get('/auth/github')->assertRedirect('/auth/github/callback?code=123&state=456');
     }
 
     /** @test */
@@ -134,5 +135,19 @@ class AuthenticateUsingGithubTest extends TestCase
 
         $this->assertGuest();
         $this->assertSame(0, User::count());
+    }
+
+    /** @test */
+    public function it_redirects_the_user_back_to_the_original_page_when_they_were_redirected_for_authentication(): void
+    {
+        Event::fake();
+        $this->mockSocialiteResponse();
+        $user = User::factory()->claudiodekker()->create();
+
+        $this->get('/connections/discord/authorize')->assertRedirect('/auth/github');
+        $this->get('/auth/github')->assertRedirect('/auth/github/callback?code=123&state=456');
+        $this->assertGuest();
+        $this->get('/auth/github/callback?code=123&state=456')->assertRedirect('/connections/discord/authorize');
+        $this->assertAuthenticatedAs($user);
     }
 }

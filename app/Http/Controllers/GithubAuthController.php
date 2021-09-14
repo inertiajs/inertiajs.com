@@ -56,7 +56,9 @@ class GithubAuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->to('/');
+        return redirect()->to(
+            $request->session()->pull('original_url', '/')
+        );
     }
 
     /**
