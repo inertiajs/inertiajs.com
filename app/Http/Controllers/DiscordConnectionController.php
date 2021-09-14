@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DiscordConnectionUpdated;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -31,11 +32,22 @@ class DiscordConnectionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $credentials = Socialite::driver('discord')->user();
+
+        $user = $request->user();
+        $user->discord_api_id = $credentials->id;
+        $user->discord_api_nickname = $credentials->getNickname();
+        $user->discord_api_access_token = $credentials->token;
+        $user->discord_api_refresh_token = $credentials->refreshToken;
+        $user->save();
+
+        DiscordConnectionUpdated::dispatch($user);
+
+        return redirect()->to('https://discord.com/channels/592327939920494592/592327939920494594');
     }
 
     /**

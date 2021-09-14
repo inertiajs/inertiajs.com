@@ -25,6 +25,7 @@ Route::prefix('auth/github')->group(function () {
 
 Route::middleware('auth')->prefix('/connections/discord/authorize')->group(function () {
     Route::get('/', [DiscordConnectionController::class, 'show']);
+    Route::get('/callback', [DiscordConnectionController::class, 'store']);
 });
 
 Route::get('/releases', function () {
