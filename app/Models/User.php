@@ -47,6 +47,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Whether the User has a Sponsor that isn't expired.
+     */
+    public function hasActiveSponsor()
+    {
+        if (! $this->sponsor) {
+            return false;
+        }
+
+        return ! $this->sponsor->has_expired;
+    }
+
+    /**
      * The User's Discord Connection.
      *
      * @return HasOne

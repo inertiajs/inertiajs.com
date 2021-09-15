@@ -19,4 +19,28 @@ class UserTest extends TestCase
 
         $mock->shouldHaveReceived('isSponsoring', ['foo', 'bar']);
     }
+
+    /** @test */
+    public function it_has_an_active_sponsor(): void
+    {
+        $user = User::factory()->sponsoring()->make();
+
+        $this->assertTrue($user->hasActiveSponsor());
+    }
+
+    /** @test */
+    public function it_does_not_have_an_active_sponsor_when_there_is_no_sponsor(): void
+    {
+        $user = User::factory()->make();
+
+        $this->assertFalse($user->hasActiveSponsor());
+    }
+
+    /** @test */
+    public function it_does_not_have_an_active_sponsor_when_the_sponsor_has_expired(): void
+    {
+        $user = User::factory()->sponsoring(['has_expired' => true])->make();
+
+        $this->assertFalse($user->hasActiveSponsor());
+    }
 }
