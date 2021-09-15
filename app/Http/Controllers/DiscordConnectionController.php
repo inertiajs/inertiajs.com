@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\DiscordConnectionUpdated;
-use App\Models\User;
+use App\Models\DiscordUser;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
@@ -46,29 +46,17 @@ class DiscordConnectionController extends Controller
             return redirect()->to('/connections/discord/authorize');
         }
 
-        $existingUser = User::query()
-            ->where('id', '!=', $request->user()->id)
-            ->where('discord_api_id', $credentials->id)
-            ->first();
-
-        if ($existingUser) {
-            $existingUser->discord_api_id = null;
-            $existingUser->discord_api_nickname = null;
-            $existingUser->discord_api_access_token = null;
-            $existingUser->discord_api_refresh_token = null;
-            $existingUser->save();
-
-            DiscordConnectionUpdated::dispatch($existingUser);
-        }
-
         $user = $request->user();
-        $user->discord_api_id = $credentials->id;
-        $user->discord_api_nickname = $credentials->getNickname();
-        $user->discord_api_access_token = $credentials->token;
-        $user->discord_api_refresh_token = $credentials->refreshToken;
-        $user->save();
 
-        DiscordConnectionUpdated::dispatch($user);
+        $discordUser = DiscordUser::firstOrNew(['discord_api_id' => $credentials->id]);
+        $discordUser->user_id = $user->id;
+        $discordUser->discord_api_nickname = $credentials->getNickname();
+        $discordUser->discord_api_access_token = $credentials->token;
+        $discordUser->discord_api_refresh_token = $credentials->refreshToken;
+
+        if ($discordUser->isDirty() && $discordUser->save()) {
+            DiscordConnectionUpdated::dispatch($discordUser);
+        }
 
         return redirect()->to('https://discord.com/channels/592327939920494592/592327939920494594');
     }

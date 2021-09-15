@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\User;
+use App\Models\DiscordUser;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,18 +15,18 @@ class SynchronizeDiscordSponsorRole implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * @var User
+     * @var DiscordUser
      */
-    public $user;
+    public $discordUser;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(DiscordUser $discordUser)
     {
-        $this->user = $user;
+        $this->discordUser = $discordUser;
     }
 
     /**

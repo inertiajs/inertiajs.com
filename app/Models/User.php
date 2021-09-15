@@ -6,6 +6,7 @@ use App\Services\Github\Api as GithubApi;
 use App\Services\Github\Exceptions\BadCredentialsException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -43,6 +44,16 @@ class User extends Authenticatable
     public function sponsor(): BelongsTo
     {
         return $this->belongsTo(Sponsor::class);
+    }
+
+    /**
+     * The User's Discord Connection.
+     *
+     * @return HasOne
+     */
+    public function discordUser(): HasOne
+    {
+        return $this->hasOne(DiscordUser::class);
     }
 
     /**

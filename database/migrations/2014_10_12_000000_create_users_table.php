@@ -19,10 +19,6 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('github_api_id');
             $table->string('github_api_login');
             $table->string('github_api_access_token');
-            $table->unsignedBigInteger('discord_api_id')->nullable();
-            $table->string('discord_api_nickname')->nullable();
-            $table->string('discord_api_access_token')->nullable();
-            $table->string('discord_api_refresh_token')->nullable();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\DiscordUser;
 use App\Models\Sponsor;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -50,12 +51,7 @@ class UserFactory extends Factory
      */
     public function withDiscord(): self
     {
-        return $this->state([
-            'discord_api_id' => '696628666183975013',
-            'discord_api_nickname' => 'Claudio Dekker#3220',
-            'discord_api_access_token' => 'INVALIDxq3Ly5ca88vy9aUKjLIXdqr',
-            'discord_api_refresh_token' => 'INVALIDb8yS0e3Iau0Pn6Q96yUHr9T',
-        ]);
+        return $this->has(DiscordUser::factory());
     }
 
     /**

@@ -27,10 +27,6 @@ class ScheduleDiscordSponsorRoleSync
      */
     public function handle(DiscordConnectionUpdated $event)
     {
-        if (is_null($event->user->discord_api_id)) {
-            return;
-        }
-
-        dispatch(new SynchronizeDiscordSponsorRole($event->user));
+        dispatch(new SynchronizeDiscordSponsorRole($event->discordUser));
     }
 }

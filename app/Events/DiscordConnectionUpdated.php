@@ -2,8 +2,8 @@
 
 namespace App\Events;
 
+use App\Models\DiscordUser;
 use Illuminate\Broadcasting\Channel;
-use App\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -16,18 +16,18 @@ class DiscordConnectionUpdated
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var User
+     * @var DiscordUser
      */
-    public $user;
+    public $discordUser;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(DiscordUser $discordUser)
     {
-        $this->user = $user;
+        $this->discordUser = $discordUser;
     }
 
     /**
