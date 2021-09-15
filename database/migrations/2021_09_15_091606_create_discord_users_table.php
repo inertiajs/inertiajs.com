@@ -20,6 +20,7 @@ class CreateDiscordUsersTable extends Migration
             $table->string('discord_api_nickname');
             $table->string('discord_api_access_token');
             $table->string('discord_api_refresh_token');
+            $table->boolean('has_sponsor_role')->default(false);
             $table->timestamps();
         });
     }

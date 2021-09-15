@@ -47,11 +47,12 @@ class UserFactory extends Factory
     /**
      * The Discord User details used in our tests.
      *
+     * @param array $attributes
      * @return UserFactory
      */
-    public function withDiscord(): self
+    public function withDiscord(array $attributes = []): self
     {
-        return $this->has(DiscordUser::factory());
+        return $this->has(DiscordUser::factory()->state($attributes));
     }
 
     /**

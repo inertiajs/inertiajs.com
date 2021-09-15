@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\DiscordUser;
+use App\Services\Discord\Bot as DiscordBot;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -36,6 +37,12 @@ class SynchronizeDiscordSponsorRole implements ShouldQueue
      */
     public function handle()
     {
-        //
+        $discordUser = $this->discordUser;
+        $isSponsoring = $discordUser->user->hasActiveSponsor();
+
+        if ($isSponsoring && ! $discordUser->has_sponsor_role) {
+            $discordUser->has_sponsor_role = app(DiscordBot::class)->assignSponsorRole($discordUser->discord_api_id);
+            $discordUser->save();
+        }
     }
 }
