@@ -123,4 +123,32 @@ class HttpFakes
             ], 401),
         ]);
     }
+
+    public static function discordBotInvalidToken()
+    {
+        Http::fake([
+            'https://discord.com/api/*' => Http::response([
+                'message' => '401: Unauthorized',
+                'code' => 0,
+            ], 401),
+        ]);
+    }
+
+    public static function discordManageRole()
+    {
+        Http::fake([
+            'https://discord.com/api/guilds/invalid-guild/members/*/roles/*' => Http::response([
+                'message' => 'Unknown Guild',
+                'code' => 10004,
+            ], 404),
+            'https://discord.com/api/guilds/*/members/invalid-member/roles/*' => Http::response([
+                'user_id' => ['Value "invalid-member" is not snowflake.'],
+            ], 400),
+            'https://discord.com/api/guilds/*/members/*/roles/invalid-role' => Http::response([
+                'message' => 'Unknown Role',
+                'code' => 10011,
+            ], 404),
+            'https://discord.com/api/guilds/*/members/*/roles/*' => Http::response(null, 204),
+        ]);
+    }
 }
