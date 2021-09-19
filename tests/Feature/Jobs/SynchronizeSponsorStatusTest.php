@@ -87,4 +87,21 @@ class SynchronizeSponsorStatusTest extends TestCase
         $this->assertNull($user->fresh()->sponsor);
         Event::assertNothingDispatched();
     }
+
+    /** @test */
+    public function the_user_resumes_their_sponsorship(): void
+    {
+        Event::fake([UserStartedSponsoring::class]);
+        HttpFakes::githubSponsorsViewerIsSponsoringUser();
+        $user = User::factory()->claudiodekker()->for(Sponsor::factory()->claudiodekker())->create();
+        $user->sponsor->update(['has_expired' => true]);
+
+        SynchronizeSponsorStatus::dispatch($user);
+
+        tap($user->fresh()->sponsor, function (Sponsor $sponsor) use ($user) {
+            $this->assertSame($user->github_api_id, $sponsor->github_api_id);
+            $this->assertFalse($sponsor->has_expired);
+        });
+        Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
+    }
 }
