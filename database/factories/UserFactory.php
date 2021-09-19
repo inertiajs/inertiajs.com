@@ -71,4 +71,17 @@ class UserFactory extends Factory
                 ->id;
         });
     }
+
+    /**
+     * The User's Expired Sponsor.
+     *
+     * @param array $attributes
+     * @return UserFactory
+     */
+    public function expiredSponsor(array $attributes = []): self
+    {
+        return $this->sponsoring(array_merge([
+            'has_expired' => true,
+        ], $attributes));
+    }
 }

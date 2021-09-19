@@ -43,6 +43,9 @@ class SynchronizeDiscordSponsorRole implements ShouldQueue
         if ($isSponsoring && ! $discordUser->has_sponsor_role) {
             $discordUser->has_sponsor_role = app(DiscordBot::class)->assignSponsorRole($discordUser->discord_api_id);
             $discordUser->save();
+        } elseif (! $isSponsoring && $discordUser->has_sponsor_role) {
+            $discordUser->has_sponsor_role = ! app(DiscordBot::class)->revokeSponsorRole($discordUser->discord_api_id);
+            $discordUser->save();
         }
     }
 }

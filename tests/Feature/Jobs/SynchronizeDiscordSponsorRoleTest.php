@@ -24,4 +24,17 @@ class SynchronizeDiscordSponsorRoleTest extends TestCase
 
         $this->assertTrue($discordUser->fresh()->has_sponsor_role);
     }
+
+    /** @test */
+    public function it_revokes_the_role_when_the_user_is_no_longer_a_sponsor(): void
+    {
+        HttpFakes::discordManageRole();
+        $user = User::factory()->withGithub()->expiredSponsor()->withDiscord(['has_sponsor_role' => true])->create();
+        $discordUser = $user->discordUser;
+        $this->assertTrue($discordUser->has_sponsor_role);
+
+        SynchronizeDiscordSponsorRole::dispatch($discordUser);
+
+        $this->assertFalse($discordUser->fresh()->has_sponsor_role);
+    }
 }
