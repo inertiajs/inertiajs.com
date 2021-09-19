@@ -56,4 +56,17 @@ class SynchronizeSponsorStatusTest extends TestCase
         });
         Carbon::setTestNow();
     }
+
+    /** @test */
+    public function it_does_nothing_when_the_user_is_not_a_sponsor(): void
+    {
+        Event::fake([UserStartedSponsoring::class, UserStoppedSponsoring::class]);
+        HttpFakes::githubSponsorsViewerIsNotSponsoringUser();
+        $user = User::factory()->claudiodekker()->create();
+
+        SynchronizeSponsorStatus::dispatch($user);
+
+        $this->assertNull($user->fresh()->sponsor);
+        Event::assertNothingDispatched();
+    }
 }
