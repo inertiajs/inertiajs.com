@@ -25,6 +25,18 @@ class BotTest extends TestCase
         ]);
     }
 
+    protected function assertSponsorRoleRequestSent($method = 'PUT', $url = '/1234567890/members/123/roles/9876543210'): void
+    {
+        Http::assertSentCount(1);
+        Http::assertSent(function (Request $request) use ($url, $method) {
+            $this->assertSame('Bot foo', $request->header('Authorization.0'));
+            $this->assertSame('https://discord.com/api/guilds'.$url, $request->url());
+            $this->assertSame($method, $request->method());
+
+            return true;
+        });
+    }
+
     /** @test */
     public function it_assigns_the_sponsor_role(): void
     {
@@ -33,14 +45,7 @@ class BotTest extends TestCase
         $response = app(DiscordBot::class)->assignSponsorRole(123);
 
         $this->assertTrue($response);
-        Http::assertSentCount(1);
-        Http::assertSent(function (Request $request) {
-            $this->assertSame('Bot foo', $request->header('Authorization.0'));
-            $this->assertSame('https://discord.com/api/guilds/1234567890/members/123/roles/9876543210', $request->url());
-            $this->assertSame('PUT', $request->method());
-
-            return true;
-        });
+        $this->assertSponsorRoleRequestSent();
     }
 
     /** @test */
@@ -51,14 +56,7 @@ class BotTest extends TestCase
         try {
             app(DiscordBot::class)->assignSponsorRole(123);
         } catch (InvalidBotCredentialsException $exception) {
-            Http::assertSentCount(1);
-            Http::assertSent(function (Request $request) {
-                $this->assertSame('Bot foo', $request->header('Authorization.0'));
-                $this->assertSame('https://discord.com/api/guilds/1234567890/members/123/roles/9876543210', $request->url());
-                $this->assertSame('PUT', $request->method());
-
-                return true;
-            });
+            $this->assertSponsorRoleRequestSent();
 
             return;
         }
@@ -75,14 +73,7 @@ class BotTest extends TestCase
         try {
             app(DiscordBot::class)->assignSponsorRole(123);
         } catch (UnknownGuildException $exception) {
-            Http::assertSentCount(1);
-            Http::assertSent(function (Request $request) {
-                $this->assertSame('Bot foo', $request->header('Authorization.0'));
-                $this->assertSame('https://discord.com/api/guilds/invalid-guild/members/123/roles/9876543210', $request->url());
-                $this->assertSame('PUT', $request->method());
-
-                return true;
-            });
+            $this->assertSponsorRoleRequestSent('PUT', '/invalid-guild/members/123/roles/9876543210');
 
             return;
         }
@@ -98,14 +89,7 @@ class BotTest extends TestCase
         try {
             app(DiscordBot::class)->assignSponsorRole('invalid-member');
         } catch (UnknownUserException $exception) {
-            Http::assertSentCount(1);
-            Http::assertSent(function (Request $request) {
-                $this->assertSame('Bot foo', $request->header('Authorization.0'));
-                $this->assertSame('https://discord.com/api/guilds/1234567890/members/invalid-member/roles/9876543210', $request->url());
-                $this->assertSame('PUT', $request->method());
-
-                return true;
-            });
+            $this->assertSponsorRoleRequestSent('PUT', '/1234567890/members/invalid-member/roles/9876543210');
 
             return;
         }
@@ -122,14 +106,7 @@ class BotTest extends TestCase
         try {
             app(DiscordBot::class)->assignSponsorRole(123);
         } catch (UnknownRoleException $exception) {
-            Http::assertSentCount(1);
-            Http::assertSent(function (Request $request) {
-                $this->assertSame('Bot foo', $request->header('Authorization.0'));
-                $this->assertSame('https://discord.com/api/guilds/1234567890/members/123/roles/invalid-role', $request->url());
-                $this->assertSame('PUT', $request->method());
-
-                return true;
-            });
+            $this->assertSponsorRoleRequestSent('PUT', '/1234567890/members/123/roles/invalid-role');
 
             return;
         }
@@ -145,14 +122,7 @@ class BotTest extends TestCase
         $response = app(DiscordBot::class)->revokeSponsorRole(123);
 
         $this->assertTrue($response);
-        Http::assertSentCount(1);
-        Http::assertSent(function (Request $request) {
-            $this->assertSame('Bot foo', $request->header('Authorization.0'));
-            $this->assertSame('https://discord.com/api/guilds/1234567890/members/123/roles/9876543210', $request->url());
-            $this->assertSame('DELETE', $request->method());
-
-            return true;
-        });
+        $this->assertSponsorRoleRequestSent('DELETE');
     }
 
     /** @test */
@@ -163,14 +133,7 @@ class BotTest extends TestCase
         try {
             app(DiscordBot::class)->revokeSponsorRole(123);
         } catch (InvalidBotCredentialsException $exception) {
-            Http::assertSentCount(1);
-            Http::assertSent(function (Request $request) {
-                $this->assertSame('Bot foo', $request->header('Authorization.0'));
-                $this->assertSame('https://discord.com/api/guilds/1234567890/members/123/roles/9876543210', $request->url());
-                $this->assertSame('DELETE', $request->method());
-
-                return true;
-            });
+            $this->assertSponsorRoleRequestSent('DELETE');
 
             return;
         }
@@ -187,14 +150,7 @@ class BotTest extends TestCase
         try {
             app(DiscordBot::class)->revokeSponsorRole(123);
         } catch (UnknownGuildException $exception) {
-            Http::assertSentCount(1);
-            Http::assertSent(function (Request $request) {
-                $this->assertSame('Bot foo', $request->header('Authorization.0'));
-                $this->assertSame('https://discord.com/api/guilds/invalid-guild/members/123/roles/9876543210', $request->url());
-                $this->assertSame('DELETE', $request->method());
-
-                return true;
-            });
+            $this->assertSponsorRoleRequestSent('DELETE', '/invalid-guild/members/123/roles/9876543210');
 
             return;
         }
@@ -210,14 +166,7 @@ class BotTest extends TestCase
         try {
             app(DiscordBot::class)->revokeSponsorRole('invalid-member');
         } catch (UnknownUserException $exception) {
-            Http::assertSentCount(1);
-            Http::assertSent(function (Request $request) {
-                $this->assertSame('Bot foo', $request->header('Authorization.0'));
-                $this->assertSame('https://discord.com/api/guilds/1234567890/members/invalid-member/roles/9876543210', $request->url());
-                $this->assertSame('DELETE', $request->method());
-
-                return true;
-            });
+            $this->assertSponsorRoleRequestSent('DELETE', '/1234567890/members/invalid-member/roles/9876543210');
 
             return;
         }
@@ -234,14 +183,7 @@ class BotTest extends TestCase
         try {
             app(DiscordBot::class)->revokeSponsorRole(123);
         } catch (UnknownRoleException $exception) {
-            Http::assertSentCount(1);
-            Http::assertSent(function (Request $request) {
-                $this->assertSame('Bot foo', $request->header('Authorization.0'));
-                $this->assertSame('https://discord.com/api/guilds/1234567890/members/123/roles/invalid-role', $request->url());
-                $this->assertSame('DELETE', $request->method());
-
-                return true;
-            });
+            $this->assertSponsorRoleRequestSent('DELETE', '/1234567890/members/123/roles/invalid-role');
 
             return;
         }
