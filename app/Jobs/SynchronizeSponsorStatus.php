@@ -41,14 +41,14 @@ class SynchronizeSponsorStatus implements ShouldQueue
         $isGithubSponsor = $this->user->isGithubSponsor();
         $sponsor = Sponsor::firstOrNew(['github_api_id' => $this->user->github_api_id]);
 
-        if ($isGithubSponsor) {
+        if ($isGithubSponsor && ! $sponsor->exists) {
             $sponsor->save();
 
             $this->user->sponsor_id = $sponsor->id;
             $this->user->save();
 
             UserStartedSponsoring::dispatch($this->user);
-        } elseif ($sponsor->exists) {
+        } elseif ($sponsor->exists && ! $isGithubSponsor) {
             $sponsor->has_expired = true;
             $sponsor->save();
 
