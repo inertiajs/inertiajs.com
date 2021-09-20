@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\DiscordConnectionUpdated;
 use App\Events\GithubCredentialsUpdated;
+use App\Events\UserStartedSponsoring;
 use App\Listeners\ScheduleDiscordSponsorRoleSync;
 use App\Listeners\ScheduleSponsorshipStatusSync;
 use Illuminate\Auth\Events\Registered;
@@ -34,6 +35,9 @@ class EventServiceProvider extends ServiceProvider
         SocialiteWasCalled::class => [
             DiscordExtendSocialite::class,
             GitHubExtendSocialite::class,
+        ],
+        UserStartedSponsoring::class => [
+            ScheduleDiscordSponsorRoleSync::class,
         ],
     ];
 

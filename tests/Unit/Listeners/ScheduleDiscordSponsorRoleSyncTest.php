@@ -3,15 +3,20 @@
 namespace Tests\Unit\Listeners;
 
 use App\Events\DiscordConnectionUpdated;
+use App\Events\UserStartedSponsoring;
 use App\Jobs\SynchronizeDiscordSponsorRole;
 use App\Models\DiscordUser;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class ScheduleDiscordSponsorRoleSyncTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
-    public function it_queues_a_job_to_synchronize_the_discord_user_role(): void
+    public function it_queues_a_job_when_the_discord_connection_was_updated(): void
     {
         Queue::fake();
         $discordUser = DiscordUser::factory()->make();
@@ -19,5 +24,28 @@ class ScheduleDiscordSponsorRoleSyncTest extends TestCase
         DiscordConnectionUpdated::dispatch($discordUser);
 
         Queue::assertPushed(SynchronizeDiscordSponsorRole::class, fn ($job) => $job->discordUser->is($discordUser));
+    }
+
+    /** @test */
+    public function it_queues_a_job_when_the_user_started_sponsoring_while_having_a_discord_connection(): void
+    {
+        Queue::fake();
+        $user = User::factory()->sponsoring()->withDiscord()->create();
+        $discordUser = $user->discordUser;
+
+        UserStartedSponsoring::dispatch($user);
+
+        Queue::assertPushed(SynchronizeDiscordSponsorRole::class, fn ($job) => $job->discordUser->is($discordUser));
+    }
+
+    /** @test */
+    public function it_queues_nothing_when_the_user_started_sponsoring_without_a_discord_connection(): void
+    {
+        Queue::fake();
+        $user = User::factory()->sponsoring()->create();
+
+        UserStartedSponsoring::dispatch($user);
+
+        Queue::assertNothingPushed();
     }
 }

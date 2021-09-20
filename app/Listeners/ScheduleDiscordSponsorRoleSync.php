@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\DiscordConnectionUpdated;
+use App\Events\UserStartedSponsoring;
 use App\Jobs\SynchronizeDiscordSponsorRole;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -22,11 +23,15 @@ class ScheduleDiscordSponsorRoleSync
     /**
      * Handle the event.
      *
-     * @param  DiscordConnectionUpdated  $event
+     * @param  DiscordConnectionUpdated|UserStartedSponsoring  $event
      * @return void
      */
-    public function handle(DiscordConnectionUpdated $event)
+    public function handle($event)
     {
-        dispatch(new SynchronizeDiscordSponsorRole($event->discordUser));
+        if ($event instanceof DiscordConnectionUpdated) {
+            dispatch(new SynchronizeDiscordSponsorRole($event->discordUser));
+        } elseif ($event->user->discordUser) {
+            dispatch(new SynchronizeDiscordSponsorRole($event->user->discordUser));
+        }
     }
 }
