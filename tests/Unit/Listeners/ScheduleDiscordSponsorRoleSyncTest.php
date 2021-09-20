@@ -4,6 +4,7 @@ namespace Tests\Unit\Listeners;
 
 use App\Events\DiscordConnectionUpdated;
 use App\Events\UserStartedSponsoring;
+use App\Events\UserStoppedSponsoring;
 use App\Jobs\SynchronizeDiscordSponsorRole;
 use App\Models\DiscordUser;
 use App\Models\User;
@@ -45,6 +46,29 @@ class ScheduleDiscordSponsorRoleSyncTest extends TestCase
         $user = User::factory()->sponsoring()->create();
 
         UserStartedSponsoring::dispatch($user);
+
+        Queue::assertNothingPushed();
+    }
+
+    /** @test */
+    public function it_queues_a_job_when_the_user_stopped_sponsoring_while_having_a_discord_connection(): void
+    {
+        Queue::fake();
+        $user = User::factory()->expiredSponsor()->withDiscord()->create();
+        $discordUser = $user->discordUser;
+
+        UserStoppedSponsoring::dispatch($user);
+
+        Queue::assertPushed(SynchronizeDiscordSponsorRole::class, fn ($job) => $job->discordUser->is($discordUser));
+    }
+
+    /** @test */
+    public function it_queues_nothing_when_the_user_stopped_sponsoring_without_a_discord_connection(): void
+    {
+        Queue::fake();
+        $user = User::factory()->expiredSponsor()->create();
+
+        UserStoppedSponsoring::dispatch($user);
 
         Queue::assertNothingPushed();
     }
