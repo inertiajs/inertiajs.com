@@ -100,4 +100,20 @@ class SynchronizeSponsorStatusTest extends TestCase
         });
         Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
     }
+
+    /** @test */
+    public function it_considers_the_sponsorship_cancelled_when_github_access_was_revoked(): void
+    {
+        Event::fake(UserStoppedSponsoring::class);
+        HttpFakes::githubSponsorsInvalidTokenError();
+        $user = User::factory()->withGithub()->sponsoring()->create();
+
+        SynchronizeSponsorStatus::dispatch($user);
+
+        tap($user->fresh()->sponsor, function (Sponsor $sponsor) use ($user) {
+            $this->assertSame($user->github_api_id, $sponsor->github_api_id);
+            $this->assertTrue($sponsor->has_expired);
+        });
+        Event::assertDispatched(UserStoppedSponsoring::class, fn ($event) => $event->user->is($user));
+    }
 }

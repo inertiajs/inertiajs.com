@@ -6,6 +6,7 @@ use App\Events\UserStartedSponsoring;
 use App\Events\UserStoppedSponsoring;
 use App\Models\Sponsor;
 use App\Models\User;
+use App\Services\Github\Exceptions\BadCredentialsException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -38,7 +39,7 @@ class SynchronizeSponsorStatus implements ShouldQueue
      */
     public function handle()
     {
-        $isGithubSponsor = $this->user->isGithubSponsor();
+        $isGithubSponsor = $this->isGithubSponsor();
         $sponsor = Sponsor::firstOrNew(['github_api_id' => $this->user->github_api_id]);
 
         if ($isGithubSponsor && (! $sponsor->exists || $sponsor->has_expired)) {
@@ -54,6 +55,15 @@ class SynchronizeSponsorStatus implements ShouldQueue
             $sponsor->save();
 
             UserStoppedSponsoring::dispatch($this->user);
+        }
+    }
+
+    protected function isGithubSponsor(): bool
+    {
+        try {
+            return $this->user->isGithubSponsor();
+        } catch (BadCredentialsException $exception) {
+            return false;
         }
     }
 }
