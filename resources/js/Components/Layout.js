@@ -206,25 +206,29 @@ export default function Layout({ meta, children }) {
                       },
                       {
                         name: 'Users.vue',
-                        language: 'html',
+                        language: 'twig',
                         code: dedent`
                           <template>
-                            <layout title="Users">
+                            <Head title="Users" />
+                            <Layout>
                               <div v-for="user in users" :key="user.id">
-                                <inertia-link :href="\`/users/\${user.id}\`">
+                                <Link :href="\`/users/\${user.id}\`">
                                   {{ user.name }}
-                                </inertia-link>
+                                </Link>
                                 <div>{{ user.email }}</div>
                               </div>
-                            </layout>
+                            </Layout>
                           </template>
 
                           <script>
                           import Layout from '../Shared/Layout'
+                          import { Link, Head } from '@inertiajs/inertia-vue'
 
                           export default {
                             components: {
                               Layout,
+                              Link,
+                              Head,
                             },
                             props: {
                               users: Array,
