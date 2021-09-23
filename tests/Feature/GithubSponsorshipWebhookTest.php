@@ -111,4 +111,28 @@ class GithubSponsorshipWebhookTest extends TestCase
 
         $response->assertForbidden();
     }
+
+    /** @test */
+    public function it_blocks_the_request_when_a_webhook_secret_is_configured_but_an_incorrect_header_was_provided(): void
+    {
+        config(['services.github.webhook_secret' => 'secret']);
+        $payload = $this->getSponsorsPayload('created');
+        $headers = ['X-Hub-Signature-256' => 'foo'];
+
+        $response = $this->postJson('/api/github/webhooks/sponsorship', $payload, $headers);
+
+        $response->assertForbidden();
+    }
+
+    /** @test */
+    public function it_allows_the_request_when_a_webhook_secret_is_configured_and_the_correct_header_was_provided(): void
+    {
+        config(['services.github.webhook_secret' => 'secret']);
+        $payload = $this->getSponsorsPayload('created');
+        $headers = ['X-Hub-Signature-256' => 'sha256='.hash_hmac('sha256', json_encode($payload), 'secret')];
+
+        $response = $this->postJson('/api/github/webhooks/sponsorship', $payload, $headers);
+
+        $response->assertNoContent();
+    }
 }

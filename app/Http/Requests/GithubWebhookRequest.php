@@ -13,14 +13,17 @@ class GithubWebhookRequest extends FormRequest
      */
     public function authorize()
     {
-        $secret = config('services.github.webhook_secret');
-        if ($secret) {
-            return false;
-        }
-
         abort_if(! $this->isJson(), 415, 'Content-Type must be application/json');
 
-        return true;
+        $secret = config('services.github.webhook_secret');
+        if (! $secret) {
+            return true;
+        }
+
+        $signature = $this->headers->get('X-Hub-Signature-256', '');
+        $hash = 'sha256='.hash_hmac('sha256', (string) $this->getContent(), $secret);
+
+        return hash_equals($hash, $signature);
     }
 
     /**
