@@ -32,6 +32,7 @@ class GithubSponsorshipWebhookController extends Controller
     public function store(GithubWebhookRequest $request)
     {
         $hasStartedSponsoring = $request->input('action') === 'created';
+        $isOneTimeSponsorship = $request->input('sponsorship.tier.is_one_time');
 
         $sponsor = Sponsor::firstOrNew([
             'github_api_id' => $request->input('sponsorship.sponsor.id'),
@@ -41,7 +42,14 @@ class GithubSponsorshipWebhookController extends Controller
             return response()->noContent();
         }
 
-        $sponsor->expires_at = $hasStartedSponsoring ? null : now();
+        if ($hasStartedSponsoring && $isOneTimeSponsorship) {
+            $sponsor->expires_at = now()->addMonth();
+        } elseif ($hasStartedSponsoring) {
+            $sponsor->expires_at = null;
+        } else {
+            $sponsor->expires_at = now();
+        }
+
         $sponsor->save();
 
         if (! $user = User::where('sponsor_id', $sponsor->id)->first()) {

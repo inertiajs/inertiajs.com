@@ -50,6 +50,24 @@ class GithubSponsorshipWebhookTest extends TestCase
     }
 
     /** @test */
+    public function someone_started_sponsoring_once(): void
+    {
+        Carbon::setTestNow('2021-01-01 00:00:00');
+        Event::fake(UserStartedSponsoring::class);
+
+        $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created-one_time'));
+
+        $response->assertNoContent();
+        $this->assertCount(1, Sponsor::all());
+        tap(Sponsor::first(), function (Sponsor $sponsor) {
+            $this->assertSame(39676034, $sponsor->github_api_id);
+            $this->assertTrue(now()->addMonth()->eq($sponsor->expires_at));
+        });
+        Event::assertNothingDispatched();
+        Carbon::setTestNow();
+    }
+
+    /** @test */
     public function a_known_user_started_sponsoring(): void
     {
         Event::fake(UserStartedSponsoring::class);
