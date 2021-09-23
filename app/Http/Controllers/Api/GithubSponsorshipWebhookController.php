@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\UserStartedSponsoring;
 use App\Http\Controllers\Controller;
 use App\Models\Sponsor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GithubSponsorshipWebhookController extends Controller
@@ -27,9 +29,16 @@ class GithubSponsorshipWebhookController extends Controller
      */
     public function store(Request $request)
     {
-        Sponsor::firstOrCreate([
+        $sponsor = Sponsor::firstOrNew([
             'github_api_id' => $request->input('sponsorship.sponsor.id'),
         ]);
+
+        $sponsor->has_expired = false;
+        $sponsor->save();
+
+        if ($user = User::where('sponsor_id', $sponsor->id)->first()) {
+            UserStartedSponsoring::dispatch($user);
+        }
 
         return response()->noContent();
     }
