@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Events\UserStartedSponsoring;
+use App\Events\UserStoppedSponsoring;
 use App\Models\Sponsor;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -56,5 +57,22 @@ class GithubSponsorshipWebhookTest extends TestCase
             $this->assertFalse($sponsor->has_expired);
         });
         Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
+    }
+
+    /** @test */
+    public function a_known_user_stopped_sponsoring(): void
+    {
+        Event::fake(UserStoppedSponsoring::class);
+        $user = User::factory()->sponsoring()->create(['github_api_id' => 39676034]);
+
+        $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('cancelled'));
+
+        $response->assertNoContent();
+        $this->assertCount(1, Sponsor::all());
+        tap($user->sponsor, function (Sponsor $sponsor) {
+            $this->assertSame(39676034, $sponsor->github_api_id);
+            $this->assertTrue($sponsor->has_expired);
+        });
+        Event::assertDispatched(UserStoppedSponsoring::class, fn ($event) => $event->user->is($user));
     }
 }

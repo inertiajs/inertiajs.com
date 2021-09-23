@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Events\UserStartedSponsoring;
+use App\Events\UserStoppedSponsoring;
 use App\Http\Controllers\Controller;
 use App\Models\Sponsor;
 use App\Models\User;
@@ -33,10 +34,16 @@ class GithubSponsorshipWebhookController extends Controller
             'github_api_id' => $request->input('sponsorship.sponsor.id'),
         ]);
 
-        $sponsor->has_expired = false;
+        $sponsor->has_expired = $request->input('action') === 'cancelled';
         $sponsor->save();
 
-        if ($user = User::where('sponsor_id', $sponsor->id)->first()) {
+        if (! $user = User::where('sponsor_id', $sponsor->id)->first()) {
+            return response()->noContent();
+        }
+
+        if ($sponsor->has_expired) {
+            UserStoppedSponsoring::dispatch($user);
+        } else {
             UserStartedSponsoring::dispatch($user);
         }
 
