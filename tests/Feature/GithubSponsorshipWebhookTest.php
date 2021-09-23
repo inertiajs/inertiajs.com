@@ -75,4 +75,16 @@ class GithubSponsorshipWebhookTest extends TestCase
         });
         Event::assertDispatched(UserStoppedSponsoring::class, fn ($event) => $event->user->is($user));
     }
+
+    /** @test */
+    public function it_does_nothing_when_someone_unknown_stopped_sponsoring(): void
+    {
+        Event::fake([UserStartedSponsoring::class, UserStoppedSponsoring::class]);
+
+        $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('cancelled'));
+
+        $response->assertNoContent();
+        $this->assertCount(0, Sponsor::all());
+        Event::assertNothingDispatched();
+    }
 }

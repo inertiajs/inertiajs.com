@@ -30,11 +30,17 @@ class GithubSponsorshipWebhookController extends Controller
      */
     public function store(Request $request)
     {
+        $hasStartedSponsoring = $request->input('action') === 'created';
+
         $sponsor = Sponsor::firstOrNew([
             'github_api_id' => $request->input('sponsorship.sponsor.id'),
         ]);
 
-        $sponsor->has_expired = $request->input('action') === 'cancelled';
+        if (! $hasStartedSponsoring && ! $sponsor->exists) {
+            return response()->noContent();
+        }
+
+        $sponsor->has_expired = !$hasStartedSponsoring;
         $sponsor->save();
 
         if (! $user = User::where('sponsor_id', $sponsor->id)->first()) {
