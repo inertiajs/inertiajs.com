@@ -15,6 +15,12 @@ class GithubSponsorshipWebhookTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config(['services.github.webhook_secret' => null]);
+    }
+
     protected function getSponsorsPayload($filename): array
     {
         if (! file_exists(base_path("tests/__fixtures/github-sponsors-webhook/${filename}.json"))) {
@@ -94,5 +100,15 @@ class GithubSponsorshipWebhookTest extends TestCase
         $response = $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));
 
         $response->assertStatus(415);
+    }
+
+    /** @test */
+    public function it_blocks_the_request_when_a_webhook_secret_is_configured_but_no_header_was_provided(): void
+    {
+        config(['services.github.webhook_secret' => 'secret']);
+
+        $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));
+
+        $response->assertForbidden();
     }
 }

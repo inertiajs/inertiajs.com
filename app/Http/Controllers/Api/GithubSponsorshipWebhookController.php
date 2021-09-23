@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Events\UserStartedSponsoring;
 use App\Events\UserStoppedSponsoring;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GithubWebhookRequest;
 use App\Models\Sponsor;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,14 +25,12 @@ class GithubSponsorshipWebhookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param GithubWebhookRequest $request
      * @return \Illuminate\Http\Response
      * @see https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#sponsorship
      */
-    public function store(Request $request)
+    public function store(GithubWebhookRequest $request)
     {
-        abort_if(! $request->isJson(), 415, 'Content-Type must be application/json');
-
         $hasStartedSponsoring = $request->input('action') === 'created';
 
         $sponsor = Sponsor::firstOrNew([

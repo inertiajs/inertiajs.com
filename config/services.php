@@ -45,6 +45,7 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => env('GITHUB_REDIRECT_URI'),
         'sponsor_target' => env('GITHUB_SPONSOR_TARGET', 'reinink'),
+        'webhook_secret' => env('GITHUB_WEBHOOK_SECRET'),
     ],
 
 ];
