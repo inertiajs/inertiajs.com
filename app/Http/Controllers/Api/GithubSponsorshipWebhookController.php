@@ -30,6 +30,8 @@ class GithubSponsorshipWebhookController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(! $request->isJson(), 415, 'Content-Type must be application/json');
+
         $hasStartedSponsoring = $request->input('action') === 'created';
 
         $sponsor = Sponsor::firstOrNew([

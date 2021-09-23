@@ -87,4 +87,12 @@ class GithubSponsorshipWebhookTest extends TestCase
         $this->assertCount(0, Sponsor::all());
         Event::assertNothingDispatched();
     }
+
+    /** @test */
+    public function the_request_must_be_json(): void
+    {
+        $response = $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));
+
+        $response->assertStatus(415);
+    }
 }
