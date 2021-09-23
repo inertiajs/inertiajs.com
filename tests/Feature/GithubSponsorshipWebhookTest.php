@@ -6,6 +6,7 @@ use App\Events\UserStartedSponsoring;
 use App\Events\UserStoppedSponsoring;
 use App\Models\Sponsor;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use LogicException;
@@ -43,7 +44,7 @@ class GithubSponsorshipWebhookTest extends TestCase
         $this->assertCount(1, Sponsor::all());
         tap(Sponsor::first(), function (Sponsor $sponsor) {
             $this->assertSame(2871897, $sponsor->github_api_id);
-            $this->assertFalse($sponsor->has_expired);
+            $this->assertNull($sponsor->expires_at);
         });
         Event::assertNothingDispatched();
     }
@@ -60,7 +61,7 @@ class GithubSponsorshipWebhookTest extends TestCase
         $this->assertCount(1, Sponsor::all());
         tap($user->sponsor, function (Sponsor $sponsor) {
             $this->assertSame(2871897, $sponsor->github_api_id);
-            $this->assertFalse($sponsor->has_expired);
+            $this->assertNull($sponsor->expires_at);
         });
         Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
     }
@@ -68,6 +69,7 @@ class GithubSponsorshipWebhookTest extends TestCase
     /** @test */
     public function a_known_user_stopped_sponsoring(): void
     {
+        Carbon::setTestNow('2021-01-01');
         Event::fake(UserStoppedSponsoring::class);
         $user = User::factory()->sponsoring()->create(['github_api_id' => 39676034]);
 
@@ -77,9 +79,10 @@ class GithubSponsorshipWebhookTest extends TestCase
         $this->assertCount(1, Sponsor::all());
         tap($user->sponsor, function (Sponsor $sponsor) {
             $this->assertSame(39676034, $sponsor->github_api_id);
-            $this->assertTrue($sponsor->has_expired);
+            $this->assertTrue(now()->eq($sponsor->expires_at));
         });
         Event::assertDispatched(UserStoppedSponsoring::class, fn ($event) => $event->user->is($user));
+        Carbon::setTestNow();
     }
 
     /** @test */

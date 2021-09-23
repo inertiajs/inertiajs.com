@@ -39,8 +39,16 @@ class UserTest extends TestCase
     /** @test */
     public function it_does_not_have_an_active_sponsor_when_the_sponsor_has_expired(): void
     {
-        $user = User::factory()->sponsoring(['has_expired' => true])->make();
+        $user = User::factory()->sponsoring(['expires_at' => now()])->make();
 
         $this->assertFalse($user->hasActiveSponsor());
+    }
+
+    /** @test */
+    public function it_has_an_active_sponsor_when_the_expiration_date_is_in_the_future(): void
+    {
+        $user = User::factory()->sponsoring(['expires_at' => now()->addWeeks(2)])->make();
+
+        $this->assertTrue($user->hasActiveSponsor());
     }
 }

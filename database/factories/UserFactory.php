@@ -81,7 +81,7 @@ class UserFactory extends Factory
     public function expiredSponsor(array $attributes = []): self
     {
         return $this->sponsoring(array_merge([
-            'has_expired' => true,
+            'expires_at' => now(),
         ], $attributes));
     }
 }

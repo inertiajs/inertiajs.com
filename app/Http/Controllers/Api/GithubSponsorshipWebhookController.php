@@ -41,7 +41,7 @@ class GithubSponsorshipWebhookController extends Controller
             return response()->noContent();
         }
 
-        $sponsor->has_expired = !$hasStartedSponsoring;
+        $sponsor->expires_at = $hasStartedSponsoring ? null : now();
         $sponsor->save();
 
         if (! $user = User::where('sponsor_id', $sponsor->id)->first()) {

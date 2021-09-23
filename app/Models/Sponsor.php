@@ -22,6 +22,19 @@ class Sponsor extends Model
      * @var array
      */
     protected $casts = [
+        'expires_at' => 'datetime',
         'has_expired' => 'boolean',
     ];
+
+    /**
+     * Whether the Sponsor has expired or not.
+     */
+    public function getHasExpiredAttribute(): bool
+    {
+        if (is_null($this->expires_at)) {
+            return false;
+        }
+
+        return ! $this->expires_at->isFuture();
+    }
 }

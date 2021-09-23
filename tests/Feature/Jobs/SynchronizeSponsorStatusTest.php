@@ -29,7 +29,7 @@ class SynchronizeSponsorStatusTest extends TestCase
 
         tap($user->fresh()->sponsor, function (Sponsor $sponsor) use ($user) {
             $this->assertSame($user->github_api_id, $sponsor->github_api_id);
-            $this->assertFalse($sponsor->has_expired);
+            $this->assertNull($sponsor->expires_at);
         });
         Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
     }
@@ -47,7 +47,7 @@ class SynchronizeSponsorStatusTest extends TestCase
 
         tap($user->fresh()->sponsor, function (Sponsor $sponsor) use ($user) {
             $this->assertSame($user->github_api_id, $sponsor->github_api_id);
-            $this->assertTrue($sponsor->has_expired);
+            $this->assertTrue(now()->eq($sponsor->expires_at));
         });
         Event::assertDispatched(UserStoppedSponsoring::class, fn ($event) => $event->user->is($user));
         Carbon::setTestNow();
@@ -66,7 +66,7 @@ class SynchronizeSponsorStatusTest extends TestCase
         tap($user->fresh()->sponsor, function (Sponsor $sponsor) use ($user, $existingSponsor) {
             $this->assertTrue($sponsor->is($existingSponsor));
             $this->assertSame($user->github_api_id, $sponsor->github_api_id);
-            $this->assertFalse($sponsor->has_expired);
+            $this->assertNull($sponsor->expires_at);
         });
         Event::assertNothingDispatched();
     }
@@ -90,13 +90,13 @@ class SynchronizeSponsorStatusTest extends TestCase
         Event::fake([UserStartedSponsoring::class]);
         HttpFakes::githubSponsorsViewerIsSponsoringUser();
         $user = User::factory()->withGithub()->sponsoring()->create();
-        $user->sponsor->update(['has_expired' => true]);
+        $user->sponsor->update(['expires_at' => now()]);
 
         SynchronizeSponsorStatus::dispatch($user);
 
         tap($user->fresh()->sponsor, function (Sponsor $sponsor) use ($user) {
             $this->assertSame($user->github_api_id, $sponsor->github_api_id);
-            $this->assertFalse($sponsor->has_expired);
+            $this->assertNull($sponsor->expires_at);
         });
         Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
     }
@@ -104,6 +104,7 @@ class SynchronizeSponsorStatusTest extends TestCase
     /** @test */
     public function it_considers_the_sponsorship_cancelled_when_github_access_was_revoked(): void
     {
+        Carbon::setTestNow('2021-01-01');
         Event::fake(UserStoppedSponsoring::class);
         HttpFakes::githubSponsorsInvalidTokenError();
         $user = User::factory()->withGithub()->sponsoring()->create();
@@ -112,8 +113,9 @@ class SynchronizeSponsorStatusTest extends TestCase
 
         tap($user->fresh()->sponsor, function (Sponsor $sponsor) use ($user) {
             $this->assertSame($user->github_api_id, $sponsor->github_api_id);
-            $this->assertTrue($sponsor->has_expired);
+            $this->assertTrue(now()->eq($sponsor->expires_at));
         });
         Event::assertDispatched(UserStoppedSponsoring::class, fn ($event) => $event->user->is($user));
+        Carbon::setTestNow();
     }
 }

@@ -16,7 +16,7 @@ class CreateSponsorsTable extends Migration
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('github_api_id');
-            $table->boolean('has_expired')->default(false);
+            $table->dateTime('expires_at')->nullable()->default(null);
             $table->timestamps();
         });
     }
