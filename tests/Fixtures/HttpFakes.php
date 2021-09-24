@@ -6,6 +6,25 @@ use Illuminate\Support\Facades\Http;
 
 class HttpFakes
 {
+    public static function githubOrganizations(): void
+    {
+        Http::fake([
+            'https://api.github.com/graphql' => Http::response([
+                'data' => [
+                    'viewer' => [
+                        'organizations' => [
+                            'nodes' => [
+                                ['databaseId' => 958072],
+                                ['databaseId' => 39676034],
+                                ['databaseId' => 47703742],
+                            ],
+                        ],
+                    ],
+                ],
+            ]),
+        ]);
+    }
+
     public static function githubSponsorsViewerIsSponsoringUser(): void
     {
         Http::fake([

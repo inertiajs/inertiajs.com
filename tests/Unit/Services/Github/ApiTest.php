@@ -80,12 +80,42 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_an_exception_when_an_invalid_token_is_used(): void
+    public function it_retrieves_a_list_of_github_organization_ids_that_the_token_owner_is_a_part_of(): void
+    {
+        HttpFakes::githubOrganizations();
+
+        $response = app(GithubApi::class)->organizationIds('foo');
+
+        $this->assertCount(3, $response);
+        $this->assertSame(958072, $response[0]);
+        $this->assertSame(39676034, $response[1]);
+        $this->assertSame(47703742, $response[2]);
+        Http::assertSentCount(1);
+        Http::assertSent(function (Request $request) {
+            $this->assertSame('Bearer foo', $request->header('Authorization.0'));
+            $this->assertEmpty($request->data()['variables']);
+
+            return true;
+        });
+    }
+
+    /** @test */
+    public function it_throws_an_exception_when_an_invalid_token_is_used_when_checking_the_sponsor_status(): void
     {
         HttpFakes::githubSponsorsInvalidTokenError();
 
         $this->expectException(BadCredentialsException::class);
 
         app(GithubApi::class)->isSponsoring('bar', 'foo');
+    }
+
+    /** @test */
+    public function it_throws_an_exception_when_an_invalid_token_is_used_when_checking_the_user_organizations(): void
+    {
+        HttpFakes::githubSponsorsInvalidTokenError();
+
+        $this->expectException(BadCredentialsException::class);
+
+        app(GithubApi::class)->organizationIds('bar');
     }
 }
