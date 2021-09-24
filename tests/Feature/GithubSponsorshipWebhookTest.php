@@ -116,6 +116,16 @@ class GithubSponsorshipWebhookTest extends TestCase
     }
 
     /** @test */
+    public function it_does_nothing_when_an_unsupported_event_was_received(): void
+    {
+        Event::fake([UserStartedSponsoring::class, UserStoppedSponsoring::class]);
+
+        $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_cancellation'));
+
+        $response->assertUnprocessable();
+    }
+
+    /** @test */
     public function the_request_must_be_json(): void
     {
         $response = $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));

@@ -31,7 +31,11 @@ class GithubSponsorshipWebhookController extends Controller
      */
     public function store(GithubWebhookRequest $request)
     {
-        $hasStartedSponsoring = $request->input('action') === 'created';
+        $action = $request->input('action');
+
+        abort_if($action !== 'created' && $action !== 'cancelled', 422, 'Unsupported Hook Type.');
+
+        $hasStartedSponsoring = $action === 'created';
         $isOneTimeSponsorship = $request->input('sponsorship.tier.is_one_time');
 
         $sponsor = Sponsor::firstOrNew([
