@@ -81,4 +81,17 @@ class User extends Authenticatable
             $this->github_api_access_token,
         );
     }
+
+    /**
+     * The Github Organization ID's the User is part of.
+     *
+     * @return array
+     * @throws BadCredentialsException
+     */
+    public function getGithubOrganizationIds(): array
+    {
+        return app(GithubApi::class)->organizationIds(
+            $this->github_api_access_token
+        );
+    }
 }

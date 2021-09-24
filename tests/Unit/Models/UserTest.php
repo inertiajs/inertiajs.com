@@ -51,4 +51,15 @@ class UserTest extends TestCase
 
         $this->assertTrue($user->hasActiveSponsor());
     }
+
+    /** @test */
+    public function it_gets_the_github_organization_ids_the_user_is_a_part_of(): void
+    {
+        $user = User::factory()->make(['github_api_access_token' => 'bar']);
+        $mock = $this->spy(Api::class);
+
+        $user->getGithubOrganizationIds();
+
+        $mock->shouldHaveReceived('organizationIds', ['bar']);
+    }
 }
