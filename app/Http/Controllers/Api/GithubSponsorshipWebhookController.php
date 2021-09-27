@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Events\UserStartedSponsoring;
-use App\Events\UserStoppedSponsoring;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GithubWebhookRequest;
+use App\Jobs\SynchronizeSponsorStatus;
 use App\Models\Sponsor;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,14 +55,8 @@ class GithubSponsorshipWebhookController extends Controller
 
         $sponsor->save();
 
-        if (! $user = User::where('sponsor_id', $sponsor->id)->first()) {
-            return response()->noContent();
-        }
-
-        if ($sponsor->has_expired) {
-            UserStoppedSponsoring::dispatch($user);
-        } else {
-            UserStartedSponsoring::dispatch($user);
+        if (! $hasStartedSponsoring) {
+            $sponsor->users->each(fn (User $user) => SynchronizeSponsorStatus::dispatch($user));
         }
 
         return response()->noContent();

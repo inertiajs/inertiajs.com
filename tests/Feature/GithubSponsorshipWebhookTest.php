@@ -2,13 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Events\UserStartedSponsoring;
-use App\Events\UserStoppedSponsoring;
+use App\Jobs\SynchronizeSponsorStatus;
 use App\Models\Sponsor;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Queue;
 use LogicException;
 use Tests\TestCase;
 
@@ -36,7 +35,7 @@ class GithubSponsorshipWebhookTest extends TestCase
     /** @test */
     public function someone_started_sponsoring(): void
     {
-        Event::fake(UserStartedSponsoring::class);
+        Queue::fake();
 
         $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));
 
@@ -46,14 +45,14 @@ class GithubSponsorshipWebhookTest extends TestCase
             $this->assertSame(2871897, $sponsor->github_api_id);
             $this->assertNull($sponsor->expires_at);
         });
-        Event::assertNothingDispatched();
+        Queue::assertNothingPushed();
     }
 
     /** @test */
     public function someone_started_sponsoring_once(): void
     {
         Carbon::setTestNow('2021-01-01 00:00:00');
-        Event::fake(UserStartedSponsoring::class);
+        Queue::fake();
 
         $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created-one_time'));
 
@@ -63,66 +62,49 @@ class GithubSponsorshipWebhookTest extends TestCase
             $this->assertSame(39676034, $sponsor->github_api_id);
             $this->assertTrue(now()->addMonth()->eq($sponsor->expires_at));
         });
-        Event::assertNothingDispatched();
+        Queue::assertNothingPushed();
         Carbon::setTestNow();
     }
 
     /** @test */
-    public function a_known_user_started_sponsoring(): void
+    public function someone_stopped_sponsoring(): void
     {
-        Event::fake(UserStartedSponsoring::class);
-        $user = User::factory()->expiredSponsor()->create(['github_api_id' => 2871897]);
-
-        $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));
-
-        $response->assertNoContent();
-        $this->assertCount(1, Sponsor::all());
-        tap($user->sponsor, function (Sponsor $sponsor) {
-            $this->assertSame(2871897, $sponsor->github_api_id);
-            $this->assertNull($sponsor->expires_at);
-        });
-        Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
-    }
-
-    /** @test */
-    public function a_known_user_stopped_sponsoring(): void
-    {
-        Carbon::setTestNow('2021-01-01');
-        Event::fake(UserStoppedSponsoring::class);
-        $user = User::factory()->sponsoring()->create(['github_api_id' => 39676034]);
+        Carbon::setTestNow('2021-01-01 00:00:00');
+        Queue::fake();
+        $sponsor = Sponsor::factory()->organization()->create();
+        $userA = User::factory()->create(['sponsor_id' => $sponsor->id]);
+        $userB = User::factory()->withGithub()->create(['sponsor_id' => $sponsor->id]);
 
         $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('cancelled'));
 
         $response->assertNoContent();
         $this->assertCount(1, Sponsor::all());
-        tap($user->sponsor, function (Sponsor $sponsor) {
-            $this->assertSame(39676034, $sponsor->github_api_id);
-            $this->assertTrue(now()->eq($sponsor->expires_at));
-        });
-        Event::assertDispatched(UserStoppedSponsoring::class, fn ($event) => $event->user->is($user));
+        $this->assertTrue(now()->eq($sponsor->fresh()->expires_at));
+        Queue::assertPushed(SynchronizeSponsorStatus::class, fn ($event) => $event->user->is($userA));
+        Queue::assertPushed(SynchronizeSponsorStatus::class, fn ($event) => $event->user->is($userB));
         Carbon::setTestNow();
     }
 
     /** @test */
     public function it_does_nothing_when_someone_unknown_stopped_sponsoring(): void
     {
-        Event::fake([UserStartedSponsoring::class, UserStoppedSponsoring::class]);
-
+        Queue::fake();
         $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('cancelled'));
 
         $response->assertNoContent();
         $this->assertCount(0, Sponsor::all());
-        Event::assertNothingDispatched();
+        Queue::assertNothingPushed();
     }
 
     /** @test */
     public function it_does_nothing_when_an_unsupported_event_was_received(): void
     {
-        Event::fake([UserStartedSponsoring::class, UserStoppedSponsoring::class]);
+        Queue::fake();
 
         $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('pending_cancellation'));
 
         $response->assertUnprocessable();
+        Queue::assertNothingPushed();
     }
 
     /** @test */

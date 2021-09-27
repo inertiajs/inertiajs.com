@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sponsor extends Model
 {
@@ -36,5 +37,13 @@ class Sponsor extends Model
         }
 
         return ! $this->expires_at->isFuture();
+    }
+
+    /**
+     * The Users that are part of this Sponsorship.
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 }
