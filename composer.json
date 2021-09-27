@@ -1,15 +1,19 @@
 {
-    "name": "laravel/laravel",
+    "name": "inertiajs/inertiajs.com",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "The Inertia.js website.",
+    "keywords": ["inertia.js", "website", "inertia"],
     "license": "MIT",
+    "repositories": [
+        { "type": "vcs", "url": "git@github.com:inertiajs/inertiajs.com-sponsors.git" }
+    ],
     "require": {
         "php": "^7.4|^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.4.2",
+        "inertiajs/inertiajs.com-sponsors": "*",
         "laravel/framework": "^8.40",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",

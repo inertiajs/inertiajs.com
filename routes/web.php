@@ -18,6 +18,12 @@ use Inertia\Inertia;
 |
 */
 
+Route::middleware('auth')->get('auth/logout', function () {
+    Auth::logout();
+
+    return redirect()->to('/');
+});
+
 Route::prefix('auth/github')->group(function () {
     Route::get('/', [GithubAuthController::class, 'show']);
     Route::get('/callback', [GithubAuthController::class, 'store']);
@@ -263,6 +269,31 @@ Route::get('/releases/{slug}', function ($slug) {
         'title' => $parts[0].'@'.$parts[1],
         'date' => Date::createFromDate($parts[2], $parts[3], $parts[4])->format('F j, Y'),
     ]);
+});
+
+Route::get('/sponsors/{page?}', function ($page = 'index') {
+    if ($page === 'index') {
+        return Inertia::render('sponsors');
+    }
+
+    $user = Auth::user();
+    if (! $user) {
+        Redirect::setIntendedUrl(request()->url());
+        return Request::inertia()
+            ? Inertia::location('/auth/github')
+            : redirect()->to('/auth/github');
+    }
+
+    $isSponsoring = $user->hasActiveSponsor();
+    if (! $isSponsoring) {
+        return redirect()->to('/sponsors');
+    }
+
+    if (! file_exists(resource_path("js/Pages/sponsors/$page.js"))) {
+        App::abort(404);
+    }
+
+    return Inertia::render('sponsors/'.$page);
 });
 
 Route::get('{page?}', function ($page = 'index') {

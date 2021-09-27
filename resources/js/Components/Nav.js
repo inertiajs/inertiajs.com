@@ -1,5 +1,6 @@
 import React from 'react'
 import { InertiaLink, usePage } from '@inertiajs/inertia-react'
+import { SponsorNav } from '@/Components/Sponsors/SponsorNav'
 
 const Nav = ({ className }) => {
   const page = usePage()
@@ -52,17 +53,20 @@ const Nav = ({ className }) => {
             Demo app
           </InertiaLink>
         </li>
-        <li className="md:pr-3">
-          <InertiaLink href="/sponsors" className={linkClass('/sponsors')}>
-            Sponsors
-          </InertiaLink>
-        </li>
+        {! page.props.userIsSponsor && (
+          <li className="md:pr-3">
+            <InertiaLink href="/sponsors" className={linkClass('/sponsors')}>
+              Sponsors
+            </InertiaLink>
+          </li>
+        )}
         <li className="md:pr-3">
           <InertiaLink href="/releases" className={linkClass('/releases')}>
             Releases
           </InertiaLink>
         </li>
       </ul>
+      <SponsorNav />
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
       <ul>
         <li className="md:pr-3">
