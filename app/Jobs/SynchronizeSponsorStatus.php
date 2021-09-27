@@ -39,31 +39,53 @@ class SynchronizeSponsorStatus implements ShouldQueue
      */
     public function handle()
     {
-        $isGithubSponsor = $this->isGithubSponsor();
-        $sponsor = Sponsor::firstOrNew(['github_api_id' => $this->user->github_api_id]);
+        $user = $this->user;
+        $sponsor = $this->getSponsor();
 
-        if ($isGithubSponsor && (! $sponsor->exists || $sponsor->has_expired)) {
-            $sponsor->expires_at = null;
-            $sponsor->save();
+        // Do nothing when the user is not a sponsor.
+        if (! $sponsor && ! $user->sponsor) {
+            return;
+        }
 
-            $this->user->sponsor_id = $sponsor->id;
-            $this->user->save();
+        // Do nothing when the user is already a sponsor.
+        if ($user->hasActiveSponsor()) {
+            return;
+        }
 
-            UserStartedSponsoring::dispatch($this->user);
-        } elseif ($sponsor->exists && ! $isGithubSponsor) {
-            $sponsor->expires_at = now();
-            $sponsor->save();
+        // Silently switch sponsorship.
+        if ($sponsor && $user->sponsor) {
+            $user->sponsor_id = $sponsor->id;
+            $user->save();
+            return;
+        }
 
-            UserStoppedSponsoring::dispatch($this->user);
+        if ($sponsor) {
+            $user->sponsor_id = $sponsor->id;
+            $user->save();
+
+            UserStartedSponsoring::dispatch($user);
+        } else {
+            $user->sponsor_id = null;
+            $user->save();
+
+            UserStoppedSponsoring::dispatch($user);
         }
     }
 
-    protected function isGithubSponsor(): bool
+    protected function getSponsor(): ?Sponsor
     {
+        $sponsor = Sponsor::firstWhere('github_api_id', $this->user->github_api_id);
+        if ($sponsor && ! $sponsor->has_expired) {
+            return $sponsor;
+        }
+
         try {
-            return $this->user->isGithubSponsor();
+            return Sponsor::query()
+                ->whereIn('github_api_id', $this->user->getGithubOrganizationIds())
+                ->get()
+                ->first(fn (Sponsor $sponsor) => ! $sponsor->has_expired);
         } catch (BadCredentialsException $exception) {
-            return false;
+            return null;
         }
     }
 }
