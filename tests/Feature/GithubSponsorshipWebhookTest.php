@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Requests\GithubWebhookRequest;
 use App\Jobs\SynchronizeSponsorStatus;
 use App\Models\Sponsor;
 use App\Models\User;
@@ -30,6 +31,14 @@ class GithubSponsorshipWebhookTest extends TestCase
         $json = file_get_contents(base_path("tests/__fixtures/github-sponsors-webhook/${filename}.json"));
 
         return json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /** @test */
+    public function it_uses_the_github_webhook_form_request(): void
+    {
+        $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));
+
+        $response->assertUsesFormRequest(GithubWebhookRequest::class);
     }
 
     /** @test */
@@ -105,47 +114,5 @@ class GithubSponsorshipWebhookTest extends TestCase
 
         $response->assertUnprocessable();
         Queue::assertNothingPushed();
-    }
-
-    /** @test */
-    public function the_request_must_be_json(): void
-    {
-        $response = $this->post('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));
-
-        $response->assertStatus(415);
-    }
-
-    /** @test */
-    public function it_blocks_the_request_when_a_webhook_secret_is_configured_but_no_header_was_provided(): void
-    {
-        config(['services.github.webhook_secret' => 'secret']);
-
-        $response = $this->postJson('/api/github/webhooks/sponsorship', $this->getSponsorsPayload('created'));
-
-        $response->assertForbidden();
-    }
-
-    /** @test */
-    public function it_blocks_the_request_when_a_webhook_secret_is_configured_but_an_incorrect_header_was_provided(): void
-    {
-        config(['services.github.webhook_secret' => 'secret']);
-        $payload = $this->getSponsorsPayload('created');
-        $headers = ['X-Hub-Signature-256' => 'foo'];
-
-        $response = $this->postJson('/api/github/webhooks/sponsorship', $payload, $headers);
-
-        $response->assertForbidden();
-    }
-
-    /** @test */
-    public function it_allows_the_request_when_a_webhook_secret_is_configured_and_the_correct_header_was_provided(): void
-    {
-        config(['services.github.webhook_secret' => 'secret']);
-        $payload = $this->getSponsorsPayload('created');
-        $headers = ['X-Hub-Signature-256' => 'sha256='.hash_hmac('sha256', json_encode($payload), 'secret')];
-
-        $response = $this->postJson('/api/github/webhooks/sponsorship', $payload, $headers);
-
-        $response->assertNoContent();
     }
 }
