@@ -56,6 +56,7 @@ class SynchronizeSponsorStatus implements ShouldQueue
         if ($sponsor && $user->sponsor) {
             $user->sponsor_id = $sponsor->id;
             $user->save();
+
             return;
         }
 
@@ -75,6 +76,10 @@ class SynchronizeSponsorStatus implements ShouldQueue
     protected function getSponsor(): ?Sponsor
     {
         $sponsor = Sponsor::firstWhere('github_api_id', $this->user->github_api_id);
+        if (! $sponsor) {
+            $sponsor = $this->temporarilyCreateSponsorWhenSponsoringDirectly();
+        }
+
         if ($sponsor && ! $sponsor->has_expired) {
             return $sponsor;
         }
@@ -87,5 +92,29 @@ class SynchronizeSponsorStatus implements ShouldQueue
         } catch (BadCredentialsException $exception) {
             return null;
         }
+    }
+
+    /**
+     * This function was temporarily added to make sure existing sponsors don't lose
+     * their sponsorship, due to the fact that all of their Github Webhook events
+     * never had an opportunity to be observed by this system.
+     *
+     * Unfortunately, this only works for DIRECT SPONSORS and NOT for Organization
+     * sponsors, but there's only a handful of those, meaning we can manually
+     * re-insert those into our database as we have done until now.
+     *
+     * @return Sponsor|null
+     */
+    private function temporarilyCreateSponsorWhenSponsoringDirectly(): ?Sponsor
+    {
+        try {
+            if ($this->user->isGithubSponsor()) {
+                return Sponsor::create(['github_api_id' => $this->user->github_api_id]);
+            }
+        } catch (BadCredentialsException $exception) {
+            //
+        }
+
+        return null;
     }
 }

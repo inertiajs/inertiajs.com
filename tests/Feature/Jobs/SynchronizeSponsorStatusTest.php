@@ -9,8 +9,6 @@ use App\Models\Sponsor;
 use App\Models\User;
 use Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Http;
 use Tests\Fixtures\HttpFakes;
 use Tests\TestCase;
 
@@ -132,5 +130,36 @@ class SynchronizeSponsorStatusTest extends TestCase
 
         $this->assertTrue($user->fresh()->sponsor->is($sponsorB));
         Event::assertNothingDispatched();
+    }
+
+    /** @test */
+    public function it_temporarily_creates_the_sponsor_record_directly_when_the_user_is_sponsoring_directly(): void
+    {
+        HttpFakes::githubSponsorsViewerIsSponsoringUser();
+        $user = User::factory()->withGithub()->create();
+        $this->assertNull($user->sponsor);
+
+        SynchronizeSponsorStatus::dispatch($user);
+
+        tap($user->fresh()->sponsor, function (Sponsor $sponsor) {
+            $this->assertSame(1752195, $sponsor->github_api_id);
+            $this->assertNull($sponsor->expires_at);
+        });
+        Event::assertDispatched(UserStartedSponsoring::class, fn ($event) => $event->user->is($user));
+        Event::assertNotDispatched(UserStoppedSponsoring::class);
+    }
+
+    /** @test */
+    public function it_cannot_create_the_direct_sponsor_record_when_github_access_was_revoked(): void
+    {
+        HttpFakes::githubSponsorsInvalidTokenError();
+        $user = User::factory()->withGithub()->create();
+        $this->assertNull($user->sponsor);
+
+        SynchronizeSponsorStatus::dispatch($user);
+
+        $this->assertNull($user->fresh()->sponsor);
+        Event::assertNotDispatched(UserStartedSponsoring::class);
+        Event::assertNotDispatched(UserStoppedSponsoring::class);
     }
 }
