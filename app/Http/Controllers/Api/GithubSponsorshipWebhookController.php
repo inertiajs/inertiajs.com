@@ -46,7 +46,7 @@ class GithubSponsorshipWebhookController extends Controller
         }
 
         if ($hasStartedSponsoring && $isOneTimeSponsorship) {
-            $sponsor->expires_at = now()->addMonth();
+            $sponsor->expires_at = now()->addYear();
         } elseif ($hasStartedSponsoring) {
             $sponsor->expires_at = null;
         } else {

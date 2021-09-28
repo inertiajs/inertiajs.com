@@ -69,7 +69,7 @@ class GithubSponsorshipWebhookTest extends TestCase
         $this->assertCount(1, Sponsor::all());
         tap(Sponsor::first(), function (Sponsor $sponsor) {
             $this->assertSame(39676034, $sponsor->github_api_id);
-            $this->assertTrue(now()->addMonth()->eq($sponsor->expires_at));
+            $this->assertTrue(now()->addYear()->eq($sponsor->expires_at));
         });
         Queue::assertNothingPushed();
         Carbon::setTestNow();
