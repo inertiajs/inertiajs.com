@@ -335,11 +335,11 @@ const Page = () => {
               }
               </script>\n
               <form on:submit|preventDefault={submit}>
-                <input type="text" bind:value={$form.email} error="$form.errors.email" />
+                <input type="text" bind:value={$form.email} />
                 {#if $form.errors.email}
                   <div class="form-error">{$form.errors.email}</div>
                 {/if}
-                <input type="text" bind:value={$form.email} error="$form.errors.email" />
+                <input type="text" bind:value={$form.email} />
                 {#if $form.errors.email}
                   <div class="form-error">{$form.errors.email}</div>
                 {/if}
