@@ -156,7 +156,7 @@ const Page = () => {
               </script>\n
               <form on:submit|preventDefault={submit}>
                 <input type="text" bind:value={$form.name} />
-                <input type="file" bind:value={$form.avatar} />
+                <input type="file" on:input={e => $form.avatar = e.target.files[0]} />
                 {#if $form.progress}
                   <progress value={$form.progress.percentage} max="100">
                     {$form.progress.percentage}%
