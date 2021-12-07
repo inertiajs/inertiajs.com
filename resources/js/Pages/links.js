@@ -111,7 +111,7 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import { inertia } from '@inertiajs/inertia-svelte'\n
-              <button href="/logout" use:inertia="{{ method: 'post' }}" type="button">Logout</button>\n
+              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>\n
               // Renders as:
               <button type="button">Logout</button>
             `,
