@@ -1095,12 +1095,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:inertiajs/inertiajs.com-sponsors.git",
-                "reference": "f0bb3ad3531e6736fd4d885a9d7b4097a3e3ab6e"
+                "reference": "83c8d96463bedc4e5c3d89b97f961a70390abd12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertiajs.com-sponsors/zipball/f0bb3ad3531e6736fd4d885a9d7b4097a3e3ab6e",
-                "reference": "f0bb3ad3531e6736fd4d885a9d7b4097a3e3ab6e",
+                "url": "https://api.github.com/repos/inertiajs/inertiajs.com-sponsors/zipball/83c8d96463bedc4e5c3d89b97f961a70390abd12",
+                "reference": "83c8d96463bedc4e5c3d89b97f961a70390abd12",
                 "shasum": ""
             },
             "default-branch": true,
@@ -1116,7 +1116,7 @@
                 "source": "https://github.com/inertiajs/inertiajs.com-sponsors/tree/master",
                 "issues": "https://github.com/inertiajs/inertiajs.com-sponsors/issues"
             },
-            "time": "2021-09-27T20:09:50+00:00"
+            "time": "2022-01-05T21:10:45+00:00"
         },
         {
             "name": "laravel/framework",
