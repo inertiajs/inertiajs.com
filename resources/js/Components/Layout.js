@@ -83,19 +83,19 @@ export default function Layout({ meta, children }) {
         {meta.twitterCardImage && <meta name="twitter:image" content={meta.twitterCardImage} />}
       </InertiaHead>
       <div onClick={() => setShowMobileNav(false)} className="leading-none font-sans text-gray-800 antialiased">
-        {/*{meta.sponsor && (! userIsSponsor) && (*/}
-        {/*  <div className="px-6 md:px-12 xl:px-0 py-4 text-md font-medium flex items-center justify-center bg-[#fde9b1]">*/}
-        {/*    <div className="mx-2">*/}
-        {/*      🚀 Server-side rendering (SSR) is now <span className="whitespace-nowrap">in early access</span>!*/}
-        {/*    </div>*/}
-        {/*    <InertiaLink*/}
-        {/*      href="/server-side-rendering"*/}
-        {/*      className="px-3 py-1 bg-orange-500 hover:bg-orange-600 rounded-full text-xs text-white leading-tight whitespace-nowrap"*/}
-        {/*    >*/}
-        {/*      Learn more*/}
-        {/*    </InertiaLink>*/}
-        {/*  </div>*/}
-        {/*)}*/}
+        {meta.sponsor && (
+          <div className="px-6 md:px-12 xl:px-0 py-4 text-md font-medium flex items-center justify-center bg-[#fde9b1]">
+            <div className="mx-2">
+              🚀 Server-side rendering (SSR) is now <span className="whitespace-nowrap">in early access</span>!
+            </div>
+            <InertiaLink
+              href="/server-side-rendering"
+              className="px-3 py-1 bg-orange-500 hover:bg-orange-600 rounded-full text-xs text-white leading-tight whitespace-nowrap"
+            >
+              Learn more
+            </InertiaLink>
+          </div>
+        )}
         <div className="text-white" style={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
           <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 relative">
             <div className="overflow-hidden absolute top-0 left-0 w-full h-full">
