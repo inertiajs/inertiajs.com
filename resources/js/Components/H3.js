@@ -8,10 +8,14 @@ function kebabCase(str) {
 }
 
 export default function H3(props) {
+  const slot = Array.isArray(props.children) && props.children.length === 1
+    ? props.children[0]
+    : props.children
+
   return (
     <h3
       {...props}
-      id={props.id || kebabCase(props.children)}
+      id={props.id || kebabCase(slot)}
       className="mt-16 mb-4 text-xl font-bold text-gray-700 leading-tight"
     />
   )
