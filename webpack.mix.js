@@ -1,8 +1,6 @@
 const path = require('path')
 const mix = require('laravel-mix')
 
-require('laravel-mix-merge-manifest')
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -25,5 +23,4 @@ mix
     processCssUrls: false,
     postCss: [require('tailwindcss')],
   })
-  .mergeManifest()
   .version()

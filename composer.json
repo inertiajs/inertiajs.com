@@ -12,7 +12,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "inertiajs/inertia-laravel": "^0.4.2",
+        "inertiajs/inertia-laravel": "^0.5.1",
         "inertiajs/inertiajs.com-sponsors": "dev-master",
         "laravel/framework": "^8.40",
         "laravel/socialite": "^5.2",
