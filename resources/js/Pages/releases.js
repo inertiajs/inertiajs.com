@@ -11,6 +11,7 @@ const meta = {
     { url: '#inertia-svelte', name: 'inertia-svelte' },
     { url: '#inertia-laravel', name: 'inertia-laravel' },
     { url: '#progress', name: 'progress' },
+    { url: '#server', name: 'server' },
   ],
 }
 
@@ -23,6 +24,7 @@ const Page = ({ all, releases }) => {
     'inertia-svelte',
     'inertia-laravel',
     'progress',
+    'server',
   ]
 
   return (
