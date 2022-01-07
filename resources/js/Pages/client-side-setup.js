@@ -73,7 +73,8 @@ const Page = () => {
               import { createInertiaApp } from '@inertiajs/inertia-vue'\n
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}\`),
-                setup({ el, App, props }) {
+                setup({ el, App, props, plugin }) {
+                  Vue.use(plugin)\n
                   new Vue({
                     render: h => h(App, props),
                   }).$mount(el)
