@@ -802,7 +802,7 @@ const Page = () => {
         ]}
       />
       <P>
-        When your form's default values become outdated, you can use the <Code>defaults()</Code> method to update them.
+        If your form's default values become outdated, you can use the <Code>defaults()</Code> method to update them.
         This way, the next time the <Code>reset()</Code> method is used, the form will be reset to the correct values.
       </P>
       <TabbedCode
