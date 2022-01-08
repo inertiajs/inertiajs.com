@@ -48,7 +48,7 @@ const Page = () => {
       <CodeBlock
         language="php"
         children={dedent`
-          use Inertia\\Testing\\Assert;
+          use Inertia\\Testing\\AssertableInertia as Assert;
 
           class PodcastsControllerTest extends TestCase
           {
