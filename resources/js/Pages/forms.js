@@ -879,7 +879,7 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              this.form.cancel()
+              form.cancel()
             `,
           },
           {
