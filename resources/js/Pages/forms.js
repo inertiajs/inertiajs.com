@@ -815,7 +815,7 @@ const Page = () => {
               form.defaults()\n
               // Update the default value of a single field
               form.defaults('email', 'updated-default@example.com')\n
-              // Change the default value of multiple fields
+              // Update the default value of multiple fields
               form.defaults({
                 name: 'Updated Example',
                 email: 'updated-default@example.com',
@@ -830,7 +830,7 @@ const Page = () => {
               form.defaults()\n
               // Update the default value of a single field
               form.defaults('email', 'updated-default@example.com')\n
-              // Change the default value of multiple fields
+              // Update the default value of multiple fields
               form.defaults({
                 name: 'Updated Example',
                 email: 'updated-default@example.com',
@@ -846,7 +846,7 @@ const Page = () => {
               setDefaults()\n
               // Update the default value of a single field
               setDefaults('email', 'updated-default@example.com')\n
-              // Change the default value of multiple fields
+              // Update the default value of multiple fields
               setDefaults({
                 name: 'Updated Example',
                 email: 'updated-default@example.com',
