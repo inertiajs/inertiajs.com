@@ -1,6 +1,6 @@
 import React from 'react'
 import dedent from 'dedent-js'
-import { A, Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Forms',
@@ -686,14 +686,75 @@ const Page = () => {
         ]}
       />
       <P>
+        If you're using a client-side input validation libraries or do additional checks of your own, you can also
+        set your own errors on the form by using the <Code>setErrors()</Code> method.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              // Set a single error
+              form.setError('field', 'Your error message.');\n
+              // Set multiple errors at once
+              form.setError({
+                foo: 'Your error message for the foo field.',
+                bar: 'Some other error for the bar field.'
+              });
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              // Set a single error
+              form.setError('field', 'Your error message.');\n
+              // Set multiple errors at once
+              form.setError({
+                foo: 'Your error message for the foo field.',
+                bar: 'Some other error for the bar field.'
+              });
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              const { setError } = useForm({ ... })\n
+              // Set a single error
+              setError('field', 'Your error message.');\n
+              // Set multiple errors at once
+              setError({
+                foo: 'Your error message for the foo field.',
+                bar: 'Some other error for the bar field.'
+              });
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Set a single error
+              $form.setError('field', 'Your error message.');\n
+              // Set multiple errors at once
+              $form.setError({
+                foo: 'Your error message for the foo field.',
+                bar: 'Some other error for the bar field.'
+              });
+            `,
+          },
+        ]}
+      />
+      <Notice>Unlike an actual form submission, the page's props remain unchanged when manually setting errors on a form instance.</Notice>
+      <P>
         When a form has been successfully submitted, the <Code>wasSuccessful</Code> property will be <Code>true</Code>.
         In addition to this, there is also a <Code>recentlySuccessful</Code> property, which will be set to{' '}
         <Code>true</Code> for two seconds after a successful form submission. This is helpful for showing temporary
         success messages.
       </P>
       <P>
-        To reset the form values back to their original values, use the <Code>reset()</Code> method. Note, this will
-        reset the values back to the initial values that were provided when you first instantiated the form helper.
+        To reset the form values back to their default values, you can use the <Code>reset()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -736,6 +797,75 @@ const Page = () => {
               $form.reset()\n
               // Reset specific fields
               $form.reset('field', 'anotherfield')
+            `,
+          },
+        ]}
+      />
+      <P>
+        When your form's default values become outdated, you can use the <Code>defaults()</Code> method to update them.
+        This way, the next time the <Code>reset()</Code> method is used, the form will be reset to the correct values.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              // Set the form's current values as the new defaults
+              form.defaults()\n
+              // Update the default value of a single field
+              form.defaults('email', 'updated-default@example.com')\n
+              // Change the default value of multiple fields
+              form.defaults({
+                name: 'Updated Example',
+                email: 'updated-default@example.com',
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              // Set the form's current values as the new defaults
+              form.defaults()\n
+              // Update the default value of a single field
+              form.defaults('email', 'updated-default@example.com')\n
+              // Change the default value of multiple fields
+              form.defaults({
+                name: 'Updated Example',
+                email: 'updated-default@example.com',
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              const { setDefaults } = useForm({ ... })\n
+              // Set the form's current values as the new defaults
+              setDefaults()\n
+              // Update the default value of a single field
+              setDefaults('email', 'updated-default@example.com')\n
+              // Change the default value of multiple fields
+              setDefaults({
+                name: 'Updated Example',
+                email: 'updated-default@example.com',
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Set the form's current values as the new defaults
+              $form.defaults()\n
+              // Update the default value of a single field
+              $form.defaults('email', 'updated-default@example.com')\n
+              // Change the default value of multiple fields
+              $form.defaults({
+                name: 'Updated Example',
+                email: 'updated-default@example.com',
+              })
             `,
           },
         ]}
