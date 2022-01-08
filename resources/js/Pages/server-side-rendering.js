@@ -28,7 +28,7 @@ const Page = () => {
       <H2 id="how-it-works">How it works</H2>
       <P>
         When Inertia detects that it's running in a Node.js environment, it will automatically render the
-        provided <A href="http://inertiajs-com.test/the-protocol#the-page-object">page object</A> to HTML and return it.
+        provided <A href="/the-protocol#the-page-object">page object</A> to HTML and return it.
       </P>
       <P>
         However, because most Inertia applications are built in languages such as PHP or Ruby, we'll
