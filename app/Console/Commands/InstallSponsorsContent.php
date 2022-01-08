@@ -2,11 +2,15 @@
 
 namespace App\Console\Commands;
 
+use Composer\InstalledVersions;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use LogicException;
-use Storage;
+use RuntimeException;
+use Symfony\Component\Process\Process;
 
 class InstallSponsorsContent extends Command
 {
@@ -15,7 +19,7 @@ class InstallSponsorsContent extends Command
      *
      * @var string
      */
-    protected $signature = 'inertia-sponsors:install';
+    protected $signature = 'inertia-sponsors:install {--from-autoloader}';
 
     /**
      * The console command description.
@@ -46,8 +50,19 @@ class InstallSponsorsContent extends Command
      */
     public function handle()
     {
-        $this->ensureVendorPackageInstalled();
         $this->prepareDisk();
+
+        // We only want to require-install automatically on production.
+        // Otherwise, we'll still allow the user to install it manually.
+        // Until then, we'll install some stubs to make the app compile.
+        if ($this->option('from-autoloader') && ! App::environment('production')) {
+            $this->createStubComponent('resources/js/Components/Sponsors/SponsorNav.js', 'SponsorNav');
+
+            return 0;
+        }
+
+        $this->requirePrivateComposerPackage();
+        $this->ensureVendorPackageInstalled();
 
         $this->copyDirectory('Components', 'Components/Sponsors');
         $this->copyDirectory('Pages', 'Pages/sponsors');
@@ -104,6 +119,20 @@ class InstallSponsorsContent extends Command
     }
 
     /**
+     * Configure our composer.json to require the sponsors package.
+     */
+    protected function requirePrivateComposerPackage(): void
+    {
+        if ($this->runConsoleCommand(['composer', 'config', 'repositories.sponsors'])) {
+            $this->runConsoleCommand(['composer', 'config', 'repositories.sponsors', 'vcs', 'https://github.com/inertiajs/inertiajs.com-sponsors.git']);
+        }
+
+        if (! in_array("inertiajs/inertiajs.com-sponsors", InstalledVersions::getInstalledPackages())) {
+            $this->runConsoleCommand(['composer', 'require', 'inertiajs/inertiajs.com-sponsors'], true);
+        }
+    }
+
+    /**
      * Ensures that this command is only ran when the package is installed.
      */
     protected function ensureVendorPackageInstalled(): void
@@ -112,6 +141,45 @@ class InstallSponsorsContent extends Command
 
         if (! file_exists($vendorPath)) {
             throw new LogicException('Sponsors content package is not installed.');
+        }
+    }
+
+    /**
+     * Executes a console command.
+     *
+     * @param  array  $command
+     * @param  bool  $throws
+     * @return int
+     */
+    protected function runConsoleCommand(array $command, bool $throws = false): int
+    {
+        $exitCode = (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                if ($this->option('verbose')) {
+                    $this->output->write($output);
+                }
+            });
+
+        if ($exitCode !== 0 && $throws) {
+            throw new RuntimeException('Error running command: '.implode(' ', $command));
+        }
+
+        return $exitCode;
+    }
+
+    /**
+     * Create a stub component at the given path.
+     *
+     * @param  string  $path
+     * @param  string  $name
+     */
+    protected function createStubComponent(string $path, string $name = 'SponsorContent'): void
+    {
+        $stub = "export const " . $name . " = () => <div className=\"text-orange-500\">Sponsors content unavailable</div>";
+
+        if (! $this->disk->exists($path)) {
+            $this->disk->put($path, $stub);
         }
     }
 }

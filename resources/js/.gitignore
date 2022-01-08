@@ -1,2 +1,4 @@
-Components/Sponsors
-Pages/sponsors
+Components/Sponsors/*
+!Components/Sponsors/.gitkeep
+Pages/sponsors/*
+!Pages/sponsors/.gitkeep
