@@ -21,7 +21,7 @@ const Page = () => {
       <H1>Server-side Rendering (SSR)</H1>
       <P>
         Server-side rendering allows you to pre-render an initial page visit on the server, and to send the rendered HTML to the browser.
-        This allows visitors to see and interact with your pages before they have fully loaded, and also providers other benefits such as decreasing the time
+        This allows visitors to see and interact with your pages before they have fully loaded, and also provides other benefits such as decreasing the time
         it takes for search engines to index your site.
       </P>
       <Notice>SSR is not yet ready for the Svelte adapter. However, it's something we're actively working on adding.</Notice>
