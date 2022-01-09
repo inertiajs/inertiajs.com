@@ -76,7 +76,7 @@ const Page = () => {
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
-        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/pages/community-adapters.mdx">pull request</A>.
+        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">pull request</A>.
       </P>
     </>
   )
