@@ -35,7 +35,7 @@ const Page = () => {
               <template>
                 <Layout>
                   <Head title="Welcome" />
-                  <H1>Welcome</H1>
+                  <h1>Welcome</h1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </Layout>
               </template>\n
@@ -61,7 +61,7 @@ const Page = () => {
               <template>
                 <Layout>
                   <Head title="Welcome" />
-                  <H1>Welcome</H1>
+                  <h1>Welcome</h1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </Layout>
               </template>\n
@@ -91,7 +91,7 @@ const Page = () => {
                 return (
                   <Layout>
                     <Head title="Welcome" />
-                    <H1>Welcome</H1>
+                    <h1>Welcome</h1>
                     <p>Hello {user.name}, welcome to your first Inertia app!</p>
                   </Layout>
                 )
