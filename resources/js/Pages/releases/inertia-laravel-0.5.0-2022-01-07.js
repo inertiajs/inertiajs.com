@@ -24,7 +24,7 @@ export default release(
 
     ### Removed
 
-    - PHP 5.4 Support ([#327](https://github.com/inertiajs/inertia-laravel/pull/327))
+    - Laravel 5.4 Support ([#327](https://github.com/inertiajs/inertia-laravel/pull/327))
 
     ### Fixed
 
