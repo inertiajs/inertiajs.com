@@ -27,6 +27,9 @@ const Page = () => {
         Note, the <Code color="orange">{'<Head>'}</Code> component is not available in the Svelte adapter, as Svelte
         already ships with a <Code color="orange">{'<svelte:head>'}</Code> component.
       </Notice>
+      <Notice>
+        Note, the <Code color="orange">{'<Head>'}</Code> component will only replace <Code>{'<head>'}</Code> elements that are not in your server-side root template.
+      </Notice>
       <H2>Head component</H2>
       <P>
         To add <Code>{'<head>'}</Code> elements to your page, use the <Code>{'<Head>'}</Code> component:
