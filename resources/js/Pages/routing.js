@@ -116,11 +116,23 @@ const Page = () => {
         automatically via a global <Code>route()</Code> function. If you're using Ziggy with Vue, it's helpful to make
         this function available as a custom <Code>$route</Code> property so you can use it directly in your templates.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Vue.prototype.$route = route
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              Vue.prototype.$route = route
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              app.config.globalProperties.$route = route
+            `,
+          },
+        ]}
       />
       <CodeBlock
         language="html"
