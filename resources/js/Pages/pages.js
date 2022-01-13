@@ -110,7 +110,7 @@ const Page = () => {
                 <svelte:head>
                   <title>Welcome</title>
                 </svelte:head>
-                <H1>Welcome</H1>
+                <h1>Welcome</h1>
                 <p>Hello {user.name}, welcome to your first Inertia app!</p>
               </Layout>
             `,
@@ -238,7 +238,7 @@ const Page = () => {
             code: dedent`
               <template>
                 <div>
-                  <H1>Welcome</H1>
+                  <h1>Welcome</h1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </div>
               </template>\n
@@ -262,7 +262,7 @@ const Page = () => {
             code: dedent`
               <template>
                 <div>
-                  <H1>Welcome</H1>
+                  <h1>Welcome</h1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </div>
               </template>\n
@@ -289,7 +289,7 @@ const Page = () => {
               const Home = ({ user }) => {
                 return (
                   <>
-                    <H1>Welcome</H1>
+                    <h1>Welcome</h1>
                     <p>Hello {user.name}, welcome to your first Inertia app!</p>
                   </>
                 )
@@ -309,7 +309,7 @@ const Page = () => {
               <script>
                 export let user
               </script>\n
-              <H1>Welcome</H1>
+              <h1>Welcome</h1>
               <p>Hello {user.name}, welcome to your first Inertia app!</p>
             `,
           },
@@ -324,7 +324,7 @@ const Page = () => {
             code: dedent`
               <template>
                 <div>
-                  <H1>Welcome</H1>
+                  <h1>Welcome</h1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </div>
               </template>\n
@@ -353,7 +353,7 @@ const Page = () => {
             code: dedent`
               <template>
                 <div>
-                  <H1>Welcome</H1>
+                  <h1>Welcome</h1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </div>
               </template>\n
@@ -384,7 +384,7 @@ const Page = () => {
               const Home = ({ user }) => {
                 return (
                   <>
-                    <H1>Welcome</H1>
+                    <h1>Welcome</h1>
                     <p>Hello {user.name}, welcome to your first Inertia app!</p>
                   </>
                 )
@@ -409,7 +409,7 @@ const Page = () => {
               <script>
                 export let user
               </script>\n
-              <H1>Welcome</H1>
+              <h1>Welcome</h1>
               <p>Hello {user.name}, welcome to your first Inertia app!</p>
             `,
           },
