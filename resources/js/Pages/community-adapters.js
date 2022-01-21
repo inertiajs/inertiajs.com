@@ -1,5 +1,5 @@
 import React from 'react'
-import { A, H1, Layout, Li, P, Ul } from '@/Components'
+import { A, H1, H2, Layout, Li, P, Ul } from '@/Components'
 
 const meta = {
   title: 'Community adapters',
@@ -9,6 +9,7 @@ const Page = () => {
   return (
     <>
       <H1>Community adapters</H1>
+      <H2>Server-side</H2>
       <P>
         In addition to the two officially supported server-side adapters (
         <A href="https://github.com/inertiajs/inertia-laravel">Laravel</A> and{' '}
@@ -74,6 +75,11 @@ const Page = () => {
           <A href="https://github.com/j0ack/flask-inertia">Flask</A>
         </Li>
       </Ul>
+      <P>
+        If you have an adapter you'd like listed here, please send a{' '}
+        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">pull request</A>.
+      </P>
+      <H2>Client-side</H2>
       <P>
         In addition to the <A href="https://github.com/inertiajs/inertia">three officially supported client-side adapters</A> (Vue, React and Svelte), there are also other community built
         client-side adapters available.
