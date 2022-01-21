@@ -75,6 +75,15 @@ const Page = () => {
         </Li>
       </Ul>
       <P>
+        In addition to the <A href="https://github.com/inertiajs/inertia">three officially supported client-side adapters</A> (Vue, React and Svelte), there are also other community built
+        client-side adapters available.
+      </P>
+      <Ul>
+        <Li>
+          <A href="https://github.com/rogervila/inertia-html">Plain HTML (inertia-html)</A>
+        </Li>
+      </Ul>
+      <P>
         If you have an adapter you'd like listed here, please send a{' '}
         <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">pull request</A>.
       </P>
