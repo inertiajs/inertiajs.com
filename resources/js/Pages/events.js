@@ -43,7 +43,7 @@ const Page = () => {
       />
       <P>
         Under the hood Inertia uses native browser events, so you can also work with them that way as well. Just be sure
-        to append <Code>inertia:</Code> to the event name.
+        to prepend <Code>inertia:</Code> to the event name.
       </P>
       <CodeBlock
         language="js"
