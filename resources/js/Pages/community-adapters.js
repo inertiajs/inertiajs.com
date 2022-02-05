@@ -60,6 +60,9 @@ const Page = () => {
           <A href="https://github.com/cherifGsoul/inertia-psr15">PSR-15</A>
         </Li>
         <Li>
+          <A href="https://github.com/stuarth/inertia-rs">Rust</A>
+        </Li>
+        <Li>
           <A href="https://github.com/hotmeteor/inertia-statamic">Statamic</A>
         </Li>
         <Li>
