@@ -63,9 +63,12 @@ const Page = () => {
         `}
       />
       <H2>Custom</H2>
+      <P>It's also possible to setup your own custom page loading indicators by hooking into Inertia's <A href="/events">events</A> system. 
+         Note that in order for your loader to persist correctly between page visits, you'll need to implement your loader's HTML outside of Inertia's main component.
+         A good example of this can be seen in our own official progress plugin {' '}
+         <A href="https://github.com/inertiajs/progress/blob/master/src/progress.js">here</A>.
       <P>
-        It's also possible to setup your own custom page loading indicators, using Inertia <A href="/events">events</A>.
-        Here's how to do this, using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
+        Here's a basic step-through of how to hook into Inertia's progress events, using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
         example.
       </P>
       <P>First, install the NProgress library.</P>
