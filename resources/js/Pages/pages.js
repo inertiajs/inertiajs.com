@@ -270,7 +270,7 @@ const Page = () => {
                 import Layout from './Layout'\n
                 export default {
                   // Using a render function
-                  layout: (h, page) => h(Layout, () => child),\n
+                  layout: (h, page) => h(Layout, () => page),\n
                   // Using the shorthand
                   layout: Layout,\n
                   props: {
