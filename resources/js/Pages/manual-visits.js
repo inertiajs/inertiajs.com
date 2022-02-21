@@ -330,7 +330,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.visit('/users', { search: 'John' }, { only: ['users'] })
+          Inertia.visit('/users', { data: { search: 'John' }, only: ['users'] })
         `}
       />
       <P>
