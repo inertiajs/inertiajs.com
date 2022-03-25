@@ -74,6 +74,9 @@ const Page = () => {
         <Li>
           <A href="https://github.com/j0ack/flask-inertia">Flask</A>
         </Li>
+        <Li>
+          <A href="https://github.com/kohkimakimoto/inertia-echo">Echo</A>
+        </Li>
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
