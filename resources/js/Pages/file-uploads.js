@@ -129,7 +129,7 @@ const Page = () => {
               return (
                 <form onSubmit={submit}>
                   <input type="text" value={data.name} onChange={e => setData('name', e.target.value)} />
-                  <input type="file" value={data.avatar} onChange={e => setData('avatar', e.target.files[0])} />
+                  <input type="file" onChange={e => setData('avatar', e.target.files[0])} />
                   {progress && (
                     <progress value={progress.percentage} max="100">
                       {progress.percentage}%
