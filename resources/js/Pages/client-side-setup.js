@@ -58,6 +58,20 @@ const Page = () => {
           },
         ]}
       />
+      <Notice>
+        If you are using the Svelte adapter with Vite, you may run into <Code>TypeError</Code> errors caused by <Code>$page.props</Code> being <Code>null</Code> in dev mode. Enabling the <Code>experimental.prebundleSvelteLibraries</Code> option in the <Code>vite.config.js</Code> file fixes it.
+        <CodeBlock
+            language="js"
+            children={dedent`
+            plugins: [
+              svelte({
+                experimental: { prebundleSvelteLibraries: true },
+              }),
+            ],
+            `}
+        />
+        Make sure you force update NPM dependencies: <Code>rm -rf node_modules && rm yarn.lock && yarn</Code>.
+      </Notice>
       <H2>Initialize app</H2>
       <P>
         Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing the
