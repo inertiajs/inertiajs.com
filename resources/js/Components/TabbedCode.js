@@ -21,19 +21,21 @@ const TabbedCode = ({ className, examples, height }) => {
 
   return (
     <div className={className || 'my-8 rounded overflow-hidden'}>
-      <div className="px-4 pt-3 flex" style={{ background: '#303f6d' }}>
-        {examples.map((example, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => setCodeTabs({ ...codeTabs, [tabType]: example.name })}
-            className="focus:outline-none text-sm text-gray-500 hover:text-gray-200 font-medium px-3 sm:px-6 pt-3 pb-2 rounded-t mr-1"
-            style={index === activeTab ? { color: 'white', background: '#202e59' } : {}}
-          >
-            {example.name}
-          </button>
-        ))}
-      </div>
+      {examples.length > 1 && (
+        <div className="px-4 pt-3 flex" style={{ background: '#303f6d' }}>
+          {examples.map((example, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setCodeTabs({ ...codeTabs, [tabType]: example.name })}
+              className="focus:outline-none text-sm text-gray-500 hover:text-gray-200 font-medium px-3 sm:px-6 pt-3 pb-2 rounded-t mr-1"
+              style={index === activeTab ? { color: 'white', background: '#202e59' } : {}}
+            >
+              {example.name}
+            </button>
+          ))}
+        </div>
+      )}
       <CodeBlock
         height={height}
         className="p-6 leading-normal"

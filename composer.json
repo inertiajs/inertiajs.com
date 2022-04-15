@@ -10,6 +10,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.5.1",
+        "inertiajs/inertiajs.com-sponsors": "dev-master",
         "laravel/framework": "^8.40",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
@@ -61,5 +62,11 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "sponsors": {
+            "type": "vcs",
+            "url": "https://github.com/inertiajs/inertiajs.com-sponsors.git"
+        }
+    }
 }

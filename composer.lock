@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39e21fb2731df2c35615757128933c2d",
+    "content-hash": "104354c864b6a00edb3bd5bf976b3adc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1089,6 +1089,31 @@
                 }
             ],
             "time": "2022-01-07T18:18:00+00:00"
+        },
+        {
+            "name": "inertiajs/inertiajs.com-sponsors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:inertiajs/inertiajs.com-sponsors.git",
+                "reference": "83c8d96463bedc4e5c3d89b97f961a70390abd12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inertiajs/inertiajs.com-sponsors/zipball/83c8d96463bedc4e5c3d89b97f961a70390abd12",
+                "reference": "83c8d96463bedc4e5c3d89b97f961a70390abd12",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "authors": [
+                {
+                    "name": "Claudio Dekker",
+                    "email": "claudio@ubient.net"
+                }
+            ],
+            "description": "Sponsors-only content/pages. Injected into the Inertia.js website during build-time.",
+            "time": "2022-01-05T21:10:45+00:00"
         },
         {
             "name": "laravel/framework",
@@ -8252,7 +8277,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "inertiajs/inertiajs.com-sponsors": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
