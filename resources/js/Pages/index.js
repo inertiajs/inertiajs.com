@@ -37,8 +37,8 @@ const Page = () => {
       <H2>Next steps</H2>
       <P>
         Want to learn a bit more before diving in? Check out
-        the <A href="/who-is-it-for">who is it for</A> and <A href="/how-it-works">how it works</A> pages
-        to learn more. Or, if you're ready to get started, jump right into
+        the <A href="/who-is-it-for">who is it for</A> and <A href="/how-it-works">how it works</A> pages.
+        Or, if you're ready to get started, jump right into
         the <A href="/server-side-setup">installation instructions</A>.
       </P>
     </>

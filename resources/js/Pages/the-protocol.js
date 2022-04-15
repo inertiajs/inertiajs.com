@@ -23,14 +23,14 @@ const Page = () => {
       </P>
       <H2>HTML responses</H2>
       <P>
-        The very first request to an Inertia app is just a regular full-page browser request, with no special Inertia
+        The very first request to an Inertia app is just a regular, full-page browser request, with no special Inertia
         headers or data. For these requests, the server returns a full HTML document.
       </P>
       <P>
-        This HTML response includes the site assets (CSS, JavaScript) as well as a root <Code>{`<div>`}</Code> in the
+        This HTML response includes the site assets (CSS, JavaScript) as well as a root <Code>{`<div>`}</Code> in the page's
         body. The root <Code>{`<div>`}</Code> serves as a mounting point for the client-side app, and includes a{' '}
         <Code>data-page</Code> attribute with a JSON encoded <A href="#the-page-object">page object</A> for the initial
-        page. Inertia uses this information to boot your client-side framework, and display the initial page component.
+        page. Inertia uses this information to boot your client-side framework and display the initial page component.
       </P>
       <div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
         <div className="pt-6 px-6 text-white font-mono text-sm">
@@ -67,9 +67,9 @@ const Page = () => {
       </Notice>
       <H2>Inertia responses</H2>
       <P>
-        Once an Inertia app has been booted, all subsequent requests to the site are made via XHR with a special{' '}
+        Once an Inertia app has been booted, all subsequent requests to the site are made via XHR with a{' '}
         <Code>X-Inertia</Code> header set to <Code>true</Code>. This header indicates that the request is being made by
-        Inertia, and isn't a standard full-page visit.
+        Inertia and isn't a standard full-page visit.
       </P>
       <P>
         When the server detects the <Code>X-Inertia</Code> header, instead of responding with a full HTML document, it
@@ -126,7 +126,7 @@ const Page = () => {
       <H2>The page object</H2>
       <P>
         Inertia shares data between the server and client via a page object. This object includes the necessary
-        information required to render the page component, update the history state, and track the site's asset version.
+        information required to render the page component, update the browser's history state, and track the site's asset version.
         The page object includes the following four properties:
       </P>
       <Ol>
@@ -137,7 +137,7 @@ const Page = () => {
           <Strong>props:</Strong> The page props (data).
         </Li>
         <Li>
-          <Strong>url:</Strong> The page url.
+          <Strong>url:</Strong> The page URL.
         </Li>
         <Li>
           <Strong>version:</Strong> The current asset version.
@@ -151,12 +151,12 @@ const Page = () => {
       <P>
         One common challenge with single-page apps is refreshing site assets when they've been changed. Inertia makes
         this easy by optionally tracking the current version of the site's assets. In the event that an asset changes,
-        Inertia will automatically make a hard (full) page visit instead of an XHR visit.
+        Inertia will automatically make a full-page visit instead of an XHR visit.
       </P>
       <P>
-        Included in the <A href="#the-page-object">page object</A> is a <Code>version</Code> identifier. This version
-        identifier is set server-side, and can be a number, string, file hash, whatever. It doesn't matter, as long as
-        it changes when the site's assets have been updated.
+        The Inertia <A href="#the-page-object">page object</A> includes a <Code>version</Code> identifier. This version
+        identifier is set server-side and can be a number, string, file hash, or any other value that represents
+        the current "version" of your site's assets, as long as the value changes when the site's assets have been updated.
       </P>
       <P>
         Whenever an Inertia request is made, Inertia will include the current asset version in the{' '}
@@ -165,7 +165,7 @@ const Page = () => {
         in a middleware layer.
       </P>
       <P>
-        If the asset versions are the same, the request simply continues as expected. However, if they are different,
+        If the asset versions are the same, the request simply continues as expected. However, if the asset versions are different,
         the server immediately returns a <Code>409 Conflict</Code> response, and includes the URL in a{' '}
         <Code>X-Inertia-Location</Code> header. This header is necessary, since server-side redirects may have occurred.
         This tells Inertia what the final intended destination URL is.
@@ -206,7 +206,7 @@ const Page = () => {
       </div>
       <H2>Partial reloads</H2>
       <P>
-        When making Inertia requests, the partial reloads option allows you to request a subset of the props (data) from
+        When making Inertia requests, the partial reload option allows you to request a subset of the props (data) from
         the server on subsequent visits to the <em>same</em> page component. This can be a helpful performance
         optimization if it's acceptable that some page data becomes stale.
       </P>
@@ -221,7 +221,7 @@ const Page = () => {
       <P>
         The <Code>X-Inertia-Partial-Component</Code> header includes the name of the component that is being partially
         reloaded. This is necessary, since partial reloads only work for requests made to the same page component. If
-        the final destination is different for whatever reason (eg. the user was logged out and is now on the login
+        the final destination is different for some reason (eg. the user was logged out and is now on the login
         page), then no partial reloading will occur.
       </P>
       <div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
