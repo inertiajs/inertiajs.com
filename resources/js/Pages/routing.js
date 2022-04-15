@@ -43,7 +43,7 @@ const Page = () => {
           },
         ]}
       />
-      <H2>Generating URLs</H2>
+      <H2 id="generating-routes">Generating URLs</H2>
       <P>
         Some server-side frameworks allow you to generate URLs from named routes. However, you will not have access to
         those helpers client-side. Here are a couple ways to still use named routes with Inertia.
