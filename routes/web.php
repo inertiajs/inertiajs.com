@@ -271,30 +271,30 @@ Route::get('/releases/{slug}', function ($slug) {
     ]);
 });
 
-Route::get('/sponsors/{page?}', function ($page = 'index') {
-    if ($page === 'index') {
-        return Inertia::render('sponsors');
-    }
+// Route::get('/sponsors/{page?}', function ($page = 'index') {
+//     if ($page === 'index') {
+//         return Inertia::render('sponsors');
+//     }
 
-    $user = Auth::user();
-    if (! $user) {
-        Redirect::setIntendedUrl(request()->url());
-        return Request::inertia()
-            ? Inertia::location('/auth/github')
-            : redirect()->to('/auth/github');
-    }
+//     $user = Auth::user();
+//     if (! $user) {
+//         Redirect::setIntendedUrl(request()->url());
+//         return Request::inertia()
+//             ? Inertia::location('/auth/github')
+//             : redirect()->to('/auth/github');
+//     }
 
-    $isSponsoring = $user->hasActiveSponsor();
-    if (! $isSponsoring) {
-        return redirect()->to('/sponsors');
-    }
+//     $isSponsoring = $user->hasActiveSponsor();
+//     if (! $isSponsoring) {
+//         return redirect()->to('/sponsors');
+//     }
 
-    if (! file_exists(resource_path("js/Pages/sponsors/$page.js"))) {
-        App::abort(404);
-    }
+//     if (! file_exists(resource_path("js/Pages/sponsors/$page.js"))) {
+//         App::abort(404);
+//     }
 
-    return Inertia::render('sponsors/'.$page);
-});
+//     return Inertia::render('sponsors/'.$page);
+// });
 
 Route::get('{page?}', function ($page = 'index') {
     if (! file_exists(resource_path("js/Pages/$page.js"))) {

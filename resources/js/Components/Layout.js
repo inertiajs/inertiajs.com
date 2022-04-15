@@ -173,11 +173,11 @@ export default function Layout({ meta, children }) {
                     Build single-page apps, <strong className="font-bold">without building an API.</strong>
                   </div>
                   <p className="mt-8 text-lg lg:text-xl leading-relaxed max-w-md pr-2">
-                    Inertia.js lets you{' '}
+                    Create{' '}
                     <strong className="font-bold" style={{ color: '#92eee2' }}>
-                      quickly build modern single-page React, Vue and Svelte apps
+                      modern single-page React, Vue, and Svelte apps
                     </strong>{' '}
-                    using classic server-side routing and controllers.
+                    using classic server-side routing. Works with any backend - tuned for Laravel.
                   </p>
                 </div>
                 <div className="w-full lg:w-1/2 lg:pl-24 mt-8 lg:mt-0">

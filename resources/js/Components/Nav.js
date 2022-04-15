@@ -53,13 +53,6 @@ const Nav = ({ className }) => {
             Demo app
           </InertiaLink>
         </li>
-        {! page.props.userIsSponsor && (
-          <li className="md:pr-3">
-            <InertiaLink href="/sponsors" className={linkClass('/sponsors')}>
-              Sponsors
-            </InertiaLink>
-          </li>
-        )}
         <li className="md:pr-3">
           <InertiaLink href="/releases" className={linkClass('/releases')}>
             Releases
