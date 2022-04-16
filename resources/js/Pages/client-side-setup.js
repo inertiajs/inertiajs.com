@@ -5,6 +5,7 @@ import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Com
 const meta = {
   title: 'Client-side setup',
   links: [
+    { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
     { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#initialize-app', name: 'Initialize the Inertia app' },
     { url: '#progress-indicator', name: 'Progress indicator' },
@@ -19,6 +20,12 @@ const Page = () => {
       <P>
         Once you have your <A href="/server-side-setup">server-side framework configured</A>, you then need to setup
         your client-side framework. Inertia currently provides support for React, Vue, and Svelte.
+      </P>
+      <H2>Laravel starter kits</H2>
+      <P>
+        Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Breeze and Jetstream, provide out-of-the-box scaffolding
+        for new Inertia applications. These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React.
+        However, if you would like to manually install Inertia into your application, please consult the documentation below.
       </P>
       <H2>Install dependencies</H2>
       <P>First, install the Inertia client-side adapters corresponding to your framework of choice using NPM or Yarn.</P>
