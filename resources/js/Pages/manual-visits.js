@@ -7,12 +7,12 @@ const meta = {
   links: [
     { url: '#method', name: 'Method' },
     { url: '#data', name: 'Data' },
+    { url: '#custom-headers', name: 'Custom headers' },
+    { url: '#file-uploads', name: 'File uploads' },
     { url: '#browser-history', name: 'Browser history' },
-    { url: '#component-state', name: 'Component state' },
+    { url: '#state-preservation', name: 'State preservation' },
     { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
-    { url: '#file-uploads', name: 'File uploads' },
-    { url: '#custom-headers', name: 'Custom headers' },
     { url: '#visit-cancellation', name: 'Visit cancellation' },
     { url: '#event-callbacks', name: 'Event callbacks' },
   ],
@@ -246,6 +246,40 @@ const Page = () => {
           })
         `}
       />
+      <H2>Custom headers</H2>
+      <P>
+        The <Code>headers</Code> option allows you to add custom headers to a request.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          Inertia.post('/users', data, {
+            headers: {
+              'Custom-Header': 'value',
+            },
+          })
+        `}
+      />
+      <Notice>
+        The headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
+      </Notice>
+      <H2>File uploads</H2>
+      <P>
+        When making visits / requests that include files, Inertia will automatically convert the request data into a{' '}
+        <Code>FormData</Code> object. If you would like the visit to always use a <Code>FormData</Code> object, you can
+        force this using the <Code>forceFormData</Code> option.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          Inertia.post('/companies', data, {
+            forceFormData: true,
+          })
+        `}
+      />
+      <P>
+        For more information on uploading files, please consult the dedicated <A href="/file-uploads">file uploads</A> documentation.
+      </P>
       <H2>Browser history</H2>
       <P>
         When making visits, Inertia automatically adds a new entry into the browser history. However, it's also possible
@@ -261,7 +295,7 @@ const Page = () => {
         Visits made to the same URL automatically set <Code color="orange">replace</Code> to{' '}
         <Code color="orange">true</Code>.
       </Notice>
-      <H2>Component state</H2>
+      <H2>State preservation</H2>
       <P>
         By default, page visits to the same page create a fresh page component instance. This causes any local state,
         such as form inputs, scroll positions and focus states to be lost.
@@ -336,40 +370,6 @@ const Page = () => {
       <P>
         For more information on this feature, please consult the <A href="/partial-reloads">partial reloads</A> documentation.
       </P>
-      <H2>File uploads</H2>
-      <P>
-        When making visits / requests that include files, Inertia will automatically convert the request data into a{' '}
-        <Code>FormData</Code> object. If you would like the visit to always use a <Code>FormData</Code> object, you can
-        force this using the <Code>forceFormData</Code> option.
-      </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/companies', data, {
-            forceFormData: true,
-          })
-        `}
-      />
-      <P>
-        For more information on uploading files, please consult the dedicated <A href="/file-uploads">file uploads</A> documentation.
-      </P>
-      <H2>Custom headers</H2>
-      <P>
-        The <Code>headers</Code> option allows you to add custom headers to a request.
-      </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/users', data, {
-            headers: {
-              'Custom-Header': 'value',
-            },
-          })
-        `}
-      />
-      <Notice>
-        The headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
-      </Notice>
       <H2>Visit cancellation</H2>
       <P>
         You can cancel a visit using a cancel token, which Inertia automatically generates and provides via the{' '}

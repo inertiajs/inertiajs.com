@@ -9,10 +9,10 @@ const meta = {
     { url: '#creating-links', name: 'Creating links' },
     { url: '#method', name: 'Method' },
     { url: '#data', name: 'Data' },
-    { url: '#headers', name: 'Headers' },
-    { url: '#replace', name: 'Replace' },
-    { url: '#preserve-state', name: 'Preserve state' },
-    { url: '#preserve-scroll', name: 'Preserve scroll' },
+    { url: '#custom-headers', name: 'Custom headers' },
+    { url: '#browser-history', name: 'Browser history' },
+    { url: '#state-preservation', name: 'State preservation' },
+    { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
     { url: '#active-states', name: 'Active states' },
   ],
@@ -208,7 +208,7 @@ const Page = () => {
           },
         ]}
       />
-      <H2>Headers</H2>
+      <H2>Custom headers</H2>
       <P>
         The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, you should note that the headers Inertia
         uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
@@ -250,7 +250,7 @@ const Page = () => {
           },
         ]}
       />
-      <H2>Replace</H2>
+      <H2>Browser history</H2>
       <P>
         The <Code>replace</Code> attribute allows you to specify the browser's history behaviour. By default, page visits push (new) state (
         <Code>window.history.pushState</Code>) into the history; however, it's also possible to replace state (
@@ -294,7 +294,7 @@ const Page = () => {
           },
         ]}
       />
-      <H2>Preserve state</H2>
+      <H2>State preservation</H2>
       <P>
         You can preserve a page component's local state using the <Code>preserve-state</Code> attribute. This will
         prevent a page component from fully re-rendering. The <Code>preserve-state</Code> attribute is especially helpful with forms, since you can avoid
@@ -341,7 +341,7 @@ const Page = () => {
           },
         ]}
       />
-      <H2>Preserve scroll</H2>
+      <H2>Scroll preservation</H2>
       <P>
         You can use the <Code>preserve-scroll</Code> attribute to prevent Inertia from automatically resetting the
         scroll position when making a page visit.
