@@ -94,13 +94,13 @@ const Nav = ({ className }) => {
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">The basics</div>
       <ul>
         <li className="md:pr-3">
-          <InertiaLink href="/responses" className={linkClass('/responses')}>
-            Responses
+          <InertiaLink href="/pages" className={linkClass('/pages')}>
+            Pages
           </InertiaLink>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/pages" className={linkClass('/pages')}>
-            Pages
+          <InertiaLink href="/responses" className={linkClass('/responses')}>
+            Responses
           </InertiaLink>
         </li>
         <li className="md:pr-3">

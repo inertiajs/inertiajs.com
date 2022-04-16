@@ -6,7 +6,7 @@ const meta = {
   title: 'Routing',
   links: [
     { url: '#top', name: 'Defining routes' },
-    { url: '#route-helpers', name: 'Route helpers' },
+    { url: '#shorthand-routes', name: 'Shorthand routes' },
     { url: '#generating-routes', name: 'Generating URLs' },
   ],
 }
@@ -17,13 +17,13 @@ const Page = () => {
       <H1>Routing</H1>
       <H2>Defining routes</H2>
       <P>
-        When using Inertia, all of your application's routing is defined server-side. This means that you don't need Vue Router or React Router. Instead,
+        When using Inertia, all of your application's routes are defined server-side. This means that you don't need Vue Router or React Router. Instead,
         you can simply define Laravel routes and return <A href="/responses">Inertia responses</A> from those routes.
       </P>
-      <H2>Route helpers</H2>
+      <H2>Shorthand routes</H2>
       <P>
-        If you have a page that doesn't need a corresponding controller method, like an FAQ or about page, you can route
-        directly to a component.
+        If you have a <A href="/pages">page</A> that doesn't need a corresponding controller method, like an "FAQ" or "about" page, you can route
+        directly to a component via the <Code>Route::inertia()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -31,14 +31,7 @@ const Page = () => {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              Route::inertia('/about', 'AboutComponent');
-            `,
-          },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              inertia 'about' => 'AboutComponent'
+              Route::inertia('/about', 'About');
             `,
           },
         ]}
@@ -68,52 +61,24 @@ const Page = () => {
                                   'id' => $user->id,
                                   'name' => $user->name,
                                   'email' => $user->email,
-                                  'edit_url' => URL::route('users.edit', $user),
+                                  'edit_url' => route('users.edit', $user),
                               ];
                           }),
-                          'create_url' => URL::route('users.create'),
+                          'create_url' => route('users.create'),
                       ]);
                   }
               }
             `,
           },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              class UsersController < ApplicationController
-                def index
-                  render inertia: 'Users/Index', props: {
-                    users: User.all.map do |user|
-                      user.as_json(
-                        only: [ :id, :name, :email ]
-                      ).merge(
-                        edit_url: edit_user_path(user)
-                      )
-                    end,
-                    create_url: new_user_path
-                  }
-                end
-              end
-            `,
-          },
         ]}
       />
       <P>
-        Another option is to make your route definitions available client-side as JSON, and then use this to generate
-        URLs from your named routes.
+        However, when using Laravel, the <A href="https://github.com/tightenco/ziggy">Ziggy</A> library can make your named, server-side
+        routes available to you via a global <Code>route()</Code> function. In fact, if you are developing an application using
+        one of Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Ziggy is already configured for you.
       </P>
-      <CodeBlock
-        language="php"
-        children={dedent`
-          <script>
-            let routes = {{ json_encode($routes) }}
-          </script>
-        `}
-      />
       <P>
-        If you're using Laravel, the <A href="https://github.com/tightenco/ziggy">Ziggy</A> library does this for you
-        automatically via a global <Code>route()</Code> function. If you're using Ziggy with Vue, it's helpful to make
+        If you're using Ziggy with Vue, it's helpful to make
         this function available as a custom <Code>$route</Code> property so you can use it directly in your templates.
       </P>
       <TabbedCode
@@ -140,10 +105,6 @@ const Page = () => {
           <Link :href="$route('users.create')">Create User</Link>
         `}
       />
-      <P>
-        For Ruby on Rails there is a similar library called{' '}
-        <A href="https://github.com/railsware/js-routes">JsRoutes</A>.
-      </P>
     </>
   )
 }
