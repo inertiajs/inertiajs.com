@@ -17,8 +17,8 @@ const Page = () => {
       <H1>Routing</H1>
       <H2>Defining routes</H2>
       <P>
-        With Inertia all routing is defined server-side. Meaning you don't need Vue Router or React Router. Simply
-        create routes using your server-side framework of choice.
+        When using Inertia, all of your application's routing is defined server-side. This means that you don't need Vue Router or React Router. Instead,
+        you can simply define Laravel routes and return <A href="/responses">Inertia responses</A> from those routes.
       </P>
       <H2>Route helpers</H2>
       <P>
