@@ -70,7 +70,7 @@ const Page = () => {
                     $user = User::create(
                       Request::only('first_name', 'last_name', 'email')
                     );\n
-                    return Redirect::route('users.show', $user);
+                    return to_route('users.show', $user);
                   }
               }
             `,

@@ -5,7 +5,7 @@ import { Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
 const meta = {
   title: 'Redirects',
   links: [
-    { url: '#top', name: 'Making redirects' },
+    { url: '#top', name: 'Introduction' },
     { url: '#303-response-code', name: '303 response code' },
     { url: '#external-redirects', name: 'External redirects' },
   ],
@@ -16,15 +16,12 @@ const Page = () => {
     <>
       <H1>Redirects</H1>
       <P>
-        When making a non-GET Inertia request, via <Code>{`<Link>`}</Code> or manually, be sure to always respond with a
-        proper Inertia response.
+        When making a non-GET Inertia request via <Code>{`<Link>`}</Code> or manually, you should ensure that you always respond with a
+        proper Inertia redirect response.
       </P>
       <P>
-        For example, if you're creating a new user, have your "store" endpoint return a redirect back to a standard GET
-        endpoint, such as your user index page.
-      </P>
-      <P>
-        Inertia will automatically follow this redirect and update the page accordingly. Here's a simplified example.
+        For example, if your controller is creating a new user, your "store" endpoint should return a redirect back to a standard <Code>GET</Code>{' '}
+        endpoint, such as your user "index" page. Inertia will automatically follow this redirect and update the page accordingly.
       </P>
       <TabbedCode
         examples={[
@@ -40,48 +37,34 @@ const Page = () => {
                           'users' => User::all(),
                       ]);
                   }\n
-                  public function store()
+                  public function store(Request $request)
                   {
                       User::create(
-                          Request::validate([
+                          $request->validate([
                               'name' => ['required', 'max:50'],
                               'email' => ['required', 'max:50', 'email'],
                           ])
                       );\n
-                      return Redirect::route('users.index');
+                      return to_route('users.index');
                   }
               }
-            `,
-          },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              class UsersController < ApplicationController
-                def index
-                  render inertia: 'Users/Index', props: {users: User.all}
-                end\n
-                def create
-                  User.create params.require(:user).permit(:name, :email)\n
-                  redirect_to users_path
-                end
-              end
             `,
           },
         ]}
       />
       <H2>303 response code</H2>
       <P>
-        Note, when redirecting after a <Code>PUT</Code>, <Code>PATCH</Code> or <Code>DELETE</Code> request you must use
+        When redirecting after a <Code>PUT</Code>, <Code>PATCH</Code>, or <Code>DELETE</Code> request, you must use
         a <Code>303</Code> response code, otherwise the subsequent request will not be treated as a <Code>GET</Code>{' '}
-        request. A <Code>303</Code> redirect is the same as a <Code>302</Code> except that the follow-up request is
+        request. A <Code>303</Code> redirect is very similar to a <Code>302</Code> redirect; however, the follow-up request is
         explicitly changed to a <Code>GET</Code> request.
       </P>
-      <P>If you're using one of our official server-side adapters, redirects will automatically be converted.</P>
+      <P>If you're using one of our official server-side adapters, all redirects will automatically be converted to <Code>303</Code> redirects.</P>
       <H2>External redirects</H2>
       <P>
-        Sometimes it's necessary to redirect to an external website, or even another non-Inertia endpoint in your app,
-        within an Inertia request. This is possible using a server-side initiated <Code>window.location</Code> visit.
+        Sometimes it's necessary to redirect to an external website, or even another non-Inertia endpoint in your app
+        while handling an Inertia request. This can be accomplished using a server-side initiated <Code>window.location</Code> visit via
+          the <Code>Inertia::location()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -92,18 +75,11 @@ const Page = () => {
               return Inertia::location($url);
             `,
           },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              inertia_location index_path
-            `,
-          },
         ]}
       />
       <P>
-        This will generate a <Code>409 Conflict</Code> response, which includes the destination URL in the{' '}
-        <Code>X-Inertia-Location</Code> header. Client-side, Inertia will detect this response and automatically do a{' '}
+        The <Code>Inertia::location()</Code> method will generate a <Code>409 Conflict</Code> response and include the destination URL in the{' '}
+        <Code>X-Inertia-Location</Code> header. When this response is received client-side, Inertia will automatically perform a{' '}
         <Code>window.location = url</Code> visit.
       </P>
     </>

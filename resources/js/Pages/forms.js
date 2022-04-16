@@ -187,7 +187,7 @@ const Page = () => {
                               'email' => ['required', 'max:50', 'email'],
                           ])
                       );\n
-                      return Redirect::route('users.index');
+                      return to_route('users.index');
                   }
               }
             `,
