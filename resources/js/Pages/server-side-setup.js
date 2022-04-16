@@ -114,8 +114,8 @@ const Page = () => {
       </P>
       <H2>Creating responses</H2>
       <P>
-        That's it, you're all ready to go server-side! From here you can start creating Inertia responses. See the{' '}
-        <A href="/responses">responses</A> page for more information.
+        That's it, you're all ready to go server-side! Now you're ready to start creating
+        Inertia <A href="/pages">pages</A> and rendering them via <A href="/responses">responses</A>.
       </P>
       <TabbedCode
         examples={[
@@ -138,23 +138,6 @@ const Page = () => {
                       ]);
                   }
               }
-            `,
-          },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              class EventsController < ApplicationController
-                def show
-                  event = Event.find(params[:id])
-                  render inertia: 'Event/Show',
-                    props: {
-                      event: event.as_json(
-                        only: [ :id, :title, :start_date, :description ]
-                      )
-                    }
-                end
-              end
             `,
           },
         ]}

@@ -6,7 +6,7 @@ const meta = {
   title: 'Client-side setup',
   links: [
     { url: '#install-dependencies', name: 'Install dependencies' },
-    { url: '#initialize-app', name: 'Initialize app' },
+    { url: '#initialize-app', name: 'Initialize the Inertia app' },
     { url: '#progress-indicator', name: 'Progress indicator' },
     { url: '#code-splitting', name: 'Code splitting' },
   ],
@@ -21,7 +21,7 @@ const Page = () => {
         your client-side framework. Inertia currently provides support for React, Vue, and Svelte.
       </P>
       <H2>Install dependencies</H2>
-      <P>Install the Inertia client-side adapters using NPM or Yarn.</P>
+      <P>First, install the Inertia client-side adapters corresponding to your framework of choice using NPM or Yarn.</P>
       <TabbedCode
         examples={[
           {
@@ -58,10 +58,10 @@ const Page = () => {
           },
         ]}
       />
-      <H2>Initialize app</H2>
+      <H2>Initialize the Inertia app</H2>
       <P>
-        Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing the
-        client-side framework with the base Inertia component.
+        Next, update your main JavaScript file to boot your Inertia app. To accomplish this, we'll
+        initialize the client-side framework with the base Inertia component.
       </P>
       <TabbedCode
         examples={[
@@ -129,12 +129,12 @@ const Page = () => {
         ]}
       />
       <P>
-        The <Code>resolve</Code> callback tells Inertia how to load a page component. It receives a page name (string),
-        and should return a page component module.
+        Let's dig into this example a bit further. The <Code>resolve</Code> callback tells Inertia
+        how to load a page component. As you can see, it receives a page name (string), and returns a page component module.
       </P>
       <P>
-        By default, Inertia assumes that you have a root element with an <Code>id</Code> of <Code>app</Code>. If
-        different, you can change this using the <Code>id</Code> property.
+        By default, Inertia assumes that your application's root template has a root element with an <Code>id</Code> of <Code>app</Code>. If
+        your application's root element has a different <Code>id</Code>, you can provide it using the <Code>id</Code> property.
       </P>
       <CodeBlock
         language="js"
@@ -149,10 +149,10 @@ const Page = () => {
       <P>
         Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one
         page to another. To solve this, Inertia provides an optional{' '}
-        <A href="https://github.com/inertiajs/progress">progress</A> library, which shows a loading bar whenever you
+        <A href="https://github.com/inertiajs/progress">progress</A> library which shows a loading bar whenever you
         make an Inertia visit.
       </P>
-      <P>To use it, start by installing it:</P>
+      <P>To start using the Inertia progress library, you will first need to install it via NPM / Yarn:</P>
       <CodeBlock
         language="bash"
         children={dedent`
@@ -160,7 +160,7 @@ const Page = () => {
           yarn add @inertiajs/progress
         `}
       />
-      <P>Once it's been installed, initialize it in your app.</P>
+      <P>Once the library has been installed, initialize it in your application's main JavaScript file.</P>
       <CodeBlock
         language="js"
         children={dedent`
@@ -169,13 +169,13 @@ const Page = () => {
         `}
       />
       <P>
-        It also provides a number of customization options, which you can learn more about on the{' '}
-        <A href="/progress-indicators">progress indicators</A> page.
+        The Inertia progress library also provides a number of customization options, which you can learn more about within the{' '}
+        <A href="/progress-indicators">progress indicators</A> documentation.
       </P>
       <H2>Code splitting</H2>
       <P>
         Code splitting breaks apart the various pages of your application into smaller bundles, which are then loaded on
-        demand when visiting new pages. This can significantly reduce the size of the initial JavaScript bundle,
+        demand when visiting new pages. This can significantly reduce the size of the initial JavaScript bundle loaded by the browser,
         improving the time to first render.
       </P>
       <Notice>
@@ -183,9 +183,8 @@ const Page = () => {
         Generally speaking, if you're able to use a single bundle, your app is going to feel snappier.
       </Notice>
       <P>
-        To use code splitting with Inertia you'll need to enable{' '}
-        <A href="https://github.com/tc39/proposal-dynamic-import">dynamic imports</A>. You'll need a Babel plugin to
-        make this work. First, install the plugin:
+        To use code splitting with Inertia, you will first need to enable{' '}
+        <A href="https://github.com/tc39/proposal-dynamic-import">dynamic imports</A> via a Babel plugin. Let's install it now.
       </P>
       <CodeBlock
         language="bash"
@@ -195,7 +194,7 @@ const Page = () => {
         `}
       />
       <P>
-        Next, create a <Code>.babelrc</Code> file in your project with the following:
+        Next, create a <Code>.babelrc</Code> file in your project with the following configuration:
       </P>
       <CodeBlock
         language="json"
@@ -207,10 +206,10 @@ const Page = () => {
       />
       <Notice>
         If you're using Laravel Mix, the dynamic imports Babel plugin is already configured. However, we recommend using
-        Laravel Mix 6, as there are known issues with older versions.
+        Laravel Mix 6 or above, as there are known issues with older versions.
       </Notice>
       <P>
-        Finally, update the <Code>resolve</Code> callback in your app initialization to use <Code>import</Code> instead
+        Finally, update the <Code>resolve</Code> callback in your app's initialization code to use <Code>import</Code> instead
         of <Code>require</Code>.
       </P>
       <TabbedCode
@@ -246,8 +245,8 @@ const Page = () => {
         ]}
       />
       <P>
-        Consider using cache busting to force browsers to load the latest version of your assets. To do this, add the
-        following to your webpack config:
+        You should also consider using cache busting to force browsers to load the latest version of your assets. To accomplish this, add the
+        following configuration to your webpack configuration file.
       </P>
       <CodeBlock
         language="js"
