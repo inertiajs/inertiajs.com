@@ -1,6 +1,6 @@
 import React from 'react'
 import dedent from 'dedent-js'
-import { Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Pages',
@@ -18,13 +18,17 @@ const Page = () => {
     <>
       <H1>Pages</H1>
       <P>
-        With Inertia, each page in your application has its own controller and corresponding JavaScript component. This
-        allows you to retrieve just the data necessary for that page, no API required.
+        When building applications using Inertia, each page in your application typically has its own controller / route and a corresponding JavaScript component. This
+        allows you to retrieve just the data necessary for that page - no API required.
+      </P>
+      <P>
+         In addition, all of the data needed for the page
+        can be retrieved before the page is ever rendered by the browser, eliminating the need for displaying "loading" states when users visit your application.
       </P>
       <H2>Creating pages</H2>
       <P>
-        Pages are simply JavaScript components. There is nothing particularly special about them. Pages receive data
-        from the controllers as props. Here's an example of a simple page component.
+        Inertia pages are simply JavaScript components. There is nothing particularly special or "magical" about pages.
+        As you can see in the example below, pages receive data from your application's controllers as props.
       </P>
       <TabbedCode
         examples={[
@@ -117,12 +121,36 @@ const Page = () => {
           },
         ]}
       />
+      <P>
+        Given the page above, you can render the page by returning an <A href="/responses">Inertia response</A> from a controller or route. In this example, let's
+        assume this page is stored at <Code>resources/js/Pages/User/Show.(js|vue|svelte)</Code> within the Laravel application.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              use Inertia\\Inertia;\n
+              class UserController extends Controller
+              {
+                  public function show(User $user)
+                  {
+                      return Inertia::render('User/Show', [
+                        'user' => $user
+                      ]);
+                  }
+              }
+            `,
+          },
+        ]}
+      />
       <H2>Creating layouts</H2>
       <P>
-        While not required, for most projects it makes sense to create a site layout that your pages can extend. Notice
-        in our page example above that we're wrapping the page content within a <Code>{`<layout>`}</Code> component.
-        Here's an example of such a component. There is nothing Inertia specific here. This is just a standard
-        JavaScript component.
+        While not required, for most projects it makes sense to create a site layout that all of your pages can extend. You may
+        have noticed in our page example above that we're wrapping the page content within a <Code>{`<Layout>`}</Code> component.
+        Here's an example of such a component. As you can see, there is nothing Inertia specific within this template. This is just a standard
+        JavaScript component that can be written using your client-side framework of choice.
       </P>
       <TabbedCode
         examples={[
@@ -227,8 +255,8 @@ const Page = () => {
       </P>
       <P>
         For example, maybe you have an audio player on a podcast website that you want to continue playing as users
-        navigate the site. Or, maybe you simply want to maintain the scroll position in your navigation between page
-        visits. In these situations, using the persistent layouts feature in Inertia is a better choice.
+        navigate the site. Or, maybe you simply want to maintain the scroll position in your sidebar navigation between page
+        visits. In these situations, using Inertia's persistent layouts can solve these problems.
       </P>
       <TabbedCode
         examples={[
@@ -245,9 +273,9 @@ const Page = () => {
               <script>
                 import Layout from './Layout'\n
                 export default {
-                  // Using a render function
+                  // Using a render function...
                   layout: (h, page) => h(Layout, [page]),\n
-                  // Using the shorthand
+                  // Using shorthand syntax...
                   layout: Layout,\n
                   props: {
                     user: Object,
@@ -269,9 +297,9 @@ const Page = () => {
               <script>
                 import Layout from './Layout'\n
                 export default {
-                  // Using a render function
+                  // Using a render function...
                   layout: (h, page) => h(Layout, () => child),\n
-                  // Using the shorthand
+                  // Using shorthand syntax...
                   layout: Layout,\n
                   props: {
                     user: Object,
@@ -332,13 +360,13 @@ const Page = () => {
                 import SiteLayout from './SiteLayout'
                 import NestedLayout from './NestedLayout'\n
                 export default {
-                  // Using a render function
+                  // Using a render function...
                   layout: (h, page) => {
                     return h(SiteLayout, [
                       h(NestedLayout, [page]),
                     ])
                   },\n
-                  // Using the shorthand
+                  // Using shorthand syntax...
                   layout: [SiteLayout, NestedLayout],\n
                   props: {
                     user: Object,
@@ -361,11 +389,11 @@ const Page = () => {
                 import SiteLayout from './SiteLayout'
                 import NestedLayout from './NestedLayout'\n
                 export default {
-                  // Using a render function
+                  // Using a render function...
                   layout: (h, page) => {
                     return h(SiteLayout, () => h(NestedLayout, () => page))
                   },\n
-                  // Using the shorthand
+                  // Using the shorthand...
                   layout: [SiteLayout, NestedLayout],\n
                   props: {
                     user: Object,
@@ -417,8 +445,8 @@ const Page = () => {
       />
       <H2>Default layouts</H2>
       <P>
-        If you're using persistent layouts, it's possible to set a default page layout in the <Code>resolve</Code>{' '}
-        callback.
+        If you're using persistent layouts, you may find it convenient to define the default page layout in the <Code>resolve</Code>{' '}
+        callback of your application's main JavaScript file.
       </P>
       <CodeBlock
         language="js"
