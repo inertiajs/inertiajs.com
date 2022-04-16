@@ -104,6 +104,11 @@ const Nav = ({ className }) => {
           </InertiaLink>
         </li>
         <li className="md:pr-3">
+          <InertiaLink href="/redirects" className={linkClass('/redirects')}>
+            Redirects
+          </InertiaLink>
+        </li>
+        <li className="md:pr-3">
           <InertiaLink href="/routing" className={linkClass('/routing')}>
             Routing
           </InertiaLink>
@@ -121,11 +126,6 @@ const Nav = ({ className }) => {
         <li className="md:pr-3">
           <InertiaLink href="/manual-visits" className={linkClass('/manual-visits')}>
             Manual visits
-          </InertiaLink>
-        </li>
-        <li className="md:pr-3">
-          <InertiaLink href="/redirects" className={linkClass('/redirects')}>
-            Redirects
           </InertiaLink>
         </li>
         <li className="md:pr-3">
