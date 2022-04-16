@@ -11,7 +11,6 @@ const meta = {
     { url: '#component-state', name: 'Component state' },
     { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
-    { url: '#error-bags', name: 'Error bags' },
     { url: '#file-uploads', name: 'File uploads' },
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#visit-cancellation', name: 'Visit cancellation' },
@@ -24,8 +23,8 @@ const Page = () => {
     <>
       <H1>Manual visits</H1>
       <P>
-        In addition to <A href="/links">creating links</A>, it's also possible to manually make Inertia visits. This is
-        done using the <Code>Inertia.visit()</Code> method.
+        In addition to <A href="/links">creating links</A>, it's also possible to manually make Inertia visits / requests programatically via JavaScript. This is
+        accomplished via the <Code>Inertia.visit()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -136,7 +135,7 @@ const Page = () => {
         ]}
       />
       <P>
-        However, generally it's preferred to use one of the shortcut methods instead. These methods share all the same
+        However, it's generally more convenient to use one of Inertia's shortcut request methods instead. These methods share all the same
         options as <Code>Inertia.visit()</Code>.
       </P>
       <TabbedCode
@@ -151,7 +150,7 @@ const Page = () => {
               this.$inertia.put(url, data, options)
               this.$inertia.patch(url, data, options)
               this.$inertia.delete(url, options)
-              this.$inertia.reload(options) // Uses the current URL
+              this.$inertia.reload(options) // Uses the current URL...
             `,
           },
           {
@@ -196,13 +195,14 @@ const Page = () => {
         ]}
       />
       <P>
-        The <Code>reload()</Code> method is simply a shorthand that automatically visits the current page, with{' '}
-        <Code>preserveState</Code> and <Code>preserveScroll</Code> both set to true.
+        The <Code>reload()</Code> method is simply a shorthand method that automatically visits the current page with{' '}
+        <Code>preserveState</Code> and <Code>preserveScroll</Code> both set to <Code>true</Code>, making it a convenient
+        method to invoke when you would like to simply reload the current page's data.
       </P>
       <H2>Method</H2>
       <P>
-        Use the <Code>method</Code> option to set the request method to <Code>get</Code>, <Code>post</Code>,{' '}
-        <Code>put</Code>, <Code>patch</Code> or <Code>delete</Code>. The default is <Code>get</Code>.
+        When making manual visits, you may use the <Code>method</Code> option to set the request's HTTP method to <Code>get</Code>, <Code>post</Code>,{' '}
+        <Code>put</Code>, <Code>patch</Code> or <Code>delete</Code>. The default method is <Code>get</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -219,7 +219,7 @@ const Page = () => {
       </Notice>
       <H2>Data</H2>
       <P>
-        Use the <Code>data</Code> option to add data to the request.
+        You may use the <Code>data</Code> option to add data to the request.
       </P>
       <CodeBlock
         language="js"
@@ -234,8 +234,8 @@ const Page = () => {
         `}
       />
       <P>
-        As a convenience, the <Code>get()</Code>, <Code>post()</Code>, <Code>put()</Code> and <Code>patch()</Code>{' '}
-        methods all include <Code>data</Code> as the second argument.
+        For convenience, the <Code>get()</Code>, <Code>post()</Code>, <Code>put()</Code> and <Code>patch()</Code>{' '}
+        methods all accept <Code>data</Code> as their second argument.
       </P>
       <CodeBlock
         language="js"
@@ -249,7 +249,7 @@ const Page = () => {
       <H2>Browser history</H2>
       <P>
         When making visits, Inertia automatically adds a new entry into the browser history. However, it's also possible
-        to replace the current history entry using by setting the <Code>replace</Code> option to <Code>true</Code>.
+        to replace the current history entry by setting the <Code>replace</Code> option to <Code>true</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -263,15 +263,15 @@ const Page = () => {
       </Notice>
       <H2>Component state</H2>
       <P>
-        By default page visits to the same page force a fresh page component instance, which clears out any local state,
-        such as form inputs, scroll positions and focus states.
+        By default, page visits to the same page create a fresh page component instance. This causes any local state,
+        such as form inputs, scroll positions and focus states to be lost.
       </P>
       <P>
-        In certain situations it's necessary to preserve the page component state. For example, when submitting a form,
-        you need to preserve your form data in the event that validation errors come back.
+        However, in some situations, it's necessary to preserve the page component state. For example, when submitting a form,
+        you need to preserve your form data in the event that form validation fails on the server.
       </P>
       <P>
-        This can be done by setting the <Code>preserveState</Code> option to <Code>true</Code>.
+        You can instruct Inertia to preserve the component's state by setting the <Code>preserveState</Code> option to <Code>true</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -281,7 +281,7 @@ const Page = () => {
       />
       <P>
         You can also lazily evaluate the <Code>preserveState</Code> option based on the response by providing a
-        callback.
+        callback to the <Code>preserveState</Code> option.
       </P>
       <CodeBlock
         language="js"
@@ -292,14 +292,14 @@ const Page = () => {
         `}
       />
       <P>
-        For convenience, the <Code>post</Code>, <Code>put</Code>, <Code>patch</Code>, <Code>delete</Code> and{' '}
-        <Code>reload</Code> methods all default <Code>preserveState</Code> to <Code>true</Code>.
+        For convenience, the <Code>post</Code>, <Code>put</Code>, <Code>patch</Code>, <Code>delete</Code>, and{' '}
+        <Code>reload</Code> methods all set the <Code>preserveState</Code> option to <Code>true</Code> by default.
       </P>
       <H2>Scroll preservation</H2>
       <P>
         When navigating between pages, Inertia mimics default browser behaviour by automatically resetting the scroll
         position of the document body (as well as any <A href="/scroll-management#scroll-regions">scroll regions</A>{' '}
-        you've defined), back to the top. Use the <Code>preserveScroll</Code> option to disable this behaviour.
+        you've defined) back to the top of the page. However, you may use the <Code>preserveScroll</Code> option to disable this behaviour.
       </P>
       <CodeBlock
         language="js"
@@ -320,12 +320,12 @@ const Page = () => {
         `}
       />
       <P>
-        For more information, see the <A href="/scroll-management">scroll management</A> page.
+        For more information regarding this feature, please consult the <A href="/scroll-management">scroll management</A> documentation.
       </P>
       <H2>Partial reloads</H2>
       <P>
         The <Code>only</Code> option allows you to request a subset of the props (data) from the server on subsequent
-        visits to the same page.
+        visits to the same page, thus making your application more efficient since it does not need to retrieve data that the page is not interested in refreshing.
       </P>
       <CodeBlock
         language="js"
@@ -334,29 +334,12 @@ const Page = () => {
         `}
       />
       <P>
-        For more information, see the <A href="/partial-reloads">partial reloads</A> page.
-      </P>
-      <H2>Error bags</H2>
-      <P>
-        For pages that have more than one form, it's possible to run into conflicts when displaying validation errors if
-        two forms share the same field names. To get around this, you can use error bags. Error bags scope the
-        validation errors returned from the server within a unique key specific to that form.
-      </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/companies', data, {
-            errorBag: 'createCompany',
-          })
-        `}
-      />
-      <P>
-        For more information, see the <A href="/validation#error-bags">validation</A> page.
+        For more information on this feature, please consult the <A href="/partial-reloads">partial reloads</A> documentation.
       </P>
       <H2>File uploads</H2>
       <P>
-        When making visits that include files, Inertia will automatically convert the request data into a{' '}
-        <Code>FormData</Code> object. If you'd like the visit to always use a <Code>FormData</Code> object, you can
+        When making visits / requests that include files, Inertia will automatically convert the request data into a{' '}
+        <Code>FormData</Code> object. If you would like the visit to always use a <Code>FormData</Code> object, you can
         force this using the <Code>forceFormData</Code> option.
       </P>
       <CodeBlock
@@ -368,7 +351,7 @@ const Page = () => {
         `}
       />
       <P>
-        See the <A href="/file-uploads">file uploads</A> page for more information.
+        For more information on uploading files, please consult the dedicated <A href="/file-uploads">file uploads</A> documentation.
       </P>
       <H2>Custom headers</H2>
       <P>
@@ -384,7 +367,9 @@ const Page = () => {
           })
         `}
       />
-      <Notice>The Inertia headers take priority and therefore cannot be overwritten.</Notice>
+      <Notice>
+        The headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
+      </Notice>
       <H2>Visit cancellation</H2>
       <P>
         You can cancel a visit using a cancel token, which Inertia automatically generates and provides via the{' '}
@@ -396,17 +381,16 @@ const Page = () => {
           Inertia.post('/users', data, {
             onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
           })\n
-          // Cancel the visit
+          // Cancel the visit...
           this.cancelToken.cancel()
         `}
       />
       <P>
-        When a visit is cancelled, both the <Code>onCancel()</Code> and <Code>onFinish()</Code> event callbacks will be
-        called.
+        The <Code>onCancel()</Code> and <Code>onFinish()</Code> event callbacks will be executed when a visit is cancelled.
       </P>
       <H2>Event callbacks</H2>
       <P>
-        In addition to the <A href="/events">global events</A>, Inertia also provides a number of per-visit event
+        In addition to Inertia's <A href="/events">global events</A>, Inertia also provides a number of per-visit event
         callbacks.
       </P>
       <CodeBlock
@@ -436,7 +420,7 @@ const Page = () => {
       />
       <P>
         It's also possible to return a promise from the <Code>onSuccess()</Code> and <Code>onError()</Code> callbacks.
-        This will delay the "finish" event until the promise has resolved.
+        When doing so, the "finish" event will be delayed until the promise has resolved.
       </P>
       <CodeBlock
         language="js"
