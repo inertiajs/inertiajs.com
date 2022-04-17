@@ -9,7 +9,7 @@ const meta = {
     { url: '#server-side-validation', name: 'Server-side validation' },
     { url: '#form-helper', name: 'Form helper' },
     { url: '#file-uploads', name: 'File uploads' },
-    { url: '#xhr-fetch-submissions', name: 'XHR/fetch submissions' },
+    { url: '#xhr-fetch-submissions', name: 'XHR / fetch submissions' },
   ],
 }
 
@@ -19,8 +19,8 @@ const Page = () => {
       <H1>Forms</H1>
       <H2>Submitting forms</H2>
       <P>
-        While it's possible to make classic form submissions with Inertia, it's not recommended, as they cause full page
-        reloads. Instead, it's better to intercept form submissions and then make the request using Inertia.
+        While it's possible to make classic HTML form submissions with Inertia, it's not recommended since they cause full-page
+        reloads. Instead, it's better to intercept form submissions and then make the <A href="/manual-visits">request using Inertia</A>.
       </P>
       <TabbedCode
         examples={[
@@ -160,9 +160,12 @@ const Page = () => {
         ]}
       />
       <P>
-        Unlike a classic ajax submitted form, with Inertia you don't handle the post submission behaviour client-side.
-        Rather, you do this server-side using a <A href="/redirects">redirect</A>. And, of course, there is nothing
-        stopping you from redirecting right back to the page that you're on.
+        As you may have noticed in the example above, when using Inertia, you don't typically need inspect form responses client-side like you would when making XHR / fetch requests manually.
+      </P>
+      <P>
+        Instead, your server-side route / controller typically issues a <A href="/redirects">redirect</A> response. And, of course, there is nothing
+        stopping you from redirecting the user right back to the page they were previously on. In this way, handling Inertia form submissions server-side
+        feels very similar to handling classic HTML form submissions.
       </P>
       <TabbedCode
         examples={[
@@ -178,51 +181,37 @@ const Page = () => {
                         'users' => User::all(),
                       ]);
                   }\n
-                  public function store()
+                  public function store(Request $request)
                   {
-                      User::create(
-                          Request::validate([
-                              'first_name' => ['required', 'max:50'],
-                              'last_name' => ['required', 'max:50'],
-                              'email' => ['required', 'max:50', 'email'],
-                          ])
-                      );\n
+                      User::create($request->validate([
+                        'first_name' => ['required', 'max:50'],
+                        'last_name' => ['required', 'max:50'],
+                        'email' => ['required', 'max:50', 'email'],
+                      ]));\n
                       return to_route('users.index');
                   }
               }
-            `,
-          },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              class UsersController < ApplicationController
-                def index
-                  render inertia: 'Users/Index', props: { users: User.all }
-                end\n
-                def create
-                  User.create params.require(:user).permit(:first_name, :last_name, :email)\n
-                  redirect_to users_path
-                end
-              end
             `,
           },
         ]}
       />
       <H2>Server-side validation</H2>
       <P>
-        Handling server-side validation errors in Inertia works a little different than a classic ajax-driven form,
-        where you catch the validation errors from <Code>422</Code> responses and manually update the form's error
-        state. That's because Inertia never receives <Code>422</Code> responses. Rather, Inertia operates much more like
-        a standard full page form submission.
+        Handling server-side validation errors in Inertia works a little different than handling errors from manual XHR / fetch requests.
+        When making XHR / fetch requests, you typically inspect the response for a <Code>422</Code> status code and manually update the form's error
+        state.
       </P>
       <P>
-        See the <A href="/validation">validation</A> page for more information.
+        However, when using Inertia, a <Code>422</Code> response is never returned by your server. Instead, as we saw in the example above, your routes / controllers
+        will typically return a redirect response - much like a classic, full-page form submission.
+      </P>
+      <P>
+        For a full discussion on handling and displaying validation errors with Inertia, please consult the <A href="/validation">validation</A> documentation.
       </P>
       <H2>Form helper</H2>
       <P>
-        Since working with forms is so common, Inertia comes with a form helper designed to help reduce the amount of
-        boilerplate needed for typical forms. Here's how to use it:
+        Since working with forms is so common, Inertia includes a form helper designed to help reduce the amount of
+        boilerplate code needed for handling typical form submissions.
       </P>
       <TabbedCode
         examples={[
@@ -351,7 +340,7 @@ const Page = () => {
         ]}
       />
       <P>
-        To submit the form, use the <Code>get</Code>, <Code>post</Code>, <Code>put</Code>, <Code>patch</Code> and{' '}
+        To submit the form, you may use the <Code>get</Code>, <Code>post</Code>, <Code>put</Code>, <Code>patch</Code> and{' '}
         <Code>delete</Code> methods.
       </P>
       <TabbedCode
@@ -408,9 +397,10 @@ const Page = () => {
         ]}
       />
       <P>
-        The submit methods support all the regular <A href="/manual-visits">visit options</A>, such as{' '}
-        <Code>preserveState</Code>, <Code>preserveScroll</Code>, and the event callbacks. This can be helpful for
-        performing tasks on successful form submissions, such as resetting inputs.
+        The submit methods support all of the typical <A href="/manual-visits">visit options</A>, such as{' '}
+        <Code>preserveState</Code>, <Code>preserveScroll</Code>, and event callbacks, which can be helpful for
+        performing tasks on successful form submissions. For example, you might use the <Code>onSuccess</Code> callback to
+        reset inputs to their original state.
       </P>
       <TabbedCode
         examples={[
@@ -514,7 +504,7 @@ const Page = () => {
       />
       <P>
         You can use the <Code>processing</Code> property to track if a form is currently being submitted. This can be
-        helpful for preventing double form submissions, by disabling the submit button.
+        helpful for preventing double form submissions by disabling the submit button.
       </P>
       <TabbedCode
         examples={[
@@ -550,8 +540,8 @@ const Page = () => {
         ]}
       />
       <P>
-        In the event that you're uploading files, the current progress event is available via the <Code>progress</Code>{' '}
-        property. This is helpful for showing upload progress. For example:
+        If your form is uploading files, the current progress event is available via the <Code>progress</Code>{' '}
+        property, allowing you to easily display the upload progress.
       </P>
       <TabbedCode
         examples={[
@@ -599,7 +589,9 @@ const Page = () => {
         ]}
       />
       <P>
-        In the event there are form errors, they are available via the <Code>errors</Code> property.
+        In the event there are form errors, they are available via the <Code>errors</Code> property. When building
+        Laravel powered Inertia applications, form errors will automatically be populated when your application
+        throws instances of <Code>ValidationException</Code>, such as when using <Code>$request->validate()</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -636,8 +628,11 @@ const Page = () => {
           },
         ]}
       />
+      <Notice>
+        For a more thorough discussion of form validation and errors, please consult the <A href="/validation">validation documentation</A>.
+      </Notice>
       <P>
-        To check if a form has any errors, use the <Code>hasErrors</Code> property. To clear form errors, use the{' '}
+        To determine if a form has any errors, you may use the <Code>hasErrors</Code> property. To clear form errors, use the{' '}
         <Code>clearErrors()</Code> method.
       </P>
       <TabbedCode
@@ -646,9 +641,9 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              // Clear all errors
+              // Clear all errors...
               form.clearErrors()\n
-              // Clear errors for specific fields
+              // Clear errors for specific fields...
               form.clearErrors('field', 'anotherfield')
             `,
           },
@@ -656,9 +651,9 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              // Clear all errors
+              // Clear all errors...
               form.clearErrors()\n
-              // Clear errors for specific fields
+              // Clear errors for specific fields...
               form.clearErrors('field', 'anotherfield')
             `,
           },
@@ -667,9 +662,9 @@ const Page = () => {
             language: 'js',
             code: dedent`
               const { clearErrors } = useForm({ ... })\n
-              // Clear all errors
+              // Clear all errors...
               clearErrors()\n
-              // Clear errors for specific fields
+              // Clear errors for specific fields...
               clearErrors('field', 'anotherfield')
             `,
           },
@@ -677,17 +672,17 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              // Clear all errors
+              // Clear all errors...
               $form.clearErrors()\n
-              // Clear errors for specific fields
+              // Clear errors for specific fields...
               $form.clearErrors('field', 'anotherfield')
             `,
           },
         ]}
       />
       <P>
-        If you're using a client-side input validation libraries or do additional checks of your own, you can also
-        set your own errors on the form by using the <Code>setErrors()</Code> method.
+        If you're using a client-side input validation libraries or do additional manual validation, you can also
+        set your own errors on the form using the <Code>setErrors()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -695,9 +690,9 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              // Set a single error
+              // Set a single error...
               form.setError('field', 'Your error message.');\n
-              // Set multiple errors at once
+              // Set multiple errors at once...
               form.setError({
                 foo: 'Your error message for the foo field.',
                 bar: 'Some other error for the bar field.'
@@ -708,9 +703,9 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              // Set a single error
+              // Set a single error...
               form.setError('field', 'Your error message.');\n
-              // Set multiple errors at once
+              // Set multiple errors at once...
               form.setError({
                 foo: 'Your error message for the foo field.',
                 bar: 'Some other error for the bar field.'
@@ -722,9 +717,9 @@ const Page = () => {
             language: 'js',
             code: dedent`
               const { setError } = useForm({ ... })\n
-              // Set a single error
+              // Set a single error...
               setError('field', 'Your error message.');\n
-              // Set multiple errors at once
+              // Set multiple errors at once...
               setError({
                 foo: 'Your error message for the foo field.',
                 bar: 'Some other error for the bar field.'
@@ -749,12 +744,12 @@ const Page = () => {
       <Notice>Unlike an actual form submission, the page's props remain unchanged when manually setting errors on a form instance.</Notice>
       <P>
         When a form has been successfully submitted, the <Code>wasSuccessful</Code> property will be <Code>true</Code>.
-        In addition to this, there is also a <Code>recentlySuccessful</Code> property, which will be set to{' '}
-        <Code>true</Code> for two seconds after a successful form submission. This is helpful for showing temporary
+        In addition to this, forms have a <Code>recentlySuccessful</Code> property, which will be set to{' '}
+        <Code>true</Code> for two seconds after a successful form submission. This property can be utilized to show temporary
         success messages.
       </P>
       <P>
-        To reset the form values back to their default values, you can use the <Code>reset()</Code> method.
+        To reset the form's values back to their default values, you can use the <Code>reset()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -762,9 +757,9 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              // Reset the form
+              // Reset the form...
               form.reset()\n
-              // Reset specific fields
+              // Reset specific fields...
               form.reset('field', 'anotherfield')
             `,
           },
@@ -772,9 +767,9 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              // Reset the form
+              // Reset the form...
               form.reset()\n
-              // Reset specific fields
+              // Reset specific fields...
               form.reset('field', 'anotherfield')
             `,
           },
@@ -783,9 +778,9 @@ const Page = () => {
             language: 'js',
             code: dedent`
               const { reset } = useForm({ ... })\n
-              // Reset the form
+              // Reset the form...
               reset()\n
-              // Reset specific fields
+              // Reset specific fields...
               reset('field', 'anotherfield')
             `,
           },
@@ -793,9 +788,9 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              // Reset the form
+              // Reset the form...
               $form.reset()\n
-              // Reset specific fields
+              // Reset specific fields...
               $form.reset('field', 'anotherfield')
             `,
           },
@@ -803,7 +798,7 @@ const Page = () => {
       />
       <P>
         If your form's default values become outdated, you can use the <Code>defaults()</Code> method to update them.
-        This way, the next time the <Code>reset()</Code> method is used, the form will be reset to the correct values.
+        Then, the form will be reset to the correct values the next time the <Code>reset()</Code> method is invoked.
       </P>
       <TabbedCode
         examples={[
@@ -811,11 +806,11 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              // Set the form's current values as the new defaults
+              // Set the form's current values as the new defaults...
               form.defaults()\n
-              // Update the default value of a single field
+              // Update the default value of a single field...
               form.defaults('email', 'updated-default@example.com')\n
-              // Update the default value of multiple fields
+              // Update the default value of multiple fields...
               form.defaults({
                 name: 'Updated Example',
                 email: 'updated-default@example.com',
@@ -826,11 +821,11 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              // Set the form's current values as the new defaults
+              // Set the form's current values as the new defaults...
               form.defaults()\n
-              // Update the default value of a single field
+              // Update the default value of a single field...
               form.defaults('email', 'updated-default@example.com')\n
-              // Update the default value of multiple fields
+              // Update the default value of multiple fields...
               form.defaults({
                 name: 'Updated Example',
                 email: 'updated-default@example.com',
@@ -842,11 +837,11 @@ const Page = () => {
             language: 'js',
             code: dedent`
               const { setDefaults } = useForm({ ... })\n
-              // Set the form's current values as the new defaults
+              // Set the form's current values as the new defaults...
               setDefaults()\n
-              // Update the default value of a single field
+              // Update the default value of a single field...
               setDefaults('email', 'updated-default@example.com')\n
-              // Update the default value of multiple fields
+              // Update the default value of multiple fields...
               setDefaults({
                 name: 'Updated Example',
                 email: 'updated-default@example.com',
@@ -857,15 +852,52 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              // Set the form's current values as the new defaults
+              // Set the form's current values as the new defaults...
               $form.defaults()\n
-              // Update the default value of a single field
+              // Update the default value of a single field...
               $form.defaults('email', 'updated-default@example.com')\n
-              // Change the default value of multiple fields
+              // Change the default value of multiple fields...
               $form.defaults({
                 name: 'Updated Example',
                 email: 'updated-default@example.com',
               })
+            `,
+          },
+        ]}
+      />
+      <P>
+        To determine if a form has any changes, you may use the <Code>isDirty</Code> property.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'twig',
+            code: dedent`
+              <div v-if="form.isDirty">There are unsaved form changes.</div>
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'twig',
+            code: dedent`
+              <div v-if="form.isDirty">There are unsaved form changes.</div>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              {errors.isDirty && <div>There are unsaved form changes.</div>}
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              {#if $form.isDirty}
+                <div>There are unsaved form changes.</div>
+              {/if}
             `,
           },
         ]}
@@ -907,7 +939,7 @@ const Page = () => {
         ]}
       />
       <P>
-        To have form helper data and errors automatically <A href="/remembering-state">remembered</A> in history state,
+        To instruct Inertia to store a form's data and errors in <A href="/remembering-state">history state</A>,
         you can provide a unique form key as the first argument when instantiating your form.
       </P>
       <TabbedCode
@@ -949,57 +981,19 @@ const Page = () => {
           },
         ]}
       />
-      <P>
-        To check if a form has any changes, use the <Code>isDirty</Code> property.
-      </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue 2',
-            language: 'twig',
-            code: dedent`
-              <div v-if="form.isDirty">There are unsaved form changes.</div>
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'twig',
-            code: dedent`
-              <div v-if="form.isDirty">There are unsaved form changes.</div>
-            `,
-          },
-          {
-            name: 'React',
-            language: 'jsx',
-            code: dedent`
-              {errors.isDirty && <div>There are unsaved form changes.</div>}
-            `,
-          },
-          {
-            name: 'Svelte',
-            language: 'html',
-            code: dedent`
-              {#if $form.isDirty}
-                <div>There are unsaved form changes.</div>
-              {/if}
-            `,
-          },
-        ]}
-      />
       <H2>File uploads</H2>
       <P>
-        When making visits that include files, Inertia will automatically convert the request data into a{' '}
+        When making requests or form submissions that include files, Inertia will automatically convert the request data into a{' '}
         <Code>FormData</Code> object.
       </P>
       <P>
-        See the <A href="/file-uploads">file uploads</A> page for more information.
+        For a more thorough discussion of file uploads, please consult the <A href="/file-uploads">file uploads documentation</A>.
       </P>
-      <H2>XHR/fetch submissions</H2>
+      <H2>XHR / fetch submissions</H2>
       <P>
-        Using Inertia to submit forms works great for the vast majority of situations. However, in the event that you
-        need more fine-grain control over the form submission, there's nothing stopping you from making plain{' '}
-        <Code>xhr</Code> or <Code>fetch</Code> requests instead. Using both approaches in the same application is
-        totally fine!
+        Using Inertia to submit forms works great for the vast majority of situations; however, in the event that you
+        need more control over the form submission, you're free to make plain{' '}
+        XHR or <Code>fetch</Code> requests instead using the library of your choice.
       </P>
     </>
   )
