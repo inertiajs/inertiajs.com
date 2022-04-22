@@ -18,14 +18,14 @@ const Page = () => {
       <H2>Scroll resetting</H2>
       <P>
         When navigating between pages, Inertia mimics default browser behaviour by automatically resetting the scroll
-        position of the document body (as well as any <A href="#scroll-regions">scroll regions</A> you've defined), back
-        to the top. Further, Inertia keeps track of the scroll position of each page and automatically restores that
+        position of the document body (as well as any <A href="#scroll-regions">scroll regions</A> you've defined) back
+        to the top. In addition, Inertia keeps track of the scroll position of each page and automatically restores that
         scroll position as you navigate forward and back in history.
       </P>
       <H2>Scroll preservation</H2>
       <P>
-        Sometimes it's desirable to prevent the default scroll resetting when making visits. You can disable this
-        behaviour using the <Code>preserveScroll</Code> option when manually <A href="/requests">making visits</A>.
+        Sometimes it's desirable to prevent the default scroll resetting behavior when making visits. You can disable this
+        behaviour using the <Code>preserveScroll</Code> option when <A href="/requests">manually making visits</A>.
       </P>
       <CodeBlock
         language="js"
@@ -34,8 +34,8 @@ const Page = () => {
         `}
       />
       <P>
-        You can also lazily evaluate the <Code>preserveScroll</Code> option based on the response by providing a
-        callback.
+        You can also lazily evaluate the <Code>preserveScroll</Code> option based on the server's response by providing a
+        callback to the option.
       </P>
       <CodeBlock
         language="js"
@@ -46,7 +46,7 @@ const Page = () => {
         `}
       />
       <P>
-        You can also preserve the scroll position with <A href="/links">Inertia links</A> using the{' '}
+        You can also preserve the scroll position when using <A href="/links">Inertia links</A> using the{' '}
         <Code>preserve-scroll</Code> attribute.
       </P>
       <TabbedCode
@@ -89,8 +89,8 @@ const Page = () => {
       <H2>Scroll regions</H2>
       <P>
         If your app doesn't use document body scrolling, but instead has scrollable elements (using the{' '}
-        <Code>overflow</Code> CSS property), scroll resetting will not work. In these situations you must tell Inertia
-        which scrollable elements to manage by adding a <Code>scroll-region</Code> attribute.
+        <Code>overflow</Code> CSS property), scroll resetting will not work. In these situations, you must tell Inertia
+        which scrollable elements to manage by adding a <Code>scroll-region</Code> attribute to the element.
       </P>
       <CodeBlock
         language="html"
