@@ -11,10 +11,12 @@ const Page = () => {
     <>
       <H1>Authorization</H1>
       <P>
-        With Inertia, authorization is best handled server-side in your policies. However, you may be wondering how to
-        check against your policies from within your JavaScript page components, since you won't have access to your
-        server-side helpers. The simplest approach here is to pass your authorization checks as props to your page
-        components.
+        When using Inertia, authorization is best handled server-side in your application's authorization policies. However, you may be wondering how to
+        perform checks against your policies from within your JavaScript page components since you won't have access to your
+        server-side helpers.
+      </P>
+      <P>
+        The simplest approach to solving this problem is to pass the results of your authorization checks as props to your page components.
       </P>
       <TabbedCode
         examples={[
@@ -28,7 +30,7 @@ const Page = () => {
                   {
                       return Inertia::render('Users/Index', [
                           'can' => [
-                              'create_user' => Auth::user()->can('users.create'),
+                              'create_user' => Auth::user()->can('create', User::class),
                           ],
                           'users' => User::all()->map(function ($user) {
                               return [
@@ -36,7 +38,7 @@ const Page = () => {
                                   'last_name' => $user->last_name,
                                   'email' => $user->email,
                                   'can' => [
-                                      'edit_user' => Auth::user()->can('users.edit', $user),
+                                      'edit_user' => Auth::user()->can('edit', $user),
                                   ]
                               ];
                           }),
@@ -44,31 +46,7 @@ const Page = () => {
                   }
               }
             `,
-          },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              class UsersController < ApplicationController
-                def index
-                  render inertia: 'Users/Index', props: {
-                    can: {
-                      create_user: can?(:create, User)
-                    },
-                    users: User.all.map do |user|
-                      user.as_json(
-                        only: [ :id, :first_name, :last_name, :email ]
-                      ).merge(
-                        can: {
-                          edit_user: can?(:edit, user)
-                        }
-                      )
-                    end
-                  }
-                end
-              end
-            `,
-          },
+          }
         ]}
       />
     </>
