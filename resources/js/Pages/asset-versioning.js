@@ -6,7 +6,7 @@ const meta = {
   title: 'Asset versioning',
   links: [
     { url: '#introduction', name: 'Introduction' },
-    { url: '#configuring', name: 'Configuring' },
+    { url: '#configuration', name: 'Configuration' },
     { url: '#cache-busting', name: 'Cache busting' },
   ],
 }
@@ -16,15 +16,19 @@ const Page = () => {
     <>
       <H1>Asset versioning</H1>
       <P>
-        One common challenge with single-page apps is refreshing site assets when they've been changed. Inertia makes
-        this easy by optionally tracking the current version of your site assets. In the event that an asset changes,
-        Inertia will automatically make a hard page visit instead of a normal ajax visit on the next request.
+        One common challenge when building single-page apps is refreshing site assets when they've been changed. Thankfully, Inertia makes
+        this easy by optionally tracking the current version of your site assets. When an asset changes,
+        Inertia will automatically make a hard page visit instead of a XHR visit on the next request.
       </P>
-      <H2>Configuring</H2>
+      <H2>Configuration</H2>
       <P>
-        To enable automatic asset refreshing, you simply need to tell Inertia what the current version of your assets
-        is. This can be any <Code>string</Code> (letters, numbers, or a file hash), as long as it changes when your
+        To enable automatic asset refreshing, you need to tell Inertia the current version of your assets. This can
+        be any arbitrary string (letters, numbers, or a file hash), as long as it changes when your
         assets have been updated.
+      </P>
+      <P>
+        Typically, your application's asset version can be specifed within the <Code>version</Code> method of
+        the Inertia <Code>HandleInertiaRequests</Code> middleware.
       </P>
       <TabbedCode
         examples={[
@@ -32,43 +36,33 @@ const Page = () => {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              /*
-              |----------------------------------------------------------------
-              | Via the HandleInertiaRequests middleware (recommended)
-              |----------------------------------------------------------------
-              */\n
               class HandleInertiaRequests extends Middleware
               {
                   public function version(Request $request)
                   {
                       return parent::version($request);
                   }
-              }\n
-              /*
-              |----------------------------------------------------------------
-              | Manually
-              |----------------------------------------------------------------
-              */\n
-              use Inertia\\Inertia;\n
-              Inertia::version($version);
-              Inertia::version(fn () => $version); // Lazily
+              }
             `,
             description:
-              'The HandleInertiaRequests middleware provides a sensible default for Laravel applications, which uses either a hash of the "app.asset_url" config value or the mix-manifest.json file.',
-          },
+              'The HandleInertiaRequests middleware provides a sensible default for Laravel applications, which uses either a hash of the "app.asset_url" configuration value or the mix-manifest.json file.',
+          }
+        ]}
+      />
+      <P>
+        Alternatively, the asset version can be provided manually using the <Code>Inertia::version()</Code> method.
+      </P>
+      <TabbedCode
+        examples={[
           {
-            name: 'Rails',
-            language: 'ruby',
+            name: 'Laravel',
+            language: 'php',
             code: dedent`
-              InertiaRails.configure do |config|
-                config.version = '1.0'
-              end\n
-              # You can also use lazy evaluation
-              InertiaRails.configure do |config|
-                config.version = lambda { InertiaRails::Version.last }
-              end
+              use Inertia\\Inertia;\n
+              Inertia::version($version);
+              Inertia::version(fn () => $version); // Lazily...
             `,
-          },
+          }
         ]}
       />
       <H2>Cache busting</H2>
