@@ -18,8 +18,8 @@ const Page = () => {
     <>
       <H1>Remembering state</H1>
       <P>
-        When navigating browser history, Inertia restores pages using prop data cached in history state. Inertia does
-        not, however, restore local page component state, since this is beyond its reach. This can lead to outdated
+        When navigating browser history, Inertia restores pages using prop data cached in history state. However, Inertia does
+        not restore local page component state since this is beyond its reach. This can lead to outdated
         pages in your browser history.
       </P>
       <P>
@@ -36,17 +36,17 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            description: 'Use the "remember" property.',
+            description: 'Use the "remember" property to tell Inertia which data it should remember.',
             language: 'js',
             code: dedent`
               {
-                // Option 1: Object
+                // Option 1: Object...
                 remember: {
                   data: ['form'],
                 },\n
-                // Option 2: Array
+                // Option 2: Array...
                 remember: ['form'],\n
-                // Option 3: String
+                // Option 3: String...
                 remember: 'form',\n
                 data() {
                   return {
@@ -62,7 +62,7 @@ const Page = () => {
           },
           {
             name: 'Vue 3',
-            description: 'Use the "useRemember" hook.',
+            description: 'Use the "useRemember" hook to tell Inertia which data it should remember.',
             language: 'js',
             code: dedent`
               import { useRemember } from '@inertiajs/inertia-vue3'\n
@@ -79,7 +79,7 @@ const Page = () => {
           },
           {
             name: 'React',
-            description: 'Use the "useRemember" hook.',
+            description: 'Use the "useRemember" hook to tell Inertia which data it should remember.',
             language: 'jsx',
             code: dedent`
               import { useRemember } from '@inertiajs/inertia-react'
@@ -96,7 +96,7 @@ const Page = () => {
           },
           {
             name: 'Svelte',
-            description: 'Use the "remember" store.',
+            description: 'Use the "remember" store to tell Inertia which data it should remember.',
             language: 'js',
             code: dedent`
               import { remember } from '@inertiajs/inertia-svelte'\n
@@ -111,12 +111,12 @@ const Page = () => {
       />
       <P>
         Now, whenever your local <Code>form</Code> state changes, Inertia will automatically save this data to the
-        history state, and restore it on history navigation.
+        history state and will also restore it on history navigation.
       </P>
       <H2>Multiple components</H2>
       <P>
-        If your page contains multiple components that use the remember functionality, you need to provide a unique key
-        for each component, so that Inertia knows which data to restore to each component.
+        If your page contains multiple components that use the remember functionality provided by Inertia, you need to provide a unique key
+        for each component so that Inertia knows which data to restore to each component.
       </P>
       <TabbedCode
         examples={[
@@ -189,7 +189,7 @@ const Page = () => {
       />
       <P>
         If you have multiple instances of the same component on the page using the remember functionality, be sure to
-        also include a unique key for each component instance.
+        also include a unique key for each component instance, such as a model identifier.
       </P>
       <TabbedCode
         examples={[
@@ -264,8 +264,8 @@ const Page = () => {
       />
       <H2>Form helper</H2>
       <P>
-        If you're using the <A href="/forms#form-helper">form helper</A>, you can pass a unique form key as the first
-        argument when instantiating your form, and this will cause the form data and errors to automatically be
+        If you're using the <A href="/forms#form-helper">Inertia form helper</A>, you can pass a unique form key as the first
+        argument when instantiating your form. This will cause the form data and errors to automatically be
         remembered.
       </P>
       <TabbedCode
@@ -309,8 +309,8 @@ const Page = () => {
       />
       <H2>Manually saving state</H2>
       <P>
-        The <Code>remember</Code> property in Vue 2, and the <Code>useRemember</Code> hook in Vue 3, React and Svelte
-        all watch for data changes, and automatically save those changes to the history state, and then restore it on
+        The <Code>remember</Code> property in Vue 2, and the <Code>useRemember</Code> hook in Vue 3, React, and Svelte
+        all watch for data changes and automatically save those changes to the history state. Then, Inertia will restore the data on
         page load.
       </P>
       <P>
@@ -321,9 +321,9 @@ const Page = () => {
         language="js"
         children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
-          // Save local component state to history state
+          // Save local component state to history state...
           Inertia.remember(data, 'my-key')\n
-          // Restore local component state from history state
+          // Restore local component state from history state...
           let data = Inertia.restore('my-key')
         `}
       />
