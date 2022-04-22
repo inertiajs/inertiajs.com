@@ -17,9 +17,8 @@ const Page = () => {
       <P>
         Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one
         page to another. To solve this, Inertia provides an optional{' '}
-        <A href="https://github.com/inertiajs/progress">progress</A> library, which shows a loading bar whenever you
-        make an Inertia visit. It's also possible to setup your own custom page loading indicators. This page explains
-        both approaches.
+        <A href="https://github.com/inertiajs/progress">progress</A> library that shows a loading bar whenever you
+        make an Inertia visit. It's also possible to setup your own custom page loading indicators. Let's explore both approaches.
       </P>
       <H2>Default</H2>
       <P>
@@ -27,7 +26,7 @@ const Page = () => {
         <A href="https://ricostacruz.com/nprogress/">NProgress</A>. This library shows, updates, and hides the NProgress
         loading bar by listening to Inertia page visit <A href="/events">events</A>.
       </P>
-      <P>To use it, start by installing it:</P>
+      <P>To get started, install the library.</P>
       <CodeBlock
         language="bash"
         children={dedent`
@@ -35,7 +34,7 @@ const Page = () => {
           yarn add @inertiajs/progress
         `}
       />
-      <P>Once it's been installed, initialize it in your app.</P>
+      <P>Once the library has been installed, you should initialize it in your app.</P>
       <CodeBlock
         language="js"
         children={dedent`
@@ -44,28 +43,27 @@ const Page = () => {
         `}
       />
       <P>
-        It also provides a number of customization options, which you pass to the <Code>init()</Code> method.
+        The Inertia progress library also provides a number of customization options which you pass to the <Code>init()</Code> method.
       </P>
       <CodeBlock
         language="js"
         children={dedent`
           InertiaProgress.init({
-            // The delay after which the progress bar will
-            // appear during navigation, in milliseconds.
+            // The delay after which the progress bar will appear during navigation, in milliseconds...
             delay: 250,\n
-            // The color of the progress bar.
+            // The color of the progress bar...
             color: '#29d',\n
-            // Whether to include the default NProgress styles.
+            // Whether to include the default NProgress styles...
             includeCSS: true,\n
-            // Whether the NProgress spinner will be shown.
+            // Whether the NProgress spinner will be shown...
             showSpinner: false,
           })
         `}
       />
       <H2>Custom</H2>
       <P>
-        It's also possible to setup your own custom page loading indicators, using Inertia <A href="/events">events</A>.
-        Here's how to do this, using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
+        It's also possible to setup your own custom page loading indicators using Inertia <A href="/events">events</A>.
+        Let's explore how to do this, using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
         example.
       </P>
       <P>First, install the NProgress library.</P>
@@ -77,9 +75,9 @@ const Page = () => {
         `}
       />
       <P>
-        You'll need to add the NProgress{' '}
+        You'll also need to add the NProgress{' '}
         <A href="https://github.com/rstacruz/nprogress/blob/master/nprogress.css">styles</A> to your project. You can do
-        this using the CDN version.
+        this using the CDN version of these assets.
       </P>
       <CodeBlock
         language="html"
@@ -117,18 +115,18 @@ const Page = () => {
         `}
       />
       <P>
-        That's it, you now have a working page loading indicator! As you navigate from one page to another, the progress
+        That's it! Now, as you navigate from one page to another, the progress
         bar will be added and removed from the page.
       </P>
       <H3>Handling cancelled visits</H3>
       <P>
-        While this implementation works great for visits that finish properly, it would be nice to handle cancelled
-        visits a little better. First, for interrupted visits (those that get cancelled as a result of a new visit) the
+        While this custom progress implementation works great for page visits that finish properly, it would be nice to handle cancelled
+        visits as well. First, for interrupted visits (those that get cancelled as a result of a new visit), the
         progress bar should simply be reset back to the start position. Second, for manually cancelled visits, the
         progress bar should be immediately removed from the page.
       </P>
       <P>
-        We can do this by inspecting the <Code>event.detail.visit</Code> object that's provided to the finish event.
+        We can accomplish this by inspecting the <Code>event.detail.visit</Code> object that's provided to the finish event.
       </P>
       <CodeBlock
         language="js"
@@ -145,10 +143,9 @@ const Page = () => {
           })
         `}
       />
-      <P>Much better!</P>
       <H3>File upload progress</H3>
       <P>
-        Let's take this a step further yet. When files are being uploaded, it would be great to update the loading
+        Let's take this a step further. When files are being uploaded, it would be great to update the loading
         indicator to reflect the upload progress. This can be done using the <Code>progress</Code> event.
       </P>
       <CodeBlock
@@ -169,7 +166,7 @@ const Page = () => {
       <H3>Loading indicator delay</H3>
       <P>
         The last thing we're going to implement is a loading indicator delay. It's often preferable to delay showing the
-        loading indicator until a request has taken longer than <Code>250ms</Code>-<Code>500ms</Code>. This prevents the
+        loading indicator until a request has taken longer than 250-500 milliseconds. This prevents the
         loading indicator from appearing constantly on quick page visits, which can be visually distracting.
       </P>
       <P>
@@ -184,7 +181,7 @@ const Page = () => {
       />
       <P>
         Next, let's update the <Code>start</Code> event listener to start a new timeout that will show the progress bar
-        after <Code>250ms</Code>.
+        after 250 milliseconds.
       </P>
       <CodeBlock
         language="js"
@@ -195,7 +192,7 @@ const Page = () => {
         `}
       />
       <P>
-        Next, we'll update the <Code>finish</Code> event listener to clear any existing timeouts, in the event that the
+        Next, we'll update the <Code>finish</Code> event listener to clear any existing timeouts in the event that the
         page visit finishes before the timeout does.
       </P>
       <CodeBlock
@@ -208,7 +205,7 @@ const Page = () => {
         `}
       />
       <P>
-        We also need to check in the <Code>finish</Code> event listener if the progress bar has actually started,
+        In the <Code>finish</Code> event listener, we need to determine if the progress bar has actually started displaying progress,
         otherwise we'll inadvertently cause it to show before the timeout has finished.
       </P>
       <CodeBlock
@@ -224,7 +221,7 @@ const Page = () => {
         `}
       />
       <P>
-        And finally, we need to do the same check in the <Code>progress</Code> event listener.
+        And, finally, we need to do the same check in the <Code>progress</Code> event listener.
       </P>
       <CodeBlock
         language="js"
@@ -239,7 +236,7 @@ const Page = () => {
       />
       <P>That's it, you now have a beautiful custom page loading indicator!</P>
       <H3>Complete example</H3>
-      <P>For your quick reference, here is the full source code of the final version.</P>
+      <P>For convenience, here is the full source code of the final version of our custom loading indicator.</P>
       <CodeBlock
         language="js"
         children={dedent`
