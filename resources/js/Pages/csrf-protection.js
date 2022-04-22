@@ -15,9 +15,13 @@ const Page = () => {
     <>
       <H1>CSRF protection</H1>
       <H2>Making requests</H2>
+      <Notice>
+        Laravel automatically includes the proper CSRF token when making requests via Inertia or Axios. However, if you're using Laravel, be sure to omit the <Code color="orange">csrf-token</Code> meta tag from your project,
+        as this will prevent the CSRF token from refreshing properly.
+      </Notice>
       <P>
-        If your web framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that each
-        Inertia requests includes the necessary token for <Code>POST</Code>, <Code>PUT</Code>, <Code>PATCH</Code> and{' '}
+        If your server-side framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that each
+        Inertia requests includes the necessary CSRF token for <Code>POST</Code>, <Code>PUT</Code>, <Code>PATCH</Code>, and{' '}
         <Code>DELETE</Code> requests.
       </P>
       <P>
@@ -35,7 +39,7 @@ const Page = () => {
         `}
       />
       <P>
-        You can even use the <A href="/shared-data">shared data</A> functionality to automatically include the{' '}
+        You can even use Inertia's <A href="/shared-data">shared data</A> functionality to automatically include the{' '}
         <Code>csrf_token</Code> with each response.
       </P>
       <P>
@@ -53,37 +57,34 @@ const Page = () => {
         requests from axios.
       </P>
       <P>
-        Some frameworks, such as{' '}
-        <A href="https://github.com/laravel/framework/blob/5.8/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php#L176-L188">
-          Laravel
-        </A>
-        , do this automatically, meaning there is no configuration required.
+        Of course, as already discussed, some server-side frameworks such as Laravel automatically handle the inclusion of the CSRF
+        token when making requests. Therefore, no additional configuration is required when using one of these frameworks.
       </P>
-      <Notice>
-        If you're using Laravel, be sure to omit the <Code color="orange">csrf-token</Code> meta tag from your project,
-        as this will prevent the CSRF token from refreshing properly.
-      </Notice>
       <H2>Handling mismatches</H2>
       <P>
-        When a CSRF token mismatch occurs, your web framework will likely throw an exception that results in an error
-        response. For example, in Laravel a <Code>TokenMismatchException</Code> is thrown, which results in a{' '}
+        When a CSRF token mismatch occurs, your server-side framework will likely throw an exception that results in an error
+        response. For example, when using Laravel, a <Code>TokenMismatchException</Code> is thrown which results in a{' '}
         <Code>419</Code> error page. Since that isn't a valid Inertia response, the error is shown in a modal.
       </P>
       <video controls>
         <source src="/mp4/csrf-mismatch-modal.mp4" type="video/mp4" />
       </video>
       <P>
-        But, this isn't a great user experience. A better way to handle these errors is to return a redirect back to the
-        previous page, along with a flash message that the page expired. This will result in a valid Inertia response,
-        with the flash message available as a prop, which you can then display to the user. Note, you'll need to share
-        your <A href="/shared-data#flash-messages">flash messages</A> with Inertia.js for this to work.
+        Obviously, this isn't a great user experience. A better way to handle these errors is to return a redirect back to the
+        previous page, along with a flash message that the page expired. This will result in a valid Inertia response
+        with the flash message available as a prop which you can then display to the user. Of course, you'll need to share
+        your <A href="/shared-data#flash-messages">flash messages</A> with Inertia for this to work.
+      </P>
+      <P>
+        When using Laravel, you may modify your application's exception handler to automatically redirect the user back
+        to the page they were previously on while flashing a message to the session. First, you will need to extend
+        your exception handler's <Code>render</Code> method.
       </P>
       <TabbedCode
         examples={[
           {
             name: 'Laravel',
             language: 'php',
-            description: 'Extend the render() method in your App\\Exceptions\\Handler.php.',
             code: dedent`
               use Throwable;
               use Inertia\\Inertia;\n
@@ -104,23 +105,12 @@ const Page = () => {
                   return $response;
               }
             `,
-          },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              class ApplicationController < ActionController::Base
-                rescue_from ActionController::InvalidAuthenticityToken do
-                  redirect_back fallback_location: '/', notice: 'The page expired, please try again.'
-                end
-              end
-            `,
-          },
+          }
         ]}
       />
       <P>
-        The end result is a much better experience for your users. Instead of seeing the error modal, they are instead
-        presented with a message that the "page expired", and are asked to try again.
+        The end result is a much better experience for your users. Instead of seeing the error modal, the user is instead
+        presented with a message that the page "expired" and are asked to try again.
       </P>
       <video controls>
         <source src="/mp4/csrf-mismatch-warning.mp4" type="video/mp4" />
