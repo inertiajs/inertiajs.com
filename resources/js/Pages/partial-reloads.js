@@ -16,24 +16,24 @@ const Page = () => {
     <>
       <H1>Partial reloads</H1>
       <P>
-        When making visits to the same page, it's not always necessary to fetch all of the data required for that page
-        from the server again. In fact, selecting only a subset of the data can be a helpful performance optimization if
-        it's acceptable that some page data becomes stale. This is possible to do in Inertia with the "partial reloads"
+        When making visits to the same page you are already on, it's not always necessary to re-fetch all of the data required for that page
+        from the server. In fact, selecting only a subset of the data can be a helpful performance optimization if
+        it's acceptable that some page data becomes stale. Inertia makes this possible via the "partial reload"
         feature.
       </P>
       <P>
-        As an example, consider a user index page that includes a list of users, as well as an option to filter the
-        users by their company. On the first request to the user index page both the <Code>users</Code> and{' '}
-        <Code>companies</Code> data is passed to the page component. However, on subsequent visits to the same page
-        (maybe to filter the users), you can request only the <Code>users</Code> data from the server, and not the{' '}
+        As an example, consider a "user index" page that includes a list of users, as well as an option to filter the
+        users by their company. On the first request to the page, both the <Code>users</Code> and{' '}
+        <Code>companies</Code> props are passed to the page component. However, on subsequent visits to the same page
+        (maybe to filter the users), you can request only the <Code>users</Code> data from the server without requesting the{' '}
         <Code>companies</Code> data. Inertia will then automatically merge the partial data returned from the server
         with the data it already has in memory client-side.
       </P>
       <Notice>Partial reloads only work for visits made to the same page component.</Notice>
       <H2>Making partial visits</H2>
       <P>
-        To perform a partial reload, use the <Code>only</Code> property to set which data you want returned from the
-        server. This takes an array of keys, which corresponds to the keys of the props.
+        To perform a partial reload, use the <Code>only</Code> property to specify which data the server should return. This option should be
+        an array of keys which correspond to the keys of the props.
       </P>
       <CodeBlock
         language="js"
@@ -45,7 +45,7 @@ const Page = () => {
         `}
       />
       <P>
-        Since partial reloads can only be made to the same page component, it almost always makes sense to just use the{' '}
+        Since partial reloads can only be made to the same page component the user is already on, it almost always makes sense to just use the{' '}
         <Code>Inertia.reload()</Code> method, which automatically uses the current URL.
       </P>
       <CodeBlock
@@ -97,12 +97,12 @@ const Page = () => {
       />
       <H2>Lazy data evaluation</H2>
       <P>
-        For partial reloads to be most effective, be sure to also use lazy data evaluation server-side. This is done by
+        For partial reloads to be most effective, be sure to also use lazy data evaluation when returning props from your server-side routes or controllers. This can be accomplished by
         wrapping all optional page data in a closure.
       </P>
       <P>
-        When Inertia performs a visit, it will determine which data is required, and only then will it evaluate the
-        closure. This can significantly increase the performance of pages with a lot of optional data.
+        When Inertia performs a request, it will determine which data is required and only then will it evaluate the
+        closure. This can significantly increase the performance of pages that contain a lot of optional data.
       </P>
       <TabbedCode
         examples={[
@@ -110,44 +110,20 @@ const Page = () => {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              return Inertia::render('Users/Index', [\n
-                  // ALWAYS included on first visit
-                  // OPTIONALLY included on partial reloads
-                  // ALWAYS evaluated
+              return Inertia::render('Users/Index', [
+                  // ALWAYS included on first visit...
+                  // OPTIONALLY included on partial reloads...
+                  // ALWAYS evaluated...
                   'users' => User::get(),\n
-                  // ALWAYS included on first visit
-                  // OPTIONALLY included on partial reloads
-                  // ONLY evaluated when needed
+                  // ALWAYS included on first visit...
+                  // OPTIONALLY included on partial reloads...
+                  // ONLY evaluated when needed...
                   'users' => fn () => User::get(),\n
-                  // NEVER included on first visit
-                  // OPTIONALLY included on partial reloads
-                  // ONLY evaluated when needed
+                  // NEVER included on first visit...
+                  // OPTIONALLY included on partial reloads...
+                  // ONLY evaluated when needed...
                   'users' => Inertia::lazy(fn () => User::get()),
               ]);
-            `,
-          },
-          {
-            name: 'Rails',
-            language: 'ruby',
-            code: dedent`
-              class UsersController < ApplicationController
-                def index
-                  render inertia: 'Users/Index', props: {\n
-                    # ALWAYS included on first visit
-                    # OPTIONALLY included on partial reloads
-                    # ALWAYS evaluated
-                    users: User.as_json()\n
-                    # ALWAYS included on first visit
-                    # OPTIONALLY included on partial reloads
-                    # ONLY evaluated when needed
-                    users: -> { User.as_json() },\n
-                    # NEVER included on first visit
-                    # OPTIONALLY included on partial reloads
-                    # ONLY evaluated when needed
-                    users: InertiaRails.lazy(-> { User.as_json }),
-                  }
-                end
-              end
             `,
           },
         ]}
