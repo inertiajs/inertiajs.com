@@ -1,6 +1,6 @@
 import React from 'react'
 import dedent from 'dedent-js'
-import { A, CodeBlock, H1, H2, Layout, Notice, P } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Layout, Notice, P } from '@/Components'
 
 const meta = {
   title: 'Testing',
@@ -16,17 +16,17 @@ const Page = () => {
     <>
       <H1>Testing</H1>
       <P>
-        There are many different ways to test an Inertia.js app. This page provides a quick overview of the tools
+        There are many different ways to test an Inertia.js application. This page provides a quick overview of the tools
         available.
       </P>
       <H2>End-to-end tests</H2>
       <P>
-        One popular approach to testing your JavaScript page components, is to use an end-to-end testing tool like{' '}
+        One popular approach to testing your JavaScript page components is to use an end-to-end testing tool like{' '}
         <A href="https://www.cypress.io/">Cypress</A> or <A href="https://laravel.com/docs/8.x/dusk">Laravel Dusk</A>.
         These are browser automation tools that allow you to run real simulations of your app in the browser. These
-        tests are known to be slower, and sometimes brittle, but since they test your application at the same layer as
+        tests are known to be slower and sometimes brittle. However, since they test your application at the same layer as
         your end users, they can provide a lot of confidence that your app is working correctly. And, since these tests
-        are run in the browser your JavaScript code is actually executed and tested as well.
+        are run in the browser, your JavaScript code is actually executed and tested as well.
       </P>
       <H2>Client-side unit tests</H2>
       <P>
@@ -36,14 +36,12 @@ const Page = () => {
       </P>
       <H2>Endpoint tests</H2>
       <P>
-        In addition to testing your JavaScript page components, you'll also want to test the Inertia responses that come
-        back from your server-side framework. A popular approach to doing this is using endpoint tests, where you make
-        requests to your application and examine the responses. Frameworks, such as Laravel (
-        <A href="https://laravel.com/docs/8.x/http-tests">see here</A>), provide tooling for this.
+        In addition to testing your JavaScript page components, you will likely want to also test the Inertia responses that are
+        returned by your server-side framework. A popular approach to doing this is using endpoint tests, where you make
+        requests to your application and examine the responses. Laravel <A href="https://laravel.com/docs/http-tests">provides tooling</A> for executing these types of tests.
       </P>
       <P>
-        However, to make this process even easier, in our Laravel adapter we've provided additional HTTP testing tools.
-        Here's an example:
+        However, to make this process even easier, Inertia's Laravel adapter provides additional HTTP testing tools. Let's take a look at an example.
       </P>
       <CodeBlock
         language="php"
@@ -81,16 +79,132 @@ const Page = () => {
           }
         `}
       />
-      <Notice>
-        Note, until we're able to add the documentation for these testing helpers to this website, please see the{' '}
-        <A
-          href="https://github.com/claudiodekker/inertia-laravel-testing/tree/a5ac8d372e456534f5ad2e07a6875e0f27c6a73d"
-          color="orange"
-        >
-          old docs
-        </A>
-        .
-      </Notice>
+      <P>
+        As you can see in the example above, you may use these assertion methods to assert against the content of the data provided to the Inertia response. In addition, you
+        may assert that array data has a given length as well as scope your assertions.
+      </P>
+      <P>
+        To assert that the Inertia response has a property, you may use the <Code>has</Code> method. You can think of this method as being similar to PHP's <Code>isset</Code> function.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              // Checking a root-level property...
+              ->has('podcast')
+
+              // Checking nested properties using "dot" notation...
+              ->has('podcast.id')
+          );
+        `}
+      />
+      <P>
+        To assert that an Inertia property has a specified amount of items, you may provide the expected size as the second argument to the <Code>has</Code> method:
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              // Checking if a root-level property has 7 items...
+              ->has('podcasts', 7)
+
+              // Checking nested properties using "dot" notation...
+              ->has('podcast.subscribers', 7)
+          );
+        `}
+      />
+      <P>
+        The <Code>has</Code> method may also be used to scope properties in order to lessen repetition when asserting against
+        nested properties.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              // Creating a single-level property scope...
+              ->has('message', fn (Assert $page) => $page
+                  // We can now continue chaining methods...
+                  ->has('subject')
+                  ->has('comments', 5)
+
+                  // And can even create a deeper scope using "dot" notation...
+                  ->has('comments.0', fn (Assert $page) => $page
+                      ->has('body')
+                      ->has('files', 1)
+                      ->has('files.0', fn (Assert $page) => $page
+                          ->has('url')
+                      )
+                  )
+              )
+          );
+        `}
+      />
+      <P>
+        When scoping into Inertia properties that are arrays or collections, you may also assert that a specified
+        number of items are present in addition to scoping into the first item.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              // Assert that there are 5 comments and automatically scope into the first comment...
+              ->has('comments', 5, fn (Assert $page) => $page
+                  ->has('body')
+                  // ...
+              )
+          );
+        `}
+      />
+      <P>
+        To assert that an Inertia property has an expected value, you may use the <Code>where</Code> assertion.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              ->has('message', fn (Assert $page) => $page
+                  // Assert that the subject prop matches the given message...
+                  ->where('subject', 'This is an example message')
+
+                  // Or, assert against deeply nested values...
+                  ->where('comments.0.files.0.name', 'example-attachment.pdf')
+              )
+          );
+        `}
+      />
+      <P>
+        Inertia's testing methods will automatically fail your test when you haven't interacted with at least one of
+        the props in a scope. While this is generally useful, you might run into situations where you're working
+        with unreliable data (such as from an external feed), or with data that you really don't want interact with in order
+        to keep your test simple. For these situations, the <Code>etc</Code> method exists.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              ->has('message', fn (Assert $page) => $page
+                  ->has('subject')
+                  ->has('comments')
+                  ->etc()
+              )
+          );
+        `}
+      />
+      <P>
+        The <Code>missing</Code> method is the exact opposite of the <Code>has</Code> method, ensuring that the property does not exist. This method makes a great companion to the <Code>etc</Code> method.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              ->has('message', fn (Assert $page) => $page
+                  ->has('subject')
+                  ->missing('published_at')
+                  ->etc()
+              )
+          );
+        `}
+      />
     </>
   )
 }
