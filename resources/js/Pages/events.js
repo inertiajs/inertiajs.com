@@ -42,7 +42,7 @@ const Page = () => {
         `}
       />
       <P>
-        Under the hood Inertia uses native browser events, so you can also work with them that way as well. Just be sure
+        Under the hood, Inertia uses native browser events, so you can also interact with Inertia events using the typical event methods you may already be familiar with - just be sure
         to append <Code>inertia:</Code> to the event name.
       </P>
       <CodeBlock
@@ -55,7 +55,7 @@ const Page = () => {
       />
       <H2>Removing listeners</H2>
       <P>
-        When you register an event listener, Inertia automatically returns you a callback to remove the event listener.
+        When you register an event listener, Inertia automatically returns a callback that can be invoked to remove the event listener.
       </P>
       <CodeBlock
         language="js"
@@ -63,11 +63,11 @@ const Page = () => {
           let removeStartEventListener = Inertia.on('start', (event) => {
             console.log(\`Starting a visit to \${event.detail.visit.url}\`)
           })\n
-          // Remove the listener
+          // Remove the listener...
           removeStartEventListener()
         `}
       />
-      <P>Combined with hooks, you can automatically remove the event listener on component unmount.</P>
+      <P>Combined with hooks, you can automatically remove the event listener when components unmount.</P>
       <TabbedCode
         examples={[
           {
@@ -142,15 +142,15 @@ const Page = () => {
             console.log(\`Starting a visit to \${event.detail.visit.url}\`)
           }\n
           document.addEventListener('inertia:start', startEventListener)\n
-          // Remove the listener
+          // Remove the listener...
           document.removeEventListener('inertia:start', startEventListener)
         `}
       />
       <H2>Cancelling events</H2>
       <P>
-        Some events (<Code>before</Code>, <Code>invalid</Code>, <Code>error</Code>) support cancellation, allowing you
-        to prevent Inertia's default behaviour. Just like native events, if only one event listener calls{' '}
-        <Code>event.preventDefault()</Code>, the event will be cancelled.
+        Some events, such as <Code>before</Code>, <Code>invalid</Code>, and <Code>error</Code>, support cancellation, allowing you
+        to prevent Inertia's default behaviour. Just like native events, the event will be cancelled if only one event listener calls{' '}
+        <Code>event.preventDefault()</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -164,7 +164,7 @@ const Page = () => {
         `}
       />
       <P>
-        As a convenience, if you register your event listener using <Code>Inertia.on()</Code>, you can also cancel the
+        For convenience, if you register your event listener using <Code>Inertia.on()</Code>, you can also cancel the
         event by returning <Code>false</Code> from the listener.
       </P>
       <CodeBlock
@@ -235,7 +235,7 @@ const Page = () => {
       </P>
       <H2>Success</H2>
       <P>
-        The <Code>success</Code> event fires on successful page visits, unless validation errors are present. Note, this
+        The <Code>success</Code> event fires on successful page visits, unless validation errors are present. However, this
         does <em>not</em> include history visits.
       </P>
       <CodeBlock
@@ -269,7 +269,7 @@ const Page = () => {
       <H2>Invalid</H2>
       <P>
         The <Code>invalid</Code> event fires when a non-Inertia response is received from the server, such as an{' '}
-        <Code>html</Code> or <Code>json</Code> response. A valid Inertia response is one that has the{' '}
+        <Code>html</Code> or <Code>json</Code> response. A valid Inertia response is a response that has the{' '}
         <Code>X-Inertia</Code> header set to <Code>true</Code> with a <Code>json</Code> payload containing{' '}
         <A href="/the-protocol#the-page-object">the page object</A>.
       </P>
@@ -295,14 +295,14 @@ const Page = () => {
         children={dedent`
           import { Inertia } from '@inertiajs/inertia'\n
           Inertia.on('invalid', (event) => {
-            event.preventDefault()
-            // Handle the invalid response yourself
+            event.preventDefault()\n
+            // Handle the invalid response yourself...
           })
         `}
       />
       <H2>Exception</H2>
       <P>
-        The <Code>exception</Code> event fires on unexpected XHR errors, such as network interruptions, and for errors
+        The <Code>exception</Code> event fires on unexpected XHR errors such as network interruptions. In addition, this event fires for errors
         generated when resolving page components.
       </P>
       <CodeBlock
@@ -316,7 +316,7 @@ const Page = () => {
         `}
       />
       <P>
-        Cancel the <Code>exception</Code> event to prevent the error from being thrown.
+        You may cancel the <Code>exception</Code> event to prevent the error from being thrown.
       </P>
       <CodeBlock
         language="js"
@@ -329,13 +329,13 @@ const Page = () => {
         `}
       />
       <P>
-        Note, this event will <em>not</em> fire for XHR requests that receive <Code>400</Code> and <Code>500</Code>{' '}
-        level responses, or for non-Inertia responses, as these situations are handled in other ways by Inertia. See the{' '}
-        <A href="/error-handling">error handling</A> page for more information.
+        This event will <em>not</em> fire for XHR requests that receive <Code>400</Code> and <Code>500</Code>{' '}
+        level responses or for non-Inertia responses, as these situations are handled in other ways by Inertia. Please consult the{' '}
+        <A href="/error-handling">error handling documentation</A> for more information.
       </P>
       <H2>Finish</H2>
       <P>
-        The <Code>finish</Code> event fires after an XHR request has completed for both successful and unsuccessful
+        The <Code>finish</Code> event fires after an XHR request has completed for both "successful" and "unsuccessful"
         responses. This event is useful for hiding loading indicators.
       </P>
       <CodeBlock
@@ -353,7 +353,6 @@ const Page = () => {
       <H2>Navigate</H2>
       <P>
         The <Code>navigate</Code> event fires on successful page visits, as well as when navigating through history.
-        This event is useful for tracking analytics and things of that nature.
       </P>
       <CodeBlock
         language="js"
@@ -369,8 +368,8 @@ const Page = () => {
       </P>
       <H2>Event callbacks</H2>
       <P>
-        In addition to the global events, Inertia also provides a number of{' '}
-        <A href="/manual-visits#event-callbacks">event callbacks</A> when manually making Inertia visits.
+        In addition to the global events described throughout this page, Inertia also provides a number of{' '}
+        <A href="/manual-visits#event-callbacks">event callbacks</A> that fire when manually making Inertia visits.
       </P>
     </>
   )
