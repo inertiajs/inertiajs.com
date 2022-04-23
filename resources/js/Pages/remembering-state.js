@@ -18,8 +18,8 @@ const Page = () => {
     <>
       <H1>Remembering state</H1>
       <P>
-        When navigating browser history, Inertia restores pages using prop data cached in history state. However, Inertia does
-        not restore local page component state since this is beyond its reach. This can lead to outdated
+        When navigating browser history, Inertia restores pages using prop data cached in history state. However,
+        Inertia does not restore local page component state since this is beyond its reach. This can lead to outdated
         pages in your browser history.
       </P>
       <P>
@@ -115,8 +115,8 @@ const Page = () => {
       </P>
       <H2>Multiple components</H2>
       <P>
-        If your page contains multiple components that use the remember functionality provided by Inertia, you need to provide a unique key
-        for each component so that Inertia knows which data to restore to each component.
+        If your page contains multiple components that use the remember functionality provided by Inertia, you need to
+        provide a unique key for each component so that Inertia knows which data to restore to each component.
       </P>
       <TabbedCode
         examples={[
@@ -264,8 +264,8 @@ const Page = () => {
       />
       <H2>Form helper</H2>
       <P>
-        If you're using the <A href="/forms#form-helper">Inertia form helper</A>, you can pass a unique form key as the first
-        argument when instantiating your form. This will cause the form data and errors to automatically be
+        If you're using the <A href="/forms#form-helper">Inertia form helper</A>, you can pass a unique form key as the
+        first argument when instantiating your form. This will cause the form data and errors to automatically be
         remembered.
       </P>
       <TabbedCode
@@ -310,8 +310,8 @@ const Page = () => {
       <H2>Manually saving state</H2>
       <P>
         The <Code>remember</Code> property in Vue 2, and the <Code>useRemember</Code> hook in Vue 3, React, and Svelte
-        all watch for data changes and automatically save those changes to the history state. Then, Inertia will restore the data on
-        page load.
+        all watch for data changes and automatically save those changes to the history state. Then, Inertia will restore
+        the data on page load.
       </P>
       <P>
         However, it's possible to also manage this manually using the underlying <Code>remember()</Code> and{' '}

@@ -25,19 +25,18 @@ const Page = () => {
       </P>
       <P>
         Inertia is fine-tuned for Laravel, so the documentation examples on this website utilize Laravel. For examples
-        of using Inertia with other server-side frameworks, please refer to the framework specific documentation maintained
-        by that adapter.
+        of using Inertia with other server-side frameworks, please refer to the framework specific documentation
+        maintained by that adapter.
       </P>
       <H2>Laravel starter kits</H2>
       <P>
-        Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Breeze and Jetstream, provide out-of-the-box scaffolding
-        for new Inertia applications. These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React.
-        However, if you would like to manually install Inertia into your application, please consult the documentation below.
+        Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Breeze and Jetstream, provide
+        out-of-the-box scaffolding for new Inertia applications. These starter kits are the absolute fastest way to
+        start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually
+        install Inertia into your application, please consult the documentation below.
       </P>
       <H2>Install dependencies</H2>
-      <P>
-        First, install the Inertia server-side adapter using the Composer package manager.
-      </P>
+      <P>First, install the Inertia server-side adapter using the Composer package manager.</P>
       <TabbedCode
         examples={[
           {
@@ -51,9 +50,9 @@ const Page = () => {
       />
       <H2>Root template</H2>
       <P>
-        Next, setup the root template that will be loaded on the first page visit to your application. This will be used to
-        load your site assets (CSS and JavaScript), and will also contain a root <Code>{'<div>'}</Code> in which to boot your JavaScript
-        application.
+        Next, setup the root template that will be loaded on the first page visit to your application. This will be used
+        to load your site assets (CSS and JavaScript), and will also contain a root <Code>{'<div>'}</Code> in which to
+        boot your JavaScript application.
       </P>
       <TabbedCode
         examples={[
@@ -79,14 +78,15 @@ const Page = () => {
         ]}
       />
       <P>
-        By default, Inertia's Laravel adapter will assume your root template is named <Code>app.blade.php</Code>. This template
-        should include your assets, as well as the <Code>@inertia</Code> directive. If you would like to use a different root
-        view, you can change it using the <Code>Inertia::setRootView()</Code> method.
+        By default, Inertia's Laravel adapter will assume your root template is named <Code>app.blade.php</Code>. This
+        template should include your assets, as well as the <Code>@inertia</Code> directive. If you would like to use a
+        different root view, you can change it using the <Code>Inertia::setRootView()</Code> method.
       </P>
       <H2>Middleware</H2>
       <P>
-        Next we need to setup the Inertia middleware. You can accomplish this by publishing the <Code>HandleInertiaRequests</Code> middleware to your application, which can be
-        done using the following Artisan command.
+        Next we need to setup the Inertia middleware. You can accomplish this by publishing the{' '}
+        <Code>HandleInertiaRequests</Code> middleware to your application, which can be done using the following Artisan
+        command.
       </P>
       <CodeBlock
         language="sh"
@@ -95,8 +95,8 @@ const Page = () => {
         `}
       />
       <P>
-        Once the middleware has been published, register the <Code>HandleInertiaRequests</Code> middleware in your <Code>App\Http\Kernel</Code> as
-        the <u>last item</u> in your <Code>web</Code> middleware group.
+        Once the middleware has been published, register the <Code>HandleInertiaRequests</Code> middleware in your{' '}
+        <Code>App\Http\Kernel</Code> as the <u>last item</u> in your <Code>web</Code> middleware group.
       </P>
       <CodeBlock
         language="php"
@@ -114,8 +114,8 @@ const Page = () => {
       </P>
       <H2>Creating responses</H2>
       <P>
-        That's it, you're all ready to go server-side! Now you're ready to start creating
-        Inertia <A href="/pages">pages</A> and rendering them via <A href="/responses">responses</A>.
+        That's it, you're all ready to go server-side! Now you're ready to start creating Inertia{' '}
+        <A href="/pages">pages</A> and rendering them via <A href="/responses">responses</A>.
       </P>
       <TabbedCode
         examples={[

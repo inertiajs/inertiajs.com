@@ -17,13 +17,13 @@ const Page = () => {
       <H1>File uploads</H1>
       <H2>FormData conversion</H2>
       <P>
-        When making Inertia requests that include files (even nested files), Inertia will automatically convert the request data
-        into a <Code>FormData</Code> object. This conversation is necessary in order to submit a{' '}
+        When making Inertia requests that include files (even nested files), Inertia will automatically convert the
+        request data into a <Code>FormData</Code> object. This conversation is necessary in order to submit a{' '}
         <Code>multipart/form-data</Code> request via XHR.
       </P>
       <P>
-        If you would like the request to always use a <Code>FormData</Code> object regardless of whether a file is present in the data, you may provide the{' '}
-        <Code>forceFormData</Code> option when making the request.
+        If you would like the request to always use a <Code>FormData</Code> object regardless of whether a file is
+        present in the data, you may provide the <Code>forceFormData</Code> option when making the request.
       </P>
       <CodeBlock
         language="js"
@@ -38,13 +38,14 @@ const Page = () => {
         <A href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">MDN documentation</A>.
       </P>
       <Notice>
-        Prior to <a href="/releases/inertia-0.8.0">version 0.8.0</a>, Inertia did not automatically convert
-        requests to <Code color="orange">FormData</Code>. If you're using an Inertia release prior to this version, you will need to manually perform this conversion.
+        Prior to <a href="/releases/inertia-0.8.0">version 0.8.0</a>, Inertia did not automatically convert requests to{' '}
+        <Code color="orange">FormData</Code>. If you're using an Inertia release prior to this version, you will need to
+        manually perform this conversion.
       </Notice>
       <H2>File upload example</H2>
       <P>
-        Let's examine a complete file upload example using Inertia. This example includes both a <Code>name</Code>{' '}
-        text input and an <Code>avatar</Code> file input.
+        Let's examine a complete file upload example using Inertia. This example includes both a <Code>name</Code> text
+        input and an <Code>avatar</Code> file input.
       </P>
       <TabbedCode
         examples={[
@@ -169,17 +170,19 @@ const Page = () => {
         ]}
       />
       <P>
-        This example uses the <A href="/forms#form-helper">Inertia form helper</A> for convenience, since the form helper provides easy access to the current upload
-        progress. However, you are free to submit your forms using <A href="/manual-visits">manual Inertia visits</A> as well.
+        This example uses the <A href="/forms#form-helper">Inertia form helper</A> for convenience, since the form
+        helper provides easy access to the current upload progress. However, you are free to submit your forms using{' '}
+        <A href="/manual-visits">manual Inertia visits</A> as well.
       </P>
       <H2>Multipart limitations</H2>
       <P>
         Uploading files using a <Code>multipart/form-data</Code> request is not natively supported in some languages for
-        the <Code>PUT</Code>,<Code>PATCH</Code>, or <Code>DELETE</Code> methods. The simplest workaround for this limitation is to simply upload
-        files using a <Code>POST</Code> request instead.
+        the <Code>PUT</Code>,<Code>PATCH</Code>, or <Code>DELETE</Code> methods. The simplest workaround for this
+        limitation is to simply upload files using a <Code>POST</Code> request instead.
       </P>
       <P>
-        However, some frameworks, such as <a href="https://laravel.com/docs/8.x/routing#form-method-spoofing">Laravel</a> and{' '}
+        However, some frameworks, such as{' '}
+        <a href="https://laravel.com/docs/8.x/routing#form-method-spoofing">Laravel</a> and{' '}
         <a href="https://guides.rubyonrails.org/form_helpers.html#how-do-forms-with-patch-put-or-delete-methods-work-questionmark">
           Rails
         </a>

@@ -16,19 +16,19 @@ const Page = () => {
     <>
       <H1>Asset versioning</H1>
       <P>
-        One common challenge when building single-page apps is refreshing site assets when they've been changed. Thankfully, Inertia makes
-        this easy by optionally tracking the current version of your site assets. When an asset changes,
-        Inertia will automatically make a hard page visit instead of a XHR visit on the next request.
+        One common challenge when building single-page apps is refreshing site assets when they've been changed.
+        Thankfully, Inertia makes this easy by optionally tracking the current version of your site assets. When an
+        asset changes, Inertia will automatically make a hard page visit instead of a XHR visit on the next request.
       </P>
       <H2>Configuration</H2>
       <P>
-        To enable automatic asset refreshing, you need to tell Inertia the current version of your assets. This can
-        be any arbitrary string (letters, numbers, or a file hash), as long as it changes when your
-        assets have been updated.
+        To enable automatic asset refreshing, you need to tell Inertia the current version of your assets. This can be
+        any arbitrary string (letters, numbers, or a file hash), as long as it changes when your assets have been
+        updated.
       </P>
       <P>
-        Typically, your application's asset version can be specifed within the <Code>version</Code> method of
-        the Inertia <Code>HandleInertiaRequests</Code> middleware.
+        Typically, your application's asset version can be specified within the <Code>version</Code> method of the
+        Inertia <Code>HandleInertiaRequests</Code> middleware.
       </P>
       <TabbedCode
         examples={[
@@ -46,7 +46,7 @@ const Page = () => {
             `,
             description:
               'The HandleInertiaRequests middleware provides a sensible default for Laravel applications, which uses either a hash of the "app.asset_url" configuration value or the mix-manifest.json file.',
-          }
+          },
         ]}
       />
       <P>
@@ -62,7 +62,7 @@ const Page = () => {
               Inertia::version($version);
               Inertia::version(fn () => $version); // Lazily...
             `,
-          }
+          },
         ]}
       />
       <H2>Cache busting</H2>

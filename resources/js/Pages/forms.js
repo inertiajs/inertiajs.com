@@ -19,8 +19,9 @@ const Page = () => {
       <H1>Forms</H1>
       <H2>Submitting forms</H2>
       <P>
-        While it's possible to make classic HTML form submissions with Inertia, it's not recommended since they cause full-page
-        reloads. Instead, it's better to intercept form submissions and then make the <A href="/manual-visits">request using Inertia</A>.
+        While it's possible to make classic HTML form submissions with Inertia, it's not recommended since they cause
+        full-page reloads. Instead, it's better to intercept form submissions and then make the{' '}
+        <A href="/manual-visits">request using Inertia</A>.
       </P>
       <TabbedCode
         examples={[
@@ -160,12 +161,14 @@ const Page = () => {
         ]}
       />
       <P>
-        As you may have noticed in the example above, when using Inertia, you don't typically need inspect form responses client-side like you would when making XHR / fetch requests manually.
+        As you may have noticed in the example above, when using Inertia, you don't typically need inspect form
+        responses client-side like you would when making XHR / fetch requests manually.
       </P>
       <P>
-        Instead, your server-side route / controller typically issues a <A href="/redirects">redirect</A> response. And, of course, there is nothing
-        stopping you from redirecting the user right back to the page they were previously on. In this way, handling Inertia form submissions server-side
-        feels very similar to handling classic HTML form submissions.
+        Instead, your server-side route / controller typically issues a <A href="/redirects">redirect</A> response. And,
+        of course, there is nothing stopping you from redirecting the user right back to the page they were previously
+        on. In this way, handling Inertia form submissions server-side feels very similar to handling classic HTML form
+        submissions.
       </P>
       <TabbedCode
         examples={[
@@ -197,16 +200,18 @@ const Page = () => {
       />
       <H2>Server-side validation</H2>
       <P>
-        Handling server-side validation errors in Inertia works a little different than handling errors from manual XHR / fetch requests.
-        When making XHR / fetch requests, you typically inspect the response for a <Code>422</Code> status code and manually update the form's error
-        state.
+        Handling server-side validation errors in Inertia works a little different than handling errors from manual XHR
+        / fetch requests. When making XHR / fetch requests, you typically inspect the response for a <Code>422</Code>{' '}
+        status code and manually update the form's error state.
       </P>
       <P>
-        However, when using Inertia, a <Code>422</Code> response is never returned by your server. Instead, as we saw in the example above, your routes / controllers
-        will typically return a redirect response - much like a classic, full-page form submission.
+        However, when using Inertia, a <Code>422</Code> response is never returned by your server. Instead, as we saw in
+        the example above, your routes / controllers will typically return a redirect response - much like a classic,
+        full-page form submission.
       </P>
       <P>
-        For a full discussion on handling and displaying validation errors with Inertia, please consult the <A href="/validation">validation</A> documentation.
+        For a full discussion on handling and displaying validation errors with Inertia, please consult the{' '}
+        <A href="/validation">validation</A> documentation.
       </P>
       <H2>Form helper</H2>
       <P>
@@ -340,8 +345,8 @@ const Page = () => {
         ]}
       />
       <P>
-        To submit the form, you may use the <Code>get</Code>, <Code>post</Code>, <Code>put</Code>, <Code>patch</Code> and{' '}
-        <Code>delete</Code> methods.
+        To submit the form, you may use the <Code>get</Code>, <Code>post</Code>, <Code>put</Code>, <Code>patch</Code>{' '}
+        and <Code>delete</Code> methods.
       </P>
       <TabbedCode
         examples={[
@@ -399,8 +404,8 @@ const Page = () => {
       <P>
         The submit methods support all of the typical <A href="/manual-visits">visit options</A>, such as{' '}
         <Code>preserveState</Code>, <Code>preserveScroll</Code>, and event callbacks, which can be helpful for
-        performing tasks on successful form submissions. For example, you might use the <Code>onSuccess</Code> callback to
-        reset inputs to their original state.
+        performing tasks on successful form submissions. For example, you might use the <Code>onSuccess</Code> callback
+        to reset inputs to their original state.
       </P>
       <TabbedCode
         examples={[
@@ -540,8 +545,8 @@ const Page = () => {
         ]}
       />
       <P>
-        If your form is uploading files, the current progress event is available via the <Code>progress</Code>{' '}
-        property, allowing you to easily display the upload progress.
+        If your form is uploading files, the current progress event is available via the <Code>progress</Code> property,
+        allowing you to easily display the upload progress.
       </P>
       <TabbedCode
         examples={[
@@ -590,8 +595,8 @@ const Page = () => {
       />
       <P>
         In the event there are form errors, they are available via the <Code>errors</Code> property. When building
-        Laravel powered Inertia applications, form errors will automatically be populated when your application
-        throws instances of <Code>ValidationException</Code>, such as when using <Code>$request->validate()</Code>.
+        Laravel powered Inertia applications, form errors will automatically be populated when your application throws
+        instances of <Code>ValidationException</Code>, such as when using <Code>$request->validate()</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -629,11 +634,12 @@ const Page = () => {
         ]}
       />
       <Notice>
-        For a more thorough discussion of form validation and errors, please consult the <A href="/validation">validation documentation</A>.
+        For a more thorough discussion of form validation and errors, please consult the{' '}
+        <A href="/validation">validation documentation</A>.
       </Notice>
       <P>
-        To determine if a form has any errors, you may use the <Code>hasErrors</Code> property. To clear form errors, use the{' '}
-        <Code>clearErrors()</Code> method.
+        To determine if a form has any errors, you may use the <Code>hasErrors</Code> property. To clear form errors,
+        use the <Code>clearErrors()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -681,8 +687,8 @@ const Page = () => {
         ]}
       />
       <P>
-        If you're using a client-side input validation libraries or do additional manual validation, you can also
-        set your own errors on the form using the <Code>setErrors()</Code> method.
+        If you're using a client-side input validation libraries or do additional manual validation, you can also set
+        your own errors on the form using the <Code>setErrors()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -741,12 +747,15 @@ const Page = () => {
           },
         ]}
       />
-      <Notice>Unlike an actual form submission, the page's props remain unchanged when manually setting errors on a form instance.</Notice>
+      <Notice>
+        Unlike an actual form submission, the page's props remain unchanged when manually setting errors on a form
+        instance.
+      </Notice>
       <P>
         When a form has been successfully submitted, the <Code>wasSuccessful</Code> property will be <Code>true</Code>.
         In addition to this, forms have a <Code>recentlySuccessful</Code> property, which will be set to{' '}
-        <Code>true</Code> for two seconds after a successful form submission. This property can be utilized to show temporary
-        success messages.
+        <Code>true</Code> for two seconds after a successful form submission. This property can be utilized to show
+        temporary success messages.
       </P>
       <P>
         To reset the form's values back to their default values, you can use the <Code>reset()</Code> method.
@@ -939,8 +948,8 @@ const Page = () => {
         ]}
       />
       <P>
-        To instruct Inertia to store a form's data and errors in <A href="/remembering-state">history state</A>,
-        you can provide a unique form key as the first argument when instantiating your form.
+        To instruct Inertia to store a form's data and errors in <A href="/remembering-state">history state</A>, you can
+        provide a unique form key as the first argument when instantiating your form.
       </P>
       <TabbedCode
         examples={[
@@ -983,17 +992,18 @@ const Page = () => {
       />
       <H2>File uploads</H2>
       <P>
-        When making requests or form submissions that include files, Inertia will automatically convert the request data into a{' '}
-        <Code>FormData</Code> object.
+        When making requests or form submissions that include files, Inertia will automatically convert the request data
+        into a <Code>FormData</Code> object.
       </P>
       <P>
-        For a more thorough discussion of file uploads, please consult the <A href="/file-uploads">file uploads documentation</A>.
+        For a more thorough discussion of file uploads, please consult the{' '}
+        <A href="/file-uploads">file uploads documentation</A>.
       </P>
       <H2>XHR / fetch submissions</H2>
       <P>
         Using Inertia to submit forms works great for the vast majority of situations; however, in the event that you
-        need more control over the form submission, you're free to make plain{' '}
-        XHR or <Code>fetch</Code> requests instead using the library of your choice.
+        need more control over the form submission, you're free to make plain XHR or <Code>fetch</Code> requests instead
+        using the library of your choice.
       </P>
     </>
   )

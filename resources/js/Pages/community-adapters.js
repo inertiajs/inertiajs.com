@@ -77,12 +77,16 @@ const Page = () => {
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
-        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">pull request</A>.
+        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">
+          pull request
+        </A>
+        .
       </P>
       <H2>Client-side</H2>
       <P>
-        In addition to the <A href="https://github.com/inertiajs/inertia">three officially supported client-side adapters</A> (Vue, React and Svelte), there are also other community built
-        client-side adapters available.
+        In addition to the{' '}
+        <A href="https://github.com/inertiajs/inertia">three officially supported client-side adapters</A> (Vue, React
+        and Svelte), there are also other community built client-side adapters available.
       </P>
       <Ul>
         <Li>
@@ -91,7 +95,10 @@ const Page = () => {
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
-        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">pull request</A>.
+        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">
+          pull request
+        </A>
+        .
       </P>
     </>
   )

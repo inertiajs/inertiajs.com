@@ -19,16 +19,16 @@ const Page = () => {
       <H1>Validation</H1>
       <H2>How it works</H2>
       <P>
-        Handling server-side validation errors in Inertia works differently than a classic XHR-driven form
-        that requires you to catch the validation errors from <Code>422</Code> responses and manually update the form's error
-        state - because Inertia never receives <Code>422</Code> responses. Instead, Inertia operates much more like
-        a standard full page form submission. Here's how:
+        Handling server-side validation errors in Inertia works differently than a classic XHR-driven form that requires
+        you to catch the validation errors from <Code>422</Code> responses and manually update the form's error state -
+        because Inertia never receives <Code>422</Code> responses. Instead, Inertia operates much more like a standard
+        full page form submission. Here's how:
       </P>
       <P>
-        First, you <A href="/forms">submit your form using Inertia</A>. If there are server-side validation errors, you don't
-        return those errors as a <Code>422</Code> JSON response. Instead, you redirect (server-side) the user back to the form
-        page they were previously on, flashing the validation errors in the session. Some frameworks, such as Laravel, do this
-        automatically.
+        First, you <A href="/forms">submit your form using Inertia</A>. If there are server-side validation errors, you
+        don't return those errors as a <Code>422</Code> JSON response. Instead, you redirect (server-side) the user back
+        to the form page they were previously on, flashing the validation errors in the session. Some frameworks, such
+        as Laravel, do this automatically.
       </P>
       <P>
         Next, any time these validation errors are present in the session, they automatically get shared with Inertia,
@@ -38,20 +38,21 @@ const Page = () => {
       <P>
         Finally, since Inertia apps never generate <Code>422</Code> responses, Inertia needs another way to determine if
         a response includes validation errors. To do this, Inertia checks the <Code>page.props.errors</Code> object for
-        the existence of any errors. In the event that errors are present, the request's <Code>onError()</Code> callback will be
-        called instead of the <Code>onSuccess()</Code> callback.
+        the existence of any errors. In the event that errors are present, the request's <Code>onError()</Code> callback
+        will be called instead of the <Code>onSuccess()</Code> callback.
       </P>
       <H2>Sharing errors</H2>
       <P>
         In order for your server-side validation errors to be available client-side, your server-side framework must
-        share them via the <Code>errors</Code> prop. Inertia's first-party adapters, such as the Laravel adapter, do this automatically.
-        For others, you may need to do this manually. Please refer to your specific server-side adapter documentation
-        for more information.
+        share them via the <Code>errors</Code> prop. Inertia's first-party adapters, such as the Laravel adapter, do
+        this automatically. For others, you may need to do this manually. Please refer to your specific server-side
+        adapter documentation for more information.
       </P>
       <H2>Displaying errors</H2>
       <P>
         Since validation errors are made available client-side as page component props, you can conditionally display
-        them based on their existence. Remember, when using our first-party server adapters (such as the Laravel adapter), the <Code>errors</Code> prop will automatically be available to your page.
+        them based on their existence. Remember, when using our first-party server adapters (such as the Laravel
+        adapter), the <Code>errors</Code> prop will automatically be available to your page.
       </P>
       <TabbedCode
         examples={[
@@ -215,30 +216,30 @@ const Page = () => {
       </Notice>
       <H2>Repopulating input</H2>
       <P>
-        While handling errors in Inertia is similar to full page form submissions, Inertia offers even more benefits. In fact,
-        you don't even need to manually repopulate old form input data.
+        While handling errors in Inertia is similar to full page form submissions, Inertia offers even more benefits. In
+        fact, you don't even need to manually repopulate old form input data.
       </P>
       <P>
         When validation errors occur, the user is typically redirected back to the form page they were previously on.
         And, by default, Inertia automatically preserves the{' '}
         <A href="/manual-visits#state-preservation">component state</A> for <Code>post</Code>, <Code>put</Code>,{' '}
-        <Code>patch</Code>, and <Code>delete</Code> requests. Therefore, all the old form input data remains exactly as it
-        was when the user submitted the form.
+        <Code>patch</Code>, and <Code>delete</Code> requests. Therefore, all the old form input data remains exactly as
+        it was when the user submitted the form.
       </P>
       <P>
         So, the only work remaining is to display any validation errors using the <Code>errors</Code> prop.
       </P>
       <H2>Error bags</H2>
       <Notice>
-        If you're using the <A href="/forms#form-helper">form helper</A>, it's not necessary to use error bags
-        since validation errors are automatically scoped to the form object making the request.
+        If you're using the <A href="/forms#form-helper">form helper</A>, it's not necessary to use error bags since
+        validation errors are automatically scoped to the form object making the request.
       </Notice>
       <P>
-        For pages that have more than one form, it's possible to encounter conflicts when displaying validation errors if
-        two forms share the same field names. For example, imagine a "create company" form and a "create user" form that
-        both have a <Code>name</Code> field. Since both forms will be displaying the <Code>page.props.errors.name</Code>{' '}
-        validation error, generating a validation error for the <Code>name</Code> field in either form will cause the
-        error to appear in both forms.
+        For pages that have more than one form, it's possible to encounter conflicts when displaying validation errors
+        if two forms share the same field names. For example, imagine a "create company" form and a "create user" form
+        that both have a <Code>name</Code> field. Since both forms will be displaying the{' '}
+        <Code>page.props.errors.name</Code> validation error, generating a validation error for the <Code>name</Code>{' '}
+        field in either form will cause the error to appear in both forms.
       </P>
       <P>
         To solve this issue, you can use "error bags". Error bags scope the validation errors returned from the server

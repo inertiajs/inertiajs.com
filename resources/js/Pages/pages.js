@@ -18,12 +18,13 @@ const Page = () => {
     <>
       <H1>Pages</H1>
       <P>
-        When building applications using Inertia, each page in your application typically has its own controller / route and a corresponding JavaScript component. This
-        allows you to retrieve just the data necessary for that page - no API required.
+        When building applications using Inertia, each page in your application typically has its own controller / route
+        and a corresponding JavaScript component. This allows you to retrieve just the data necessary for that page - no
+        API required.
       </P>
       <P>
-         In addition, all of the data needed for the page
-        can be retrieved before the page is ever rendered by the browser, eliminating the need for displaying "loading" states when users visit your application.
+        In addition, all of the data needed for the page can be retrieved before the page is ever rendered by the
+        browser, eliminating the need for displaying "loading" states when users visit your application.
       </P>
       <H2>Creating pages</H2>
       <P>
@@ -122,8 +123,9 @@ const Page = () => {
         ]}
       />
       <P>
-        Given the page above, you can render the page by returning an <A href="/responses">Inertia response</A> from a controller or route. In this example, let's
-        assume this page is stored at <Code>resources/js/Pages/User/Show.(js|vue|svelte)</Code> within the Laravel application.
+        Given the page above, you can render the page by returning an <A href="/responses">Inertia response</A> from a
+        controller or route. In this example, let's assume this page is stored at{' '}
+        <Code>resources/js/Pages/User/Show.(js|vue|svelte)</Code> within the Laravel application.
       </P>
       <TabbedCode
         examples={[
@@ -147,10 +149,11 @@ const Page = () => {
       />
       <H2>Creating layouts</H2>
       <P>
-        While not required, for most projects it makes sense to create a site layout that all of your pages can extend. You may
-        have noticed in our page example above that we're wrapping the page content within a <Code>{`<Layout>`}</Code> component.
-        Here's an example of such a component. As you can see, there is nothing Inertia specific within this template. This is just a standard
-        JavaScript component that can be written using your client-side framework of choice.
+        While not required, for most projects it makes sense to create a site layout that all of your pages can extend.
+        You may have noticed in our page example above that we're wrapping the page content within a{' '}
+        <Code>{`<Layout>`}</Code> component. Here's an example of such a component. As you can see, there is nothing
+        Inertia specific within this template. This is just a standard JavaScript component that can be written using
+        your client-side framework of choice.
       </P>
       <TabbedCode
         examples={[
@@ -255,8 +258,8 @@ const Page = () => {
       </P>
       <P>
         For example, maybe you have an audio player on a podcast website that you want to continue playing as users
-        navigate the site. Or, maybe you simply want to maintain the scroll position in your sidebar navigation between page
-        visits. In these situations, using Inertia's persistent layouts can solve these problems.
+        navigate the site. Or, maybe you simply want to maintain the scroll position in your sidebar navigation between
+        page visits. In these situations, using Inertia's persistent layouts can solve these problems.
       </P>
       <TabbedCode
         examples={[
@@ -445,8 +448,8 @@ const Page = () => {
       />
       <H2>Default layouts</H2>
       <P>
-        If you're using persistent layouts, you may find it convenient to define the default page layout in the <Code>resolve</Code>{' '}
-        callback of your application's main JavaScript file.
+        If you're using persistent layouts, you may find it convenient to define the default page layout in the{' '}
+        <Code>resolve</Code> callback of your application's main JavaScript file.
       </P>
       <CodeBlock
         language="js"

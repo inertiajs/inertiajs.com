@@ -17,13 +17,14 @@ const Page = () => {
       <H1>Routing</H1>
       <H2>Defining routes</H2>
       <P>
-        When using Inertia, all of your application's routes are defined server-side. This means that you don't need Vue Router or React Router. Instead,
-        you can simply define Laravel routes and return <A href="/responses">Inertia responses</A> from those routes.
+        When using Inertia, all of your application's routes are defined server-side. This means that you don't need Vue
+        Router or React Router. Instead, you can simply define Laravel routes and return{' '}
+        <A href="/responses">Inertia responses</A> from those routes.
       </P>
       <H2>Shorthand routes</H2>
       <P>
-        If you have a <A href="/pages">page</A> that doesn't need a corresponding controller method, like an "FAQ" or "about" page, you can route
-        directly to a component via the <Code>Route::inertia()</Code> method.
+        If you have a <A href="/pages">page</A> that doesn't need a corresponding controller method, like an "FAQ" or
+        "about" page, you can route directly to a component via the <Code>Route::inertia()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -73,13 +74,14 @@ const Page = () => {
         ]}
       />
       <P>
-        However, when using Laravel, the <A href="https://github.com/tightenco/ziggy">Ziggy</A> library can make your named, server-side
-        routes available to you via a global <Code>route()</Code> function. In fact, if you are developing an application using
-        one of Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Ziggy is already configured for you.
+        However, when using Laravel, the <A href="https://github.com/tightenco/ziggy">Ziggy</A> library can make your
+        named, server-side routes available to you via a global <Code>route()</Code> function. In fact, if you are
+        developing an application using one of Laravel's{' '}
+        <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Ziggy is already configured for you.
       </P>
       <P>
-        If you're using Ziggy with Vue, it's helpful to make
-        this function available as a custom <Code>$route</Code> property so you can use it directly in your templates.
+        If you're using Ziggy with Vue, it's helpful to make this function available as a custom <Code>$route</Code>{' '}
+        property so you can use it directly in your templates.
       </P>
       <TabbedCode
         examples={[

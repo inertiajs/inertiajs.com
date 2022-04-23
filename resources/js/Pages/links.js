@@ -23,14 +23,16 @@ const Page = () => {
     <>
       <H1>Links</H1>
       <P>
-        To create links to other pages within an Inertia app, you will typically use the Inertia <Code>{'<Link>'}</Code> component. This component is a light wrapper
-        around a standard anchor <Code>{'<a>'}</Code> link that intercepts click events and prevents full page reloads
-        from occurring. This is <A href="/how-it-works">how Inertia provides a single-page app experience</A> once your application has been loaded.
+        To create links to other pages within an Inertia app, you will typically use the Inertia <Code>{'<Link>'}</Code>{' '}
+        component. This component is a light wrapper around a standard anchor <Code>{'<a>'}</Code> link that intercepts
+        click events and prevents full page reloads from occurring. This is{' '}
+        <A href="/how-it-works">how Inertia provides a single-page app experience</A> once your application has been
+        loaded.
       </P>
       <H2>Creating links</H2>
       <P>
-        To create an Inertia link, use the Inertia <Code>{'<Link>'}</Code> component. Any attributes you provide to this component
-        will be proxied to the underlying HTML tag.
+        To create an Inertia link, use the Inertia <Code>{'<Link>'}</Code> component. Any attributes you provide to this
+        component will be proxied to the underlying HTML tag.
       </P>
       <TabbedCode
         examples={[
@@ -123,13 +125,14 @@ const Page = () => {
       <Notice>
         Creating <Code color="orange">POST</Code>/<Code color="orange">PUT</Code>/<Code color="orange">PATCH</Code>/
         <Code color="orange">DELETE</Code> anchor <Code color="orange">{'<a>'}</Code> links is discouraged as it causes
-        "Open Link in New Tab / Window" accessibility issues. Instead, consider using a more appropriate element, such as
-        a <Code color="orange">{'<button>'}</Code>.
+        "Open Link in New Tab / Window" accessibility issues. Instead, consider using a more appropriate element, such
+        as a <Code color="orange">{'<button>'}</Code>.
       </Notice>
       <H2>Method</H2>
       <P>
-        You can specify the HTTP request method for an Inertia link request using the <Code>method</Code> attribute. The default method used by links is <Code>GET</Code>, but you
-        can use the <Code>method</Code> attribute to make <Code>POST</Code>, <Code>PUT</Code>, <Code>PATCH</Code>, and <Code>DELETE</Code> requests via links.
+        You can specify the HTTP request method for an Inertia link request using the <Code>method</Code> attribute. The
+        default method used by links is <Code>GET</Code>, but you can use the <Code>method</Code> attribute to make{' '}
+        <Code>POST</Code>, <Code>PUT</Code>, <Code>PATCH</Code>, and <Code>DELETE</Code> requests via links.
       </P>
       <TabbedCode
         examples={[
@@ -169,8 +172,9 @@ const Page = () => {
       />
       <H2>Data</H2>
       <P>
-        When making <Code>POST</Code> or <Code>PUT</Code> requests, you may wish to add additional data to the request. You can accomplish this using the <Code>data</Code> attribute.
-        The provided data can be an <Code>object</Code> or <Code>FormData</Code> instance.
+        When making <Code>POST</Code> or <Code>PUT</Code> requests, you may wish to add additional data to the request.
+        You can accomplish this using the <Code>data</Code> attribute. The provided data can be an <Code>object</Code>{' '}
+        or <Code>FormData</Code> instance.
       </P>
       <TabbedCode
         examples={[
@@ -210,8 +214,9 @@ const Page = () => {
       />
       <H2>Custom headers</H2>
       <P>
-        The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, you should note that the headers Inertia
-        uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
+        The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, you should note
+        that the headers Inertia uses internally to communicate its state to the server take priority and therefore
+        cannot be overwritten.
       </P>
       <TabbedCode
         examples={[
@@ -252,10 +257,11 @@ const Page = () => {
       />
       <H2>Browser history</H2>
       <P>
-        The <Code>replace</Code> attribute allows you to specify the browser's history behaviour. By default, page visits push (new) state (
-        <Code>window.history.pushState</Code>) into the history; however, it's also possible to replace state (
-        <Code>window.history.replaceState</Code>) by setting the <Code>replace</Code> attribute to true. This will cause
-        the visit to replace the current history state instead of adding a new history state to the stack.
+        The <Code>replace</Code> attribute allows you to specify the browser's history behaviour. By default, page
+        visits push (new) state (<Code>window.history.pushState</Code>) into the history; however, it's also possible to
+        replace state (<Code>window.history.replaceState</Code>) by setting the <Code>replace</Code> attribute to true.
+        This will cause the visit to replace the current history state instead of adding a new history state to the
+        stack.
       </P>
       <TabbedCode
         examples={[
@@ -297,8 +303,9 @@ const Page = () => {
       <H2>State preservation</H2>
       <P>
         You can preserve a page component's local state using the <Code>preserve-state</Code> attribute. This will
-        prevent a page component from fully re-rendering. The <Code>preserve-state</Code> attribute is especially helpful with forms, since you can avoid
-        manually repopulating input fields and can also maintain a focused input.
+        prevent a page component from fully re-rendering. The <Code>preserve-state</Code> attribute is especially
+        helpful with forms, since you can avoid manually repopulating input fields and can also maintain a focused
+        input.
       </P>
       <TabbedCode
         examples={[
@@ -384,12 +391,13 @@ const Page = () => {
         ]}
       />
       <P>
-        For more information on managing scroll position, please consult the documentation on <A href="/scroll-management">scroll management</A>.
+        For more information on managing scroll position, please consult the documentation on{' '}
+        <A href="/scroll-management">scroll management</A>.
       </P>
       <H2>Partial reloads</H2>
       <P>
-        The <Code>only</Code> attribute allows you to specify that only a subset of a page's props (data) should be retrieved from the server on subsequent
-        visits to that page.
+        The <Code>only</Code> attribute allows you to specify that only a subset of a page's props (data) should be
+        retrieved from the server on subsequent visits to that page.
       </P>
       <TabbedCode
         examples={[
@@ -429,13 +437,14 @@ const Page = () => {
         ]}
       />
       <P>
-        For more information on this topic, please consult the complete documentation on <A href="/partial-reloads">partial reloads</A>.
+        For more information on this topic, please consult the complete documentation on{' '}
+        <A href="/partial-reloads">partial reloads</A>.
       </P>
       <H2>Active states</H2>
       <P>
-        It's often desirable to set an active state for navigation links based on the current page. This can be accomplished when using
-        Inertia by inspecting the <Code>page</Code> object and doing string comparisons against the <Code>page.url</Code> and{' '}
-        <Code>page.component</Code> properties.
+        It's often desirable to set an active state for navigation links based on the current page. This can be
+        accomplished when using Inertia by inspecting the <Code>page</Code> object and doing string comparisons against
+        the <Code>page.url</Code> and <Code>page.component</Code> properties.
       </P>
       <TabbedCode
         examples={[
@@ -503,12 +512,13 @@ const Page = () => {
         ]}
       />
       <P>
-        You can perform exact match comparisons (<Code>===</Code>), <Code>startsWith()</Code> comparisons (useful for matching a subset
-        of pages), or even more complex comparisons using regular expressions.
+        You can perform exact match comparisons (<Code>===</Code>), <Code>startsWith()</Code> comparisons (useful for
+        matching a subset of pages), or even more complex comparisons using regular expressions.
       </P>
       <P>
-        Using this approach, you're not limited to just setting class names. You can use this
-        technique to conditionally render any markup on active state, such as different link text or even an SVG icon that represents the link is active.
+        Using this approach, you're not limited to just setting class names. You can use this technique to conditionally
+        render any markup on active state, such as different link text or even an SVG icon that represents the link is
+        active.
       </P>
     </>
   )

@@ -17,8 +17,9 @@ const Page = () => {
       <H1>Responses</H1>
       <H2>Creating responses</H2>
       <P>
-        Creating an Inertia response is simple. To get started, invoke the <Code>Inertia::render()</Code> within your controller or
-        route, providing both the name of the <A href="/pages">JavaScript page component</A> that you wish to render, as well as any props (data) for the page.
+        Creating an Inertia response is simple. To get started, invoke the <Code>Inertia::render()</Code> within your
+        controller or route, providing both the name of the <A href="/pages">JavaScript page component</A> that you wish
+        to render, as well as any props (data) for the page.
       </P>
       <P>
         In the example below, we will pass a single prop (<Code>event</Code>) which contains four attributes (
@@ -66,9 +67,9 @@ const Page = () => {
       </Notice>
       <H2>Root template data</H2>
       <P>
-        There are situations where you may want to access your prop data in your application's root Blade template. For example, you
-        may want to add a meta description tag, Twitter card meta tags, or Facebook Open Graph meta tags. You can access this data
-        via the <Code>$page</Code> variable.
+        There are situations where you may want to access your prop data in your application's root Blade template. For
+        example, you may want to add a meta description tag, Twitter card meta tags, or Facebook Open Graph meta tags.
+        You can access this data via the <Code>$page</Code> variable.
       </P>
       <TabbedCode
         examples={[
@@ -81,8 +82,10 @@ const Page = () => {
           },
         ]}
       />
-      <P>Sometimes you may even want to provide data to the root template that will not be sent to your JavaScript page / component. This can
-      be accomplished by invoking the <Code>withViewData</Code> method.</P>
+      <P>
+        Sometimes you may even want to provide data to the root template that will not be sent to your JavaScript page /
+        component. This can be accomplished by invoking the <Code>withViewData</Code> method.
+      </P>
       <TabbedCode
         examples={[
           {
@@ -95,7 +98,10 @@ const Page = () => {
           },
         ]}
       />
-      <P>After invoking the <Code>withViewData</Code> method, you can then access the defined data as you would typically access a Blade template variable.</P>
+      <P>
+        After invoking the <Code>withViewData</Code> method, you can then access the defined data as you would typically
+        access a Blade template variable.
+      </P>
       <TabbedCode
         examples={[
           {
@@ -110,13 +116,14 @@ const Page = () => {
       <H2>Maximum response size</H2>
       <P>
         To enable client-side history navigation, all Inertia server responses are stored in the browser's history
-        state. It's good to be aware that some browsers impose a size limit on how much data can be saved within the history state.
+        state. It's good to be aware that some browsers impose a size limit on how much data can be saved within the
+        history state.
       </P>
       <P>
         For example, <A href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState">Firefox</A> has a size
-        limit of 640k characters and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed this limit. This is
-        generally much more data than you'll ever practically need when building applications, but it's good to be aware of this limit when building an Inertia
-        application.
+        limit of 640k characters and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed this limit. This
+        is generally much more data than you'll ever practically need when building applications, but it's good to be
+        aware of this limit when building an Inertia application.
       </P>
     </>
   )

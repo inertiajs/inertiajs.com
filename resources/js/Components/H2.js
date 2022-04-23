@@ -8,9 +8,7 @@ function kebabCase(str) {
 }
 
 export default function H2(props) {
-  const slot = Array.isArray(props.children) && props.children.length === 1
-    ? props.children[0]
-    : props.children
+  const slot = Array.isArray(props.children) && props.children.length === 1 ? props.children[0] : props.children
 
   return (
     <h2

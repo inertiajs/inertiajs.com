@@ -1,6 +1,6 @@
 import React from 'react'
 import dedent from 'dedent-js'
-import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Error handling',
@@ -37,11 +37,13 @@ const Page = () => {
       </div>
       <H2>Production</H2>
       <P>
-        In production you will want to return a proper Inertia error response instead of relying on the modal-driven error reporting that is present during development.
-        To accomplish this, you'll need to update your framework's default exception handler to return a custom error page.
+        In production you will want to return a proper Inertia error response instead of relying on the modal-driven
+        error reporting that is present during development. To accomplish this, you'll need to update your framework's
+        default exception handler to return a custom error page.
       </P>
       <P>
-        When building Laravel applications, you can accomplish this by extending the <Code>render</Code> method of your application's exception handler.
+        When building Laravel applications, you can accomplish this by extending the <Code>render</Code> method of your
+        application's exception handler.
       </P>
       <TabbedCode
         examples={[
@@ -72,12 +74,12 @@ const Page = () => {
                   return $response;
               }
             `,
-          }
+          },
         ]}
       />
       <P>
-        You may have noticed we're returning an `Error` page component in the example above. You'll need to actually create this component.
-        Here's an example error page component you can use as a starting point.
+        You may have noticed we're returning an `Error` page component in the example above. You'll need to actually
+        create this component. Here's an example error page component you can use as a starting point.
       </P>
       <TabbedCode
         examples={[

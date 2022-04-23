@@ -23,8 +23,8 @@ const Page = () => {
     <>
       <H1>Manual visits</H1>
       <P>
-        In addition to <A href="/links">creating links</A>, it's also possible to manually make Inertia visits / requests programatically via JavaScript. This is
-        accomplished via the <Code>Inertia.visit()</Code> method.
+        In addition to <A href="/links">creating links</A>, it's also possible to manually make Inertia visits /
+        requests programatically via JavaScript. This is accomplished via the <Code>Inertia.visit()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -135,8 +135,8 @@ const Page = () => {
         ]}
       />
       <P>
-        However, it's generally more convenient to use one of Inertia's shortcut request methods instead. These methods share all the same
-        options as <Code>Inertia.visit()</Code>.
+        However, it's generally more convenient to use one of Inertia's shortcut request methods instead. These methods
+        share all the same options as <Code>Inertia.visit()</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -201,8 +201,9 @@ const Page = () => {
       </P>
       <H2>Method</H2>
       <P>
-        When making manual visits, you may use the <Code>method</Code> option to set the request's HTTP method to <Code>get</Code>, <Code>post</Code>,{' '}
-        <Code>put</Code>, <Code>patch</Code> or <Code>delete</Code>. The default method is <Code>get</Code>.
+        When making manual visits, you may use the <Code>method</Code> option to set the request's HTTP method to{' '}
+        <Code>get</Code>, <Code>post</Code>, <Code>put</Code>, <Code>patch</Code> or <Code>delete</Code>. The default
+        method is <Code>get</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -261,7 +262,8 @@ const Page = () => {
         `}
       />
       <Notice>
-        The headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
+        The headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be
+        overwritten.
       </Notice>
       <H2>File uploads</H2>
       <P>
@@ -278,7 +280,8 @@ const Page = () => {
         `}
       />
       <P>
-        For more information on uploading files, please consult the dedicated <A href="/file-uploads">file uploads</A> documentation.
+        For more information on uploading files, please consult the dedicated <A href="/file-uploads">file uploads</A>{' '}
+        documentation.
       </P>
       <H2>Browser history</H2>
       <P>
@@ -301,11 +304,12 @@ const Page = () => {
         such as form inputs, scroll positions and focus states to be lost.
       </P>
       <P>
-        However, in some situations, it's necessary to preserve the page component state. For example, when submitting a form,
-        you need to preserve your form data in the event that form validation fails on the server.
+        However, in some situations, it's necessary to preserve the page component state. For example, when submitting a
+        form, you need to preserve your form data in the event that form validation fails on the server.
       </P>
       <P>
-        You can instruct Inertia to preserve the component's state by setting the <Code>preserveState</Code> option to <Code>true</Code>.
+        You can instruct Inertia to preserve the component's state by setting the <Code>preserveState</Code> option to{' '}
+        <Code>true</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -314,8 +318,8 @@ const Page = () => {
         `}
       />
       <P>
-        You can also lazily evaluate the <Code>preserveState</Code> option based on the response by providing a
-        callback to the <Code>preserveState</Code> option.
+        You can also lazily evaluate the <Code>preserveState</Code> option based on the response by providing a callback
+        to the <Code>preserveState</Code> option.
       </P>
       <CodeBlock
         language="js"
@@ -333,7 +337,8 @@ const Page = () => {
       <P>
         When navigating between pages, Inertia mimics default browser behaviour by automatically resetting the scroll
         position of the document body (as well as any <A href="/scroll-management#scroll-regions">scroll regions</A>{' '}
-        you've defined) back to the top of the page. However, you may use the <Code>preserveScroll</Code> option to disable this behaviour.
+        you've defined) back to the top of the page. However, you may use the <Code>preserveScroll</Code> option to
+        disable this behaviour.
       </P>
       <CodeBlock
         language="js"
@@ -354,12 +359,14 @@ const Page = () => {
         `}
       />
       <P>
-        For more information regarding this feature, please consult the <A href="/scroll-management">scroll management</A> documentation.
+        For more information regarding this feature, please consult the{' '}
+        <A href="/scroll-management">scroll management</A> documentation.
       </P>
       <H2>Partial reloads</H2>
       <P>
         The <Code>only</Code> option allows you to request a subset of the props (data) from the server on subsequent
-        visits to the same page, thus making your application more efficient since it does not need to retrieve data that the page is not interested in refreshing.
+        visits to the same page, thus making your application more efficient since it does not need to retrieve data
+        that the page is not interested in refreshing.
       </P>
       <CodeBlock
         language="js"
@@ -368,7 +375,8 @@ const Page = () => {
         `}
       />
       <P>
-        For more information on this feature, please consult the <A href="/partial-reloads">partial reloads</A> documentation.
+        For more information on this feature, please consult the <A href="/partial-reloads">partial reloads</A>{' '}
+        documentation.
       </P>
       <H2>Visit cancellation</H2>
       <P>
@@ -386,7 +394,8 @@ const Page = () => {
         `}
       />
       <P>
-        The <Code>onCancel()</Code> and <Code>onFinish()</Code> event callbacks will be executed when a visit is cancelled.
+        The <Code>onCancel()</Code> and <Code>onFinish()</Code> event callbacks will be executed when a visit is
+        cancelled.
       </P>
       <H2>Event callbacks</H2>
       <P>

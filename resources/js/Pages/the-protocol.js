@@ -27,8 +27,8 @@ const Page = () => {
         headers or data. For these requests, the server returns a full HTML document.
       </P>
       <P>
-        This HTML response includes the site assets (CSS, JavaScript) as well as a root <Code>{`<div>`}</Code> in the page's
-        body. The root <Code>{`<div>`}</Code> serves as a mounting point for the client-side app, and includes a{' '}
+        This HTML response includes the site assets (CSS, JavaScript) as well as a root <Code>{`<div>`}</Code> in the
+        page's body. The root <Code>{`<div>`}</Code> serves as a mounting point for the client-side app, and includes a{' '}
         <Code>data-page</Code> attribute with a JSON encoded <A href="#the-page-object">page object</A> for the initial
         page. Inertia uses this information to boot your client-side framework and display the initial page component.
       </P>
@@ -126,8 +126,8 @@ const Page = () => {
       <H2>The page object</H2>
       <P>
         Inertia shares data between the server and client via a page object. This object includes the necessary
-        information required to render the page component, update the browser's history state, and track the site's asset version.
-        The page object includes the following four properties:
+        information required to render the page component, update the browser's history state, and track the site's
+        asset version. The page object includes the following four properties:
       </P>
       <Ol>
         <Li>
@@ -155,8 +155,8 @@ const Page = () => {
       </P>
       <P>
         The Inertia <A href="#the-page-object">page object</A> includes a <Code>version</Code> identifier. This version
-        identifier is set server-side and can be a number, string, file hash, or any other value that represents
-        the current "version" of your site's assets, as long as the value changes when the site's assets have been updated.
+        identifier is set server-side and can be a number, string, file hash, or any other value that represents the
+        current "version" of your site's assets, as long as the value changes when the site's assets have been updated.
       </P>
       <P>
         Whenever an Inertia request is made, Inertia will include the current asset version in the{' '}
@@ -165,8 +165,8 @@ const Page = () => {
         in a middleware layer.
       </P>
       <P>
-        If the asset versions are the same, the request simply continues as expected. However, if the asset versions are different,
-        the server immediately returns a <Code>409 Conflict</Code> response, and includes the URL in a{' '}
+        If the asset versions are the same, the request simply continues as expected. However, if the asset versions are
+        different, the server immediately returns a <Code>409 Conflict</Code> response, and includes the URL in a{' '}
         <Code>X-Inertia-Location</Code> header. This header is necessary, since server-side redirects may have occurred.
         This tells Inertia what the final intended destination URL is.
       </P>
@@ -221,8 +221,8 @@ const Page = () => {
       <P>
         The <Code>X-Inertia-Partial-Component</Code> header includes the name of the component that is being partially
         reloaded. This is necessary, since partial reloads only work for requests made to the same page component. If
-        the final destination is different for some reason (eg. the user was logged out and is now on the login
-        page), then no partial reloading will occur.
+        the final destination is different for some reason (eg. the user was logged out and is now on the login page),
+        then no partial reloading will occur.
       </P>
       <div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
         <div className="pt-6 px-6 text-white font-mono text-sm">

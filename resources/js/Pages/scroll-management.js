@@ -24,8 +24,8 @@ const Page = () => {
       </P>
       <H2>Scroll preservation</H2>
       <P>
-        Sometimes it's desirable to prevent the default scroll resetting behavior when making visits. You can disable this
-        behaviour using the <Code>preserveScroll</Code> option when <A href="/requests">manually making visits</A>.
+        Sometimes it's desirable to prevent the default scroll resetting behavior when making visits. You can disable
+        this behaviour using the <Code>preserveScroll</Code> option when <A href="/requests">manually making visits</A>.
       </P>
       <CodeBlock
         language="js"
@@ -34,8 +34,8 @@ const Page = () => {
         `}
       />
       <P>
-        You can also lazily evaluate the <Code>preserveScroll</Code> option based on the server's response by providing a
-        callback to the option.
+        You can also lazily evaluate the <Code>preserveScroll</Code> option based on the server's response by providing
+        a callback to the option.
       </P>
       <CodeBlock
         language="js"

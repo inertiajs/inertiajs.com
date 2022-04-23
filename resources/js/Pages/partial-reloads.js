@@ -16,24 +16,24 @@ const Page = () => {
     <>
       <H1>Partial reloads</H1>
       <P>
-        When making visits to the same page you are already on, it's not always necessary to re-fetch all of the data required for that page
-        from the server. In fact, selecting only a subset of the data can be a helpful performance optimization if
-        it's acceptable that some page data becomes stale. Inertia makes this possible via the "partial reload"
-        feature.
+        When making visits to the same page you are already on, it's not always necessary to re-fetch all of the data
+        required for that page from the server. In fact, selecting only a subset of the data can be a helpful
+        performance optimization if it's acceptable that some page data becomes stale. Inertia makes this possible via
+        the "partial reload" feature.
       </P>
       <P>
         As an example, consider a "user index" page that includes a list of users, as well as an option to filter the
-        users by their company. On the first request to the page, both the <Code>users</Code> and{' '}
-        <Code>companies</Code> props are passed to the page component. However, on subsequent visits to the same page
-        (maybe to filter the users), you can request only the <Code>users</Code> data from the server without requesting the{' '}
+        users by their company. On the first request to the page, both the <Code>users</Code> and <Code>companies</Code>{' '}
+        props are passed to the page component. However, on subsequent visits to the same page (maybe to filter the
+        users), you can request only the <Code>users</Code> data from the server without requesting the{' '}
         <Code>companies</Code> data. Inertia will then automatically merge the partial data returned from the server
         with the data it already has in memory client-side.
       </P>
       <Notice>Partial reloads only work for visits made to the same page component.</Notice>
       <H2>Making partial visits</H2>
       <P>
-        To perform a partial reload, use the <Code>only</Code> property to specify which data the server should return. This option should be
-        an array of keys which correspond to the keys of the props.
+        To perform a partial reload, use the <Code>only</Code> property to specify which data the server should return.
+        This option should be an array of keys which correspond to the keys of the props.
       </P>
       <CodeBlock
         language="js"
@@ -45,8 +45,8 @@ const Page = () => {
         `}
       />
       <P>
-        Since partial reloads can only be made to the same page component the user is already on, it almost always makes sense to just use the{' '}
-        <Code>Inertia.reload()</Code> method, which automatically uses the current URL.
+        Since partial reloads can only be made to the same page component the user is already on, it almost always makes
+        sense to just use the <Code>Inertia.reload()</Code> method, which automatically uses the current URL.
       </P>
       <CodeBlock
         language="js"
@@ -97,8 +97,9 @@ const Page = () => {
       />
       <H2>Lazy data evaluation</H2>
       <P>
-        For partial reloads to be most effective, be sure to also use lazy data evaluation when returning props from your server-side routes or controllers. This can be accomplished by
-        wrapping all optional page data in a closure.
+        For partial reloads to be most effective, be sure to also use lazy data evaluation when returning props from
+        your server-side routes or controllers. This can be accomplished by wrapping all optional page data in a
+        closure.
       </P>
       <P>
         When Inertia performs a request, it will determine which data is required and only then will it evaluate the

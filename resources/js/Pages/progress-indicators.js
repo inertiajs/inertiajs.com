@@ -17,8 +17,9 @@ const Page = () => {
       <P>
         Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one
         page to another. To solve this, Inertia provides an optional{' '}
-        <A href="https://github.com/inertiajs/progress">progress</A> library that shows a loading bar whenever you
-        make an Inertia visit. It's also possible to setup your own custom page loading indicators. Let's explore both approaches.
+        <A href="https://github.com/inertiajs/progress">progress</A> library that shows a loading bar whenever you make
+        an Inertia visit. It's also possible to setup your own custom page loading indicators. Let's explore both
+        approaches.
       </P>
       <H2>Default</H2>
       <P>
@@ -43,7 +44,8 @@ const Page = () => {
         `}
       />
       <P>
-        The Inertia progress library also provides a number of customization options which you pass to the <Code>init()</Code> method.
+        The Inertia progress library also provides a number of customization options which you pass to the{' '}
+        <Code>init()</Code> method.
       </P>
       <CodeBlock
         language="js"
@@ -115,18 +117,19 @@ const Page = () => {
         `}
       />
       <P>
-        That's it! Now, as you navigate from one page to another, the progress
-        bar will be added and removed from the page.
+        That's it! Now, as you navigate from one page to another, the progress bar will be added and removed from the
+        page.
       </P>
       <H3>Handling cancelled visits</H3>
       <P>
-        While this custom progress implementation works great for page visits that finish properly, it would be nice to handle cancelled
-        visits as well. First, for interrupted visits (those that get cancelled as a result of a new visit), the
-        progress bar should simply be reset back to the start position. Second, for manually cancelled visits, the
-        progress bar should be immediately removed from the page.
+        While this custom progress implementation works great for page visits that finish properly, it would be nice to
+        handle cancelled visits as well. First, for interrupted visits (those that get cancelled as a result of a new
+        visit), the progress bar should simply be reset back to the start position. Second, for manually cancelled
+        visits, the progress bar should be immediately removed from the page.
       </P>
       <P>
-        We can accomplish this by inspecting the <Code>event.detail.visit</Code> object that's provided to the finish event.
+        We can accomplish this by inspecting the <Code>event.detail.visit</Code> object that's provided to the finish
+        event.
       </P>
       <CodeBlock
         language="js"
@@ -145,8 +148,8 @@ const Page = () => {
       />
       <H3>File upload progress</H3>
       <P>
-        Let's take this a step further. When files are being uploaded, it would be great to update the loading
-        indicator to reflect the upload progress. This can be done using the <Code>progress</Code> event.
+        Let's take this a step further. When files are being uploaded, it would be great to update the loading indicator
+        to reflect the upload progress. This can be done using the <Code>progress</Code> event.
       </P>
       <CodeBlock
         language="js"
@@ -166,8 +169,8 @@ const Page = () => {
       <H3>Loading indicator delay</H3>
       <P>
         The last thing we're going to implement is a loading indicator delay. It's often preferable to delay showing the
-        loading indicator until a request has taken longer than 250-500 milliseconds. This prevents the
-        loading indicator from appearing constantly on quick page visits, which can be visually distracting.
+        loading indicator until a request has taken longer than 250-500 milliseconds. This prevents the loading
+        indicator from appearing constantly on quick page visits, which can be visually distracting.
       </P>
       <P>
         To implement the delay behaviour, we'll use the <Code>setTimeout</Code> and <Code>clearTimeout</Code> functions.
@@ -205,8 +208,8 @@ const Page = () => {
         `}
       />
       <P>
-        In the <Code>finish</Code> event listener, we need to determine if the progress bar has actually started displaying progress,
-        otherwise we'll inadvertently cause it to show before the timeout has finished.
+        In the <Code>finish</Code> event listener, we need to determine if the progress bar has actually started
+        displaying progress, otherwise we'll inadvertently cause it to show before the timeout has finished.
       </P>
       <CodeBlock
         language="js"

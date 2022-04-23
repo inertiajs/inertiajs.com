@@ -42,8 +42,9 @@ const Page = () => {
         `}
       />
       <P>
-        Under the hood, Inertia uses native browser events, so you can also interact with Inertia events using the typical event methods you may already be familiar with - just be sure
-        to append <Code>inertia:</Code> to the event name.
+        Under the hood, Inertia uses native browser events, so you can also interact with Inertia events using the
+        typical event methods you may already be familiar with - just be sure to append <Code>inertia:</Code> to the
+        event name.
       </P>
       <CodeBlock
         language="js"
@@ -55,7 +56,8 @@ const Page = () => {
       />
       <H2>Removing listeners</H2>
       <P>
-        When you register an event listener, Inertia automatically returns a callback that can be invoked to remove the event listener.
+        When you register an event listener, Inertia automatically returns a callback that can be invoked to remove the
+        event listener.
       </P>
       <CodeBlock
         language="js"
@@ -148,9 +150,9 @@ const Page = () => {
       />
       <H2>Cancelling events</H2>
       <P>
-        Some events, such as <Code>before</Code>, <Code>invalid</Code>, and <Code>error</Code>, support cancellation, allowing you
-        to prevent Inertia's default behaviour. Just like native events, the event will be cancelled if only one event listener calls{' '}
-        <Code>event.preventDefault()</Code>.
+        Some events, such as <Code>before</Code>, <Code>invalid</Code>, and <Code>error</Code>, support cancellation,
+        allowing you to prevent Inertia's default behaviour. Just like native events, the event will be cancelled if
+        only one event listener calls <Code>event.preventDefault()</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -235,8 +237,8 @@ const Page = () => {
       </P>
       <H2>Success</H2>
       <P>
-        The <Code>success</Code> event fires on successful page visits, unless validation errors are present. However, this
-        does <em>not</em> include history visits.
+        The <Code>success</Code> event fires on successful page visits, unless validation errors are present. However,
+        this does <em>not</em> include history visits.
       </P>
       <CodeBlock
         language="js"
@@ -302,8 +304,8 @@ const Page = () => {
       />
       <H2>Exception</H2>
       <P>
-        The <Code>exception</Code> event fires on unexpected XHR errors such as network interruptions. In addition, this event fires for errors
-        generated when resolving page components.
+        The <Code>exception</Code> event fires on unexpected XHR errors such as network interruptions. In addition, this
+        event fires for errors generated when resolving page components.
       </P>
       <CodeBlock
         language="js"
@@ -329,9 +331,9 @@ const Page = () => {
         `}
       />
       <P>
-        This event will <em>not</em> fire for XHR requests that receive <Code>400</Code> and <Code>500</Code>{' '}
-        level responses or for non-Inertia responses, as these situations are handled in other ways by Inertia. Please consult the{' '}
-        <A href="/error-handling">error handling documentation</A> for more information.
+        This event will <em>not</em> fire for XHR requests that receive <Code>400</Code> and <Code>500</Code> level
+        responses or for non-Inertia responses, as these situations are handled in other ways by Inertia. Please consult
+        the <A href="/error-handling">error handling documentation</A> for more information.
       </P>
       <H2>Finish</H2>
       <P>

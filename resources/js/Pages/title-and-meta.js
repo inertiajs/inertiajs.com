@@ -18,22 +18,23 @@ const Page = () => {
     <>
       <H1>Title & meta</H1>
       <P>
-        Since Inertia powered JavaScript apps are rendered within the document <Code>{'<body>'}</Code>, they are unable to render markup
-        to the document <Code>{'<head>'}</Code>, as it's outside of their scope. To help with this, Inertia ships with
-        an <Code>{'<Head>'}</Code> component which can be used to set the page <Code>{'<title>'}</Code>,{' '}
-        <Code>{'<meta>'}</Code> tags, and other <Code>{'<head>'}</Code> elements.
+        Since Inertia powered JavaScript apps are rendered within the document <Code>{'<body>'}</Code>, they are unable
+        to render markup to the document <Code>{'<head>'}</Code>, as it's outside of their scope. To help with this,
+        Inertia ships with an <Code>{'<Head>'}</Code> component which can be used to set the page{' '}
+        <Code>{'<title>'}</Code>, <Code>{'<meta>'}</Code> tags, and other <Code>{'<head>'}</Code> elements.
       </P>
       <Notice>
-        The <Code color="orange">{'<Head>'}</Code> component will only replace <Code>{'<head>'}</Code> elements that are not in your server-side root template.
+        The <Code color="orange">{'<Head>'}</Code> component will only replace <Code>{'<head>'}</Code> elements that are
+        not in your server-side root template.
       </Notice>
       <Notice>
-        The <Code color="orange">{'<Head>'}</Code> component is not available in the Svelte adapter, as Svelte
-        already ships with its own <Code color="orange">{'<svelte:head>'}</Code> component.
+        The <Code color="orange">{'<Head>'}</Code> component is not available in the Svelte adapter, as Svelte already
+        ships with its own <Code color="orange">{'<svelte:head>'}</Code> component.
       </Notice>
       <H2>Head component</H2>
       <P>
-        To add <Code>{'<head>'}</Code> elements to your page, use the <Code>{'<Head>'}</Code> component. Within this component, you can
-        include the elements that you wish to add to the document <Code>{'<head>'}</Code>.
+        To add <Code>{'<head>'}</Code> elements to your page, use the <Code>{'<Head>'}</Code> component. Within this
+        component, you can include the elements that you wish to add to the document <Code>{'<head>'}</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -85,7 +86,8 @@ const Page = () => {
       />
       <H2>Title shorthand</H2>
       <P>
-        If you only need to add a <Code>{'<title>'}</Code> to the document <Code>{'<head>'}</Code>, you may simply pass the title as a prop to the <Code>{'<Head>'}</Code> component.
+        If you only need to add a <Code>{'<title>'}</Code> to the document <Code>{'<head>'}</Code>, you may simply pass
+        the title as a prop to the <Code>{'<Head>'}</Code> component.
       </P>
       <TabbedCode
         examples={[
@@ -125,8 +127,9 @@ const Page = () => {
       <H2>Title callback</H2>
       <P>
         You can globally modify the page <Code>{'<title>'}</Code> using the <Code>title</Code> callback in the{' '}
-        <Code>createInertiaApp</Code> setup method. Typically, this method is invoked in your application's main JavaScript file.
-        A common use case for the title callback is automatically adding an app name before or after each page title.
+        <Code>createInertiaApp</Code> setup method. Typically, this method is invoked in your application's main
+        JavaScript file. A common use case for the title callback is automatically adding an app name before or after
+        each page title.
       </P>
       <CodeBlock
         language="js"
@@ -138,7 +141,8 @@ const Page = () => {
         `}
       />
       <P>
-        After defining the <Code>title</Code> callback, the callback will automatically be invoked when you set a title using the <Code>{'<Head>'}</Code> component.
+        After defining the <Code>title</Code> callback, the callback will automatically be invoked when you set a title
+        using the <Code>{'<Head>'}</Code> component.
       </P>
       <TabbedCode
         examples={[
@@ -185,8 +189,8 @@ const Page = () => {
         `}
       />
       <P>
-        The <Code>title</Code> callback will also be invoked when you set the title using
-        a <Code>{'<title>'}</Code> tag within your <Code>{'<Head>'}</Code> component.
+        The <Code>title</Code> callback will also be invoked when you set the title using a <Code>{'<title>'}</Code> tag
+        within your <Code>{'<Head>'}</Code> component.
       </P>
       <TabbedCode
         examples={[
@@ -232,7 +236,8 @@ const Page = () => {
       <H2>Multiple Head instances</H2>
       <P>
         It's possible to have multiple instances of the <Code>{'<Head>'}</Code> component throughout your application.
-        For example, your layout can set some default <Code>{'<Head>'}</Code> elements, and then your individual pages can overide those defaults.
+        For example, your layout can set some default <Code>{'<Head>'}</Code> elements, and then your individual pages
+        can overide those defaults.
       </P>
       <TabbedCode
         examples={[
@@ -304,9 +309,9 @@ const Page = () => {
       />
       <P>
         Inertia will only ever render one <Code>{'<title>'}</Code> tag; however, all other tags will be stacked since
-        it's valid to have multiple instances of them. To avoid duplicate tags in your <Code>{'<head>'}</Code>, you
-        can use the <Code>head-key</Code> property, which will make sure the tag is only rendered once. This is
-        illustrated in the example above for the <Code>{'<meta name="description">'}</Code> tag.
+        it's valid to have multiple instances of them. To avoid duplicate tags in your <Code>{'<head>'}</Code>, you can
+        use the <Code>head-key</Code> property, which will make sure the tag is only rendered once. This is illustrated
+        in the example above for the <Code>{'<meta name="description">'}</Code> tag.
       </P>
       <P>The code example below contains the HTML created by the example above.</P>
       <CodeBlock
@@ -321,8 +326,9 @@ const Page = () => {
       />
       <H2>Head extension</H2>
       <P>
-        When building a real application, it can sometimes be helpful to create a custom head component that extends Inertia's <Code>{'<Head>'}</Code>{' '}
-        component. This gives you a place to set app-wide defaults, such as appending the app name to the page title.
+        When building a real application, it can sometimes be helpful to create a custom head component that extends
+        Inertia's <Code>{'<Head>'}</Code> component. This gives you a place to set app-wide defaults, such as appending
+        the app name to the page title.
       </P>
       <TabbedCode
         examples={[

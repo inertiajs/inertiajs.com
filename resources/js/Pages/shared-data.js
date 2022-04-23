@@ -17,16 +17,19 @@ const Page = () => {
     <>
       <H1>Shared data</H1>
       <P>
-        Sometimes you need to access specific pieces of data on numerous pages within your application. For example, you may need to display the current user in the site header. Passing this data manually in each response
-        across your entire application isn't practical. Thankfully, there is a better option: shared data.
+        Sometimes you need to access specific pieces of data on numerous pages within your application. For example, you
+        may need to display the current user in the site header. Passing this data manually in each response across your
+        entire application isn't practical. Thankfully, there is a better option: shared data.
       </P>
       <H2>Sharing data</H2>
       <P>
-        Inertia's server-side adapters provide a method of preassigning shared data for each request. This is typically done outside
-        of your controllers. Shared data will be automatically merged with the page props provided in your controller.
+        Inertia's server-side adapters provide a method of preassigning shared data for each request. This is typically
+        done outside of your controllers. Shared data will be automatically merged with the page props provided in your
+        controller.
       </P>
       <P>
-        In Laravel applications, this is typically handled by the <Code>HandleInertiaRequests</Code> middleware that is automatically installed when installing the <A href="/server-side-setup#middleware">server-side adapter</A>.
+        In Laravel applications, this is typically handled by the <Code>HandleInertiaRequests</Code> middleware that is
+        automatically installed when installing the <A href="/server-side-setup#middleware">server-side adapter</A>.
       </P>
       <TabbedCode
         examples={[
@@ -51,7 +54,7 @@ const Page = () => {
             `,
             description:
               'The HandleInertiaRequests middleware provides a "share" method where you can define the data that is automatically shared with each Inertia response.',
-          }
+          },
         ]}
       />
       <P>
@@ -71,18 +74,19 @@ const Page = () => {
                   ? $request->user()->only('id', 'name', 'email')
                   : null
               );
-            `
-          }
+            `,
+          },
         ]}
       />
       <Notice>Shared data should be used sparingly as all shared data is included with every response.</Notice>
       <Notice>
-        Page props and shared data are merged together, so be sure to namespace your shared data appropriately to avoid collisions.
+        Page props and shared data are merged together, so be sure to namespace your shared data appropriately to avoid
+        collisions.
       </Notice>
       <H2>Accessing shared data</H2>
       <P>
-        Once you have shared the data server-side, you will then be able to access it within any of your pages or components.
-        Here's an example of how to access shared data in a layout component.
+        Once you have shared the data server-side, you will then be able to access it within any of your pages or
+        components. Here's an example of how to access shared data in a layout component.
       </P>
       <TabbedCode
         examples={[
@@ -109,7 +113,7 @@ const Page = () => {
                 }
               }
               </script>
-            `
+            `,
           },
           {
             name: 'Vue 3',
@@ -135,7 +139,7 @@ const Page = () => {
                 },
               }
               </script>
-            `
+            `,
           },
           {
             name: 'React',
@@ -155,7 +159,7 @@ const Page = () => {
                   </main>
                 )
               }
-            `
+            `,
           },
           {
             name: 'Svelte',
@@ -172,15 +176,15 @@ const Page = () => {
                   <slot />
                 </content>
               </main>
-            `
+            `,
           },
         ]}
       />
       <H2>Flash messages</H2>
       <P>
         Another great use-case for shared data is flash messages. These are messages stored in the session only for the
-        next request. For example, it's common to set a flash message after completing a task and before redirecting to a different
-        page.
+        next request. For example, it's common to set a flash message after completing a task and before redirecting to
+        a different page.
       </P>
       <P>
         Here's a simple way to implement flash messages in your Inertia applications. First, share the flash message on
@@ -204,7 +208,7 @@ const Page = () => {
                   }
               }
             `,
-          }
+          },
         ]}
       />
       <P>Next, display the flash message in a front-end component, such as the site layout.</P>
