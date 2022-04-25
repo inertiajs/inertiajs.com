@@ -6,6 +6,7 @@ const meta = {
   title: 'Server-side rendering (SSR)',
   links: [
     { url: '#how-it-works', name: 'How it works' },
+    { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
     { url: '#setting-up-ssr', name: 'Setting up SSR' },
     { url: '#setting-up-mix', name: 'Setting up Mix' },
     { url: '#enabling-ssr', name: 'Enabling SSR' },
@@ -34,6 +35,24 @@ const Page = () => {
         request over to a separate Node.js service so that it can render the page for us. Then, the Node.js service will
         return the rendered HTML back to the browser when it's done rendering the page.
       </P>
+      <H2 id="laravel-starter-kits">Laravel starter kits</H2>
+      <P>
+        If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Breeze or Jetstream</A>, you may
+        install the starter kit's scaffolding with Inertia SSR support pre-configured using
+        the <Code>--ssr</Code> flag.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'bash',
+            code: dedent`
+              php artisan breeze:install react --ssr
+              php artisan breeze:install vue --ssr
+            `,
+          },
+        ]}
+      />
       <H2 id="setting-up-ssr">Setting up server side rendering</H2>
       <P>First, we'll install the necessary server-side rendering dependencies using NPM or Yarn.</P>
       <TabbedCode
