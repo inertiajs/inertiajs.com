@@ -14,20 +14,20 @@ const Page = () => {
     <>
       <H1>Demo application</H1>
       <P>
-        We've setup a demo app for Inertia.js, called <A href="https://demo.inertiajs.com">Ping CRM</A>. This
+        We've setup a demo app for Inertia.js called <A href="https://demo.inertiajs.com">Ping CRM</A>. This
         application is built using Laravel and Vue. You can find the source code on{' '}
         <A href="https://github.com/inertiajs/pingcrm">GitHub</A>.
       </P>
       <Notice>
-        The Ping CRM demo is hosted on Heroku, and the database is reset every hour. Please be respectful when editing
+        The Ping CRM demo is hosted on Heroku and the database is reset every hour. Please be respectful when editing
         data.
       </Notice>
       <a href="https://demo.inertiajs.com">
         <img className="w-full h-auto rounded" src="/pingcrm.png" alt="Ping CRM" />
       </a>
       <P>
-        In addition to the Vue version of Ping CRM, there is now also an officially maintained Svelte version of it,
-        which you can find <A href="https://github.com/inertiajs/pingcrm-svelte">here</A>.
+        In addition to the Vue version of Ping CRM, we also maintain a Svelte version of the application,
+        which you can find <A href="https://github.com/inertiajs/pingcrm-svelte">on GitHub</A>.
       </P>
       <H2>Third party</H2>
       <P>
