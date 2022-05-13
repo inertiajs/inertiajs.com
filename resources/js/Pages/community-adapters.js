@@ -27,9 +27,6 @@ const Page = () => {
           <A href="https://github.com/ishanvyas22/cakephp-inertiajs">CakePHP</A>
         </Li>
         <Li>
-          <A href="https://github.com/cherifGsoul/inertia-can">CanJS</A>
-        </Li>
-        <Li>
           <A href="https://github.com/prestancedesign/inertia-clojure">Clojure</A>
         </Li>
         <Li>
@@ -46,9 +43,6 @@ const Page = () => {
         </Li>
         <Li>
           <A href="https://github.com/girardinsamuel/masonite-inertia/">Masonite</A>
-        </Li>
-        <Li>
-          <A href="https://github.com/tbreuss/inertia-mithril">Mithril.js</A>
         </Li>
         <Li>
           <A href="https://github.com/jordankaerim/inertia-node">Node.js</A>
@@ -85,6 +79,12 @@ const Page = () => {
         client-side adapters available.
       </P>
       <Ul>
+        <Li>
+          <A href="https://github.com/cherifGsoul/inertia-can">CanJS</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/tbreuss/inertia-mithril">Mithril.js</A>
+        </Li>
         <Li>
           <A href="https://github.com/rogervila/inertia-html">Plain HTML (inertia-html)</A>
         </Li>
