@@ -39,7 +39,7 @@ const Page = () => {
           <A href="https://github.com/elpete/cbInertia">ColdBox</A>
         </Li>
         <Li>
-          <A href="https://pypi.org/project/inertia-django/">Django</A>
+          <A href="https://github.com/girardinsamuel/django-inertia">Django</A>
         </Li>
         <Li>
           <A href="https://github.com/petaki/inertia-go">Go</A>
