@@ -141,11 +141,11 @@ const Page = () => {
       <H2>Maximum response size</H2>
       <P>
         To enable client-side history navigation, all Inertia server responses are stored in the browser's history
-        state. It's good to be aware that some browsers impose a size limit on how much data can be saved there. For
-        example, <A href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState">Firefox</A> has a size
-        limit of 640k characters (and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed it). This is
-        generally much more than you'll ever need, but it's good to be aware of this when building an Inertia
-        application.
+        state. It's good to be aware that some browsers may impose a size limit on how much data can be saved there. For
+        example, <A href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState">Firefox</A> used to have a size
+        limit of 640k characters (2 MiB) up until December 2021 (which results in a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error 
+        if you exceeded it). This is generally much more than you'll ever need, but it's good to be aware of this when building 
+        an Inertia application.
       </P>
     </>
   )
