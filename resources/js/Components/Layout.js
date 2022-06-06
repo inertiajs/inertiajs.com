@@ -2,6 +2,7 @@ import dedent from 'dedent-js'
 import Mousetrap from 'mousetrap'
 import Nav from '@/Components/Nav'
 import { Inertia } from '@inertiajs/inertia'
+import Storage from '@/Utils/Storage'
 import TabbedCode from '@/Components/TabbedCode'
 import React, { useState, useEffect } from 'react'
 import { InertiaHead, InertiaLink } from '@inertiajs/inertia-react'
@@ -10,7 +11,7 @@ export const CodeTabContext = React.createContext()
 
 const getCurrentCodeTab = tabType => {
   const param = new URLSearchParams(location.search).get(tabType)
-  return param ? param : localStorage.getItem('tab.' + tabType)
+  return param ? param : Storage.get('tab.' + tabType)
 }
 
 export default function Layout({ meta, children }) {
@@ -28,8 +29,9 @@ export default function Layout({ meta, children }) {
 
   const setCodeTabs = value => {
     setCodeTabsState(value)
-    localStorage.setItem('tab.frontend', value.frontend)
-    localStorage.setItem('tab.backend', value.backend)
+
+    Storage.set('tab.frontend', value.frontend)
+    Storage.set('tab.backend', value.backend)
   }
 
   useEffect(() => {
