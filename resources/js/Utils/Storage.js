@@ -1,7 +1,7 @@
 export default {
   get(key) {
     try {
-      localStorage.getItem(key);
+      return localStorage.getItem(key);
     } catch (e) {};
   },
 
