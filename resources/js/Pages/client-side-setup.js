@@ -97,9 +97,24 @@ const Page = () => {
                 },
               })
             `,
-          },
+            },
+            {
+            name: 'React 17',
+            language: 'jsx',
+            code: dedent`
+                import React from 'react'
+                import { render } from 'react-dom'
+                import { createInertiaApp } from '@inertiajs/inertia-react'\n
+                createInertiaApp({
+                resolve: name => require(\`./Pages/\${name}\`),
+                setup({ el, App, props }) {
+                    render(<App {...props} />, el)
+                },
+                })
+            `,
+            },
           {
-            name: 'React',
+            name: 'React 18',
             language: 'jsx',
             code: dedent`
               import React from 'react'
