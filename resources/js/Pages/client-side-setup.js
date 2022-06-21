@@ -125,7 +125,8 @@ const Page = () => {
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}\`),
                 setup({ el, App, props }) {
-                  root.render(<App {...props} />, el)
+                  const root = createRoot(el);
+                  root.render(<App {...props} />);
                 },
               })
             `,
