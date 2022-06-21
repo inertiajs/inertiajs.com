@@ -119,9 +119,7 @@ const Page = () => {
             code: dedent`
               import React from 'react'
               import { createRoot } from 'react-dom/client'
-              import { createInertiaApp } from '@inertiajs/inertia-react'
-              const container = document.getElementById('app')
-              const root = createRoot(container)\n
+              import { createInertiaApp } from '@inertiajs/inertia-react'\n
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}\`),
                 setup({ el, App, props }) {
