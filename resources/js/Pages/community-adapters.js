@@ -51,6 +51,9 @@ const Page = () => {
           <A href="https://github.com/tbreuss/inertia-mithril">Mithril.js</A>
         </Li>
         <Li>
+          <A href="https://github.com/harisfi/nestjs-inertia">NestJS</A>
+        </Li>
+        <Li>
           <A href="https://github.com/jordankaerim/inertia-node">Node.js</A>
         </Li>
         <Li>
