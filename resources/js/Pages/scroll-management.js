@@ -25,7 +25,7 @@ const Page = () => {
       <H2>Scroll preservation</H2>
       <P>
         Sometimes it's desirable to prevent the default scroll resetting when making visits. You can disable this
-        behaviour using the <Code>preserveScroll</Code> option when manually <A href="/requests">making visits</A>.
+        behaviour using the <Code>preserveScroll</Code> option when manually <A href="/manual-visits">making visits</A>.
       </P>
       <CodeBlock
         language="js"
