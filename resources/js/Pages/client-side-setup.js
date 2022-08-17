@@ -318,6 +318,13 @@ const Page = () => {
           },
         ]}
       />
+      <P>and add this import to the top of the file:</P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+        `}
+      />
       <P>
         By default, Inertia assumes that you have a root element with an <Code>id</Code> of <Code>app</Code>. If
         different, you can change this using the <Code>id</Code> property.
