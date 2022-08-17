@@ -6,6 +6,7 @@ const meta = {
   title: 'Client-side setup',
   links: [
     { url: '#install-dependencies', name: 'Install dependencies' },
+    { url: '#vite-setup', name: 'Vite Setup' },
     { url: '#initialize-app', name: 'Initialize app' },
     { url: '#progress-indicator', name: 'Progress indicator' },
     { url: '#code-splitting', name: 'Code splitting' },
@@ -54,6 +55,123 @@ const Page = () => {
             code: dedent`
               npm install @inertiajs/inertia @inertiajs/inertia-svelte
               yarn add @inertiajs/inertia @inertiajs/inertia-svelte
+            `,
+          },
+        ]}
+      />
+      <H2>Vite Setup</H2>
+      <P>
+        If you're using newer versions of Laravel (which use Vite instead of Webpack), a couple of extra steps are required. First, add the following code to your <Code>vite.config.js</Code> file.
+      </P>
+        <CodeBlock
+        language="js"
+        children={dedent`
+          import { defineConfig } from 'vite'
+
+          export default defineConfig({
+            // ...
+            optimizeDeps: {
+              include: [
+                "@inertiajs/inertia",
+              ],
+            },
+            // ...
+          })
+        `}/>
+      <P>Then, install the relevant language plugin for vite:</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'bash',
+            code: dedent`
+              npm install @vitejs/plugin-vue2
+              yarn add @vitejs/plugin-vue2
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'bash',
+            code: dedent`
+              npm install @vitejs/plugin-vue
+              yarn add @vitejs/plugin-vue
+            `,
+          },
+          {
+            name: 'React',
+            language: 'bash',
+            code: dedent`
+              npm install @vitejs/plugin-react
+              yarn add @vitejs/plugin-react
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'bash',
+            code: dedent`
+              npm install @sveltejs/vite-plugin-svelte
+              yarn add @sveltejs/vite-plugin-svelte
+            `,
+          },
+        ]}
+      />
+      <P>Then, add it to your <Code>vite.config.js</Code> file.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+            import vue from '@vitejs/plugin-vue2'
+
+            export default defineConfig({
+              plugins: [
+                vue()
+              ],
+              // ...
+            })
+          `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import vue from '@vitejs/plugin-vue'
+
+              export default defineConfig({
+                plugins: [
+                  vue()
+                ],
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import react from '@vitejs/plugin-react'
+
+              export default defineConfig({
+                plugins: [
+                  react()
+                ],
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { svelte } from '@sveltejs/vite-plugin-svelte';
+
+              export default defineConfig({
+                plugins: [
+                  svelte()
+                ],
+                // ...
+              });
             `,
           },
         ]}
@@ -132,6 +250,74 @@ const Page = () => {
         The <Code>resolve</Code> callback tells Inertia how to load a page component. It receives a page name (string),
         and should return a page component module.
       </P>
+      <P>If you're using Vite, <Code>require()</Code> cannot be used, so replace</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              require(\`./Pages/\${name}\`)
+          `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              require(\`./Pages/\${name}\`)
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              require(\`./Pages/\${name}\`)
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              require(\`./Pages/\${name}.svelte\`)
+            `,
+          },
+        ]}
+      />
+      <P>
+        with
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import(\`./Pages/\${name}\`)
+          `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import(\`./Pages/\${name}\`)
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import(\`./Pages/\${name}\`)
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import(\`./Pages/\${name}.svelte\`)
+            `,
+          },
+        ]}
+      />
       <P>
         By default, Inertia assumes that you have a root element with an <Code>id</Code> of <Code>app</Code>. If
         different, you can change this using the <Code>id</Code> property.
