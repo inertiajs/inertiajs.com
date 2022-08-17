@@ -292,28 +292,28 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import(\`./Pages/\${name}\`)
+              resolvePageComponent(\`../Pages/\${name}.vue\`, import.meta.glob('../Pages/**/*.vue')),
           `,
           },
           {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import(\`./Pages/\${name}\`)
+              resolvePageComponent(\`../Pages/\${name}.vue\`, import.meta.glob('../Pages/**/*.vue')),
             `,
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import(\`./Pages/\${name}\`)
+              resolvePageComponent(\`../Pages/\${name}\`, import.meta.glob('../Pages/**/*')),
             `,
           },
           {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import(\`./Pages/\${name}.svelte\`)
+              resolvePageComponent(\`../Pages/\${name}.svelte\`, import.meta.glob('../Pages/**/*.svelte')),
             `,
           },
         ]}
