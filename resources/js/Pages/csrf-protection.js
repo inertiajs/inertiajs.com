@@ -17,7 +17,7 @@ const Page = () => {
       <H2>Making requests</H2>
       <P>
         If your web framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that each
-        Inertia requests includes the necessary token for <Code>POST</Code>, <Code>PUT</Code>, <Code>PATCH</Code> and{' '}
+        Inertia request includes the necessary token for <Code>POST</Code>, <Code>PUT</Code>, <Code>PATCH</Code> and{' '}
         <Code>DELETE</Code> requests.
       </P>
       <P>
