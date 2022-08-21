@@ -686,7 +686,7 @@ const Page = () => {
         ]}
       />
       <P>
-        If you're using a client-side input validation libraries or do additional checks of your own, you can also
+        If you're using client-side input validation libraries or do additional checks of your own, you can also
         set your own errors on the form by using the <Code>setErrors()</Code> method.
       </P>
       <TabbedCode
