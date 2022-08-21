@@ -481,9 +481,9 @@ const Page = () => {
               // Component exact match
               <Link href="/users" className={component === 'Users/Index' ? 'active' : ''}>Users</Link>\n
               // URL starts with (/users, /users/create, /users/1, etc.)
-              <Link href="/users" className={url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>\n
+              <Link href="/users" className={url.startsWith('/users') ? 'active' : ''}>Users</Link>\n
               // Component starts with (Users/Index, Users/Create, Users/Show, etc.)
-              <Link href="/users" className={component.startsWith('Users') === 'Users/Index' ? 'active' : ''}>Users</Link>
+              <Link href="/users" className={component.startsWith('Users') ? 'active' : ''}>Users</Link>
             `,
           },
           {
@@ -496,9 +496,9 @@ const Page = () => {
               // Component exact match
               <Link href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</Link>\n
               // URL starts with (/users, /users/create, /users/1, etc.)
-              <Link href="/users" class={$page.url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>\n
+              <Link href="/users" class={$page.url.startsWith('/users') ? 'active' : ''}>Users</Link>\n
               // Component starts with (Users/Index, Users/Create, Users/Show, etc.)
-              <Link href="/users" class={$page.component.startsWith('Users') === 'Users/Index' ? 'active' : ''}>Users</Link>
+              <Link href="/users" class={$page.component.startsWith('Users') ? 'active' : ''}>Users</Link>
             `,
           },
         ]}
