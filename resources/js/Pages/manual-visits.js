@@ -215,7 +215,7 @@ const Page = () => {
         Laravel. Instead, make the request via <Code color="orange">post</Code>, including a{' '}
         <Code color="orange">_method</Code> field set to <Code color="orange">put</Code> or{' '}
         <Code color="orange">patch</Code>. This is called{' '}
-        <A href="https://laravel.com/docs/8.x/routing#form-method-spoofing">form method spoofing</A>.
+        <A href="https://laravel.com/docs/9.x/routing#form-method-spoofing">form method spoofing</A>.
       </Notice>
       <H2>Data</H2>
       <P>
