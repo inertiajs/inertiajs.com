@@ -78,7 +78,7 @@ const Page = () => {
             // ...
           })
         `}/>
-      <P>Then, install the relevant language plugin for vite:</P>
+      <P>Then, install the relevant language plugin for Vite:</P>
       <TabbedCode
         examples={[
           {
