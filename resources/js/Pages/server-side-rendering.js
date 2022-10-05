@@ -406,7 +406,7 @@ const Page = () => {
       />
       <H2>Heroku</H2>
       <P>
-        To run the SSR server on Heroku, update your <Code>{'web'}</Code> configuration in your <Code>{'Procfile'}</Code> to first run the SSR server before starting your web server. Note, to do this you must have the <Code>{'heroku/nodejs'}</Code> buildpack installed in addition to the <Code>{'heroku/php'}</Code> buildback.
+        To run the SSR server on Heroku, update your <Code>{'web'}</Code> configuration in your <Code>{'Procfile'}</Code> to first run the SSR server before starting your web server. Note, to do this you must have the <Code>{'heroku/nodejs'}</Code> buildpack installed in addition to the <Code>{'heroku/php'}</Code> buildpack.
       </P>
       <CodeBlock
         language="bash"
