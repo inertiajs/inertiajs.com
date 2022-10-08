@@ -344,7 +344,7 @@ const Page = () => {
       </Notice>
       <H2 id="running-the-service">Running the Node.js service</H2>
       <P>
-        With the builds generated, you should be able run the Node server using the following command:
+        With the builds generated, you should be able to run the Node server using the following command:
       </P>
       <CodeBlock
         language="bash"
