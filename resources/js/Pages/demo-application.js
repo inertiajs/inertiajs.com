@@ -56,6 +56,9 @@ const Page = () => {
         <Li>
           <A href="https://github.com/prestancedesign/pingcrm-clojure">Clojure/React</A> by Michaël Salihi
         </Li>
+        <Li>
+          <A href="https://github.com/matrei/pingcrm-grails">Grails/Vue</A> by Mattias Reichel
+        </Li>
       </Ul>
     </>
   )
