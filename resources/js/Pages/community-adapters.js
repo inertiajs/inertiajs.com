@@ -45,6 +45,9 @@ const Page = () => {
           <A href="https://github.com/petaki/inertia-go">Go</A>
         </Li>
         <Li>
+           <A href="https://github.com/matrei/grails-inertia-plugin">Grails</A>
+        </Li>
+        <Li>
           <A href="https://github.com/girardinsamuel/masonite-inertia/">Masonite</A>
         </Li>
         <Li>
