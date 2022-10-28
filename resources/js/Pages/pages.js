@@ -427,7 +427,10 @@ const Page = () => {
           createInertiaApp({
             resolve: name => {
               const page = require(\`./Pages/\${name}\`).default
-              page.layout = page.layout || Layout
+                const DefaultLayout = (page: React.ReactNode) => (
+                      <Layout children={page} />
+                );
+              page.layout = page.layout || DefaultLayout
               return page
             },
             // ...
