@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\GithubSponsorshipWebhookController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('github/webhooks/sponsorship', [GithubSponsorshipWebhookController::class, 'store']);
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
