@@ -1,5 +1,5 @@
 import '../css/app.css'
-import { hydrateRoot } from 'react-dom/client'
+import { hydrate } from 'react-dom'
 import { Inertia } from '@inertiajs/inertia'
 import { InertiaProgress } from '@inertiajs/progress'
 import { createInertiaApp } from '@inertiajs/inertia-react'
@@ -36,6 +36,6 @@ InertiaProgress.init()
 createInertiaApp({
   resolve: name => import.meta.globEager('./Pages/**/*.jsx')[`./Pages/${name}.jsx`],
   setup({ el, App, props }) {
-    hydrateRoot(el, <App {...props} />)
+    hydrate(<App {...props} />, el)
   },
 })
