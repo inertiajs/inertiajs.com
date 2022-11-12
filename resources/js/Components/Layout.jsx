@@ -39,11 +39,13 @@ export default function Layout({ meta, children }) {
     })
 
     // Algolia DocSearch
-    window.docsearch({
-      apiKey: 'ea9f3351550104420cd3c7b4e2b9b7b1',
-      indexName: 'inertiajs',
-      inputSelector: '#docsearch',
-      debug: false,
+    setTimeout(() => {
+      window.docsearch({
+        apiKey: 'ea9f3351550104420cd3c7b4e2b9b7b1',
+        indexName: 'inertiajs',
+        inputSelector: '#docsearch',
+        debug: true,
+      })
     })
 
     // Add shortcut to search input when pressing the "/" key

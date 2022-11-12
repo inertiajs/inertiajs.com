@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'Responses',

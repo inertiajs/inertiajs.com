@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'Scroll management',
@@ -54,7 +54,7 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/inertia-vue'\n
+              import { Link } from '@inertiajs/vue2'\n
               <Link href="/" preserve-scroll>Home</Link>
             `,
           },
@@ -62,7 +62,7 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/inertia-vue3'\n
+              import { Link } from '@inertiajs/vue3'\n
               <Link href="/" preserve-scroll>Home</Link>
             `,
           },
@@ -70,7 +70,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/inertia-react'\n
+              import { Link } from '@inertiajs/react'\n
               <Link preserveScroll href="/">Home</Link>
             `,
           },
@@ -78,7 +78,7 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/svelte'\n
               <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
               <Link href="/" preserveScroll>Home</Link>
             `,

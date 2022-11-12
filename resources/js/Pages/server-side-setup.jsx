@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'Server-side setup',
@@ -64,8 +64,7 @@ const Page = () => {
                 <head>
                   <meta charset="utf-8" />
                   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-                  <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
-                  <script src="{{ mix('/js/app.js') }}" defer></script>
+                  @vite('resources/js/app.js')
                   @inertiaHead
                 </head>
                 <body>

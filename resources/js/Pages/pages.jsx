@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'Pages',
@@ -45,7 +45,7 @@ const Page = () => {
               </template>\n
               <script>
                 import Layout from './Layout'
-                import { Head } from '@inertiajs/inertia-vue'\n
+                import { Head } from '@inertiajs/vue2'\n
                 export default {
                   components: {
                     Head,
@@ -71,7 +71,7 @@ const Page = () => {
               </template>\n
               <script>
                 import Layout from './Layout'
-                import { Head } from '@inertiajs/inertia-vue3'\n
+                import { Head } from '@inertiajs/vue3'\n
                 export default {
                   components: {
                     Head,
@@ -89,7 +89,7 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
                             import Layout from './Layout'
-              import { Head } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/react'\n
               export default function Welcome({ user }) {
                 return (
                   <Layout>
@@ -172,7 +172,7 @@ const Page = () => {
                 </main>
               </template>\n
               <script>
-              import { Link } from '@inertiajs/inertia-vue'\n
+              import { Link } from '@inertiajs/vue2'\n
               export default {
                 components: {
                   Link,
@@ -198,7 +198,7 @@ const Page = () => {
                 </main>
               </template>\n
               <script>
-              import { Link } from '@inertiajs/inertia-vue3'\n
+              import { Link } from '@inertiajs/vue3'\n
               export default {
                 components: {
                   Link,
@@ -212,7 +212,7 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import React, { useEffect } from 'react'
-              import { Link } from '@inertiajs/inertia-react'\n
+              import { Link } from '@inertiajs/react'\n
               export default function Layout({ children }) {
                 return (
                   <main>
@@ -232,7 +232,7 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import { inertia } from '@inertiajs/inertia-svelte'
+                import { inertia } from '@inertiajs/svelte'
               </script>\n
               <main>
                 <header>

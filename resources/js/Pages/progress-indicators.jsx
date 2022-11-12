@@ -1,5 +1,5 @@
+import { A, Code, CodeBlock, H1, H2, H3, Layout, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, H3, Layout, P } from '@/Components'
 
 const meta = {
   title: 'Progress indicators',
@@ -31,7 +31,6 @@ const Page = () => {
         language="bash"
         children={dedent`
           npm install @inertiajs/progress
-          yarn add @inertiajs/progress
         `}
       />
       <P>Once the library has been installed, you should initialize it in your app.</P>
@@ -72,7 +71,6 @@ const Page = () => {
         language="bash"
         children={dedent`
           npm install nprogress
-          yarn add nprogress
         `}
       />
       <P>
@@ -87,14 +85,43 @@ const Page = () => {
         `}
       />
       <P>
-        Next, import both <Code>NProgress</Code> and <Code>Inertia</Code> into your application.
+        Next, import both <Code>NProgress</Code> and <Code>router</Code> into your application.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import NProgress from 'nprogress'
-          import { Inertia } from '@inertiajs/inertia'
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import NProgress from 'nprogress'
+              import { router } from '@inertiajs/vue2'
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import NProgress from 'nprogress'
+              import { router } from '@inertiajs/vue3'
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import NProgress from 'nprogress'
+              import { router } from '@inertiajs/react'
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import NProgress from 'nprogress'
+              import { router } from '@inertiajs/svelte'
+            `,
+          },
+        ]}
       />
       <P>
         Next, let's add a <Code>start</Code> event listener. We'll use this listener to show the progress bar when a new
@@ -103,7 +130,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.on('start', () => NProgress.start())
+          router.on('start', () => NProgress.start())
         `}
       />
       <P>
@@ -112,7 +139,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.on('finish', () => NProgress.done())
+          router.on('finish', () => NProgress.done())
         `}
       />
       <P>
@@ -133,7 +160,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.on('finish', (event) => {
+          router.on('finish', (event) => {
             if (event.detail.visit.completed) {
               NProgress.done()
             } else if (event.detail.visit.interrupted) {
@@ -153,7 +180,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.on('progress', (event) => {
+          router.on('progress', (event) => {
             if (event.detail.progress.percentage) {
               NProgress.set((event.detail.progress.percentage / 100) * 0.9)
             }
@@ -188,7 +215,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.on('start', () => {
+          router.on('start', () => {
             timeout = setTimeout(() => NProgress.start(), 250)
           })
         `}
@@ -200,7 +227,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.on('finish', (event) => {
+          router.on('finish', (event) => {
             clearTimeout(timeout)
             // ...
           })
@@ -213,7 +240,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.on('finish', (event) => {
+          router.on('finish', (event) => {
             clearTimeout(timeout)
             if (!NProgress.isStarted()) {
               return
@@ -228,7 +255,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.on('progress', event => {
+          router.on('progress', event => {
             if (!NProgress.isStarted()) {
               return
             }
@@ -239,34 +266,129 @@ const Page = () => {
       <P>That's it, you now have a beautiful custom page loading indicator!</P>
       <H3>Complete example</H3>
       <P>For convenience, here is the full source code of the final version of our custom loading indicator.</P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import NProgress from 'nprogress'
-          import { Inertia } from '@inertiajs/inertia'\n
-          let timeout = null\n
-          Inertia.on('start', () => {
-            timeout = setTimeout(() => NProgress.start(), 250)
-          })\n
-          Inertia.on('progress', (event) => {
-            if (NProgress.isStarted() && event.detail.progress.percentage) {
-              NProgress.set((event.detail.progress.percentage / 100) * 0.9)
-            }
-          })\n
-          Inertia.on('finish', (event) => {
-            clearTimeout(timeout)
-            if (!NProgress.isStarted()) {
-              return
-            } else if (event.detail.visit.completed) {
-              NProgress.done()
-            } else if (event.detail.visit.interrupted) {
-              NProgress.set(0)
-            } else if (event.detail.visit.cancelled) {
-              NProgress.done()
-              NProgress.remove()
-            }
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import NProgress from 'nprogress'
+              import { router } from '@inertiajs/vue2'\n
+              let timeout = null\n
+              router.on('start', () => {
+                timeout = setTimeout(() => NProgress.start(), 250)
+              })\n
+              router.on('progress', (event) => {
+                if (NProgress.isStarted() && event.detail.progress.percentage) {
+                  NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+                }
+              })\n
+              router.on('finish', (event) => {
+                clearTimeout(timeout)
+                if (!NProgress.isStarted()) {
+                  return
+                } else if (event.detail.visit.completed) {
+                  NProgress.done()
+                } else if (event.detail.visit.interrupted) {
+                  NProgress.set(0)
+                } else if (event.detail.visit.cancelled) {
+                  NProgress.done()
+                  NProgress.remove()
+                }
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import NProgress from 'nprogress'
+              import { router } from '@inertiajs/vue3'\n
+              let timeout = null\n
+              router.on('start', () => {
+                timeout = setTimeout(() => NProgress.start(), 250)
+              })\n
+              router.on('progress', (event) => {
+                if (NProgress.isStarted() && event.detail.progress.percentage) {
+                  NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+                }
+              })\n
+              router.on('finish', (event) => {
+                clearTimeout(timeout)
+                if (!NProgress.isStarted()) {
+                  return
+                } else if (event.detail.visit.completed) {
+                  NProgress.done()
+                } else if (event.detail.visit.interrupted) {
+                  NProgress.set(0)
+                } else if (event.detail.visit.cancelled) {
+                  NProgress.done()
+                  NProgress.remove()
+                }
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import NProgress from 'nprogress'
+              import { router } from '@inertiajs/react'\n
+              let timeout = null\n
+              router.on('start', () => {
+                timeout = setTimeout(() => NProgress.start(), 250)
+              })\n
+              router.on('progress', (event) => {
+                if (NProgress.isStarted() && event.detail.progress.percentage) {
+                  NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+                }
+              })\n
+              router.on('finish', (event) => {
+                clearTimeout(timeout)
+                if (!NProgress.isStarted()) {
+                  return
+                } else if (event.detail.visit.completed) {
+                  NProgress.done()
+                } else if (event.detail.visit.interrupted) {
+                  NProgress.set(0)
+                } else if (event.detail.visit.cancelled) {
+                  NProgress.done()
+                  NProgress.remove()
+                }
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import NProgress from 'nprogress'
+              import { router } from '@inertiajs/svelte'\n
+              let timeout = null\n
+              router.on('start', () => {
+                timeout = setTimeout(() => NProgress.start(), 250)
+              })\n
+              router.on('progress', (event) => {
+                if (NProgress.isStarted() && event.detail.progress.percentage) {
+                  NProgress.set((event.detail.progress.percentage / 100) * 0.9)
+                }
+              })\n
+              router.on('finish', (event) => {
+                clearTimeout(timeout)
+                if (!NProgress.isStarted()) {
+                  return
+                } else if (event.detail.visit.completed) {
+                  NProgress.done()
+                } else if (event.detail.visit.interrupted) {
+                  NProgress.set(0)
+                } else if (event.detail.visit.cancelled) {
+                  NProgress.done()
+                  NProgress.remove()
+                }
+              })
+            `,
+          },
+        ]}
       />
     </>
   )

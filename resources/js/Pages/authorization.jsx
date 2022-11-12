@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { H1, Layout, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'Authorization',

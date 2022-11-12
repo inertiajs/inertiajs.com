@@ -1,5 +1,5 @@
+import { Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
-import { Code, Notice, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Title & meta',
@@ -23,8 +23,8 @@ const Page = () => {
         <Code>{'<title>'}</Code>, <Code>{'<meta>'}</Code> tags, and other <Code>{'<head>'}</Code> elements.
       </P>
       <Notice>
-        The <Code color="orange">{'<Head>'}</Code> component will only replace <Code>{'<head>'}</Code> elements that are
-        not in your server-side root template.
+        The <Code color="orange">{'<Head>'}</Code> component will only replace <Code color="orange">{'<head>'}</Code>{' '}
+        elements that are not in your server-side root template.
       </Notice>
       <Notice>
         The <Code color="orange">{'<Head>'}</Code> component is not available in the Svelte adapter, as Svelte already
@@ -41,7 +41,7 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-vue'\n
+              import { Head } from '@inertiajs/vue2'\n
               <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description">
@@ -52,7 +52,7 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-vue3'\n
+              import { Head } from '@inertiajs/vue3'\n
               <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description">
@@ -63,7 +63,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/react'\n
               <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description" />
@@ -94,7 +94,7 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-vue'\n
+              import { Head } from '@inertiajs/vue2'\n
               <Head title="Your page title" />
             `,
           },
@@ -102,7 +102,7 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-vue3'\n
+              import { Head } from '@inertiajs/vue3'\n
               <Head title="Your page title" />
             `,
           },
@@ -110,7 +110,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/react'\n
               <Head title="Your page title" />
             `,
           },
@@ -149,7 +149,7 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-vue'\n
+              import { Head } from '@inertiajs/vue2'\n
               <Head title="Home">
             `,
           },
@@ -157,7 +157,7 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-vue3'\n
+              import { Head } from '@inertiajs/vue3'\n
               <Head title="Home">
             `,
           },
@@ -165,7 +165,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/react'\n
               <Head title="Home">
             `,
           },
@@ -197,7 +197,7 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-vue'\n
+              import { Head } from '@inertiajs/vue2'\n
               <Head>
                 <title>Home</title>
               </Head>
@@ -207,7 +207,7 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-vue3'\n
+              import { Head } from '@inertiajs/vue3'\n
               <Head>
                 <title>Home</title>
               </Head>
@@ -217,7 +217,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/react'\n
               <Head>
                 <title>Home</title>
               </Head>
@@ -245,14 +245,14 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               // Layout.vue\n
-              import { Head } from '@inertiajs/inertia-vue'\n
+              import { Head } from '@inertiajs/vue2'\n
               <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
               </Head>\n
               // About.vue\n
-              import { Head } from '@inertiajs/inertia-vue'\n
+              import { Head } from '@inertiajs/vue2'\n
               <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
@@ -264,14 +264,14 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               // Layout.vue\n
-              import { Head } from '@inertiajs/inertia-vue3'\n
+              import { Head } from '@inertiajs/vue3'\n
               <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
               </Head>\n
               // About.vue\n
-              import { Head } from '@inertiajs/inertia-vue3'\n
+              import { Head } from '@inertiajs/vue3'\n
               <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
@@ -283,14 +283,14 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               // Layout.js\n
-              import { Head } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/react'\n
               <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
               </Head>\n
               // About.js\n
-              import { Head } from '@inertiajs/inertia-react'\n
+              import { Head } from '@inertiajs/react'\n
               <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
@@ -342,7 +342,7 @@ const Page = () => {
                 </Head>
               </template>\n
               <script>
-              import { Head } from '@inertiajs/inertia-vue'\n
+              import { Head } from '@inertiajs/vue2'\n
               export default {
                 components: {
                   Head,
@@ -365,7 +365,7 @@ const Page = () => {
                 </Head>
               </template>\n
               <script>
-              import { Head } from '@inertiajs/inertia-vue3'\n
+              import { Head } from '@inertiajs/vue3'\n
               export default {
                 components: {
                   Head,
@@ -382,7 +382,7 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               // AppHead.js\n
-                            import { Head } from '@inertiajs/inertia-react'\n
+                            import { Head } from '@inertiajs/react'\n
               const Site = ({ title, children }) => {
                 return (
                   <Head>

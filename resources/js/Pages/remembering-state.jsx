@@ -1,5 +1,5 @@
+import { A, Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Remembering state',
@@ -64,7 +64,7 @@ const Page = () => {
             description: 'Use the "useRemember" hook to tell Inertia which data it should remember.',
             language: 'js',
             code: dedent`
-              import { useRemember } from '@inertiajs/inertia-vue3'\n
+              import { useRemember } from '@inertiajs/vue3'\n
               export default {
                 setup() {
                   const form = useRemember({
@@ -81,8 +81,7 @@ const Page = () => {
             description: 'Use the "useRemember" hook to tell Inertia which data it should remember.',
             language: 'jsx',
             code: dedent`
-              import { useRemember } from '@inertiajs/inertia-react'
-              import React from 'react'\n
+              import { useRemember } from '@inertiajs/react'\n
               export default function Profile() {
                 const [formState, setFormState] = useRemember({
                   first_name: null,
@@ -98,7 +97,7 @@ const Page = () => {
             description: 'Use the "remember" store to tell Inertia which data it should remember.',
             language: 'js',
             code: dedent`
-              import { remember } from '@inertiajs/inertia-svelte'\n
+              import { remember } from '@inertiajs/svelte'\n
               let form = remember({
                 first_name: null,
                 last_name: null,
@@ -145,7 +144,7 @@ const Page = () => {
             description: 'Set a key as the second argument of useRemember().',
             language: 'js',
             code: dedent`
-              import { useRemember } from '@inertiajs/inertia-vue3'\n
+              import { useRemember } from '@inertiajs/vue3'\n
               export default {
                 setup() {
                   const form = useRemember({
@@ -162,8 +161,7 @@ const Page = () => {
             description: 'Set a key as the second argument of useRemember().',
             language: 'jsx',
             code: dedent`
-              import { useRemember } from '@inertiajs/inertia-react'
-              import React from 'react'\n
+              import { useRemember } from '@inertiajs/react'\n
               export default function Profile() {
                 const [formState, setFormState] = useRemember({
                   first_name: null,
@@ -177,7 +175,7 @@ const Page = () => {
             description: 'Set a key as the second argument of useRemember().',
             language: 'js',
             code: dedent`
-                import { page, remember } from '@inertiajs/inertia-svelte'\n
+                import { page, remember } from '@inertiajs/svelte'\n
                 let form = remember({
                   first_name: null,
                   last_name: null,
@@ -220,7 +218,7 @@ const Page = () => {
             description: 'Set a dynamic key as the second argument of useRemember().',
             language: 'js',
             code: dedent`
-              import { useRemember } from '@inertiajs/inertia-vue3'\n
+              import { useRemember } from '@inertiajs/vue3'\n
               export default {
                 setup({ user }) {
                   const form = useRemember({
@@ -237,8 +235,7 @@ const Page = () => {
             description: 'Set a dynamic key as the second argument of useRemember().',
             language: 'jsx',
             code: dedent`
-              import { useRemember } from '@inertiajs/inertia-react'
-              import React from 'react'\n
+              import { useRemember } from '@inertiajs/react'\n
               export default function Profile() {
                 const [formState, setFormState] = useRemember({
                   first_name: props.user.first_name,
@@ -252,7 +249,7 @@ const Page = () => {
             description: 'Set a dynamic key as the second argument of useRemember().',
             language: 'js',
             code: dedent`
-                import { page, remember } from '@inertiajs/inertia-svelte'\n
+                import { page, remember } from '@inertiajs/svelte'\n
                 let form = remember({
                   first_name: $page.props.user.first_name,
                   last_name: $page.props.user.last_name,
@@ -273,15 +270,16 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              this.$inertia.form('CreateUser', data)
-              this.$inertia.form(\`EditUser:\${this.user.id}\`, data)
+              import { useForm } from '@inertiajs/vue2'\n
+              form: useForm('CreateUser', data)
+              form: useForm(\`EditUser:\${this.user.id}\`, data)
             `,
           },
           {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/inertia-vue3'\n
+              import { useForm } from '@inertiajs/vue3'\n
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,
@@ -290,7 +288,7 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/inertia-react'\n
+              import { useForm } from '@inertiajs/react'\n
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,
@@ -299,7 +297,7 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/inertia-svelte'\n
+              import { useForm } from '@inertiajs/svelte'\n
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,
@@ -316,15 +314,53 @@ const Page = () => {
         However, it's possible to also manage this manually using the underlying <Code>remember()</Code> and{' '}
         <Code>restore()</Code> methods in Inertia.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          // Save local component state to history state...
-          Inertia.remember(data, 'my-key')\n
-          // Restore local component state from history state...
-          let data = Inertia.restore('my-key')
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              // Save local component state to history state...
+              router.remember(data, 'my-key')\n
+              // Restore local component state from history state...
+              let data = router.restore('my-key')
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              // Save local component state to history state...
+              router.remember(data, 'my-key')\n
+              // Restore local component state from history state...
+              let data = router.restore('my-key')
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              // Save local component state to history state...
+              router.remember(data, 'my-key')\n
+              // Restore local component state from history state...
+              let data = router.restore('my-key')
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              // Save local component state to history state...
+              router.remember(data, 'my-key')\n
+              // Restore local component state from history state...
+              let data = router.restore('my-key')
+            `,
+          },
+        ]}
       />
     </>
   )

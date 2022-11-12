@@ -1,5 +1,5 @@
+import { Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
-import { Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Partial reloads',
@@ -34,25 +34,89 @@ const Page = () => {
         To perform a partial reload, use the <Code>only</Code> property to specify which data the server should return.
         This option should be an array of keys which correspond to the keys of the props.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.visit(url, {
-            only: ['users'],
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.visit(url, {
+                only: ['users'],
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.visit(url, {
+                only: ['users'],
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.visit(url, {
+                only: ['users'],
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.visit(url, {
+                only: ['users'],
+              })
+            `,
+          },
+        ]}
       />
       <P>
         Since partial reloads can only be made to the same page component the user is already on, it almost always makes
-        sense to just use the <Code>Inertia.reload()</Code> method, which automatically uses the current URL.
+        sense to just use the <Code>router.reload()</Code> method, which automatically uses the current URL.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.reload({ only: ['users'] })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.reload({ only: ['users'] })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.reload({ only: ['users'] })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.reload({ only: ['users'] })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.reload({ only: ['users'] })
+            `,
+          },
+        ]}
       />
       <P>
         It's also possible to perform partial reloads with Inertia links using the <Code>only</Code> property.
@@ -63,7 +127,7 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/inertia-vue'\n
+              import { Link } from '@inertiajs/vue2'\n
               <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
           },
@@ -71,7 +135,7 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/inertia-vue3'\n
+              import { Link } from '@inertiajs/vue3'\n
               <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
           },
@@ -79,7 +143,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/inertia-react'\n
+              import { Link } from '@inertiajs/react'\n
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
@@ -87,7 +151,7 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/inertia-svelte'\n
+              import { inertia, Link } from '@inertiajs/svelte'\n
               <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,

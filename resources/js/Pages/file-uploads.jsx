@@ -1,5 +1,5 @@
+import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'File uploads',
@@ -24,13 +24,49 @@ const Page = () => {
         If you would like the request to always use a <Code>FormData</Code> object regardless of whether a file is
         present in the data, you may provide the <Code>forceFormData</Code> option when making the request.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/users', data, {
-            forceFormData: true,
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/users', data, {
+                forceFormData: true,
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/users', data, {
+                forceFormData: true,
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/users', data, {
+                forceFormData: true,
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/users', data, {
+                forceFormData: true,
+              })
+            `,
+          },
+        ]}
       />
       <P>
         You can learn more about the <Code>FormData</Code> interface via its{' '}
@@ -62,10 +98,11 @@ const Page = () => {
                 </form>
               </template>\n
               <script>
+              import { useForm } from '@inertiajs/vue2'\n
               export default {
                 data() {
                   return {
-                    form: this.$inertia.form({
+                    form: useForm({
                       name: null,
                       avatar: null,
                     }),
@@ -95,7 +132,7 @@ const Page = () => {
                 </form>
               </template>\n
               <script>
-              import { useForm } from '@inertiajs/inertia-vue3'\n
+              import { useForm } from '@inertiajs/vue3'\n
               export default {
                 setup () {
                   const form = useForm({
@@ -115,7 +152,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-                            import { useForm } from '@inertiajs/inertia-react'\n
+                            import { useForm } from '@inertiajs/react'\n
               const { data, setData, post, progress } = useForm({
                 name: null,
                 avatar: null,
@@ -143,7 +180,7 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-              import { useForm } from '@inertiajs/inertia-svelte'\n
+              import { useForm } from '@inertiajs/svelte'\n
               let form = useForm({
                 name: null,
                 avatar: null,
@@ -187,14 +224,53 @@ const Page = () => {
         framework handle the request as a <Code>PUT</Code> or <Code>PATCH</Code> request. This is done by including a{' '}
         <Code>_method</Code> attribute in the data of your request.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post(\`/users/\${user.id}\`, {
-            _method: 'put',
-            avatar: form.avatar,
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post(\`/users/\${user.id}\`, {
+                _method: 'put',
+                avatar: form.avatar,
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post(\`/users/\${user.id}\`, {
+                _method: 'put',
+                avatar: form.avatar,
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post(\`/users/\${user.id}\`, {
+                _method: 'put',
+                avatar: form.avatar,
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post(\`/users/\${user.id}\`, {
+                _method: 'put',
+                avatar: form.avatar,
+              })
+            `,
+          },
+        ]}
       />
     </>
   )

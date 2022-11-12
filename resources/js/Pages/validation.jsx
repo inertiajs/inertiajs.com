@@ -1,5 +1,5 @@
+import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Validation',
@@ -74,6 +74,7 @@ const Page = () => {
                 </form>
               </template>\n
               <script>
+              import { router } from '@inertiajs/vue2'\n
               export default {
                 props: {
                   errors: Object,
@@ -89,7 +90,7 @@ const Page = () => {
                 },
                 methods: {
                   submit() {
-                    this.$inertia.post('/users', this.form)
+                    router.post('/users', this.form)
                   },
                 },
               }
@@ -115,6 +116,7 @@ const Page = () => {
                 </form>
               </template>\n
               <script>
+              import { router } from '@inertiajs/vue3'\n
               export default {
                 props: {
                   errors: Object,
@@ -130,7 +132,7 @@ const Page = () => {
                 },
                 methods: {
                   submit() {
-                    this.$inertia.post('/users', this.form)
+                    router.post('/users', this.form)
                   },
                 },
               }
@@ -141,9 +143,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'
-              import { usePage } from '@inertiajs/inertia-react'
-              import React, { useState } from 'react'\n
+              import { useState } from 'react'
+              import { router, usePage } from '@inertiajs/react'\n
               export default function Edit() {
                 const { errors } = usePage().props\n
                 const [values, setValues] = useState({
@@ -159,7 +160,7 @@ const Page = () => {
                 }\n
                 function handleSubmit(e) {
                   e.preventDefault()
-                  Inertia.post('/users', values)
+                  router.post('/users', values)
                 }\n
                 return (
                   <form onSubmit={handleSubmit}>
@@ -183,7 +184,7 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import { Inertia } from '@inertiajs/inertia'\n
+                import { router } from '@inertiajs/svelte'\n
                 export let errors = {}\n
                 let values = {
                   first_name: null,
@@ -191,7 +192,7 @@ const Page = () => {
                   email: null,
                 }\n
                 function handleSubmit() {
-                  Inertia.post('/users', values)
+                  router.post('/users', values)
                 }
               </script>\n
               <form on:submit|preventDefault={handleSubmit}>
@@ -246,16 +247,61 @@ const Page = () => {
         <Code>createCompany</Code> error bag for the first form and a <Code>createUser</Code> error bag for the second
         form.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/companies', data, {
-            errorBag: 'createCompany',
-          })\n
-          Inertia.post('/users', data, {
-            errorBag: 'createUser',
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/companies', data, {
+                errorBag: 'createCompany',
+              })\n
+              router.post('/users', data, {
+                errorBag: 'createUser',
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/companies', data, {
+                errorBag: 'createCompany',
+              })\n
+              router.post('/users', data, {
+                errorBag: 'createUser',
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/companies', data, {
+                errorBag: 'createCompany',
+              })\n
+              router.post('/users', data, {
+                errorBag: 'createUser',
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/companies', data, {
+                errorBag: 'createCompany',
+              })\n
+              router.post('/users', data, {
+                errorBag: 'createUser',
+              })
+            `,
+          },
+        ]}
       />
       <P>
         Specifying an error bag will cause the validation errors to come back from the server within{' '}

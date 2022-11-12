@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'Forms',
@@ -40,6 +40,7 @@ const Page = () => {
                 </form>
               </template>\n
               <script>
+              import { router } from '@inertiajs/vue2'\n
               export default {
                 data() {
                   return {
@@ -52,7 +53,7 @@ const Page = () => {
                 },
                 methods: {
                   submit() {
-                    this.$inertia.post('/users', this.form)
+                    router.post('/users', this.form)
                   },
                 },
               }
@@ -76,7 +77,7 @@ const Page = () => {
               </template>\n
               <script>
               import { reactive } from 'vue'
-              import { Inertia } from '@inertiajs/inertia'\n
+              import { router } from '@inertiajs/vue3'\n
               export default {
                 setup () {
                   const form = reactive({
@@ -85,7 +86,7 @@ const Page = () => {
                     email: null,
                   })\n
                   function submit() {
-                    Inertia.post('/users', form)
+                    router.post('/users', form)
                   }\n
                   return { form, submit }
                 },
@@ -97,8 +98,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'
-              import React, { useState } from 'react'\n
+              import React, { useState } from 'react'
+              import { router } from '@inertiajs/react'\n
               export default function Edit() {
                 const [values, setValues] = useState({
                   first_name: "",
@@ -115,7 +116,7 @@ const Page = () => {
                 }\n
                 function handleSubmit(e) {
                   e.preventDefault()
-                  Inertia.post('/users', values)
+                  router.post('/users', values)
                 }\n
                 return (
                   <form onSubmit={handleSubmit}>
@@ -136,14 +137,14 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import { Inertia } from '@inertiajs/inertia'\n
+                import { router } from '@inertiajs/svelte'\n
                 let values = {
                   first_name: null,
                   last_name: null,
                   email: null,
                 }\n
                 function handleSubmit() {
-                  Inertia.post('/users', values)
+                  router.post('/users', values)
                 }
               </script>\n
               <form on:submit|preventDefault={handleSubmit}>
@@ -238,10 +239,11 @@ const Page = () => {
                 </form>
               </template>\n
               <script>
+              import { useForm } from '@inertiajs/vue2'\n
               export default {
                 data() {
                   return {
-                    form: this.$inertia.form({
+                    form: useForm({
                       email: null,
                       password: null,
                       remember: false,
@@ -271,7 +273,7 @@ const Page = () => {
                 </form>
               </template>\n
               <script>
-              import { useForm } from '@inertiajs/inertia-vue3'\n
+              import { useForm } from '@inertiajs/vue3'\n
               export default {
                 setup () {
                   const form = useForm({
@@ -289,7 +291,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-                            import { useForm } from '@inertiajs/inertia-react'\n
+              import { useForm } from '@inertiajs/react'\n
               const { data, setData, post, processing, errors } = useForm({
                 email: '',
                 password: '',
@@ -316,7 +318,7 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-              import { useForm } from '@inertiajs/inertia-svelte'\n
+              import { useForm } from '@inertiajs/svelte'\n
               let form = useForm({
                 email: null,
                 password: null,
@@ -955,15 +957,16 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              this.$inertia.form('CreateUser', data)
-              this.$inertia.form(\`EditUser:\${this.user.id}\`, data)
+              import { useForm } from '@inertiajs/vue2'\n
+              form: useForm('CreateUser', data)
+              form: useForm(\`EditUser:\${this.user.id}\`, data)
             `,
           },
           {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/inertia-vue3'\n
+              import { useForm } from '@inertiajs/vue3'\n
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,
@@ -972,7 +975,7 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/inertia-react'\n
+              import { useForm } from '@inertiajs/react'\n
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,
@@ -981,7 +984,7 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/inertia-svelte'\n
+              import { useForm } from '@inertiajs/svelte'\n
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,

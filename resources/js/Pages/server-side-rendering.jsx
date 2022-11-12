@@ -60,7 +60,6 @@ const Page = () => {
             language: 'bash',
             code: dedent`
               npm install vue-server-renderer
-              yarn add vue-server-renderer
             `,
           },
           {
@@ -68,7 +67,6 @@ const Page = () => {
             language: 'bash',
             code: dedent`
               npm install @vue/server-renderer
-              yarn add @vue/server-renderer
             `,
           },
           {
@@ -76,7 +74,6 @@ const Page = () => {
             language: 'bash',
             code: dedent`
               npm install react-dom
-              yarn add react-dom
             `,
           },
         ]}
@@ -93,7 +90,6 @@ const Page = () => {
         language="bash"
         children={dedent`
           npm install @inertiajs/server
-          yarn add @inertiajs/server
         `}
       />
       <P>
@@ -117,7 +113,7 @@ const Page = () => {
             code: dedent`
               import Vue from 'vue'
               import { createRenderer } from 'vue-server-renderer'
-              import { createInertiaApp } from '@inertiajs/inertia-vue'
+              import { createInertiaApp } from '@inertiajs/vue2'
               import createServer from '@inertiajs/server'
 
               createServer((page) => createInertiaApp({
@@ -139,7 +135,7 @@ const Page = () => {
             code: dedent`
               import { createSSRApp, h } from 'vue'
               import { renderToString } from '@vue/server-renderer'
-              import { createInertiaApp } from '@inertiajs/inertia-vue3'
+              import { createInertiaApp } from '@inertiajs/vue3'
               import createServer from '@inertiajs/server'
 
               createServer((page) => createInertiaApp({
@@ -159,7 +155,7 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
                             import ReactDOMServer from 'react-dom/server'
-              import { createInertiaApp } from '@inertiajs/inertia-react'
+              import { createInertiaApp } from '@inertiajs/react'
               import createServer from '@inertiajs/server'
 
               createServer((page) => createInertiaApp({

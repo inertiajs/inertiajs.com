@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'Client-side setup',
@@ -7,7 +7,6 @@ const meta = {
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
     { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#initialize-app', name: 'Initialize the Inertia app' },
-    { url: '#progress-indicator', name: 'Progress indicator' },
     { url: '#code-splitting', name: 'Code splitting' },
   ],
 }
@@ -28,41 +27,35 @@ const Page = () => {
         install Inertia into your application, please consult the documentation below.
       </P>
       <H2>Install dependencies</H2>
-      <P>
-        First, install the Inertia client-side adapters corresponding to your framework of choice using NPM or Yarn.
-      </P>
+      <P>First, install the Inertia client-side adapter corresponding to your framework of choice.</P>
       <TabbedCode
         examples={[
           {
             name: 'Vue 2',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/inertia @inertiajs/inertia-vue
-              yarn add @inertiajs/inertia @inertiajs/inertia-vue
+              npm install @inertiajs/vue2
             `,
           },
           {
             name: 'Vue 3',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/inertia @inertiajs/inertia-vue3
-              yarn add @inertiajs/inertia @inertiajs/inertia-vue3
+              npm install @inertiajs/vue3
             `,
           },
           {
             name: 'React',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/inertia @inertiajs/inertia-react
-              yarn add @inertiajs/inertia @inertiajs/inertia-react
+              npm install @inertiajs/react
             `,
           },
           {
             name: 'Svelte',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/inertia @inertiajs/inertia-svelte
-              yarn add @inertiajs/inertia @inertiajs/inertia-svelte
+              npm install @inertiajs/svelte
             `,
           },
         ]}
@@ -79,7 +72,7 @@ const Page = () => {
             language: 'js',
             code: dedent`
               import Vue from 'vue'
-              import { createInertiaApp } from '@inertiajs/inertia-vue'\n
+              import { createInertiaApp } from '@inertiajs/vue2'\n
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}\`),
                 setup({ el, App, props, plugin }) {
@@ -96,7 +89,7 @@ const Page = () => {
             language: 'js',
             code: dedent`
               import { createApp, h } from 'vue'
-              import { createInertiaApp } from '@inertiajs/inertia-vue3'\n
+              import { createInertiaApp } from '@inertiajs/vue3'\n
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}\`),
                 setup({ el, App, props, plugin }) {
@@ -111,8 +104,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-                            import { render } from 'react-dom'
-              import { createInertiaApp } from '@inertiajs/inertia-react'\n
+              import { render } from 'react-dom'
+              import { createInertiaApp } from '@inertiajs/react'\n
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}\`),
                 setup({ el, App, props }) {
@@ -125,7 +118,7 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { createInertiaApp } from '@inertiajs/inertia-svelte'\n
+              import { createInertiaApp } from '@inertiajs/svelte'\n
               createInertiaApp({
                 resolve: name => require(\`./Pages/\${name}.svelte\`),
                 setup({ el, App, props }) {
@@ -154,33 +147,6 @@ const Page = () => {
           })
         `}
       />
-      <H2>Progress indicator</H2>
-      <P>
-        Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one
-        page to another. To solve this, Inertia provides an optional{' '}
-        <A href="https://github.com/inertiajs/progress">progress</A> library which shows a loading bar whenever you make
-        an Inertia visit.
-      </P>
-      <P>To start using the Inertia progress library, you will first need to install it via NPM / Yarn:</P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          npm install @inertiajs/progress
-          yarn add @inertiajs/progress
-        `}
-      />
-      <P>Once the library has been installed, initialize it in your application's main JavaScript file.</P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { InertiaProgress } from '@inertiajs/progress'\n
-          InertiaProgress.init()
-        `}
-      />
-      <P>
-        The Inertia progress library also provides a number of customization options, which you can learn more about
-        within the <A href="/progress-indicators">progress indicators</A> documentation.
-      </P>
       <H2>Code splitting</H2>
       <P>
         Code splitting breaks apart the various pages of your application into smaller bundles, which are then loaded on
@@ -200,7 +166,6 @@ const Page = () => {
         language="bash"
         children={dedent`
           npm install @babel/plugin-syntax-dynamic-import
-          yarn add @babel/plugin-syntax-dynamic-import
         `}
       />
       <P>

@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'Shared data',
@@ -130,7 +130,7 @@ const Page = () => {
               </template>\n
               <script>
               import { computed } from 'vue'
-              import { usePage } from '@inertiajs/inertia-vue3'\n
+              import { usePage } from '@inertiajs/vue3'\n
               export default {
                 setup() {
                   const user = computed(() => usePage().props.value.auth.user)
@@ -144,7 +144,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { usePage } from '@inertiajs/inertia-react'\n
+              import { usePage } from '@inertiajs/react'\n
               export default function Layout({ children }) {
                 const { auth } = usePage().props\n
                 return (
@@ -165,7 +165,7 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import { page } from '@inertiajs/inertia-svelte'
+                import { page } from '@inertiajs/svelte'
               </script>\n
               <main>
                 <header>
@@ -253,7 +253,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { usePage } from '@inertiajs/inertia-react'\n
+              import { usePage } from '@inertiajs/react'\n
               export default function Layout({ children }) {
                 const { flash } = usePage().props\n
                 return (
@@ -276,7 +276,7 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import { page } from '@inertiajs/inertia-svelte'
+                import { page } from '@inertiajs/svelte'
               </script>\n
               <main>
                 <header></header>

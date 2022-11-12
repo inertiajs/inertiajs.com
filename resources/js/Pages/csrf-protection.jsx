@@ -1,5 +1,5 @@
-import dedent from 'dedent-js'
 import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
+import dedent from 'dedent-js'
 
 const meta = {
   title: 'CSRF protection',
@@ -28,15 +28,57 @@ const Page = () => {
         One solution is to include the CSRF token as a prop on every response. You can then use the token when making
         Inertia requests.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          this.$inertia.post('/users', {
-            name: this.name,
-            email: this.email,
-            _token: this.$page.props.csrf_token,
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/users', {
+                name: this.name,
+                email: this.email,
+                _token: this.$page.props.csrf_token,
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/users', {
+                name: this.name,
+                email: this.email,
+                _token: this.$page.props.csrf_token,
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/users', {
+                name: this.name,
+                email: this.email,
+                _token: this.$page.props.csrf_token,
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/users', {
+                name: this.name,
+                email: this.email,
+                _token: this.$page.props.csrf_token,
+              })
+            `,
+          },
+        ]}
       />
       <P>
         You can even use Inertia's <A href="/shared-data">shared data</A> functionality to automatically include the{' '}

@@ -1,5 +1,5 @@
+import { A, Code, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Manual visits',
@@ -23,7 +23,7 @@ const Page = () => {
       <H1>Manual visits</H1>
       <P>
         In addition to <A href="/links">creating links</A>, it's also possible to manually make Inertia visits /
-        requests programatically via JavaScript. This is accomplished via the <Code>Inertia.visit()</Code> method.
+        requests programatically via JavaScript. This is accomplished via the <Code>router.visit()</Code> method.
       </P>
       <TabbedCode
         examples={[
@@ -31,8 +31,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              // import { Inertia } from '@inertiajs/inertia'\n
-              this.$inertia.visit(url, {
+              import { router } from '@inertiajs/vue2'\n
+              router.visit(url, {
                 method: 'get',
                 data: {},
                 replace: false,
@@ -57,8 +57,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              // import { Inertia } from '@inertiajs/inertia'\n
-              this.$inertia.visit(url, {
+              import { router } from '@inertiajs/vue3'\n
+              router.visit(url, {
                 method: 'get',
                 data: {},
                 replace: false,
@@ -83,8 +83,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'\n
-              Inertia.visit(url, {
+              import { router } from '@inertiajs/react'\n
+              router.visit(url, {
                 method: 'get',
                 data: {},
                 replace: false,
@@ -109,8 +109,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'\n
-              Inertia.visit(url, {
+              import { router } from '@inertiajs/svelte'\n
+              router.visit(url, {
                 method: 'get',
                 data: {},
                 replace: false,
@@ -135,7 +135,7 @@ const Page = () => {
       />
       <P>
         However, it's generally more convenient to use one of Inertia's shortcut request methods instead. These methods
-        share all the same options as <Code>Inertia.visit()</Code>.
+        share all the same options as <Code>router.visit()</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -143,52 +143,52 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              // import { Inertia } from '@inertiajs/inertia'\n
-              this.$inertia.get(url, data, options)
-              this.$inertia.post(url, data, options)
-              this.$inertia.put(url, data, options)
-              this.$inertia.patch(url, data, options)
-              this.$inertia.delete(url, options)
-              this.$inertia.reload(options) // Uses the current URL...
+              import { router } from '@inertiajs/vue2'\n
+              router.get(url, data, options)
+              router.post(url, data, options)
+              router.put(url, data, options)
+              router.patch(url, data, options)
+              router.delete(url, options)
+              router.reload(options) // Uses the current URL
             `,
           },
           {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              // import { Inertia } from '@inertiajs/inertia'\n
-              this.$inertia.get(url, data, options)
-              this.$inertia.post(url, data, options)
-              this.$inertia.put(url, data, options)
-              this.$inertia.patch(url, data, options)
-              this.$inertia.delete(url, options)
-              this.$inertia.reload(options) // Uses the current URL
+              import { router } from '@inertiajs/vue3'\n
+              router.get(url, data, options)
+              router.post(url, data, options)
+              router.put(url, data, options)
+              router.patch(url, data, options)
+              router.delete(url, options)
+              router.reload(options) // Uses the current URL
             `,
           },
           {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'\n
-              Inertia.get(url, data, options)
-              Inertia.post(url, data, options)
-              Inertia.put(url, data, options)
-              Inertia.patch(url, data, options)
-              Inertia.delete(url, options)
-              Inertia.reload(options) // Uses the current URL
+              import { router } from '@inertiajs/react'\n
+              router.get(url, data, options)
+              router.post(url, data, options)
+              router.put(url, data, options)
+              router.patch(url, data, options)
+              router.delete(url, options)
+              router.reload(options) // Uses the current URL
             `,
           },
           {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'\n
-              Inertia.get(url, data, options)
-              Inertia.post(url, data, options)
-              Inertia.put(url, data, options)
-              Inertia.patch(url, data, options)
-              Inertia.delete(url, options)
-              Inertia.reload(options) // Uses the current URL
+              import { router } from '@inertiajs/svelte'\n
+              router.get(url, data, options)
+              router.post(url, data, options)
+              router.put(url, data, options)
+              router.patch(url, data, options)
+              router.delete(url, options)
+              router.reload(options) // Uses the current URL
             `,
           },
         ]}
@@ -204,11 +204,41 @@ const Page = () => {
         <Code>get</Code>, <Code>post</Code>, <Code>put</Code>, <Code>patch</Code> or <Code>delete</Code>. The default
         method is <Code>get</Code>.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.visit(url, { method: 'post' })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.visit(url, { method: 'post' })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.visit(url, { method: 'post' })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.visit(url, { method: 'post' })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.visit(url, { method: 'post' })
+            `,
+          },
+        ]}
       />
       <Notice>
         Uploading files via <Code color="orange">put</Code> or <Code color="orange">patch</Code> is not supported in
@@ -221,44 +251,173 @@ const Page = () => {
       <P>
         You may use the <Code>data</Code> option to add data to the request.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.visit('/users', {
-            method: 'post',
-            data: {
-              name: 'John Doe',
-              email: 'john.doe@example.com',
-            },
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.visit('/users', {
+                method: 'post',
+                data: {
+                  name: 'John Doe',
+                  email: 'john.doe@example.com',
+                },
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.visit('/users', {
+                method: 'post',
+                data: {
+                  name: 'John Doe',
+                  email: 'john.doe@example.com',
+                },
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.visit('/users', {
+                method: 'post',
+                data: {
+                  name: 'John Doe',
+                  email: 'john.doe@example.com',
+                },
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.visit('/users', {
+                method: 'post',
+                data: {
+                  name: 'John Doe',
+                  email: 'john.doe@example.com',
+                },
+              })
+            `,
+          },
+        ]}
       />
       <P>
         For convenience, the <Code>get()</Code>, <Code>post()</Code>, <Code>put()</Code> and <Code>patch()</Code>{' '}
         methods all accept <Code>data</Code> as their second argument.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/users', {
-            name: 'John Doe',
-            email: 'john.doe@example.com',
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/users', {
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/users', {
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/users', {
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/users', {
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+              })
+            `,
+          },
+        ]}
       />
       <H2>Custom headers</H2>
       <P>
         The <Code>headers</Code> option allows you to add custom headers to a request.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/users', data, {
-            headers: {
-              'Custom-Header': 'value',
-            },
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/users', data, {
+                headers: {
+                  'Custom-Header': 'value',
+                },
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/users', data, {
+                headers: {
+                  'Custom-Header': 'value',
+                },
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/users', data, {
+                headers: {
+                  'Custom-Header': 'value',
+                },
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/users', data, {
+                headers: {
+                  'Custom-Header': 'value',
+                },
+              })
+            `,
+          },
+        ]}
       />
       <Notice>
         The headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be
@@ -270,13 +429,49 @@ const Page = () => {
         <Code>FormData</Code> object. If you would like the visit to always use a <Code>FormData</Code> object, you can
         force this using the <Code>forceFormData</Code> option.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/companies', data, {
-            forceFormData: true,
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/companies', data, {
+                forceFormData: true,
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/companies', data, {
+                forceFormData: true,
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/companies', data, {
+                forceFormData: true,
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/companies', data, {
+                forceFormData: true,
+              })
+            `,
+          },
+        ]}
       />
       <P>
         For more information on uploading files, please consult the dedicated <A href="/file-uploads">file uploads</A>{' '}
@@ -287,11 +482,41 @@ const Page = () => {
         When making visits, Inertia automatically adds a new entry into the browser history. However, it's also possible
         to replace the current history entry by setting the <Code>replace</Code> option to <Code>true</Code>.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.get('/users', { search: 'John' }, { replace: true })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.get('/users', { search: 'John' }, { replace: true })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.get('/users', { search: 'John' }, { replace: true })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.get('/users', { search: 'John' }, { replace: true })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.get('/users', { search: 'John' }, { replace: true })
+            `,
+          },
+        ]}
       />
       <Notice>
         Visits made to the same URL automatically set <Code color="orange">replace</Code> to{' '}
@@ -310,23 +535,89 @@ const Page = () => {
         You can instruct Inertia to preserve the component's state by setting the <Code>preserveState</Code> option to{' '}
         <Code>true</Code>.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.get('/users', { search: 'John' }, { preserveState: true })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.get('/users', { search: 'John' }, { preserveState: true })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.get('/users', { search: 'John' }, { preserveState: true })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.get('/users', { search: 'John' }, { preserveState: true })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.get('/users', { search: 'John' }, { preserveState: true })
+            `,
+          },
+        ]}
       />
       <P>
         You can also lazily evaluate the <Code>preserveState</Code> option based on the response by providing a callback
         to the <Code>preserveState</Code> option.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/users', data, {
-            preserveState: (page) => Object.keys(page.props.errors).length,
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/users', data, {
+                preserveState: (page) => Object.keys(page.props.errors).length,
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/users', data, {
+                preserveState: (page) => Object.keys(page.props.errors).length,
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/users', data, {
+                preserveState: (page) => Object.keys(page.props.errors).length,
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/users', data, {
+                preserveState: (page) => Object.keys(page.props.errors).length,
+              })
+            `,
+          },
+        ]}
       />
       <P>
         For convenience, the <Code>post</Code>, <Code>put</Code>, <Code>patch</Code>, <Code>delete</Code>, and{' '}
@@ -339,23 +630,89 @@ const Page = () => {
         you've defined) back to the top of the page. However, you may use the <Code>preserveScroll</Code> option to
         disable this behaviour.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.visit(url, { preserveScroll: true })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.visit(url, { preserveScroll: true })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.visit(url, { preserveScroll: true })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.visit(url, { preserveScroll: true })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.visit(url, { preserveScroll: true })
+            `,
+          },
+        ]}
       />
       <P>
         You can also lazily evaluate the <Code>preserveScroll</Code> option based on the response by providing a
         callback.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/users', data, {
-            preserveScroll: (page) => Object.keys(page.props.errors).length,
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/users', data, {
+                preserveScroll: (page) => Object.keys(page.props.errors).length,
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/users', data, {
+                preserveScroll: (page) => Object.keys(page.props.errors).length,
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/users', data, {
+                preserveScroll: (page) => Object.keys(page.props.errors).length,
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/users', data, {
+                preserveScroll: (page) => Object.keys(page.props.errors).length,
+              })
+            `,
+          },
+        ]}
       />
       <P>
         For more information regarding this feature, please consult the{' '}
@@ -367,11 +724,41 @@ const Page = () => {
         visits to the same page, thus making your application more efficient since it does not need to retrieve data
         that the page is not interested in refreshing.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.visit('/users', { search: 'John' }, { only: ['users'] })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.visit('/users', { search: 'John' }, { only: ['users'] })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.visit('/users', { search: 'John' }, { only: ['users'] })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.visit('/users', { search: 'John' }, { only: ['users'] })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.visit('/users', { search: 'John' }, { only: ['users'] })
+            `,
+          },
+        ]}
       />
       <P>
         For more information on this feature, please consult the <A href="/partial-reloads">partial reloads</A>{' '}
@@ -382,15 +769,57 @@ const Page = () => {
         You can cancel a visit using a cancel token, which Inertia automatically generates and provides via the{' '}
         <Code>onCancelToken()</Code> callback prior to making the visit.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/users', data, {
-            onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
-          })\n
-          // Cancel the visit...
-          this.cancelToken.cancel()
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/users', data, {
+                onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
+              })\n
+              // Cancel the visit...
+              this.cancelToken.cancel()
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/users', data, {
+                onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
+              })\n
+              // Cancel the visit...
+              this.cancelToken.cancel()
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/users', data, {
+                onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
+              })\n
+              // Cancel the visit...
+              this.cancelToken.cancel()
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/users', data, {
+                onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
+              })\n
+              // Cancel the visit...
+              this.cancelToken.cancel()
+            `,
+          },
+        ]}
       />
       <P>
         The <Code>onCancel()</Code> and <Code>onFinish()</Code> event callbacks will be executed when a visit is
@@ -401,51 +830,204 @@ const Page = () => {
         In addition to Inertia's <A href="/events">global events</A>, Inertia also provides a number of per-visit event
         callbacks.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post('/users', data, {
-            onBefore: (visit) => {},
-            onStart: (visit) => {},
-            onProgress: (progress) => {},
-            onSuccess: (page) => {},
-            onError: (errors) => {},
-            onCancel: () => {},
-            onFinish: visit => {},
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post('/users', data, {
+                onBefore: (visit) => {},
+                onStart: (visit) => {},
+                onProgress: (progress) => {},
+                onSuccess: (page) => {},
+                onError: (errors) => {},
+                onCancel: () => {},
+                onFinish: visit => {},
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post('/users', data, {
+                onBefore: (visit) => {},
+                onStart: (visit) => {},
+                onProgress: (progress) => {},
+                onSuccess: (page) => {},
+                onError: (errors) => {},
+                onCancel: () => {},
+                onFinish: visit => {},
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post('/users', data, {
+                onBefore: (visit) => {},
+                onStart: (visit) => {},
+                onProgress: (progress) => {},
+                onSuccess: (page) => {},
+                onError: (errors) => {},
+                onCancel: () => {},
+                onFinish: visit => {},
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post('/users', data, {
+                onBefore: (visit) => {},
+                onStart: (visit) => {},
+                onProgress: (progress) => {},
+                onSuccess: (page) => {},
+                onError: (errors) => {},
+                onCancel: () => {},
+                onFinish: visit => {},
+              })
+            `,
+          },
+        ]}
       />
       <P>
         Returning <Code>false</Code> from the <Code>onBefore()</Code> callback will cause the visit to be cancelled.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.delete(\`/users/\${user.id}\`, {
-            onBefore: () => confirm('Are you sure you want to delete this user?'),
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.delete(\`/users/\${user.id}\`, {
+                onBefore: () => confirm('Are you sure you want to delete this user?'),
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.delete(\`/users/\${user.id}\`, {
+                onBefore: () => confirm('Are you sure you want to delete this user?'),
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.delete(\`/users/\${user.id}\`, {
+                onBefore: () => confirm('Are you sure you want to delete this user?'),
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.delete(\`/users/\${user.id}\`, {
+                onBefore: () => confirm('Are you sure you want to delete this user?'),
+              })
+            `,
+          },
+        ]}
       />
       <P>
         It's also possible to return a promise from the <Code>onSuccess()</Code> and <Code>onError()</Code> callbacks.
         When doing so, the "finish" event will be delayed until the promise has resolved.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          Inertia.post(url, {
-            onSuccess: () => {
-              return Promise.all([
-                this.doThing(),
-                this.doAnotherThing()
-              ])
-            }
-            onFinish: visit => {
-              // This won't be called until doThing()
-              // and doAnotherThing() have finished.
-            },
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.post(url, {
+                onSuccess: () => {
+                  return Promise.all([
+                    this.doThing(),
+                    this.doAnotherThing()
+                  ])
+                }
+                onFinish: visit => {
+                  // This won't be called until doThing()
+                  // and doAnotherThing() have finished.
+                },
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.post(url, {
+                onSuccess: () => {
+                  return Promise.all([
+                    this.doThing(),
+                    this.doAnotherThing()
+                  ])
+                }
+                onFinish: visit => {
+                  // This won't be called until doThing()
+                  // and doAnotherThing() have finished.
+                },
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.post(url, {
+                onSuccess: () => {
+                  return Promise.all([
+                    this.doThing(),
+                    this.doAnotherThing()
+                  ])
+                }
+                onFinish: visit => {
+                  // This won't be called until doThing()
+                  // and doAnotherThing() have finished.
+                },
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.post(url, {
+                onSuccess: () => {
+                  return Promise.all([
+                    this.doThing(),
+                    this.doAnotherThing()
+                  ])
+                }
+                onFinish: visit => {
+                  // This won't be called until doThing()
+                  // and doAnotherThing() have finished.
+                },
+              })
+            `,
+          },
+        ]}
       />
     </>
   )

@@ -1,5 +1,5 @@
+import { A, Code, H1, H2, Layout, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
 
 const meta = {
   title: 'Events',
@@ -29,44 +29,157 @@ const Page = () => {
       </P>
       <H2>Registering listeners</H2>
       <P>
-        To register an event listener, use the <Code>Inertia.on()</Code> method.
+        To register an event listener, use the <Code>router.on()</Code> method.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('start', (event) => {
-            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+        ]}
       />
       <P>
         Under the hood, Inertia uses native browser events, so you can also interact with Inertia events using the
         typical event methods you may already be familiar with - just be sure to append <Code>inertia:</Code> to the
         event name.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          document.addEventListener('inertia:start', (event) => {
-            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              document.addEventListener('inertia:start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              document.addEventListener('inertia:start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              document.addEventListener('inertia:start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              document.addEventListener('inertia:start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+        ]}
       />
       <H2>Removing listeners</H2>
       <P>
         When you register an event listener, Inertia automatically returns a callback that can be invoked to remove the
         event listener.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          let removeStartEventListener = Inertia.on('start', (event) => {
-            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-          })\n
-          // Remove the listener...
-          removeStartEventListener()
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              let removeStartEventListener = router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })\n
+              // Remove the listener...
+              removeStartEventListener()
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              let removeStartEventListener = router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })\n
+              // Remove the listener...
+              removeStartEventListener()
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              let removeStartEventListener = router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })\n
+              // Remove the listener...
+              removeStartEventListener()
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              let removeStartEventListener = router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })\n
+              // Remove the listener...
+              removeStartEventListener()
+            `,
+          },
+        ]}
       />
       <P>Combined with hooks, you can automatically remove the event listener when components unmount.</P>
       <TabbedCode
@@ -75,11 +188,12 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
+              import { router } from '@inertiajs/vue2'\n
               export default {
                 mounted() {
                   this.$once(
                     'hook:destroyed',
-                    this.$inertia.on('start', (event) => {
+                    router.on('start', (event) => {
                       console.log(\`Starting a visit to \${event.detail.visit.url}\`)
                     })
                   )
@@ -91,12 +205,12 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'
+              import { router } from '@inertiajs/vue3'
               import { onUnmounted } from 'vue'\n
               export default {
                 setup() {
                   onUnmounted(
-                    Inertia.on('start', (event) => {
+                    router.on('start', (event) => {
                       console.log(\`Starting a visit to \${event.detail.visit.url}\`)
                     })
                   )
@@ -108,10 +222,10 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'
+              import { router } from '@inertiajs/react'
               import React, { useEffect } from 'react'\n
               useEffect(() => {
-                return Inertia.on('start', (event) => {
+                return router.on('start', (event) => {
                   console.log(\`Starting a visit to \${event.detail.visit.url}\`)
                 })
               }, [])
@@ -121,10 +235,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { Inertia } from '@inertiajs/inertia'
+              import { router } from '@inertiajs/svelte'
               import { onMount } from 'svelte'\n
               onMount(() => {
-                return Inertia.on('start', (event) => {
+                return router.on('start', (event) => {
                   console.log(\`Starting a visit to \${event.detail.visit.url}\`)
                 })
               })
@@ -136,16 +250,61 @@ const Page = () => {
         Alternatively, if you're using native browser events, you can remove the event listener using{' '}
         <Code>removeEventListener()</Code>.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          let startEventListener = (event) => {
-            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-          }\n
-          document.addEventListener('inertia:start', startEventListener)\n
-          // Remove the listener...
-          document.removeEventListener('inertia:start', startEventListener)
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              let startEventListener = (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              }\n
+              document.addEventListener('inertia:start', startEventListener)\n
+              // Remove the listener...
+              document.removeEventListener('inertia:start', startEventListener)
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              let startEventListener = (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              }\n
+              document.addEventListener('inertia:start', startEventListener)\n
+              // Remove the listener...
+              document.removeEventListener('inertia:start', startEventListener)
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              let startEventListener = (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              }\n
+              document.addEventListener('inertia:start', startEventListener)\n
+              // Remove the listener...
+              document.removeEventListener('inertia:start', startEventListener)
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              let startEventListener = (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              }\n
+              document.addEventListener('inertia:start', startEventListener)\n
+              // Remove the listener...
+              document.removeEventListener('inertia:start', startEventListener)
+            `,
+          },
+        ]}
       />
       <H2>Cancelling events</H2>
       <P>
@@ -153,67 +312,248 @@ const Page = () => {
         allowing you to prevent Inertia's default behaviour. Just like native events, the event will be cancelled if
         only one event listener calls <Code>event.preventDefault()</Code>.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('before', (event) => {
-            if (!confirm('Are you sure you want to navigate away?')) {
-              event.preventDefault()
-            }
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('before', (event) => {
+                if (!confirm('Are you sure you want to navigate away?')) {
+                  event.preventDefault()
+                }
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('before', (event) => {
+                if (!confirm('Are you sure you want to navigate away?')) {
+                  event.preventDefault()
+                }
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('before', (event) => {
+                if (!confirm('Are you sure you want to navigate away?')) {
+                  event.preventDefault()
+                }
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('before', (event) => {
+                if (!confirm('Are you sure you want to navigate away?')) {
+                  event.preventDefault()
+                }
+              })
+            `,
+          },
+        ]}
       />
       <P>
-        For convenience, if you register your event listener using <Code>Inertia.on()</Code>, you can also cancel the
+        For convenience, if you register your event listener using <Code>router.on()</Code>, you can also cancel the
         event by returning <Code>false</Code> from the listener.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('before', (event) => {
-            return confirm('Are you sure you want to navigate away?')
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('before', (event) => {
+                return confirm('Are you sure you want to navigate away?')
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('before', (event) => {
+                return confirm('Are you sure you want to navigate away?')
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('before', (event) => {
+                return confirm('Are you sure you want to navigate away?')
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('before', (event) => {
+                return confirm('Are you sure you want to navigate away?')
+              })
+            `,
+          },
+        ]}
       />
       <H2>Before</H2>
       <P>
         The <Code>before</Code> event fires when a request is about to be made to the server. This is useful for
         intercepting visits.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('before', (event) => {
-            console.log(\`About to make a visit to \${event.detail.visit.url}\`)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('before', (event) => {
+                console.log(\`About to make a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('before', (event) => {
+                console.log(\`About to make a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('before', (event) => {
+                console.log(\`About to make a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('before', (event) => {
+                console.log(\`About to make a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+        ]}
       />
       <P>The primary purpose of this event is to allow you to prevent a visit from happening.</P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('before', (event) => {
-            return confirm('Are you sure you want to navigate away?')
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('before', (event) => {
+                return confirm('Are you sure you want to navigate away?')
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('before', (event) => {
+                return confirm('Are you sure you want to navigate away?')
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('before', (event) => {
+                return confirm('Are you sure you want to navigate away?')
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('before', (event) => {
+                return confirm('Are you sure you want to navigate away?')
+              })
+            `,
+          },
+        ]}
       />
       <H2>Start</H2>
       <P>
         The <Code>start</Code> event fires when a request to the server has started. This is useful for displaying
         loading indicators.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('start', (event) => {
-            console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('start', (event) => {
+                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+              })
+            `,
+          },
+        ]}
       />
       <P>
         The <Code>start</Code> event is not cancelable.
@@ -222,14 +562,49 @@ const Page = () => {
       <P>
         The <Code>progress</Code> event fires as progress increments during file uploads.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('progress', (event) => {
-            this.form.progress = event.detail.progress.percentage
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('progress', (event) => {
+                this.form.progress = event.detail.progress.percentage
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('progress', (event) => {
+                this.form.progress = event.detail.progress.percentage
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('progress', (event) => {
+                this.form.progress = event.detail.progress.percentage
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('progress', (event) => {
+                this.form.progress = event.detail.progress.percentage
+              })
+            `,
+          },
+        ]}
       />
       <P>
         The <Code>progress</Code> event is not cancelable.
@@ -239,14 +614,49 @@ const Page = () => {
         The <Code>success</Code> event fires on successful page visits, unless validation errors are present. However,
         this does <em>not</em> include history visits.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('success', (event) => {
-            console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('success', (event) => {
+                console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('success', (event) => {
+                console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('success', (event) => {
+                console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('success', (event) => {
+                console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
+              })
+            `,
+          },
+        ]}
       />
       <P>
         The <Code>success</Code> event is not cancelable.
@@ -255,14 +665,49 @@ const Page = () => {
       <P>
         The <Code>error</Code> event fires when validation errors are present on "successful" page visits.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('error', (errors) => {
-            console.log(errors)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('error', (errors) => {
+                console.log(errors)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('error', (errors) => {
+                console.log(errors)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('error', (errors) => {
+                console.log(errors)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('error', (errors) => {
+                console.log(errors)
+              })
+            `,
+          },
+        ]}
       />
       <P>
         The <Code>error</Code> event is not cancelable.
@@ -278,56 +723,208 @@ const Page = () => {
         This event is fired for all response types, including <Code>200</Code>, <Code>400</Code>, and <Code>500</Code>{' '}
         response codes.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('invalid', (event) => {
-            console.log(\`An invalid Inertia response was received.\`)
-            console.log(event.detail.response)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('invalid', (event) => {
+                console.log(\`An invalid Inertia response was received.\`)
+                console.log(event.detail.response)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('invalid', (event) => {
+                console.log(\`An invalid Inertia response was received.\`)
+                console.log(event.detail.response)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('invalid', (event) => {
+                console.log(\`An invalid Inertia response was received.\`)
+                console.log(event.detail.response)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('invalid', (event) => {
+                console.log(\`An invalid Inertia response was received.\`)
+                console.log(event.detail.response)
+              })
+            `,
+          },
+        ]}
       />
       <P>
         Cancel the <Code>invalid</Code> event to prevent Inertia from showing the non-Inertia response modal.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('invalid', (event) => {
-            event.preventDefault()\n
-            // Handle the invalid response yourself...
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('invalid', (event) => {
+                event.preventDefault()\n
+                // Handle the invalid response yourself...
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('invalid', (event) => {
+                event.preventDefault()\n
+                // Handle the invalid response yourself...
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('invalid', (event) => {
+                event.preventDefault()\n
+                // Handle the invalid response yourself...
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('invalid', (event) => {
+                event.preventDefault()\n
+                // Handle the invalid response yourself...
+              })
+            `,
+          },
+        ]}
       />
       <H2>Exception</H2>
       <P>
         The <Code>exception</Code> event fires on unexpected XHR errors such as network interruptions. In addition, this
         event fires for errors generated when resolving page components.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('exception', (event) => {
-            console.log(\`An unexpected error occurred during an Inertia visit.\`)
-            console.log(event.detail.error)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('exception', (event) => {
+                console.log(\`An unexpected error occurred during an Inertia visit.\`)
+                console.log(event.detail.error)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('exception', (event) => {
+                console.log(\`An unexpected error occurred during an Inertia visit.\`)
+                console.log(event.detail.error)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('exception', (event) => {
+                console.log(\`An unexpected error occurred during an Inertia visit.\`)
+                console.log(event.detail.error)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('exception', (event) => {
+                console.log(\`An unexpected error occurred during an Inertia visit.\`)
+                console.log(event.detail.error)
+              })
+            `,
+          },
+        ]}
       />
       <P>
         You may cancel the <Code>exception</Code> event to prevent the error from being thrown.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('exception', (event) => {
-            event.preventDefault()
-            // Handle the error yourself
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('exception', (event) => {
+                event.preventDefault()
+                // Handle the error yourself
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('exception', (event) => {
+                event.preventDefault()
+                // Handle the error yourself
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('exception', (event) => {
+                event.preventDefault()
+                // Handle the error yourself
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('exception', (event) => {
+                event.preventDefault()
+                // Handle the error yourself
+              })
+            `,
+          },
+        ]}
       />
       <P>
         This event will <em>not</em> fire for XHR requests that receive <Code>400</Code> and <Code>500</Code> level
@@ -339,14 +936,49 @@ const Page = () => {
         The <Code>finish</Code> event fires after an XHR request has completed for both "successful" and "unsuccessful"
         responses. This event is useful for hiding loading indicators.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('finish', (event) => {
-            NProgress.done()
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('finish', (event) => {
+                NProgress.done()
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('finish', (event) => {
+                NProgress.done()
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('finish', (event) => {
+                NProgress.done()
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('finish', (event) => {
+                NProgress.done()
+              })
+            `,
+          },
+        ]}
       />
       <P>
         The <Code>finish</Code> event is not cancelable.
@@ -355,14 +987,49 @@ const Page = () => {
       <P>
         The <Code>navigate</Code> event fires on successful page visits, as well as when navigating through history.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import { Inertia } from '@inertiajs/inertia'\n
-          Inertia.on('navigate', (event) => {
-            console.log(\`Navigated to \${event.detail.page.url}\`)
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue2'\n
+              router.on('navigate', (event) => {
+                console.log(\`Navigated to \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'\n
+              router.on('navigate', (event) => {
+                console.log(\`Navigated to \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'\n
+              router.on('navigate', (event) => {
+                console.log(\`Navigated to \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'\n
+              router.on('navigate', (event) => {
+                console.log(\`Navigated to \${event.detail.page.url}\`)
+              })
+            `,
+          },
+        ]}
       />
       <P>
         The <Code>navigate</Code> event is not cancelable.
