@@ -152,7 +152,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-                            import { useForm } from '@inertiajs/react'\n
+              import { useForm } from '@inertiajs/react'\n
               const { data, setData, post, progress } = useForm({
                 name: null,
                 avatar: null,

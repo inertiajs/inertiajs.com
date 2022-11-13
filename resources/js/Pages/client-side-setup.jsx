@@ -7,7 +7,8 @@ const meta = {
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
     { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#initialize-app', name: 'Initialize the Inertia app' },
-    { url: '#code-splitting', name: 'Code splitting' },
+    { url: '#resolving-components', name: 'Resolving components' },
+    { url: '#defining-a-root-element', name: 'Defining a root element' },
   ],
 }
 
@@ -130,9 +131,72 @@ const Page = () => {
         ]}
       />
       <P>
-        Let's dig into this example a bit further. The <Code>resolve</Code> callback tells Inertia how to load a page
-        component. As you can see, it receives a page name (string), and returns a page component module.
+        The <Code>setup</Code> callback receives everything necessary to initialize the client-side framework, including
+        the root Inertia <Code>App</Code> component.
       </P>
+      <H2>Resolving components</H2>
+      <P>
+        The <Code>resolve</Code> callback tells Inertia how to load a page component. It receives a page name (string),
+        and returns a page component module. How you implement this callback depends on which bundler (Vite or Webpack)
+        you're using.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              // Vite
+              resolve: name => {
+                const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                return pages[\`./Pages/\${name}.vue\`]
+              },\n
+              // Webpack
+              resolve: name => require(\`./Pages/\${name}\`),
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              // Vite
+              resolve: name => {
+                const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                return pages[\`./Pages/\${name}.vue\`]
+              },\n
+              // Webpack
+              resolve: name => require(\`./Pages/\${name}\`),
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              // Vite
+              resolve: name => {
+                const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+                return pages[\`./Pages/\${name}.jsx\`]
+              },\n
+              // Webpack
+              resolve: name => require(\`./Pages/\${name}\`),
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Vite
+              resolve: name => {
+                const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                return pages[\`./Pages/\${name}.svelte\`]
+              },\n
+              // Webpack
+              resolve: name => require(\`./Pages/\${name}.svelte\`),
+            `,
+          },
+        ]}
+      />
+      <H2>Defining a root element</H2>
       <P>
         By default, Inertia assumes that your application's root template has a root element with an <Code>id</Code> of{' '}
         <Code>app</Code>. If your application's root element has a different <Code>id</Code>, you can provide it using
@@ -145,90 +209,6 @@ const Page = () => {
             id: 'my-app',
             // ...
           })
-        `}
-      />
-      <H2>Code splitting</H2>
-      <P>
-        Code splitting breaks apart the various pages of your application into smaller bundles, which are then loaded on
-        demand when visiting new pages. This can significantly reduce the size of the initial JavaScript bundle loaded
-        by the browser, improving the time to first render.
-      </P>
-      <Notice>
-        While code splitting is helpful for very large projects, it does require extra requests when visiting new pages.
-        Generally speaking, if you're able to use a single bundle, your app is going to feel snappier.
-      </Notice>
-      <P>
-        To use code splitting with Inertia, you will first need to enable{' '}
-        <A href="https://github.com/tc39/proposal-dynamic-import">dynamic imports</A> via a Babel plugin. Let's install
-        it now.
-      </P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          npm install @babel/plugin-syntax-dynamic-import
-        `}
-      />
-      <P>
-        Next, create a <Code>.babelrc</Code> file in your project with the following configuration:
-      </P>
-      <CodeBlock
-        language="json"
-        children={dedent`
-          {
-            "plugins": ["@babel/plugin-syntax-dynamic-import"]
-          }
-        `}
-      />
-      <Notice>
-        If you're using Laravel Mix, the dynamic imports Babel plugin is already configured. However, we recommend using
-        Laravel Mix 6 or above, as there are known issues with older versions.
-      </Notice>
-      <P>
-        Finally, update the <Code>resolve</Code> callback in your app's initialization code to use <Code>import</Code>{' '}
-        instead of <Code>require</Code>.
-      </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              resolve: name => import(\`./Pages/\${name}\`),
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'js',
-            code: dedent`
-              resolve: name => import(\`./Pages/\${name}\`),
-            `,
-          },
-          {
-            name: 'React',
-            language: 'jsx',
-            code: dedent`
-              resolve: name => import(\`./Pages/\${name}\`),
-            `,
-          },
-          {
-            name: 'Svelte',
-            language: 'js',
-            code: dedent`
-              resolve: name => import(\`./Pages/\${name}.svelte\`),
-            `,
-          },
-        ]}
-      />
-      <P>
-        You should also consider using cache busting to force browsers to load the latest version of your assets. To
-        accomplish this, add the following configuration to your webpack configuration file.
-      </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          output: {
-            chunkFilename: 'js/[name].js?id=[chunkhash]',
-          }
         `}
       />
     </>

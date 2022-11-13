@@ -160,7 +160,6 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import React from 'react'\n
               export default function ErrorPage({ status }) {
                 const title = {
                   503: '503: Service Unavailable',

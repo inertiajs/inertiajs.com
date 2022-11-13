@@ -154,7 +154,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-                            import ReactDOMServer from 'react-dom/server'
+              import ReactDOMServer from 'react-dom/server'
               import { createInertiaApp } from '@inertiajs/react'
               import createServer from '@inertiajs/server'
 

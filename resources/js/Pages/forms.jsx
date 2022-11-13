@@ -98,7 +98,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import React, { useState } from 'react'
+              import { useState } from 'react'
               import { router } from '@inertiajs/react'\n
               export default function Edit() {
                 const [values, setValues] = useState({

@@ -88,7 +88,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-                            import Layout from './Layout'
+              import Layout from './Layout'
               import { Head } from '@inertiajs/react'\n
               export default function Welcome({ user }) {
                 return (
@@ -211,7 +211,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import React, { useEffect } from 'react'
+              import { useEffect } from 'react'
               import { Link } from '@inertiajs/react'\n
               export default function Layout({ children }) {
                 return (
@@ -313,7 +313,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-                            import Layout from './Layout'\n
+              import Layout from './Layout'\n
               const Home = ({ user }) => {
                 return (
                   <>
@@ -406,7 +406,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-                            import SiteLayout from './SiteLayout'
+              import SiteLayout from './SiteLayout'
               import NestedLayout from './NestedLayout'\n
               const Home = ({ user }) => {
                 return (

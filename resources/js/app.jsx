@@ -1,8 +1,8 @@
-import '../css/app.css'
-import { hydrate } from 'react-dom'
 import { Inertia } from '@inertiajs/inertia'
-import { InertiaProgress } from '@inertiajs/progress'
 import { createInertiaApp } from '@inertiajs/inertia-react'
+import { InertiaProgress } from '@inertiajs/progress'
+import { hydrateRoot } from 'react-dom/client'
+import '../css/app.css'
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +34,11 @@ Inertia.on('navigate', () => {
 InertiaProgress.init()
 
 createInertiaApp({
-  resolve: name => import.meta.globEager('./Pages/**/*.jsx')[`./Pages/${name}.jsx`],
+  resolve: name => {
+    const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+    return pages[`./Pages/${name}.jsx`]
+  },
   setup({ el, App, props }) {
-    hydrate(<App {...props} />, el)
+    hydrateRoot(el, <App {...props} />)
   },
 })

@@ -222,8 +222,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'
-              import React, { useEffect } from 'react'\n
+              import { useEffect } from 'react'
+              import { router } from '@inertiajs/react'\n
               useEffect(() => {
                 return router.on('start', (event) => {
                   console.log(\`Starting a visit to \${event.detail.visit.url}\`)
