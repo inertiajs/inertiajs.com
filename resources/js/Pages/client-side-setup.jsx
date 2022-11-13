@@ -75,7 +75,10 @@ const Page = () => {
               import Vue from 'vue'
               import { createInertiaApp } from '@inertiajs/vue2'\n
               createInertiaApp({
-                resolve: name => require(\`./Pages/\${name}\`),
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  return pages[\`./Pages/\${name}.vue\`]
+                },
                 setup({ el, App, props, plugin }) {
                   Vue.use(plugin)\n
                   new Vue({
@@ -92,7 +95,10 @@ const Page = () => {
               import { createApp, h } from 'vue'
               import { createInertiaApp } from '@inertiajs/vue3'\n
               createInertiaApp({
-                resolve: name => require(\`./Pages/\${name}\`),
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  return pages[\`./Pages/\${name}.vue\`]
+                },
                 setup({ el, App, props, plugin }) {
                   createApp({ render: () => h(App, props) })
                     .use(plugin)
@@ -108,7 +114,10 @@ const Page = () => {
               import { render } from 'react-dom'
               import { createInertiaApp } from '@inertiajs/react'\n
               createInertiaApp({
-                resolve: name => require(\`./Pages/\${name}\`),
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+                  return pages[\`./Pages/\${name}.jsx\`]
+                },
                 setup({ el, App, props }) {
                   render(<App {...props} />, el)
                 },
@@ -121,7 +130,10 @@ const Page = () => {
             code: dedent`
               import { createInertiaApp } from '@inertiajs/svelte'\n
               createInertiaApp({
-                resolve: name => require(\`./Pages/\${name}.svelte\`),
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                  return pages[\`./Pages/\${name}.svelte\`]
+                },
                 setup({ el, App, props }) {
                   new App({ target: el, props })
                 },
