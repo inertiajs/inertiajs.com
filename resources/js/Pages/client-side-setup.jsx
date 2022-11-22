@@ -208,6 +208,10 @@ const Page = () => {
           },
         ]}
       />
+      <P>
+        By default we recommend eager loading your components, which will result in a single JavaScript bundle. However,
+        if you'd like to lazy-load your components, see our <A href="/code-splitting">code splitting</A> documentation.
+      </P>
       <H2>Defining a root element</H2>
       <P>
         By default, Inertia assumes that your application's root template has a root element with an <Code>id</Code> of{' '}
