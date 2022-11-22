@@ -86,7 +86,7 @@
 /* DocSearch */
 
 .DocSearch-Button {
-  @apply bg-white scale-90;
+  @apply bg-white scale-90 lg:w-56;
 }
 
 .DocSearch-Button .DocSearch-Search-Icon {
