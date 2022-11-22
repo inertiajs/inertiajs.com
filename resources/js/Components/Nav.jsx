@@ -45,6 +45,11 @@ const Nav = ({ className }) => {
             Demo app
           </InertiaLink>
         </li>
+        <li className="md:pr-3">
+          <InertiaLink href="/upgrade-guide" className={linkClass('/upgrade-guide')}>
+            Upgrade guide
+          </InertiaLink>
+        </li>
       </ul>
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
       <ul>
