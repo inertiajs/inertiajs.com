@@ -6,7 +6,7 @@ const meta = {
   links: [
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
     { url: '#install-dependencies', name: 'Install dependencies' },
-    { url: '#initialize-app', name: 'Initialize the Inertia app' },
+    { url: '#initialize-the-inertia-app', name: 'Initialize the Inertia app' },
     { url: '#resolving-components', name: 'Resolving components' },
     { url: '#defining-a-root-element', name: 'Defining a root element' },
   ],
