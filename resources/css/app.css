@@ -163,7 +163,7 @@ pre[class*='language-'] {
 .token.attr-name,
 .token.namespace,
 .token.deleted {
-  color: #e2777a;
+  @apply text-red-500;
 }
 
 .token.function-name {
@@ -218,7 +218,7 @@ pre[class*='language-'] {
 }
 
 .token.inserted {
-  color: green;
+  @apply text-green-400;
 }
 
 @tailwind components;
