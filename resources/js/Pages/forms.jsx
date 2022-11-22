@@ -26,7 +26,7 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <template>
                 <form @submit.prevent="submit">
@@ -62,7 +62,7 @@ const Page = () => {
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <template>
                 <form @submit.prevent="submit">
@@ -222,7 +222,7 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <template>
                 <form @submit.prevent="form.post('/login')">
@@ -256,7 +256,7 @@ const Page = () => {
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <template>
                 <form @submit.prevent="form.post('/login')">
@@ -881,14 +881,14 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <div v-if="form.isDirty">There are unsaved form changes.</div>
             `,
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <div v-if="form.isDirty">There are unsaved form changes.</div>
             `,

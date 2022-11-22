@@ -183,7 +183,7 @@ export default function Layout({ meta, children }) {
               },
               {
                 name: 'Users.vue',
-                language: 'twig',
+                language: 'markup',
                 code: dedent`
               <template>
                 <Head title="Users" />

@@ -91,7 +91,7 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <template>
                 <main>
@@ -116,7 +116,7 @@ const Page = () => {
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <template>
                 <main>
@@ -215,7 +215,7 @@ const Page = () => {
         examples={[
           {
             name: 'Vue 2',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <template>
                 <main>
@@ -233,7 +233,7 @@ const Page = () => {
           },
           {
             name: 'Vue 3',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <template>
                 <main>

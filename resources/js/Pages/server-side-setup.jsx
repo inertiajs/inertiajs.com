@@ -57,7 +57,7 @@ const Page = () => {
         examples={[
           {
             name: 'Laravel',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <!DOCTYPE html>
               <html>

@@ -74,7 +74,7 @@ const Page = () => {
         examples={[
           {
             name: 'Laravel',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <meta name="twitter:title" content="{{ $page['props']['event']->title }}">
             `,
@@ -105,7 +105,7 @@ const Page = () => {
         examples={[
           {
             name: 'Laravel',
-            language: 'twig',
+            language: 'markup',
             code: dedent`
               <meta name="description" content="{{ $meta }}">
             `,
