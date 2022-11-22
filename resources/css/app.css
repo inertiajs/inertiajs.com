@@ -1,5 +1,7 @@
 @tailwind base;
 
+/* Fonts */
+
 @font-face {
   font-family: 'Gilroy';
   src: url('../fonts/gilroy-bold.woff2') format('woff2'), url('../fonts/gilroy-bold.woff') format('woff');
@@ -59,6 +61,8 @@
   font-style: italic;
 }
 
+/* Carbon Ads */
+
 .carbon-wrap {
   @apply block;
 }
@@ -79,13 +83,27 @@
   @apply text-xs text-gray-500;
 }
 
-/* PrismJS 1.29.0
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+bash+markup-templating+php+jsx+twig */
-/**
- * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
- * Based on https://github.com/chriskempson/tomorrow-theme
- * @author Rose Pritchard
- */
+/* DocSearch */
+
+.DocSearch-Button {
+  @apply bg-white scale-90;
+}
+
+.DocSearch-Button .DocSearch-Search-Icon {
+  @apply text-gray-600;
+}
+
+.DocSearch-Button .DocSearch-Button-Placeholder {
+  @apply text-gray-600;
+}
+
+.DocSearch-Button:active,
+.DocSearch-Button:focus,
+.DocSearch-Button:hover {
+  @apply ring-2 ring-purple-900;
+}
+
+/* PrismJS */
 
 code[class*='language-'],
 pre[class*='language-'] {
