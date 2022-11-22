@@ -226,7 +226,7 @@ const Page = () => {
         Previously the progress indicator was available as a separate plugin (<Code>@inertiajs/progress</Code>). It is
         now installed and enabled default.
       </P>
-      <P>If you haven't yet, remove the old by library:</P>
+      <P>If you haven't yet, remove the old progress library:</P>
       <TabbedCode
         examples={[
           {
@@ -271,8 +271,8 @@ const Page = () => {
         `}
       />
       <P>
-        Finally, if you any customization options set, you can set these in the <Code>progress</Code> property when
-        initializing Inertia with <Code>createInertiaApp()</Code>:
+        Finally, if you have any progress customization set, you can move these to the <Code>progress</Code> property of
+        the <Code>createInertiaApp()</Code> helper:
       </P>
       <CodeBlock
         language="js"
