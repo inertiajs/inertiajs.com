@@ -300,7 +300,7 @@ export default function Layout({ meta, children }) {
         <div className="px-6 md:px-12 xl:px-0 py-4 text-md font-medium flex items-center justify-center bg-[#fde9b1]">
           <div className="mx-2">🥳 Inertia.js v1.0 has been released!</div>
           <InertiaLink
-            href="/server-side-rendering"
+            href="/upgrade-guide"
             className="px-3 py-1 bg-orange-500 hover:bg-orange-600 rounded-full text-xs text-white leading-tight whitespace-nowrap"
           >
             Upgrade guide
