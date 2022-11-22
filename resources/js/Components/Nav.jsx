@@ -51,6 +51,19 @@ const Nav = ({ className }) => {
           </InertiaLink>
         </li>
       </ul>
+      <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Installation</div>
+      <ul>
+        <li className="md:pr-3">
+          <InertiaLink href="/server-side-setup" className={linkClass('/server-side-setup')}>
+            Server-side
+          </InertiaLink>
+        </li>
+        <li className="md:pr-3">
+          <InertiaLink href="/client-side-setup" className={linkClass('/client-side-setup')}>
+            Client-side
+          </InertiaLink>
+        </li>
+      </ul>
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
       <ul>
         <li className="md:pr-3">
@@ -66,19 +79,6 @@ const Nav = ({ className }) => {
         <li className="md:pr-3">
           <InertiaLink href="/the-protocol" className={linkClass('/the-protocol')}>
             The protocol
-          </InertiaLink>
-        </li>
-      </ul>
-      <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Installation</div>
-      <ul>
-        <li className="md:pr-3">
-          <InertiaLink href="/server-side-setup" className={linkClass('/server-side-setup')}>
-            Server-side
-          </InertiaLink>
-        </li>
-        <li className="md:pr-3">
-          <InertiaLink href="/client-side-setup" className={linkClass('/client-side-setup')}>
-            Client-side
           </InertiaLink>
         </li>
       </ul>
