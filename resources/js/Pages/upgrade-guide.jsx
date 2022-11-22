@@ -14,16 +14,20 @@ const Page = () => {
   return (
     <>
       <H1>Upgrade guide</H1>
+      <P>
+        Inertia.js v1.0 is now available and includes a bunch of improvements to how you install and configure Inertia.
+        It includes a number of breaking changes. This guide explains how to update your project to v1.0.
+      </P>
       <H2>Update dependencies</H2>
       <P>
-        Inertia.js v1.0 simplifies how you install Inertia. Previously you needed to install the core library (
+        Previously to use Inertia you had to install a number of libraries, including the core library (
         <Code>@inertiajs/inertia</Code>), the adapter of your choice (
-        <Code>@inertiajs/inertia-vue|vue3|react|svelte</Code>), the progress library (<Code>@inertiajs/progress</Code>),
-        and if you were using server-side rendering, the server library (<Code>@inertiajs/server</Code>).
+        <Code>@inertiajs/inertia-vue|vue3|react|svelte</Code>), the progress library (<Code>@inertiajs/progress</Code>
+        ), and if you were using server-side rendering, the server library (<Code>@inertiajs/server</Code>).
       </P>
       <P>
-        Moving forward you are now only required to install the adapter of your choice, and the core libraries are
-        automatically installed for you.
+        Moving forward you are now only required to install a single library — the adapter of your choice (Vue, React,
+        or Svelte), and the core libraries are automatically installed for you.
       </P>
       <P>Start by removing all of the old Inertia libraries:</P>
       <TabbedCode
@@ -58,7 +62,10 @@ const Page = () => {
           },
         ]}
       />
-      <P>Next, install the new Inertia adapter of your choice:</P>
+      <P>
+        Next, install the new Inertia adapter of your choice. The new adapter libraries have been renamed, and no longer
+        include <Code>inertia-</Code> in them.
+      </P>
       <TabbedCode
         examples={[
           {
@@ -91,13 +98,9 @@ const Page = () => {
           },
         ]}
       />
-      <Notice>
-        Note that the new adapter libraries have been renamed, and no longer include{' '}
-        <Code color="orange">inertia-</Code> in them.
-      </Notice>
       <H2>Update imports</H2>
       <P>
-        Next, update all the Inertia related imports in your project to use these new adapter library names. All imports
+        Next, update all the Inertia related imports in your project to use the new adapter library name. All imports
         are now available from the adapter library, meaning you no longer import anything from the Inertia core library,
         progress library, or server library.
       </P>
@@ -219,12 +222,14 @@ const Page = () => {
       />
       <Notice>
         It is no longer possible to manually configure Inertia using the <Code color="orange">App</Code> export, and you
-        must now use the <Code color="orange">createInertiaApp()</Code> helper.
+        must now use the <Code color="orange">createInertiaApp()</Code> helper. See the{' '}
+        <A href="/client-side-setup#initialize-the-inertia-app">client-side setup</A> documentation for more
+        information.
       </Notice>
       <H2>Update progress</H2>
       <P>
         Previously the progress indicator was available as a separate plugin (<Code>@inertiajs/progress</Code>). It is
-        now installed and enabled default.
+        now installed and enabled by default.
       </P>
       <P>If you haven't yet, remove the old progress library:</P>
       <TabbedCode
