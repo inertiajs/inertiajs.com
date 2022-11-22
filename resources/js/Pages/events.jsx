@@ -77,7 +77,7 @@ const Page = () => {
       />
       <P>
         Under the hood, Inertia uses native browser events, so you can also interact with Inertia events using the
-        typical event methods you may already be familiar with - just be sure to append <Code>inertia:</Code> to the
+        typical event methods you may already be familiar with - just be sure to prepend <Code>inertia:</Code> to the
         event name.
       </P>
       <TabbedCode
