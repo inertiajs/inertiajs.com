@@ -17,6 +17,9 @@ const Page = () => {
         server-side adapters available.
       </P>
       <Ul>
+         <Li>
+          <A href="https://github.com/sailscastshq/inertia-sails">Sails</A>
+        </Li>
         <Li>
           <A href="https://github.com/eidellev/inertiajs-adonisjs">AdonisJs</A>
         </Li>
