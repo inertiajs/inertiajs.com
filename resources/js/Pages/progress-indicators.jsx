@@ -15,48 +15,48 @@ const Page = () => {
       <H1>Progress indicators</H1>
       <P>
         Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one
-        page to another. To solve this, Inertia provides an optional{' '}
-        <A href="https://github.com/inertiajs/progress">progress</A> library that shows a loading bar whenever you make
-        an Inertia visit. It's also possible to setup your own custom page loading indicators. Let's explore both
-        approaches.
+        page to another. To solve this Inertia displays a progress indicator at the top of the page whenever you make an
+        Inertia visit.
+      </P>
+      <P>
+        If you prefer, you can also disable Inertia's default loading indicator and provide your own custom
+        implementation. We'll look at both approaches below.
       </P>
       <H2>Default</H2>
       <P>
-        Inertia's default progress library (<Code>@inertiajs/progress</Code>) is a light wrapper around{' '}
-        <A href="https://ricostacruz.com/nprogress/">NProgress</A>. This library shows, updates, and hides the NProgress
-        loading bar by listening to Inertia page visit <A href="/events">events</A>.
+        Inertia's default progress indicator is a light wrapper around the{' '}
+        <A href="https://ricostacruz.com/nprogress/">NProgress</A> library. You can customize it via the{' '}
+        <Code>progress</Code> property of the <Code>createInertiaApp()</Code> function.
       </P>
-      <P>To get started, install the library.</P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          npm install @inertiajs/progress
-        `}
-      />
-      <P>Once the library has been installed, you should initialize it in your app.</P>
       <CodeBlock
         language="js"
         children={dedent`
-          import { InertiaProgress } from '@inertiajs/progress'\n
-          InertiaProgress.init()
+          createInertiaApp({
+            progress: {
+              // The delay after which the progress bar will appear
+              // during navigation, in milliseconds.
+              delay: 250,\n
+              // The color of the progress bar.
+              color: '#29d',\n
+              // Whether to include the default NProgress styles.
+              includeCSS: true,\n
+              // Whether the NProgress spinner will be shown.
+              showSpinner: false,
+            },
+            // ...
+          })
         `}
       />
       <P>
-        The Inertia progress library also provides a number of customization options which you pass to the{' '}
-        <Code>init()</Code> method.
+        You can disable Inertia's default loading indicator by setting the <Code>progress</Code> property to{' '}
+        <Code>false</Code>:
       </P>
       <CodeBlock
         language="js"
         children={dedent`
-          InertiaProgress.init({
-            // The delay after which the progress bar will appear during navigation, in milliseconds...
-            delay: 250,\n
-            // The color of the progress bar...
-            color: '#29d',\n
-            // Whether to include the default NProgress styles...
-            includeCSS: true,\n
-            // Whether the NProgress spinner will be shown...
-            showSpinner: false,
+          createInertiaApp({
+            progress: false,
+            // ...
           })
         `}
       />
@@ -66,7 +66,20 @@ const Page = () => {
         Let's explore how to do this, using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
         example.
       </P>
-      <P>First, install the NProgress library.</P>
+      <P>First, disable Inertia's default loading indicator:</P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          createInertiaApp({
+            progress: false,
+            // ...
+          })
+        `}
+      />
+      <P>
+        Next, install the NProgress library. Technically this is already installed since it's an Inertia dependency, but
+        it's good to be explicit, as Inertia could change in the future.
+      </P>
       <CodeBlock
         language="bash"
         children={dedent`
@@ -74,9 +87,9 @@ const Page = () => {
         `}
       />
       <P>
-        You'll also need to add the NProgress{' '}
+        You'll need to add the NProgress{' '}
         <A href="https://github.com/rstacruz/nprogress/blob/master/nprogress.css">styles</A> to your project. You can do
-        this using the CDN version of these assets.
+        this using the CDN version.
       </P>
       <CodeBlock
         language="html"
@@ -85,7 +98,7 @@ const Page = () => {
         `}
       />
       <P>
-        Next, import both <Code>NProgress</Code> and <Code>router</Code> into your application.
+        Next, import both <Code>NProgress</Code> and the Inertia <Code>router</Code> into your application.
       </P>
       <TabbedCode
         examples={[
