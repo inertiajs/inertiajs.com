@@ -1,4 +1,4 @@
-import { InertiaLink, usePage } from '@inertiajs/inertia-react'
+import { Link, usePage } from '@inertiajs/react'
 
 const Nav = ({ className }) => {
   const page = usePage()
@@ -36,171 +36,171 @@ const Nav = ({ className }) => {
       </div>
       <ul>
         <li className="md:pr-3">
-          <InertiaLink href="/" className={linkClass('/')}>
+          <Link href="/" className={linkClass('/')}>
             Introduction
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/demo-application" className={linkClass('/demo-application')}>
+          <Link href="/demo-application" className={linkClass('/demo-application')}>
             Demo app
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/upgrade-guide" className={linkClass('/upgrade-guide')}>
+          <Link href="/upgrade-guide" className={linkClass('/upgrade-guide')}>
             Upgrade guide
-          </InertiaLink>
+          </Link>
         </li>
       </ul>
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Installation</div>
       <ul>
         <li className="md:pr-3">
-          <InertiaLink href="/server-side-setup" className={linkClass('/server-side-setup')}>
+          <Link href="/server-side-setup" className={linkClass('/server-side-setup')}>
             Server-side
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/client-side-setup" className={linkClass('/client-side-setup')}>
+          <Link href="/client-side-setup" className={linkClass('/client-side-setup')}>
             Client-side
-          </InertiaLink>
+          </Link>
         </li>
       </ul>
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Core concepts</div>
       <ul>
         <li className="md:pr-3">
-          <InertiaLink href="/who-is-it-for" className={linkClass('/who-is-it-for')}>
+          <Link href="/who-is-it-for" className={linkClass('/who-is-it-for')}>
             Who is it for
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/how-it-works" className={linkClass('/how-it-works')}>
+          <Link href="/how-it-works" className={linkClass('/how-it-works')}>
             How it works
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/the-protocol" className={linkClass('/the-protocol')}>
+          <Link href="/the-protocol" className={linkClass('/the-protocol')}>
             The protocol
-          </InertiaLink>
+          </Link>
         </li>
       </ul>
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">The basics</div>
       <ul>
         <li className="md:pr-3">
-          <InertiaLink href="/pages" className={linkClass('/pages')}>
+          <Link href="/pages" className={linkClass('/pages')}>
             Pages
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/responses" className={linkClass('/responses')}>
+          <Link href="/responses" className={linkClass('/responses')}>
             Responses
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/redirects" className={linkClass('/redirects')}>
+          <Link href="/redirects" className={linkClass('/redirects')}>
             Redirects
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/routing" className={linkClass('/routing')}>
+          <Link href="/routing" className={linkClass('/routing')}>
             Routing
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/title-and-meta" className={linkClass('/title-and-meta')}>
+          <Link href="/title-and-meta" className={linkClass('/title-and-meta')}>
             Title & meta
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/links" className={linkClass('/links')}>
+          <Link href="/links" className={linkClass('/links')}>
             Links
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/manual-visits" className={linkClass('/manual-visits')}>
+          <Link href="/manual-visits" className={linkClass('/manual-visits')}>
             Manual visits
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/forms" className={linkClass('/forms')}>
+          <Link href="/forms" className={linkClass('/forms')}>
             Forms
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/file-uploads" className={linkClass('/file-uploads')}>
+          <Link href="/file-uploads" className={linkClass('/file-uploads')}>
             File uploads
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/validation" className={linkClass('/validation')}>
+          <Link href="/validation" className={linkClass('/validation')}>
             Validation
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/shared-data" className={linkClass('/shared-data')}>
+          <Link href="/shared-data" className={linkClass('/shared-data')}>
             Shared data
-          </InertiaLink>
+          </Link>
         </li>
       </ul>
       <div className="mt-8 md:mt-12 mb-3 text-xs font-bold uppercase text-gray-500 tracking-widest">Advanced</div>
       <ul>
         <li className="md:pr-3">
-          <InertiaLink href="/events" className={linkClass('/events')}>
+          <Link href="/events" className={linkClass('/events')}>
             Events
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/testing" className={linkClass('/testing')}>
+          <Link href="/testing" className={linkClass('/testing')}>
             Testing
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/partial-reloads" className={linkClass('/partial-reloads')}>
+          <Link href="/partial-reloads" className={linkClass('/partial-reloads')}>
             Partial reloads
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/scroll-management" className={linkClass('/scroll-management')}>
+          <Link href="/scroll-management" className={linkClass('/scroll-management')}>
             Scroll management
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/authentication" className={linkClass('/authentication')}>
+          <Link href="/authentication" className={linkClass('/authentication')}>
             Authentication
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/authorization" className={linkClass('/authorization')}>
+          <Link href="/authorization" className={linkClass('/authorization')}>
             Authorization
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/csrf-protection" className={linkClass('/csrf-protection')}>
+          <Link href="/csrf-protection" className={linkClass('/csrf-protection')}>
             CSRF protection
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/error-handling" className={linkClass('/error-handling')}>
+          <Link href="/error-handling" className={linkClass('/error-handling')}>
             Error handling
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/asset-versioning" className={linkClass('/asset-versioning')}>
+          <Link href="/asset-versioning" className={linkClass('/asset-versioning')}>
             Asset versioning
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/progress-indicators" className={linkClass('/progress-indicators')}>
+          <Link href="/progress-indicators" className={linkClass('/progress-indicators')}>
             Progress indicators
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/remembering-state" className={linkClass('/remembering-state')}>
+          <Link href="/remembering-state" className={linkClass('/remembering-state')}>
             Remembering state
-          </InertiaLink>
+          </Link>
         </li>
         <li className="md:pr-3">
-          <InertiaLink href="/server-side-rendering" className={linkClass('/server-side-rendering')}>
+          <Link href="/server-side-rendering" className={linkClass('/server-side-rendering')}>
             Server-side rendering
-          </InertiaLink>
+          </Link>
         </li>
       </ul>
     </nav>

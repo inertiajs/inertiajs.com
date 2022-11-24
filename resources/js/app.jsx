@@ -1,6 +1,4 @@
-import { Inertia } from '@inertiajs/inertia'
-import { createInertiaApp } from '@inertiajs/inertia-react'
-import { InertiaProgress } from '@inertiajs/progress'
+import { router, createInertiaApp } from '@inertiajs/react'
 import { hydrateRoot } from 'react-dom/client'
 import '../css/app.css'
 
@@ -10,7 +8,7 @@ import '../css/app.css'
 |--------------------------------------------------------------------------
 */
 
-Inertia.on('navigate', () => {
+router.on('navigate', () => {
   setTimeout(() => {
     window.dataLayer = window.dataLayer || []
     function gtag() {
@@ -30,8 +28,6 @@ Inertia.on('navigate', () => {
 | Setup Inertia app
 |--------------------------------------------------------------------------
 */
-
-InertiaProgress.init()
 
 createInertiaApp({
   resolve: name => {

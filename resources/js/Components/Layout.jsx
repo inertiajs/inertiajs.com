@@ -1,11 +1,12 @@
 import Nav from '@/Components/Nav'
 import TabbedCode from '@/Components/TabbedCode'
 import '@docsearch/css'
-import { DocSearch } from '@docsearch/react'
-import { Inertia } from '@inertiajs/inertia'
-import { InertiaHead, InertiaLink } from '@inertiajs/inertia-react'
+import * as DocSearchReact from '@docsearch/react'
+import { Head, Link, router } from '@inertiajs/react'
 import dedent from 'dedent-js'
 import React, { useEffect, useState } from 'react'
+
+const { DocSearch } = DocSearchReact
 
 export const CodeTabContext = React.createContext()
 
@@ -15,6 +16,7 @@ const getCurrentCodeTab = tabType => {
 }
 
 export default function Layout({ meta, children }) {
+  const [showSearch, setShowSearch] = useState(false)
   const [showMobileNav, setShowMobileNav] = useState(false)
 
   function toggleMobileNav(event) {
@@ -34,13 +36,15 @@ export default function Layout({ meta, children }) {
   }
 
   useEffect(() => {
+    setShowSearch(true)
+
     setCodeTabs({
       frontend: getCurrentCodeTab('frontend') || 'Vue 3',
       backend: getCurrentCodeTab('backend') || 'Laravel',
     })
 
     // Carbon Ads
-    Inertia.on('navigate', () => {
+    router.on('navigate', () => {
       const carbonScript = document.getElementById('_carbonads_projs')
       if (carbonScript) {
         carbonScript.parentNode.removeChild(carbonScript)
@@ -69,7 +73,7 @@ export default function Layout({ meta, children }) {
   function Header() {
     return (
       <header className="py-12 relative flex items-center justify-between">
-        <InertiaLink href="/" className="md:flex md:items-end">
+        <Link href="/" className="md:flex md:items-end">
           <svg className="block fill-current text-white" style={{ height: '25px' }} viewBox="0 0 275.3 50.5">
             <path d="M231.2 16.1h-17.8l17.2 17.2-17.2 17.2h17.8l17.2-17.2z" />
             <path d="M258.1 16.1h-17.8l17.2 17.2-17.2 17.2h17.8l17.2-17.2z" />
@@ -82,7 +86,7 @@ export default function Layout({ meta, children }) {
           >
             <path d="M11.1 2.2H6.6v13.5h-2V2.2H0V.3h11.1v1.9zM29.1.3v15.4h-2V8.8h-7.5v6.9h-2V.3h2v6.5h7.5V.3h2zM46 13.8v1.9h-9.2V.3h9.1v1.9h-7V7h6.5v1.9h-6.5v4.9H46zM77.2 15.7h-2v-12l-5 8.4h-.3l-5-8.4v12h-2V.3h2.3L70 8.4 74.9.3h2.3v15.4zM84 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.4 0 5.9-2.6 5.9-6zM120.2 8c0 4.3-3.1 7.7-7.3 7.7h-6V.3h6c4.2 0 7.3 3.4 7.3 7.7zm-2 0c0-3.3-2.2-5.8-5.3-5.8h-4v11.5h4c3.1.1 5.3-2.5 5.3-5.7zM136.2 13.8v1.9H127V.3h9.1v1.9h-7V7h6.5v1.9h-6.5v4.9h7.1zM148.8 9.8h-3.6v5.9h-2V.3h6.2c2.6 0 4.8 2.1 4.8 4.8 0 2-1.3 3.8-3.2 4.5l3.6 6.2h-2.3l-3.5-6zm-3.6-1.9h4.1c1.5 0 2.8-1.3 2.8-2.9 0-1.6-1.2-2.9-2.8-2.9h-4.1v5.8zM172.6.3v15.4H171l-8-11.5v11.5h-2V.3h1.7l7.9 11.5V.3h2zM204.6 15.7h-2v-12l-5 8.4h-.3l-5-8.4v12h-2V.3h2.3l4.9 8.1 4.9-8.1h2.3v15.4zM211.5 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.3 0 5.9-2.6 5.9-6zM245.9.3v15.4h-1.6l-7.9-11.5v11.5h-2V.3h1.7l7.9 11.5V.3h1.9zM252.8 8a8 8 0 0 1 8-8c4.5 0 8 3.5 8 8a8 8 0 0 1-8 8 8 8 0 0 1-8-8zm13.9 0c0-3.4-2.6-6-5.9-6a5.8 5.8 0 0 0-5.9 6c0 3.4 2.6 6 5.9 6 3.3 0 5.9-2.6 5.9-6zM284.3 13.8v1.9h-8.7V.3h2v13.5h6.7zM292.8.3v15.4h-2V.3h2zM310.3 2.2h-4.6v13.5h-2V2.2h-4.5V.3h11.1v1.9zM328.3.3v15.4h-2V8.8h-7.5v6.9h-2V.3h2v6.5h7.5V.3h2z" />
           </svg>
-        </InertiaLink>
+        </Link>
         <div onClick={toggleMobileNav} className="md:hidden relative z-10">
           <button className="block focus:outline-none" type="button">
             <svg className="block fill-current text-white w-6 h-6" viewBox="0 0 20 20">
@@ -95,7 +99,9 @@ export default function Layout({ meta, children }) {
         </div>
         <div className="hidden md:flex items-center text-white">
           <div className="mr-5 -my-2 relative">
-            <DocSearch appId="VKGU7LHY9C" indexName="inertiajs" apiKey="cebbd114b9b67501184b39b00f94f765" />
+            {showSearch && (
+              <DocSearch appId="VKGU7LHY9C" indexName="inertiajs" apiKey="cebbd114b9b67501184b39b00f94f765" />
+            )}
           </div>
           <a className="flex items-center hover:text-purple-900 mr-5" href="https://github.com/inertiajs">
             <svg className="fill-current w-6 h-6" viewBox="0 0 20 20">
@@ -284,7 +290,7 @@ export default function Layout({ meta, children }) {
 
   return (
     <>
-      <InertiaHead>
+      <Head>
         <title>{meta.title ? `${meta.title} - Inertia.js` : `Inertia.js - The Modern Monolith`}</title>
         {meta.description && <meta type="description" content={meta.description} />}
         {meta.twitterCardImage && <meta name="twitter:card" content="summary_large_image" />}
@@ -295,16 +301,17 @@ export default function Layout({ meta, children }) {
         )}
         {meta.twitterCardImage && <meta name="twitter:description" content={meta.description} />}
         {meta.twitterCardImage && <meta name="twitter:image" content={meta.twitterCardImage} />}
-      </InertiaHead>
+      </Head>
       <div onClick={() => setShowMobileNav(false)} className="leading-none font-sans text-gray-800 antialiased">
         <div className="px-6 md:px-12 xl:px-0 py-4 text-md font-medium flex items-center justify-center bg-[#fde9b1]">
-          <div className="mx-2">🥳 Inertia.js v1.0 has been released!</div>
-          <InertiaLink
+          {/* <div className="mx-2">🥳 Inertia.js v1.0 has been released!</div> */}
+          <div className="mx-2">🚧 Inertia.js v1.0 is now in beta</div>
+          <Link
             href="/upgrade-guide"
             className="px-3 py-1 bg-orange-500 hover:bg-orange-600 rounded-full text-xs text-white leading-tight whitespace-nowrap"
           >
             Upgrade guide
-          </InertiaLink>
+          </Link>
         </div>
         <div className="text-white" style={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
           <div className="max-w-6xl mx-auto px-6 md:px-12 xl:px-0 relative">
