@@ -16,8 +16,12 @@ const Page = () => {
     <>
       <H1>Upgrade guide</H1>
       <P>
-        Inertia.js v1.0 is now available and includes a bunch of improvements to how you install and configure Inertia.
-        It includes a number of breaking changes. This guide explains how to update your project to v1.0.
+        Inertia.js v1.0 is now in beta! This release focuses on simplifying the overall architecture of the project with
+        the goal of making Inertia easier to maintain and easier to use.
+      </P>
+      <P>
+        It includes a number of breaking changes, mostly related to package names and updated named exports. This guide
+        explains how to upgrade your project to v1.0.
       </P>
       <H2>Dependencies</H2>
       <P>
@@ -73,28 +77,28 @@ const Page = () => {
             name: 'Vue 2',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/vue2
+              npm install @inertiajs/vue2@beta
             `,
           },
           {
             name: 'Vue 3',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/vue3
+              npm install @inertiajs/vue3@beta
             `,
           },
           {
             name: 'React',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/react
+              npm install @inertiajs/react@beta
             `,
           },
           {
             name: 'Svelte',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/svelte
+              npm install @inertiajs/svelte@beta
             `,
           },
         ]}
