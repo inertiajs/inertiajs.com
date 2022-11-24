@@ -29,7 +29,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.visit(url, { preserveScroll: true })
+          router.visit(url, { preserveScroll: true })
         `}
       />
       <P>
@@ -39,7 +39,7 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          Inertia.post('/users', data, {
+          router.post('/users', data, {
             preserveScroll: (page) => Object.keys(page.props.errors).length,
           })
         `}

@@ -4,9 +4,10 @@ import dedent from 'dedent-js'
 const meta = {
   title: 'Upgrade guide',
   links: [
-    { url: '#update-dependencies', name: 'Update dependencies' },
-    { url: '#update-imports', name: 'Update imports' },
-    { url: '#update-progress', name: 'Update progress' },
+    { url: '#dependencies', name: 'Dependencies' },
+    { url: '#imports', name: 'Imports' },
+    { url: '#progress', name: 'Progress indicator' },
+    { url: '#setup-arguments', name: 'Setup arguments' },
   ],
 }
 
@@ -18,7 +19,7 @@ const Page = () => {
         Inertia.js v1.0 is now available and includes a bunch of improvements to how you install and configure Inertia.
         It includes a number of breaking changes. This guide explains how to update your project to v1.0.
       </P>
-      <H2>Update dependencies</H2>
+      <H2>Dependencies</H2>
       <P>
         Previously to use Inertia you had to install a number of libraries, including the core library (
         <Code>@inertiajs/inertia</Code>), the adapter of your choice (
@@ -98,7 +99,7 @@ const Page = () => {
           },
         ]}
       />
-      <H2>Update imports</H2>
+      <H2>Imports</H2>
       <P>
         Next, update all the Inertia related imports in your project to use the new adapter library name. All imports
         are now available from the adapter library, meaning you no longer import anything from the Inertia core library,
@@ -211,7 +212,7 @@ const Page = () => {
               + import { useForm } from '@inertiajs/svelte'\n
               - import { useRemember } from '@inertiajs/inertia-svelte'
               - import { remember } from '@inertiajs/inertia-svelte'
-              + import { useRemember } from '@inertiajs/svelte'\n
+              + import { remember } from '@inertiajs/svelte'\n
               - import { Link } from '@inertiajs/inertia-svelte'
               - import { link } from '@inertiajs/inertia-svelte'
               - import { InertiaLink } from '@inertiajs/inertia-svelte'
@@ -226,7 +227,7 @@ const Page = () => {
         <A href="/client-side-setup#initialize-the-inertia-app">client-side setup</A> documentation for more
         information.
       </Notice>
-      <H2>Update progress</H2>
+      <H2>Progress</H2>
       <P>
         Previously the progress indicator was available as a separate plugin (<Code>@inertiajs/progress</Code>). It is
         now installed and enabled by default.
@@ -300,6 +301,23 @@ const Page = () => {
           createInertiaApp({
             progress: false,
             // ...
+          })
+        `}
+      />
+      <H2>Setup arguments</H2>
+      <P>
+        We've removed the previously deprecated <Code>app</Code> argument from the <Code>setup()</Code> method in{' '}
+        <Code>createInertiaApp()</Code>. Use <Code>App</Code> instead.
+      </P>
+      <CodeBlock
+        language="diff"
+        children={dedent`
+          createInertiaApp({
+            // ...
+        -   setup({ app, props }) {
+        +   setup({ App, props }) {
+              // ...
+            },
           })
         `}
       />
