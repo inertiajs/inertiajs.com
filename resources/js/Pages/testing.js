@@ -57,7 +57,7 @@ const Page = () => {
                   $this->get('/podcasts/41')
                       ->assertInertia(fn (Assert $page) => $page
                           ->component('Podcasts/Show')
-                          ->has('podcast', fn (Assert $page) => $page
+                          ->has('podcast', fn (Assert $podcast) => $podcast
                               ->where('id', $podcast->id)
                               ->where('subject', 'The Laravel Podcast')
                               ->where('description', 'The Laravel Podcast brings you Laravel and PHP development news and discussion.')
