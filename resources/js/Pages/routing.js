@@ -1,6 +1,6 @@
 import React from 'react'
 import dedent from 'dedent-js'
-import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode, Notice } from '@/Components'
 
 const meta = {
   title: 'Routing',
@@ -134,6 +134,20 @@ const Page = () => {
           },
         ]}
       />
+      <Notice>To work with routing in SSR in vue 3.</Notice>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          const Ziggy = {
+            // props should be in the parameters of the setup function
+            ...props.initialPage.props.ziggy,
+            location: new URL(props.initialPage.props.ziggy.url)
+          }
+
+          app.config.globalProperties.$route = (name, params, absolute) => route(name, params, absolute, Ziggy)
+        `}
+      />
+
       <CodeBlock
         language="html"
         children={dedent`
