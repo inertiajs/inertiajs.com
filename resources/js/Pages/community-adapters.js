@@ -21,7 +21,7 @@ const Page = () => {
           <A href="https://github.com/eidellev/inertiajs-adonisjs">AdonisJs</A>
         </Li>
         <Li>
-          <A href="https://github.com/Nothing-Works/inertia-aspnetcore">ASP.NET Core</A>
+          <A href="https://github.com/kapi2289/InertiaCore">ASP.NET Core</A>
         </Li>
         <Li>
           <A href="https://github.com/ishanvyas22/cakephp-inertiajs">CakePHP</A>
