@@ -972,7 +972,7 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              {errors.isDirty && <div>There are unsaved form changes.</div>}
+              {form.isDirty && <div>There are unsaved form changes.</div>}
             `,
           },
           {
