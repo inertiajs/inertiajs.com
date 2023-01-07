@@ -1,4 +1,4 @@
-import { A, H1, H2, Layout, Li, Notice, P, Ul } from '@/Components'
+import { A, H1, H2, Li, Notice, P, Ul } from '@/Components'
 
 export const meta = {
   title: 'Demo application',
@@ -22,7 +22,7 @@ export default function () {
         data.
       </Notice>
       <a href="https://demo.inertiajs.com">
-        <img className="w-full h-auto rounded" src="/pingcrm.png" alt="Ping CRM" />
+        <img className="h-auto w-full rounded" src="/pingcrm.png" alt="Ping CRM" />
       </a>
       <P>
         In addition to the Vue version of Ping CRM, we also maintain a Svelte version of the application, which you can

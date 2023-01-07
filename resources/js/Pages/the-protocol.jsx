@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, Layout, Li, Notice, Ol, P, Strong } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Li, Notice, Ol, P, Strong } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -31,16 +31,16 @@ export default function () {
         <Code>data-page</Code> attribute with a JSON encoded <A href="#the-page-object">page object</A> for the initial
         page. Inertia uses this information to boot your client-side framework and display the initial page component.
       </P>
-      <div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
-        <div className="pt-6 px-6 text-white font-mono text-sm">
-          <div className="text-gray-600 font-bold text-xs uppercase">Request</div>
+      <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
+        <div className="px-6 pt-6 font-mono text-sm text-white">
+          <div className="text-xs font-bold uppercase text-gray-600">Request</div>
           <div className="mt-1">
             <span className="text-blue-400">GET:</span> http://example.com/events/80
           </div>
           <div>
             <span className="text-blue-400">Accept:</span> text/html, application/xhtml+xml
           </div>
-          <div className="mt-8 text-gray-600 font-bold text-xs uppercase">Response</div>
+          <div className="mt-8 text-xs font-bold uppercase text-gray-600">Response</div>
           <div className="mt-1">HTTP/1.1 200 OK</div>
           <div>
             <span className="text-blue-400">Content-Type:</span> text/html; charset=utf-8
@@ -76,9 +76,9 @@ export default function () {
         When the server detects the <Code>X-Inertia</Code> header, instead of responding with a full HTML document, it
         returns a JSON response with an encoded <A href="#the-page-object">page object</A>.
       </P>
-      <div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
-        <div className="pt-6 px-6 text-white font-mono text-sm">
-          <div className="text-gray-600 font-bold text-xs uppercase">Request</div>
+      <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
+        <div className="px-6 pt-6 font-mono text-sm text-white">
+          <div className="text-xs font-bold uppercase text-gray-600">Request</div>
           <div className="mt-1">
             <span className="text-blue-400">GET:</span> http://example.com/events/80
           </div>
@@ -94,7 +94,7 @@ export default function () {
           <div>
             <span className="text-blue-400">X-Inertia-Version:</span> 6b16b94d7c51cbe5b1fa42aac98241d5
           </div>
-          <div className="mt-8 text-gray-600 font-bold text-xs uppercase">Response</div>
+          <div className="mt-8 text-xs font-bold uppercase text-gray-600">Response</div>
           <div className="mt-1">HTTP/1.1 200 OK</div>
           <div>
             <span className="text-blue-400">Content-Type:</span> application/json
@@ -180,9 +180,9 @@ export default function () {
         Finally, in the event that flash session data exists when a <Code>409 Conflict</Code> response occurs, the
         server will automatically reflash this data.
       </P>
-      <div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
-        <div className="p-6 text-white font-mono text-sm">
-          <div className="text-gray-600 font-bold text-xs uppercase">Request</div>
+      <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
+        <div className="p-6 font-mono text-sm text-white">
+          <div className="text-xs font-bold uppercase text-gray-600">Request</div>
           <div className="mt-1">
             <span className="text-blue-400">GET:</span> http://example.com/events/80
           </div>
@@ -198,7 +198,7 @@ export default function () {
           <div>
             <span className="text-blue-400">X-Inertia-Version:</span> 6b16b94d7c51cbe5b1fa42aac98241d5
           </div>
-          <div className="mt-8 text-gray-600 font-bold text-xs uppercase">Response</div>
+          <div className="mt-8 text-xs font-bold uppercase text-gray-600">Response</div>
           <div className="mt-1">409: Conflict</div>
           <div>
             <span className="text-blue-400">X-Inertia-Location:</span> http://example.com/events/80
@@ -225,9 +225,9 @@ export default function () {
         the final destination is different for some reason (eg. the user was logged out and is now on the login page),
         then no partial reloading will occur.
       </P>
-      <div className="rounded overflow-hidden" style={{ background: '#202e59' }}>
-        <div className="pt-6 px-6 text-white font-mono text-sm">
-          <div className="text-gray-600 font-bold text-xs uppercase">Request</div>
+      <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
+        <div className="px-6 pt-6 font-mono text-sm text-white">
+          <div className="text-xs font-bold uppercase text-gray-600">Request</div>
           <div className="mt-1">
             <span className="text-blue-400">GET:</span> http://example.com/events
           </div>
@@ -249,7 +249,7 @@ export default function () {
           <div>
             <span className="text-blue-400">X-Inertia-Partial-Component:</span> Events
           </div>
-          <div className="mt-8 text-gray-600 font-bold text-xs uppercase">Response</div>
+          <div className="mt-8 text-xs font-bold uppercase text-gray-600">Response</div>
           <div className="mt-1">HTTP/1.1 200 OK</div>
           <div>
             <span className="text-blue-400">Content-Type:</span> application/json

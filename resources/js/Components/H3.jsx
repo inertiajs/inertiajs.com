@@ -12,7 +12,7 @@ export default function H3(props) {
     <h3
       {...props}
       id={props.id || kebabCase(slot)}
-      className="mt-16 mb-4 text-xl font-bold text-gray-700 leading-tight"
+      className="mt-16 mb-4 text-xl font-bold leading-tight text-gray-700"
     />
   )
 }

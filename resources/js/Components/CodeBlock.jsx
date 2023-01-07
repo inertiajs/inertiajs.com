@@ -12,7 +12,7 @@ const CodeBlock = ({ className = 'my-8 p-6 leading-normal rounded', language, he
   <pre>
     <code
       style={{ height: height ? `${height}px` : 'auto' }}
-      className={`${className} block text-white overflow-auto text-[.85rem] bg-[#202e59]`}
+      className={`${className} block overflow-auto bg-[#202e59] text-[.85rem] text-white`}
       dangerouslySetInnerHTML={{
         __html: Prism.highlight(children, Prism.languages[language] || Prism.languages.text),
       }}

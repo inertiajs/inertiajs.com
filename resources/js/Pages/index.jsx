@@ -1,4 +1,4 @@
-import { A, H1, H2, Layout, P } from '@/Components'
+import { A, H1, H2, P } from '@/Components'
 
 export const meta = {
   description:

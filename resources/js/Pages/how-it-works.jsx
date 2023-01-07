@@ -1,4 +1,4 @@
-import { A, Code, H1, Layout, P, Strong } from '@/Components'
+import { A, Code, H1, P, Strong } from '@/Components'
 
 export const meta = {
   title: 'How it works',

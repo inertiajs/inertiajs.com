@@ -1,4 +1,4 @@
-import { A, H1, H2, Layout, Li, P, Ul } from '@/Components'
+import { A, H1, H2, Li, P, Ul } from '@/Components'
 
 export const meta = {
   title: 'Community adapters',

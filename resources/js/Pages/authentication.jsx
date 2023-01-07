@@ -1,4 +1,4 @@
-import { A, H1, Layout, P } from '@/Components'
+import { A, H1, P } from '@/Components'
 
 export const meta = {
   title: 'Authentication',

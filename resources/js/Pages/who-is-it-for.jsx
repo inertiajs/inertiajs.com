@@ -1,4 +1,4 @@
-import { H1, Layout, P, Strong } from '@/Components'
+import { H1, P, Strong } from '@/Components'
 
 export const meta = {
   title: 'Who is Inertia.js for?',
