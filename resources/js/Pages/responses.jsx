@@ -31,7 +31,8 @@ const Page = () => {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Inertia\\Inertia;\n
+              use Inertia\\Inertia;
+
               class EventsController extends Controller
               {
                   public function show(Event $event)
@@ -43,7 +44,8 @@ const Page = () => {
                             'start_date',
                             'description'
                           ),
-                      ]);\n
+                      ]);
+
                       // Alternatively, you can use the inertia() helper...
                       return inertia('Event/Show', [
                           'event' => $event->only(
@@ -52,7 +54,7 @@ const Page = () => {
                             'start_date',
                             'description'
                           ),
-                      ]);\n
+                      ]);
                   }
               }
             `,

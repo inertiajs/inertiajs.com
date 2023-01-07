@@ -121,18 +121,22 @@ const Page = () => {
             language: 'diff',
             code: dedent`
               - import { Inertia } from '@inertiajs/inertia'
-              + import { router } from '@inertiajs/vue2'\n
+              + import { router } from '@inertiajs/vue2'
+
               - import createServer from '@inertiajs/server'
-              + import createServer from '@inertiajs/vue2/server'\n
+              + import createServer from '@inertiajs/vue2/server'
+
               - import { createInertiaApp } from '@inertiajs/inertia-vue'
               - import { App } from '@inertiajs/inertia-vue'
               - import { app } from '@inertiajs/inertia-vue'
               - import { InertiaApp } from '@inertiajs/inertia-vue'
               - import { plugin } from '@inertiajs/inertia-vue'
-              + import { createInertiaApp } from '@inertiajs/vue2'\n
+              + import { createInertiaApp } from '@inertiajs/vue2'
+
               - import { Head } from '@inertiajs/inertia-vue'
               - import { InertiaHead } from '@inertiajs/inertia-vue'
-              + import { Head } from '@inertiajs/vue2'\n
+              + import { Head } from '@inertiajs/vue2'
+
               - import { Link } from '@inertiajs/inertia-vue'
               - import { link } from '@inertiajs/inertia-vue'
               - import { InertiaLink } from '@inertiajs/inertia-vue'
@@ -144,24 +148,31 @@ const Page = () => {
             language: 'diff',
             code: dedent`
               - import { Inertia } from '@inertiajs/inertia'
-              + import { router } from '@inertiajs/vue3'\n
+              + import { router } from '@inertiajs/vue3'
+
               - import createServer from '@inertiajs/server'
-              + import createServer from '@inertiajs/vue3/server'\n
+              + import createServer from '@inertiajs/vue3/server'
+
               - import { createInertiaApp } from '@inertiajs/inertia-vue3'
               - import { App } from '@inertiajs/inertia-vue3'
               - import { app } from '@inertiajs/inertia-vue3'
               - import { plugin } from '@inertiajs/inertia-vue3'
               - import { InertiaApp } from '@inertiajs/inertia-vue3'
-              + import { createInertiaApp } from '@inertiajs/vue3'\n
+              + import { createInertiaApp } from '@inertiajs/vue3'
+
               - import { usePage } from '@inertiajs/inertia-vue3'
-              + import { usePage } from '@inertiajs/vue3'\n
+              + import { usePage } from '@inertiajs/vue3'
+
               - import { useForm } from '@inertiajs/inertia-vue3'
-              + import { useForm } from '@inertiajs/vue3'\n
+              + import { useForm } from '@inertiajs/vue3'
+
               - import { useRemember } from '@inertiajs/inertia-vue3'
-              + import { useRemember } from '@inertiajs/vue3'\n
+              + import { useRemember } from '@inertiajs/vue3'
+
               - import { Head } from '@inertiajs/inertia-vue3'
               - import { InertiaHead } from '@inertiajs/inertia-vue3'
-              + import { Head } from '@inertiajs/vue3'\n
+              + import { Head } from '@inertiajs/vue3'
+
               - import { Link } from '@inertiajs/inertia-vue3'
               - import { link } from '@inertiajs/inertia-vue3'
               - import { InertiaLink } from '@inertiajs/inertia-vue3'
@@ -173,24 +184,31 @@ const Page = () => {
             language: 'diff',
             code: dedent`
               - import { Inertia } from '@inertiajs/inertia'
-              + import { router } from '@inertiajs/react'\n
+              + import { router } from '@inertiajs/react'
+
               - import createServer from '@inertiajs/server'
-              + import createServer from '@inertiajs/react/server'\n
+              + import createServer from '@inertiajs/react/server'
+
               - import { createInertiaApp } from '@inertiajs/inertia-react'
               - import { App } from '@inertiajs/inertia-react'
               - import { app } from '@inertiajs/inertia-react'
               - import { InertiaApp } from '@inertiajs/inertia-react'
-              + import { createInertiaApp } from '@inertiajs/react'\n
+              + import { createInertiaApp } from '@inertiajs/react'
+
               - import { usePage } from '@inertiajs/inertia-react'
-              + import { usePage } from '@inertiajs/react'\n
+              + import { usePage } from '@inertiajs/react'
+
               - import { useForm } from '@inertiajs/inertia-react'
-              + import { useForm } from '@inertiajs/react'\n
+              + import { useForm } from '@inertiajs/react'
+
               - import { useRemember } from '@inertiajs/inertia-react'
               - import { useRememberedState } from '@inertiajs/inertia-react'
-              + import { useRemember } from '@inertiajs/react'\n
+              + import { useRemember } from '@inertiajs/react'
+
               - import { Head } from '@inertiajs/inertia-react'
               - import { InertiaHead } from '@inertiajs/inertia-react'
-              + import { Head } from '@inertiajs/react'\n
+              + import { Head } from '@inertiajs/react'
+
               - import { Link } from '@inertiajs/inertia-react'
               - import { link } from '@inertiajs/inertia-react'
               - import { InertiaLink } from '@inertiajs/inertia-react'
@@ -202,25 +220,32 @@ const Page = () => {
             language: 'diff',
             code: dedent`
               - import { Inertia } from '@inertiajs/inertia'
-              + import { router } from '@inertiajs/svelte'\n
+              + import { router } from '@inertiajs/svelte'
+
               - import { createInertiaApp } from '@inertiajs/inertia-svelte'
               - import { App } from '@inertiajs/inertia-svelte'
               - import { app } from '@inertiajs/inertia-svelte'
               - import { InertiaApp } from '@inertiajs/inertia-svelte'
-              + import { createInertiaApp } from '@inertiajs/svelte'\n
+              + import { createInertiaApp } from '@inertiajs/svelte'
+
               - import { page } from '@inertiajs/inertia-svelte'
-              + import { page } from '@inertiajs/svelte'\n
+              + import { page } from '@inertiajs/svelte'
+
               - import { inertia } from '@inertiajs/inertia-svelte'
-              + import { inertia } from '@inertiajs/svelte'\n
+              + import { inertia } from '@inertiajs/svelte'
+
               - import { useForm } from '@inertiajs/inertia-svelte'
-              + import { useForm } from '@inertiajs/svelte'\n
+              + import { useForm } from '@inertiajs/svelte'
+
               - import { useRemember } from '@inertiajs/inertia-svelte'
               - import { remember } from '@inertiajs/inertia-svelte'
-              + import { remember } from '@inertiajs/svelte'\n
+              + import { remember } from '@inertiajs/svelte'
+
               - import { Link } from '@inertiajs/inertia-svelte'
               - import { link } from '@inertiajs/inertia-svelte'
               - import { InertiaLink } from '@inertiajs/inertia-svelte'
-              + import { Link } from '@inertiajs/svelte'\n
+              + import { Link } from '@inertiajs/svelte'
+
             `,
           },
         ]}
@@ -270,13 +295,14 @@ const Page = () => {
         ]}
       />
       <P>
-        Next, remove the <Code>InertiaProgress()</Code> import and <Code>InertiaProgress.init()</Code> call, as they are
+        Next, remove the <Code>InertiaProgress</Code> import and <Code>InertiaProgress.init()</Code> call, as they are
         no longer required.
       </P>
       <CodeBlock
         language="diff"
         children={dedent`
-          - import { InertiaProgress } from '@inertiajs/progress'\n
+          - import { InertiaProgress } from '@inertiajs/progress'
+
           - InertiaProgress.init()
         `}
       />

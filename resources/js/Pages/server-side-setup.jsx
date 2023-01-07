@@ -121,7 +121,8 @@ const Page = () => {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Inertia\\Inertia;\n
+              use Inertia\\Inertia;
+
               class EventsController extends Controller
               {
                   public function show(Event $event)

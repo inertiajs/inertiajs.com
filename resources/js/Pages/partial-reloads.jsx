@@ -40,7 +40,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.visit(url, {
                 only: ['users'],
               })
@@ -50,7 +51,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.visit(url, {
                 only: ['users'],
               })
@@ -60,7 +62,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.visit(url, {
                 only: ['users'],
               })
@@ -70,7 +73,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.visit(url, {
                 only: ['users'],
               })
@@ -88,7 +92,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.reload({ only: ['users'] })
             `,
           },
@@ -96,7 +101,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.reload({ only: ['users'] })
             `,
           },
@@ -104,7 +110,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.reload({ only: ['users'] })
             `,
           },
@@ -112,7 +119,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.reload({ only: ['users'] })
             `,
           },
@@ -127,7 +135,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
           },
@@ -135,7 +144,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
           },
@@ -143,7 +153,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
@@ -151,8 +162,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
+
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
@@ -178,11 +191,13 @@ const Page = () => {
                   // ALWAYS included on first visit...
                   // OPTIONALLY included on partial reloads...
                   // ALWAYS evaluated...
-                  'users' => User::get(),\n
+                  'users' => User::get(),
+
                   // ALWAYS included on first visit...
                   // OPTIONALLY included on partial reloads...
                   // ONLY evaluated when needed...
-                  'users' => fn () => User::get(),\n
+                  'users' => fn () => User::get(),
+
                   // NEVER included on first visit...
                   // OPTIONALLY included on partial reloads...
                   // ONLY evaluated when needed...

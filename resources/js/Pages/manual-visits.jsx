@@ -31,7 +31,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.visit(url, {
                 method: 'get',
                 data: {},
@@ -57,7 +58,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.visit(url, {
                 method: 'get',
                 data: {},
@@ -83,7 +85,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.visit(url, {
                 method: 'get',
                 data: {},
@@ -109,7 +112,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.visit(url, {
                 method: 'get',
                 data: {},
@@ -143,7 +147,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.get(url, data, options)
               router.post(url, data, options)
               router.put(url, data, options)
@@ -156,7 +161,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.get(url, data, options)
               router.post(url, data, options)
               router.put(url, data, options)
@@ -169,7 +175,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.get(url, data, options)
               router.post(url, data, options)
               router.put(url, data, options)
@@ -182,7 +189,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.get(url, data, options)
               router.post(url, data, options)
               router.put(url, data, options)
@@ -210,7 +218,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.visit(url, { method: 'post' })
             `,
           },
@@ -218,7 +227,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.visit(url, { method: 'post' })
             `,
           },
@@ -226,7 +236,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.visit(url, { method: 'post' })
             `,
           },
@@ -234,7 +245,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.visit(url, { method: 'post' })
             `,
           },
@@ -257,7 +269,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.visit('/users', {
                 method: 'post',
                 data: {
@@ -271,7 +284,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.visit('/users', {
                 method: 'post',
                 data: {
@@ -285,7 +299,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.visit('/users', {
                 method: 'post',
                 data: {
@@ -299,7 +314,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.visit('/users', {
                 method: 'post',
                 data: {
@@ -321,7 +337,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/users', {
                 name: 'John Doe',
                 email: 'john.doe@example.com',
@@ -332,7 +349,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/users', {
                 name: 'John Doe',
                 email: 'john.doe@example.com',
@@ -343,7 +361,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/users', {
                 name: 'John Doe',
                 email: 'john.doe@example.com',
@@ -354,7 +373,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/users', {
                 name: 'John Doe',
                 email: 'john.doe@example.com',
@@ -373,7 +393,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/users', data, {
                 headers: {
                   'Custom-Header': 'value',
@@ -385,7 +406,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/users', data, {
                 headers: {
                   'Custom-Header': 'value',
@@ -397,7 +419,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/users', data, {
                 headers: {
                   'Custom-Header': 'value',
@@ -409,7 +432,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/users', data, {
                 headers: {
                   'Custom-Header': 'value',
@@ -435,7 +459,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/companies', data, {
                 forceFormData: true,
               })
@@ -445,7 +470,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/companies', data, {
                 forceFormData: true,
               })
@@ -455,7 +481,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/companies', data, {
                 forceFormData: true,
               })
@@ -465,7 +492,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/companies', data, {
                 forceFormData: true,
               })
@@ -488,7 +516,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.get('/users', { search: 'John' }, { replace: true })
             `,
           },
@@ -496,7 +525,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.get('/users', { search: 'John' }, { replace: true })
             `,
           },
@@ -504,7 +534,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.get('/users', { search: 'John' }, { replace: true })
             `,
           },
@@ -512,7 +543,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.get('/users', { search: 'John' }, { replace: true })
             `,
           },
@@ -541,7 +573,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.get('/users', { search: 'John' }, { preserveState: true })
             `,
           },
@@ -549,7 +582,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.get('/users', { search: 'John' }, { preserveState: true })
             `,
           },
@@ -557,7 +591,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.get('/users', { search: 'John' }, { preserveState: true })
             `,
           },
@@ -565,7 +600,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.get('/users', { search: 'John' }, { preserveState: true })
             `,
           },
@@ -581,7 +617,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/users', data, {
                 preserveState: (page) => Object.keys(page.props.errors).length,
               })
@@ -591,7 +628,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/users', data, {
                 preserveState: (page) => Object.keys(page.props.errors).length,
               })
@@ -601,7 +639,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/users', data, {
                 preserveState: (page) => Object.keys(page.props.errors).length,
               })
@@ -611,7 +650,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/users', data, {
                 preserveState: (page) => Object.keys(page.props.errors).length,
               })
@@ -636,7 +676,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.visit(url, { preserveScroll: true })
             `,
           },
@@ -644,7 +685,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.visit(url, { preserveScroll: true })
             `,
           },
@@ -652,7 +694,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.visit(url, { preserveScroll: true })
             `,
           },
@@ -660,7 +703,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.visit(url, { preserveScroll: true })
             `,
           },
@@ -676,7 +720,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/users', data, {
                 preserveScroll: (page) => Object.keys(page.props.errors).length,
               })
@@ -686,7 +731,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/users', data, {
                 preserveScroll: (page) => Object.keys(page.props.errors).length,
               })
@@ -696,7 +742,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/users', data, {
                 preserveScroll: (page) => Object.keys(page.props.errors).length,
               })
@@ -706,7 +753,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/users', data, {
                 preserveScroll: (page) => Object.keys(page.props.errors).length,
               })
@@ -730,7 +778,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.visit('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
@@ -738,7 +787,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.visit('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
@@ -746,7 +796,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.visit('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
@@ -754,7 +805,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.visit('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
@@ -775,10 +827,12 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/users', data, {
                 onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
-              })\n
+              })
+
               // Cancel the visit...
               this.cancelToken.cancel()
             `,
@@ -787,10 +841,12 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/users', data, {
                 onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
-              })\n
+              })
+
               // Cancel the visit...
               this.cancelToken.cancel()
             `,
@@ -799,10 +855,12 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/users', data, {
                 onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
-              })\n
+              })
+
               // Cancel the visit...
               this.cancelToken.cancel()
             `,
@@ -811,10 +869,12 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/users', data, {
                 onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
-              })\n
+              })
+
               // Cancel the visit...
               this.cancelToken.cancel()
             `,
@@ -836,7 +896,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/users', data, {
                 onBefore: (visit) => {},
                 onStart: (visit) => {},
@@ -852,7 +913,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/users', data, {
                 onBefore: (visit) => {},
                 onStart: (visit) => {},
@@ -868,7 +930,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/users', data, {
                 onBefore: (visit) => {},
                 onStart: (visit) => {},
@@ -884,7 +947,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/users', data, {
                 onBefore: (visit) => {},
                 onStart: (visit) => {},
@@ -907,7 +971,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.delete(\`/users/\${user.id}\`, {
                 onBefore: () => confirm('Are you sure you want to delete this user?'),
               })
@@ -917,7 +982,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.delete(\`/users/\${user.id}\`, {
                 onBefore: () => confirm('Are you sure you want to delete this user?'),
               })
@@ -927,7 +993,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.delete(\`/users/\${user.id}\`, {
                 onBefore: () => confirm('Are you sure you want to delete this user?'),
               })
@@ -937,7 +1004,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.delete(\`/users/\${user.id}\`, {
                 onBefore: () => confirm('Are you sure you want to delete this user?'),
               })
@@ -955,7 +1023,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
@@ -974,7 +1043,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
@@ -993,7 +1063,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
@@ -1012,7 +1083,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([

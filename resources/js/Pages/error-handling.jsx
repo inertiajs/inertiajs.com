@@ -51,7 +51,8 @@ const Page = () => {
             language: 'php',
             code: dedent`
               use Throwable;
-              use Inertia\\Inertia;\n
+              use Inertia\\Inertia;
+
               /**
                * Prepare exception for rendering.
                *
@@ -60,7 +61,8 @@ const Page = () => {
                */
               public function render($request, Throwable $e)
               {
-                  $response = parent::render($request, $e);\n
+                  $response = parent::render($request, $e);
+
                   if (! app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403])) {
                       return Inertia::render('Error', ['status' => $response->status()])
                           ->toResponse($request)
@@ -69,7 +71,8 @@ const Page = () => {
                       return back()->with([
                           'message' => 'The page expired, please try again.',
                       ]);
-                  }\n
+                  }
+
                   return $response;
               }
             `,
@@ -91,7 +94,8 @@ const Page = () => {
                   <H1>{{ title }}</H1>
                   <div>{{ description }}</div>
                 </div>
-              </template>\n
+              </template>
+
               <script>
               export default {
                 props: {
@@ -128,7 +132,8 @@ const Page = () => {
                   <H1>{{ title }}</H1>
                   <div>{{ description }}</div>
                 </div>
-              </template>\n
+              </template>
+
               <script>
               export default {
                 props: {
@@ -166,13 +171,15 @@ const Page = () => {
                   500: '500: Server Error',
                   404: '404: Page Not Found',
                   403: '403: Forbidden',
-                }[status]\n
+                }[status]
+
                 const description = {
                   503: 'Sorry, we are doing some maintenance. Please check back soon.',
                   500: 'Whoops, something went wrong on our servers.',
                   404: 'Sorry, the page you are looking for could not be found.',
                   403: 'Sorry, you are forbidden from accessing this page.',
-                }[status]\n
+                }[status]
+
                 return (
                   <div>
                     <H1>{title}</H1>
@@ -187,20 +194,23 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                export let status\n
+                export let status
+
                 $: title = {
                   503: '503: Service Unavailable',
                   500: '500: Server Error',
                   404: '404: Page Not Found',
                   403: '403: Forbidden',
-                }[status]\n
+                }[status]
+
                 $: description = {
                   503: 'Sorry, we are doing some maintenance. Please check back soon.',
                   500: 'Whoops, something went wrong on our servers.',
                   404: 'Sorry, the page you are looking for could not be found.',
                   403: 'Sorry, you are forbidden from accessing this page.',
                 }[status]
-              </script>\n
+              </script>
+
               <div>
                 <H1>{title}</H1>
                 <div>{description}</div>

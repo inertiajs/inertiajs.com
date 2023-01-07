@@ -37,7 +37,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -47,7 +48,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -57,7 +59,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -67,7 +70,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -86,7 +90,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               document.addEventListener('inertia:start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -96,7 +101,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               document.addEventListener('inertia:start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -106,7 +112,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               document.addEventListener('inertia:start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -116,7 +123,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               document.addEventListener('inertia:start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -135,10 +143,12 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               let removeStartEventListener = router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })\n
+              })
+
               // Remove the listener...
               removeStartEventListener()
             `,
@@ -147,10 +157,12 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               let removeStartEventListener = router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })\n
+              })
+
               // Remove the listener...
               removeStartEventListener()
             `,
@@ -159,10 +171,12 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               let removeStartEventListener = router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })\n
+              })
+
               // Remove the listener...
               removeStartEventListener()
             `,
@@ -171,10 +185,12 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               let removeStartEventListener = router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })\n
+              })
+
               // Remove the listener...
               removeStartEventListener()
             `,
@@ -188,7 +204,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               export default {
                 mounted() {
                   this.$once(
@@ -206,7 +223,8 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import { router } from '@inertiajs/vue3'
-              import { onUnmounted } from 'vue'\n
+              import { onUnmounted } from 'vue'
+
               export default {
                 setup() {
                   onUnmounted(
@@ -223,7 +241,8 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import { useEffect } from 'react'
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               useEffect(() => {
                 return router.on('start', (event) => {
                   console.log(\`Starting a visit to \${event.detail.visit.url}\`)
@@ -236,7 +255,8 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import { router } from '@inertiajs/svelte'
-              import { onMount } from 'svelte'\n
+              import { onMount } from 'svelte'
+
               onMount(() => {
                 return router.on('start', (event) => {
                   console.log(\`Starting a visit to \${event.detail.visit.url}\`)
@@ -256,11 +276,14 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               let startEventListener = (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              }\n
-              document.addEventListener('inertia:start', startEventListener)\n
+              }
+
+              document.addEventListener('inertia:start', startEventListener)
+
               // Remove the listener...
               document.removeEventListener('inertia:start', startEventListener)
             `,
@@ -269,11 +292,14 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               let startEventListener = (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              }\n
-              document.addEventListener('inertia:start', startEventListener)\n
+              }
+
+              document.addEventListener('inertia:start', startEventListener)
+
               // Remove the listener...
               document.removeEventListener('inertia:start', startEventListener)
             `,
@@ -282,11 +308,14 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               let startEventListener = (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              }\n
-              document.addEventListener('inertia:start', startEventListener)\n
+              }
+
+              document.addEventListener('inertia:start', startEventListener)
+
               // Remove the listener...
               document.removeEventListener('inertia:start', startEventListener)
             `,
@@ -295,11 +324,14 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               let startEventListener = (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              }\n
-              document.addEventListener('inertia:start', startEventListener)\n
+              }
+
+              document.addEventListener('inertia:start', startEventListener)
+
               // Remove the listener...
               document.removeEventListener('inertia:start', startEventListener)
             `,
@@ -318,7 +350,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('before', (event) => {
                 if (!confirm('Are you sure you want to navigate away?')) {
                   event.preventDefault()
@@ -330,7 +363,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('before', (event) => {
                 if (!confirm('Are you sure you want to navigate away?')) {
                   event.preventDefault()
@@ -342,7 +376,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('before', (event) => {
                 if (!confirm('Are you sure you want to navigate away?')) {
                   event.preventDefault()
@@ -354,7 +389,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('before', (event) => {
                 if (!confirm('Are you sure you want to navigate away?')) {
                   event.preventDefault()
@@ -374,7 +410,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('before', (event) => {
                 return confirm('Are you sure you want to navigate away?')
               })
@@ -384,7 +421,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('before', (event) => {
                 return confirm('Are you sure you want to navigate away?')
               })
@@ -394,7 +432,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('before', (event) => {
                 return confirm('Are you sure you want to navigate away?')
               })
@@ -404,7 +443,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('before', (event) => {
                 return confirm('Are you sure you want to navigate away?')
               })
@@ -423,7 +463,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('before', (event) => {
                 console.log(\`About to make a visit to \${event.detail.visit.url}\`)
               })
@@ -433,7 +474,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('before', (event) => {
                 console.log(\`About to make a visit to \${event.detail.visit.url}\`)
               })
@@ -443,7 +485,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('before', (event) => {
                 console.log(\`About to make a visit to \${event.detail.visit.url}\`)
               })
@@ -453,7 +496,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('before', (event) => {
                 console.log(\`About to make a visit to \${event.detail.visit.url}\`)
               })
@@ -468,7 +512,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('before', (event) => {
                 return confirm('Are you sure you want to navigate away?')
               })
@@ -478,7 +523,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('before', (event) => {
                 return confirm('Are you sure you want to navigate away?')
               })
@@ -488,7 +534,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('before', (event) => {
                 return confirm('Are you sure you want to navigate away?')
               })
@@ -498,7 +545,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('before', (event) => {
                 return confirm('Are you sure you want to navigate away?')
               })
@@ -517,7 +565,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -527,7 +576,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -537,7 +587,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -547,7 +598,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('start', (event) => {
                 console.log(\`Starting a visit to \${event.detail.visit.url}\`)
               })
@@ -568,7 +620,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('progress', (event) => {
                 this.form.progress = event.detail.progress.percentage
               })
@@ -578,7 +631,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('progress', (event) => {
                 this.form.progress = event.detail.progress.percentage
               })
@@ -588,7 +642,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('progress', (event) => {
                 this.form.progress = event.detail.progress.percentage
               })
@@ -598,7 +653,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('progress', (event) => {
                 this.form.progress = event.detail.progress.percentage
               })
@@ -620,7 +676,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('success', (event) => {
                 console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
               })
@@ -630,7 +687,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('success', (event) => {
                 console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
               })
@@ -640,7 +698,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('success', (event) => {
                 console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
               })
@@ -650,7 +709,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('success', (event) => {
                 console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
               })
@@ -671,7 +731,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('error', (errors) => {
                 console.log(errors)
               })
@@ -681,7 +742,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('error', (errors) => {
                 console.log(errors)
               })
@@ -691,7 +753,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('error', (errors) => {
                 console.log(errors)
               })
@@ -701,7 +764,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('error', (errors) => {
                 console.log(errors)
               })
@@ -729,7 +793,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('invalid', (event) => {
                 console.log(\`An invalid Inertia response was received.\`)
                 console.log(event.detail.response)
@@ -740,7 +805,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('invalid', (event) => {
                 console.log(\`An invalid Inertia response was received.\`)
                 console.log(event.detail.response)
@@ -751,7 +817,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('invalid', (event) => {
                 console.log(\`An invalid Inertia response was received.\`)
                 console.log(event.detail.response)
@@ -762,7 +829,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('invalid', (event) => {
                 console.log(\`An invalid Inertia response was received.\`)
                 console.log(event.detail.response)
@@ -780,9 +848,11 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('invalid', (event) => {
-                event.preventDefault()\n
+                event.preventDefault()
+
                 // Handle the invalid response yourself...
               })
             `,
@@ -791,9 +861,11 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('invalid', (event) => {
-                event.preventDefault()\n
+                event.preventDefault()
+
                 // Handle the invalid response yourself...
               })
             `,
@@ -802,9 +874,11 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('invalid', (event) => {
-                event.preventDefault()\n
+                event.preventDefault()
+
                 // Handle the invalid response yourself...
               })
             `,
@@ -813,9 +887,11 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('invalid', (event) => {
-                event.preventDefault()\n
+                event.preventDefault()
+
                 // Handle the invalid response yourself...
               })
             `,
@@ -833,7 +909,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('exception', (event) => {
                 console.log(\`An unexpected error occurred during an Inertia visit.\`)
                 console.log(event.detail.error)
@@ -844,7 +921,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('exception', (event) => {
                 console.log(\`An unexpected error occurred during an Inertia visit.\`)
                 console.log(event.detail.error)
@@ -855,7 +933,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('exception', (event) => {
                 console.log(\`An unexpected error occurred during an Inertia visit.\`)
                 console.log(event.detail.error)
@@ -866,7 +945,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('exception', (event) => {
                 console.log(\`An unexpected error occurred during an Inertia visit.\`)
                 console.log(event.detail.error)
@@ -884,7 +964,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('exception', (event) => {
                 event.preventDefault()
                 // Handle the error yourself
@@ -895,7 +976,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('exception', (event) => {
                 event.preventDefault()
                 // Handle the error yourself
@@ -906,7 +988,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('exception', (event) => {
                 event.preventDefault()
                 // Handle the error yourself
@@ -917,7 +1000,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('exception', (event) => {
                 event.preventDefault()
                 // Handle the error yourself
@@ -942,7 +1026,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('finish', (event) => {
                 NProgress.done()
               })
@@ -952,7 +1037,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('finish', (event) => {
                 NProgress.done()
               })
@@ -962,7 +1048,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('finish', (event) => {
                 NProgress.done()
               })
@@ -972,7 +1059,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('finish', (event) => {
                 NProgress.done()
               })
@@ -993,7 +1081,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.on('navigate', (event) => {
                 console.log(\`Navigated to \${event.detail.page.url}\`)
               })
@@ -1003,7 +1092,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.on('navigate', (event) => {
                 console.log(\`Navigated to \${event.detail.page.url}\`)
               })
@@ -1013,7 +1103,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.on('navigate', (event) => {
                 console.log(\`Navigated to \${event.detail.page.url}\`)
               })
@@ -1023,7 +1114,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.on('navigate', (event) => {
                 console.log(\`Navigated to \${event.detail.page.url}\`)
               })

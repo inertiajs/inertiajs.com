@@ -57,7 +57,8 @@ const Page = () => {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Inertia\\Inertia;\n
+              use Inertia\\Inertia;
+
               Inertia::version($version);
               Inertia::version(fn () => $version); // Lazily...
             `,

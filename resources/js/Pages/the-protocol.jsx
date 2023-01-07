@@ -54,8 +54,10 @@ const Page = () => {
                 <link href="/css/app.css" rel="stylesheet">
                 <script src="/js/app.js" defer></script>
             </head>
-            <body>\n
-            <div id="app" data-page='{"component":"Event","props":{"event":{"id":80,"title":"Birthday party","start_date":"2019-06-02","description":"Come out and celebrate Jonathan&apos;s 36th birthday party!"}},"url":"/events/80","version":"c32b8e4965f418ad16eaebba1d4e960f"}'></div>\n
+            <body>
+
+            <div id="app" data-page='{"component":"Event","props":{"event":{"id":80,"title":"Birthday party","start_date":"2019-06-02","description":"Come out and celebrate Jonathan&apos;s 36th birthday party!"}},"url":"/events/80","version":"c32b8e4965f418ad16eaebba1d4e960f"}'></div>
+
             </body>
             </html>
           `}

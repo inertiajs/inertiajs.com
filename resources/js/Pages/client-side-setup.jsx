@@ -73,14 +73,16 @@ const Page = () => {
             language: 'js',
             code: dedent`
               import Vue from 'vue'
-              import { createInertiaApp } from '@inertiajs/vue2'\n
+              import { createInertiaApp } from '@inertiajs/vue2'
+
               createInertiaApp({
                 resolve: name => {
                   const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
                   return pages[\`./Pages/\${name}.vue\`]
                 },
                 setup({ el, App, props, plugin }) {
-                  Vue.use(plugin)\n
+                  Vue.use(plugin)
+
                   new Vue({
                     render: h => h(App, props),
                   }).$mount(el)
@@ -93,7 +95,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               import { createApp, h } from 'vue'
-              import { createInertiaApp } from '@inertiajs/vue3'\n
+              import { createInertiaApp } from '@inertiajs/vue3'
+
               createInertiaApp({
                 resolve: name => {
                   const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
@@ -112,7 +115,8 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import { render } from 'react-dom'
-              import { createInertiaApp } from '@inertiajs/react'\n
+              import { createInertiaApp } from '@inertiajs/react'
+
               createInertiaApp({
                 resolve: name => {
                   const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
@@ -128,7 +132,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { createInertiaApp } from '@inertiajs/svelte'\n
+              import { createInertiaApp } from '@inertiajs/svelte'
+
               createInertiaApp({
                 resolve: name => {
                   const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
@@ -162,7 +167,8 @@ const Page = () => {
               resolve: name => {
                 const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
                 return pages[\`./Pages/\${name}.vue\`]
-              },\n
+              },
+
               // Webpack
               resolve: name => require(\`./Pages/\${name}\`),
             `,
@@ -175,7 +181,8 @@ const Page = () => {
               resolve: name => {
                 const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
                 return pages[\`./Pages/\${name}.vue\`]
-              },\n
+              },
+
               // Webpack
               resolve: name => require(\`./Pages/\${name}\`),
             `,
@@ -188,7 +195,8 @@ const Page = () => {
               resolve: name => {
                 const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
                 return pages[\`./Pages/\${name}.jsx\`]
-              },\n
+              },
+
               // Webpack
               resolve: name => require(\`./Pages/\${name}\`),
             `,
@@ -201,7 +209,8 @@ const Page = () => {
               resolve: name => {
                 const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
                 return pages[\`./Pages/\${name}.svelte\`]
-              },\n
+              },
+
               // Webpack
               resolve: name => require(\`./Pages/\${name}.svelte\`),
             `,

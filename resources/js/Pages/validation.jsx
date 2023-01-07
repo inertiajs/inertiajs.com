@@ -72,9 +72,11 @@ const Page = () => {
                   <div v-if="errors.email">{{ errors.email }}</div>
                   <button type="submit">Submit</button>
                 </form>
-              </template>\n
+              </template>
+
               <script>
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               export default {
                 props: {
                   errors: Object,
@@ -114,9 +116,11 @@ const Page = () => {
                   <div v-if="errors.email">{{ errors.email }}</div>
                   <button type="submit">Submit</button>
                 </form>
-              </template>\n
+              </template>
+
               <script>
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               export default {
                 props: {
                   errors: Object,
@@ -144,24 +148,29 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import { useState } from 'react'
-              import { router, usePage } from '@inertiajs/react'\n
+              import { router, usePage } from '@inertiajs/react'
+
               export default function Edit() {
-                const { errors } = usePage().props\n
+                const { errors } = usePage().props
+
                 const [values, setValues] = useState({
                   first_name: null,
                   last_name: null,
                   email: null,
-                })\n
+                })
+
                 function handleChange(e) {
                   setValues(values => ({
                     ...values,
                     [e.target.id]: e.target.value,
                   }))
-                }\n
+                }
+
                 function handleSubmit(e) {
                   e.preventDefault()
                   router.post('/users', values)
-                }\n
+                }
+
                 return (
                   <form onSubmit={handleSubmit}>
                     <label for="first_name">First name:</label>
@@ -184,27 +193,34 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import { router } from '@inertiajs/svelte'\n
-                export let errors = {}\n
+                import { router } from '@inertiajs/svelte'
+
+                export let errors = {}
+
                 let values = {
                   first_name: null,
                   last_name: null,
                   email: null,
-                }\n
+                }
+
                 function handleSubmit() {
                   router.post('/users', values)
                 }
-              </script>\n
+              </script>
+
               <form on:submit|preventDefault={handleSubmit}>
                 <label for="first_name">First name:</label>
                 <input id="first_name" bind:value={values.first_name}>
-                {#if errors.first_name}<div>{errors.first_name}</div>{/if}\n
+                {#if errors.first_name}<div>{errors.first_name}</div>{/if}
+
                 <label for="last_name">Last name:</label>
                 <input id="last_name" bind:value={values.last_name}>
-                {#if errors.last_name}<div>{errors.last_name}</div>{/if}\n
+                {#if errors.last_name}<div>{errors.last_name}</div>{/if}
+
                 <label for="email">Email:</label>
                 <input id="email" bind:value={values.email}>
-                {#if errors.email}<div>{errors.email}</div>{/if}\n
+                {#if errors.email}<div>{errors.email}</div>{/if}
+
                 <button type="submit">Submit</button>
               </form>
             `,
@@ -253,10 +269,12 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/companies', data, {
                 errorBag: 'createCompany',
-              })\n
+              })
+
               router.post('/users', data, {
                 errorBag: 'createUser',
               })
@@ -266,10 +284,12 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/companies', data, {
                 errorBag: 'createCompany',
-              })\n
+              })
+
               router.post('/users', data, {
                 errorBag: 'createUser',
               })
@@ -279,10 +299,12 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/companies', data, {
                 errorBag: 'createCompany',
-              })\n
+              })
+
               router.post('/users', data, {
                 errorBag: 'createUser',
               })
@@ -292,10 +314,12 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/companies', data, {
                 errorBag: 'createCompany',
-              })\n
+              })
+
               router.post('/users', data, {
                 errorBag: 'createUser',
               })

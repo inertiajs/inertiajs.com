@@ -34,7 +34,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/users', {
                 name: this.name,
                 email: this.email,
@@ -46,7 +47,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/users', {
                 name: this.name,
                 email: this.email,
@@ -58,7 +60,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/users', {
                 name: this.name,
                 email: this.email,
@@ -70,7 +73,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/users', {
                 name: this.name,
                 email: this.email,
@@ -130,7 +134,8 @@ const Page = () => {
             language: 'php',
             code: dedent`
               use Throwable;
-              use Inertia\\Inertia;\n
+              use Inertia\\Inertia;
+
               /**
                * Prepare exception for rendering.
                *
@@ -139,12 +144,14 @@ const Page = () => {
                */
               public function render($request, Throwable $e)
               {
-                  $response = parent::render($request, $e);\n
+                  $response = parent::render($request, $e);
+
                   if ($response->status() === 419) {
                       return back()->with([
                           'message' => 'The page expired, please try again.',
                       ]);
-                  }\n
+                  }
+
                   return $response;
               }
             `,

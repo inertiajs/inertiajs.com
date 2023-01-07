@@ -42,7 +42,8 @@ const Page = () => {
                   {
                       return array_merge(parent::share($request), [
                           // Synchronously...
-                          'appName' => config('app.name'),\n
+                          'appName' => config('app.name'),
+
                           // Lazily...
                           'auth.user' => fn () => $request->user()
                               ? $request->user()->only('id', 'name', 'email')
@@ -65,9 +66,11 @@ const Page = () => {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Inertia\\Inertia;\n
+              use Inertia\\Inertia;
+
               // Synchronously...
-              Inertia::share('appName', config('app.name'));\n
+              Inertia::share('appName', config('app.name'));
+
               // Lazily...
               Inertia::share('user', fn (Request $request) => $request->user()
                   ? $request->user()->only('id', 'name', 'email')
@@ -102,7 +105,8 @@ const Page = () => {
                     <slot />
                   </content>
                 </main>
-              </template>\n
+              </template>
+
               <script>
               export default {
                 computed: {
@@ -127,10 +131,12 @@ const Page = () => {
                     <slot />
                   </content>
                 </main>
-              </template>\n
+              </template>
+
               <script>
               import { computed } from 'vue'
-              import { usePage } from '@inertiajs/vue3'\n
+              import { usePage } from '@inertiajs/vue3'
+
               export default {
                 setup() {
                   const user = computed(() => usePage().props.value.auth.user)
@@ -144,9 +150,11 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { usePage } from '@inertiajs/react'\n
+              import { usePage } from '@inertiajs/react'
+
               export default function Layout({ children }) {
-                const { auth } = usePage().props\n
+                const { auth } = usePage().props
+
                 return (
                   <main>
                     <header>
@@ -166,7 +174,8 @@ const Page = () => {
             code: dedent`
               <script>
                 import { page } from '@inertiajs/svelte'
-              </script>\n
+              </script>
+
               <main>
                 <header>
                   You are logged in as: {$page.props.auth.user.name}
@@ -253,9 +262,11 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { usePage } from '@inertiajs/react'\n
+              import { usePage } from '@inertiajs/react'
+
               export default function Layout({ children }) {
-                const { flash } = usePage().props\n
+                const { flash } = usePage().props
+
                 return (
                   <main>
                     <header></header>
@@ -277,7 +288,8 @@ const Page = () => {
             code: dedent`
               <script>
                 import { page } from '@inertiajs/svelte'
-              </script>\n
+              </script>
+
               <main>
                 <header></header>
                 <content>

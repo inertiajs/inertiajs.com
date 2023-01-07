@@ -42,10 +42,12 @@ const Page = () => {
                   <h1>Welcome</h1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </Layout>
-              </template>\n
+              </template>
+
               <script>
                 import Layout from './Layout'
-                import { Head } from '@inertiajs/vue2'\n
+                import { Head } from '@inertiajs/vue2'
+
                 export default {
                   components: {
                     Head,
@@ -68,10 +70,12 @@ const Page = () => {
                   <h1>Welcome</h1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </Layout>
-              </template>\n
+              </template>
+
               <script>
                 import Layout from './Layout'
-                import { Head } from '@inertiajs/vue3'\n
+                import { Head } from '@inertiajs/vue3'
+
                 export default {
                   components: {
                     Head,
@@ -89,7 +93,8 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import Layout from './Layout'
-              import { Head } from '@inertiajs/react'\n
+              import { Head } from '@inertiajs/react'
+
               export default function Welcome({ user }) {
                 return (
                   <Layout>
@@ -106,9 +111,11 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import Layout from './Layout.svelte'\n
+                import Layout from './Layout.svelte'
+
                 export let user
-              </script>\n
+              </script>
+
               <Layout>
                 <svelte:head>
                   <title>Welcome</title>
@@ -131,7 +138,8 @@ const Page = () => {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Inertia\\Inertia;\n
+              use Inertia\\Inertia;
+
               class UserController extends Controller
               {
                   public function show(User $user)
@@ -170,9 +178,11 @@ const Page = () => {
                     <slot />
                   </article>
                 </main>
-              </template>\n
+              </template>
+
               <script>
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               export default {
                 components: {
                   Link,
@@ -196,9 +206,11 @@ const Page = () => {
                     <slot />
                   </article>
                 </main>
-              </template>\n
+              </template>
+
               <script>
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               export default {
                 components: {
                   Link,
@@ -212,7 +224,8 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import { useEffect } from 'react'
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               export default function Layout({ children }) {
                 return (
                   <main>
@@ -233,7 +246,8 @@ const Page = () => {
             code: dedent`
               <script>
                 import { inertia } from '@inertiajs/svelte'
-              </script>\n
+              </script>
+
               <main>
                 <header>
                   <a use:inertia href="/">Home</a>
@@ -270,14 +284,18 @@ const Page = () => {
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </div>
-              </template>\n
+              </template>
+
               <script>
-                import Layout from './Layout'\n
+                import Layout from './Layout'
+
                 export default {
                   // Using a render function...
-                  layout: (h, page) => h(Layout, [page]),\n
+                  layout: (h, page) => h(Layout, [page]),
+
                   // Using shorthand syntax...
-                  layout: Layout,\n
+                  layout: Layout,
+
                   props: {
                     user: Object,
                   },
@@ -294,14 +312,18 @@ const Page = () => {
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </div>
-              </template>\n
+              </template>
+
               <script>
-                import Layout from './Layout'\n
+                import Layout from './Layout'
+
                 export default {
                   // Using a render function...
-                  layout: (h, page) => h(Layout, () => child),\n
+                  layout: (h, page) => h(Layout, () => child),
+
                   // Using shorthand syntax...
-                  layout: Layout,\n
+                  layout: Layout,
+
                   props: {
                     user: Object,
                   },
@@ -313,7 +335,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import Layout from './Layout'\n
+              import Layout from './Layout'
+
               const Home = ({ user }) => {
                 return (
                   <>
@@ -321,8 +344,10 @@ const Page = () => {
                     <p>Hello {user.name}, welcome to your first Inertia app!</p>
                   </>
                 )
-              }\n
-              Home.layout = page => <Layout children={page} title="Welcome" />\n
+              }
+
+              Home.layout = page => <Layout children={page} title="Welcome" />
+
               export default Home
             `,
           },
@@ -333,10 +358,12 @@ const Page = () => {
               <script context="module">
                 import Layout from './Layout.svelte'
                 export const layout = Layout
-              </script>\n
+              </script>
+
               <script>
                 export let user
-              </script>\n
+              </script>
+
               <H1>Welcome</H1>
               <p>Hello {user.name}, welcome to your first Inertia app!</p>
             `,
@@ -355,19 +382,23 @@ const Page = () => {
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </div>
-              </template>\n
+              </template>
+
               <script>
                 import SiteLayout from './SiteLayout'
-                import NestedLayout from './NestedLayout'\n
+                import NestedLayout from './NestedLayout'
+
                 export default {
                   // Using a render function...
                   layout: (h, page) => {
                     return h(SiteLayout, [
                       h(NestedLayout, [page]),
                     ])
-                  },\n
+                  },
+
                   // Using shorthand syntax...
-                  layout: [SiteLayout, NestedLayout],\n
+                  layout: [SiteLayout, NestedLayout],
+
                   props: {
                     user: Object,
                   },
@@ -384,17 +415,21 @@ const Page = () => {
                   <H1>Welcome</H1>
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </div>
-              </template>\n
+              </template>
+
               <script>
                 import SiteLayout from './SiteLayout'
-                import NestedLayout from './NestedLayout'\n
+                import NestedLayout from './NestedLayout'
+
                 export default {
                   // Using a render function...
                   layout: (h, page) => {
                     return h(SiteLayout, () => h(NestedLayout, () => page))
-                  },\n
+                  },
+
                   // Using the shorthand...
-                  layout: [SiteLayout, NestedLayout],\n
+                  layout: [SiteLayout, NestedLayout],
+
                   props: {
                     user: Object,
                   },
@@ -407,7 +442,8 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import SiteLayout from './SiteLayout'
-              import NestedLayout from './NestedLayout'\n
+              import NestedLayout from './NestedLayout'
+
               const Home = ({ user }) => {
                 return (
                   <>
@@ -415,12 +451,14 @@ const Page = () => {
                     <p>Hello {user.name}, welcome to your first Inertia app!</p>
                   </>
                 )
-              }\n
+              }
+
               Home.layout = page => (
                 <SiteLayout title="Welcome">
                   <NestedLayout children={page} />
                 </SiteLayout>
-              )\n
+              )
+
               export default Home
             `,
           },
@@ -432,10 +470,12 @@ const Page = () => {
                 import SiteLayout from './SiteLayout.svelte'
                 import NestedLayout from './NestedLayout.svelte'
                 export const layout = [SiteLayout, NestedLayout]
-              </script>\n
+              </script>
+
               <script>
                 export let user
-              </script>\n
+              </script>
+
               <H1>Welcome</H1>
               <p>Hello {user.name}, welcome to your first Inertia app!</p>
             `,
@@ -450,7 +490,8 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          import Layout from './Layout'\n
+          import Layout from './Layout'
+
           createInertiaApp({
             resolve: name => {
               const page = require(\`./Pages/\${name}\`).default
@@ -474,7 +515,8 @@ const Page = () => {
       <CodeBlock
         language="js"
         children={dedent`
-          import Layout from './Layout'\n
+          import Layout from './Layout'
+
           createInertiaApp({
             resolve: name => {
               const page = require(\`./Pages/\${name}\`).default

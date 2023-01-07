@@ -54,7 +54,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/" preserve-scroll>Home</Link>
             `,
           },
@@ -62,7 +63,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/" preserve-scroll>Home</Link>
             `,
           },
@@ -70,7 +72,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link preserveScroll href="/">Home</Link>
             `,
           },
@@ -78,8 +81,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
+
               <Link href="/" preserveScroll>Home</Link>
             `,
           },

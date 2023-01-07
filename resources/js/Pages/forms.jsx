@@ -38,9 +38,11 @@ const Page = () => {
                   <input id="email" v-model="form.email" />
                   <button type="submit">Submit</button>
                 </form>
-              </template>\n
+              </template>
+
               <script>
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               export default {
                 data() {
                   return {
@@ -74,20 +76,24 @@ const Page = () => {
                   <input id="email" v-model="form.email" />
                   <button type="submit">Submit</button>
                 </form>
-              </template>\n
+              </template>
+
               <script>
               import { reactive } from 'vue'
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               export default {
                 setup () {
                   const form = reactive({
                     first_name: null,
                     last_name: null,
                     email: null,
-                  })\n
+                  })
+
                   function submit() {
                     router.post('/users', form)
-                  }\n
+                  }
+
                   return { form, submit }
                 },
               }
@@ -99,13 +105,15 @@ const Page = () => {
             language: 'jsx',
             code: dedent`
               import { useState } from 'react'
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               export default function Edit() {
                 const [values, setValues] = useState({
                   first_name: "",
                   last_name: "",
                   email: "",
-                })\n
+                })
+
                 function handleChange(e) {
                   const key = e.target.id;
                   const value = e.target.value
@@ -113,11 +121,13 @@ const Page = () => {
                       ...values,
                       [key]: value,
                   }))
-                }\n
+                }
+
                 function handleSubmit(e) {
                   e.preventDefault()
                   router.post('/users', values)
-                }\n
+                }
+
                 return (
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="first_name">First name:</label>
@@ -137,23 +147,29 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-                import { router } from '@inertiajs/svelte'\n
+                import { router } from '@inertiajs/svelte'
+
                 let values = {
                   first_name: null,
                   last_name: null,
                   email: null,
-                }\n
+                }
+
                 function handleSubmit() {
                   router.post('/users', values)
                 }
-              </script>\n
+              </script>
+
               <form on:submit|preventDefault={handleSubmit}>
                 <label for="first_name">First name:</label>
-                <input id="first_name" bind:value={values.first_name}>\n
+                <input id="first_name" bind:value={values.first_name}>
+
                 <label for="last_name">Last name:</label>
-                <input id="last_name" bind:value={values.last_name}>\n
+                <input id="last_name" bind:value={values.last_name}>
+
                 <label for="email">Email:</label>
-                <input id="email" bind:value={values.email}>\n
+                <input id="email" bind:value={values.email}>
+
                 <button type="submit">Submit</button>
               </form>
             `,
@@ -183,14 +199,16 @@ const Page = () => {
                       return Inertia::render('Users/Index', [
                         'users' => User::all(),
                       ]);
-                  }\n
+                  }
+
                   public function store(Request $request)
                   {
                       User::create($request->validate([
                         'first_name' => ['required', 'max:50'],
                         'last_name' => ['required', 'max:50'],
                         'email' => ['required', 'max:50', 'email'],
-                      ]));\n
+                      ]));
+
                       return to_route('users.index');
                   }
               }
@@ -237,9 +255,11 @@ const Page = () => {
                   <!-- submit -->
                   <button type="submit" :disabled="form.processing">Login</button>
                 </form>
-              </template>\n
+              </template>
+
               <script>
-              import { useForm } from '@inertiajs/vue2'\n
+              import { useForm } from '@inertiajs/vue2'
+
               export default {
                 data() {
                   return {
@@ -271,16 +291,19 @@ const Page = () => {
                   <!-- submit -->
                   <button type="submit" :disabled="form.processing">Login</button>
                 </form>
-              </template>\n
+              </template>
+
               <script>
-              import { useForm } from '@inertiajs/vue3'\n
+              import { useForm } from '@inertiajs/vue3'
+
               export default {
                 setup () {
                   const form = useForm({
                     email: null,
                     password: null,
                     remember: false,
-                  })\n
+                  })
+
                   return { form }
                 },
               }
@@ -291,16 +314,19 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { useForm } from '@inertiajs/react'\n
+              import { useForm } from '@inertiajs/react'
+
               const { data, setData, post, processing, errors } = useForm({
                 email: '',
                 password: '',
                 remember: false,
-              })\n
+              })
+
               function submit(e) {
                 e.preventDefault()
                 post('/login')
-              }\n
+              }
+
               return (
                 <form onSubmit={submit}>
                   <input type="text" value={data.email} onChange={e => setData('email', e.target.value)} />
@@ -318,16 +344,19 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-              import { useForm } from '@inertiajs/svelte'\n
+              import { useForm } from '@inertiajs/svelte'
+
               let form = useForm({
                 email: null,
                 password: null,
                 remember: false,
-              })\n
+              })
+
               function submit() {
                 $form.post('/login')
               }
-              </script>\n
+              </script>
+
               <form on:submit|preventDefault={submit}>
                 <input type="text" bind:value={$form.email} />
                 {#if $form.errors.email}
@@ -378,7 +407,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              const { submit, get, post, put, patch, delete: destroy } = useForm({ ... })\n
+              const { submit, get, post, put, patch, delete: destroy } = useForm({ ... })
+
               submit(method, url, options)
               get(url, options)
               post(url, options)
@@ -433,7 +463,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-            const { post, reset } = useForm({ ... })\n
+            const { post, reset } = useForm({ ... })
+
             post('/profile', {
               preserveScroll: true,
               onSuccess: () => reset('password'),
@@ -486,7 +517,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              const { transform } = useForm({ ... })\n
+              const { transform } = useForm({ ... })
+
               transform((data) => ({
                 ...data,
                 remember: data.remember ? 'on' : '',
@@ -531,7 +563,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              const { processing } = useForm({ ... })\n
+              const { processing } = useForm({ ... })
+
               <button type="submit" disabled={processing}>Submit</button>
             `,
           },
@@ -572,7 +605,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              const { progress } = useForm({ ... })\n
+              const { progress } = useForm({ ... })
+
               {progress && (
                 <progress value={progress.percentage} max="100">
                   {progress.percentage}%
@@ -618,7 +652,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              const { errors } = useForm({ ... })\n
+              const { errors } = useForm({ ... })
+
               {errors.email && <div>{errors.email}</div>}
             `,
           },
@@ -648,7 +683,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Clear all errors...
-              form.clearErrors()\n
+              form.clearErrors()
+
               // Clear errors for specific fields...
               form.clearErrors('field', 'anotherfield')
             `,
@@ -658,7 +694,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Clear all errors...
-              form.clearErrors()\n
+              form.clearErrors()
+
               // Clear errors for specific fields...
               form.clearErrors('field', 'anotherfield')
             `,
@@ -667,9 +704,11 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              const { clearErrors } = useForm({ ... })\n
+              const { clearErrors } = useForm({ ... })
+
               // Clear all errors...
-              clearErrors()\n
+              clearErrors()
+
               // Clear errors for specific fields...
               clearErrors('field', 'anotherfield')
             `,
@@ -679,7 +718,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Clear all errors...
-              $form.clearErrors()\n
+              $form.clearErrors()
+
               // Clear errors for specific fields...
               $form.clearErrors('field', 'anotherfield')
             `,
@@ -697,7 +737,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Set a single error...
-              form.setError('field', 'Your error message.');\n
+              form.setError('field', 'Your error message.');
+
               // Set multiple errors at once...
               form.setError({
                 foo: 'Your error message for the foo field.',
@@ -710,7 +751,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Set a single error...
-              form.setError('field', 'Your error message.');\n
+              form.setError('field', 'Your error message.');
+
               // Set multiple errors at once...
               form.setError({
                 foo: 'Your error message for the foo field.',
@@ -722,9 +764,11 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              const { setError } = useForm({ ... })\n
+              const { setError } = useForm({ ... })
+
               // Set a single error...
-              setError('field', 'Your error message.');\n
+              setError('field', 'Your error message.');
+
               // Set multiple errors at once...
               setError({
                 foo: 'Your error message for the foo field.',
@@ -737,7 +781,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Set a single error
-              $form.setError('field', 'Your error message.');\n
+              $form.setError('field', 'Your error message.');
+
               // Set multiple errors at once
               $form.setError({
                 foo: 'Your error message for the foo field.',
@@ -767,7 +812,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Reset the form...
-              form.reset()\n
+              form.reset()
+
               // Reset specific fields...
               form.reset('field', 'anotherfield')
             `,
@@ -777,7 +823,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Reset the form...
-              form.reset()\n
+              form.reset()
+
               // Reset specific fields...
               form.reset('field', 'anotherfield')
             `,
@@ -786,9 +833,11 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              const { reset } = useForm({ ... })\n
+              const { reset } = useForm({ ... })
+
               // Reset the form...
-              reset()\n
+              reset()
+
               // Reset specific fields...
               reset('field', 'anotherfield')
             `,
@@ -798,7 +847,8 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Reset the form...
-              $form.reset()\n
+              $form.reset()
+
               // Reset specific fields...
               $form.reset('field', 'anotherfield')
             `,
@@ -816,9 +866,11 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Set the form's current values as the new defaults...
-              form.defaults()\n
+              form.defaults()
+
               // Update the default value of a single field...
-              form.defaults('email', 'updated-default@example.com')\n
+              form.defaults('email', 'updated-default@example.com')
+
               // Update the default value of multiple fields...
               form.defaults({
                 name: 'Updated Example',
@@ -831,9 +883,11 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Set the form's current values as the new defaults...
-              form.defaults()\n
+              form.defaults()
+
               // Update the default value of a single field...
-              form.defaults('email', 'updated-default@example.com')\n
+              form.defaults('email', 'updated-default@example.com')
+
               // Update the default value of multiple fields...
               form.defaults({
                 name: 'Updated Example',
@@ -845,11 +899,14 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              const { setDefaults } = useForm({ ... })\n
+              const { setDefaults } = useForm({ ... })
+
               // Set the form's current values as the new defaults...
-              setDefaults()\n
+              setDefaults()
+
               // Update the default value of a single field...
-              setDefaults('email', 'updated-default@example.com')\n
+              setDefaults('email', 'updated-default@example.com')
+
               // Update the default value of multiple fields...
               setDefaults({
                 name: 'Updated Example',
@@ -862,9 +919,11 @@ const Page = () => {
             language: 'js',
             code: dedent`
               // Set the form's current values as the new defaults...
-              $form.defaults()\n
+              $form.defaults()
+
               // Update the default value of a single field...
-              $form.defaults('email', 'updated-default@example.com')\n
+              $form.defaults('email', 'updated-default@example.com')
+
               // Change the default value of multiple fields...
               $form.defaults({
                 name: 'Updated Example',
@@ -934,7 +993,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              const { cancel } = useForm({ ... })\n
+              const { cancel } = useForm({ ... })
+
               cancel()
             `,
           },
@@ -957,7 +1017,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/vue2'\n
+              import { useForm } from '@inertiajs/vue2'
+
               form: useForm('CreateUser', data)
               form: useForm(\`EditUser:\${this.user.id}\`, data)
             `,
@@ -966,7 +1027,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/vue3'\n
+              import { useForm } from '@inertiajs/vue3'
+
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,
@@ -975,7 +1037,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/react'\n
+              import { useForm } from '@inertiajs/react'
+
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,
@@ -984,7 +1047,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { useForm } from '@inertiajs/svelte'\n
+              import { useForm } from '@inertiajs/svelte'
+
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
             `,

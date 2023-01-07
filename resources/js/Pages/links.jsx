@@ -39,7 +39,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/">Home</Link>
             `,
           },
@@ -47,7 +48,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/">Home</Link>
             `,
           },
@@ -55,7 +57,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link href="/">Home</Link>
             `,
           },
@@ -63,8 +66,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <a href="/" use:inertia>Home</a>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <a href="/" use:inertia>Home</a>
+
               <Link href="/">Home</Link>
             `,
             description: 'The use:inertia directive can be applied to any HTML element.',
@@ -81,8 +86,10 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>\n
+              import { Link } from '@inertiajs/vue2'
+
+              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+
               // Renders as...
               <button type="button">Logout</button>
             `,
@@ -91,8 +98,10 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>\n
+              import { Link } from '@inertiajs/vue3'
+
+              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+
               // Renders as...
               <button type="button">Logout</button>
             `,
@@ -101,8 +110,10 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>\n
+              import { Link } from '@inertiajs/react'
+
+              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+
               // Renders as...
               <button type="button">Logout</button>
             `,
@@ -111,8 +122,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia } from '@inertiajs/svelte'\n
-              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>\n
+              import { inertia } from '@inertiajs/svelte'
+
+              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
+
               // Renders as...
               <button type="button">Logout</button>
             `,
@@ -139,7 +152,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/logout" method="post" as="button">Logout</Link>
             `,
           },
@@ -147,7 +161,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/logout" method="post" as="button">Logout</Link>
             `,
           },
@@ -155,7 +170,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link href="/logout" method="post" as="button">Logout</Link>
             `,
           },
@@ -163,8 +179,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
+
             `,
           },
         ]}
@@ -181,7 +199,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
             `,
           },
@@ -189,7 +208,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
             `,
           },
@@ -197,7 +217,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
             `,
           },
@@ -205,7 +226,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/svelte'\n
+              import { Link } from '@inertiajs/svelte'
+
               <Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
             `,
           },
@@ -223,7 +245,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
             `,
           },
@@ -231,7 +254,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
             `,
           },
@@ -239,7 +263,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link href="/endpoint" headers={{ foo: bar }}>Save</Link>
             `,
           },
@@ -247,8 +272,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>
+
               <Link href="/endpoint" headers={{ foo: bar}}>Save</Link>
             `,
           },
@@ -268,7 +295,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/" replace>Home</Link>
             `,
           },
@@ -276,7 +304,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/" replace>Home</Link>
             `,
           },
@@ -284,7 +313,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link replace href="/">Home</Link>
             `,
           },
@@ -292,8 +322,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <a href="/" use:inertia="{{ replace: true }}">Home</a>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <a href="/" use:inertia="{{ replace: true }}">Home</a>
+
               <Link href="/" replace>Home</Link>
             `,
           },
@@ -312,8 +344,10 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
-              <input v-model="query" type="text" />\n
+              import { Link } from '@inertiajs/vue2'
+
+              <input v-model="query" type="text" />
+
               <Link href="/search" :data="{ query }" preserve-state>Search</Link>
             `,
           },
@@ -321,8 +355,10 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
-              <input v-model="query" type="text" />\n
+              import { Link } from '@inertiajs/vue3'
+
+              <input v-model="query" type="text" />
+
               <Link href="/search" :data="{ query }" preserve-state>Search</Link>
             `,
           },
@@ -330,8 +366,10 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
-              <input onChange={this.handleChange} value={query} />\n
+              import { Link } from '@inertiajs/react'
+
+              <input onChange={this.handleChange} value={query} />
+
               <Link href="/search" data={query} preserveState>Search</Link>
             `,
           },
@@ -339,9 +377,12 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <input on:change={handleChange} value={query} />\n
-              <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <input on:change={handleChange} value={query} />
+
+              <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>
+
               <Link href="/search" data={query} preserveState>Search</Link>
             `,
           },
@@ -358,7 +399,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/" preserve-scroll>Home</Link>
             `,
           },
@@ -366,7 +408,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/" preserve-scroll>Home</Link>
             `,
           },
@@ -374,7 +417,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link preserveScroll href="/">Home</Link>
             `,
           },
@@ -382,8 +426,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
+
               <Link href="/" preserveScroll>Home</Link>
             `,
           },
@@ -404,7 +450,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
           },
@@ -412,7 +459,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue3'\n
+              import { Link } from '@inertiajs/vue3'
+
               <Link href="/users?active=true" :only="['users']">Show active</Link>
             `,
           },
@@ -420,7 +468,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/react'\n
+              import { Link } from '@inertiajs/react'
+
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
@@ -428,8 +477,10 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia, Link } from '@inertiajs/svelte'\n
-              <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>\n
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
+
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
           },
@@ -451,13 +502,17 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               // URL exact match...
-              <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>\n
+              <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
+
               // Component exact match...
-              <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>\n
+              <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>
+
               // URL starts with (/users, /users/create, /users/1, etc.)...
-              <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>\n
+              <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
+
               // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
               <Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
             `,
@@ -466,13 +521,17 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'\n
+              import { Link } from '@inertiajs/vue2'
+
               // URL exact match...
-              <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>\n
+              <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
+
               // Component exact match...
-              <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>\n
+              <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>
+
               // URL starts with (/users, /users/create, /users/1, etc.)...
-              <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>\n
+              <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
+
               // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
               <Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
             `,
@@ -481,14 +540,19 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { usePage } from '@inertiajs/react'\n
-              const { url, component } = usePage()\n
+              import { usePage } from '@inertiajs/react'
+
+              const { url, component } = usePage()
+
               // URL exact match...
-              <Link href="/users" className={url === '/users' ? 'active' : ''}>Users</Link>\n
+              <Link href="/users" className={url === '/users' ? 'active' : ''}>Users</Link>
+
               // Component exact match...
-              <Link href="/users" className={component === 'Users/Index' ? 'active' : ''}>Users</Link>\n
+              <Link href="/users" className={component === 'Users/Index' ? 'active' : ''}>Users</Link>
+
               // URL starts with (/users, /users/create, /users/1, etc.)...
-              <Link href="/users" className={url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>\n
+              <Link href="/users" className={url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>
+
               // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
               <Link href="/users" className={component.startsWith('Users') === 'Users/Index' ? 'active' : ''}>Users</Link>
             `,
@@ -497,13 +561,17 @@ const Page = () => {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { page } from '@inertiajs/svelte'\n
+              import { page } from '@inertiajs/svelte'
+
               // URL exact match...
-              <Link href="/users" class={$page.url === '/users' ? 'active' : ''}>Users</Link>\n
+              <Link href="/users" class={$page.url === '/users' ? 'active' : ''}>Users</Link>
+
               // Component exact match...
-              <Link href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</Link>\n
+              <Link href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</Link>
+
               // URL starts with (/users, /users/create, /users/1, etc.)...
-              <Link href="/users" class={$page.url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>\n
+              <Link href="/users" class={$page.url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>
+
               // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
               <Link href="/users" class={$page.component.startsWith('Users') === 'Users/Index' ? 'active' : ''}>Users</Link>
             `,

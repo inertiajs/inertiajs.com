@@ -30,7 +30,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post('/users', data, {
                 forceFormData: true,
               })
@@ -40,7 +41,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post('/users', data, {
                 forceFormData: true,
               })
@@ -50,7 +52,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post('/users', data, {
                 forceFormData: true,
               })
@@ -60,7 +63,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post('/users', data, {
                 forceFormData: true,
               })
@@ -96,9 +100,11 @@ const Page = () => {
                   </progress>
                   <button type="submit">Submit</button>
                 </form>
-              </template>\n
+              </template>
+
               <script>
-              import { useForm } from '@inertiajs/vue2'\n
+              import { useForm } from '@inertiajs/vue2'
+
               export default {
                 data() {
                   return {
@@ -130,18 +136,22 @@ const Page = () => {
                   </progress>
                   <button type="submit">Submit</button>
                 </form>
-              </template>\n
+              </template>
+
               <script>
-              import { useForm } from '@inertiajs/vue3'\n
+              import { useForm } from '@inertiajs/vue3'
+
               export default {
                 setup () {
                   const form = useForm({
                     name: null,
                     avatar: null,
-                  })\n
+                  })
+
                   function submit() {
                     form.post('/users')
-                  }\n
+                  }
+
                   return { form, submit }
                 },
               }
@@ -152,15 +162,18 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { useForm } from '@inertiajs/react'\n
+              import { useForm } from '@inertiajs/react'
+
               const { data, setData, post, progress } = useForm({
                 name: null,
                 avatar: null,
-              })\n
+              })
+
               function submit(e) {
                 e.preventDefault()
                 post('/users')
-              }\n
+              }
+
               return (
                 <form onSubmit={submit}>
                   <input type="text" value={data.name} onChange={e => setData('name', e.target.value)} />
@@ -180,15 +193,18 @@ const Page = () => {
             language: 'html',
             code: dedent`
               <script>
-              import { useForm } from '@inertiajs/svelte'\n
+              import { useForm } from '@inertiajs/svelte'
+
               let form = useForm({
                 name: null,
                 avatar: null,
-              })\n
+              })
+
               function submit() {
                 $form.post('/users')
               }
-              </script>\n
+              </script>
+
               <form on:submit|preventDefault={submit}>
                 <input type="text" bind:value={$form.name} />
                 <input type="file" on:input={e => $form.avatar = e.target.files[0]} />
@@ -230,7 +246,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'\n
+              import { router } from '@inertiajs/vue2'
+
               router.post(\`/users/\${user.id}\`, {
                 _method: 'put',
                 avatar: form.avatar,
@@ -241,7 +258,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'\n
+              import { router } from '@inertiajs/vue3'
+
               router.post(\`/users/\${user.id}\`, {
                 _method: 'put',
                 avatar: form.avatar,
@@ -252,7 +270,8 @@ const Page = () => {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'\n
+              import { router } from '@inertiajs/react'
+
               router.post(\`/users/\${user.id}\`, {
                 _method: 'put',
                 avatar: form.avatar,
@@ -263,7 +282,8 @@ const Page = () => {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'\n
+              import { router } from '@inertiajs/svelte'
+
               router.post(\`/users/\${user.id}\`, {
                 _method: 'put',
                 avatar: form.avatar,

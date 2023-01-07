@@ -41,7 +41,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/vue2'\n
+              import { Head } from '@inertiajs/vue2'
+
               <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description">
@@ -52,7 +53,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/vue3'\n
+              import { Head } from '@inertiajs/vue3'
+
               <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description">
@@ -63,7 +65,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/react'\n
+              import { Head } from '@inertiajs/react'
+
               <Head>
                 <title>Your page title</title>
                 <meta name="description" content="Your page description" />
@@ -94,7 +97,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/vue2'\n
+              import { Head } from '@inertiajs/vue2'
+
               <Head title="Your page title" />
             `,
           },
@@ -102,7 +106,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/vue3'\n
+              import { Head } from '@inertiajs/vue3'
+
               <Head title="Your page title" />
             `,
           },
@@ -110,7 +115,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/react'\n
+              import { Head } from '@inertiajs/react'
+
               <Head title="Your page title" />
             `,
           },
@@ -149,7 +155,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/vue2'\n
+              import { Head } from '@inertiajs/vue2'
+
               <Head title="Home">
             `,
           },
@@ -157,7 +164,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/vue3'\n
+              import { Head } from '@inertiajs/vue3'
+
               <Head title="Home">
             `,
           },
@@ -165,7 +173,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/react'\n
+              import { Head } from '@inertiajs/react'
+
               <Head title="Home">
             `,
           },
@@ -197,7 +206,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/vue2'\n
+              import { Head } from '@inertiajs/vue2'
+
               <Head>
                 <title>Home</title>
               </Head>
@@ -207,7 +217,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/vue3'\n
+              import { Head } from '@inertiajs/vue3'
+
               <Head>
                 <title>Home</title>
               </Head>
@@ -217,7 +228,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { Head } from '@inertiajs/react'\n
+              import { Head } from '@inertiajs/react'
+
               <Head>
                 <title>Home</title>
               </Head>
@@ -244,15 +256,20 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              // Layout.vue\n
-              import { Head } from '@inertiajs/vue2'\n
+              // Layout.vue
+
+              import { Head } from '@inertiajs/vue2'
+
               <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-              </Head>\n
-              // About.vue\n
-              import { Head } from '@inertiajs/vue2'\n
+              </Head>
+
+              // About.vue
+
+              import { Head } from '@inertiajs/vue2'
+
               <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
@@ -263,15 +280,20 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              // Layout.vue\n
-              import { Head } from '@inertiajs/vue3'\n
+              // Layout.vue
+
+              import { Head } from '@inertiajs/vue3'
+
               <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-              </Head>\n
-              // About.vue\n
-              import { Head } from '@inertiajs/vue3'\n
+              </Head>
+
+              // About.vue
+
+              import { Head } from '@inertiajs/vue3'
+
               <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
@@ -282,15 +304,20 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              // Layout.js\n
-              import { Head } from '@inertiajs/react'\n
+              // Layout.js
+
+              import { Head } from '@inertiajs/react'
+
               <Head>
                 <title>My app</title>
                 <meta head-key="description" name="description" content="This is the default description" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-              </Head>\n
-              // About.js\n
-              import { Head } from '@inertiajs/react'\n
+              </Head>
+
+              // About.js
+
+              import { Head } from '@inertiajs/react'
+
               <Head>
                 <title>About - My app</title>
                 <meta head-key="description" name="description" content="This is a page specific description" />
@@ -335,14 +362,17 @@ const Page = () => {
             name: 'Vue 2',
             language: 'markup',
             code: dedent`
-              <!-- AppHead.vue -->\n
+              <!-- AppHead.vue -->
+
               <template>
                 <Head :title="title ? \`\${title} - My App\` : 'My App'">
                   <slot />
                 </Head>
-              </template>\n
+              </template>
+
               <script>
-              import { Head } from '@inertiajs/vue2'\n
+              import { Head } from '@inertiajs/vue2'
+
               export default {
                 components: {
                   Head,
@@ -358,14 +388,17 @@ const Page = () => {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
-              <!-- AppHead.vue -->\n
+              <!-- AppHead.vue -->
+
               <template>
                 <Head :title="title ? \`\${title} - My App\` : 'My App'">
                   <slot />
                 </Head>
-              </template>\n
+              </template>
+
               <script>
-              import { Head } from '@inertiajs/vue3'\n
+              import { Head } from '@inertiajs/vue3'
+
               export default {
                 components: {
                   Head,
@@ -381,8 +414,10 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              // AppHead.js\n
-                            import { Head } from '@inertiajs/react'\n
+              // AppHead.js
+
+                            import { Head } from '@inertiajs/react'
+
               const Site = ({ title, children }) => {
                 return (
                   <Head>
@@ -390,7 +425,8 @@ const Page = () => {
                     {children}
                   </Head>
                 )
-              }\n
+              }
+
               export default Site
             `,
           },
@@ -410,7 +446,8 @@ const Page = () => {
             name: 'Vue 2',
             language: 'jsx',
             code: dedent`
-              import AppHead from './AppHead'\n
+              import AppHead from './AppHead'
+
               <AppHead title="About" />
             `,
           },
@@ -418,7 +455,8 @@ const Page = () => {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import AppHead from './AppHead'\n
+              import AppHead from './AppHead'
+
               <AppHead title="About" />
             `,
           },
@@ -426,7 +464,8 @@ const Page = () => {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import AppHead from './AppHead'\n
+              import AppHead from './AppHead'
+
               <AppHead title="About">
             `,
           },

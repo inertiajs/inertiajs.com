@@ -36,7 +36,8 @@ const Page = () => {
                       return Inertia::render('Users/Index', [
                           'users' => User::all(),
                       ]);
-                  }\n
+                  }
+
                   public function store(Request $request)
                   {
                       User::create(
@@ -44,7 +45,8 @@ const Page = () => {
                               'name' => ['required', 'max:50'],
                               'email' => ['required', 'max:50', 'email'],
                           ])
-                      );\n
+                      );
+
                       return to_route('users.index');
                   }
               }
