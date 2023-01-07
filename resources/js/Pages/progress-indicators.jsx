@@ -1,7 +1,7 @@
 import { A, Code, CodeBlock, H1, H2, H3, Layout, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
-const meta = {
+export const meta = {
   title: 'Progress indicators',
   links: [
     { url: '#default', name: 'Default' },
@@ -9,7 +9,7 @@ const meta = {
   ],
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>Progress indicators</H1>
@@ -425,7 +425,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

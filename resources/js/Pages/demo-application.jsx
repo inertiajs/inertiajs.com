@@ -1,6 +1,6 @@
 import { A, H1, H2, Layout, Li, Notice, P, Ul } from '@/Components'
 
-const meta = {
+export const meta = {
   title: 'Demo application',
   links: [
     { url: '#top', name: 'Official' },
@@ -8,7 +8,7 @@ const meta = {
   ],
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>Demo application</H1>
@@ -59,7 +59,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

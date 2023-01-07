@@ -1,10 +1,10 @@
 import { H1, Layout, P, Strong } from '@/Components'
 
-const meta = {
+export const meta = {
   title: 'Who is Inertia.js for?',
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>Who is Inertia.js for?</H1>
@@ -41,7 +41,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

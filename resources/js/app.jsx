@@ -1,4 +1,5 @@
-import { router, createInertiaApp } from '@inertiajs/react'
+import { Layout } from '@/Components'
+import { createInertiaApp, router } from '@inertiajs/react'
 import { hydrateRoot } from 'react-dom/client'
 import '../css/app.css'
 
@@ -32,7 +33,10 @@ router.on('navigate', () => {
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-    return pages[`./Pages/${name}.jsx`]
+    const page = pages[`./Pages/${name}.jsx`]
+    const meta = page.meta
+    page.default.layout = page => <Layout children={page} meta={meta} />
+    return page
   },
   setup({ el, App, props }) {
     hydrateRoot(el, <App {...props} />)

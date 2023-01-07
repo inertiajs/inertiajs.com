@@ -1,7 +1,7 @@
 import { A, Code, TabbedCode, CodeBlock, H1, H2, Layout, Li, Notice, Ol, P, Strong } from '@/Components'
 import dedent from 'dedent-js'
 
-const meta = {
+export const meta = {
   title: 'Code splitting',
   links: [
     { url: '#using-vite', name: 'Using Vite' },
@@ -9,7 +9,7 @@ const meta = {
   ],
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>Code splitting</H1>
@@ -163,7 +163,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

@@ -1,7 +1,7 @@
 import { A, Code, CodeBlock, H1, H2, Layout, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
-const meta = {
+export const meta = {
   title: 'Scroll management',
   links: [
     { url: '#scroll-resetting', name: 'Scroll resetting' },
@@ -10,7 +10,7 @@ const meta = {
   ],
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>Scroll management</H1>
@@ -107,7 +107,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

@@ -1,10 +1,10 @@
 import { A, H1, Layout, P } from '@/Components'
 
-const meta = {
+export const meta = {
   title: 'Authentication',
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>Authentication</H1>
@@ -25,7 +25,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

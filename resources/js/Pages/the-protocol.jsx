@@ -1,7 +1,7 @@
 import { A, Code, CodeBlock, H1, H2, Layout, Li, Notice, Ol, P, Strong } from '@/Components'
 import dedent from 'dedent-js'
 
-const meta = {
+export const meta = {
   title: 'The protocol',
   links: [
     { url: '#html-responses', name: 'HTML responses' },
@@ -12,7 +12,7 @@ const meta = {
   ],
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>The protocol</H1>
@@ -273,7 +273,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

@@ -1,6 +1,6 @@
 import { A, H1, H2, Layout, P } from '@/Components'
 
-const meta = {
+export const meta = {
   description:
     'Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers.',
   hero: true,
@@ -13,7 +13,7 @@ const meta = {
   ],
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>JavaScript apps the monolith way</H1>
@@ -43,7 +43,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

@@ -1,20 +1,21 @@
-import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, H3, Layout, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
-const meta = {
+export const meta = {
   title: 'Server-side rendering (SSR)',
   links: [
     { url: '#how-it-works', name: 'How it works' },
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
-    { url: '#setting-up-ssr', name: 'Setting up SSR' },
-    { url: '#setting-up-mix', name: 'Setting up Mix' },
+    { url: '#setting-up-ssr', name: 'Add server entry-point' },
+    { url: '#setting-up-vite', name: 'Setting up Vite.js' },
     { url: '#enabling-ssr', name: 'Enabling SSR' },
     { url: '#building-your-app', name: 'Building your app' },
-    { url: '#running-the-service', name: 'Running the service' },
+    { url: '#hosting-setup', name: 'Hosting setup' },
+    { url: '#common-gotchas', name: 'Common gotchas' },
   ],
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>Server-side Rendering (SSR)</H1>
@@ -23,7 +24,6 @@ const Page = () => {
         to the browser. This allows visitors to see and interact with your pages before they have fully loaded, and also
         provides other benefits such as decreasing the time it takes for search engines to index your site.
       </P>
-      <Notice>SSR is not currently supported by our Svelte adapter.</Notice>
       <H2 id="how-it-works">How it works</H2>
       <P>
         When Inertia detects that it's running in a Node.js environment, it will automatically render the provided{' '}
@@ -51,8 +51,8 @@ const Page = () => {
           },
         ]}
       />
-      <H2 id="setting-up-ssr">Setting up server side rendering</H2>
-      <P>First, we'll install the necessary server-side rendering dependencies using NPM or Yarn.</P>
+      <H2 id="setting-up-ssr">Create server entry-point</H2>
+      <P>First, we'll install the necessary server-side rendering dependencies.</P>
       <TabbedCode
         examples={[
           {
@@ -76,21 +76,14 @@ const Page = () => {
               npm install react-dom
             `,
           },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // No additional dependencies required
+            `,
+          },
         ]}
-      />
-      <P>
-        We'll also install the{' '}
-        <A href="https://github.com/inertiajs/server">
-          <Code>@inertiajs/server</Code>
-        </A>{' '}
-        package, which provides a simple HTTP server that renders Inertia pages. While this package isn't strictly
-        necessary, it prevents the need to write your own HTTP service.
-      </P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          npm install @inertiajs/server
-        `}
       />
       <P>
         Then, we'll create a <Code>{'resources/js/ssr.js'}</Code> file within our Laravel project:
@@ -102,8 +95,8 @@ const Page = () => {
         `}
       />
       <P>
-        This file is going to look very similar like your application's <Code>{'app.js'}</Code> file; however, it's not
-        going to run in the browser. Instead, this file will run in Node.js. Here's a complete example:
+        This file is going to look very similar to your <Code>{'app.js'}</Code> file, except it's not going to run in
+        the browser but rather in Node.js. Here's a complete example:
       </P>
       <TabbedCode
         examples={[
@@ -114,12 +107,15 @@ const Page = () => {
               import Vue from 'vue'
               import { createRenderer } from 'vue-server-renderer'
               import { createInertiaApp } from '@inertiajs/vue2'
-              import createServer from '@inertiajs/server'
+              import createServer from '@inertiajs/vue2/server'
 
               createServer((page) => createInertiaApp({
                 page,
                 render: createRenderer().renderToString,
-                resolve: name => require(\`./Pages/\${name}\`),
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  return pages[\`./Pages/\${name}.vue\`]
+                },
                 setup({ app, props, plugin }) {
                   Vue.use(plugin)
                   return new Vue({
@@ -136,12 +132,15 @@ const Page = () => {
               import { createSSRApp, h } from 'vue'
               import { renderToString } from '@vue/server-renderer'
               import { createInertiaApp } from '@inertiajs/vue3'
-              import createServer from '@inertiajs/server'
+              import createServer from '@inertiajs/vue3/server'
 
               createServer((page) => createInertiaApp({
                 page,
                 render: renderToString,
-                resolve: name => require(\`./Pages/\${name}\`),
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  return pages[\`./Pages/\${name}.vue\`]
+                },
                 setup({ app, props, plugin }) {
                   return createSSRApp({
                     render: () => h(app, props),
@@ -156,130 +155,85 @@ const Page = () => {
             code: dedent`
               import ReactDOMServer from 'react-dom/server'
               import { createInertiaApp } from '@inertiajs/react'
-              import createServer from '@inertiajs/server'
+              import createServer from '@inertiajs/react/server'
 
               createServer((page) => createInertiaApp({
                 page,
                 render: ReactDOMServer.renderToString,
-                resolve: name => require(\`./Pages/\${name}\`),
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+                  return pages[\`./Pages/\${name}.jsx\`]
+                },
                 setup: ({ App, props }) => <App {...props} />,
               }))
             `,
           },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/svelte'
+              import createServer from '@inertiajs/svelte/server'
+
+              createServer((page) =>
+                createInertiaApp({
+                  page,
+                  resolve: (name) => {
+                    const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                    return pages[\`./Pages/\${name}.svelte\`]
+                  },
+                })
+              )
+            `,
+          },
         ]}
       />
-      <Notice>
+      <P>
         Be sure to add anything that's missing from your <Code>{'app.js'}</Code> file that makes sense to run in SSR
-        mode, such as plugins or custom mixins. However, not everything needs to be included. For example, the{' '}
-        <Code>{'InertiaProgress'}</Code> library can be omitted from this file, as it will never be used in SSR mode.
-        <br />
-        <br />
-        Furthermore, do not use code-splitting in your <Code>{'ssr.js'}</Code> file as it will not provide any benefit
-        given that we want to generate just one SSR build file. You can, of course, still use code splitting for your
-        client-side build (<Code>{'app.js'}</Code>).
-      </Notice>
-      <Notice>
-        By default, Inertia's SSR server will operate on port <Code>{'13714'}</Code>. However, you can change this by
-        providing a second argument to the <Code>{'createServer'}</Code> method.
-      </Notice>
-      <Notice>
-        <strong>Vue 2</strong>: If you're using the <Code>{'PortalVue'}</Code> package, it's import line must come after
-        the <Code>{"import { createRenderer } from 'vue-server-renderer'"}</Code> line.
-      </Notice>
-      <H2 id="setting-up-mix">Setting up Laravel Mix</H2>
+        mode, such as plugins or custom mixins.
+      </P>
+      <H2 id="setting-up-vite">Setting up Vite.js</H2>
       <P>
-        In order for our Webpack build to run properly on Node, we'll first need to install the{' '}
-        <Code>{'webpack-node-externals'}</Code> package.
+        Next, we need to update our Vite.js configuration to build our new <Code>ssr.js</Code> file. We can do this by
+        adding a <Code>ssr</Code> property to the Laravel plugin configuration in our <Code>vite.config.js</Code> file:
       </P>
       <CodeBlock
-        language="bash"
+        language="diff"
         children={dedent`
-          npm install webpack-node-externals
+          export default defineConfig({
+            plugins: [
+              laravel({
+                input: ['resources/css/app.css', 'resources/js/app.js'],
+          +     ssr: 'resources/js/ssr.js',
+                refresh: true,
+              }),
+              // ...
+            ],
+          })
         `}
       />
       <P>
-        Then, we'll create a new <Code>{'webpack.ssr.mix.js'}</Code> file for SSR. This is necessary because Laravel Mix
-        does not currently support multiple webpack configurations within the same <Code>{'webpack.mix.js'}</Code> file.
+        You now have two build processes you need to run — one for your client-side bundle and another for your
+        server-side bundle.
       </P>
+      <CodeBlock
+        language="diff"
+        children={dedent`
+           "scripts": {
+             "dev": "vite",
+         -   "build": "vite build"
+         +   "build": "vite build && vite build --ssr"
+           },
+        `}
+      />
+      <P>Now you can build your app by running:</P>
       <CodeBlock
         language="bash"
         children={dedent`
-          touch webpack.ssr.mix.js
+          npm run dev
         `}
-      />
-      <P>
-        Next, let's add some content to this file. This file will contain code very similar to your application's{' '}
-        <Code>{'webpack.mix.js'}</Code> configuration, with the exception that you only compile your JavaScript and not
-        your CSS.
-      </P>
-      <P>
-        When writing this file, be sure to redefine any aliases used within your application. In addition, using{' '}
-        <Code>{'webpackConfig()'}</Code>, be sure to set the <Code>{'target'}</Code> to <Code>{'node'}</Code>, and set{' '}
-        <Code>{'externals'}</Code> to <Code>{'[webpackNodeExternals()]'}</Code>, which is the library we just installed.
-      </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              const path = require('path')
-              const mix = require('laravel-mix')
-              const webpackNodeExternals = require('webpack-node-externals')
-
-              mix
-                .options({ manifest: false })
-                .js('resources/js/ssr.js', 'public/js')
-                .vue({ version: 2, options: { optimizeSSR: true } })
-                .alias({ '@': path.resolve('resources/js') })
-                .webpackConfig({
-                  target: 'node',
-                  externals: [webpackNodeExternals()],
-                })
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'js',
-            code: dedent`
-              const path = require('path')
-              const mix = require('laravel-mix')
-              const webpackNodeExternals = require('webpack-node-externals')
-
-              mix
-                .options({ manifest: false })
-                .js('resources/js/ssr.js', 'public/js')
-                .vue({ version: 3, options: { optimizeSSR: true } })
-                .alias({ '@': path.resolve('resources/js') })
-                .webpackConfig({
-                  target: 'node',
-                  externals: [webpackNodeExternals()],
-                })
-            `,
-          },
-          {
-            name: 'React',
-            language: 'jsx',
-            code: dedent`
-              const path = require('path')
-              const mix = require('laravel-mix')
-              const nodeExternals = require('webpack-node-externals');
-
-              mix
-                .options({ manifest: false })
-                .js('resources/js/ssr.js', 'public/js')
-                .react()
-                .alias({ '@': path.resolve('resources/js') })
-                .webpackConfig({
-                  target: 'node',
-                  externals: [nodeExternals()],
-                })
-            `,
-          },
-        ]}
       />
       <H2 id="enabling-ssr">Enabling server side rendering</H2>
-      <Notice>Automatic SSR rendering is currently only available for the Laravel adapter.</Notice>
       <P>
         Next, we'll need to make sure the <Code>{'@inertiaHead'}</Code> directive is included in the{' '}
         <Code>{'<head>'}</Code> section of our application's <Code>{'app.blade.php'}</Code> file:
@@ -332,28 +286,6 @@ const Page = () => {
           // ...
         `}
       />
-      <H2 id="building-your-app">Building your application</H2>
-      <P>
-        You now have two build processes you need to run — one for your client-side bundle and another for your
-        server-side bundle.
-      </P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          npx mix
-          npx mix --mix-config=webpack.ssr.mix.js
-        `}
-      />
-      <P>
-        You should run both of these build steps and correct any errors that are generated. Remember, you're now
-        building an "isomorphic" app, which means your app runs both on the client (browser) and on the server (Node).
-      </P>
-      <Notice>
-        To learn more about SSR in Vue 2, consult the <A href="https://ssr.vuejs.org">Vue 2 SSR guide</A>. To learn more
-        about SSR in Vue 3, consult the <A href="https://v3.vuejs.org/guide/ssr/introduction.html">Vue 3 SSR guide</A>.
-        To learn more about SSR in React, consult the{' '}
-        <A href="https://reactjs.org/docs/react-dom-server.html">React SSR guide</A>.
-      </Notice>
       <H2 id="running-the-service">Running the Node.js service</H2>
       <P>
         After running both of your application builds, you should be able run the Node-based Inertia SSR server using
@@ -434,17 +366,30 @@ const Page = () => {
         To run the SSR server on Heroku, update the <Code>{'web'}</Code> configuration in your <Code>{'Procfile'}</Code>{' '}
         to first run the SSR server before starting your web server. To do this successfully, you must have the{' '}
         <Code>{'heroku/nodejs'}</Code> buildpack installed in addition to the <Code>{'heroku/php'}</Code> buildback.
-      </P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          web: node public/js/ssr.js & vendor/bin/heroku-php-apache2 public/
+        <CodeBlock
+          language="bash"
+          children={dedent`
+        web: node public/js/ssr.js & vendor/bin/heroku-php-apache2 public/
         `}
-      />
+        />
+      </P>
+      <H2>Common gotchas</H2>
+      <H3>Don't use code-splitting in SSR</H3>
+      <P>
+        Do not use code-splitting in your <Code>{'ssr.js'}</Code> file as it will not provide any benefit given that we
+        want to generate just one SSR build file. You can, of course, still use code splitting for your client-side
+        build (<Code>{'app.js'}</Code>).
+      </P>
+      <H3>Port</H3>
+      <P>
+        By default, Inertia's SSR server will operate on port <Code>{'13714'}</Code>. However, you can change this by
+        providing a second argument to the <Code>{'createServer'}</Code> method.
+      </P>
+      <H3>PortalVue</H3>
+      <P>
+        If you're using the <Code>{'PortalVue'}</Code> package, it's import line must come after the{' '}
+        <Code>{"import { createRenderer } from 'vue-server-renderer'"}</Code> line.
+      </P>
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page

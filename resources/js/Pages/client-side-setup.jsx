@@ -1,7 +1,7 @@
 import { A, Code, CodeBlock, H1, H2, Layout, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
-const meta = {
+export const meta = {
   title: 'Client-side setup',
   links: [
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
@@ -12,7 +12,7 @@ const meta = {
   ],
 }
 
-const Page = () => {
+export default function () {
   return (
     <>
       <H1>Client-side setup</H1>
@@ -239,7 +239,3 @@ const Page = () => {
     </>
   )
 }
-
-Page.layout = page => <Layout children={page} meta={meta} />
-
-export default Page
