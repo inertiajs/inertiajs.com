@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, P, React, Svelte, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -45,18 +45,18 @@ export default function () {
               </template>
 
               <script>
-                import Layout from './Layout'
-                import { Head } from '@inertiajs/vue2'
+              import Layout from './Layout'
+              import { Head } from '@inertiajs/vue2'
 
-                export default {
-                  components: {
-                    Head,
-                    Layout,
-                  },
-                  props: {
-                    user: Object,
-                  },
-                }
+              export default {
+                components: {
+                  Head,
+                  Layout,
+                },
+                props: {
+                  user: Object,
+                },
+              }
               </script>
             `,
           },
@@ -64,6 +64,13 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
+              <script setup>
+              import Layout from './Layout'
+              import { Head } from '@inertiajs/vue3'
+
+              defineProps({ user: Object })
+              </script>
+
               <template>
                 <Layout>
                   <Head title="Welcome" />
@@ -71,21 +78,6 @@ export default function () {
                   <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
                 </Layout>
               </template>
-
-              <script>
-                import Layout from './Layout'
-                import { Head } from '@inertiajs/vue3'
-
-                export default {
-                  components: {
-                    Head,
-                    Layout,
-                  },
-                  props: {
-                    user: Object,
-                  },
-                }
-              </script>
             `,
           },
           {
@@ -130,7 +122,16 @@ export default function () {
       <P>
         Given the page above, you can render the page by returning an <A href="/responses">Inertia response</A> from a
         controller or route. In this example, let's assume this page is stored at{' '}
-        <Code>resources/js/Pages/User/Show.(js|vue|svelte)</Code> within the Laravel application.
+        <Vue>
+          <Code>resources/js/Pages/User/Show.vue</Code>
+        </Vue>
+        <React>
+          <Code>resources/js/Pages/User/Show.jsx</Code>
+        </React>
+        <Svelte>
+          <Code>resources/js/Pages/User/Show.svelte</Code>
+        </Svelte>{' '}
+        within the Laravel application.
       </P>
       <TabbedCode
         examples={[
@@ -157,9 +158,7 @@ export default function () {
       <P>
         While not required, for most projects it makes sense to create a site layout that all of your pages can extend.
         You may have noticed in our page example above that we're wrapping the page content within a{' '}
-        <Code>{`<Layout>`}</Code> component. Here's an example of such a component. As you can see, there is nothing
-        Inertia specific within this template. This is just a standard JavaScript component that can be written using
-        your client-side framework of choice.
+        <Code>{`<Layout>`}</Code> component. Here's an example of such a component:
       </P>
       <TabbedCode
         examples={[
@@ -195,6 +194,10 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
+              <script setup>
+              import { Link } from '@inertiajs/vue3'
+              </script>
+
               <template>
                 <main>
                   <header>
@@ -207,23 +210,12 @@ export default function () {
                   </article>
                 </main>
               </template>
-
-              <script>
-              import { Link } from '@inertiajs/vue3'
-
-              export default {
-                components: {
-                  Link,
-                }
-              }
-              </script>
             `,
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { useEffect } from 'react'
               import { Link } from '@inertiajs/react'
 
               export default function Layout({ children }) {
@@ -262,6 +254,11 @@ export default function () {
           },
         ]}
       />
+      <P>
+        As you can see, there is nothing Inertia specific within this template. This is just a standard <Vue>Vue</Vue>
+        <React>React</React>
+        <Svelte>Svelte</Svelte> component.
+      </P>
       <H2>Persistent layouts</H2>
       <P>
         While it's simple to implement layouts as children of the page components, it does force the layout instance to
@@ -287,19 +284,19 @@ export default function () {
               </template>
 
               <script>
-                import Layout from './Layout'
+              import Layout from './Layout'
 
-                export default {
-                  // Using a render function...
-                  layout: (h, page) => h(Layout, [page]),
+              export default {
+                // Using a render function...
+                layout: (h, page) => h(Layout, [page]),
 
-                  // Using shorthand syntax...
-                  layout: Layout,
+                // Using shorthand syntax...
+                layout: Layout,
 
-                  props: {
-                    user: Object,
-                  },
-                }
+                props: {
+                  user: Object,
+                },
+              }
               </script>
             `,
           },
@@ -307,28 +304,26 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
-              <template>
-                <div>
-                  <H1>Welcome</H1>
-                  <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </div>
-              </template>
-
               <script>
-                import Layout from './Layout'
+              import Layout from './Layout'
 
-                export default {
-                  // Using a render function...
-                  layout: (h, page) => h(Layout, () => child),
+              export default {
+                // Using a render function...
+                layout: (h, page) => h(Layout, [page]),
 
-                  // Using shorthand syntax...
-                  layout: Layout,
-
-                  props: {
-                    user: Object,
-                  },
-                }
+                // Using shorthand syntax...
+                layout: Layout,
+              }
               </script>
+
+              <script setup>
+              defineProps({ user: Object })
+              </script>
+
+              <template>
+                <H1>Welcome</H1>
+                <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+              </template>
             `,
           },
           {
@@ -356,8 +351,7 @@ export default function () {
             language: 'html',
             code: dedent`
               <script context="module">
-                import Layout from './Layout.svelte'
-                export const layout = Layout
+                export { default as layout } from './Layout.svelte'
               </script>
 
               <script>
@@ -385,24 +379,24 @@ export default function () {
               </template>
 
               <script>
-                import SiteLayout from './SiteLayout'
-                import NestedLayout from './NestedLayout'
+              import SiteLayout from './SiteLayout'
+              import NestedLayout from './NestedLayout'
 
-                export default {
-                  // Using a render function...
-                  layout: (h, page) => {
-                    return h(SiteLayout, [
-                      h(NestedLayout, [page]),
-                    ])
-                  },
+              export default {
+                // Using a render function...
+                layout: (h, page) => {
+                  return h(SiteLayout, [
+                    h(NestedLayout, [page]),
+                  ])
+                },
 
-                  // Using shorthand syntax...
-                  layout: [SiteLayout, NestedLayout],
+                // Using shorthand syntax...
+                layout: [SiteLayout, NestedLayout],
 
-                  props: {
-                    user: Object,
-                  },
-                }
+                props: {
+                  user: Object,
+                },
+              }
               </script>
             `,
           },
@@ -410,31 +404,29 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
-              <template>
-                <div>
-                  <H1>Welcome</H1>
-                  <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </div>
-              </template>
-
               <script>
-                import SiteLayout from './SiteLayout'
-                import NestedLayout from './NestedLayout'
+              import SiteLayout from './SiteLayout'
+              import NestedLayout from './NestedLayout'
 
-                export default {
-                  // Using a render function...
-                  layout: (h, page) => {
-                    return h(SiteLayout, () => h(NestedLayout, () => page))
-                  },
+              export default {
+                // Using a render function...
+                layout: (h, page) => {
+                  return h(SiteLayout, () => h(NestedLayout, () => page))
+                },
 
-                  // Using the shorthand...
-                  layout: [SiteLayout, NestedLayout],
-
-                  props: {
-                    user: Object,
-                  },
-                }
+                // Using the shorthand...
+                layout: [SiteLayout, NestedLayout],
+              }
               </script>
+
+              <script setup>
+              defineProps({ user: Object })
+              </script>
+
+              <template>
+                <H1>Welcome</H1>
+                <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
+              </template>
             `,
           },
           {
@@ -482,52 +474,179 @@ export default function () {
           },
         ]}
       />
+      <Vue>
+        <P>
+          If you're using Vue 2.7 or Vue 3, you can alternatively use the{' '}
+          <A href="https://vue-macros.sxzz.moe/macros/define-options.html">defineOptions plugin</A> to define a layout
+          within <Code>{'<script setup>'}</Code>:
+        </P>
+        <CodeBlock
+          language="markup"
+          children={dedent`
+            <script setup>
+            import Layout from './Layout'
+
+            defineOptions({ layout: Layout })
+            </script>
+          `}
+        />
+      </Vue>
       <H2>Default layouts</H2>
       <P>
         If you're using persistent layouts, you may find it convenient to define the default page layout in the{' '}
-        <Code>resolve</Code> callback of your application's main JavaScript file.
+        <Code>resolve()</Code> callback of your application's main JavaScript file.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import Layout from './Layout'
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import Layout from './Layout'
 
-          createInertiaApp({
-            resolve: name => {
-              const page = require(\`./Pages/\${name}\`).default
-              page.layout = page.layout || Layout
-              return page
-            },
-            // ...
-          })
-        `}
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  let page = pages[\`./Pages/\${name}.vue\`]
+                  page.default.layout = page.default.layout || Layout
+                  return page
+                },
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import Layout from './Layout'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  let page = pages[\`./Pages/\${name}.vue\`]
+                  page.default.layout = page.default.layout || Layout
+                  return page
+                },
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import Layout from './Layout'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+                  let page = pages[\`./Pages/\${name}.jsx\`]
+                  page.default.layout = page.default.layout || (page => <Layout children={page} />)
+                  return page
+                },
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import Layout from './Layout'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                  let page = pages[\`./Pages/\${name}.svelte\`]
+                  return { default: page.default, layout: page.layout || Layout }
+                },
+                // ...
+              })
+            `,
+          },
+        ]}
       />
       <P>
         This will automatically set the page layout to <Code>Layout</Code> if a layout has not already been set for that
-        page. If needed, you can disable the default layout on specific pages by setting the <Code>layout</Code> to{' '}
-        <Code>null</Code>.
+        page.
       </P>
       <P>
         You can even go a step further and conditionally set the default page layout based on the page <Code>name</Code>
-        , which is available to the <Code>resolve()</Code> method. For example, maybe you don't want the default layout
-        applied to your public pages.
+        , which is available to the <Code>resolve()</Code> callback. For example, maybe you don't want the default
+        layout applied to your public pages.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          import Layout from './Layout'
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 2',
+            language: 'js',
+            code: dedent`
+              import Layout from './Layout'
 
-          createInertiaApp({
-            resolve: name => {
-              const page = require(\`./Pages/\${name}\`).default
-              if (page.layout === undefined && !name.startsWith('Public/')) {
-                page.layout = Layout
-              }
-              return page
-            },
-            // ...
-          })
-        `}
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  let page = pages[\`./Pages/\${name}.vue\`]
+                  page.default.layout = name.startsWith('Public/') ? undefined : Layout
+                  return page
+                },
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import Layout from './Layout'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  let page = pages[\`./Pages/\${name}.vue\`]
+                  page.default.layout = name.startsWith('Public/') ? undefined : Layout
+                  return page
+                },
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import Layout from './Layout'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+                  let page = pages[\`./Pages/\${name}.jsx\`]
+                  page.default.layout = name.startsWith('Public/') ? undefined : page => <Layout children={page} />
+                  return page
+                },
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import Layout from './Layout'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                  let page = pages[\`./Pages/\${name}.svelte\`]
+                  return { default: page.default, layout: name.startsWith('Public/') ? undefined : Layout }
+                  return page
+                },
+                // ...
+              })
+            `,
+          },
+        ]}
       />
     </>
   )
