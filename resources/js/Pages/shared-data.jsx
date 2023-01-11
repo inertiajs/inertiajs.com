@@ -122,6 +122,13 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
+              <script setup>
+              import { computed } from 'vue'
+              import { usePage } from '@inertiajs/vue3'
+
+              const user = computed(() => usePage().props.auth.user)
+              </script>
+
               <template>
                 <main>
                   <header>
@@ -132,18 +139,6 @@ export default function () {
                   </content>
                 </main>
               </template>
-
-              <script>
-              import { computed } from 'vue'
-              import { usePage } from '@inertiajs/vue3'
-
-              export default {
-                setup() {
-                  const user = computed(() => usePage().props.value.auth.user)
-                  return { user }
-                },
-              }
-              </script>
             `,
           },
           {

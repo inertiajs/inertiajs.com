@@ -69,16 +69,10 @@ export default function () {
             code: dedent`
               import { useRemember } from '@inertiajs/vue3'
 
-              export default {
-                setup() {
-                  const form = useRemember({
-                      first_name: null,
-                      last_name: null,
-                  })
-
-                  return { form }
-                },
-              }
+              const form = useRemember({
+                first_name: null,
+                last_name: null,
+              })
             `,
           },
           {
@@ -155,16 +149,10 @@ export default function () {
             code: dedent`
               import { useRemember } from '@inertiajs/vue3'
 
-              export default {
-                setup() {
-                  const form = useRemember({
-                      first_name: null,
-                      last_name: null,
-                  }, 'Users/Create')
-
-                  return { form }
-                },
-              }
+              const form = useRemember({
+                first_name: null,
+                last_name: null,
+              }, 'Users/Create')
             `,
           },
           {
@@ -235,16 +223,12 @@ export default function () {
             code: dedent`
               import { useRemember } from '@inertiajs/vue3'
 
-              export default {
-                setup({ user }) {
-                  const form = useRemember({
-                      first_name: null,
-                      last_name: null,
-                  }, \`Users/Edit:\${user.id}\`)
+              const props = defineProps({ user: Object })
 
-                  return { form }
-                },
-              }
+              const form = useRemember({
+                first_name: null,
+                last_name: null,
+              }, \`Users/Edit:\${props.user.id}\`)
             `,
           },
           {

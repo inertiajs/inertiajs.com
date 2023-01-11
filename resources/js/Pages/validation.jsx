@@ -103,6 +103,23 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
+              <script setup>
+              import { reactive } from 'vue'
+              import { router } from '@inertiajs/vue3'
+
+              defineProps({ errors: Object })
+
+              const form = reactive({
+                first_name: null,
+                last_name: null,
+                email: null,
+              })
+
+              function submit() {
+                router.post('/users', form)
+              }
+              </script>
+
               <template>
                 <form @submit.prevent="submit">
                   <label for="first_name">First name:</label>
@@ -117,30 +134,6 @@ export default function () {
                   <button type="submit">Submit</button>
                 </form>
               </template>
-
-              <script>
-              import { router } from '@inertiajs/vue3'
-
-              export default {
-                props: {
-                  errors: Object,
-                },
-                data() {
-                  return {
-                    form: {
-                      first_name: null,
-                      last_name: null,
-                      email: null,
-                    },
-                  }
-                },
-                methods: {
-                  submit() {
-                    router.post('/users', this.form)
-                  },
-                },
-              }
-              </script>
             `,
           },
           {

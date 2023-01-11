@@ -225,15 +225,11 @@ export default function () {
               import { router } from '@inertiajs/vue3'
               import { onUnmounted } from 'vue'
 
-              export default {
-                setup() {
-                  onUnmounted(
-                    router.on('start', (event) => {
-                      console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-                    })
-                  )
-                },
-              }
+              onUnmounted(
+                router.on('start', (event) => {
+                  console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+                })
+              )
             `,
           },
           {

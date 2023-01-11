@@ -150,53 +150,44 @@ export default function Layout({ meta, children }) {
                 name: 'UsersController.php',
                 language: 'php',
                 code: dedent`
-              class UsersController
-              {
-                  public function index()
+                  class UsersController
                   {
-                      $users = User::active()
-                          ->orderByName()
-                          ->get(['id', 'name', 'email']);
+                      public function index()
+                      {
+                          $users = User::active()
+                              ->orderByName()
+                              ->get(['id', 'name', 'email']);
 
-                      return Inertia::render('Users', [
-                          'users' => $users
-                      ]);
+                          return Inertia::render('Users', [
+                              'users' => $users
+                          ]);
+                      }
                   }
-              }
-            `,
+                `,
               },
               {
                 name: 'Users.vue',
                 language: 'markup',
                 code: dedent`
-              <template>
-                <Head title="Users" />
-                <Layout>
-                  <div v-for="user in users" :key="user.id">
-                    <Link :href="\`/users/\${user.id}\`">
-                      {{ user.name }}
-                    </Link>
-                    <div>{{ user.email }}</div>
-                  </div>
-                </Layout>
-              </template>
+                  <script setup>
+                  import Layout from './Layout'
+                  import { Link, Head } from '@inertiajs/vue3'
 
-              <script>
-              import Layout from '../Shared/Layout'
-              import { Link, Head } from '@inertiajs/inertia-vue'
+                  defineProps({ users: Array })
+                  </script>
 
-              export default {
-                components: {
-                  Layout,
-                  Link,
-                  Head,
-                },
-                props: {
-                  users: Array,
-                },
-              }
-              </script>
-            `,
+                  <template>
+                    <Layout>
+                      <Head title="Users" />
+                      <div v-for="user in users" :key="user.id">
+                        <Link :href="\`/users/\${user.id}\`">
+                          {{ user.name }}
+                        </Link>
+                        <div>{{ user.email }}</div>
+                      </div>
+                    </Layout>
+                  </template>
+                `,
               },
             ]}
           />

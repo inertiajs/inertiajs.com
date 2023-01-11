@@ -127,6 +127,19 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
+              <script setup>
+              import { useForm } from '@inertiajs/vue3'
+
+              const form = useForm({
+                name: null,
+                avatar: null,
+              })
+
+              function submit() {
+                form.post('/users')
+              }
+              </script>
+
               <template>
                 <form @submit.prevent="submit">
                   <input type="text" v-model="form.name" />
@@ -137,25 +150,6 @@ export default function () {
                   <button type="submit">Submit</button>
                 </form>
               </template>
-
-              <script>
-              import { useForm } from '@inertiajs/vue3'
-
-              export default {
-                setup () {
-                  const form = useForm({
-                    name: null,
-                    avatar: null,
-                  })
-
-                  function submit() {
-                    form.post('/users')
-                  }
-
-                  return { form, submit }
-                },
-              }
-              </script>
             `,
           },
           {

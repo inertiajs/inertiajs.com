@@ -66,6 +66,21 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
+              <script setup>
+              import { reactive } from 'vue'
+              import { router } from '@inertiajs/vue3'
+
+              const form = reactive({
+                first_name: null,
+                last_name: null,
+                email: null,
+              })
+
+              function submit() {
+                router.post('/users', form)
+              }
+              </script>
+
               <template>
                 <form @submit.prevent="submit">
                   <label for="first_name">First name:</label>
@@ -77,27 +92,6 @@ export default function () {
                   <button type="submit">Submit</button>
                 </form>
               </template>
-
-              <script>
-              import { reactive } from 'vue'
-              import { router } from '@inertiajs/vue3'
-
-              export default {
-                setup () {
-                  const form = reactive({
-                    first_name: null,
-                    last_name: null,
-                    email: null,
-                  })
-
-                  function submit() {
-                    router.post('/users', form)
-                  }
-
-                  return { form, submit }
-                },
-              }
-              </script>
             `,
           },
           {
@@ -278,6 +272,16 @@ export default function () {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
+              <script setup>
+              import { useForm } from '@inertiajs/vue3'
+
+              const form = useForm({
+                email: null,
+                password: null,
+                remember: false,
+              })
+              </script>
+
               <template>
                 <form @submit.prevent="form.post('/login')">
                   <!-- email -->
@@ -292,22 +296,6 @@ export default function () {
                   <button type="submit" :disabled="form.processing">Login</button>
                 </form>
               </template>
-
-              <script>
-              import { useForm } from '@inertiajs/vue3'
-
-              export default {
-                setup () {
-                  const form = useForm({
-                    email: null,
-                    password: null,
-                    remember: false,
-                  })
-
-                  return { form }
-                },
-              }
-              </script>
             `,
           },
           {
