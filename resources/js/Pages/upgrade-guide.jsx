@@ -5,9 +5,10 @@ export const meta = {
   title: 'Upgrade guide',
   links: [
     { url: '#dependencies', name: 'Dependencies' },
-    { url: '#imports', name: 'Imports' },
+    { url: '#renamed-imports', name: 'Renamed imports' },
     { url: '#progress', name: 'Progress indicator' },
     { url: '#setup-arguments', name: 'Setup arguments' },
+    { url: '#simplified-use-page', name: 'Simplified usePage' },
   ],
 }
 
@@ -77,33 +78,33 @@ export default function () {
             name: 'Vue 2',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/vue2@beta
+              npm install @inertiajs/vue2
             `,
           },
           {
             name: 'Vue 3',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/vue3@beta
+              npm install @inertiajs/vue3
             `,
           },
           {
             name: 'React',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/react@beta
+              npm install @inertiajs/react
             `,
           },
           {
             name: 'Svelte',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/svelte@beta
+              npm install @inertiajs/svelte
             `,
           },
         ]}
       />
-      <H2>Imports</H2>
+      <H2>Renamed imports</H2>
       <P>
         Next, update all the Inertia related imports in your project to use the new adapter library name. All imports
         are now available from the adapter library, meaning you no longer import anything from the Inertia core library,
@@ -336,8 +337,8 @@ export default function () {
       />
       <H2>Setup arguments</H2>
       <P>
-        We've removed the previously deprecated <Code>app</Code> argument from the <Code>setup()</Code> method in{' '}
-        <Code>createInertiaApp()</Code>. Use <Code>App</Code> instead.
+        We've removed the previously deprecated lowercase <Code>app</Code> argument from the <Code>setup()</Code> method
+        in <Code>createInertiaApp()</Code>. Use <Code>App</Code> instead.
       </P>
       <CodeBlock
         language="diff"
@@ -349,6 +350,24 @@ export default function () {
               // ...
             },
           })
+        `}
+      />
+      <H2>Simplified usePage</H2>
+      <P>
+        In the Vue 3 adapter, we simplified the <Code>usePage()</Code> hook to no longer require adding{' '}
+        <Code>.value</Code> after the <Code>component</Code>, <Code>props</Code>, <Code>url</Code> and{' '}
+        <Code>version</Code> properties.
+      </P>
+      <P>
+        If you're using the <Code>usePage()</Code> hook, remove all instances of <Code>.value</Code>.
+      </P>
+      <CodeBlock
+        language="diff"
+        children={dedent`
+          import { computed } from 'vue'
+
+        - const appName = computed(() => usePage().props.value.appName)
+        + const appName = computed(() => usePage().props.appName)
         `}
       />
     </>
