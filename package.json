@@ -7,11 +7,11 @@
     },
     "dependencies": {
         "@docsearch/react": "^3.3.0",
-        "@inertiajs/react": "^1.0.0-beta.5",
-        "@vitejs/plugin-react": "^2.2.0",
+        "@inertiajs/react": "^1.0.0-beta.6",
+        "@vitejs/plugin-react": "^3.0.1",
         "autoprefixer": "^10.4.13",
         "dedent-js": "^1.0.1",
-        "laravel-vite-plugin": "^0.6.0",
+        "laravel-vite-plugin": "^0.7.3",
         "postcss": "^8.4.19",
         "prettier": "^2.8.2",
         "prettier-plugin-organize-imports": "^3.2.1",
@@ -20,6 +20,6 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "tailwindcss": "^2.1.2",
-        "vite": "^3.0.0"
+        "vite": "^4.0.4"
     }
 }
