@@ -6,9 +6,10 @@ export const meta = {
   links: [
     { url: '#how-it-works', name: 'How it works' },
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
-    { url: '#setting-up-ssr', name: 'Add server entry-point' },
-    { url: '#setting-up-vite', name: 'Setting up Vite.js' },
-    { url: '#enabling-ssr', name: 'Enabling SSR' },
+    { url: '#install-dependencies', name: 'Install dependencies' },
+    { url: '#add-server-entry-point', name: 'Add server entry-point' },
+    { url: '#setup-vite-js', name: 'Setup Vite.js' },
+    { url: '#update-npm-scripts', name: 'Update npm scripts' },
     { url: '#building-your-app', name: 'Building your app' },
     { url: '#hosting-setup', name: 'Hosting setup' },
     { url: '#common-gotchas', name: 'Common gotchas' },
@@ -24,7 +25,7 @@ export default function () {
         to the browser. This allows visitors to see and interact with your pages before they have fully loaded, and also
         provides other benefits such as decreasing the time it takes for search engines to index your site.
       </P>
-      <H2 id="how-it-works">How it works</H2>
+      <H2>How it works</H2>
       <P>
         When Inertia detects that it's running in a Node.js environment, it will automatically render the provided{' '}
         <A href="/the-protocol#the-page-object">page object</A> to HTML and return it.
@@ -34,7 +35,7 @@ export default function () {
         request over to a separate Node.js service so that it can render the page for us. Then, the Node.js service will
         return the rendered HTML back to the browser when it's done rendering the page.
       </P>
-      <H2 id="laravel-starter-kits">Laravel starter kits</H2>
+      <H2>Laravel starter kits</H2>
       <P>
         If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Breeze or Jetstream</A>, you may
         install the starter kit's scaffolding with Inertia SSR support pre-configured using the <Code>--ssr</Code> flag.
@@ -51,8 +52,11 @@ export default function () {
           },
         ]}
       />
-      <H2 id="setting-up-ssr">Create server entry-point</H2>
-      <P>First, we'll install the necessary server-side rendering dependencies.</P>
+      <H2>Install dependencies</H2>
+      <P>
+        First, we'll install the additional dependencies required for server-side rendering. This is only necessary for
+        the Vue adapters, so if you're using React or Svelte you can skip this step.
+      </P>
       <TabbedCode
         examples={[
           {
@@ -71,9 +75,9 @@ export default function () {
           },
           {
             name: 'React',
-            language: 'bash',
+            language: 'js',
             code: dedent`
-              npm install react-dom
+              // No additional dependencies required
             `,
           },
           {
@@ -85,8 +89,10 @@ export default function () {
           },
         ]}
       />
+      <H2>Create server entry-point</H2>
       <P>
-        Then, we'll create a <Code>{'resources/js/ssr.js'}</Code> file within our Laravel project:
+        Next, we'll create a <Code>resources/js/ssr.js</Code> file within our Laravel project that will serve as our SSR
+        entry point:
       </P>
       <CodeBlock
         language="bash"
@@ -95,8 +101,8 @@ export default function () {
         `}
       />
       <P>
-        This file is going to look very similar to your <Code>{'app.js'}</Code> file, except it's not going to run in
-        the browser but rather in Node.js. Here's a complete example:
+        This file is going to look very similar to your <Code>resources/js/app.js</Code> file, except it's not going to
+        run in the browser, but rather in Node.js. Here's a complete example:
       </P>
       <TabbedCode
         examples={[
@@ -104,68 +110,74 @@ export default function () {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              import Vue from 'vue'
-              import { createRenderer } from 'vue-server-renderer'
               import { createInertiaApp } from '@inertiajs/vue2'
               import createServer from '@inertiajs/vue2/server'
+              import Vue from 'vue'
+              import { createRenderer } from 'vue-server-renderer'
 
-              createServer((page) => createInertiaApp({
-                page,
-                render: createRenderer().renderToString,
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                  return pages[\`./Pages/\${name}.vue\`]
-                },
-                setup({ app, props, plugin }) {
-                  Vue.use(plugin)
-                  return new Vue({
-                    render: h => h(app, props),
-                  })
-                },
-              }))
+              createServer(page =>
+                createInertiaApp({
+                  page,
+                  render: createRenderer().renderToString,
+                  resolve: name => {
+                    const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                    return pages[\`./Pages/\${name}.vue\`]
+                  },
+                  setup({ app, props, plugin }) {
+                    Vue.use(plugin)
+                    return new Vue({
+                      render: h => h(app, props),
+                    })
+                  },
+                }),
+              )
             `,
           },
           {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { createSSRApp, h } from 'vue'
-              import { renderToString } from '@vue/server-renderer'
               import { createInertiaApp } from '@inertiajs/vue3'
               import createServer from '@inertiajs/vue3/server'
+              import { renderToString } from '@vue/server-renderer'
+              import { createSSRApp, h } from 'vue'
 
-              createServer((page) => createInertiaApp({
-                page,
-                render: renderToString,
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                  return pages[\`./Pages/\${name}.vue\`]
-                },
-                setup({ app, props, plugin }) {
-                  return createSSRApp({
-                    render: () => h(app, props),
-                  }).use(plugin)
-                },
-              }))
+              createServer(page =>
+                createInertiaApp({
+                  page,
+                  render: renderToString,
+                  resolve: name => {
+                    const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                    return pages[\`./Pages/\${name}.vue\`]
+                  },
+                  setup({ app, props, plugin }) {
+                    return createSSRApp({
+                      render: () => h(app, props),
+                    }).use(plugin)
+                  },
+                }),
+              )
             `,
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import ReactDOMServer from 'react-dom/server'
               import { createInertiaApp } from '@inertiajs/react'
               import createServer from '@inertiajs/react/server'
+              import ReactDOMServer from 'react-dom/server'
 
-              createServer((page) => createInertiaApp({
-                page,
-                render: ReactDOMServer.renderToString,
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-                  return pages[\`./Pages/\${name}.jsx\`]
-                },
-                setup: ({ App, props }) => <App {...props} />,
-              }))
+              createServer(page =>
+                createInertiaApp({
+                  page,
+                  render: ReactDOMServer.renderToString,
+                  resolve: name => {
+                    const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+                    return pages[\`./Pages/\${name}.jsx\`]
+                  },
+                  setup: ({ App, props }) => <App {...props} />,
+                }),
+              )
             `,
           },
           {
@@ -175,24 +187,24 @@ export default function () {
               import { createInertiaApp } from '@inertiajs/svelte'
               import createServer from '@inertiajs/svelte/server'
 
-              createServer((page) =>
+              createServer(page =>
                 createInertiaApp({
                   page,
-                  resolve: (name) => {
+                  resolve: name => {
                     const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
                     return pages[\`./Pages/\${name}.svelte\`]
                   },
-                })
+                }),
               )
             `,
           },
         ]}
       />
       <P>
-        Be sure to add anything that's missing from your <Code>{'app.js'}</Code> file that makes sense to run in SSR
-        mode, such as plugins or custom mixins.
+        Be sure to add anything that's missing from your <Code>app.js</Code> file that makes sense to run in SSR mode,
+        such as plugins or custom mixins.
       </P>
-      <H2 id="setting-up-vite">Setting up Vite.js</H2>
+      <H2>Setup Vite.js</H2>
       <P>
         Next, we need to update our Vite.js configuration to build our new <Code>ssr.js</Code> file. We can do this by
         adding a <Code>ssr</Code> property to the Laravel plugin configuration in our <Code>vite.config.js</Code> file:
@@ -212,9 +224,10 @@ export default function () {
           })
         `}
       />
+      <H2>Update npm scripts</H2>
       <P>
-        You now have two build processes you need to run — one for your client-side bundle and another for your
-        server-side bundle.
+        Next, let's update our <Code>package.json</Code> scripts to build our new <Code>ssr.js</Code> file. We'll add
+        this to our existing <Code>build</Code> script:
       </P>
       <CodeBlock
         language="diff"
@@ -226,17 +239,20 @@ export default function () {
            },
         `}
       />
-      <P>Now you can build your app by running:</P>
+      <P>Now you can build both your client-side and server-side bundles by running:</P>
       <CodeBlock
         language="bash"
         children={dedent`
-          npm run dev
+          npm run build
         `}
       />
-      <H2 id="enabling-ssr">Enabling server side rendering</H2>
       <P>
-        Next, we'll need to make sure the <Code>{'@inertiaHead'}</Code> directive is included in the{' '}
-        <Code>{'<head>'}</Code> section of our application's <Code>{'app.blade.php'}</Code> file:
+        While we have the <Code>package.json</Code> file open, let's also add
+      </P>
+      <H2>Enabling server side rendering</H2>
+      <P>
+        Next, we'll need to make sure the <Code>@inertiaHead</Code> directive is included in the <Code>{'<head>'}</Code>{' '}
+        section of our application's <Code>app.blade.php</Code> file:
       </P>
       <CodeBlock
         language="html"
@@ -257,9 +273,9 @@ export default function () {
         `}
       />
       <P>
-        Finally, we'll need to enable SSR in your application's <Code>{'inertia.php'}</Code> configuration file. If you
-        do not yet have this file in your application's <Code>{'config'}</Code> folder, you should publish it first
-        using the following command.
+        Finally, we'll need to enable SSR in your application's <Code>inertia.php</Code> configuration file. If you do
+        not yet have this file in your application's <Code>config</Code> folder, you should publish it first using the
+        following command.
       </P>
       <CodeBlock
         language="bash"
@@ -268,8 +284,7 @@ export default function () {
         `}
       />
       <P>
-        Then, enable SSR by setting the <Code>{'enabled'}</Code> option under <Code>{'ssr'}</Code> to{' '}
-        <Code>{'true'}</Code>.
+        Then, enable SSR by setting the <Code>enabled</Code> option under <Code>ssr</Code> to <Code>true</Code>.
       </P>
       <CodeBlock
         language="php"
@@ -280,13 +295,14 @@ export default function () {
 
               'ssr' => [
                   'enabled' => true,
-                  'url' => 'http://127.0.0.1:13714/render',
+                  'url' => 'http://127.0.0.1:13714',
+                  'bundle' => base_path('bootstrap/ssr/ssr.mjs'),
               ],
 
           // ...
         `}
       />
-      <H2 id="running-the-service">Running the Node.js service</H2>
+      <H2>Running the Node.js service</H2>
       <P>
         After running both of your application builds, you should be able run the Node-based Inertia SSR server using
         the following command.
@@ -332,10 +348,9 @@ export default function () {
       </P>
       <H2>Hosting setup</H2>
       <P>
-        When deploying your SSR enabled app to production, you'll need to run both the client-side (
-        <Code>{'app.js'}</Code>) and server-side (<Code>{'ssr.js'}</Code>) builds. One option is to update the{' '}
-        <Code>{'prod'}</Code> script in your appliation's <Code>{'package.json'}</Code> file to run both builds
-        automatically.
+        When deploying your SSR enabled app to production, you'll need to run both the client-side (<Code>app.js</Code>)
+        and server-side (<Code>ssr.js</Code>) builds. One option is to update the <Code>prod</Code> script in your
+        application's <Code>package.json</Code> file to run both builds automatically.
       </P>
       <CodeBlock
         language="js"
@@ -345,9 +360,9 @@ export default function () {
       />
       <H2>Laravel Forge</H2>
       <P>
-        To run the SSR server on Forge, you should create a new daemon that runs <Code>{'node public/js/ssr.js'}</Code>{' '}
-        from the root of your app. Take note of the daemon ID that is generated by Forge, as you'll need to use this in
-        your app's deployment script.
+        To run the SSR server on Forge, you should create a new daemon that runs <Code>node public/js/ssr.js</Code> from
+        the root of your app. Take note of the daemon ID that is generated by Forge, as you'll need to use this in your
+        app's deployment script.
       </P>
       <P>
         Next, whenever you deploy your application, you'll need to automatically restart the SSR server. You can
@@ -363,9 +378,9 @@ export default function () {
       />
       <H2>Heroku</H2>
       <P>
-        To run the SSR server on Heroku, update the <Code>{'web'}</Code> configuration in your <Code>{'Procfile'}</Code>{' '}
-        to first run the SSR server before starting your web server. To do this successfully, you must have the{' '}
-        <Code>{'heroku/nodejs'}</Code> buildpack installed in addition to the <Code>{'heroku/php'}</Code> buildback.
+        To run the SSR server on Heroku, update the <Code>web</Code> configuration in your <Code>Procfile</Code> to
+        first run the SSR server before starting your web server. To do this successfully, you must have the{' '}
+        <Code>heroku/nodejs</Code> buildpack installed in addition to the <Code>heroku/php</Code> buildback.
         <CodeBlock
           language="bash"
           children={dedent`
@@ -376,18 +391,18 @@ export default function () {
       <H2>Common gotchas</H2>
       <H3>Don't use code-splitting in SSR</H3>
       <P>
-        Do not use code-splitting in your <Code>{'ssr.js'}</Code> file as it will not provide any benefit given that we
-        want to generate just one SSR build file. You can, of course, still use code splitting for your client-side
-        build (<Code>{'app.js'}</Code>).
+        Do not use code-splitting in your <Code>ssr.js</Code> file as it will not provide any benefit given that we want
+        to generate just one SSR build file. You can, of course, still use code splitting for your client-side build (
+        <Code>app.js</Code>).
       </P>
       <H3>Port</H3>
       <P>
-        By default, Inertia's SSR server will operate on port <Code>{'13714'}</Code>. However, you can change this by
-        providing a second argument to the <Code>{'createServer'}</Code> method.
+        By default, Inertia's SSR server will operate on port <Code>13714</Code>. However, you can change this by
+        providing a second argument to the <Code>createServer</Code> method.
       </P>
       <H3>PortalVue</H3>
       <P>
-        If you're using the <Code>{'PortalVue'}</Code> package, it's import line must come after the{' '}
+        If you're using the <Code>PortalVue</Code> package, it's import line must come after the{' '}
         <Code>{"import { createRenderer } from 'vue-server-renderer'"}</Code> line.
       </P>
     </>
