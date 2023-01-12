@@ -1,1 +1,1 @@
-web: node bootstrap/ssr/ssr.mjs & vendor/bin/heroku-php-apache2 public/
+web: php artisan inertia:start-ssr & vendor/bin/heroku-php-apache2 public/
