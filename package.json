@@ -7,7 +7,7 @@
     },
     "dependencies": {
         "@docsearch/react": "^3.3.0",
-        "@inertiajs/react": "^1.0.0-beta.6",
+        "@inertiajs/react": "^1.0.0-beta.7",
         "@vitejs/plugin-react": "^3.0.1",
         "autoprefixer": "^10.4.13",
         "dedent-js": "^1.0.1",
