@@ -122,10 +122,10 @@ export default function () {
                     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
                     return pages[\`./Pages/\${name}.vue\`]
                   },
-                  setup({ app, props, plugin }) {
+                  setup({ App, props, plugin }) {
                     Vue.use(plugin)
                     return new Vue({
-                      render: h => h(app, props),
+                      render: h => h(App, props),
                     })
                   },
                 }),
@@ -149,9 +149,9 @@ export default function () {
                     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
                     return pages[\`./Pages/\${name}.vue\`]
                   },
-                  setup({ app, props, plugin }) {
+                  setup({ App, props, plugin }) {
                     return createSSRApp({
-                      render: () => h(app, props),
+                      render: () => h(App, props),
                     }).use(plugin)
                   },
                 }),
