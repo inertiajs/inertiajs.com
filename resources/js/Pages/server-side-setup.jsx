@@ -4,8 +4,8 @@ import dedent from 'dedent-js'
 export const meta = {
   title: 'Server-side setup',
   links: [
-    { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
+    { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#root-template', name: 'Root template' },
     { url: '#middleware', name: 'Middleware' },
     { url: '#creating-responses', name: 'Creating responses' },
@@ -17,9 +17,8 @@ export default function () {
     <>
       <H1>Server-side setup</H1>
       <P>
-        The first step when installing Inertia is to configure your server-side framework. Inertia maintains official
-        server-side adapters for <A href="https://laravel.com/">Laravel</A> and{' '}
-        <A href="https://rubyonrails.org/">Rails</A>. For other frameworks, please see the{' '}
+        The first step when installing Inertia is to configure your server-side framework. Inertia maintains an official
+        server-side adapter for <A href="https://laravel.com/">Laravel</A>. For other frameworks, please see the{' '}
         <A href="/community-adapters">community adapters</A>.
       </P>
       <P>
@@ -76,9 +75,12 @@ export default function () {
         ]}
       />
       <P>
-        By default, Inertia's Laravel adapter will assume your root template is named <Code>app.blade.php</Code>. This
-        template should include your assets, as well as the <Code>@inertia</Code> directive. If you would like to use a
-        different root view, you can change it using the <Code>Inertia::setRootView()</Code> method.
+        This template should include your assets, as well as the <Code>@inertia</Code> and <Code>@inertiaHead</Code>{' '}
+        directives.
+      </P>
+      <P>
+        By default, Inertia's Laravel adapter will assume your root template is named <Code>app.blade.php</Code>. If you
+        would like to use a different root view, you can change it using the <Code>Inertia::setRootView()</Code> method.
       </P>
       <H2>Middleware</H2>
       <P>
