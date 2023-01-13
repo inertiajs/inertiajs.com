@@ -114,8 +114,8 @@ export default function () {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { render } from 'react-dom'
               import { createInertiaApp } from '@inertiajs/react'
+              import { createRoot } from 'react-dom/client'
 
               createInertiaApp({
                 resolve: name => {
@@ -123,7 +123,7 @@ export default function () {
                   return pages[\`./Pages/\${name}.jsx\`]
                 },
                 setup({ el, App, props }) {
-                  render(<App {...props} />, el)
+                  createRoot(el).render(<App {...props} />)
                 },
               })
             `,
