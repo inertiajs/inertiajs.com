@@ -1,18 +1,17 @@
-import { A, Code, CodeBlock, H1, H2, H3, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Notice, P, React, Svelte, TabbedCode, Vue, Vue2, Vue3 } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
   title: 'Server-side rendering (SSR)',
   links: [
-    { url: '#how-it-works', name: 'How it works' },
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
     { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#add-server-entry-point', name: 'Add server entry-point' },
     { url: '#setup-vite-js', name: 'Setup Vite.js' },
-    { url: '#update-npm-scripts', name: 'Update npm scripts' },
-    { url: '#building-your-app', name: 'Building your app' },
+    { url: '#update-npm-script', name: 'Update npm script' },
+    { url: '#running-the-ssr-server', name: 'Running the SSR server' },
+    { url: '#client-side-hydration', name: 'Client side hydration' },
     { url: '#hosting-setup', name: 'Hosting setup' },
-    { url: '#common-gotchas', name: 'Common gotchas' },
   ],
 }
 
@@ -21,20 +20,13 @@ export default function () {
     <>
       <H1>Server-side Rendering (SSR)</H1>
       <P>
-        Server-side rendering allows you to pre-render an initial page visit on the server and to send the rendered HTML
-        to the browser. This allows visitors to see and interact with your pages before they have fully loaded, and also
-        provides other benefits such as decreasing the time it takes for search engines to index your site.
+        Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to see your
+        website prior to the JavaScript fully loading. It also makes it easier for search engines to index your site.
       </P>
-      <H2>How it works</H2>
-      <P>
-        When Inertia detects that it's running in a Node.js environment, it will automatically render the provided{' '}
-        <A href="/the-protocol#the-page-object">page object</A> to HTML and return it.
-      </P>
-      <P>
-        However, because most Inertia applications are built in languages such as PHP or Ruby, we'll need to hand the
-        request over to a separate Node.js service so that it can render the page for us. Then, the Node.js service will
-        return the rendered HTML back to the browser when it's done rendering the page.
-      </P>
+      <Notice>
+        Server-side rendering uses Node.js to render your pages on the server, and therefore must be available on your
+        server.
+      </Notice>
       <H2>Laravel starter kits</H2>
       <P>
         If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Breeze or Jetstream</A>, you may
@@ -89,7 +81,14 @@ export default function () {
           },
         ]}
       />
-      <H2>Create server entry-point</H2>
+      <P>Also, make sure you have the latest version of the Inertia Laravel adapter installed:</P>
+      <CodeBlock
+        language="bash"
+        children={dedent`
+          composer install inertiajs/inertia-laravel
+        `}
+      />
+      <H2>Add server entry-point</H2>
       <P>
         Next, we'll create a <Code>resources/js/ssr.js</Code> file within our Laravel project that will serve as our SSR
         entry point:
@@ -224,10 +223,10 @@ export default function () {
           })
         `}
       />
-      <H2>Update npm scripts</H2>
+      <H2>Update npm script</H2>
       <P>
-        Next, let's update our <Code>package.json</Code> scripts to build our new <Code>ssr.js</Code> file. We'll add
-        this to our existing <Code>build</Code> script:
+        Next, let's update the <Code>build</Code> script in our <Code>package.json</Code> file to also build our new{' '}
+        <Code>ssr.js</Code> file:
       </P>
       <CodeBlock
         language="diff"
@@ -239,171 +238,177 @@ export default function () {
            },
         `}
       />
-      <P>Now you can build both your client-side and server-side bundles by running:</P>
+      <P>Now you can build both your client-side and server-side bundles:</P>
       <CodeBlock
         language="bash"
         children={dedent`
           npm run build
         `}
       />
+      <H2>Running the SSR server</H2>
       <P>
-        While we have the <Code>package.json</Code> file open, let's also add
-      </P>
-      <H2>Enabling server side rendering</H2>
-      <P>
-        Next, we'll need to make sure the <Code>@inertiaHead</Code> directive is included in the <Code>{'<head>'}</Code>{' '}
-        section of our application's <Code>app.blade.php</Code> file:
-      </P>
-      <CodeBlock
-        language="html"
-        children={dedent`
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <meta charset="utf-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-              <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
-              <script src="{{ mix('/js/app.js') }}" defer></script>
-              @inertiaHead
-            </head>
-            <body>
-              @inertia
-            </body>
-          </html>
-        `}
-      />
-      <P>
-        Finally, we'll need to enable SSR in your application's <Code>inertia.php</Code> configuration file. If you do
-        not yet have this file in your application's <Code>config</Code> folder, you should publish it first using the
-        following command.
+        Now that you have built both your client-side and server-side bundles, you should be able run the Node-based
+        Inertia SSR server using the following command:
       </P>
       <CodeBlock
         language="bash"
         children={dedent`
-          php artisan vendor:publish --provider="Inertia\\ServiceProvider"
-        `}
-      />
-      <P>
-        Then, enable SSR by setting the <Code>enabled</Code> option under <Code>ssr</Code> to <Code>true</Code>.
-      </P>
-      <CodeBlock
-        language="php"
-        children={dedent`
-          <?php
-
-          return [
-
-              'ssr' => [
-                  'enabled' => true,
-                  'url' => 'http://127.0.0.1:13714',
-                  'bundle' => base_path('bootstrap/ssr/ssr.mjs'),
-              ],
-
-          // ...
-        `}
-      />
-      <H2>Running the Node.js service</H2>
-      <P>
-        After running both of your application builds, you should be able run the Node-based Inertia SSR server using
-        the following command.
-      </P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          node public/js/ssr.js
+          php artisan inertia:start-ssr
         `}
       />
       <P>
         With the server running, you should now be able to access your app within the browser with server-side rendering
         enabled. In fact, you should be able to disable JavaScript entirely and still navigate around your application.
       </P>
-      <H2>Client side hydration (Vue-only)</H2>
+      <H2>Client side hydration</H2>
       <P>
-        With this configuration, Vue will automatically try to "hydrate" the static markup and make it interactive
-        instead of re-rendering all the HTML that we just generated on the server. This is called "client side
-        hydration". However, for client side hydration to work, the HTML generated on the server must be exactly the
-        same as on the client, otherwise you'll see the following warning in your console.
+        Since your website is now being server-side rendered, you can instruct <Vue>Vue</Vue>
+        <React>React</React>
+        <Svelte>Svelte</Svelte> to "hydrate" the static markup and make it interactive instead of re-rendering all the
+        HTML that we just generated.
       </P>
+      <Vue2>
+        <P>Inertia automatically enables client-side hydration in Vue 2 apps, so no changes are required.</P>
+      </Vue2>
+      <Vue3>
+        <P>
+          To enable client-side hydration in a Vue 3 app, update your <Code>app.js</Code> file to use{' '}
+          <Code>createSSRApp</Code> instead of <Code>createApp</Code>:
+        </P>
+      </Vue3>
+      <React>
+        <P>
+          To enable client-side hydration in a React app, update your <Code>app.js</Code> file to use{' '}
+          <Code>hydrateRoot</Code> instead of <Code>createRoot</Code>:
+        </P>
+      </React>
+      <Svelte>
+        <P>
+          To enable client-side hydration in a Svelte app, set the <Code>hydratable</Code> compiler option to{' '}
+          <Code>true</Code> in your <Code>vite.config.js</Code> file:
+        </P>
+      </Svelte>
       <TabbedCode
         examples={[
           {
             name: 'Vue 2',
+            language: 'js',
             code: dedent`
-              [Vue warn]: The client-side rendered virtual DOM tree is not matching server-rendered content. This is likely caused by incorrect HTML markup, for example nesting block-level elements inside <p>, or missing <tbody>. Bailing hydration and performing full client-side render.
+              // No changes required
             `,
           },
           {
             name: 'Vue 3',
+            language: 'diff',
             code: dedent`
-              [Vue warn]: Hydration children mismatch...
+            - import { createApp, h } from 'vue'
+            + import { createSSRApp, h } from 'vue'
+              import { createInertiaApp } from '@inertiajs/vue3'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+                  return pages[\`./Pages/\${name}.vue\`]
+                },
+                setup({ el, App, props, plugin }) {
+            -     createApp({ render: () => h(App, props) })
+            +     createSSRApp({ render: () => h(App, props) })
+                    .use(plugin)
+                    .mount(el)
+                },
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'diff',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/react'
+            - import { createRoot } from 'react-dom/client'
+            + import { hydrateRoot } from 'react-dom/client'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+                  return pages[\`./Pages/\${name}.jsx\`]
+                },
+                setup({ el, App, props }) {
+            -     createRoot(el).render(<App {...props} />)
+            +     hydrateRoot(el, <App {...props} />)
+                },
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'diff',
+            code: dedent`
+              import { svelte } from '@sveltejs/vite-plugin-svelte'
+              import laravel from 'laravel-vite-plugin'
+              import { defineConfig } from 'vite'
+
+              export default defineConfig({
+                plugins: [
+                  laravel.default({
+                    input: ['resources/css/app.css', 'resources/js/app.js'],
+                    ssr: 'resources/js/ssr.js',
+                    refresh: true,
+                  }),
+            -     svelte(),
+            +     svelte({
+            +       compilerOptions: {
+            +         hydratable: true,
+            +       },
+            +     }),
+                ],
+              })
             `,
           },
         ]}
       />
-      <P>
-        Of course, since you're generating the HTML from the same page components, this generally isn't an issue.
-        However, if you do see this warning, see the following caveats in the{' '}
-        <A href="https://ssr.vuejs.org/guide/hydration.html#hydration-caveats">Vue 2</A> /{' '}
-        <A href="https://v3.vuejs.org/guide/ssr/hydration.html#hydration-caveats">Vue 3</A> SSR documentation.
-      </P>
       <H2>Hosting setup</H2>
       <P>
-        When deploying your SSR enabled app to production, you'll need to run both the client-side (<Code>app.js</Code>)
-        and server-side (<Code>ssr.js</Code>) builds. One option is to update the <Code>prod</Code> script in your
-        application's <Code>package.json</Code> file to run both builds automatically.
-      </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          "prod": "mix --production && mix --production --mix-config=webpack.ssr.mix.js",
-        `}
-      />
-      <H2>Laravel Forge</H2>
-      <P>
-        To run the SSR server on Forge, you should create a new daemon that runs <Code>node public/js/ssr.js</Code> from
-        the root of your app. Take note of the daemon ID that is generated by Forge, as you'll need to use this in your
-        app's deployment script.
-      </P>
-      <P>
-        Next, whenever you deploy your application, you'll need to automatically restart the SSR server. You can
-        accomplish this by adding the following command to your deployment script, updating "123456" with your daemon
-        ID.
+        When deploying your SSR enabled app to production, you'll need to build both the client-side (
+        <Code>app.js</Code>) and server-side bundles (<Code>ssr.js</Code>), and then enable the SSR server in a
+        background process:
       </P>
       <CodeBlock
         language="bash"
         children={dedent`
-          # Restart the SSR server...
-          sudo supervisorctl restart daemon-123456:daemon-123456_00
+          php artisan inertia:start-ssr
         `}
       />
+      <P>To stop the SSR server, for instance when you deploy a new version of your website, run:</P>
+      <CodeBlock
+        language="bash"
+        children={dedent`
+          php artisan inertia:stop-ssr
+        `}
+      />
+      <H2>Laravel Forge</H2>
+      <P>
+        To run the SSR server on Forge, you should create a new daemon that runs{' '}
+        <Code>php artisan inertia:start-ssr</Code> from the root of your app.
+      </P>
+      <P>
+        Next, whenever you deploy your application, you'll need to automatically restart the SSR server by calling the{' '}
+        <Code>php artisan inertia:start-ssr</Code> command. This will stop the existing SSR server, forcing a new one to
+        start.
+      </P>
       <H2>Heroku</H2>
       <P>
         To run the SSR server on Heroku, update the <Code>web</Code> configuration in your <Code>Procfile</Code> to
-        first run the SSR server before starting your web server. To do this successfully, you must have the{' '}
-        <Code>heroku/nodejs</Code> buildpack installed in addition to the <Code>heroku/php</Code> buildback.
-        <CodeBlock
-          language="bash"
-          children={dedent`
-        web: node public/js/ssr.js & vendor/bin/heroku-php-apache2 public/
-        `}
-        />
+        first run the SSR server before starting your web server.
       </P>
-      <H2>Common gotchas</H2>
-      <H3>Don't use code-splitting in SSR</H3>
+      <CodeBlock
+        language="bash"
+        children={dedent`
+        web: php artisan inertia:start-ssr & vendor/bin/heroku-php-apache2 public/
+      `}
+      />
       <P>
-        Do not use code-splitting in your <Code>ssr.js</Code> file as it will not provide any benefit given that we want
-        to generate just one SSR build file. You can, of course, still use code splitting for your client-side build (
-        <Code>app.js</Code>).
-      </P>
-      <H3>Port</H3>
-      <P>
-        By default, Inertia's SSR server will operate on port <Code>13714</Code>. However, you can change this by
-        providing a second argument to the <Code>createServer</Code> method.
-      </P>
-      <H3>PortalVue</H3>
-      <P>
-        If you're using the <Code>PortalVue</Code> package, it's import line must come after the{' '}
-        <Code>{"import { createRenderer } from 'vue-server-renderer'"}</Code> line.
+        Note, you must have the <Code>heroku/nodejs</Code> buildpack installed in addition to the{' '}
+        <Code>heroku/php</Code> buildback for the SSR server to run.
       </P>
     </>
   )
