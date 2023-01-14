@@ -29,7 +29,7 @@ export default function () {
       </P>
       <P>
         For a complete list of all the changes, see the{' '}
-        <A href="https://github.com/inertiajs/inertia/blob/master/CHANGELOG.md">changelog</A>.
+        <A href="https://github.com/inertiajs/inertia/releases/tag/v1.0.0">release notes</A>.
       </P>
       <H2>New dependencies</H2>
       <P>
