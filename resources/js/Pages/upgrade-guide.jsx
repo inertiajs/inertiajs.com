@@ -1,10 +1,11 @@
-import { A, Code, CodeBlock, H1, H2, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Notice, P, Strong, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
   title: 'Upgrade guide',
   links: [
-    { url: '#dependencies', name: 'Dependencies' },
+    { url: '#whats-new', name: "What's new" },
+    { url: '#new-dependencies', name: 'New dependencies' },
     { url: '#renamed-imports', name: 'Renamed imports' },
     { url: '#progress', name: 'Progress indicator' },
     { url: '#setup-arguments', name: 'Setup arguments' },
@@ -16,15 +17,21 @@ export default function () {
   return (
     <>
       <H1>Upgrade guide</H1>
+      <P>Inertia.js v1.0 has been released! 🥳</P>
+      <H2 id="whats-new">What's new</H2>
       <P>
-        Inertia.js v1.0 is now in beta! This release focuses on simplifying the overall architecture of the project with
-        the goal of making Inertia easier to maintain and easier to use.
+        This release focuses on simplifying the overall architecture of the project with the goal of making Inertia
+        easier to maintain and easier to use.
       </P>
       <P>
         It includes a number of breaking changes, mostly related to package names and updated named exports. This guide
         explains how to upgrade your project to v1.0.
       </P>
-      <H2>Dependencies</H2>
+      <P>
+        For a complete list of all the changes, see the{' '}
+        <A href="https://github.com/inertiajs/inertia/blob/master/CHANGELOG.md">changelog</A>.
+      </P>
+      <H2>New dependencies</H2>
       <P>
         Previously to use Inertia you had to install a number of libraries, including the core library (
         <Code>@inertiajs/inertia</Code>), the adapter of your choice (
@@ -32,10 +39,12 @@ export default function () {
         ), and if you were using server-side rendering, the server library (<Code>@inertiajs/server</Code>).
       </P>
       <P>
-        Moving forward you are now only required to install a single library — the adapter of your choice (Vue, React,
-        or Svelte), and the core libraries are automatically installed for you.
+        <Strong>Moving forward you are now only required to install a single library</Strong> — the adapter of your
+        choice (Vue, React, or Svelte), and the core libraries are automatically installed for you.
       </P>
-      <P>Start by removing all of the old Inertia libraries:</P>
+      <P>
+        Start by removing <em>all</em> of the old Inertia libraries:
+      </P>
       <TabbedCode
         examples={[
           {
