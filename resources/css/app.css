@@ -1,62 +1,67 @@
-/* purgecss start ignore */
 @tailwind base;
 
+/* Fonts */
+
 @font-face {
   font-family: 'Gilroy';
-  src: url('/fonts/gilroy-bold.woff2') format('woff2'), url('/fonts/gilroy-bold.woff') format('woff');
+  src: url('../fonts/gilroy-bold.woff2') format('woff2'), url('../fonts/gilroy-bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('/fonts/gilroy-bold-italic.woff2') format('woff2'), url('/fonts/gilroy-bold-italic.woff') format('woff');
+  src: url('../fonts/gilroy-bold-italic.woff2') format('woff2'), url('../fonts/gilroy-bold-italic.woff') format('woff');
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('/fonts/gilroy-light.woff2') format('woff2'), url('/fonts/gilroy-light.woff') format('woff');
+  src: url('../fonts/gilroy-light.woff2') format('woff2'), url('../fonts/gilroy-light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('/fonts/gilroy-light-italic.woff2') format('woff2'), url('/fonts/gilroy-light-italic.woff') format('woff');
+  src: url('../fonts/gilroy-light-italic.woff2') format('woff2'),
+    url('../fonts/gilroy-light-italic.woff') format('woff');
   font-weight: 300;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('/fonts/gilroy-medium.woff2') format('woff2'), url('/fonts/gilroy-medium.woff') format('woff');
+  src: url('../fonts/gilroy-medium.woff2') format('woff2'), url('../fonts/gilroy-medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('/fonts/gilroy-medium-italic.woff2') format('woff2'), url('/fonts/gilroy-medium-italic.woff') format('woff');
+  src: url('../fonts/gilroy-medium-italic.woff2') format('woff2'),
+    url('../fonts/gilroy-medium-italic.woff') format('woff');
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('/fonts/gilroy-regular.woff2') format('woff2'), url('/fonts/gilroy-regular.woff') format('woff');
+  src: url('../fonts/gilroy-regular.woff2') format('woff2'), url('../fonts/gilroy-regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('/fonts/gilroy-regular-italic.woff2') format('woff2'),
-    url('/fonts/gilroy-regular-italic.woff') format('woff');
+  src: url('../fonts/gilroy-regular-italic.woff2') format('woff2'),
+    url('../fonts/gilroy-regular-italic.woff') format('woff');
   font-weight: 400;
   font-style: italic;
 }
+
+/* Carbon Ads */
 
 .carbon-wrap {
   @apply block;
@@ -76,6 +81,147 @@
 
 .carbon-poweredby {
   @apply text-xs text-gray-500;
+}
+
+/* DocSearch */
+
+.DocSearch-Button {
+  @apply bg-white scale-90 lg:w-56;
+}
+
+.DocSearch-Button .DocSearch-Search-Icon {
+  @apply text-gray-600;
+}
+
+.DocSearch-Button .DocSearch-Button-Placeholder {
+  @apply text-gray-600;
+}
+
+.DocSearch-Button:active,
+.DocSearch-Button:focus,
+.DocSearch-Button:hover {
+  @apply ring-2 ring-purple-900;
+}
+
+/* PrismJS */
+
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #ccc;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: #2d2d2d;
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999;
+}
+
+.token.punctuation {
+  color: #ccc;
+}
+
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+  @apply text-red-500;
+}
+
+.token.function-name {
+  color: #6196cc;
+}
+
+.token.boolean,
+.token.number,
+.token.function {
+  color: #f08d49;
+}
+
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol {
+  color: #f8c555;
+}
+
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+  color: #cc99cd;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex {
+  color: #7ec699;
+}
+
+.token.variable {
+  color: white;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: #67cdcc;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.inserted {
+  @apply text-green-400;
 }
 
 @tailwind components;

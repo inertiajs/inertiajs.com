@@ -15,10 +15,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            $target = '/auth/github';
-
-            redirect()->setIntendedUrl($target);
-            return $target;
+            return route('login');
         }
     }
 }
