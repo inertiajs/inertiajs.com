@@ -24,8 +24,8 @@ export default function () {
         website prior to the JavaScript fully loading. It also makes it easier for search engines to index your site.
       </P>
       <Notice>
-        Server-side rendering uses Node.js to render your pages on the server, and therefore must be available on your
-        server.
+        Server-side rendering uses Node.js to render your pages in a background job, and therefore must be available on
+        your server.
       </Notice>
       <H2>Laravel starter kits</H2>
       <P>
