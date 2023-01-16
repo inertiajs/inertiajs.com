@@ -85,7 +85,7 @@ export default function () {
       <CodeBlock
         language="bash"
         children={dedent`
-          composer install inertiajs/inertia-laravel
+          composer require inertiajs/inertia-laravel
         `}
       />
       <H2>Add server entry-point</H2>
