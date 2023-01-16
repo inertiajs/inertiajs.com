@@ -40,9 +40,10 @@ export default function () {
             language: 'diff',
             code: dedent`
                resolve: name => {
-               - const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-               + const pages = import.meta.glob('./Pages/**/*.vue')
-                 return pages[\`./Pages/\${name}.vue\`]
+             -   const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+             -   return pages[\`./Pages/\${name}.vue\`]
+             +   const pages = import.meta.glob('./Pages/**/*.vue')
+             +   return pages[\`./Pages/\${name}.vue\`]()
                },
             `,
           },
@@ -51,9 +52,10 @@ export default function () {
             language: 'diff',
             code: dedent`
                resolve: name => {
-               - const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-               + const pages = import.meta.glob('./Pages/**/*.vue')
-                 return pages[\`./Pages/\${name}.vue\`]
+             -   const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+             -   return pages[\`./Pages/\${name}.vue\`]
+             +   const pages = import.meta.glob('./Pages/**/*.vue')
+             +   return pages[\`./Pages/\${name}.vue\`]()
                },
             `,
           },
@@ -62,9 +64,10 @@ export default function () {
             language: 'diff',
             code: dedent`
                resolve: name => {
-               - const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-               + const pages = import.meta.glob('./Pages/**/*.jsx')
-                 return pages[\`./Pages/\${name}.jsx\`]
+             -   const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+             -   return pages[\`./Pages/\${name}.jsx\`]
+             +   const pages = import.meta.glob('./Pages/**/*.jsx')
+             +   return pages[\`./Pages/\${name}.jsx\`]()
                },
             `,
           },
@@ -73,9 +76,10 @@ export default function () {
             language: 'diff',
             code: dedent`
                resolve: name => {
-               - const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-               + const pages = import.meta.glob('./Pages/**/*.svelte')
-                 return pages[\`./Pages/\${name}.svelte\`]
+             -   const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+             -   return pages[\`./Pages/\${name}.svelte\`]
+             +   const pages = import.meta.glob('./Pages/**/*.svelte')
+             +   return pages[\`./Pages/\${name}.svelte\`]()
                },
             `,
           },
