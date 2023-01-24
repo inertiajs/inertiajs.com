@@ -171,7 +171,7 @@ export default function () {
         ]}
       />
       <P>
-        As you may have noticed in the example above, when using Inertia, you don't typically need inspect form
+        As you may have noticed in the example above, when using Inertia, you don't typically need to inspect form
         responses client-side like you would when making XHR / fetch requests manually.
       </P>
       <P>
