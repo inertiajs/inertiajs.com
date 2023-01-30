@@ -392,7 +392,7 @@ export default function () {
       </P>
       <P>
         Next, whenever you deploy your application, you'll need to automatically restart the SSR server by calling the{' '}
-        <Code>php artisan inertia:start-ssr</Code> command. This will stop the existing SSR server, forcing a new one to
+        <Code>php artisan inertia:stop-ssr</Code> command. This will stop the existing SSR server, forcing a new one to
         start.
       </P>
       <H2>Heroku</H2>
