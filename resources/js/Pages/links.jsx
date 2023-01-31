@@ -521,7 +521,7 @@ export default function () {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'
+              import { Link } from '@inertiajs/vue3'
 
               // URL exact match...
               <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
