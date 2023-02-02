@@ -38,7 +38,10 @@ export default function () {
           <A href="https://pypi.org/project/inertia-django/">Django</A>
         </Li>
         <Li>
-          <A href="https://github.com/petaki/inertia-go">Go</A>
+          <A href="https://github.com/petaki/inertia-go">Go (inertia-go)</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
         </Li>
         <Li>
           <A href="https://github.com/girardinsamuel/masonite-inertia/">Masonite</A>
