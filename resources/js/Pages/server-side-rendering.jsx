@@ -272,7 +272,7 @@ export default function () {
       </Vue2>
       <Vue3>
         <P>
-          To enable client-side hydration in a Vue 3 app, update your <Code>app.js</Code> file to use{' '}
+          To enable client-side hydration in a Vue 3 app, update your <Code>ssr.js</Code> file to use{' '}
           <Code>createSSRApp</Code> instead of <Code>createApp</Code>:
         </P>
       </Vue3>
