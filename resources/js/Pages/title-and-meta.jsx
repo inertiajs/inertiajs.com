@@ -409,7 +409,7 @@ export default function () {
             code: dedent`
               // AppHead.js
 
-                            import { Head } from '@inertiajs/react'
+              import { Head } from '@inertiajs/react'
 
               const Site = ({ title, children }) => {
                 return (
