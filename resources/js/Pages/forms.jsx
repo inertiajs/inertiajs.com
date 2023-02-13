@@ -944,7 +944,9 @@ export default function () {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              {errors.isDirty && <div>There are unsaved form changes.</div>}
+              const { isDirty } = useForm({ ... })
+
+              {isDirty && <div>There are unsaved form changes.</div>}
             `,
           },
           {
