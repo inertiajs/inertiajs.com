@@ -346,7 +346,7 @@ export default function () {
           <head>
             <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
             <title>About - My app</title>
-            <meta name="description" content="This is my about page description" />
+            <meta name="description" content="This is a page specific description" />
           </head>
         `}
       />
