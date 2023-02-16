@@ -17,7 +17,7 @@ export default function () {
       <H2>FormData conversion</H2>
       <P>
         When making Inertia requests that include files (even nested files), Inertia will automatically convert the
-        request data into a <Code>FormData</Code> object. This conversation is necessary in order to submit a{' '}
+        request data into a <Code>FormData</Code> object. This conversion is necessary in order to submit a{' '}
         <Code>multipart/form-data</Code> request via XHR.
       </P>
       <P>
