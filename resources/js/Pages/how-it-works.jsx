@@ -32,7 +32,7 @@ export default function () {
         .
       </P>
       <P>
-        When Inertia makes an XHR visit, the server detects that it's an Inertia visit and returns, and instead of
+        When Inertia makes an XHR visit, the server detects that it's an Inertia visit and instead of
         returning a full HTML response, it returns a JSON response with the JavaScript page component name and data
         (props). Inertia then dynamically swaps out the previous page component with the new page component and updates
         the browser's history state.
