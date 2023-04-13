@@ -14,17 +14,17 @@ export default function () {
     <>
       <H1>Progress indicators</H1>
       <P>
-        Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one
-        page to another. To solve this Inertia displays a progress indicator at the top of the page whenever you make an
+        Since Inertia requests are made via XHR, there would typically not be a browser loading indicator when navigating from one
+        page to another. To solve this, Inertia displays a progress indicator at the top of the page whenever you make an
         Inertia visit.
       </P>
       <P>
-        If you prefer, you can also disable Inertia's default loading indicator and provide your own custom
-        implementation. We'll look at both approaches below.
+        Of course, if you prefer, you can disable Inertia's default loading indicator and provide your own custom
+        implementation. We'll discuss both approaches below.
       </P>
       <H2>Default</H2>
       <P>
-        Inertia's default progress indicator is a light wrapper around the{' '}
+        Inertia's default progress indicator is a light-weight wrapper around the{' '}
         <A href="https://ricostacruz.com/nprogress/">NProgress</A> library. You can customize it via the{' '}
         <Code>progress</Code> property of the <Code>createInertiaApp()</Code> function.
       </P>
@@ -33,17 +33,16 @@ export default function () {
         children={dedent`
           createInertiaApp({
             progress: {
-              // The delay after which the progress bar will appear
-              // during navigation, in milliseconds.
+              // The delay after which the progress bar will appear, in milliseconds...
               delay: 250,
 
-              // The color of the progress bar.
+              // The color of the progress bar...
               color: '#29d',
 
-              // Whether to include the default NProgress styles.
+              // Whether to include the default NProgress styles...
               includeCSS: true,
 
-              // Whether the NProgress spinner will be shown.
+              // Whether the NProgress spinner will be shown...
               showSpinner: false,
             },
             // ...
@@ -52,7 +51,7 @@ export default function () {
       />
       <P>
         You can disable Inertia's default loading indicator by setting the <Code>progress</Code> property to{' '}
-        <Code>false</Code>:
+        <Code>false</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -66,10 +65,10 @@ export default function () {
       <H2>Custom</H2>
       <P>
         It's also possible to setup your own custom page loading indicators using Inertia <A href="/events">events</A>.
-        Let's explore how to do this, using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
+        Let's explore how to do this using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
         example.
       </P>
-      <P>First, disable Inertia's default loading indicator:</P>
+      <P>First, disable Inertia's default loading indicator.</P>
       <CodeBlock
         language="js"
         children={dedent`
@@ -80,8 +79,7 @@ export default function () {
         `}
       />
       <P>
-        Next, install the NProgress library. Technically this is already installed since it's an Inertia dependency, but
-        it's good to be explicit, as Inertia could change in the future.
+        Next, install the NProgress library.
       </P>
       <CodeBlock
         language="bash"
@@ -90,9 +88,9 @@ export default function () {
         `}
       />
       <P>
-        You'll need to add the NProgress{' '}
+        After installation, you'll need to add the NProgress{' '}
         <A href="https://github.com/rstacruz/nprogress/blob/master/nprogress.css">styles</A> to your project. You can do
-        this using the CDN version.
+        this using a CDN hosted copy of the styles.
       </P>
       <CodeBlock
         language="html"
@@ -150,7 +148,7 @@ export default function () {
         `}
       />
       <P>
-        Next, let's add a <Code>finish</Code> event listener to hide the progress bar when the page visit finishes.
+        Then, let's add a <Code>finish</Code> event listener to hide the progress bar when the page visit finishes.
       </P>
       <CodeBlock
         language="js"
