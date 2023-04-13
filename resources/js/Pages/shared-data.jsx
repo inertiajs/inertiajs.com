@@ -214,7 +214,7 @@ export default function () {
           },
         ]}
       />
-      <P>Next, display the flash message in a front-end component, such as the site layout.</P>
+      <P>Next, display the flash message in a frontend component, such as the site layout.</P>
       <TabbedCode
         examples={[
           {
