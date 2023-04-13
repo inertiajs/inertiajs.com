@@ -18,11 +18,11 @@ export default function () {
       <P>
         Sometimes you need to access specific pieces of data on numerous pages within your application. For example, you
         may need to display the current user in the site header. Passing this data manually in each response across your
-        entire application isn't practical. Thankfully, there is a better option: shared data.
+        entire application is cumbersome. Thankfully, there is a better option: shared data.
       </P>
       <H2>Sharing data</H2>
       <P>
-        Inertia's server-side adapters provide a method of preassigning shared data for each request. This is typically
+        Inertia's server-side adapters all provide a method of making shared data available for every request. This is typically
         done outside of your controllers. Shared data will be automatically merged with the page props provided in your
         controller.
       </P>
@@ -87,7 +87,7 @@ export default function () {
       </Notice>
       <H2>Accessing shared data</H2>
       <P>
-        Once you have shared the data server-side, you will then be able to access it within any of your pages or
+        Once you have shared the data server-side, you will be able to access it within any of your pages or
         components. Here's an example of how to access shared data in a layout component.
       </P>
       <TabbedCode
