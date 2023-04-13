@@ -7,7 +7,7 @@ export const meta = {
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
     { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#add-server-entry-point', name: 'Add server entry-point' },
-    { url: '#setup-vite-js', name: 'Setup Vite.js' },
+    { url: '#setup-vite-js', name: 'Setup Vite' },
     { url: '#update-npm-script', name: 'Update npm script' },
     { url: '#running-the-ssr-server', name: 'Running the SSR server' },
     { url: '#client-side-hydration', name: 'Client side hydration' },
@@ -20,12 +20,13 @@ export default function () {
     <>
       <H1>Server-side Rendering (SSR)</H1>
       <P>
-        Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to see your
-        website prior to the JavaScript fully loading. It also makes it easier for search engines to index your site.
+        Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to receive fully rendered HTML
+        when they visit your application. Since fully rendered HTML is served by your application, it's also easier for search engines
+        to index your site.
       </P>
       <Notice>
-        Server-side rendering uses Node.js to render your pages in a background process, and therefore must be available
-        on your server.
+        Server-side rendering uses Node.js to render your pages in a background process; therefore, Node must be available
+        on your server for server-side rendering to function properly.
       </Notice>
       <H2>Laravel starter kits</H2>
       <P>
@@ -46,8 +47,9 @@ export default function () {
       />
       <H2>Install dependencies</H2>
       <P>
-        First, we'll install the additional dependencies required for server-side rendering. This is only necessary for
-        the Vue adapters, so if you're using React or Svelte you can skip this step.
+        If you are not using a Laravel starter kit and would like to manually configure SSR, we'll first install the additional
+        dependencies required for server-side rendering. This is only necessary for the Vue adapters, so you can skip this step if you're
+        using React or Svelte.
       </P>
       <TabbedCode
         examples={[
@@ -81,7 +83,7 @@ export default function () {
           },
         ]}
       />
-      <P>Also, make sure you have the latest version of the Inertia Laravel adapter installed:</P>
+      <P>Then, make sure you have the latest version of the Inertia Laravel adapter installed:</P>
       <CodeBlock
         language="bash"
         children={dedent`
@@ -91,7 +93,7 @@ export default function () {
       <H2>Add server entry-point</H2>
       <P>
         Next, we'll create a <Code>resources/js/ssr.js</Code> file within our Laravel project that will serve as our SSR
-        entry point:
+        entry point.
       </P>
       <CodeBlock
         language="bash"
@@ -101,7 +103,7 @@ export default function () {
       />
       <P>
         This file is going to look very similar to your <Code>resources/js/app.js</Code> file, except it's not going to
-        run in the browser, but rather in Node.js. Here's a complete example:
+        run in the browser, but rather in Node.js. Here's a complete example.
       </P>
       <TabbedCode
         examples={[
@@ -200,13 +202,13 @@ export default function () {
         ]}
       />
       <P>
-        Be sure to add anything that's missing from your <Code>app.js</Code> file that makes sense to run in SSR mode,
-        such as plugins or custom mixins.
+        When creating this file, be sure to add anything that's missing from your <Code>app.js</Code> file that makes
+        sense to run in SSR mode, such as plugins or custom mixins.
       </P>
-      <H2>Setup Vite.js</H2>
+      <H2>Setup Vite</H2>
       <P>
-        Next, we need to update our Vite.js configuration to build our new <Code>ssr.js</Code> file. We can do this by
-        adding a <Code>ssr</Code> property to the Laravel plugin configuration in our <Code>vite.config.js</Code> file:
+        Next, we need to update our Vite configuration to build our new <Code>ssr.js</Code> file. We can do this by
+        adding a <Code>ssr</Code> property to Laravel's Vite plugin configuration in our <Code>vite.config.js</Code> file.
       </P>
       <CodeBlock
         language="diff"
@@ -226,7 +228,7 @@ export default function () {
       <H2>Update npm script</H2>
       <P>
         Next, let's update the <Code>build</Code> script in our <Code>package.json</Code> file to also build our new{' '}
-        <Code>ssr.js</Code> file:
+        <Code>ssr.js</Code> file.
       </P>
       <CodeBlock
         language="diff"
@@ -238,7 +240,7 @@ export default function () {
            },
         `}
       />
-      <P>Now you can build both your client-side and server-side bundles:</P>
+      <P>Now you can build both your client-side and server-side bundles.</P>
       <CodeBlock
         language="bash"
         children={dedent`
@@ -248,7 +250,7 @@ export default function () {
       <H2>Running the SSR server</H2>
       <P>
         Now that you have built both your client-side and server-side bundles, you should be able run the Node-based
-        Inertia SSR server using the following command:
+        Inertia SSR server using the following command.
       </P>
       <CodeBlock
         language="bash"
@@ -257,7 +259,7 @@ export default function () {
         `}
       />
       <P>
-        With the server running, you should now be able to access your app within the browser with server-side rendering
+        With the server running, you should be able to access your app within the browser with server-side rendering
         enabled. In fact, you should be able to disable JavaScript entirely and still navigate around your application.
       </P>
       <H2>Client side hydration</H2>
@@ -369,8 +371,8 @@ export default function () {
       <H2>Hosting setup</H2>
       <P>
         When deploying your SSR enabled app to production, you'll need to build both the client-side (
-        <Code>app.js</Code>) and server-side bundles (<Code>ssr.js</Code>), and then enable the SSR server in a
-        background process:
+        <Code>app.js</Code>) and server-side bundles (<Code>ssr.js</Code>), and then run the SSR server as a
+        background process, typically using a process monitoring tool such as Supervisor.
       </P>
       <CodeBlock
         language="bash"
@@ -378,7 +380,10 @@ export default function () {
           php artisan inertia:start-ssr
         `}
       />
-      <P>To stop the SSR server, for instance when you deploy a new version of your website, run:</P>
+      <P>
+        To stop the SSR server, for instance when you deploy a new version of your website, run. Your process
+        monitor (such as Supervisor) should be responsible for automatically restarting the SSR server after it has stopped.
+      </P>
       <CodeBlock
         language="bash"
         children={dedent`
@@ -391,14 +396,14 @@ export default function () {
         <Code>php artisan inertia:start-ssr</Code> from the root of your app.
       </P>
       <P>
-        Next, whenever you deploy your application, you'll need to automatically restart the SSR server by calling the{' '}
+        Next, whenever you deploy your application, you'll can automatically restart the SSR server by calling the{' '}
         <Code>php artisan inertia:stop-ssr</Code> command. This will stop the existing SSR server, forcing a new one to
         start.
       </P>
       <H2>Heroku</H2>
       <P>
         To run the SSR server on Heroku, update the <Code>web</Code> configuration in your <Code>Procfile</Code> to
-        first run the SSR server before starting your web server.
+        run the SSR server before starting your web server.
       </P>
       <CodeBlock
         language="bash"
