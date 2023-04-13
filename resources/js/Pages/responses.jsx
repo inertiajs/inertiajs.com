@@ -16,7 +16,7 @@ export default function () {
       <H1>Responses</H1>
       <H2>Creating responses</H2>
       <P>
-        Creating an Inertia response is simple. To get started, invoke the <Code>Inertia::render()</Code> within your
+        Creating an Inertia response is simple. To get started, invoke the <Code>Inertia::render()</Code> method within your
         controller or route, providing both the name of the <A href="/pages">JavaScript page component</A> that you wish
         to render, as well as any props (data) for the page.
       </P>
@@ -100,7 +100,7 @@ export default function () {
         ]}
       />
       <P>
-        After invoking the <Code>withViewData</Code> method, you can then access the defined data as you would typically
+        After invoking the <Code>withViewData</Code> method, you can access the defined data as you would typically
         access a Blade template variable.
       </P>
       <TabbedCode
@@ -117,14 +117,13 @@ export default function () {
       <H2>Maximum response size</H2>
       <P>
         To enable client-side history navigation, all Inertia server responses are stored in the browser's history
-        state. It's good to be aware that some browsers impose a size limit on how much data can be saved within the
+        state. However, keep in mind that some browsers impose a size limit on how much data can be saved within the
         history state.
       </P>
       <P>
         For example, <A href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState">Firefox</A> has a size
-        limit of 640k characters and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed this limit. This
-        is generally much more data than you'll ever practically need when building applications, but it's good to be
-        aware of this limit when building an Inertia application.
+        limit of 640k characters and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed this limit. Typically, this
+        is much more data than you'll ever practically need when building applications.
       </P>
     </>
   )
