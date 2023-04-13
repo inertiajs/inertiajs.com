@@ -176,8 +176,8 @@ export default function () {
       </P>
       <P>
         Instead, your server-side route / controller typically issues a <A href="/redirects">redirect</A> response. And,
-        of course, there is nothing stopping you from redirecting the user right back to the page they were previously
-        on. In this way, handling Inertia form submissions server-side feels very similar to handling classic HTML form
+        Of course, there is nothing stopping you from redirecting the user right back to the page they were previously
+        on. Using this approach, handling Inertia form submissions feels very similar to handling classic HTML form
         submissions.
       </P>
       <TabbedCode
@@ -472,7 +472,7 @@ export default function () {
         ]}
       />
       <P>
-        If you need to modify the form data before it's sent to the server, you can do this via the{' '}
+        If you need to modify the form data before it's sent to the server, you can do so via the{' '}
         <Code>transform()</Code> method.
       </P>
       <TabbedCode
@@ -616,7 +616,7 @@ export default function () {
         ]}
       />
       <P>
-        In the event there are form errors, they are available via the <Code>errors</Code> property. When building
+        If there are form validation errors, they are available via the <Code>errors</Code> property. When building
         Laravel powered Inertia applications, form errors will automatically be populated when your application throws
         instances of <Code>ValidationException</Code>, such as when using <Code>{'$request->validate()'}</Code>.
       </P>
@@ -715,7 +715,7 @@ export default function () {
         ]}
       />
       <P>
-        If you're using a client-side input validation libraries or do additional manual validation, you can also set
+        If you're using a client-side input validation libraries or do client-side validation manually, you can set
         your own errors on the form using the <Code>setErrors()</Code> method.
       </P>
       <TabbedCode
