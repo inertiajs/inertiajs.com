@@ -339,7 +339,7 @@ export default function () {
         use the <Code>head-key</Code> property, which will make sure the tag is only rendered once. This is illustrated
         in the example above for the <Code>{'<meta name="description">'}</Code> tag.
       </P>
-      <P>The code example below contains the HTML created by the example above.</P>
+      <P>The code example above will render the following HTML.</P>
       <CodeBlock
         language="html"
         children={dedent`
