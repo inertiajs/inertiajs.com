@@ -17,7 +17,7 @@ export default function () {
     <>
       <H1>The protocol</H1>
       <P>
-        The following is a detailed spec of the Inertia protocol. Be sure to read the{' '}
+        This page contains a detailed specification of the Inertia protocol. Be sure to read the{' '}
         <A href="/how-it-works">how it works</A> page first for a high-level overview.
       </P>
       <H2>HTML responses</H2>
@@ -68,7 +68,7 @@ export default function () {
       </Notice>
       <H2>Inertia responses</H2>
       <P>
-        Once an Inertia app has been booted, all subsequent requests to the site are made via XHR with a{' '}
+        Once the Inertia app has been booted, all subsequent requests to the site are made via XHR with a{' '}
         <Code>X-Inertia</Code> header set to <Code>true</Code>. This header indicates that the request is being made by
         Inertia and isn't a standard full-page visit.
       </P>
@@ -163,7 +163,7 @@ export default function () {
         Whenever an Inertia request is made, Inertia will include the current asset version in the{' '}
         <Code>X-Inertia-Version</Code> header. When the server receives the request, it compares the asset version
         provided in the <Code>X-Inertia-Version</Code> header with the current asset version. This is typically handled
-        in a middleware layer.
+        in the middleware layer of your server-side framework.
       </P>
       <P>
         If the asset versions are the same, the request simply continues as expected. However, if the asset versions are
@@ -177,8 +177,8 @@ export default function () {
         redirect occurs after one of these requests.
       </P>
       <P>
-        Finally, in the event that flash session data exists when a <Code>409 Conflict</Code> response occurs, the
-        server will automatically reflash this data.
+        If "flash" session data exists when a <Code>409 Conflict</Code> response occurs, Inertia's
+        server-side framework adapters will automatically reflash this data.
       </P>
       <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
         <div className="p-6 font-mono text-sm text-white">
