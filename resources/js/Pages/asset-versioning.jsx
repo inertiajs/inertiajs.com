@@ -17,7 +17,7 @@ export default function () {
       <P>
         One common challenge when building single-page apps is refreshing site assets when they've been changed.
         Thankfully, Inertia makes this easy by optionally tracking the current version of your site assets. When an
-        asset changes, Inertia will automatically make a hard page visit instead of a XHR visit on the next request.
+        asset changes, Inertia will automatically make a full page visit instead of a XHR visit on the next request.
       </P>
       <H2>Configuration</H2>
       <P>
@@ -44,7 +44,7 @@ export default function () {
               }
             `,
             description:
-              'The HandleInertiaRequests middleware provides a sensible default for Laravel applications, which uses either a hash of the "app.asset_url" configuration value or the mix-manifest.json file.',
+              'The HandleInertiaRequests middleware provides a sensible default for Laravel applications, which uses either a hash of the "app.asset_url" configuration value or the "mix-manifest.json" file. When using Vite, Inertia will use a hash of the "build/manifest.json" file.',
           },
         ]}
       />
@@ -74,7 +74,7 @@ export default function () {
       <P>
         If you're using Laravel Mix, you can do this automatically by enabling{' '}
         <A href="https://laravel.com/docs/mix#versioning-and-cache-busting">versioning</A> in your{' '}
-        <Code>webpack.mix.js</Code> file.
+        <Code>webpack.mix.js</Code> file. When using Laravel's Vite integration, asset versioning is done automatically.
       </P>
     </>
   )
