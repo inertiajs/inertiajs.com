@@ -24,7 +24,7 @@ export default function () {
       <P>
         To create links to other pages within an Inertia app, you will typically use the Inertia <Code>{'<Link>'}</Code>{' '}
         component. This component is a light wrapper around a standard anchor <Code>{'<a>'}</Code> link that intercepts
-        click events and prevents full page reloads from occurring. This is{' '}
+        click events and prevents full page reloads. This is{' '}
         <A href="/how-it-works">how Inertia provides a single-page app experience</A> once your application has been
         loaded.
       </P>
@@ -235,8 +235,8 @@ export default function () {
       />
       <H2>Custom headers</H2>
       <P>
-        The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, you should note
-        that the headers Inertia uses internally to communicate its state to the server take priority and therefore
+        The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, the headers
+        Inertia uses internally to communicate its state to the server take priority and therefore
         cannot be overwritten.
       </P>
       <TabbedCode
@@ -335,8 +335,8 @@ export default function () {
       <P>
         You can preserve a page component's local state using the <Code>preserve-state</Code> attribute. This will
         prevent a page component from fully re-rendering. The <Code>preserve-state</Code> attribute is especially
-        helpful with forms, since you can avoid manually repopulating input fields and can also maintain a focused
-        input.
+        helpful on pages that contain forms, since you can avoid manually repopulating input fields and can also
+        maintain a focused input.
       </P>
       <TabbedCode
         examples={[
