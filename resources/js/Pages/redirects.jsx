@@ -15,7 +15,7 @@ export default function () {
     <>
       <H1>Redirects</H1>
       <P>
-        When making a non-GET Inertia request via <Code>{`<Link>`}</Code> or manually, you should ensure that you always
+        When making a non-GET Inertia request manually or via a <Code>{`<Link>`}</Code> element, you should ensure that you always
         respond with a proper Inertia redirect response.
       </P>
       <P>
