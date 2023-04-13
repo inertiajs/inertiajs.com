@@ -30,7 +30,7 @@ export default function () {
         these frameworks.</strong>
       </P>
       <P>
-        If you need to handle CSRF protection manually, one approach is to include the CSRF token as a prop on every
+        However, if you need to handle CSRF protection manually, one approach is to include the CSRF token as a prop on every
         response. You can then use the token when making Inertia requests.
       </P>
       <TabbedCode
