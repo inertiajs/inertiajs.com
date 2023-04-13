@@ -397,7 +397,7 @@ export default function () {
         ]}
       />
       <P>
-        For convenience, if you register your event listener using <Code>router.on()</Code>, you can also cancel the
+        For convenience, if you register your event listener using <Code>router.on()</Code>, you can cancel the
         event by returning <Code>false</Code> from the listener.
       </P>
       <TabbedCode
@@ -775,7 +775,7 @@ export default function () {
       <H2>Invalid</H2>
       <P>
         The <Code>invalid</Code> event fires when a non-Inertia response is received from the server, such as an{' '}
-        <Code>html</Code> or <Code>json</Code> response. A valid Inertia response is a response that has the{' '}
+        HTML or vanilla JSON response. A valid Inertia response is a response that has the{' '}
         <Code>X-Inertia</Code> header set to <Code>true</Code> with a <Code>json</Code> payload containing{' '}
         <A href="/the-protocol#the-page-object">the page object</A>.
       </P>
@@ -836,7 +836,7 @@ export default function () {
         ]}
       />
       <P>
-        Cancel the <Code>invalid</Code> event to prevent Inertia from showing the non-Inertia response modal.
+        You may cancel the <Code>invalid</Code> event to prevent Inertia from showing the non-Inertia response modal.
       </P>
       <TabbedCode
         examples={[
