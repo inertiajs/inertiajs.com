@@ -286,7 +286,7 @@ export default function () {
               import { useForm } from '@inertiajs/vue3'
 
               const form = useForm('CreateUser', data)
-              const form = useForm(\`EditUser:\${user.id}\`, data)
+              const form = useForm(\`EditUser:\${props.user.id}\`, data)
             `,
           },
           {
@@ -318,7 +318,7 @@ export default function () {
         the data on page load.
       </P>
       <P>
-        However, it's possible to also manage this manually using the underlying <Code>remember()</Code> and{' '}
+        However, it's also possible to manage this manually using the underlying <Code>remember()</Code> and{' '}
         <Code>restore()</Code> methods in Inertia.
       </P>
       <TabbedCode
