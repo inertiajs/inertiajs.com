@@ -25,8 +25,13 @@ export default function () {
         <Code>PATCH</Code>, and <Code>DELETE</Code> requests.
       </P>
       <P>
-        One solution is to include the CSRF token as a prop on every response. You can then use the token when making
-        Inertia requests.
+        Of course, as already discussed, some server-side frameworks such as Laravel automatically handle the inclusion
+        of the CSRF token when making requests. <strong>Therefore, no additional configuration is required when using one of
+        these frameworks.</strong>
+      </P>
+      <P>
+        If you need to handle CSRF protection manually, one approach is to include the CSRF token as a prop on every
+        response. You can then use the token when making Inertia requests.
       </P>
       <TabbedCode
         examples={[
@@ -101,11 +106,6 @@ export default function () {
         The easiest way to implement this is using server-side middleware. Simply include the <Code>XSRF-TOKEN</Code>{' '}
         cookie on each response, and then verify the token using the <Code>X-XSRF-TOKEN</Code> header sent in the
         requests from axios.
-      </P>
-      <P>
-        Of course, as already discussed, some server-side frameworks such as Laravel automatically handle the inclusion
-        of the CSRF token when making requests. Therefore, no additional configuration is required when using one of
-        these frameworks.
       </P>
       <H2>Handling mismatches</H2>
       <P>
