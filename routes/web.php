@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Inertia\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('{page?}', function ($page = 'index') {
+Route::get('{page?}', function (string $page = 'index'): Response {
     if (! file_exists(resource_path("js/Pages/$page.jsx"))) {
         App::abort(404);
     }
