@@ -125,8 +125,10 @@ export default function () {
               <script setup>
               import { computed } from 'vue'
               import { usePage } from '@inertiajs/vue3'
-
-              const user = computed(() => usePage().props.auth.user)
+              
+              const page = usePage()
+              
+              const user = computed(() => page.props.auth.user)
               </script>
 
               <template>
