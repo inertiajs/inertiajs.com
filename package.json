@@ -5,7 +5,7 @@
         "build": "vite build && vite build --ssr",
         "heroku-postbuild": "npm run build"
     },
-    "dependencies": {
+    "devDependencies": {
         "@docsearch/react": "^3.3.0",
         "@inertiajs/react": "^1.0.0",
         "@vitejs/plugin-react": "^3.0.1",
