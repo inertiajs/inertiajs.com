@@ -368,6 +368,33 @@ export default function () {
           },
         ]}
       />
+     <Svelte>
+        <P>You must also modify the app.js by removing the props when creating the app instance</P>
+        <TabbedCode
+        examples={[
+          {
+            name: 'Svelte',
+            language: 'diff',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/svelte'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                  return pages[`./Pages/${name}.svelte`]
+                },
+          -     setup({ el, App, props }) {
+          -       new App({ target: el, props })
+          -     },
+          +     setup({ el, App }) {
+          +       new App({ target: el, hydrate: true })
+          +     },
+              })
+            `,
+          },
+        ]}
+      />
+      </Svelte>
       <H2>Hosting setup</H2>
       <P>
         When deploying your SSR enabled app to production, you'll need to build both the client-side (
