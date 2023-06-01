@@ -378,20 +378,20 @@ export default function () {
               name: 'Svelte',
               language: 'diff',
               code: dedent`
-              import { createInertiaApp } from '@inertiajs/svelte'
+                import { createInertiaApp } from '@inertiajs/svelte'
 
-              createInertiaApp({
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-                  return pages[\`./Pages/${name}.svelte\`]
-                },
-          -     setup({ el, App, props }) {
-          -       new App({ target: el, props })
-          -     },
-          +     setup({ el, App }) {
-          +       new App({ target: el, hydrate: true })
-          +     },
-              })
+                createInertiaApp({
+                  resolve: name => {
+                    const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                    return pages[\`./Pages/${name}.svelte\`]
+                  },
+             -   setup({ el, App, props }) {
+             -     new App({ target: el, props })
+             -   },
+             +   setup({ el, App }) {
+             +     new App({ target: el, hydrate: true })
+             +   },
+                })
             `,
             },
           ]}
