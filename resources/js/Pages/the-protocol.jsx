@@ -177,8 +177,8 @@ export default function () {
         redirect occurs after one of these requests.
       </P>
       <P>
-        If "flash" session data exists when a <Code>409 Conflict</Code> response occurs, Inertia's
-        server-side framework adapters will automatically reflash this data.
+        If "flash" session data exists when a <Code>409 Conflict</Code> response occurs, Inertia's server-side framework
+        adapters will automatically reflash this data.
       </P>
       <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
         <div className="p-6 font-mono text-sm text-white">

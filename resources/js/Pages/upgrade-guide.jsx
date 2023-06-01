@@ -261,8 +261,8 @@ export default function () {
         ]}
       />
       <Notice>
-        It is no longer possible to manually configure Inertia using the <Code color="orange">App</Code> export. Instead, you
-        should use the <Code color="orange">createInertiaApp()</Code> helper. See the{' '}
+        It is no longer possible to manually configure Inertia using the <Code color="orange">App</Code> export.
+        Instead, you should use the <Code color="orange">createInertiaApp()</Code> helper. See the{' '}
         <A href="/client-side-setup#initialize-the-inertia-app">client-side setup</A> documentation for more
         information.
       </Notice>
@@ -317,8 +317,8 @@ export default function () {
         `}
       />
       <P>
-        Finally, if you have defined any progress customizations, you can move them to the <Code>progress</Code> property of
-        the <Code>createInertiaApp()</Code> helper.
+        Finally, if you have defined any progress customizations, you can move them to the <Code>progress</Code>{' '}
+        property of the <Code>createInertiaApp()</Code> helper.
       </P>
       <CodeBlock
         language="js"

@@ -16,9 +16,8 @@ export default function () {
       <H1>Partial reloads</H1>
       <P>
         When making visits to the same page you are already on, it's not always necessary to re-fetch all of the page's
-        data from the server. In fact, selecting only a subset of the data can be a helpful
-        performance optimization if it's acceptable that some page data becomes stale. Inertia makes this possible via
-        its "partial reload" feature.
+        data from the server. In fact, selecting only a subset of the data can be a helpful performance optimization if
+        it's acceptable that some page data becomes stale. Inertia makes this possible via its "partial reload" feature.
       </P>
       <P>
         As an example, consider a "user index" page that includes a list of users, as well as an option to filter the

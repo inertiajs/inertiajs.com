@@ -15,8 +15,8 @@ export default function () {
       <H1>Error handling</H1>
       <H2>Development</H2>
       <P>
-        One of the advantages to working with a robust server-side framework is the built-in exception handling you get for
-        free. For example, Laravel ships with <A href="https://github.com/facade/ignition">Ignition</A>, a beautiful
+        One of the advantages to working with a robust server-side framework is the built-in exception handling you get
+        for free. For example, Laravel ships with <A href="https://github.com/facade/ignition">Ignition</A>, a beautiful
         error reporting tool which displays a nicely formatted stack trace in local development.
       </P>
       <P>
@@ -80,9 +80,9 @@ export default function () {
         ]}
       />
       <P>
-        You may have noticed we're returning an <Code>Error</Code> page component in the example above. You'll need to actually
-        create this component, which will serve as the generic error page for your application.
-        Here's an example error component you can use as a starting point.
+        You may have noticed we're returning an <Code>Error</Code> page component in the example above. You'll need to
+        actually create this component, which will serve as the generic error page for your application. Here's an
+        example error component you can use as a starting point.
       </P>
       <TabbedCode
         examples={[

@@ -138,8 +138,8 @@ export default function () {
         ]}
       />
       <P>
-        However, it's generally more convenient to use one of Inertia's shortcut request methods. These methods
-        share all the same options as <Code>router.visit()</Code>.
+        However, it's generally more convenient to use one of Inertia's shortcut request methods. These methods share
+        all the same options as <Code>router.visit()</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -202,9 +202,9 @@ export default function () {
         ]}
       />
       <P>
-        The <Code>reload()</Code> method is a convenient, shorthand method that automatically visits the current page with{' '}
-        <Code>preserveState</Code> and <Code>preserveScroll</Code> both set to <Code>true</Code>, making it the perfect
-        method to invoke when you just want to reload the current page's data.
+        The <Code>reload()</Code> method is a convenient, shorthand method that automatically visits the current page
+        with <Code>preserveState</Code> and <Code>preserveScroll</Code> both set to <Code>true</Code>, making it the
+        perfect method to invoke when you just want to reload the current page's data.
       </P>
       <H2>Method</H2>
       <P>
@@ -450,8 +450,8 @@ export default function () {
       <H2>File uploads</H2>
       <P>
         When making visits / requests that include files, Inertia will automatically convert the request data into a{' '}
-        <Code>FormData</Code> object. If you would like the request to always use a <Code>FormData</Code> object, you may
-        use the <Code>forceFormData</Code> option.
+        <Code>FormData</Code> object. If you would like the request to always use a <Code>FormData</Code> object, you
+        may use the <Code>forceFormData</Code> option.
       </P>
       <TabbedCode
         examples={[

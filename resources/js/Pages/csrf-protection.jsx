@@ -26,12 +26,12 @@ export default function () {
       </P>
       <P>
         Of course, as already discussed, some server-side frameworks such as Laravel automatically handle the inclusion
-        of the CSRF token when making requests. <strong>Therefore, no additional configuration is required when using one of
-        these frameworks.</strong>
+        of the CSRF token when making requests.{' '}
+        <strong>Therefore, no additional configuration is required when using one of these frameworks.</strong>
       </P>
       <P>
-        However, if you need to handle CSRF protection manually, one approach is to include the CSRF token as a prop on every
-        response. You can then use the token when making Inertia requests.
+        However, if you need to handle CSRF protection manually, one approach is to include the CSRF token as a prop on
+        every response. You can then use the token when making Inertia requests.
       </P>
       <TabbedCode
         examples={[

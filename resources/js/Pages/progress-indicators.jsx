@@ -14,9 +14,9 @@ export default function () {
     <>
       <H1>Progress indicators</H1>
       <P>
-        Since Inertia requests are made via XHR, there would typically not be a browser loading indicator when navigating from one
-        page to another. To solve this, Inertia displays a progress indicator at the top of the page whenever you make an
-        Inertia visit.
+        Since Inertia requests are made via XHR, there would typically not be a browser loading indicator when
+        navigating from one page to another. To solve this, Inertia displays a progress indicator at the top of the page
+        whenever you make an Inertia visit.
       </P>
       <P>
         Of course, if you prefer, you can disable Inertia's default loading indicator and provide your own custom
@@ -78,9 +78,7 @@ export default function () {
           })
         `}
       />
-      <P>
-        Next, install the NProgress library.
-      </P>
+      <P>Next, install the NProgress library.</P>
       <CodeBlock
         language="bash"
         children={dedent`

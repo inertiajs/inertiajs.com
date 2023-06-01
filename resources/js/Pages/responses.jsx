@@ -16,9 +16,9 @@ export default function () {
       <H1>Responses</H1>
       <H2>Creating responses</H2>
       <P>
-        Creating an Inertia response is simple. To get started, invoke the <Code>Inertia::render()</Code> method within your
-        controller or route, providing both the name of the <A href="/pages">JavaScript page component</A> that you wish
-        to render, as well as any props (data) for the page.
+        Creating an Inertia response is simple. To get started, invoke the <Code>Inertia::render()</Code> method within
+        your controller or route, providing both the name of the <A href="/pages">JavaScript page component</A> that you
+        wish to render, as well as any props (data) for the page.
       </P>
       <P>
         In the example below, we will pass a single prop (<Code>event</Code>) which contains four attributes (
@@ -122,8 +122,8 @@ export default function () {
       </P>
       <P>
         For example, <A href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState">Firefox</A> has a size
-        limit of 640k characters and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed this limit. Typically, this
-        is much more data than you'll ever practically need when building applications.
+        limit of 640k characters and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed this limit.
+        Typically, this is much more data than you'll ever practically need when building applications.
       </P>
     </>
   )

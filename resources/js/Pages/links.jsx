@@ -236,8 +236,8 @@ export default function () {
       <H2>Custom headers</H2>
       <P>
         The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, the headers
-        Inertia uses internally to communicate its state to the server take priority and therefore
-        cannot be overwritten.
+        Inertia uses internally to communicate its state to the server take priority and therefore cannot be
+        overwritten.
       </P>
       <TabbedCode
         examples={[

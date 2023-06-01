@@ -20,13 +20,13 @@ export default function () {
     <>
       <H1>Server-side Rendering (SSR)</H1>
       <P>
-        Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to receive fully rendered HTML
-        when they visit your application. Since fully rendered HTML is served by your application, it's also easier for search engines
-        to index your site.
+        Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to receive fully
+        rendered HTML when they visit your application. Since fully rendered HTML is served by your application, it's
+        also easier for search engines to index your site.
       </P>
       <Notice>
-        Server-side rendering uses Node.js to render your pages in a background process; therefore, Node must be available
-        on your server for server-side rendering to function properly.
+        Server-side rendering uses Node.js to render your pages in a background process; therefore, Node must be
+        available on your server for server-side rendering to function properly.
       </Notice>
       <H2>Laravel starter kits</H2>
       <P>
@@ -47,9 +47,9 @@ export default function () {
       />
       <H2>Install dependencies</H2>
       <P>
-        If you are not using a Laravel starter kit and would like to manually configure SSR, we'll first install the additional
-        dependencies required for server-side rendering. This is only necessary for the Vue adapters, so you can skip this step if you're
-        using React or Svelte.
+        If you are not using a Laravel starter kit and would like to manually configure SSR, we'll first install the
+        additional dependencies required for server-side rendering. This is only necessary for the Vue adapters, so you
+        can skip this step if you're using React or Svelte.
       </P>
       <TabbedCode
         examples={[
@@ -208,7 +208,8 @@ export default function () {
       <H2>Setup Vite</H2>
       <P>
         Next, we need to update our Vite configuration to build our new <Code>ssr.js</Code> file. We can do this by
-        adding a <Code>ssr</Code> property to Laravel's Vite plugin configuration in our <Code>vite.config.js</Code> file.
+        adding a <Code>ssr</Code> property to Laravel's Vite plugin configuration in our <Code>vite.config.js</Code>{' '}
+        file.
       </P>
       <CodeBlock
         language="diff"
@@ -400,8 +401,8 @@ export default function () {
       <H2>Hosting setup</H2>
       <P>
         When deploying your SSR enabled app to production, you'll need to build both the client-side (
-        <Code>app.js</Code>) and server-side bundles (<Code>ssr.js</Code>), and then run the SSR server as a
-        background process, typically using a process monitoring tool such as Supervisor.
+        <Code>app.js</Code>) and server-side bundles (<Code>ssr.js</Code>), and then run the SSR server as a background
+        process, typically using a process monitoring tool such as Supervisor.
       </P>
       <CodeBlock
         language="bash"
@@ -410,8 +411,8 @@ export default function () {
         `}
       />
       <P>
-        To stop the SSR server, for instance when you deploy a new version of your website, run. Your process
-        monitor (such as Supervisor) should be responsible for automatically restarting the SSR server after it has stopped.
+        To stop the SSR server, for instance when you deploy a new version of your website, run. Your process monitor
+        (such as Supervisor) should be responsible for automatically restarting the SSR server after it has stopped.
       </P>
       <CodeBlock
         language="bash"
@@ -431,8 +432,8 @@ export default function () {
       </P>
       <H2>Heroku</H2>
       <P>
-        To run the SSR server on Heroku, update the <Code>web</Code> configuration in your <Code>Procfile</Code> to
-        run the SSR server before starting your web server.
+        To run the SSR server on Heroku, update the <Code>web</Code> configuration in your <Code>Procfile</Code> to run
+        the SSR server before starting your web server.
       </P>
       <CodeBlock
         language="bash"

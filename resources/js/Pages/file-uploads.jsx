@@ -221,8 +221,8 @@ export default function () {
       <H2>Multipart limitations</H2>
       <P>
         Uploading files using a <Code>multipart/form-data</Code> request is not natively supported in some server-side
-        frameworks when using the <Code>PUT</Code>,<Code>PATCH</Code>, or <Code>DELETE</Code> HTTP methods. The simplest workaround for this
-        limitation is to simply upload files using a <Code>POST</Code> request instead.
+        frameworks when using the <Code>PUT</Code>,<Code>PATCH</Code>, or <Code>DELETE</Code> HTTP methods. The simplest
+        workaround for this limitation is to simply upload files using a <Code>POST</Code> request instead.
       </P>
       <P>
         However, some frameworks, such as{' '}

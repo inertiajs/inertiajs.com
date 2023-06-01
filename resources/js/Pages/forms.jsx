@@ -715,8 +715,8 @@ export default function () {
         ]}
       />
       <P>
-        If you're using a client-side input validation libraries or do client-side validation manually, you can set
-        your own errors on the form using the <Code>setErrors()</Code> method.
+        If you're using a client-side input validation libraries or do client-side validation manually, you can set your
+        own errors on the form using the <Code>setErrors()</Code> method.
       </P>
       <TabbedCode
         examples={[

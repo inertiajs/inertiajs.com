@@ -27,8 +27,9 @@ export default function () {
       </P>
       <H2>Creating pages</H2>
       <P>
-        Inertia pages are simply JavaScript components. If you have ever written a Vue, React, or Svelte component, you will feel
-        right at home. As you can see in the example below, pages receive data from your application's controllers as props.
+        Inertia pages are simply JavaScript components. If you have ever written a Vue, React, or Svelte component, you
+        will feel right at home. As you can see in the example below, pages receive data from your application's
+        controllers as props.
       </P>
       <TabbedCode
         examples={[
@@ -261,8 +262,8 @@ export default function () {
       </P>
       <H2>Persistent layouts</H2>
       <P>
-        While it's simple to implement layouts as children of page components, it forces the layout instance to
-        be destroyed and recreated between visits. This means you cannot have persistent layout state when navigating
+        While it's simple to implement layouts as children of page components, it forces the layout instance to be
+        destroyed and recreated between visits. This means you cannot have persistent layout state when navigating
         between pages.
       </P>
       <P>
