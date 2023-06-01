@@ -368,20 +368,22 @@ export default function () {
           },
         ]}
       />
-     <Svelte>
-        <P>You must also modify the app.js by removing the props when creating the app instance</P>
+      <Svelte>
+        <P>
+          You'll also need to enable hydration in your <Code>app.js</Code> file:
+        </P>
         <TabbedCode
-        examples={[
-          {
-            name: 'Svelte',
-            language: 'diff',
-            code: dedent`
+          examples={[
+            {
+              name: 'Svelte',
+              language: 'diff',
+              code: dedent`
               import { createInertiaApp } from '@inertiajs/svelte'
 
               createInertiaApp({
                 resolve: name => {
                   const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-                  return pages[`./Pages/${name}.svelte`]
+                  return pages[\`./Pages/${name}.svelte\`]
                 },
           -     setup({ el, App, props }) {
           -       new App({ target: el, props })
@@ -391,9 +393,9 @@ export default function () {
           +     },
               })
             `,
-          },
-        ]}
-      />
+            },
+          ]}
+        />
       </Svelte>
       <H2>Hosting setup</H2>
       <P>
