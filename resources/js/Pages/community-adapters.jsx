@@ -59,9 +59,6 @@ export default function () {
           <A href="https://github.com/cherifGsoul/inertia-psr15">PSR-15</A>
         </Li>
         <Li>
-          <A href="https://github.com/hotmeteor/inertia-statamic">Statamic</A>
-        </Li>
-        <Li>
           <A href="https://github.com/rompetomp/inertia-bundle">Symfony</A>
         </Li>
         <Li>
