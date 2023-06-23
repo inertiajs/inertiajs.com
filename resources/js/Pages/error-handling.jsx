@@ -25,7 +25,7 @@ export default function () {
       </P>
       <P>
         Inertia solves this issue by showing all non-Inertia responses in a modal. This means you get the same beautiful
-        error-reporting your accustomed to, even though you've made that request over XHR.
+        error-reporting you're accustomed to, even though you've made that request over XHR.
       </P>
       <div className="relative my-6 overflow-hidden rounded bg-gray-500" style={{ paddingTop: '80.5%' }}>
         <div className="absolute inset-0 flex h-full w-full items-center justify-center text-sm">Loading&hellip;</div>
