@@ -363,7 +363,7 @@ export default function () {
       />
       <H2>Simplified usePage</H2>
       <P>
-        In the Vue 3 adapter, we simplified the <Code>usePage()</Code> hook to no longer require adding{' '}
+        In both Vue 2 and Vue 3 adapters, we simplified the <Code>usePage()</Code> hook to no longer require adding{' '}
         <Code>.value</Code> after the <Code>component</Code>, <Code>props</Code>, <Code>url</Code> and{' '}
         <Code>version</Code> properties.
       </P>
