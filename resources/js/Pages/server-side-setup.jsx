@@ -9,6 +9,7 @@ export const meta = {
     { url: '#root-template', name: 'Root template' },
     { url: '#middleware', name: 'Middleware' },
     { url: '#creating-responses', name: 'Creating responses' },
+    { url: '#defining-a-root-element', name: 'Defining a root element' },
   ],
 }
 
@@ -139,6 +140,31 @@ export default function () {
                       ]);
                   }
               }
+            `,
+          },
+        ]}
+      />
+      <H2>Defining a root element</H2>
+      <P>
+        By default, Inertia assumes that your application's root template has a root element with an <Code>id</Code> of{' '}
+        <Code>app</Code>. If your application's root element has a different <Code>id</Code>, you need to update a code
+        on both the server side and the client side. For instance, if the <Code>id</Code> is <Code>my-app</Code>, you
+        should write <Code>@inertia('my-app')</Code> on the server side. Also, you will need to make the corresponding
+        changes <A href="/client-side-setup#defining-a-root-element">on the client side.</A>
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'markup',
+            code: dedent`
+              <!DOCTYPE html>
+              <html>
+                ...
+                <body>
+                  @inertia('my-app')
+                </body>
+              </html>
             `,
           },
         ]}

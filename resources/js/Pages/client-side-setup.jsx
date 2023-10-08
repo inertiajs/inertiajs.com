@@ -223,9 +223,9 @@ export default function () {
       </P>
       <H2>Defining a root element</H2>
       <P>
-        By default, Inertia assumes that your application's root template has a root element with an <Code>id</Code> of{' '}
-        <Code>app</Code>. If your application's root element has a different <Code>id</Code>, you can provide it using
-        the <Code>id</Code> property.
+        Changing the id requires update to both server-side and client-side code. For more information, please check{' '}
+        <A href="server-side-setup#defining-a-root-element">server-side installation page.</A> Setting on the
+        client-side, you can provide it using the <Code>id</Code> property.
       </P>
       <CodeBlock
         language="js"
