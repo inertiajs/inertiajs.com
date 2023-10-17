@@ -426,7 +426,7 @@ export default function () {
         <Code>php artisan inertia:start-ssr</Code> from the root of your app.
       </P>
       <P>
-        Next, whenever you deploy your application, you'll can automatically restart the SSR server by calling the{' '}
+        Next, whenever you deploy your application, you can automatically restart the SSR server by calling the{' '}
         <Code>php artisan inertia:stop-ssr</Code> command. This will stop the existing SSR server, forcing a new one to
         start.
       </P>
