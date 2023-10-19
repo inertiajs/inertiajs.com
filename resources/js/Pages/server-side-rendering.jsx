@@ -411,8 +411,9 @@ export default function () {
         `}
       />
       <P>
-        To stop the SSR server, for instance when you deploy a new version of your website, run. Your process monitor
-        (such as Supervisor) should be responsible for automatically restarting the SSR server after it has stopped.
+        To stop the SSR server, for instance when you deploy a new version of your website, run the following command.
+        Your process monitor (such as Supervisor) should be responsible for automatically restarting the SSR server
+        after it has stopped.
       </P>
       <CodeBlock
         language="bash"
