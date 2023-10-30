@@ -11,7 +11,7 @@ export const meta = {
     { url: '#update-npm-script', name: 'Update npm script' },
     { url: '#running-the-ssr-server', name: 'Running the SSR server' },
     { url: '#client-side-hydration', name: 'Client side hydration' },
-    { url: '#hosting-setup', name: 'Hosting setup' },
+    { url: '#deployment', name: 'Deployment' },
   ],
 }
 
@@ -83,7 +83,7 @@ export default function () {
           },
         ]}
       />
-      <P>Then, make sure you have the latest version of the Inertia Laravel adapter installed:</P>
+      <P>Then, make sure you have the latest version of the Inertia Laravel adapter installed.</P>
       <CodeBlock
         language="bash"
         children={dedent`
@@ -398,7 +398,7 @@ export default function () {
           ]}
         />
       </Svelte>
-      <H2>Hosting setup</H2>
+      <H2>Deployment</H2>
       <P>
         When deploying your SSR enabled app to production, you'll need to build both the client-side (
         <Code>app.js</Code>) and server-side bundles (<Code>ssr.js</Code>), and then run the SSR server as a background
@@ -411,8 +411,8 @@ export default function () {
         `}
       />
       <P>
-        To stop the SSR server, for instance when you deploy a new version of your website, run. Your process monitor
-        (such as Supervisor) should be responsible for automatically restarting the SSR server after it has stopped.
+        To stop the SSR server, for instance when you deploy a new version of your website, you may utilize the <Code>inertia:stop-ssr</Code> Artisan command.
+        Your process monitor (such as Supervisor) should be responsible for automatically restarting the SSR server after it has stopped.
       </P>
       <CodeBlock
         language="bash"
@@ -424,11 +424,12 @@ export default function () {
       <P>
         To run the SSR server on Forge, you should create a new daemon that runs{' '}
         <Code>php artisan inertia:start-ssr</Code> from the root of your app.
+        Or, you may utilize the built-in Inertia integration from your Forge application's management dashboard.
       </P>
       <P>
-        Next, whenever you deploy your application, you'll can automatically restart the SSR server by calling the{' '}
+        Next, whenever you deploy your application, you can automatically restart the SSR server by calling the{' '}
         <Code>php artisan inertia:stop-ssr</Code> command. This will stop the existing SSR server, forcing a new one to
-        start.
+        be started by your process monitor.
       </P>
       <H2>Heroku</H2>
       <P>
