@@ -24,7 +24,7 @@ export default function () {
       <H2>Scroll preservation</H2>
       <P>
         Sometimes it's desirable to prevent the default scroll resetting behavior when making visits. You can disable
-        this behaviour using the <Code>preserveScroll</Code> option when <A href="/requests">manually making visits</A>.
+        this behaviour using the <Code>preserveScroll</Code> option when <A href="/manual-visits">manually making visits</A>.
       </P>
       <CodeBlock
         language="js"
