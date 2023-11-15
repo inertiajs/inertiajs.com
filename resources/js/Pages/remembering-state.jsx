@@ -366,7 +366,7 @@ export default function () {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'
+              import { router } from '@inertiajs/core'
 
               // Save local component state to history state...
               router.remember(data, 'my-key')
