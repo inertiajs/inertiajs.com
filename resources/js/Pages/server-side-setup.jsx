@@ -19,7 +19,7 @@ export default function () {
       <P>
         The first step when installing Inertia is to configure your server-side framework. Inertia maintains an official
         server-side adapter for <A href="https://laravel.com/">Laravel</A>. For other frameworks, please see the{' '}
-        <A href="/community-adapters">community adapters</A>.
+        <a href="https://github.com/innocenzi/awesome-inertiajs#server-side">community adapters</a>.
       </P>
       <P>
         Inertia is fine-tuned for Laravel, so the documentation examples on this website utilize Laravel. For examples
