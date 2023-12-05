@@ -76,7 +76,7 @@ export default function () {
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
-        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">
+        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.jsx">
           pull request
         </A>
         .
