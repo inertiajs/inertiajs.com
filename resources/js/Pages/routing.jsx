@@ -88,14 +88,14 @@ export default function () {
             name: 'Vue 2',
             language: 'js',
             code: dedent`
-              Vue.prototype.$route = route
+              Vue.prototype.route = route
             `,
           },
           {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              app.config.globalProperties.$route = route
+              app.config.globalProperties.route = route
             `,
           },
         ]}
@@ -103,7 +103,7 @@ export default function () {
       <CodeBlock
         language="html"
         children={dedent`
-          <Link :href="$route('users.create')">Create User</Link>
+          <Link :href="route('users.create')">Create User</Link>
         `}
       />
     </>
