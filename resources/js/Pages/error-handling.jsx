@@ -41,8 +41,8 @@ export default function () {
         default exception handler to return a custom error page.
       </P>
       <P>
-        When building Laravel applications, you can accomplish this by extending the <Code>render</Code> method of your
-        application's exception handler.
+        When building Laravel applications, you can accomplish this by using the  <Code>respond</Code> exception method
+        in your application's `bootstrap/app.php` file.
       </P>
       <TabbedCode
         examples={[
@@ -50,31 +50,24 @@ export default function () {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Throwable;
               use Inertia\\Inertia;
+              use Symfony\\Component\\HttpFoundation\\Response;
 
-              /**
-               * Prepare exception for rendering.
-               *
-               * @param  \\Throwable  $e
-               * @return \\Throwable
-               */
-              public function render($request, Throwable $e)
-              {
-                  $response = parent::render($request, $e);
+              ->withExceptions(function (Exceptions $exceptions) {
+                  $exceptions->respond(function (Response $response) {
+                      if (! app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403])) {
+                          return Inertia::render('Error', ['status' => $response->status()])
+                              ->toResponse($request)
+                              ->setStatusCode($response->status());
+                      } elseif ($response->status() === 419) {
+                          return back()->with([
+                              'message' => 'The page expired, please try again.',
+                          ]);
+                      }
 
-                  if (! app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403])) {
-                      return Inertia::render('Error', ['status' => $response->status()])
-                          ->toResponse($request)
-                          ->setStatusCode($response->status());
-                  } elseif ($response->status() === 419) {
-                      return back()->with([
-                          'message' => 'The page expired, please try again.',
-                      ]);
-                  }
-
-                  return $response;
-              }
+                      return $response;
+                  });
+              })
             `,
           },
         ]}

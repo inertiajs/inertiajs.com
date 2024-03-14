@@ -124,8 +124,8 @@ export default function () {
       </P>
       <P>
         When using Laravel, you may modify your application's exception handler to automatically redirect the user back
-        to the page they were previously on while flashing a message to the session. First, you will need to extend your
-        exception handler's <Code>render</Code> method.
+        to the page they were previously on while flashing a message to the session. To accomplish this, you may use the
+        <Code>respond</Code> exception method in your application's `bootstrap/app.php` file.
       </P>
       <TabbedCode
         examples={[
@@ -133,27 +133,19 @@ export default function () {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Throwable;
-              use Inertia\\Inertia;
+              use Symfony\\Component\\HttpFoundation\\Response;
 
-              /**
-               * Prepare exception for rendering.
-               *
-               * @param  \\Throwable  $e
-               * @return \\Throwable
-               */
-              public function render($request, Throwable $e)
-              {
-                  $response = parent::render($request, $e);
+              ->withExceptions(function (Exceptions $exceptions) {
+                  $exceptions->respond(function (Response $response) {
+                      if ($response->getStatusCode() === 419) {
+                          return back()->with([
+                              'message' => 'The page expired, please try again.',
+                          ]);
+                      }
 
-                  if ($response->status() === 419) {
-                      return back()->with([
-                          'message' => 'The page expired, please try again.',
-                      ]);
-                  }
-
-                  return $response;
-              }
+                      return $response;
+                  });
+              });
             `,
           },
         ]}
