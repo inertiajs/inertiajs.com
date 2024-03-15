@@ -42,7 +42,7 @@ export default function () {
       </P>
       <P>
         When building Laravel applications, you can accomplish this by using the  <Code>respond</Code> exception method
-        in your application's `bootstrap/app.php` file.
+        in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <TabbedCode
         examples={[

@@ -125,7 +125,7 @@ export default function () {
       <P>
         When using Laravel, you may modify your application's exception handler to automatically redirect the user back
         to the page they were previously on while flashing a message to the session. To accomplish this, you may use the
-        <Code>respond</Code> exception method in your application's `bootstrap/app.php` file.
+        <Code>respond</Code> exception method in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <TabbedCode
         examples={[
