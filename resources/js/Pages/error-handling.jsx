@@ -50,11 +50,12 @@ export default function () {
             name: 'Laravel',
             language: 'php',
             code: dedent`
+              use Illuminate\\Http\\Request;
+              use Illuminate\\Http\\Response;
               use Inertia\\Inertia;
-              use Symfony\\Component\\HttpFoundation\\Response;
 
               ->withExceptions(function (Exceptions $exceptions) {
-                  $exceptions->respond(function (Response $response) {
+                  $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
                       if (! app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403])) {
                           return Inertia::render('Error', ['status' => $response->status()])
                               ->toResponse($request)
