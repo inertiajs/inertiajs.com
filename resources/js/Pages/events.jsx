@@ -448,6 +448,10 @@ export default function () {
           },
         ]}
       />
+      <P>
+        Note, browsers do not allow cancelling the native <Code>popstate</Code> event, so preventing forward and back
+        history visits while using Inertia.js is not possible.
+      </P>
       <H2>Before</H2>
       <P>
         The <Code>before</Code> event fires when a request is about to be made to the server. This is useful for
