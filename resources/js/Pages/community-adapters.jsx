@@ -50,9 +50,6 @@ export default function () {
           <A href="https://github.com/tbreuss/inertia-mithril">Mithril.js</A>
         </Li>
         <Li>
-          <A href="https://github.com/jordankaerim/inertia-node">Node.js</A>
-        </Li>
-        <Li>
           <A href="https://github.com/devato/inertia_phoenix">Phoenix</A>
         </Li>
         <Li>
@@ -76,7 +73,7 @@ export default function () {
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
-        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">
+        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.jsx">
           pull request
         </A>
         .
