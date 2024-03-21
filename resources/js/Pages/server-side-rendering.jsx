@@ -411,8 +411,9 @@ export default function () {
         `}
       />
       <P>
-        To stop the SSR server, for instance when you deploy a new version of your website, you may utilize the <Code>inertia:stop-ssr</Code> Artisan command.
-        Your process monitor (such as Supervisor) should be responsible for automatically restarting the SSR server after it has stopped.
+        To stop the SSR server, for instance when you deploy a new version of your website, you may utilize the{' '}
+        <Code>inertia:stop-ssr</Code> Artisan command. Your process monitor (such as Supervisor) should be responsible
+        for automatically restarting the SSR server after it has stopped.
       </P>
       <CodeBlock
         language="bash"
@@ -423,8 +424,8 @@ export default function () {
       <H2>Laravel Forge</H2>
       <P>
         To run the SSR server on Forge, you should create a new daemon that runs{' '}
-        <Code>php artisan inertia:start-ssr</Code> from the root of your app.
-        Or, you may utilize the built-in Inertia integration from your Forge application's management dashboard.
+        <Code>php artisan inertia:start-ssr</Code> from the root of your app. Or, you may utilize the built-in Inertia
+        integration from your Forge application's management dashboard.
       </P>
       <P>
         Next, whenever you deploy your application, you can automatically restart the SSR server by calling the{' '}

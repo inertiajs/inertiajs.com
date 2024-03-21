@@ -95,8 +95,8 @@ export default function () {
         `}
       />
       <P>
-        Once the middleware has been published, append the <Code>HandleInertiaRequests</Code> middleware
-        to the <Code>web</Code> middleware group in your application's <Code>bootstrap/app.php</Code> file.
+        Once the middleware has been published, append the <Code>HandleInertiaRequests</Code> middleware to the{' '}
+        <Code>web</Code> middleware group in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <CodeBlock
         language="php"

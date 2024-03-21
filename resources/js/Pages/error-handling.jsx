@@ -41,7 +41,7 @@ export default function () {
         default exception handler to return a custom error page.
       </P>
       <P>
-        When building Laravel applications, you can accomplish this by using the  <Code>respond</Code> exception method
+        When building Laravel applications, you can accomplish this by using the <Code>respond</Code> exception method
         in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <TabbedCode
