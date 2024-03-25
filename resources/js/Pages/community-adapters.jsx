@@ -41,7 +41,10 @@ export default function () {
           <A href="https://pypi.org/project/inertia-django/">Django</A>
         </Li>
         <Li>
-          <A href="https://github.com/petaki/inertia-go">Go</A>
+          <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/petaki/inertia-go">Go (inertia-go)</A>
         </Li>
         <Li>
           <A href="https://github.com/girardinsamuel/masonite-inertia/">Masonite</A>
@@ -76,7 +79,7 @@ export default function () {
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
-        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">
+        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.jsx">
           pull request
         </A>
         .
