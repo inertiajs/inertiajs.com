@@ -51,7 +51,7 @@ export default function () {
             language: 'php',
             code: dedent`
               use Illuminate\\Http\\Request;
-              use Symfony\Component\HttpFoundation\Response;
+              use Symfony\\Component\\HttpFoundation\\Response;
               use Inertia\\Inertia;
 
               ->withExceptions(function (Exceptions $exceptions) {
