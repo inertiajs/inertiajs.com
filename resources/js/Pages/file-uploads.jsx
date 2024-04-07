@@ -17,7 +17,7 @@ export default function () {
       <H2>FormData conversion</H2>
       <P>
         When making Inertia requests that include files (even nested files), Inertia will automatically convert the
-        request data into a <Code>FormData</Code> object. This conversation is necessary in order to submit a{' '}
+        request data into a <Code>FormData</Code> object. This conversion is necessary in order to submit a{' '}
         <Code>multipart/form-data</Code> request via XHR.
       </P>
       <P>
@@ -220,9 +220,9 @@ export default function () {
       </P>
       <H2>Multipart limitations</H2>
       <P>
-        Uploading files using a <Code>multipart/form-data</Code> request is not natively supported in some languages for
-        the <Code>PUT</Code>,<Code>PATCH</Code>, or <Code>DELETE</Code> methods. The simplest workaround for this
-        limitation is to simply upload files using a <Code>POST</Code> request instead.
+        Uploading files using a <Code>multipart/form-data</Code> request is not natively supported in some server-side
+        frameworks when using the <Code>PUT</Code>,<Code>PATCH</Code>, or <Code>DELETE</Code> HTTP methods. The simplest
+        workaround for this limitation is to simply upload files using a <Code>POST</Code> request instead.
       </P>
       <P>
         However, some frameworks, such as{' '}

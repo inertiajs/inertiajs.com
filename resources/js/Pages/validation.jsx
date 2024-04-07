@@ -44,8 +44,8 @@ export default function () {
       <P>
         In order for your server-side validation errors to be available client-side, your server-side framework must
         share them via the <Code>errors</Code> prop. Inertia's first-party adapters, such as the Laravel adapter, do
-        this automatically. For others, you may need to do this manually. Please refer to your specific server-side
-        adapter documentation for more information.
+        this automatically. For other frameworks, you may need to do this manually. Please refer to your specific
+        server-side adapter documentation for more information.
       </P>
       <H2>Displaying errors</H2>
       <P>

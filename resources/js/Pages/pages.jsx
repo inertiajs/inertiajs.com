@@ -27,8 +27,9 @@ export default function () {
       </P>
       <H2>Creating pages</H2>
       <P>
-        Inertia pages are simply JavaScript components. There is nothing particularly special or "magical" about pages.
-        As you can see in the example below, pages receive data from your application's controllers as props.
+        Inertia pages are simply JavaScript components. If you have ever written a Vue, React, or Svelte component, you
+        will feel right at home. As you can see in the example below, pages receive data from your application's
+        controllers as props.
       </P>
       <TabbedCode
         examples={[
@@ -131,7 +132,7 @@ export default function () {
         <Svelte>
           <Code>resources/js/Pages/User/Show.svelte</Code>
         </Svelte>{' '}
-        within the Laravel application.
+        within a Laravel application.
       </P>
       <TabbedCode
         examples={[
@@ -255,20 +256,20 @@ export default function () {
         ]}
       />
       <P>
-        As you can see, there is nothing Inertia specific within this template. This is just a standard <Vue>Vue</Vue>
+        As you can see, there is nothing Inertia specific within this template. This is just a typical <Vue>Vue</Vue>
         <React>React</React>
         <Svelte>Svelte</Svelte> component.
       </P>
       <H2>Persistent layouts</H2>
       <P>
-        While it's simple to implement layouts as children of the page components, it does force the layout instance to
-        be destroyed and recreated between visits. This means you cannot have persistent layout state when navigating
+        While it's simple to implement layouts as children of page components, it forces the layout instance to be
+        destroyed and recreated between visits. This means you cannot have persistent layout state when navigating
         between pages.
       </P>
       <P>
         For example, maybe you have an audio player on a podcast website that you want to continue playing as users
         navigate the site. Or, maybe you simply want to maintain the scroll position in your sidebar navigation between
-        page visits. In these situations, using Inertia's persistent layouts can solve these problems.
+        page visits. In these situations, the solution is to leverage Inertia's persistent layouts.
       </P>
       <TabbedCode
         examples={[
@@ -574,7 +575,7 @@ export default function () {
       <P>
         You can even go a step further and conditionally set the default page layout based on the page <Code>name</Code>
         , which is available to the <Code>resolve()</Code> callback. For example, maybe you don't want the default
-        layout applied to your public pages.
+        layout to be applied to your public pages.
       </P>
       <TabbedCode
         examples={[

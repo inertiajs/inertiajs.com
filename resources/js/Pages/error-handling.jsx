@@ -15,8 +15,8 @@ export default function () {
       <H1>Error handling</H1>
       <H2>Development</H2>
       <P>
-        One of the nice things about working with a server-side framework is the built-in exception handling you get for
-        free. For example, Laravel ships with <A href="https://github.com/facade/ignition">Ignition</A>, a beautiful
+        One of the advantages to working with a robust server-side framework is the built-in exception handling you get
+        for free. For example, Laravel ships with <A href="https://github.com/facade/ignition">Ignition</A>, a beautiful
         error reporting tool which displays a nicely formatted stack trace in local development.
       </P>
       <P>
@@ -25,7 +25,7 @@ export default function () {
       </P>
       <P>
         Inertia solves this issue by showing all non-Inertia responses in a modal. This means you get the same beautiful
-        error-reporting your accustomed to, even though you've made that request over XHR.
+        error-reporting you're accustomed to, even though you've made that request over XHR.
       </P>
       <div className="relative my-6 overflow-hidden rounded bg-gray-500" style={{ paddingTop: '80.5%' }}>
         <div className="absolute inset-0 flex h-full w-full items-center justify-center text-sm">Loading&hellip;</div>
@@ -41,8 +41,8 @@ export default function () {
         default exception handler to return a custom error page.
       </P>
       <P>
-        When building Laravel applications, you can accomplish this by extending the <Code>render</Code> method of your
-        application's exception handler.
+        When building Laravel applications, you can accomplish this by using the <Code>respond</Code> exception method
+        in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <TabbedCode
         examples={[
@@ -50,38 +50,33 @@ export default function () {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Throwable;
+              use Illuminate\\Http\\Request;
+              use Symfony\\Component\\HttpFoundation\\Response;
               use Inertia\\Inertia;
 
-              /**
-               * Prepare exception for rendering.
-               *
-               * @param  \\Throwable  $e
-               * @return \\Throwable
-               */
-              public function render($request, Throwable $e)
-              {
-                  $response = parent::render($request, $e);
+              ->withExceptions(function (Exceptions $exceptions) {
+                  $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+                      if (! app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [500, 503, 404, 403])) {
+                          return Inertia::render('Error', ['status' => $response->getStatusCode()])
+                              ->toResponse($request)
+                              ->setStatusCode($response->getStatusCode());
+                      } elseif ($response->getStatusCode() === 419) {
+                          return back()->with([
+                              'message' => 'The page expired, please try again.',
+                          ]);
+                      }
 
-                  if (! app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403])) {
-                      return Inertia::render('Error', ['status' => $response->status()])
-                          ->toResponse($request)
-                          ->setStatusCode($response->status());
-                  } elseif ($response->status() === 419) {
-                      return back()->with([
-                          'message' => 'The page expired, please try again.',
-                      ]);
-                  }
-
-                  return $response;
-              }
+                      return $response;
+                  });
+              })
             `,
           },
         ]}
       />
       <P>
-        You may have noticed we're returning an `Error` page component in the example above. You'll need to actually
-        create this component. Here's an example error page component you can use as a starting point.
+        You may have noticed we're returning an <Code>Error</Code> page component in the example above. You'll need to
+        actually create this component, which will serve as the generic error page for your application. Here's an
+        example error component you can use as a starting point.
       </P>
       <TabbedCode
         examples={[

@@ -68,7 +68,7 @@
 }
 
 .carbon-img {
-  @apply block mb-3;
+  @apply mb-3 block;
 }
 
 .carbon-img img {
@@ -76,7 +76,7 @@
 }
 
 .carbon-text {
-  @apply block text-sm leading-snug mb-2;
+  @apply mb-2 block text-sm leading-snug;
 }
 
 .carbon-poweredby {
@@ -86,7 +86,7 @@
 /* DocSearch */
 
 .DocSearch-Button {
-  @apply bg-white scale-90 lg:w-56;
+  @apply scale-90 bg-white lg:w-56;
 }
 
 .DocSearch-Button .DocSearch-Search-Icon {

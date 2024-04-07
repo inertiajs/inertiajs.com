@@ -19,7 +19,7 @@ export default function () {
       <P>
         Since Inertia powered JavaScript apps are rendered within the document <Code>{'<body>'}</Code>, they are unable
         to render markup to the document <Code>{'<head>'}</Code>, as it's outside of their scope. To help with this,
-        Inertia ships with an <Code>{'<Head>'}</Code> component which can be used to set the page{' '}
+        Inertia ships with a <Code>{'<Head>'}</Code> component which can be used to set the page{' '}
         <Code>{'<title>'}</Code>, <Code>{'<meta>'}</Code> tags, and other <Code>{'<head>'}</Code> elements.
       </P>
       <Notice>
@@ -248,7 +248,7 @@ export default function () {
       <P>
         It's possible to have multiple instances of the <Code>{'<Head>'}</Code> component throughout your application.
         For example, your layout can set some default <Code>{'<Head>'}</Code> elements, and then your individual pages
-        can overide those defaults.
+        can override those defaults.
       </P>
       <TabbedCode
         examples={[
@@ -339,14 +339,14 @@ export default function () {
         use the <Code>head-key</Code> property, which will make sure the tag is only rendered once. This is illustrated
         in the example above for the <Code>{'<meta name="description">'}</Code> tag.
       </P>
-      <P>The code example below contains the HTML created by the example above.</P>
+      <P>The code example above will render the following HTML.</P>
       <CodeBlock
         language="html"
         children={dedent`
           <head>
             <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
             <title>About - My app</title>
-            <meta name="description" content="This is my about page description" />
+            <meta name="description" content="This is a page specific description" />
           </head>
         `}
       />
@@ -409,7 +409,7 @@ export default function () {
             code: dedent`
               // AppHead.js
 
-                            import { Head } from '@inertiajs/react'
+              import { Head } from '@inertiajs/react'
 
               const Site = ({ title, children }) => {
                 return (

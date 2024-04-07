@@ -24,7 +24,7 @@ export default function () {
       <P>
         To create links to other pages within an Inertia app, you will typically use the Inertia <Code>{'<Link>'}</Code>{' '}
         component. This component is a light wrapper around a standard anchor <Code>{'<a>'}</Code> link that intercepts
-        click events and prevents full page reloads from occurring. This is{' '}
+        click events and prevents full page reloads. This is{' '}
         <A href="/how-it-works">how Inertia provides a single-page app experience</A> once your application has been
         loaded.
       </P>
@@ -235,9 +235,9 @@ export default function () {
       />
       <H2>Custom headers</H2>
       <P>
-        The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, you should note
-        that the headers Inertia uses internally to communicate its state to the server take priority and therefore
-        cannot be overwritten.
+        The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, the headers
+        Inertia uses internally to communicate its state to the server take priority and therefore cannot be
+        overwritten.
       </P>
       <TabbedCode
         examples={[
@@ -335,8 +335,8 @@ export default function () {
       <P>
         You can preserve a page component's local state using the <Code>preserve-state</Code> attribute. This will
         prevent a page component from fully re-rendering. The <Code>preserve-state</Code> attribute is especially
-        helpful with forms, since you can avoid manually repopulating input fields and can also maintain a focused
-        input.
+        helpful on pages that contain forms, since you can avoid manually repopulating input fields and can also
+        maintain a focused input.
       </P>
       <TabbedCode
         examples={[
@@ -521,7 +521,7 @@ export default function () {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/vue2'
+              import { Link } from '@inertiajs/vue3'
 
               // URL exact match...
               <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
@@ -551,10 +551,10 @@ export default function () {
               <Link href="/users" className={component === 'Users/Index' ? 'active' : ''}>Users</Link>
 
               // URL starts with (/users, /users/create, /users/1, etc.)...
-              <Link href="/users" className={url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>
+              <Link href="/users" className={url.startsWith('/users') ? 'active' : ''}>Users</Link>
 
               // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
-              <Link href="/users" className={component.startsWith('Users') === 'Users/Index' ? 'active' : ''}>Users</Link>
+              <Link href="/users" className={component.startsWith('Users') ? 'active' : ''}>Users</Link>
             `,
           },
           {
@@ -570,10 +570,10 @@ export default function () {
               <Link href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</Link>
 
               // URL starts with (/users, /users/create, /users/1, etc.)...
-              <Link href="/users" class={$page.url.startsWith('/users') === '/users' ? 'active' : ''}>Users</Link>
+              <Link href="/users" class={$page.url.startsWith('/users') ? 'active' : ''}>Users</Link>
 
               // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
-              <Link href="/users" class={$page.component.startsWith('Users') === 'Users/Index' ? 'active' : ''}>Users</Link>
+              <Link href="/users" class={$page.component.startsWith('Users') ? 'active' : ''}>Users</Link>
             `,
           },
         ]}

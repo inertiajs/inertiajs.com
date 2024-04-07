@@ -33,17 +33,17 @@ export default function () {
       </P>
       <H2>New dependencies</H2>
       <P>
-        Previously to use Inertia you had to install a number of libraries, including the core library (
+        To use previous Inertia releases, you had to install a number of libraries, including the core library (
         <Code>@inertiajs/inertia</Code>), the adapter of your choice (
         <Code>@inertiajs/inertia-vue|vue3|react|svelte</Code>), the progress library (<Code>@inertiajs/progress</Code>
         ), and if you were using server-side rendering, the server library (<Code>@inertiajs/server</Code>).
       </P>
       <P>
         <Strong>Moving forward you are now only required to install a single library</Strong> — the adapter of your
-        choice (Vue, React, or Svelte), and the core libraries are automatically installed for you.
+        choice (Vue, React, or Svelte), and all other core libraries are automatically installed for you.
       </P>
       <P>
-        Start by removing <em>all</em> of the old Inertia libraries:
+        To get started, remove <em>all</em> of the old Inertia libraries.
       </P>
       <TabbedCode
         examples={[
@@ -261,17 +261,17 @@ export default function () {
         ]}
       />
       <Notice>
-        It is no longer possible to manually configure Inertia using the <Code color="orange">App</Code> export, and you
-        must now use the <Code color="orange">createInertiaApp()</Code> helper. See the{' '}
+        It is no longer possible to manually configure Inertia using the <Code color="orange">App</Code> export.
+        Instead, you should use the <Code color="orange">createInertiaApp()</Code> helper. See the{' '}
         <A href="/client-side-setup#initialize-the-inertia-app">client-side setup</A> documentation for more
         information.
       </Notice>
       <H2>Progress</H2>
       <P>
-        Previously the progress indicator was available as a separate plugin (<Code>@inertiajs/progress</Code>). It is
+        Previously, the progress indicator was available as a separate plugin (<Code>@inertiajs/progress</Code>). It is
         now installed and enabled by default.
       </P>
-      <P>If you haven't yet, remove the old progress library:</P>
+      <P>If you haven't yet, remove the old progress library.</P>
       <TabbedCode
         examples={[
           {
@@ -317,8 +317,8 @@ export default function () {
         `}
       />
       <P>
-        Finally, if you have any progress customization set, you can move these to the <Code>progress</Code> property of
-        the <Code>createInertiaApp()</Code> helper:
+        Finally, if you have defined any progress customizations, you can move them to the <Code>progress</Code>{' '}
+        property of the <Code>createInertiaApp()</Code> helper.
       </P>
       <CodeBlock
         language="js"
@@ -333,7 +333,7 @@ export default function () {
       />
       <P>
         If you're using a custom progress indicator, you can disable the default progress indicator by setting the{' '}
-        <Code>progress</Code> property to <Code>false</Code>:
+        <Code>progress</Code> property to <Code>false</Code>.
       </P>
       <CodeBlock
         language="js"
