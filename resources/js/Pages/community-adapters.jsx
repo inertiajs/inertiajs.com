@@ -59,7 +59,7 @@ export default function () {
           <A href="https://github.com/hotmeteor/inertia-statamic">Statamic</A>
         </Li>
         <Li>
-          <A href="https://github.com/rompetomp/inertia-bundle">Symfony</A>
+          <A href="https://github.com/skipthedragon/inertia-bundle">Symfony</A>
         </Li>
         <Li>
           <A href="https://github.com/boxybird/inertia-wordpress">WordPress</A>
