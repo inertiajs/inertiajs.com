@@ -17,7 +17,7 @@ export default function () {
           <A href="https://github.com/inertiajs/inertia-rails">Rails</A>
         </Li>
         <Li>
-          <A href="https://github.com/eidellev/inertiajs-adonisjs">AdonisJs</A>
+          <A href="https://docs.adonisjs.com/guides/inertia">AdonisJS</A>
         </Li>
         <Li>
           <A href="https://github.com/ishanvyas22/cakephp-inertiajs">CakePHP</A>
