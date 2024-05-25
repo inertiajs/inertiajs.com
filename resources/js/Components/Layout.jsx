@@ -273,23 +273,6 @@ export default function Layout({ meta, children }) {
         {meta.twitterCardImage && <meta name="twitter:image" content={meta.twitterCardImage} />}
       </Head>
       <div onClick={() => setShowMobileNav(false)} className="font-sans leading-none text-gray-800 antialiased">
-        <div className="text-md flex flex-wrap items-center justify-center gap-3 bg-[#fde9b1] px-6 py-4 font-medium">
-          <div>🥳 Inertia.js v1.0 has been released!</div>
-          <div className="flex gap-2">
-            <Link
-              href="/upgrade-guide"
-              className="whitespace-nowrap rounded-full bg-orange-500 px-3 py-1 text-xs leading-tight text-white hover:bg-orange-600"
-            >
-              Upgrade guide
-            </Link>
-            <a
-              href="https://legacy.inertiajs.com"
-              className="whitespace-nowrap rounded-full bg-orange-500 px-3 py-1 text-xs leading-tight text-white hover:bg-orange-600"
-            >
-              Legacy docs
-            </a>
-          </div>
-        </div>
         <div className="text-white" style={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
           <div className="relative mx-auto max-w-6xl px-6 md:px-12 xl:px-0">
             <HeaderBackground />

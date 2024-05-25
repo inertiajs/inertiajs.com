@@ -16,11 +16,14 @@ export const meta = {
 export default function () {
   return (
     <>
-      <H1>Upgrade guide</H1>
-      <P>Inertia.js v1.0 has been released! 🥳</P>
+      <H1>Upgrade guide for v1.0</H1>
+      <Notice>
+        You can find the legacy docs for Inertia.js v0.11 at{' '}
+        <A href="https://legacy.inertiajs.com">legacy.inertiajs.com</A>.
+      </Notice>
       <H2 id="whats-new">What's new</H2>
       <P>
-        This release focuses on simplifying the overall architecture of the project with the goal of making Inertia
+        Inertia.js v1.0 focuses on simplifying the overall architecture of the project with the goal of making Inertia
         easier to maintain and easier to use.
       </P>
       <P>
