@@ -73,6 +73,9 @@ export default function () {
         <Li>
           <A href="https://github.com/tobimori/kirby-inertia">Kirby CMS</A>
         </Li>
+        <Li>
+          <A href="https://github.com/onix-systems-php/hyperf-inertia">Hyperf</A>
+        </Li>
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
