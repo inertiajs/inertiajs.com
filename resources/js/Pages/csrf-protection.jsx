@@ -65,12 +65,14 @@ export default function () {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'
+              import { router, usePage } from '@inertiajs/react'
+
+              const page = usePage()
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+                _token: page.props.csrf_token,
               })
             `,
           },
