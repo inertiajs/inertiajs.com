@@ -78,7 +78,7 @@ export default function () {
       />
       <P>
         By default, Inertia renders links as anchor <Code>{'<a>'}</Code> elements. However, you can change the tag using
-        the <Code>as</Code> attribute.
+        the <Code>as</Code> prop.
       </P>
       <TabbedCode
         examples={[
@@ -142,8 +142,8 @@ export default function () {
       </Notice>
       <H2>Method</H2>
       <P>
-        You can specify the HTTP request method for an Inertia link request using the <Code>method</Code> attribute. The
-        default method used by links is <Code>GET</Code>, but you can use the <Code>method</Code> attribute to make{' '}
+        You can specify the HTTP request method for an Inertia link request using the <Code>method</Code> prop. The
+        default method used by links is <Code>GET</Code>, but you can use the <Code>method</Code> prop to make{' '}
         <Code>POST</Code>, <Code>PUT</Code>, <Code>PATCH</Code>, and <Code>DELETE</Code> requests via links.
       </P>
       <TabbedCode
@@ -190,8 +190,8 @@ export default function () {
       <H2>Data</H2>
       <P>
         When making <Code>POST</Code> or <Code>PUT</Code> requests, you may wish to add additional data to the request.
-        You can accomplish this using the <Code>data</Code> attribute. The provided data can be an <Code>object</Code>{' '}
-        or <Code>FormData</Code> instance.
+        You can accomplish this using the <Code>data</Code> prop. The provided data can be an <Code>object</Code> or{' '}
+        <Code>FormData</Code> instance.
       </P>
       <TabbedCode
         examples={[
@@ -235,9 +235,8 @@ export default function () {
       />
       <H2>Custom headers</H2>
       <P>
-        The <Code>headers</Code> attribute allows you to add custom headers to an Inertia link. However, the headers
-        Inertia uses internally to communicate its state to the server take priority and therefore cannot be
-        overwritten.
+        The <Code>headers</Code> prop allows you to add custom headers to an Inertia link. However, the headers Inertia
+        uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
       </P>
       <TabbedCode
         examples={[
@@ -283,9 +282,9 @@ export default function () {
       />
       <H2>Browser history</H2>
       <P>
-        The <Code>replace</Code> attribute allows you to specify the browser's history behavior. By default, page visits
-        push (new) state (<Code>window.history.pushState</Code>) into the history; however, it's also possible to
-        replace state (<Code>window.history.replaceState</Code>) by setting the <Code>replace</Code> attribute to true.
+        The <Code>replace</Code> prop allows you to specify the browser's history behavior. By default, page visits push
+        (new) state (<Code>window.history.pushState</Code>) into the history; however, it's also possible to replace
+        state (<Code>window.history.replaceState</Code>) by setting the <Code>replace</Code> prop to <Code>true</Code>.
         This will cause the visit to replace the current history state instead of adding a new history state to the
         stack.
       </P>
@@ -333,10 +332,9 @@ export default function () {
       />
       <H2>State preservation</H2>
       <P>
-        You can preserve a page component's local state using the <Code>preserve-state</Code> attribute. This will
-        prevent a page component from fully re-rendering. The <Code>preserve-state</Code> attribute is especially
-        helpful on pages that contain forms, since you can avoid manually repopulating input fields and can also
-        maintain a focused input.
+        You can preserve a page component's local state using the <Code>preserve-state</Code> prop. This will prevent a
+        page component from fully re-rendering. The <Code>preserve-state</Code> prop is especially helpful on pages that
+        contain forms, since you can avoid manually repopulating input fields and can also maintain a focused input.
       </P>
       <TabbedCode
         examples={[
@@ -441,8 +439,8 @@ export default function () {
       </P>
       <H2>Partial reloads</H2>
       <P>
-        The <Code>only</Code> attribute allows you to specify that only a subset of a page's props (data) should be
-        retrieved from the server on subsequent visits to that page.
+        The <Code>only</Code> prop allows you to specify that only a subset of a page's props (data) should be retrieved
+        from the server on subsequent visits to that page.
       </P>
       <TabbedCode
         examples={[
