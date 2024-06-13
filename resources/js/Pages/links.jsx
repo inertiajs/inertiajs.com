@@ -390,8 +390,8 @@ export default function () {
       />
       <H2>Scroll preservation</H2>
       <P>
-        You can use the <Code>preserve-scroll</Code> attribute to prevent Inertia from automatically resetting the
-        scroll position when making a page visit.
+        You can use the <Code>preserveScroll</Code> prop to prevent Inertia from automatically resetting the scroll
+        position when making a page visit.
       </P>
       <TabbedCode
         examples={[
