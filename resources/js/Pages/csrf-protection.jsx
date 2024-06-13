@@ -42,9 +42,9 @@ export default function () {
               import { router } from '@inertiajs/vue2'
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
                 _token: this.$page.props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -52,12 +52,14 @@ export default function () {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue3'
+              import { router, usePage } from '@inertiajs/vue3'
+
+              const page = usePage()
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: page.props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -65,12 +67,14 @@ export default function () {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'
+              import { router, usePage } from '@inertiajs/react'
+
+              const props = usePage().props
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -78,12 +82,12 @@ export default function () {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'
+              import { page, router } from '@inertiajs/svelte'
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: $page.props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
