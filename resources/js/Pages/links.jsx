@@ -283,8 +283,8 @@ export default function () {
       />
       <H2>Browser history</H2>
       <P>
-        The <Code>replace</Code> attribute allows you to specify the browser's history behaviour. By default, page
-        visits push (new) state (<Code>window.history.pushState</Code>) into the history; however, it's also possible to
+        The <Code>replace</Code> attribute allows you to specify the browser's history behavior. By default, page visits
+        push (new) state (<Code>window.history.pushState</Code>) into the history; however, it's also possible to
         replace state (<Code>window.history.replaceState</Code>) by setting the <Code>replace</Code> attribute to true.
         This will cause the visit to replace the current history state instead of adding a new history state to the
         stack.

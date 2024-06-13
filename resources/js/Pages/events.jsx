@@ -337,8 +337,8 @@ export default function () {
       <H2>Cancelling events</H2>
       <P>
         Some events, such as <Code>before</Code>, <Code>invalid</Code>, and <Code>error</Code>, support cancellation,
-        allowing you to prevent Inertia's default behaviour. Just like native events, the event will be cancelled if
-        only one event listener calls <Code>event.preventDefault()</Code>.
+        allowing you to prevent Inertia's default behavior. Just like native events, the event will be cancelled if only
+        one event listener calls <Code>event.preventDefault()</Code>.
       </P>
       <TabbedCode
         examples={[

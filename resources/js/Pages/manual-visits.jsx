@@ -709,12 +709,12 @@ export default function () {
       />
       <H2>Scroll preservation</H2>
       <P>
-        When navigating between pages, Inertia mimics default browser behaviour by automatically resetting the scroll
+        When navigating between pages, Inertia mimics default browser behavior by automatically resetting the scroll
         position of the document body (as well as any <A href="/scroll-management#scroll-regions">scroll regions</A>{' '}
         you've defined) back to the top of the page.
       </P>
       <P>
-        You can disable this behaviour by setting the <Code>preserveScroll</Code> option to <Code>false</Code>.
+        You can disable this behavior by setting the <Code>preserveScroll</Code> option to <Code>false</Code>.
       </P>
       <TabbedCode
         examples={[

@@ -211,7 +211,7 @@ export default function () {
         indicator from appearing constantly on quick page visits, which can be visually distracting.
       </P>
       <P>
-        To implement the delay behaviour, we'll use the <Code>setTimeout</Code> and <Code>clearTimeout</Code> functions.
+        To implement the delay behavior, we'll use the <Code>setTimeout</Code> and <Code>clearTimeout</Code> functions.
         Let's start by defining a variable to keep track of the timeout.
       </P>
       <CodeBlock
