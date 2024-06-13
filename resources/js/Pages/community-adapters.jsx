@@ -50,7 +50,7 @@ export default function () {
           <A href="https://github.com/jordankaerim/inertia-node">Node.js</A>
         </Li>
         <Li>
-          <A href="https://github.com/devato/inertia_phoenix">Phoenix</A>
+          <A href="https://github.com/inertiajs/inertia-phoenix">Phoenix</A>
         </Li>
         <Li>
           <A href="https://github.com/cherifGsoul/inertia-psr15">PSR-15</A>
