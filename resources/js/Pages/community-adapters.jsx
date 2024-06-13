@@ -47,9 +47,6 @@ export default function () {
           <A href="https://github.com/tbreuss/inertia-mithril">Mithril.js</A>
         </Li>
         <Li>
-          <A href="https://github.com/jordankaerim/inertia-node">Node.js</A>
-        </Li>
-        <Li>
           <A href="https://github.com/inertiajs/inertia-phoenix">Phoenix</A>
         </Li>
         <Li>
