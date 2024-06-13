@@ -100,7 +100,7 @@ export default function () {
             <span className="text-blue-400">Content-Type:</span> application/json
           </div>
           <div>
-            <span className="text-blue-400">Vary:</span> Accept
+            <span className="text-blue-400">Vary:</span> X-Inertia
           </div>
           <div>
             <span className="text-blue-400">X-Inertia:</span> true
