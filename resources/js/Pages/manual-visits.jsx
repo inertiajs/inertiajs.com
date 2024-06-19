@@ -23,7 +23,7 @@ export default function () {
       <H1>Manual visits</H1>
       <P>
         In addition to <A href="/links">creating links</A>, it's also possible to manually make Inertia visits /
-        requests programatically via JavaScript. This is accomplished via the <Code>router.visit()</Code> method.
+        requests programmatically via JavaScript. This is accomplished via the <Code>router.visit()</Code> method.
       </P>
       <TabbedCode
         examples={[
