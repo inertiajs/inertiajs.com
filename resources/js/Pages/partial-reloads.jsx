@@ -255,7 +255,7 @@ export default function () {
       </P>
       <P>
         Additionally, Inertia provides an <Code>Inertia::lazy()</Code> method to specify that a prop should never be
-        included unless explicity requested using the <Code>only</Code> option:
+        included unless explicitly requested using the <Code>only</Code> option:
       </P>
       <TabbedCode
         examples={[
@@ -272,7 +272,7 @@ export default function () {
       />
       <P>
         On the inverse, you can use the <Code>Inertia::always()</Code> method to specify that a prop should always be
-        included, even if it has not been explicity required in a partial reload.
+        included, even if it has not been explicitly required in a partial reload.
       </P>
       <TabbedCode
         examples={[
