@@ -506,7 +506,8 @@ export default function () {
             language: 'js',
             code: dedent`
               const { transform } = useForm({ ... })
-
+              
+              // Should be called from the component body, not from any handler
               transform((data) => ({
                 ...data,
                 remember: data.remember ? 'on' : '',
