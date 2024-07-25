@@ -236,6 +236,121 @@ export default function () {
           })
         `}
       />
+
+      <H2>Integration in existing project</H2>
+      <P>If you are integrating Inertia an existing project using React or Vue and Vite for asset compilation. You can follow these steps.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 3',
+            language: 'bash',
+            code: dedent`
+              npm install @vitejs/plugin-vue
+            `,
+          },
+          {
+            name: 'React',
+            language: 'bash',
+            code: dedent`
+              npm install @vitejs/plugin-react
+            `,
+          }
+        ]}
+      />
+
+      <P>Next, update the <Code>vite.config.js</Code> to use the required plugin.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { defineConfig } from 'vite';
+              import laravel from 'laravel-vite-plugin';
+              import vue from '@vitejs/plugin-vue';
+
+              export default defineConfig({
+                  plugins: [
+                      laravel({
+                          input: 'resources/js/app.js',
+                          refresh: true,
+                      }),
+                      vue({
+                          template: {
+                              transformAssetUrls: {
+                                  base: null,
+                                  includeAbsolute: false,
+                              },
+                          },
+                      }),
+                  ],
+              });
+           `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { defineConfig } from 'vite';
+              import laravel from 'laravel-vite-plugin';
+              import react from '@vitejs/plugin-react';
+
+              export default defineConfig({
+                  plugins: [
+                      laravel({
+                          input: 'resources/js/app.tsx',
+                          refresh: true,
+                      }),
+                      react(),
+                  ],
+              });
+            `,
+          }
+        ]}
+      />
+      
+      <P>Lastly, update the <Code>app.blade.php</Code>.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 3',
+            language: 'markup',
+            code: dedent`
+                <!DOCTYPE html>
+                <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+                    <head>
+                        @routes
+                        @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
+                        @inertiaHead
+                    </head>
+                    <body class="font-sans antialiased">
+                        @inertia
+                    </body>
+                </html>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'markup',
+            code: dedent`
+              <!DOCTYPE html>
+                <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+                    <head>
+                        @routes
+                        @viteReactRefresh
+                        @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
+                        @inertiaHead
+                    </head>
+                    <body class="font-sans antialiased">
+                        @inertia
+                    </body>
+                </html>
+            `,
+          }
+        ]}
+      />
+      
+      
     </>
   )
 }
