@@ -101,9 +101,9 @@ export default function () {
                   <header>
                     You are logged in as: {{ user.name }}
                   </header>
-                  <content>
+                  <article>
                     <slot />
-                  </content>
+                  </article>
                 </main>
               </template>
 
@@ -136,9 +136,9 @@ export default function () {
                   <header>
                     You are logged in as: {{ user.name }}
                   </header>
-                  <content>
+                  <article>
                     <slot />
-                  </content>
+                  </article>
                 </main>
               </template>
             `,
@@ -157,9 +157,9 @@ export default function () {
                     <header>
                       You are logged in as: {auth.user.name}
                     </header>
-                    <content>
+                    <article>
                       {children}
-                    </content>
+                    </article>
                   </main>
                 )
               }
@@ -177,9 +177,9 @@ export default function () {
                 <header>
                   You are logged in as: {$page.props.auth.user.name}
                 </header>
-                <content>
+                <article>
                   <slot />
-                </content>
+                </article>
               </main>
             `,
           },
@@ -226,12 +226,12 @@ export default function () {
               <template>
                 <main>
                   <header></header>
-                  <content>
+                  <article>
                     <div v-if="$page.props.flash.message" class="alert">
                       {{ $page.props.flash.message }}
                     </div>
                     <slot />
-                  </content>
+                  </article>
                   <footer></footer>
                 </main>
               </template>
@@ -244,12 +244,12 @@ export default function () {
               <template>
                 <main>
                   <header></header>
-                  <content>
+                  <article>
                     <div v-if="$page.props.flash.message" class="alert">
                       {{ $page.props.flash.message }}
                     </div>
                     <slot />
-                  </content>
+                  </article>
                   <footer></footer>
                 </main>
               </template>
@@ -267,12 +267,12 @@ export default function () {
                 return (
                   <main>
                     <header></header>
-                    <content>
+                    <article>
                       {flash.message && (
                         <div class="alert">{flash.message}</div>
                       )}
                       {children}
-                    </content>
+                    </article>
                     <footer></footer>
                   </main>
                 )
@@ -289,12 +289,12 @@ export default function () {
 
               <main>
                 <header></header>
-                <content>
+                <article>
                   {#if $page.props.flash.message}
                     <div class="alert">{$page.props.flash.message}</div>
                   {/if}
                   <slot />
-                </content>
+                </article>
                 <footer></footer>
               </main>
             `,
