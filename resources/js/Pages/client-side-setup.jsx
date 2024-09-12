@@ -49,7 +49,7 @@ export default function () {
             name: 'React',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/react
+              npm install @inertiajs/react react react-dom
             `,
           },
           {
