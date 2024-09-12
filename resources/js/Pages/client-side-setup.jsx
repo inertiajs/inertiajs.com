@@ -64,7 +64,7 @@ export default function () {
       <H2>Initialize the Inertia app</H2>
       <P>
         Next, update your main JavaScript file to boot your Inertia app 
-        (if you don't know which one it is, <A href="https://laravel.com/docs/11.x/vite">check this</A>). 
+        (if you don't know which one it is, <A href="https://laravel.com/docs/vite">check this</A>). 
         To accomplish this, we'll initialize the client-side framework with the base Inertia component.
       </P>
       <TabbedCode
