@@ -5,13 +5,13 @@ const Nav = ({ className }) => {
 
   function linkClass(path) {
     return (path === '/' && path === page.url) || (path !== '/' && page.url.startsWith(path))
-      ? `block -ml-3 pl-3 pr-2 py-1 md:py-2 font-medium border-l-4 rounded-r border-purple-400 bg-purple-100 text-purple-700`
-      : `inline-block py-1 md:py-2 hover:text-blue-700 hover:underline font-medium text-gray-700`
+      ? `block -ml-3 pl-3 pr-2 py-1 md:py-2 font-medium border-l-4 rounded-r border-purple-400 dark:border-purple-600 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300`
+      : `inline-block py-1 md:py-2 hover:text-blue-700 hover:underline font-medium text-gray-700 dark:text-gray-400`
   }
 
   return (
     <nav className={className}>
-      <div className="-mx-6 mt-4 mb-6 flex justify-center border-b pb-4 md:hidden">
+      <div className="-mx-6 mt-4 mb-6 flex justify-center border-b dark:border-gray-700 pb-4 md:hidden">
         <a className="mr-5 flex items-center text-gray-500 hover:text-gray-700" href="https://github.com/inertiajs">
           <svg className="h-5 w-5 fill-current" viewBox="0 0 20 20">
             <title>GitHub</title>
