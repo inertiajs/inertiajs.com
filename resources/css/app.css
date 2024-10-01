@@ -1,5 +1,9 @@
 @tailwind base;
 
+html{
+  color-scheme: dark light;
+}
+
 /* Fonts */
 
 @font-face {

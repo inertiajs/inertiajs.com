@@ -1,7 +1,7 @@
 module.exports = {
   mode: 'jit',
   purge: ['./resources/js/**/*.jsx'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or false or 'class'
   theme: {
     colors: {
       transparent: 'transparent',
