@@ -191,6 +191,7 @@ export default function () {
         ]}
       />
       <P>In the above example, the data will start loading 500 pixels before the element is visible.</P>
+      {/* TODO: `always` prop */}
     </>
   )
 }
