@@ -202,6 +202,36 @@ const Nav = ({ className }) => {
             Server-side rendering
           </Link>
         </li>
+        <li className="md:pr-3">
+          <Link href="/polling" className={linkClass('/polling')}>
+            Polling
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/prefetching" className={linkClass('/prefetching')}>
+            Prefetching
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/deferred-props" className={linkClass('/deferred-props')}>
+            Deferred props
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/merging-props" className={linkClass('/merging-props')}>
+            Merging props
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/intersection-observer" className={linkClass('/intersection-observer')}>
+            Intersection observer
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/history-encryption" className={linkClass('/history-encryption')}>
+            History encryption
+          </Link>
+        </li>
       </ul>
     </nav>
   )
