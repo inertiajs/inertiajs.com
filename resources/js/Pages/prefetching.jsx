@@ -6,6 +6,8 @@ export const meta = {
   links: [
     { url: '#top', name: 'Introduction' },
     { url: '#link-prefetching', name: 'Link prefetching' },
+    { url: '#programmatic-prefetching', name: 'Programmatic prefetching' },
+    { url: '#flushing-prefetch-cache', name: 'Flushing prefetch cache' },
     { url: '#stale-while-revalidate', name: 'Stale while revalidate' },
   ],
 }
@@ -202,9 +204,122 @@ export default function () {
           },
         ]}
       />
-      {/* TODO: Programattic prefetching */}
-      {/* TODO: usePrefetch */}
-      {/* TODO: Flushing prefetch cache */}
+      <H2>Programmatic prefetching</H2>
+      <P>
+        You can also prefetch data programmatically using <Code>router.prefetch</Code>. The signature is identical to{' '}
+        <Code>router.visit</Code> with the exception of a third argument that allows you to specify prefetch options.
+      </P>
+      <P>
+        When the <Code>cacheFor</Code> option is not specified, it defaults to 30 seconds.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+            router.prefetch(
+                '/users',
+                { method: 'get', data: { page: 2 } },
+            )
+
+            router.prefetch(
+                '/users',
+                { method: 'get', data: { page: 2 } },
+                { cacheFor: '1m' },
+            )
+            `,
+          },
+        ]}
+      />
+
+      <P>
+        To make this even easier, Inertia offers a prefetch helper. This helper provides some additional insight into
+        the request, such as the last updated timestamp and if the request is currently prefetching.
+      </P>
+
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+            import { usePrefetch } from '@inertiajs/vue3'
+
+            const { lastUpdatedAt, isPrefetching, isPrefetched } = usePrefetch(
+                '/users',
+                { method: 'get', data: { page: 2 } },
+                { cacheFor: '1m' },
+            )
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+            import { usePrefetch } from '@inertiajs/react'
+
+            const { lastUpdatedAt, isPrefetching, isPrefetched } = usePrefetch(
+                '/users',
+                { method: 'get', data: { page: 2 } },
+                { cacheFor: '1m' },
+            )
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+            import { usePrefetch } from '@inertiajs/svelte'
+
+            const { lastUpdatedAt, isPrefetching, isPrefetched } = usePrefetch(
+                '/users',
+                { method: 'get', data: { page: 2 } },
+                { cacheFor: '1m' },
+            )
+            `,
+          },
+        ]}
+      />
+      <H2>Flushing prefetch cache</H2>
+      <P>
+        You can flush the prefetch cache by calling <Code>router.flushAll</Code>. This will remove all cached data for
+        all pages.
+      </P>
+      <P>
+        If you want to flush the cache for a specific page, you can pass the page URL and options to the{' '}
+        <Code>router.flush</Code> method.
+      </P>
+      <P>
+        Furthermore, if you are using the prefetch helper, it will return a <Code>flush</Code> method for you to use for
+        that specific page.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+            // Flush all prefetch cache
+            router.flushAll()
+
+            // Flush cache for a specific page
+            router.flush(
+                '/users',
+                { method: 'get', data: { page: 2 } },
+            )
+
+            const { flush } = usePrefetch(
+                '/users',
+                { method: 'get', data: { page: 2 } },
+            )
+
+            // Flush cache for a specific page
+            flush()
+            `,
+          },
+        ]}
+      />
       <H2>Stale while revalidate</H2>
       <P>
         By default, Inertia will fetch a fresh copy of the data when the user visits the page if the cached data is
