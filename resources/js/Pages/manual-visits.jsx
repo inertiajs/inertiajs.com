@@ -996,6 +996,8 @@ export default function () {
                 onError: (errors) => {},
                 onCancel: () => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -1013,6 +1015,8 @@ export default function () {
                 onError: (errors) => {},
                 onCancel: () => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -1030,6 +1034,8 @@ export default function () {
                 onError: (errors) => {},
                 onCancel: () => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -1047,6 +1053,8 @@ export default function () {
                 onError: (errors) => {},
                 onCancel: () => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },

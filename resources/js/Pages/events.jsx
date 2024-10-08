@@ -16,6 +16,8 @@ export const meta = {
     { url: '#exception', name: 'Exception' },
     { url: '#finish', name: 'Finish' },
     { url: '#navigate', name: 'Navigate' },
+    { url: '#prefetching', name: 'Prefetching' },
+    { url: '#prefetched', name: 'Prefetched' },
     { url: '#event-callbacks', name: 'Event callbacks' },
   ],
 }
@@ -1125,6 +1127,94 @@ export default function () {
       />
       <P>
         The <Code>navigate</Code> event is not cancelable.
+      </P>
+      <H2>Prefetching</H2>
+      <P>
+        The <Code>prefetching</Code> event fires when the router starts prefetching a page.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+
+              router.on('prefetching', (event) => {
+                console.log(\`Prefetching \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+
+              router.on('prefetching', (event) => {
+                console.log(\`Prefetching \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              router.on('prefetching', (event) => {
+                console.log(\`Prefetching \${event.detail.page.url}\`)
+              })
+            `,
+          },
+        ]}
+      />
+      <P>
+        The <Code>prefetching</Code> event is not cancelable.
+      </P>
+      <H2>Prefetched</H2>
+      <P>
+        The <Code>prefetched</Code> event fires when the router has successfully prefetched a page.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue 3',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+
+              router.on('prefetched', (event) => {
+                console.log(\`Prefetched \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+
+              router.on('prefetched', (event) => {
+                console.log(\`Prefetched \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              router.on('prefetched', (event) => {
+                console.log(\`Prefetched \${event.detail.page.url}\`)
+              })
+            `,
+          },
+        ]}
+      />
+      <P>
+        The <Code>prefetched</Code> event is not cancelable.
       </P>
       <H2>Event callbacks</H2>
       <P>
