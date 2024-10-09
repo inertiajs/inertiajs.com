@@ -18,6 +18,7 @@ const TabbedCode = ({ className, examples, height }) => {
   const tabType = guessTabType(examples.map(example => example.name))
   const exampleIndex = examples.findIndex(example => codeTabs[tabType] === example.name)
   const activeTab = exampleIndex < 0 ? 0 : exampleIndex
+  examples = examples.filter(e => e.name !== 'Vue 2')
 
   return (
     <div className={className || 'my-8 overflow-hidden rounded'}>
