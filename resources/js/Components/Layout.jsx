@@ -100,7 +100,7 @@ export default function Layout({ meta, children }) {
         <div className="hidden items-center text-white md:flex">
           <div className="relative -my-2 mr-5">
             {showSearch && (
-              <DocSearch appId="VKGU7LHY9C" indexName="inertiajs" apiKey="cebbd114b9b67501184b39b00f94f765" />
+              <DocSearch appId="VKGU7LHY9C" indexName="inertiajs_v2" apiKey="cebbd114b9b67501184b39b00f94f765" />
             )}
           </div>
           <a className="mr-5 flex items-center hover:text-purple-900" href="https://github.com/inertiajs">
