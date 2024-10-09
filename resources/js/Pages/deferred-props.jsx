@@ -118,15 +118,19 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
+            <script>
             import { Deferred } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
+            export let permissions
+            </script>
 
-            export default () => (
-                <Deferred data="permissions" fallback={() => <div>Loading...</div>}>
-                    <PermissionsChildComponent />
-                </Deferred>
-            )
+            <Deferred data="permissions">
+                <svelte:fragment slot="fallback">
+                    <div>Loading...</div>
+                </svelte:fragment>
+
+                {permissions}
+            </Deferred>
             `,
           },
         ]}
@@ -173,15 +177,20 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
+            <script>
             import { Deferred } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
+            export let teams
+            export let users
+            </script>
 
-            export default () => (
-                <Deferred data="['teams', 'users']" fallback={() => <div>Loading...</div>}>
-                    <PermissionsChildComponent />
-                </Deferred>
-            )
+            <Deferred data={['teams', 'users']}>
+                <svelte:fragment slot="fallback">
+                    <div>Loading...</div>
+                </svelte:fragment>
+
+                <!-- Props are now loaded -->
+            </Deferred>
             `,
           },
         ]}

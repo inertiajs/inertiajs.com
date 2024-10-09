@@ -63,15 +63,19 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
+            <script>
             import { WhenVisible } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
+            export let permissions
+            </script>
 
-            export default () => (
-                <WhenVisible data="permissions" fallback={() => <div>Loading...</div>}>
-                    <PermissionsChildComponent />
-                </WhenVisible>
-            )
+            <WhenVisible data="permissions">
+                <svelte:fragment slot="fallback">
+                    <div>Loading...</div>
+                </svelte:fragment>
+
+                {permissions}
+            </WhenVisible>
             `,
           },
         ]}
@@ -118,15 +122,20 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
+            <script>
             import { WhenVisible } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
+            export let teams
+            export let users
+            </script>
 
-            export default () => (
-                <WhenVisible data="['teams', 'users']" fallback={() => <div>Loading...</div>}>
-                    <PermissionsChildComponent />
-                </WhenVisible>
-            )
+            <WhenVisible data={['teams', 'users']}>
+                <svelte:fragment slot="fallback">
+                    <div>Loading...</div>
+                </svelte:fragment>
+
+                <!-- Props are now loaded -->
+            </WhenVisible>
             `,
           },
         ]}
@@ -177,15 +186,19 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
+            <script>
             import { WhenVisible } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
+            export let permissions
+            </script>
 
-            export default () => (
-                <WhenVisible data="permissions" :buffer="500" fallback={() => <div>Loading...</div>}>
-                    <PermissionsChildComponent />
-                </WhenVisible>
-            )
+            <WhenVisible data="permissions" buffer={500}>
+                <svelte:fragment slot="fallback">
+                    <div>Loading...</div>
+                </svelte:fragment>
+
+                {permissions}
+            </WhenVisible>
             `,
           },
         ]}

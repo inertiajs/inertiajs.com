@@ -42,7 +42,7 @@ export default function () {
           },
           {
             name: 'Svelte',
-            language: 'html',
+            language: 'js',
             code: dedent`
               import { usePoll } from '@inertiajs/svelte'
 
@@ -91,7 +91,7 @@ export default function () {
           },
           {
             name: 'Svelte',
-            language: 'html',
+            language: 'js',
             code: dedent`
               import { usePoll } from '@inertiajs/svelte'
 
@@ -155,7 +155,7 @@ export default function () {
           },
           {
             name: 'Svelte',
-            language: 'html',
+            language: 'js',
             code: dedent`
               import { usePoll } from '@inertiajs/svelte'
 
@@ -198,7 +198,7 @@ export default function () {
           },
           {
             name: 'Svelte',
-            language: 'html',
+            language: 'js',
             code: dedent`
               import { usePoll } from '@inertiajs/svelte'
 

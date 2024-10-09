@@ -50,10 +50,9 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-            import { Link } from '@inertiajs/svelte'
+            import { inerta } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
-            <Link href="/users" prefetch>Users</Link>
+            <a href="/users" use:inertia={{ prefetch: true }}>Users</a>
             `,
           },
         ]}
@@ -90,12 +89,11 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-            import { Link } from '@inertiajs/svelte'
+            import { inertia } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
-            <Link href="/users" prefetch cache-for="1m">Users</Link>
-            <Link href="/users" prefetch cache-for="10s">Users</Link>
-            <Link href="/users" prefetch :cache-for="5000">Users</Link>
+            <a href="/users" use:inertia={{ prefetch: true, cacheFor: '1m' }}>Users</a>
+            <a href="/users" use:inertia={{ prefetch: true, cacheFor: '10s' }}>Users</a>
+            <a href="/users" use:inertia={{ prefetch: true, cacheFor: 5000 }}>Users</a>
             `,
           },
         ]}
@@ -128,10 +126,9 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-            import { Link } from '@inertiajs/svelte'
+            import { inertia } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
-            <Link href="/users" prefetch="click">Users</Link>
+            <a href="/users" use:inertia={{ prefetch: 'click' }}>Users</a>
             `,
           },
         ]}
@@ -161,10 +158,9 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-            import { Link } from '@inertiajs/svelte'
+            import { inerta } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
-            <Link href="/users" prefetch="mount">Users</Link>
+            <a href="/users" use:inertia={{ prefetch: 'mount' }}>Users</a>
             `,
           },
         ]}
@@ -196,10 +192,9 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-            import { Link } from '@inertiajs/svelte'
+            import { inertia } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
-            <Link href="/users" :prefetch="['mount', 'hover']">Users</Link>
+            <a href="/users" use:inertia={{ prefetch: ['mount', 'hover'] }}>Users</a>
             `,
           },
         ]}
@@ -354,10 +349,9 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-            import { Link } from '@inertiajs/svelte'
+            import { inertia } from '@inertiajs/svelte'
 
-            // TODO: Svelte example
-            <Link href="/users" prefetch :cacheFor="['30s', '1m']">Users</Link>
+            <a href="/users" use:inertia={{ prefetch: true, cacheFor: ['30s', '1m'] }}>Users</a>
             `,
           },
         ]}
