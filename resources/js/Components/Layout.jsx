@@ -263,14 +263,12 @@ export default function Layout({ meta, children }) {
       <Head>
         <title>{meta.title ? `${meta.title} - Inertia.js` : `Inertia.js - The Modern Monolith`}</title>
         {meta.description && <meta type="description" content={meta.description} />}
-        {meta.twitterCardImage && <meta name="twitter:card" content="summary_large_image" />}
-        {meta.twitterCardImage && <meta name="twitter:site" content="@reinink" />}
-        {meta.twitterCardImage && <meta name="twitter:creator" content="@reinink" />}
-        {meta.twitterCardImage && (
-          <meta name="twitter:title" content={`Inertia.js - ${meta.title ? meta.title : 'The Modern Monolith'}`} />
-        )}
-        {meta.twitterCardImage && <meta name="twitter:description" content={meta.description} />}
-        {meta.twitterCardImage && <meta name="twitter:image" content={meta.twitterCardImage} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@reinink" />
+        <meta name="twitter:creator" content="@reinink" />
+        <meta name="twitter:title" content={`Inertia.js - ${meta.title ? meta.title : 'The Modern Monolith'}`} />
+        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:image" content="https://v2.inertiajs.com/twitter-card.png" />
       </Head>
       <div onClick={() => setShowMobileNav(false)} className="font-sans leading-none text-gray-800 antialiased">
         <div className="text-md flex items-center justify-center gap-2 bg-[#202e59] px-6 py-4 font-medium leading-snug text-white">
