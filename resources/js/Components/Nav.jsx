@@ -145,23 +145,13 @@ const Nav = ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
-          <Link href="/deferred-props" className={linkClass('/deferred-props')}>
-            Deferred props
-          </Link>
-        </li>
-        <li className="md:pr-3">
-          <Link href="/intersection-observer" className={linkClass('/intersection-observer')}>
-            Intersection observer
-          </Link>
-        </li>
-        <li className="md:pr-3">
-          <Link href="/merging-props" className={linkClass('/merging-props')}>
-            Merging props
-          </Link>
-        </li>
-        <li className="md:pr-3">
           <Link href="/partial-reloads" className={linkClass('/partial-reloads')}>
             Partial reloads
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/deferred-props" className={linkClass('/deferred-props')}>
+            Deferred props
           </Link>
         </li>
         <li className="md:pr-3">
@@ -172,6 +162,16 @@ const Nav = ({ className }) => {
         <li className="md:pr-3">
           <Link href="/prefetching" className={linkClass('/prefetching')}>
             Prefetching
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/load-when-visible" className={linkClass('/load-when-visible')}>
+            Load when visible
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/merging-props" className={linkClass('/merging-props')}>
+            Merging props
           </Link>
         </li>
         <li className="md:pr-3">
