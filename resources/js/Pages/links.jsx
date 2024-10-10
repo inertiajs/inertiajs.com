@@ -80,7 +80,7 @@ export default function () {
             code: dedent`
               import { Link } from '@inertiajs/vue3'
 
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+              <Link href="/logout" method="post" as="button">Logout</Link>
 
               // Renders as...
               <button type="button">Logout</button>
@@ -92,7 +92,7 @@ export default function () {
             code: dedent`
               import { Link } from '@inertiajs/react'
 
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+              <Link href="/logout" method="post" as="button">Logout</Link>
 
               // Renders as...
               <button type="button">Logout</button>
@@ -114,9 +114,9 @@ export default function () {
       />
       <Notice>
         Creating <Code color="orange">POST</Code>/<Code color="orange">PUT</Code>/<Code color="orange">PATCH</Code>/
-        <Code color="orange">DELETE</Code> anchor <Code color="orange">{'<a>'}</Code> links is discouraged as it causes
-        "Open Link in New Tab / Window" accessibility issues. Instead, consider using a more appropriate element, such
-        as a <Code color="orange">{'<button>'}</Code>.
+        <Code color="orange">DELETE</Code> anchor <Code color="orange">{'<a>'}</Code> links is discouraged as it
+        causes "Open Link in New Tab / Window" accessibility issues. The component automatically renders a{` `}
+        <Code color="orange">{'<button>'}</Code> element when using these methods.
       </Notice>
       <H2>Method</H2>
       <P>
@@ -300,7 +300,7 @@ export default function () {
             code: dedent`
               import { Link } from '@inertiajs/react'
 
-              <input onChange={this.handleChange} value={query} />
+              <input onChange={this.handleChange} value={query} type="text" />
 
               <Link href="/search" data={query} preserveState>Search</Link>
             `,

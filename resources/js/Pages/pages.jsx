@@ -281,7 +281,7 @@ export default function () {
               </script>
 
               <template>
-                <H1>Welcome</H1>
+                <h1>Welcome</h1>
                 <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
               </template>
             `,
@@ -367,7 +367,7 @@ export default function () {
               </script>
 
               <template>
-                <H1>Welcome</H1>
+                <h1>Welcome</h1>
                 <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
               </template>
             `,
