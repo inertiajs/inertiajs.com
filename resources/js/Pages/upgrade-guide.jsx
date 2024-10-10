@@ -101,6 +101,11 @@ export default function () {
         The Vue 2 adapter has been removed. Vue 2 reached End of Life on December 3, 2023, so this felt like it was
         time.
       </P>
+      <H3>Svelte adapter</H3>
+      <Ul>
+        <li>Dropped support for Svelte 3 as it reached End of Life on June 20, 2023.</li>
+        <li>The <Code>remember</Code> helper has been rename to <Code>useRemember</Code> to be consistent with other helpers.</li>
+      </Ul>
       <H3>Partial reloads are now async</H3>
       <P>
         Previously partial reloads in Inertia were synchronous, just like all Inertia requests. In v2.0, partial reloads
