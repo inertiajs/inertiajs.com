@@ -35,6 +35,10 @@ export default function () {
         roll a new one. If we attempt to decrypt the history state with the new key, it will fail and Inertia will make
         a fresh request back to your server for the page data.
       </P>
+      <Notice>
+        History encryption relies on <Code>window.crypto.subtle</Code> which is only available in secure environments
+        (sites with SSL enabled).
+      </Notice>
       <H2>Opting in</H2>
       <P>History encryption is an opt-in feature. There are several methods for enabling it:</P>
       <H3>Global encryption</H3>
