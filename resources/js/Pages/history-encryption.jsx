@@ -39,7 +39,7 @@ export default function () {
       <P>History encryption is an opt-in feature. There are several methods for enabling it:</P>
       <H3>Global encryption</H3>
       <P>
-        If you'd like to enable history encryption globally, set the <Code>inertia.history.encrypted</Code> config value
+        If you'd like to enable history encryption globally, set the <Code>inertia.history.encrypt</Code> config value
         to <Code>true</Code>.
       </P>
       <P>
