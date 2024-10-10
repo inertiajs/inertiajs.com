@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Notice, P, React, Svelte, Svelte4, Svelte5, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -248,12 +248,18 @@ export default function () {
           <Code>hydrateRoot</Code> instead of <Code>createRoot</Code>:
         </P>
       </React>
-      <Svelte>
+      <Svelte4>
         <P>
-          To enable client-side hydration in a Svelte app, set the <Code>hydratable</Code> compiler option to{' '}
-          <Code>true</Code> in your <Code>vite.config.js</Code> file:
+          To enable client-side hydration in a Svelte 4 app, set the <Code>hydrate</Code> option to{' '}
+          <Code>true</Code> in your <Code>app.js</Code> file:
         </P>
-      </Svelte>
+      </Svelte4>
+      <Svelte5>
+        <P>
+          To enable client-side hydration in a Svelte 5 app, update your <Code>app.js</Code> file to use{' '}
+          <Code>hydrate</Code> instead of <Code>mount</Code> when server rendering:
+        </P>
+      </Svelte5>
       <TabbedCode
         examples={[
           {
@@ -299,9 +305,60 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'diff',
             code: dedent`
+                import { createInertiaApp } from '@inertiajs/svelte'
+
+                createInertiaApp({
+                  resolve: name => {
+                    const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                    return pages[\`./Pages/${name}.svelte\`]
+                  },
+                 setup({ el, App }) {
+             -     new App({ target: el })
+             +     new App({ target: el, hydrate: true })
+                 },
+                })
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'diff',
+            code: dedent`
+                import { createInertiaApp } from '@inertiajs/svelte'
+             -  import { mount } from 'svelte'
+             +  import { hydrate, mount } from 'svelte'
+
+                createInertiaApp({
+                  resolve: name => {
+                    const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                    return pages[\`./Pages/${name}.svelte\`]
+                  },
+                  setup({ el, App }) {
+             -      mount(App, { target: el })
+             +      if (el.dataset.serverRendered === 'true') {
+             +        hydrate(App, { target: el })
+             +      } else {
+             +        mount(App, { target: el })
+             +      }
+                  },
+                })
+            `,
+          },
+        ]}
+      />
+      <Svelte4>
+        <P>
+          You will also need to set the <Code>hydratable</Code> compiler option to <Code>true</Code>{' '}
+          in your <Code>vite.config.js</Code> file:
+        </P>
+        <TabbedCode
+          examples={[
+            {
+              name: 'Svelte 4',
+              language: 'diff',
+              code: dedent`
               import { svelte } from '@sveltejs/vite-plugin-svelte'
               import laravel from 'laravel-vite-plugin'
               import { defineConfig } from 'vite'
@@ -322,38 +379,10 @@ export default function () {
                 ],
               })
             `,
-          },
-        ]}
-      />
-      <Svelte>
-        <P>
-          You'll also need to enable hydration in your <Code>app.js</Code> file:
-        </P>
-        <TabbedCode
-          examples={[
-            {
-              name: 'Svelte',
-              language: 'diff',
-              code: dedent`
-                import { createInertiaApp } from '@inertiajs/svelte'
-
-                createInertiaApp({
-                  resolve: name => {
-                    const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-                    return pages[\`./Pages/${name}.svelte\`]
-                  },
-             -   setup({ el, App, props }) {
-             -     new App({ target: el, props })
-             -   },
-             +   setup({ el, App }) {
-             +     new App({ target: el, hydrate: true })
-             +   },
-                })
-            `,
             },
           ]}
         />
-      </Svelte>
+      </Svelte4>
       <H2>Deployment</H2>
       <P>
         When deploying your SSR enabled app to production, you'll need to build both the client-side (

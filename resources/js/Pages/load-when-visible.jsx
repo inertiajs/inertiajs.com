@@ -61,13 +61,13 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'jsx',
             code: dedent`
             <script>
-            import { WhenVisible } from '@inertiajs/svelte'
+                import { WhenVisible } from '@inertiajs/svelte'
 
-            export let permissions
+                export let permissions
             </script>
 
             <WhenVisible data="permissions">
@@ -75,7 +75,30 @@ export default function () {
                     <div>Loading...</div>
                 </svelte:fragment>
 
-                {permissions}
+                {#each permissions as permission}
+                    <!-- ... -->
+                {/each}
+            </WhenVisible>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+            <script>
+                import { WhenVisible } from '@inertiajs/svelte'
+
+                let { permissions } = $props()
+            </script>
+
+            <WhenVisible data="permissions">
+                {#snippet fallback()}
+                    <div>Loading...</div>
+                {/snippet}
+
+                {#each permissions as permission}
+                    <!-- ... -->
+                {/each}
             </WhenVisible>
             `,
           },
@@ -120,20 +143,39 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'jsx',
             code: dedent`
             <script>
-            import { WhenVisible } from '@inertiajs/svelte'
+                import { WhenVisible } from '@inertiajs/svelte'
 
-            export let teams
-            export let users
+                export let teams
+                export let users
             </script>
 
             <WhenVisible data={['teams', 'users']}>
                 <svelte:fragment slot="fallback">
                     <div>Loading...</div>
                 </svelte:fragment>
+
+                <!-- Props are now loaded -->
+            </WhenVisible>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+            <script>
+                import { WhenVisible } from '@inertiajs/svelte'
+
+                let { teams, users } = $props()
+            </script>
+
+            <WhenVisible data={['teams', 'users']}>
+                {#snippet fallback()}
+                    <div>Loading...</div>
+                {/snippet}
 
                 <!-- Props are now loaded -->
             </WhenVisible>
@@ -184,13 +226,13 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'jsx',
             code: dedent`
             <script>
-            import { WhenVisible } from '@inertiajs/svelte'
+                import { WhenVisible } from '@inertiajs/svelte'
 
-            export let permissions
+                export let permissions
             </script>
 
             <WhenVisible data="permissions" buffer={500}>
@@ -198,7 +240,30 @@ export default function () {
                     <div>Loading...</div>
                 </svelte:fragment>
 
-                {permissions}
+                {#each permissions as permission}
+                    <!-- ... -->
+                {/each}
+            </WhenVisible>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+            <script>
+                import { WhenVisible } from '@inertiajs/svelte'
+
+                let { permissions } = $props()
+            </script>
+
+            <WhenVisible data="permissions" buffer={500}>
+                {#snippet fallback()}
+                    <div>Loading...</div>
+                {/snippet}
+
+                {#each permissions as permission}
+                    <!-- ... -->
+                {/each}
             </WhenVisible>
             `,
           },
@@ -241,17 +306,32 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'jsx',
             code: dedent`
             <script>
-            import { WhenVisible } from '@inertiajs/svelte'
+                import { WhenVisible } from '@inertiajs/svelte'
 
-            export let products
+                export let products
             </script>
 
             <WhenVisible data="products" as="span">
-                {products}
+                <!-- ... -->
+            </WhenVisible>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+            <script>
+                import { WhenVisible } from '@inertiajs/svelte'
+
+                let { products } = $props()
+            </script>
+
+            <WhenVisible data="products" as="span">
+                <!-- ... -->
             </WhenVisible>
             `,
           },
@@ -302,17 +382,32 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'jsx',
             code: dedent`
             <script>
-            import { WhenVisible } from '@inertiajs/svelte'
+                import { WhenVisible } from '@inertiajs/svelte'
 
-            export let products
+                export let products
             </script>
 
             <WhenVisible data="products" always>
-                {products}
+                <!-- ... -->
+            </WhenVisible>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+            <script>
+                import { WhenVisible } from '@inertiajs/svelte'
+
+                let { products } = $props()
+            </script>
+
+            <WhenVisible data="products" always>
+                <!-- ... -->
             </WhenVisible>
             `,
           },

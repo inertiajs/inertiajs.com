@@ -115,13 +115,13 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'jsx',
             code: dedent`
             <script>
-            import { Deferred } from '@inertiajs/svelte'
+                import { Deferred } from '@inertiajs/svelte'
 
-            export let permissions
+                export let permissions
             </script>
 
             <Deferred data="permissions">
@@ -129,7 +129,30 @@ export default function () {
                     <div>Loading...</div>
                 </svelte:fragment>
 
-                {permissions}
+                {#each permissions as permission}
+                    <!-- ... -->
+                {/each}
+            </Deferred>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+            <script>
+                import { Deferred } from '@inertiajs/svelte'
+
+                let { permissions } = $props()
+            </script>
+
+            <Deferred data="permissions">
+                {#snippet fallback()}
+                    <div>Loading...</div>
+                {/snippet}
+
+                {#each permissions as permission}
+                    <!-- ... -->
+                {/each}
             </Deferred>
             `,
           },
@@ -174,20 +197,39 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'jsx',
             code: dedent`
             <script>
-            import { Deferred } from '@inertiajs/svelte'
+                import { Deferred } from '@inertiajs/svelte'
 
-            export let teams
-            export let users
+                export let teams
+                export let users
             </script>
 
             <Deferred data={['teams', 'users']}>
                 <svelte:fragment slot="fallback">
                     <div>Loading...</div>
                 </svelte:fragment>
+
+                <!-- Props are now loaded -->
+            </Deferred>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+            <script>
+                import { Deferred } from '@inertiajs/svelte'
+
+                let { teams, users } = $props()
+            </script>
+
+            <Deferred data={['teams', 'users']}>
+                {#snippet fallback()}
+                    <div>Loading...</div>
+                {/snippet}
 
                 <!-- Props are now loaded -->
             </Deferred>
