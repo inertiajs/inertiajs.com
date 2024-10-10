@@ -32,31 +32,24 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
+            name: 'Vue',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/vue2
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'bash',
-            code: dedent`
-              npm install @inertiajs/vue3
+              npm install @inertiajs/vue3@next
             `,
           },
           {
             name: 'React',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/react
+              npm install @inertiajs/react@next
             `,
           },
           {
             name: 'Svelte',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/svelte
+              npm install @inertiajs/svelte@next
             `,
           },
         ]}
@@ -69,29 +62,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import Vue from 'vue'
-              import { createInertiaApp } from '@inertiajs/vue2'
-
-              createInertiaApp({
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                  return pages[\`./Pages/\${name}.vue\`]
-                },
-                setup({ el, App, props, plugin }) {
-                  Vue.use(plugin)
-
-                  new Vue({
-                    render: h => h(App, props),
-                  }).$mount(el)
-                },
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { createApp, h } from 'vue'
@@ -160,21 +131,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              // Vite
-              resolve: name => {
-                const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                return pages[\`./Pages/\${name}.vue\`]
-              },
-
-              // Webpack
-              resolve: name => require(\`./Pages/\${name}\`),
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               // Vite

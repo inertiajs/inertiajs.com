@@ -25,7 +25,7 @@ export default function Layout({ meta, children }) {
   }
 
   const [codeTabs, setCodeTabsState] = useState({
-    frontend: 'Vue 3',
+    frontend: 'Vue',
     backend: 'Laravel',
   })
 
@@ -39,7 +39,7 @@ export default function Layout({ meta, children }) {
     setShowSearch(true)
 
     setCodeTabs({
-      frontend: getCurrentCodeTab('frontend') || 'Vue 3',
+      frontend: getCurrentCodeTab('frontend') || 'Vue',
       backend: getCurrentCodeTab('backend') || 'Laravel',
     })
 
@@ -100,7 +100,7 @@ export default function Layout({ meta, children }) {
         <div className="hidden items-center text-white md:flex">
           <div className="relative -my-2 mr-5">
             {showSearch && (
-              <DocSearch appId="VKGU7LHY9C" indexName="inertiajs" apiKey="cebbd114b9b67501184b39b00f94f765" />
+              <DocSearch appId="VKGU7LHY9C" indexName="inertiajs_v2" apiKey="cebbd114b9b67501184b39b00f94f765" />
             )}
           </div>
           <a className="mr-5 flex items-center hover:text-purple-900" href="https://github.com/inertiajs">
@@ -263,16 +263,25 @@ export default function Layout({ meta, children }) {
       <Head>
         <title>{meta.title ? `${meta.title} - Inertia.js` : `Inertia.js - The Modern Monolith`}</title>
         {meta.description && <meta type="description" content={meta.description} />}
-        {meta.twitterCardImage && <meta name="twitter:card" content="summary_large_image" />}
-        {meta.twitterCardImage && <meta name="twitter:site" content="@reinink" />}
-        {meta.twitterCardImage && <meta name="twitter:creator" content="@reinink" />}
-        {meta.twitterCardImage && (
-          <meta name="twitter:title" content={`Inertia.js - ${meta.title ? meta.title : 'The Modern Monolith'}`} />
-        )}
-        {meta.twitterCardImage && <meta name="twitter:description" content={meta.description} />}
-        {meta.twitterCardImage && <meta name="twitter:image" content={meta.twitterCardImage} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@reinink" />
+        <meta name="twitter:creator" content="@reinink" />
+        <meta name="twitter:title" content={`Inertia.js - ${meta.title ? meta.title : 'The Modern Monolith'}`} />
+        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:image" content="https://v2.inertiajs.com/twitter-card.png" />
       </Head>
       <div onClick={() => setShowMobileNav(false)} className="font-sans leading-none text-gray-800 antialiased">
+        <div className="text-md flex items-center justify-center gap-2 bg-[#202e59] px-6 py-4 font-medium leading-snug text-white">
+          <svg viewBox="0 0 20 20" className="h-6 w-6 flex-shrink-0 fill-current text-[#92eee2]">
+            <path d="M15.98 1.804a1 1 0 0 0-1.96 0l-.24 1.192a1 1 0 0 1-.784.785l-1.192.238a1 1 0 0 0 0 1.962l1.192.238a1 1 0 0 1 .785.785l.238 1.192a1 1 0 0 0 1.962 0l.238-1.192a1 1 0 0 1 .785-.785l1.192-.238a1 1 0 0 0 0-1.962l-1.192-.238a1 1 0 0 1-.785-.785l-.238-1.192ZM6.949 5.684a1 1 0 0 0-1.898 0l-.683 2.051a1 1 0 0 1-.633.633l-2.051.683a1 1 0 0 0 0 1.898l2.051.684a1 1 0 0 1 .633.632l.683 2.051a1 1 0 0 0 1.898 0l.683-2.051a1 1 0 0 1 .633-.633l2.051-.683a1 1 0 0 0 0-1.898l-2.051-.683a1 1 0 0 1-.633-.633L6.95 5.684ZM13.949 13.684a1 1 0 0 0-1.898 0l-.184.551a1 1 0 0 1-.632.633l-.551.183a1 1 0 0 0 0 1.898l.551.183a1 1 0 0 1 .633.633l.183.551a1 1 0 0 0 1.898 0l.184-.551a1 1 0 0 1 .632-.633l.551-.183a1 1 0 0 0 0-1.898l-.551-.184a1 1 0 0 1-.633-.632l-.183-.551Z" />
+          </svg>
+          <p style={{ textWrap: 'balance' }}>
+            You're viewing the Inertia.js v2.0 pre-release documentation.{' '}
+            <Link href="/upgrade-guide" className="group text-[#92eee2] hover:text-pink-400 lg:ml-2">
+              Upgrade guide &rarr;
+            </Link>
+          </p>
+        </div>
         <div className="text-white" style={{ background: 'linear-gradient(to right, #9553e9, #6d74ed)' }}>
           <div className="relative mx-auto max-w-6xl px-6 md:px-12 xl:px-0">
             <HeaderBackground />

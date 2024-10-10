@@ -2,7 +2,7 @@ import { Code, H1, H2, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
-  title: 'Intersection observer',
+  title: 'Load when visible',
   links: [
     { url: '#top', name: 'Introduction' },
     { url: '#loading-before-visible', name: 'Loading before visible' },
@@ -13,7 +13,7 @@ export const meta = {
 export default function () {
   return (
     <>
-      <H1>Intersection observer</H1>
+      <H1>Load when visible</H1>
       <P>
         Inertia supports lazy loading data on scroll using the Intersection Observer API. It provides the{' '}
         <Code>WhenVisible</Code> component as a convenient way to load data when an element becomes visible in the
@@ -27,7 +27,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             <script setup>
@@ -88,7 +88,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             <script setup>
@@ -150,7 +150,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             <script setup>
@@ -213,7 +213,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             <script setup>
@@ -274,7 +274,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             <script setup>

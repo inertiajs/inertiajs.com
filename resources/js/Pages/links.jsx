@@ -37,16 +37,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/">Home</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -84,19 +75,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
-
-              // Renders as...
-              <button type="button">Logout</button>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -150,16 +129,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/logout" method="post" as="button">Logout</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -197,16 +167,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -242,16 +203,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -292,16 +244,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/" replace>Home</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -340,18 +283,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <input v-model="query" type="text" />
-
-              <Link href="/search" :data="{ query }" preserve-state>Search</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -395,16 +327,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/" preserve-scroll>Home</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -446,16 +369,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/users?active=true" :only="['users']">Show active</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -498,26 +412,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              // URL exact match...
-              <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
-
-              // Component exact match...
-              <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>
-
-              // URL starts with (/users, /users/create, /users/1, etc.)...
-              <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
-
-              // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
-              <Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'

@@ -23,7 +23,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { usePoll } from '@inertiajs/vue3'
@@ -58,7 +58,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { usePoll } from '@inertiajs/vue3'
@@ -116,7 +116,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             <script setup>
@@ -175,7 +175,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
             import { usePoll } from '@inertiajs/vue3'

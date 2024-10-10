@@ -34,35 +34,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <Layout>
-                  <Head title="Welcome" />
-                  <h1>Welcome</h1>
-                  <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </Layout>
-              </template>
-
-              <script>
-              import Layout from './Layout'
-              import { Head } from '@inertiajs/vue2'
-
-              export default {
-                components: {
-                  Head,
-                  Layout,
-                },
-                props: {
-                  user: Object,
-                },
-              }
-              </script>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script setup>
@@ -164,35 +136,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <main>
-                  <header>
-                    <Link href="/">Home</Link>
-                    <Link href="/about">About</Link>
-                    <Link href="/contact">Contact</Link>
-                  </header>
-                  <article>
-                    <slot />
-                  </article>
-                </main>
-              </template>
-
-              <script>
-              import { Link } from '@inertiajs/vue2'
-
-              export default {
-                components: {
-                  Link,
-                }
-              }
-              </script>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script setup>
@@ -274,35 +218,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <div>
-                  <H1>Welcome</H1>
-                  <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </div>
-              </template>
-
-              <script>
-              import Layout from './Layout'
-
-              export default {
-                // Using a render function...
-                layout: (h, page) => h(Layout, [page]),
-
-                // Using shorthand syntax...
-                layout: Layout,
-
-                props: {
-                  user: Object,
-                },
-              }
-              </script>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script>
@@ -369,40 +285,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <div>
-                  <H1>Welcome</H1>
-                  <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
-                </div>
-              </template>
-
-              <script>
-              import SiteLayout from './SiteLayout'
-              import NestedLayout from './NestedLayout'
-
-              export default {
-                // Using a render function...
-                layout: (h, page) => {
-                  return h(SiteLayout, [
-                    h(NestedLayout, [page]),
-                  ])
-                },
-
-                // Using shorthand syntax...
-                layout: [SiteLayout, NestedLayout],
-
-                props: {
-                  user: Object,
-                },
-              }
-              </script>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script>
@@ -477,7 +360,7 @@ export default function () {
       />
       <Vue>
         <P>
-          If you're using Vue 2.7 or Vue 3, you can alternatively use the{' '}
+          Alternatively use the{' '}
           <A href="https://vue-macros.sxzz.moe/macros/define-options.html">defineOptions plugin</A> to define a layout
           within <Code>{'<script setup>'}</Code>:
         </P>
@@ -500,24 +383,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'
-
-              createInertiaApp({
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                  let page = pages[\`./Pages/\${name}.vue\`]
-                  page.default.layout = page.default.layout || Layout
-                  return page
-                },
-                // ...
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import Layout from './Layout'
@@ -580,24 +446,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import Layout from './Layout'
-
-              createInertiaApp({
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                  let page = pages[\`./Pages/\${name}.vue\`]
-                  page.default.layout = name.startsWith('Public/') ? undefined : Layout
-                  return page
-                },
-                // ...
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import Layout from './Layout'

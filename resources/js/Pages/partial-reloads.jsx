@@ -39,18 +39,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, {
-                only: ['users'],
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -93,18 +82,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, {
-                except: ['users'],
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -146,16 +124,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.reload({ only: ['users'] })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -190,16 +159,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/users?active=true" :only="['users']">Show active</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
