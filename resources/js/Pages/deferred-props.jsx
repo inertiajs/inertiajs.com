@@ -108,7 +108,7 @@ export default function () {
             import { Deferred } from '@inertiajs/react'
 
             export default () => (
-                <Deferred data="permissions" fallback={() => <div>Loading...</div>}>
+                <Deferred data="permissions" fallback={<div>Loading...</div>}>
                     <PermissionsChildComponent />
                 </Deferred>
             )
@@ -167,7 +167,7 @@ export default function () {
             import { Deferred } from '@inertiajs/react'
 
             export default () => (
-                <Deferred data={['teams', 'users']} fallback={() => <div>Loading...</div>}>
+                <Deferred data={['teams', 'users']} fallback={<div>Loading...</div>}>
                     <ChildComponent />
                 </Deferred>
             )
