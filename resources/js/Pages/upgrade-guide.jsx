@@ -40,7 +40,7 @@ export default function () {
           <A href="/merging-props">Infinite scrolling</A>
         </li>
         <li>
-          <A href="/intersection-observer">Lazy loading data on scroll</A>
+          <A href="/load-when-visible">Lazy loading data on scroll</A>
         </li>
       </Ul>
       <P>
