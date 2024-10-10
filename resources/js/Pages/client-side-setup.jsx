@@ -32,7 +32,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'bash',
             code: dedent`
               npm install @inertiajs/vue3
@@ -62,7 +62,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { createApp, h } from 'vue'
@@ -131,7 +131,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               // Vite

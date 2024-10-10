@@ -25,7 +25,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script setup>
@@ -195,7 +195,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script setup>
@@ -294,7 +294,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               form.submit(method, url, options)
@@ -342,7 +342,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               form.post('/profile', {
@@ -382,7 +382,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               form
@@ -426,7 +426,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               <button type="submit" :disabled="form.processing">Submit</button>
@@ -457,7 +457,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               <progress v-if="form.progress" :value="form.progress.percentage" max="100">
@@ -499,7 +499,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               <div v-if="form.errors.email">{{ form.errors.email }}</div>
@@ -536,7 +536,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               // Clear all errors...
@@ -579,7 +579,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               // Set a single error...
@@ -640,7 +640,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               // Reset the form...
@@ -683,7 +683,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               // Set the form's current values as the new defaults...
@@ -743,7 +743,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <div v-if="form.isDirty">There are unsaved form changes.</div>
@@ -775,7 +775,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               form.cancel()
@@ -806,7 +806,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { useForm } from '@inertiajs/vue3'

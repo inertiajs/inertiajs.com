@@ -34,7 +34,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             description: 'Use the "useRemember" hook to tell Inertia which data it should remember.',
             language: 'js',
             code: dedent`
@@ -93,7 +93,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             description: 'Set a key as the second argument of useRemember().',
             language: 'js',
             code: dedent`
@@ -144,7 +144,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             description: 'Set a dynamic key as the second argument of useRemember().',
             language: 'js',
             code: dedent`
@@ -197,7 +197,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { useForm } from '@inertiajs/vue3'
@@ -230,9 +230,9 @@ export default function () {
       />
       <H2>Manually saving state</H2>
       <P>
-        The <Code>useRemember</Code> hook in Vue 3 and React, and the <Code>remember</Code> store in Svelte all watch
-        for data changes and automatically save those changes to the history state. Then, Inertia will restore the data
-        on page load.
+        The <Code>useRemember</Code> hook in Vue and React, and the <Code>remember</Code> store in Svelte all watch for
+        data changes and automatically save those changes to the history state. Then, Inertia will restore the data on
+        page load.
       </P>
       <P>
         However, it's also possible to manage this manually using the underlying <Code>remember()</Code> and{' '}
@@ -241,7 +241,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'

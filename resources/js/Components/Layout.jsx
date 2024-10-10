@@ -25,7 +25,7 @@ export default function Layout({ meta, children }) {
   }
 
   const [codeTabs, setCodeTabsState] = useState({
-    frontend: 'Vue 3',
+    frontend: 'Vue',
     backend: 'Laravel',
   })
 
@@ -39,7 +39,7 @@ export default function Layout({ meta, children }) {
     setShowSearch(true)
 
     setCodeTabs({
-      frontend: getCurrentCodeTab('frontend') || 'Vue 3',
+      frontend: getCurrentCodeTab('frontend') || 'Vue',
       backend: getCurrentCodeTab('backend') || 'Laravel',
     })
 

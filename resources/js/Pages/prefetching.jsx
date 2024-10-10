@@ -29,7 +29,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             import { Link } from '@inertiajs/vue3'
@@ -64,7 +64,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             import { Link } from '@inertiajs/vue3'
@@ -105,7 +105,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             import { Link } from '@inertiajs/vue3'
@@ -137,7 +137,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             import { Link } from '@inertiajs/vue3'
@@ -171,7 +171,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             import { Link } from '@inertiajs/vue3'
@@ -210,7 +210,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
             router.prefetch(
@@ -236,7 +236,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
             import { usePrefetch } from '@inertiajs/vue3'
@@ -292,7 +292,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
             // Flush all prefetch cache
@@ -328,7 +328,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
             import { Link } from '@inertiajs/vue3'

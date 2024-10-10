@@ -54,7 +54,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'bash',
             code: dedent`
               npm install @vue/server-renderer
@@ -101,7 +101,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { createInertiaApp } from '@inertiajs/vue3'
@@ -238,7 +238,7 @@ export default function () {
       </P>
       <Vue>
         <P>
-          To enable client-side hydration in a Vue 3 app, update your <Code>app.js</Code> file to use{' '}
+          To enable client-side hydration in a Vue app, update your <Code>app.js</Code> file to use{' '}
           <Code>createSSRApp</Code> instead of <Code>createApp</Code>:
         </P>
       </Vue>
@@ -257,7 +257,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'diff',
             code: dedent`
             - import { createApp, h } from 'vue'

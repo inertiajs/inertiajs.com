@@ -36,7 +36,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'diff',
             code: dedent`
                resolve: name => {
@@ -107,7 +107,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'diff',
             code: dedent`
               - resolve: name => require(\`./Pages/\${name}\`),

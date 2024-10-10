@@ -53,7 +53,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'bash',
             code: dedent`
               npm install @inertiajs/vue3@next
