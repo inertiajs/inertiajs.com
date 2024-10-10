@@ -99,7 +99,7 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'html',
             code: dedent`
               <script>
@@ -111,12 +111,45 @@ export default function () {
                   email: null,
                 }
 
-                function handleSubmit() {
+                function submit() {
                   router.post('/users', values)
                 }
               </script>
 
-              <form on:submit|preventDefault={handleSubmit}>
+              <form on:submit|preventDefault={submit}>
+                <label for="first_name">First name:</label>
+                <input id="first_name" bind:value={values.first_name}>
+
+                <label for="last_name">Last name:</label>
+                <input id="last_name" bind:value={values.last_name}>
+
+                <label for="email">Email:</label>
+                <input id="email" bind:value={values.email}>
+
+                <button type="submit">Submit</button>
+              </form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { router } from '@inertiajs/svelte'
+
+                let values = {
+                  first_name: null,
+                  last_name: null,
+                  email: null,
+                }
+
+                function submit(e) {
+                  e.preventDefault()
+                  router.post('/users', values)
+                }
+              </script>
+
+              <form onsubmit={submit}>
                 <label for="first_name">First name:</label>
                 <input id="first_name" bind:value={values.first_name}>
 
@@ -254,24 +287,57 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'html',
             code: dedent`
               <script>
-              import { useForm } from '@inertiajs/svelte'
+                import { useForm } from '@inertiajs/svelte'
 
-              let form = useForm({
-                email: null,
-                password: null,
-                remember: false,
-              })
+                const form = useForm({
+                  email: null,
+                  password: null,
+                  remember: false,
+                })
 
-              function submit() {
-                $form.post('/login')
-              }
+                function submit() {
+                  $form.post('/login')
+                }
               </script>
 
               <form on:submit|preventDefault={submit}>
+                <input type="text" bind:value={$form.email} />
+                {#if $form.errors.email}
+                  <div class="form-error">{$form.errors.email}</div>
+                {/if}
+                <input type="password" bind:value={$form.password} />
+                {#if $form.errors.password}
+                  <div class="form-error">{$form.errors.password}</div>
+                {/if}
+                <input type="checkbox" bind:checked={$form.remember} /> Remember Me
+                <button type="submit" disabled={$form.processing}>Submit</button>
+              </form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+              <script>
+                import { useForm } from '@inertiajs/svelte'
+
+                const form = useForm({
+                  email: null,
+                  password: null,
+                  remember: false,
+                })
+
+                function submit(e) {
+                  e.preventDefault()
+                  $form.post('/login')
+                }
+              </script>
+
+              <form onsubmit={submit}>
                 <input type="text" bind:value={$form.email} />
                 {#if $form.errors.email}
                   <div class="form-error">{$form.errors.email}</div>

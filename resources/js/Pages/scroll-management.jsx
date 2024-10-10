@@ -166,7 +166,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
+              <a href="/" use:inertia={{ preserveScroll: true }}>Home</a>
 
               <Link href="/" preserveScroll>Home</Link>
             `,
