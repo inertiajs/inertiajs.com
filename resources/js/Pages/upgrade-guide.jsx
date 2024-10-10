@@ -15,7 +15,7 @@ export default function () {
     <>
       <H1>Upgrade guide for v2.0</H1>
       <Notice>
-        Inertia.js v2.0 is still in beta. Please report bugs on{' '}
+        Inertia.js v2.0 is still in beta and these docs are a work-in-progress. Please report bugs on{' '}
         <A color="orange" href="https://github.com/inertiajs/inertia">
           GitHub
         </A>
