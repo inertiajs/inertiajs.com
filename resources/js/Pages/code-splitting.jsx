@@ -36,18 +36,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'diff',
-            code: dedent`
-               resolve: name => {
-             -   const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-             -   return pages[\`./Pages/\${name}.vue\`]
-             +   const pages = import.meta.glob('./Pages/**/*.vue')
-             +   return pages[\`./Pages/\${name}.vue\`]()
-               },
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'diff',
             code: dedent`
@@ -118,14 +106,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'diff',
-            code: dedent`
-              - resolve: name => require(\`./Pages/\${name}\`),
-              + resolve: name => import(\`./Pages/\${name}\`),
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'diff',

@@ -93,41 +93,15 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <main>
-                  <header>
-                    You are logged in as: {{ user.name }}
-                  </header>
-                  <article>
-                    <slot />
-                  </article>
-                </main>
-              </template>
-
-              <script>
-              export default {
-                computed: {
-                  user() {
-                    return this.$page.props.auth.user
-                  }
-                }
-              }
-              </script>
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
               <script setup>
               import { computed } from 'vue'
               import { usePage } from '@inertiajs/vue3'
-              
+
               const page = usePage()
-              
+
               const user = computed(() => page.props.auth.user)
               </script>
 
@@ -219,24 +193,6 @@ export default function () {
       <P>Next, display the flash message in a frontend component, such as the site layout.</P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <main>
-                  <header></header>
-                  <article>
-                    <div v-if="$page.props.flash.message" class="alert">
-                      {{ $page.props.flash.message }}
-                    </div>
-                    <slot />
-                  </article>
-                  <footer></footer>
-                </main>
-              </template>
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'markup',

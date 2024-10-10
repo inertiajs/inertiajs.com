@@ -27,17 +27,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                forceFormData: true,
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -87,42 +76,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <form @submit.prevent="submit">
-                  <input type="text" v-model="form.name" />
-                  <input type="file" @input="form.avatar = $event.target.files[0]" />
-                  <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                    {{ form.progress.percentage }}%
-                  </progress>
-                  <button type="submit">Submit</button>
-                </form>
-              </template>
-
-              <script>
-              import { useForm } from '@inertiajs/vue2'
-
-              export default {
-                data() {
-                  return {
-                    form: useForm({
-                      name: null,
-                      avatar: null,
-                    }),
-                  }
-                },
-                methods: {
-                  submit() {
-                    this.form.post('/users')
-                  },
-                },
-              }
-              </script>
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'markup',
@@ -236,18 +189,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post(\`/users/\${user.id}\`, {
-                _method: 'put',
-                avatar: form.avatar,
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',

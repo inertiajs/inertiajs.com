@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, Notice, P, React, Svelte, TabbedCode, Vue, Vue2, Vue3 } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -54,13 +54,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'bash',
-            code: dedent`
-              npm install vue-server-renderer
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'bash',
             code: dedent`
@@ -107,33 +100,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { createInertiaApp } from '@inertiajs/vue2'
-              import createServer from '@inertiajs/vue2/server'
-              import Vue from 'vue'
-              import { createRenderer } from 'vue-server-renderer'
-
-              createServer(page =>
-                createInertiaApp({
-                  page,
-                  render: createRenderer().renderToString,
-                  resolve: name => {
-                    const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                    return pages[\`./Pages/\${name}.vue\`]
-                  },
-                  setup({ App, props, plugin }) {
-                    Vue.use(plugin)
-                    return new Vue({
-                      render: h => h(App, props),
-                    })
-                  },
-                }),
-              )
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -270,15 +236,12 @@ export default function () {
         <Svelte>Svelte</Svelte> to "hydrate" the static markup and make it interactive instead of re-rendering all the
         HTML that we just generated.
       </P>
-      <Vue2>
-        <P>Inertia automatically enables client-side hydration in Vue 2 apps, so no changes are required.</P>
-      </Vue2>
-      <Vue3>
+      <Vue>
         <P>
           To enable client-side hydration in a Vue 3 app, update your <Code>app.js</Code> file to use{' '}
           <Code>createSSRApp</Code> instead of <Code>createApp</Code>:
         </P>
-      </Vue3>
+      </Vue>
       <React>
         <P>
           To enable client-side hydration in a React app, update your <Code>app.js</Code> file to use{' '}
@@ -293,13 +256,6 @@ export default function () {
       </Svelte>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              // No changes required
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'diff',

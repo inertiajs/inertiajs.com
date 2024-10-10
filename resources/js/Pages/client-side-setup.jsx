@@ -32,13 +32,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'bash',
-            code: dedent`
-              npm install @inertiajs/vue2
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'bash',
             code: dedent`
@@ -68,28 +61,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import Vue from 'vue'
-              import { createInertiaApp } from '@inertiajs/vue2'
-
-              createInertiaApp({
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                  return pages[\`./Pages/\${name}.vue\`]
-                },
-                setup({ el, App, props, plugin }) {
-                  Vue.use(plugin)
-
-                  new Vue({
-                    render: h => h(App, props),
-                  }).$mount(el)
-                },
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -159,20 +130,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              // Vite
-              resolve: name => {
-                const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                return pages[\`./Pages/\${name}.vue\`]
-              },
-
-              // Webpack
-              resolve: name => require(\`./Pages/\${name}\`),
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',

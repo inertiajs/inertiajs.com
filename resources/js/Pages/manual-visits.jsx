@@ -28,33 +28,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, {
-                method: 'get',
-                data: {},
-                replace: false,
-                preserveState: false,
-                preserveScroll: false,
-                only: [],
-                headers: {},
-                errorBag: null,
-                forceFormData: false,
-                onCancelToken: cancelToken => {},
-                onCancel: () => {},
-                onBefore: visit => {},
-                onStart: visit => {},
-                onProgress: progress => {},
-                onSuccess: page => {},
-                onError: errors => {},
-                onFinish: visit => {},
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -144,20 +117,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get(url, data, options)
-              router.post(url, data, options)
-              router.put(url, data, options)
-              router.patch(url, data, options)
-              router.delete(url, options)
-              router.reload(options) // Uses the current URL
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -215,15 +174,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, { method: 'post' })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -265,21 +215,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit('/users', {
-                method: 'post',
-                data: {
-                  name: 'John Doe',
-                  email: 'john.doe@example.com',
-                },
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -334,18 +269,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', {
-                name: 'John Doe',
-                email: 'john.doe@example.com',
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -389,19 +312,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                headers: {
-                  'Custom-Header': 'value',
-                },
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -456,17 +366,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/companies', data, {
-                forceFormData: true,
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -512,15 +411,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get('/users', { search: 'John' }, { replace: true })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -574,15 +464,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get('/users', { search: 'John' }, { preserveState: true })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -618,15 +499,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get('/users', { search: 'John' }, { preserveState: 'errors' })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -661,17 +533,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                preserveState: (page) => page.props.someProp === 'value',
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -719,15 +580,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, { preserveScroll: false })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -763,15 +615,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, { preserveScroll: 'errors' })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -806,17 +649,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                preserveScroll: (page) => page.props.someProp === 'value',
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -865,15 +697,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit('/users', { search: 'John' }, { only: ['users'] })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -913,20 +736,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
-              })
-
-              // Cancel the visit...
-              this.cancelToken.cancel()
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -982,25 +791,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                onBefore: (visit) => {},
-                onStart: (visit) => {},
-                onProgress: (progress) => {},
-                onSuccess: (page) => {},
-                onError: (errors) => {},
-                onCancel: () => {},
-                onFinish: visit => {},
-                onPrefetching: () => {},
-                onPrefetched: () => {},
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -1066,17 +856,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.delete(\`/users/\${user.id}\`, {
-                onBefore: () => confirm('Are you sure you want to delete this user?'),
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -1117,26 +896,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post(url, {
-                onSuccess: () => {
-                  return Promise.all([
-                    this.doThing(),
-                    this.doAnotherThing()
-                  ])
-                }
-                onFinish: visit => {
-                  // This won't be called until doThing()
-                  // and doAnotherThing() have finished.
-                },
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',

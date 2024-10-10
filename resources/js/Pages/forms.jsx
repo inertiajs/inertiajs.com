@@ -25,44 +25,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <form @submit.prevent="submit">
-                  <label for="first_name">First name:</label>
-                  <input id="first_name" v-model="form.first_name" />
-                  <label for="last_name">Last name:</label>
-                  <input id="last_name" v-model="form.last_name" />
-                  <label for="email">Email:</label>
-                  <input id="email" v-model="form.email" />
-                  <button type="submit">Submit</button>
-                </form>
-              </template>
-
-              <script>
-              import { router } from '@inertiajs/vue2'
-
-              export default {
-                data() {
-                  return {
-                    form: {
-                      first_name: null,
-                      last_name: null,
-                      email: null,
-                    },
-                  }
-                },
-                methods: {
-                  submit() {
-                    router.post('/users', this.form)
-                  },
-                },
-              }
-              </script>
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
@@ -233,42 +195,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <form @submit.prevent="form.post('/login')">
-                  <!-- email -->
-                  <input type="text" v-model="form.email">
-                  <div v-if="form.errors.email">{{ form.errors.email }}</div>
-                  <!-- password -->
-                  <input type="password" v-model="form.password">
-                  <div v-if="form.errors.password">{{ form.errors.password }}</div>
-                  <!-- remember me -->
-                  <input type="checkbox" v-model="form.remember"> Remember Me
-                  <!-- submit -->
-                  <button type="submit" :disabled="form.processing">Login</button>
-                </form>
-              </template>
-
-              <script>
-              import { useForm } from '@inertiajs/vue2'
-
-              export default {
-                data() {
-                  return {
-                    form: useForm({
-                      email: null,
-                      password: null,
-                      remember: false,
-                    }),
-                  }
-                },
-              }
-              </script>
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
@@ -368,18 +294,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              form.submit(method, url, options)
-              form.get(url, options)
-              form.post(url, options)
-              form.put(url, options)
-              form.patch(url, options)
-              form.delete(url, options)
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -428,16 +342,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              form.post('/profile', {
-                preserveScroll: true,
-                onSuccess: () => form.reset('password'),
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -477,18 +381,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              form
-                .transform((data) => ({
-                  ...data,
-                  remember: data.remember ? 'on' : '',
-                }))
-                .post('/login')
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -534,13 +426,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              <button type="submit" :disabled="form.processing">Submit</button>
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
@@ -571,15 +456,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                {{ form.progress.percentage }}%
-              </progress>
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'jsx',
@@ -623,13 +499,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              <div v-if="form.errors.email">{{ form.errors.email }}</div>
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'jsx',
             code: dedent`
@@ -666,17 +535,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              // Clear all errors...
-              form.clearErrors()
-
-              // Clear errors for specific fields...
-              form.clearErrors('field', 'anotherfield')
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -720,20 +578,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              // Set a single error...
-              form.setError('field', 'Your error message.');
-
-              // Set multiple errors at once...
-              form.setError({
-                foo: 'Your error message for the foo field.',
-                bar: 'Some other error for the bar field.'
-              });
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -796,17 +640,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              // Reset the form...
-              form.reset()
-
-              // Reset specific fields...
-              form.reset('field', 'anotherfield')
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -849,23 +682,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              // Set the form's current values as the new defaults...
-              form.defaults()
-
-              // Update the default value of a single field...
-              form.defaults('email', 'updated-default@example.com')
-
-              // Update the default value of multiple fields...
-              form.defaults({
-                name: 'Updated Example',
-                email: 'updated-default@example.com',
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -927,13 +743,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <div v-if="form.isDirty">There are unsaved form changes.</div>
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'markup',
             code: dedent`
@@ -966,13 +775,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              form.cancel()
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -1003,16 +805,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { useForm } from '@inertiajs/vue2'
-
-              form: useForm('CreateUser', data)
-              form: useForm(\`EditUser:\${this.user.id}\`, data)
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',

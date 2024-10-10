@@ -34,35 +34,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            description: 'Use the "remember" property to tell Inertia which data it should remember.',
-            language: 'js',
-            code: dedent`
-              {
-                // Option 1: Object...
-                remember: {
-                  data: ['form'],
-                },
-
-                // Option 2: Array...
-                remember: ['form'],
-
-                // Option 3: String...
-                remember: 'form',
-
-                data() {
-                  return {
-                    form: {
-                      first_name: null,
-                      last_name: null,
-                      // ...
-                    },
-                  }
-                },
-              }
-            `,
-          },
-          {
             name: 'Vue 3',
             description: 'Use the "useRemember" hook to tell Inertia which data it should remember.',
             language: 'js',
@@ -122,27 +93,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            description: 'Set a key using the "remember.key" property.',
-            language: 'js',
-            code: dedent`
-              {
-                remember: {
-                  data: ['form'],
-                  key: 'Users/Create',
-                },
-                data() {
-                  return {
-                    form: {
-                      first_name: null,
-                      last_name: null,
-                    },
-                  }
-                },
-              }
-            `,
-          },
-          {
             name: 'Vue 3',
             description: 'Set a key as the second argument of useRemember().',
             language: 'js',
@@ -193,29 +143,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            description: 'Set a key callback using the "remember.key" property.',
-            language: 'js',
-            code: dedent`
-              {
-                remember: {
-                  data: ['form'],
-                  key() {
-                    return \`Users/Edit:\${this.user.id}\`
-                  }
-                },
-                data() {
-                  return {
-                    form: {
-                      first_name: this.user.first_name,
-                      last_name: this.user.last_name,
-                    },
-                  }
-                },
-              }
-            `,
-          },
           {
             name: 'Vue 3',
             description: 'Set a dynamic key as the second argument of useRemember().',
@@ -270,16 +197,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { useForm } from '@inertiajs/vue2'
-
-              form: useForm('CreateUser', data)
-              form: useForm(\`EditUser:\${this.user.id}\`, data)
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -313,9 +230,9 @@ export default function () {
       />
       <H2>Manually saving state</H2>
       <P>
-        The <Code>remember</Code> property in Vue 2, and the <Code>useRemember</Code> hook in Vue 3, React, and Svelte
-        all watch for data changes and automatically save those changes to the history state. Then, Inertia will restore
-        the data on page load.
+        The <Code>useRemember</Code> hook in Vue 3 and React, and the <Code>remember</Code> store in Svelte all watch
+        for data changes and automatically save those changes to the history state. Then, Inertia will restore the data
+        on page load.
       </P>
       <P>
         However, it's also possible to manage this manually using the underlying <Code>remember()</Code> and{' '}
@@ -323,19 +240,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              // Save local component state to history state...
-              router.remember(data, 'my-key')
-
-              // Restore local component state from history state...
-              let data = router.restore('my-key')
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',

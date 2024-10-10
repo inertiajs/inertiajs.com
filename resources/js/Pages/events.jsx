@@ -36,17 +36,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -89,17 +78,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              document.addEventListener('inertia:start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -141,20 +119,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              let removeStartEventListener = router.on('start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })
-
-              // Remove the listener...
-              removeStartEventListener()
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -202,24 +166,6 @@ export default function () {
       <P>Combined with hooks, you can automatically remove the event listener when components unmount.</P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              export default {
-                mounted() {
-                  this.$once(
-                    'hook:destroyed',
-                    router.on('start', (event) => {
-                      console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-                    })
-                  )
-                },
-              }
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'jsx',
@@ -270,22 +216,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              let startEventListener = (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              }
-
-              document.addEventListener('inertia:start', startEventListener)
-
-              // Remove the listener...
-              document.removeEventListener('inertia:start', startEventListener)
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -345,19 +275,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('before', (event) => {
-                if (!confirm('Are you sure you want to navigate away?')) {
-                  event.preventDefault()
-                }
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -405,17 +322,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('before', (event) => {
-                return confirm('Are you sure you want to navigate away?')
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -462,17 +368,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('before', (event) => {
-                console.log(\`About to make a visit to \${event.detail.visit.url}\`)
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -510,17 +405,6 @@ export default function () {
       <P>The primary purpose of this event is to allow you to prevent a visit from happening.</P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('before', (event) => {
-                return confirm('Are you sure you want to navigate away?')
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -563,17 +447,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -618,17 +491,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('progress', (event) => {
-                this.form.progress = event.detail.progress.percentage
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -675,17 +537,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('success', (event) => {
-                console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -729,17 +580,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('error', (errors) => {
-                console.log(errors)
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -792,18 +632,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('invalid', (event) => {
-                console.log(\`An invalid Inertia response was received.\`)
-                console.log(event.detail.response)
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -846,19 +674,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('invalid', (event) => {
-                event.preventDefault()
-
-                // Handle the invalid response yourself...
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -908,18 +723,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('exception', (event) => {
-                console.log(\`An unexpected error occurred during an Inertia visit.\`)
-                console.log(event.detail.error)
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -962,18 +765,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('exception', (event) => {
-                event.preventDefault()
-                // Handle the error yourself
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
@@ -1025,17 +816,6 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('finish', (event) => {
-                NProgress.done()
-              })
-            `,
-          },
-          {
             name: 'Vue 3',
             language: 'js',
             code: dedent`
@@ -1079,17 +859,6 @@ export default function () {
       </P>
       <TabbedCode
         examples={[
-          {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('navigate', (event) => {
-                console.log(\`Navigated to \${event.detail.page.url}\`)
-              })
-            `,
-          },
           {
             name: 'Vue 3',
             language: 'js',
