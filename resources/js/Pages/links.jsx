@@ -229,7 +229,7 @@ export default function () {
 
               <button use:inertia={{ href: '/endpoint', headers: { foo: bar } }}>Save</button>
 
-              <Link href="/endpoint" headers={{ foo: bar}}>Save</Link>
+              <Link href="/endpoint" headers={{ foo: bar }}>Save</Link>
             `,
           },
         ]}
