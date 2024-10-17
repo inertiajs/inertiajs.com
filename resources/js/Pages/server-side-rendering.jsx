@@ -148,7 +148,7 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'js',
             code: dedent`
               import { createInertiaApp } from '@inertiajs/svelte'
@@ -160,6 +160,31 @@ export default function () {
                   resolve: name => {
                     const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
                     return pages[\`./Pages/\${name}.svelte\`]
+                  },
+                  setup({ App, props }) {
+                    return App.render(props)
+                  },
+                }),
+              )
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/svelte'
+              import createServer from '@inertiajs/svelte/server'
+              import { render } from 'svelte/server'
+
+              createServer(page =>
+                createInertiaApp({
+                  page,
+                  resolve: name => {
+                    const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                    return pages[\`./Pages/\${name}.svelte\`]
+                  },
+                  setup({ App, props }) {
+                    return render(App, { props })
                   },
                 }),
               )
@@ -315,9 +340,9 @@ export default function () {
                     const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
                     return pages[\`./Pages/${name}.svelte\`]
                   },
-                 setup({ el, App }) {
-             -     new App({ target: el })
-             +     new App({ target: el, hydrate: true })
+                 setup({ el, App, props }) {
+             -     new App({ target: el, props })
+             +     new App({ target: el, props, hydrate: true })
                  },
                 })
             `,
@@ -335,12 +360,12 @@ export default function () {
                     const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
                     return pages[\`./Pages/${name}.svelte\`]
                   },
-                  setup({ el, App }) {
-             -      mount(App, { target: el })
+                  setup({ el, App, props }) {
+             -      mount(App, { target: el, props })
              +      if (el.dataset.serverRendered === 'true') {
-             +        hydrate(App, { target: el })
+             +        hydrate(App, { target: el, props })
              +      } else {
-             +        mount(App, { target: el })
+             +        mount(App, { target: el, props })
              +      }
                   },
                 })

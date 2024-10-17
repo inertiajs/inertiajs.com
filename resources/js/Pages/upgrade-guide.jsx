@@ -105,6 +105,15 @@ export default function () {
       <Ul>
         <li>Dropped support for Svelte 3 as it reached End of Life on June 20, 2023.</li>
         <li>The <Code>remember</Code> helper has been rename to <Code>useRemember</Code> to be consistent with other helpers.</li>
+        <li>
+            Updated <Code>setup</Code> callback in <Code>app.js</Code>.
+            You need to pass <Code>props</Code> when initializing the <Code>App</Code> component.{' '}
+            <A href="/client-side-setup#initialize-the-inertia-app">See setup in app.js</A>
+        </li>
+        <li>
+            <Code>setup</Code> callback is now required in <Code>ssr.js</Code>.{' '}
+            <A href="/server-side-rendering#add-server-entry-point">See setup in ssr.js</A>
+        </li>
       </Ul>
       <H3>Partial reloads are now async</H3>
       <P>
