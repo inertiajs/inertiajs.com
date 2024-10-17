@@ -72,7 +72,7 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'html',
             code: dedent`
               <script>
@@ -81,11 +81,32 @@ export default function () {
                 export let user
               </script>
 
+              <svelte:head>
+                <title>Welcome</title>
+              </svelte:head>
+
               <Layout>
-                <svelte:head>
-                  <title>Welcome</title>
-                </svelte:head>
-                <H1>Welcome</H1>
+                <h1>Welcome</h1>
+                <p>Hello {user.name}, welcome to your first Inertia app!</p>
+              </Layout>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <script>
+                import Layout from './Layout.svelte'
+
+                let { user } = $props()
+              </script>
+
+              <svelte:head>
+                <title>Welcome</title>
+              </svelte:head>
+
+              <Layout>
+                <h1>Welcome</h1>
                 <p>Hello {user.name}, welcome to your first Inertia app!</p>
               </Layout>
             `,
@@ -178,7 +199,7 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'html',
             code: dedent`
               <script>
@@ -193,6 +214,28 @@ export default function () {
                 </header>
                 <article>
                   <slot />
+                </article>
+              </main>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { inertia } from '@inertiajs/svelte'
+
+                let { children } = $props()
+              </script>
+
+              <main>
+                <header>
+                  <a use:inertia href="/">Home</a>
+                  <a use:inertia href="/about">About</a>
+                  <a use:inertia href="/contact">Contact</a>
+                </header>
+                <article>
+                  {@render children()}
                 </article>
               </main>
             `,
@@ -238,7 +281,7 @@ export default function () {
               </script>
 
               <template>
-                <H1>Welcome</H1>
+                <h1>Welcome</h1>
                 <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
               </template>
             `,
@@ -264,7 +307,7 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'html',
             code: dedent`
               <script context="module">
@@ -275,7 +318,23 @@ export default function () {
                 export let user
               </script>
 
-              <H1>Welcome</H1>
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <script module>
+                export { default as layout } from './Layout.svelte'
+              </script>
+
+              <script>
+                let { user } = $props()
+              </script>
+
+              <h1>Welcome</h1>
               <p>Hello {user.name}, welcome to your first Inertia app!</p>
             `,
           },
@@ -308,7 +367,7 @@ export default function () {
               </script>
 
               <template>
-                <H1>Welcome</H1>
+                <h1>Welcome</h1>
                 <p>Hello {{ user.name }}, welcome to your first Inertia app!</p>
               </template>
             `,
@@ -339,12 +398,19 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'html',
             code: dedent`
               <script context="module">
                 import SiteLayout from './SiteLayout.svelte'
                 import NestedLayout from './NestedLayout.svelte'
+
+                // Using a render function...
+                export const layout = (h, page) => {
+                  return h(SiteLayout, [h(NestedLayout, [page])])
+                }
+
+                // Using the shorthand...
                 export const layout = [SiteLayout, NestedLayout]
               </script>
 
@@ -352,7 +418,32 @@ export default function () {
                 export let user
               </script>
 
-              <H1>Welcome</H1>
+              <h1>Welcome</h1>
+              <p>Hello {user.name}, welcome to your first Inertia app!</p>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <script module>
+                import SiteLayout from './SiteLayout.svelte'
+                import NestedLayout from './NestedLayout.svelte'
+
+                // Using a render function...
+                export const layout = (h, page) => {
+                  return h(SiteLayout, [h(NestedLayout, [page])])
+                }
+
+                // Using the shorthand...
+                export const layout = [SiteLayout, NestedLayout]
+              </script>
+
+              <script>
+                let { user } = $props()
+              </script>
+
+              <h1>Welcome</h1>
               <p>Hello {user.name}, welcome to your first Inertia app!</p>
             `,
           },
@@ -490,7 +581,6 @@ export default function () {
                   const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
                   let page = pages[\`./Pages/\${name}.svelte\`]
                   return { default: page.default, layout: name.startsWith('Public/') ? undefined : Layout }
-                  return page
                 },
                 // ...
               })

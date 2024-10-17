@@ -182,7 +182,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
+              <a href="/users?active=true" use:inertia={{ only: ['users'] }}>Show active</a>
 
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,

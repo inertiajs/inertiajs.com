@@ -195,13 +195,26 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
-            language: 'jsx',
+            name: 'Svelte 4',
+            language: 'js',
             code: dedent`
               import { router } from '@inertiajs/svelte'
               import { onMount } from 'svelte'
 
               onMount(() => {
+                return router.on('start', (event) => {
+                  console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+                })
+              })
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              $effect(() => {
                 return router.on('start', (event) => {
                   console.log(\`Starting a visit to \${event.detail.visit.url}\`)
                 })
