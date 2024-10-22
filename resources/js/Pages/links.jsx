@@ -64,7 +64,7 @@ export default function () {
 
               <Link href="/">Home</Link>
             `,
-            description: 'The use:inertia directive can be applied to any HTML element.',
+            description: 'The use:inertia action can be applied to any HTML element.',
           },
         ]}
       />
@@ -80,7 +80,7 @@ export default function () {
             code: dedent`
               import { Link } from '@inertiajs/vue3'
 
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+              <Link href="/logout" method="post" as="button">Logout</Link>
 
               // Renders as...
               <button type="button">Logout</button>
@@ -92,7 +92,7 @@ export default function () {
             code: dedent`
               import { Link } from '@inertiajs/react'
 
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+              <Link href="/logout" method="post" as="button">Logout</Link>
 
               // Renders as...
               <button type="button">Logout</button>
@@ -102,23 +102,21 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia } from '@inertiajs/svelte'
+              import { Link } from '@inertiajs/svelte'
 
-              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
+              <Link href="/logout" method="post" as="button">Logout</Link>
 
               // Renders as...
               <button type="button">Logout</button>
             `,
-            description:
-              'Svelte does not support dynamic elements yet, but you can use the "inertia" directive to achieve the same results.',
           },
         ]}
       />
       <Notice>
         Creating <Code color="orange">POST</Code>/<Code color="orange">PUT</Code>/<Code color="orange">PATCH</Code>/
         <Code color="orange">DELETE</Code> anchor <Code color="orange">{'<a>'}</Code> links is discouraged as it causes
-        "Open Link in New Tab / Window" accessibility issues. Instead, consider using a more appropriate element, such
-        as a <Code color="orange">{'<button>'}</Code>.
+        "Open Link in New Tab / Window" accessibility issues. The component automatically renders a{` `}
+        <Code color="orange">{'<button>'}</Code> element when using these methods.
       </Notice>
       <H2>Method</H2>
       <P>
@@ -152,8 +150,9 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
+              <button use:inertia={{ href: '/logout', method: 'post' }} type="button">Logout</button>
 
+              <Link href="/logout" method="post">Logout</button>
             `,
           },
         ]}
@@ -188,7 +187,9 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/svelte'
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <button use:inertia={{ href: '/endpoint', method: 'post', data: { foo: bar } }} type="button">Save</button>
 
               <Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
             `,
@@ -226,9 +227,9 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>
+              <button use:inertia={{ href: '/endpoint', headers: { foo: bar } }}>Save</button>
 
-              <Link href="/endpoint" headers={{ foo: bar}}>Save</Link>
+              <Link href="/endpoint" headers={{ foo: bar }}>Save</Link>
             `,
           },
         ]}
@@ -267,7 +268,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/" use:inertia="{{ replace: true }}">Home</a>
+              <a href="/" use:inertia={{ replace: true }}>Home</a>
 
               <Link href="/" replace>Home</Link>
             `,
@@ -299,7 +300,7 @@ export default function () {
             code: dedent`
               import { Link } from '@inertiajs/react'
 
-              <input onChange={this.handleChange} value={query} />
+              <input onChange={this.handleChange} value={query} type="text" />
 
               <Link href="/search" data={query} preserveState>Search</Link>
             `,
@@ -310,11 +311,11 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <input on:change={handleChange} value={query} />
+              <input bind:value={query} type="text" />
 
-              <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>
+              <button use:inertia={{ href: '/search', data: { query }, preserveState: true }}>Search</button>
 
-              <Link href="/search" data={query} preserveState>Search</Link>
+              <Link href="/search" data={{ query }} preserveState>Search</Link>
             `,
           },
         ]}
@@ -350,7 +351,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
+              <a href="/" use:inertia={{ preserveScroll: true }}>Home</a>
 
               <Link href="/" preserveScroll>Home</Link>
             `,
@@ -392,7 +393,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
+              <a href="/users?active=true" use:inertia={{ only: ['users'] }}>Show active</a>
 
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
@@ -455,13 +456,13 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { page } from '@inertiajs/svelte'
+              import { inertia, Link, page } from '@inertiajs/svelte'
 
               // URL exact match...
-              <Link href="/users" class={$page.url === '/users' ? 'active' : ''}>Users</Link>
+              <a href="/users" use:inertia class:active={$page.url === '/users'}>Users</a>
 
               // Component exact match...
-              <Link href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</Link>
+              <a href="/users" use:inertia class:active={$page.component === 'Users/Index'}>Users</a>
 
               // URL starts with (/users, /users/create, /users/1, etc.)...
               <Link href="/users" class={$page.url.startsWith('/users') ? 'active' : ''}>Users</Link>

@@ -66,12 +66,12 @@ export default function () {
           },
           {
             name: 'Svelte',
-            description: 'Use the "remember" store to tell Inertia which data it should remember.',
+            description: 'Use the "useRemember" store to tell Inertia which data it should remember.',
             language: 'js',
             code: dedent`
-              import { remember } from '@inertiajs/svelte'
+              import { useRemember } from '@inertiajs/svelte'
 
-              let form = remember({
+              const form = useRemember({
                 first_name: null,
                 last_name: null,
               })
@@ -126,9 +126,9 @@ export default function () {
             description: 'Set a key as the second argument of useRemember().',
             language: 'js',
             code: dedent`
-                import { page, remember } from '@inertiajs/svelte'
+                import { page, useRemember } from '@inertiajs/svelte'
 
-                let form = remember({
+                const form = useRemember({
                   first_name: null,
                   last_name: null,
                 }, 'Users/Create')
@@ -178,9 +178,9 @@ export default function () {
             description: 'Set a dynamic key as the second argument of useRemember().',
             language: 'js',
             code: dedent`
-                import { page, remember } from '@inertiajs/svelte'
+                import { page, useRemember } from '@inertiajs/svelte'
 
-                let form = remember({
+                const form = useRemember({
                   first_name: $page.props.user.first_name,
                   last_name: $page.props.user.last_name,
                 }, \`Users/Edit:\${$page.props.user.id}\`)
@@ -230,9 +230,8 @@ export default function () {
       />
       <H2>Manually saving state</H2>
       <P>
-        The <Code>useRemember</Code> hook in Vue and React, and the <Code>remember</Code> store in Svelte all watch for
-        data changes and automatically save those changes to the history state. Then, Inertia will restore the data on
-        page load.
+        The <Code>useRemember</Code> hook watch for data changes and automatically save those changes to the history
+        state. Then, Inertia will restore the data on page load.
       </P>
       <P>
         However, it's also possible to manage this manually using the underlying <Code>remember()</Code> and{' '}
