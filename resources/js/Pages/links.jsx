@@ -114,8 +114,8 @@ export default function () {
       />
       <Notice>
         Creating <Code color="orange">POST</Code>/<Code color="orange">PUT</Code>/<Code color="orange">PATCH</Code>/
-        <Code color="orange">DELETE</Code> anchor <Code color="orange">{'<a>'}</Code> links is discouraged as it
-        causes "Open Link in New Tab / Window" accessibility issues. The component automatically renders a{` `}
+        <Code color="orange">DELETE</Code> anchor <Code color="orange">{'<a>'}</Code> links is discouraged as it causes
+        "Open Link in New Tab / Window" accessibility issues. The component automatically renders a{` `}
         <Code color="orange">{'<button>'}</Code> element when using these methods.
       </Notice>
       <H2>Method</H2>

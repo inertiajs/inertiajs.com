@@ -275,8 +275,8 @@ export default function () {
       </React>
       <Svelte4>
         <P>
-          To enable client-side hydration in a Svelte 4 app, set the <Code>hydrate</Code> option to{' '}
-          <Code>true</Code> in your <Code>app.js</Code> file:
+          To enable client-side hydration in a Svelte 4 app, set the <Code>hydrate</Code> option to <Code>true</Code> in
+          your <Code>app.js</Code> file:
         </P>
       </Svelte4>
       <Svelte5>
@@ -375,8 +375,8 @@ export default function () {
       />
       <Svelte4>
         <P>
-          You will also need to set the <Code>hydratable</Code> compiler option to <Code>true</Code>{' '}
-          in your <Code>vite.config.js</Code> file:
+          You will also need to set the <Code>hydratable</Code> compiler option to <Code>true</Code> in your{' '}
+          <Code>vite.config.js</Code> file:
         </P>
         <TabbedCode
           examples={[

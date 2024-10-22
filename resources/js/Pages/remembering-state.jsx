@@ -230,8 +230,8 @@ export default function () {
       />
       <H2>Manually saving state</H2>
       <P>
-        The <Code>useRemember</Code> hook watch for data changes and automatically save those changes
-        to the history state. Then, Inertia will restore the data on page load.
+        The <Code>useRemember</Code> hook watch for data changes and automatically save those changes to the history
+        state. Then, Inertia will restore the data on page load.
       </P>
       <P>
         However, it's also possible to manage this manually using the underlying <Code>remember()</Code> and{' '}
