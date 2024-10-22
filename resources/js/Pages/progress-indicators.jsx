@@ -16,9 +16,9 @@ export default function () {
       <H1>Progress indicators</H1>
       <P>
         Since Inertia requests are made via XHR, there would typically not be a browser loading indicator when
-        navigating from one page to another. To solve this, Inertia displays a progress indicator at the
-        top of the page whenever you make an Inertia visit. However, <A href="#visit-options">asynchronous requests</A>{' '}
-        do not show the progress indicator unless explicitly configured.
+        navigating from one page to another. To solve this, Inertia displays a progress indicator at the top of the page
+        whenever you make an Inertia visit. However, <A href="#visit-options">asynchronous requests</A> do not show the
+        progress indicator unless explicitly configured.
       </P>
       <P>
         Of course, if you prefer, you can disable Inertia's default loading indicator and provide your own custom
@@ -380,9 +380,9 @@ export default function () {
       />
       <H2>Visit Options</H2>
       <P>
-        In addition to these configurations, Inertia.js provides two visit options to control the loading indicator
-        on a per-request basis: <Code>showProgress</Code> and <Code>async</Code>. These options offer greater
-        control over how Inertia.js handles asynchronous requests and manages progress indicators.
+        In addition to these configurations, Inertia.js provides two visit options to control the loading indicator on a
+        per-request basis: <Code>showProgress</Code> and <Code>async</Code>. These options offer greater control over
+        how Inertia.js handles asynchronous requests and manages progress indicators.
       </P>
       <H3>showProgress</H3>
       <P>
