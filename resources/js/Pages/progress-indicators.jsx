@@ -6,6 +6,7 @@ export const meta = {
   links: [
     { url: '#default', name: 'Default' },
     { url: '#custom', name: 'Custom' },
+    { url: '#visit-options', name: 'Visit Options' },
   ],
 }
 
@@ -16,7 +17,8 @@ export default function () {
       <P>
         Since Inertia requests are made via XHR, there would typically not be a browser loading indicator when
         navigating from one page to another. To solve this, Inertia displays a progress indicator at the top of the page
-        whenever you make an Inertia visit.
+        whenever you make an Inertia visit. However, <A href="#visit-options">asynchronous requests</A> do not show the
+        progress indicator unless explicitly configured.
       </P>
       <P>
         Of course, if you prefer, you can disable Inertia's default loading indicator and provide your own custom
@@ -375,6 +377,38 @@ export default function () {
             `,
           },
         ]}
+      />
+      <H2>Visit Options</H2>
+      <P>
+        In addition to these configurations, Inertia.js provides two visit options to control the loading indicator on a
+        per-request basis: <Code>showProgress</Code> and <Code>async</Code>. These options offer greater control over
+        how Inertia.js handles asynchronous requests and manages progress indicators.
+      </P>
+      <H3>showProgress</H3>
+      <P>
+        The <Code>showProgress</Code> option provides fine-grained control over the visibility of the loading indicator
+        during requests.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          router.get('/settings', {}, { showProgress: false })
+        `}
+      />
+      <H3>async</H3>
+      <P>
+        The <Code>async</Code> option allows you to perform asynchronous requests without displaying the default
+        progress indicator. It can be used in combination with the <Code>showProgress</Code> option.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          // Disable the progress indicator
+          router.get('/settings', {}, { async: true })
+
+          // Enable the progress indicator with async requests
+          router.get('/settings', {}, { async: true, showProgress: true })
+        `}
       />
     </>
   )
