@@ -220,17 +220,25 @@ export default function () {
         optimization if it's acceptable that some page data becomes stale.
       </P>
       <P>
-        When a partial reload request is made, Inertia includes two additional headers with the request:{' '}
-        <Code>X-Inertia-Partial-Data</Code> and <Code>X-Inertia-Partial-Component</Code>.
+        When a partial reload request is made, Inertia includes the <Code>X-Inertia-Partial-Component</Code> header and
+        may include <Code>X-Inertia-Partial-Data</Code> and/or <Code>X-Inertia-Partial-Except</Code> headers with the
+        request.
       </P>
       <P>
         The <Code>X-Inertia-Partial-Data</Code> header is a comma separated list of the desired props (data) keys that
         should be returned.
       </P>
       <P>
+        The <Code>X-Inertia-Partial-Except</Code> header is a comma separated list of the props (data) keys that
+        should not be returned. When only the <Code>X-Inertia-Partial-Except</Code> header is included, all props (data)
+        except those listed will be sent. If both <Code>X-Inertia-Partial-Data</Code> and
+        <Code>X-Inertia-Partial-Except</Code> headers are included, the <Code>X-Inertia-Partial-Except</Code> header
+        will take precedence.
+      </P>
+      <P>
         The <Code>X-Inertia-Partial-Component</Code> header includes the name of the component that is being partially
         reloaded. This is necessary, since partial reloads only work for requests made to the same page component. If
-        the final destination is different for some reason (eg. the user was logged out and is now on the login page),
+        the final destination is different for some reason (e.g. the user was logged out and is now on the login page),
         then no partial reloading will occur.
       </P>
       <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
