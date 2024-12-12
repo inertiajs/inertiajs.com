@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, H3, Notice, P, TabbedCode, Ul } from '@/Components'
+import { A, Code, H1, H2, H3, P, TabbedCode, Ul } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -94,6 +94,23 @@ export default function () {
         The Vue 2 adapter has been removed. Vue 2 reached End of Life on December 3, 2023, so this felt like it was
         time.
       </P>
+      <H3>Router `replace` method</H3>
+      <P>
+        The previously deprecated <Code>router.replace</Code> method has been re-instated, but its functionality has
+        changed. It is now used to make Client Side page visits. To make server-side visits that replace the current
+        history entry in the browser, use the <Code>replace</Code> option:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'javascript',
+            code: dedent`
+              router.get('/users', { search: 'John' }, { replace: true })
+            `,
+          },
+        ]}
+      />
       <H3>Svelte adapter</H3>
       <Ul>
         <li>Dropped support for Svelte 3 as it reached End of Life on June 20, 2023.</li>
