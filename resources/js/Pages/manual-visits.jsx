@@ -9,6 +9,7 @@ export const meta = {
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#file-uploads', name: 'File uploads' },
     { url: '#browser-history', name: 'Browser history' },
+    { url: '#client-side-visits', name: 'Client side visits' },
     { url: '#state-preservation', name: 'State preservation' },
     { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
@@ -473,6 +474,118 @@ export default function () {
       <Notice>
         Visits made to the same URL automatically set <Code color="orange">replace</Code> to{' '}
         <Code color="orange">true</Code>.
+      </Notice>
+      <H2>Client side visits</H2>
+      <P>
+        You can use the <Code>router.push</Code> and <Code>router.replace</Code> method to make client-side visits. This
+        method is useful when you want to update the browser's history without making a server request.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+
+              router.push({
+                url: '/users',
+                component: 'Users',
+                props: { search: 'John' },
+                clearHistory: false,
+                encryptHistory: false,
+                preserveScroll: false,
+                preserveState: false,
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+
+              router.push({
+                url: '/users',
+                component: 'Users',
+                props: { search: 'John' },
+                clearHistory: false,
+                encryptHistory: false,
+                preserveScroll: false,
+                preserveState: false,
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              router.push({
+                url: '/users',
+                component: 'Users',
+                props: { search: 'John' },
+                clearHistory: false,
+                encryptHistory: false,
+                preserveScroll: false,
+                preserveState: false,
+              })
+            `,
+          },
+        ]}
+      />
+      <P>
+        All of the parameters are optional. By default, all passed paramaters will be merged with the current page. This
+        means you are responsible for overriding the current page's URL, component, and props.
+      </P>
+      <P>
+        If you need access to the current page's props you can pass a function to the props option. This function will
+        receive the current page's props as an argument and should return the new props.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+
+              router.push({ url: '/users', component: 'Users' })
+              router.replace({
+                props: (currentProps) => ({ ...currentProps, search: 'John' })
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+
+              router.push({ url: '/users', component: 'Users' })
+              router.replace({
+                props: (currentProps) => ({ ...currentProps, search: 'John' })
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              router.push({ url: '/users', component: 'Users' })
+              router.replace({
+                props: (currentProps) => ({ ...currentProps, search: 'John' })
+              })
+            `,
+          },
+        ]}
+      />
+      <Notice>
+        Make sure that any route you push on the client side is also defined on the server side. If the user refreshes
+        the page, the server will need to know how to render the page.
       </Notice>
       <H2>State preservation</H2>
       <P>

@@ -97,8 +97,8 @@ export default function () {
       <H3>Router `replace` method</H3>
       <P>
         The previously deprecated <Code>router.replace</Code> method has been re-instated, but its functionality has
-        changed. It is now used to make Client Side page visits. To make server-side visits that replace the current
-        history entry in the browser, use the <Code>replace</Code> option:
+        changed. It is now used to make <A href="/manual-visits#client-side-visits">Client Side</A> page visits. To make
+        server-side visits that replace the current history entry in the browser, use the <Code>replace</Code> option:
       </P>
       <TabbedCode
         examples={[
