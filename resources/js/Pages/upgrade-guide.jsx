@@ -49,21 +49,21 @@ export default function () {
             name: 'Vue',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/vue3@next
+              npm install @inertiajs/vue3@^2.0
             `,
           },
           {
             name: 'React',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/react@next
+              npm install @inertiajs/react@^2.0
             `,
           },
           {
             name: 'Svelte',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/svelte@next
+              npm install @inertiajs/svelte@^2.0
             `,
           },
         ]}
@@ -77,7 +77,7 @@ export default function () {
             name: 'Laravel',
             language: 'bash',
             code: dedent`
-              composer require inertiajs/inertia-laravel:2.x-dev
+              composer require inertiajs/inertia-laravel:^2.0
             `,
           },
         ]}
