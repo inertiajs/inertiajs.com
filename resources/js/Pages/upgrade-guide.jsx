@@ -15,7 +15,7 @@ export default function () {
     <>
       <H1>Upgrade guide for v2.0</H1>
       <Notice>
-        You can find the legacy docs for Inertia.js v1 at{' '}
+        You can find the legacy docs for Inertia.js v1.0 at{' '}
         <A href="https://v1.inertiajs.comv1.inertiajs.com">v1.inertiajs.com</A>.
       </Notice>
       <H2 id="whats-new">What's new</H2>
