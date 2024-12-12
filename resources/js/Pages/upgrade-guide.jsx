@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, H3, P, TabbedCode, Ul } from '@/Components'
+import { A, Code, H1, H2, H3, Notice, P, TabbedCode, Ul } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -14,6 +14,10 @@ export default function () {
   return (
     <>
       <H1>Upgrade guide for v2.0</H1>
+      <Notice>
+        You can find the legacy docs for Inertia.js v1 at{' '}
+        <A href="https://v1.inertiajs.comv1.inertiajs.com">v1.inertiajs.com</A>.
+      </Notice>
       <H2 id="whats-new">What's new</H2>
       <P>
         Inertia.js v2.0 is a huge step forward for Inertia! The core library has been completely rewritten to
