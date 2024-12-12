@@ -258,7 +258,7 @@ export default function Layout({ meta, children }) {
         <meta name="twitter:creator" content="@reinink" />
         <meta name="twitter:title" content={`Inertia.js - ${meta.title ? meta.title : 'The Modern Monolith'}`} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content="https://v2.inertiajs.com/twitter-card.png" />
+        <meta name="twitter:image" content="https://inertiajs.com/twitter-card.png" />
       </Head>
       <div onClick={() => setShowMobileNav(false)} className="font-sans leading-none text-gray-800 antialiased">
         <div className="text-md flex items-center justify-center gap-2 bg-[#202e59] px-6 py-4 font-medium leading-snug text-white">
