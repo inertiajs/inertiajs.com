@@ -41,7 +41,7 @@ export default function () {
             name: 'Laravel',
             language: 'bash',
             code: dedent`
-              composer require inertiajs/inertia-laravel:2.x-dev
+              composer require inertiajs/inertia-laravel
             `,
           },
         ]}
