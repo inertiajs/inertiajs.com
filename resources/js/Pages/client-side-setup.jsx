@@ -35,21 +35,21 @@ export default function () {
             name: 'Vue',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/vue3@next
+              npm install @inertiajs/vue3
             `,
           },
           {
             name: 'React',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/react@next
+              npm install @inertiajs/react
             `,
           },
           {
             name: 'Svelte',
             language: 'bash',
             code: dedent`
-              npm install @inertiajs/svelte@next
+              npm install @inertiajs/svelte
             `,
           },
         ]}
