@@ -45,7 +45,7 @@ export default function () {
         when logging out of an application.
       </P>
       <H2>Upgrade dependencies</H2>
-      <P>To upgrade to the Inertia.js v2.0 beta, first use npm to install the client-side adapter of your choice:</P>
+      <P>To upgrade to the Inertia.js v2.0, first use npm to install the client-side adapter of your choice:</P>
       <TabbedCode
         examples={[
           {
