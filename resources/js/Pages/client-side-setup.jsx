@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, P, TabbedCode, Notice } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -54,6 +54,9 @@ export default function () {
           },
         ]}
       />
+      <Notice>
+        Remember to also install and configure the Vite plugin corresponding to your framework of choice.
+      </Notice>
       <H2>Initialize the Inertia app</H2>
       <P>
         Next, update your main JavaScript file to boot your Inertia app. To accomplish this, we'll initialize the
@@ -140,6 +143,9 @@ export default function () {
         The <Code>setup</Code> callback receives everything necessary to initialize the client-side framework, including
         the root Inertia <Code>App</Code> component.
       </P>
+      <Notice>
+        For React the entry file would need to be a <Code>.jsx</Code> or <Code>.tsx</Code> file, since JSX is used.
+      </Notice>
       <H2>Resolving components</H2>
       <P>
         The <Code>resolve</Code> callback tells Inertia how to load a page component. It receives a page name (string),
