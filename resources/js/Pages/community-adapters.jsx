@@ -65,6 +65,9 @@ export default function () {
           <A href="https://github.com/boxybird/inertia-wordpress">WordPress</A>
         </Li>
         <Li>
+          <A href="https://github.com/evo-mark/inertia-wordpress">WordPress (v2 support)</A>
+        </Li>
+        <Li>
           <A href="https://github.com/tbreuss/yii2-inertia">Yii2</A>
         </Li>
         <Li>
