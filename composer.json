@@ -5,11 +5,11 @@
     "keywords": ["inertia.js", "website", "inertia"],
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4|^8.2",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "inertiajs/inertia-laravel": "^0.5.1",
+        "inertiajs/inertia-laravel": "^0.6.4",
         "laravel/framework": "^8.40",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
@@ -40,8 +40,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan inertia-sponsors:install --from-autoloader"
+            "@php artisan package:discover --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
