@@ -134,7 +134,7 @@ export default function () {
       <H3>Partial reloads are now async</H3>
       <P>
         Previously partial reloads in Inertia were synchronous, just like all Inertia requests. In v2.0, partial reloads
-        are now asynchronous. Generally this is desireable, but if you were relying on these requests being synchronous,
+        are now asynchronous. Generally this is desirable, but if you were relying on these requests being synchronous,
         you may need to adjust your code.
       </P>
     </>
