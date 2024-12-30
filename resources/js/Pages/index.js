@@ -5,7 +5,6 @@ const meta = {
   description:
     'Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers.',
   hero: true,
-  sponsor: true,
   twitterCardImage: 'https://inertiajs.com/previews/home.png',
   links: [
     { url: '#top', name: 'Introduction' },
