@@ -44,6 +44,9 @@ export default function () {
           <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
         </Li>
         <Li>
+          <A href="https://kaiofelps.github.io/inertia-rust/">Rust</A>
+        </Li>
+        <Li>
           <A href="https://github.com/girardinsamuel/masonite-inertia/">Masonite</A>
         </Li>
         <Li>
