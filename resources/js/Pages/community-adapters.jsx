@@ -29,7 +29,7 @@ export default function () {
           <A href="https://github.com/prestancedesign/inertia-clojure">Clojure</A>
         </Li>
         <Li>
-          <A href="https://github.com/amiranagram/inertia-codeigniter-4">CodeIgniter4</A>
+          <A href="https://github.com/amiranagram/inertia-codeigniter-4">CodeIgniter4 (deprecated)</A>
         </Li>
         <Li>
           <A href="https://github.com/elpete/cbInertia">ColdBox</A>
