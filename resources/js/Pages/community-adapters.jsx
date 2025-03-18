@@ -20,8 +20,8 @@ export default function () {
           <A href="https://docs.adonisjs.com/guides/inertia">AdonisJS</A>
         </Li>
         <Li>
-          <A href="https://github.com/ishanvyas22/cakephp-inertiajs">CakePHP</A>
-        </Li>
+          <A href="https://github.com/CakeDC/cakephp-inertia">CakePHP InertiaJS plugin</A>
+        </Li>          
         <Li>
           <A href="https://github.com/cherifGsoul/inertia-can">CanJS</A>
         </Li>
