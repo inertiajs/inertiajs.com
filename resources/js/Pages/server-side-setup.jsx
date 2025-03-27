@@ -28,7 +28,7 @@ export default function () {
       </P>
       <H2>Laravel starter kits</H2>
       <P>
-        Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Breeze and Jetstream, provide
+        Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A> provide
         out-of-the-box scaffolding for new Inertia applications. These starter kits are the absolute fastest way to
         start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually
         install Inertia into your application, please consult the documentation below.
