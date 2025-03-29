@@ -63,7 +63,7 @@ export default function () {
       />
       <H3>Per-request encryption</H3>
       <P>
-        To encrypt the history of an individual request, simply cal the <Code>encryptHistory</Code> method before
+        To encrypt the history of an individual request, simply call the <Code>encryptHistory</Code> method before
         returning the response:
       </P>
       <TabbedCode
