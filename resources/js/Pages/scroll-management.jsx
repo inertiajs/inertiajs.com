@@ -185,7 +185,7 @@ export default function () {
       <CodeBlock
         language="html"
         children={dedent`
-          <div class="overflow-y-auto" scroll-region>
+          <div class="overflow-y-auto" scroll-region="">
             <!-- Your page content -->
           </div>
         `}
