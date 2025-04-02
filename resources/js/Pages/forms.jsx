@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, H3, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -899,6 +899,64 @@ export default function () {
 
               const form = useForm('CreateUser', data)
               const form = useForm(\`EditUser:\${user.id}\`, data)
+            `,
+          },
+        ]}
+      />
+      <H3>Wayfinder</H3>
+      <P>
+        <strong>Requires Inertia &gt;= v2.0.6</strong>
+      </P>
+      <P>
+        When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the form helper, you
+        can simply pass the resulting object directly to the <Code>form.submit</Code> method. The form helper will infer
+        the HTTP method and URL from the Wayfinder object:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { useForm } from '@inertiajs/vue3'
+              import { store } from 'App/Http/Controllers/UserController'
+
+              const form = useForm({
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+              })
+
+              form.submit(store())
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { useForm } from '@inertiajs/react'
+              import { store } from 'App/Http/Controllers/UserController'
+
+              const form = useForm({
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+              })
+
+              form.submit(store())
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { useForm } from '@inertiajs/svelte'
+              import { store } from 'App/Http/Controllers/UserController'
+
+              const form = useForm({
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+              })
+
+              form.submit(store())
             `,
           },
         ]}

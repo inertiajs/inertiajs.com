@@ -157,6 +157,53 @@ export default function () {
           },
         ]}
       />
+
+      <H2>Wayfinder</H2>
+      <P>
+        <strong>Requires Inertia &gt;= v2.0.6</strong>
+      </P>
+      <P>
+        When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the{' '}
+        <Code>Link</Code>
+        component, you can simply pass the resulting object directly to the <Code>href</Code> prop. The{' '}
+        <Code>Link</Code> will infer the HTTP method and URL directly from the Wayfinder object:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'jsx',
+            code: dedent`
+              import { Link } from '@inertiajs/vue3'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              <Link :href="show(1)">John Doe</Link>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { Link } from '@inertiajs/react'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              <Link href={show(1)}>John Doe</Link>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'jsx',
+            code: dedent`
+              import { inertia, Link } from '@inertiajs/svelte'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              <button use:inertia={{ href: show(1) }} type="button">John Doe</button>
+
+              <Link href={show(1)}>John Doe</button>
+            `,
+          },
+        ]}
+      />
       <H2>Data</H2>
       <P>
         When making <Code>POST</Code> or <Code>PUT</Code> requests, you may wish to add additional data to the request.
