@@ -16,8 +16,8 @@ export default function () {
     <>
       <H1>History encryption</H1>
       <P>
-        Imagine a sceniario where your user is authenticated, browses priveleged information on your site, then logs
-        out. If they press the back button, they can still see the priveleged information that is stored in the window's
+        Imagine a scenario where your user is authenticated, browses privileged information on your site, then logs
+        out. If they press the back button, they can still see the privileged information that is stored in the window's
         history state. This is a security risk. To prevent this, Inertia.js provides a history encryption feature.
       </P>
       <H2>How it works</H2>
