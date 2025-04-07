@@ -55,6 +55,9 @@ export default function () {
         <Li>
           <A href="https://github.com/prestancedesign/pingcrm-clojure">Clojure/React</A> by Michaël Salihi
         </Li>
+        <Li>
+          <A href="https://github.com/hakimihamzan/penguincrm">Laravel/Inertia2/React/ShadcnUI</A> by Hakimi Hamzan
+        </Li>
       </Ul>
     </>
   )
