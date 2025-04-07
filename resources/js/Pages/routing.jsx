@@ -73,7 +73,7 @@ export default function () {
         ]}
       />
       <P>
-        However, when using Laravel, the <A href="https://github.com/tightenco/ziggy">Ziggy</A> library can make your
+        However, when using Laravel, the <A href="https://github.com/tighten/ziggy">Ziggy</A> library can make your
         named, server-side routes available to you via a global <Code>route()</Code> function. In fact, if you are
         developing an application using one of Laravel's{' '}
         <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Ziggy is already configured for you.
@@ -85,14 +85,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              Vue.prototype.$route = route
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               app.config.globalProperties.$route = route
