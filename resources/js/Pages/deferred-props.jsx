@@ -21,7 +21,7 @@ export default function () {
       </P>
       <H2>Server side</H2>
       <P>
-        To defer a prop, you can use the <Code>defer</Code> method when returning your response. This method recieves a
+        To defer a prop, you can use the <Code>defer</Code> method when returning your response. This method receives a
         callback that returns the prop data. The callback will be executed in a separate request after the initial page
         render.
       </P>
