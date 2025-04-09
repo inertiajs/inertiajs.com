@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, P, TabbedCode, Strong } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -26,13 +26,13 @@ export default function () {
       </P>
       <P>
         Use <Code>merge</Code> when merging simple arrays, and <Code>deepMerge</Code> when working with nested objects
-        that contain arrays or complex structures, such as pagination objects.
+        that contain arrays or complex structures, such as <Strong>pagination</Strong> objects.
       </P>
 
       <TabbedCode
         examples={[
           {
-            name: 'Laravel – merging pagination object',
+            name: 'Pagination object',
             language: 'php',
             code: dedent`
             Route::get('/users', function () {
@@ -40,13 +40,13 @@ export default function () {
                 $per_page = request()->input('per_page', 10);
 
                 return Inertia::render('Users/Index', [
-                    'results' => Inertia::deepMerge(User::paginate($page, $per_page)),
+                    'results' => Inertia::deepMerge(User::paginate($per_page, page: $page)),
                 ]);
             });
             `,
           },
           {
-            name: 'Laravel – merging simple array',
+            name: 'Simple array',
             language: 'php',
             code: dedent`
             Route::get('/items', function () {
@@ -91,7 +91,7 @@ export default function () {
                 $per_page = request()->input('per_page', 10);
 
                 return Inertia::render('Users/Index', [
-                    'results' => Inertia::defer(fn() => User::paginate($page, $per_page))->deepMerge(),
+                    'results' => Inertia::defer(fn() => User::paginate($per_page, page: $page))->deepMerge(),
                 ]);
             });
             `,
