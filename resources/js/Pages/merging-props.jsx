@@ -21,13 +21,18 @@ export default function () {
       </P>
       <H2>Server side</H2>
       <P>
-        To specify that a prop should be merged, you can use the <Code>merge</Code> method on the prop value.
+        To specify that a prop should be merged, you can use the <Code>merge</Code> or <Code>deepMerge</Code> method on
+        the prop value.
       </P>
-      {/* TODO: Come up with real pagination example, cookbook style */}
+      <P>
+        Use <Code>merge</Code> when merging simple arrays, and <Code>deepMerge</Code> when working with nested objects
+        that contain arrays or complex structures, such as pagination objects.
+      </P>
+
       <TabbedCode
         examples={[
           {
-            name: 'Laravel',
+            name: 'Laravel – merging pagination object',
             language: 'php',
             code: dedent`
             Route::get('/users', function () {
@@ -35,18 +40,41 @@ export default function () {
                 $per_page = request()->input('per_page', 10);
 
                 return Inertia::render('Users/Index', [
-                    'results' => Inertia::merge(User::paginate($page, $per_page)),
+                    'results' => Inertia::deepMerge(User::paginate($page, $per_page)),
+                ]);
+            });
+            `,
+          },
+          {
+            name: 'Laravel – merging simple array',
+            language: 'php',
+            code: dedent`
+            Route::get('/items', function () {
+                // Static array of tags
+                $allTags = [
+                    'Laravel', 'React', 'Vue', 'Tailwind', 'Inertia',
+                    'PHP', 'JavaScript', 'TypeScript', 'Docker', 'Vite',
+                ];
+
+                // Load chunk by page
+                $page = request()->input('page', 1);
+                $perPage = 5;
+                $offset = ($page - 1) * $perPage;
+                $tags = array_slice($allTags, $offset, $perPage);
+
+                return Inertia::render('Tags/Index', [
+                    'tags' => Inertia::merge($tags),
                 ]);
             });
             `,
           },
         ]}
       />
-      {/* TODO: Come up with real infinite scroll example, cookbook style */}
+
       <P>
-        On the client side, Inertia detects that this prop should be merged. If the prop returns an array, it will
-        append the response to the current prop value. If it's an object, it will merge the response with the current
-        prop value.
+        On the client side, Inertia detects that this prop should be merged. If the prop returns a simple array, it will
+        append the response to the current prop value. If it's a nested object, <Code>deepMerge</Code> ensures a deep
+        merge of the entire structure.
       </P>
       <P>
         You can also combine <A href="/deferred-props">deferred props</A> with mergeable props to defer the loading of
@@ -63,7 +91,7 @@ export default function () {
                 $per_page = request()->input('per_page', 10);
 
                 return Inertia::render('Users/Index', [
-                    'results' => Inertia::defer(fn() => User::paginate($page, $per_page))->merge(),
+                    'results' => Inertia::defer(fn() => User::paginate($page, $per_page))->deepMerge(),
                 ]);
             });
             `,
