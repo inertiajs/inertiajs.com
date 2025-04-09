@@ -68,6 +68,7 @@ const CodeBlock = ({ className = 'p-6 my-8 leading-normal rounded', language, he
         />
       </pre>
       <button
+        title="Copy to clipboard"
         onClick={handleCopy}
         className="focus:outline-none absolute top-2 right-2 rounded p-2 text-gray-300 transition duration-200"
         style={{ background: '#303f6d' }}
