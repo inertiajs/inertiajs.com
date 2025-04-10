@@ -451,9 +451,10 @@ export default function () {
       />
       <Vue>
         <P>
-          Alternatively use the{' '}
-          <A href="https://vue-macros.sxzz.moe/macros/define-options.html">defineOptions plugin</A> to define a layout
-          within <Code>{'<script setup>'}</Code>:
+          If you're using Vue 3.3+, you can alternatively use{' '}
+          <A href="https://vuejs.org/api/sfc-script-setup.html#defineoptions">defineOptions</A> to define a layout
+          within <Code>{'<script setup>'}</Code>. Older versions of Vue can use the
+          <A href="https://vue-macros.sxzz.moe/macros/define-options.html">defineOptions plugin</A>:
         </P>
         <CodeBlock
           language="markup"
