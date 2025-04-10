@@ -845,7 +845,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/vue3'
 
-              router.visit('/users', { search: 'John' }, { only: ['users'] })
+              router.get('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
           {
@@ -854,7 +854,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/react'
 
-              router.visit('/users', { search: 'John' }, { only: ['users'] })
+              router.get('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
           {
@@ -863,7 +863,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/svelte'
 
-              router.visit('/users', { search: 'John' }, { only: ['users'] })
+              router.get('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
         ]}
