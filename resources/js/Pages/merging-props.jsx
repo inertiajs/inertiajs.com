@@ -32,21 +32,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Pagination object',
-            language: 'php',
-            code: dedent`
-            Route::get('/users', function () {
-                $page = request()->input('page', 1);
-                $per_page = request()->input('per_page', 10);
-
-                return Inertia::render('Users/Index', [
-                    'results' => Inertia::deepMerge(User::paginate($per_page, page: $page)),
-                ]);
-            });
-            `,
-          },
-          {
-            name: 'Simple array',
+            name: 'Shallow Merge',
             language: 'php',
             code: dedent`
             Route::get('/items', function () {
@@ -64,6 +50,20 @@ export default function () {
 
                 return Inertia::render('Tags/Index', [
                     'tags' => Inertia::merge($tags),
+                ]);
+            });
+            `,
+          },
+          {
+            name: 'Deep Merge',
+            language: 'php',
+            code: dedent`
+            Route::get('/users', function () {
+                $page = request()->input('page', 1);
+                $per_page = request()->input('per_page', 10);
+
+                return Inertia::render('Users/Index', [
+                    'results' => Inertia::deepMerge(User::paginate($per_page, page: $page)),
                 ]);
             });
             `,
