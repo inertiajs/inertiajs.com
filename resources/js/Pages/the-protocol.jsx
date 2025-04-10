@@ -56,7 +56,7 @@ export default function () {
             </head>
             <body>
 
-            <div id="app" data-page='{"component":"Event","props":{"event":{"id":80,"title":"Birthday party","start_date":"2019-06-02","description":"Come out and celebrate Jonathan&apos;s 36th birthday party!"}},"url":"/events/80","version":"c32b8e4965f418ad16eaebba1d4e960f"}'></div>
+            <div id="app" data-page='{"component":"Event","props":{"errors":{},"event":{"id":80,"title":"Birthday party","start_date":"2019-06-02","description":"Come out and celebrate Jonathan&apos;s 36th birthday party!"}},"url":"/events/80","version":"c32b8e4965f418ad16eaebba1d4e960f"}'></div>
 
             </body>
             </html>
@@ -111,6 +111,7 @@ export default function () {
             {
               "component": "Event",
               "props": {
+                "errors": {},
                 "event": {
                   "id": 80,
                   "title": "Birthday party",
@@ -137,7 +138,8 @@ export default function () {
           <Strong>component:</Strong> The name of the JavaScript page component.
         </Li>
         <Li>
-          <Strong>props:</Strong> The page props (data).
+          <Strong>props:</Strong> The page props. Contains all of the page data along with an <Code>errors</Code> object
+          (defaults to <Code>{}</Code> if there are no errors).
         </Li>
         <Li>
           <Strong>url:</Strong> The page URL.
@@ -278,7 +280,8 @@ export default function () {
               "props": {
                 "auth": {...},       // NOT included
                 "categories": [...], // NOT included
-                "events": [...]      // included
+                "events": [...],      // included
+                "errors": {}         // always included
               },
               "url": "/events/80",
               "version": "c32b8e4965f418ad16eaebba1d4e960f"
