@@ -2,86 +2,39 @@
 
 namespace Database\Factories;
 
-use App\Models\DiscordUser;
-use App\Models\Sponsor;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ */
 class UserFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = User::class;
-
-    /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            'github_api_id' => 2,
-            'github_api_login' => 'monalisa',
-            'github_api_access_token' => 'gho_INVALIDtKCYSjZIDrejZHOC0B8s4ds',
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
         ];
     }
 
     /**
-     * The Github User details used in our tests.
+     * Indicate that the model's email address should be unverified.
      *
-     * @return UserFactory
+     * @return static
      */
-    public function withGithub(): self
+    public function unverified()
     {
-        return $this->state([
-            'github_api_id' => 1752195,
-            'github_api_login' => 'claudiodekker',
-            'github_api_access_token' => 'gho_INVALIDxq3Ly5ca88vy9aUKjLIXdqr',
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
         ]);
-    }
-
-    /**
-     * The Discord User details used in our tests.
-     *
-     * @param array $attributes
-     * @return UserFactory
-     */
-    public function withDiscord(array $attributes = []): self
-    {
-        return $this->has(DiscordUser::factory()->state($attributes));
-    }
-
-    /**
-     * The User's Sponsor.
-     *
-     * @param array $attributes
-     * @return UserFactory
-     */
-    public function sponsoring(array $attributes = []): self
-    {
-        return $this->afterMaking(function (User $instance) use ($attributes) {
-            $instance->sponsor_id = Sponsor::factory()
-                ->state(['github_api_id' => $instance->github_api_id])
-                ->state($attributes)
-                ->create()
-                ->id;
-        });
-    }
-
-    /**
-     * The User's Expired Sponsor.
-     *
-     * @param array $attributes
-     * @return UserFactory
-     */
-    public function expiredSponsor(array $attributes = []): self
-    {
-        return $this->sponsoring(array_merge([
-            'expires_at' => now(),
-        ], $attributes));
     }
 }
