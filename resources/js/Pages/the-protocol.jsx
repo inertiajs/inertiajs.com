@@ -138,8 +138,8 @@ export default function () {
           <Strong>component:</Strong> The name of the JavaScript page component.
         </Li>
         <Li>
-          <Strong>props:</Strong> The page props, contains all page data plus an <Code>errors</Code> object that is
-          always present (empty <Code>{}</Code> when no errors).
+          <Strong>props:</Strong> The page props. Contains all of the page data along with an <Code>errors</Code> object
+          (defaults to <Code>{}</Code> if there are no errors).
         </Li>
         <Li>
           <Strong>url:</Strong> The page URL.
