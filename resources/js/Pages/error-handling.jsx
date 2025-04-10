@@ -74,8 +74,8 @@ export default function () {
         ]}
       />
       <P>
-        You may have noticed we're returning an <Code>Error</Code> page component in the example above. You'll need to
-        actually create this component, which will serve as the generic error page for your application. Here's an
+        You may have noticed we're returning an <Code>ErrorPage</Code> page component in the example above. You'll need
+        to actually create this component, which will serve as the generic error page for your application. Here's an
         example error component you can use as a starting point.
       </P>
       <TabbedCode
