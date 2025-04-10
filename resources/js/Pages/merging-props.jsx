@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, P, TabbedCode, Strong } from '@/Components'
+import { A, Code, H1, H2, P, Strong, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -26,7 +26,7 @@ export default function () {
       </P>
       <P>
         Use <Code>merge</Code> when merging simple arrays, and <Code>deepMerge</Code> when working with nested objects
-        that contain arrays or complex structures, such as <Strong>pagination</Strong> objects.
+        that contain arrays or complex structures, such as pagination objects.
       </P>
 
       <TabbedCode
@@ -72,9 +72,13 @@ export default function () {
       />
 
       <P>
-        On the client side, Inertia detects that this prop should be merged. If the prop returns a simple array, it will
-        append the response to the current prop value. If it's a nested object, <Code>deepMerge</Code> ensures a deep
-        merge of the entire structure.
+        On the client side, Inertia detects that this prop should be merged. If the prop returns an array, it will
+        append the response to the current prop value. If it's an object, it will merge the response with the current
+        prop value. If you have opted to <Code>deepMerge</Code>, Inertia ensures a deep merge of the entire structure.
+      </P>
+      <P>
+        <Strong>Of note:</Strong> During the merging process, if the value is an array, the incoming items will be{' '}
+        <em>appended</em> to the existing array, not merged by index.
       </P>
       <P>
         You can also combine <A href="/deferred-props">deferred props</A> with mergeable props to defer the loading of
