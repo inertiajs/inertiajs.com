@@ -39,18 +39,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, {
-                only: ['users'],
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -93,18 +82,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, {
-                except: ['users'],
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -146,16 +124,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.reload({ only: ['users'] })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -190,16 +159,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/users?active=true" :only="['users']">Show active</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -222,7 +182,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
+              <a href="/users?active=true" use:inertia={{ only: ['users'] }}>Show active</a>
 
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
@@ -254,8 +214,8 @@ export default function () {
         closure. This can significantly increase the performance of pages that contain a lot of optional data.
       </P>
       <P>
-        Additionally, Inertia provides an <Code>Inertia::lazy()</Code> method to specify that a prop should never be
-        included unless explicity requested using the <Code>only</Code> option:
+        Additionally, Inertia provides an <Code>Inertia::optional()</Code> method to specify that a prop should never be
+        included unless explicitly requested using the <Code>only</Code> option:
       </P>
       <TabbedCode
         examples={[
@@ -264,7 +224,7 @@ export default function () {
             language: 'php',
             code: dedent`
               return Inertia::render('Users/Index', [
-                  'users' => Inertia::lazy(fn () => User::all()),
+                  'users' => Inertia::optional(fn () => User::all()),
               ]);
             `,
           },
@@ -272,7 +232,7 @@ export default function () {
       />
       <P>
         On the inverse, you can use the <Code>Inertia::always()</Code> method to specify that a prop should always be
-        included, even if it has not been explicity required in a partial reload.
+        included, even if it has not been explicitly required in a partial reload.
       </P>
       <TabbedCode
         examples={[
@@ -308,7 +268,7 @@ export default function () {
                   // NEVER included on standard visits
                   // OPTIONALLY included on partial reloads
                   // ONLY evaluated when needed
-                  'users' => Inertia::lazy(fn () => User::all()),
+                  'users' => Inertia::optional(fn () => User::all()),
 
                   // ALWAYS included on standard visits
                   // ALWAYS included on partial reloads

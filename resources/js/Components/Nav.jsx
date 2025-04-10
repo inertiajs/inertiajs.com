@@ -134,22 +134,14 @@ const Nav = ({ className }) => {
             Validation
           </Link>
         </li>
+      </ul>
+      <div className="mt-8 mb-3 text-xs font-bold uppercase tracking-widest text-gray-500 md:mt-12">
+        Data &amp; Props
+      </div>
+      <ul>
         <li className="md:pr-3">
           <Link href="/shared-data" className={linkClass('/shared-data')}>
             Shared data
-          </Link>
-        </li>
-      </ul>
-      <div className="mt-8 mb-3 text-xs font-bold uppercase tracking-widest text-gray-500 md:mt-12">Advanced</div>
-      <ul>
-        <li className="md:pr-3">
-          <Link href="/events" className={linkClass('/events')}>
-            Events
-          </Link>
-        </li>
-        <li className="md:pr-3">
-          <Link href="/testing" className={linkClass('/testing')}>
-            Testing
           </Link>
         </li>
         <li className="md:pr-3">
@@ -158,10 +150,38 @@ const Nav = ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
-          <Link href="/scroll-management" className={linkClass('/scroll-management')}>
-            Scroll management
+          <Link href="/deferred-props" className={linkClass('/deferred-props')}>
+            Deferred props
           </Link>
         </li>
+        <li className="md:pr-3">
+          <Link href="/polling" className={linkClass('/polling')}>
+            Polling
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/prefetching" className={linkClass('/prefetching')}>
+            Prefetching
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/load-when-visible" className={linkClass('/load-when-visible')}>
+            Load when visible
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/merging-props" className={linkClass('/merging-props')}>
+            Merging props
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/remembering-state" className={linkClass('/remembering-state')}>
+            Remembering state
+          </Link>
+        </li>
+      </ul>
+      <div className="mt-8 mb-3 text-xs font-bold uppercase tracking-widest text-gray-500 md:mt-12">Security</div>
+      <ul>
         <li className="md:pr-3">
           <Link href="/authentication" className={linkClass('/authentication')}>
             Authentication
@@ -178,13 +198,26 @@ const Nav = ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
+          <Link href="/history-encryption" className={linkClass('/history-encryption')}>
+            History encryption
+          </Link>
+        </li>
+      </ul>
+      <div className="mt-8 mb-3 text-xs font-bold uppercase tracking-widest text-gray-500 md:mt-12">Advanced</div>
+      <ul>
+        <li className="md:pr-3">
+          <Link href="/asset-versioning" className={linkClass('/asset-versioning')}>
+            Asset versioning
+          </Link>
+        </li>
+        <li className="md:pr-3">
           <Link href="/error-handling" className={linkClass('/error-handling')}>
             Error handling
           </Link>
         </li>
         <li className="md:pr-3">
-          <Link href="/asset-versioning" className={linkClass('/asset-versioning')}>
-            Asset versioning
+          <Link href="/events" className={linkClass('/events')}>
+            Events
           </Link>
         </li>
         <li className="md:pr-3">
@@ -193,13 +226,18 @@ const Nav = ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
-          <Link href="/remembering-state" className={linkClass('/remembering-state')}>
-            Remembering state
+          <Link href="/scroll-management" className={linkClass('/scroll-management')}>
+            Scroll management
           </Link>
         </li>
         <li className="md:pr-3">
           <Link href="/server-side-rendering" className={linkClass('/server-side-rendering')}>
             Server-side rendering
+          </Link>
+        </li>
+        <li className="md:pr-3">
+          <Link href="/testing" className={linkClass('/testing')}>
+            Testing
           </Link>
         </li>
         <li className="md:pr-3">

@@ -27,18 +27,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                forceFormData: true,
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -88,43 +77,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <form @submit.prevent="submit">
-                  <input type="text" v-model="form.name" />
-                  <input type="file" @input="form.avatar = $event.target.files[0]" />
-                  <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                    {{ form.progress.percentage }}%
-                  </progress>
-                  <button type="submit">Submit</button>
-                </form>
-              </template>
-
-              <script>
-              import { useForm } from '@inertiajs/vue2'
-
-              export default {
-                data() {
-                  return {
-                    form: useForm({
-                      name: null,
-                      avatar: null,
-                    }),
-                  }
-                },
-                methods: {
-                  submit() {
-                    this.form.post('/users')
-                  },
-                },
-              }
-              </script>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script setup>
@@ -171,7 +124,7 @@ export default function () {
               return (
                 <form onSubmit={submit}>
                   <input type="text" value={data.name} onChange={e => setData('name', e.target.value)} />
-                  <input type="file" value={data.avatar} onChange={e => setData('avatar', e.target.files[0])} />
+                  <input type="file" onChange={e => setData('avatar', e.target.files[0])} />
                   {progress && (
                     <progress value={progress.percentage} max="100">
                       {progress.percentage}%
@@ -183,25 +136,55 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
-            language: 'html',
+            name: 'Svelte 4',
+            language: 'jsx',
             code: dedent`
               <script>
-              import { useForm } from '@inertiajs/svelte'
+                import { useForm } from '@inertiajs/svelte'
 
-              let form = useForm({
-                name: null,
-                avatar: null,
-              })
+                const form = useForm({
+                  name: null,
+                  avatar: null,
+                })
 
-              function submit() {
-                $form.post('/users')
-              }
+                function submit() {
+                  $form.post('/users')
+                }
               </script>
 
               <form on:submit|preventDefault={submit}>
                 <input type="text" bind:value={$form.name} />
                 <input type="file" on:input={e => $form.avatar = e.target.files[0]} />
+                {#if $form.progress}
+                  <progress value={$form.progress.percentage} max="100">
+                    {$form.progress.percentage}%
+                  </progress>
+                {/if}
+                <button type="submit">Submit</button>
+              </form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'jsx',
+            code: dedent`
+              <script>
+                import { useForm } from '@inertiajs/svelte'
+
+                const form = useForm({
+                  name: null,
+                  avatar: null,
+                })
+
+                function submit(e) {
+                  e.preventDefault()
+                  $form.post('/users')
+                }
+              </script>
+
+              <form onsubmit={submit}>
+                <input type="text" bind:value={$form.name} />
+                <input type="file" oninput={e => $form.avatar = e.target.files[0]} />
                 {#if $form.progress}
                   <progress value={$form.progress.percentage} max="100">
                     {$form.progress.percentage}%
@@ -237,19 +220,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post(\`/users/\${user.id}\`, {
-                _method: 'put',
-                avatar: form.avatar,
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'

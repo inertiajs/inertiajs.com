@@ -22,7 +22,7 @@ export default function () {
       </P>
       <H2>Laravel starter kits</H2>
       <P>
-        Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Breeze and Jetstream, provide
+        Laravel's <A href="https://laravel.com/starter-kits">starter kits</A> provide
         out-of-the-box scaffolding for new Inertia applications. These starter kits are the absolute fastest way to
         start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually
         install Inertia into your application, please consult the documentation below.
@@ -32,14 +32,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'bash',
-            code: dedent`
-              npm install @inertiajs/vue2
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'bash',
             code: dedent`
               npm install @inertiajs/vue3
@@ -69,29 +62,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import Vue from 'vue'
-              import { createInertiaApp } from '@inertiajs/vue2'
-
-              createInertiaApp({
-                resolve: name => {
-                  const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                  return pages[\`./Pages/\${name}.vue\`]
-                },
-                setup({ el, App, props, plugin }) {
-                  Vue.use(plugin)
-
-                  new Vue({
-                    render: h => h(App, props),
-                  }).$mount(el)
-                },
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { createApp, h } from 'vue'
@@ -129,7 +100,7 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
+            name: 'Svelte 4',
             language: 'js',
             code: dedent`
               import { createInertiaApp } from '@inertiajs/svelte'
@@ -141,6 +112,24 @@ export default function () {
                 },
                 setup({ el, App, props }) {
                   new App({ target: el, props })
+                },
+              })
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/svelte'
+              import { mount } from 'svelte'
+
+              createInertiaApp({
+                resolve: name => {
+                  const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+                  return pages[\`./Pages/\${name}.svelte\`]
+                },
+                setup({ el, App, props }) {
+                  mount(App, { target: el, props })
                 },
               })
             `,
@@ -160,21 +149,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              // Vite
-              resolve: name => {
-                const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-                return pages[\`./Pages/\${name}.vue\`]
-              },
-
-              // Webpack
-              resolve: name => require(\`./Pages/\${name}\`),
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               // Vite
