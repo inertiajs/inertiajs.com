@@ -68,9 +68,6 @@ export default function () {
           <A href="https://kaiofelps.github.io/inertia-rust/">Rust</A>
         </Li>
         <Li>
-          <A href="https://github.com/hotmeteor/inertia-statamic">Statamic</A>
-        </Li>
-        <Li>
           <A href="https://github.com/skipthedragon/inertia-bundle">Symfony</A>
         </Li>
         <Li>
