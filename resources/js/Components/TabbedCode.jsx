@@ -8,7 +8,7 @@ const guessTabType = tabNames => {
     return 'backend'
   }
 
-  if (tabNames.includes('Vue 3')) {
+  if (tabNames.includes('Vue')) {
     return 'frontend'
   }
 }

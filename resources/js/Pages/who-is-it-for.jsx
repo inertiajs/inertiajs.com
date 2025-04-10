@@ -10,8 +10,8 @@ export default function () {
       <H1>Who is Inertia.js for?</H1>
       <P>
         Inertia was crafted for development teams and solo hackers who typically build server-side rendered applications
-        using frameworks like Laravel, Ruby on Rails, or Django. You're used to creating controllers, retrieving data
-        from the database (via an ORM), and rendering views.
+        using frameworks like Laravel, Ruby on Rails, Django, or Phoenix. You're used to creating controllers,
+        retrieving data from the database (via an ORM), and rendering views.
       </P>
       <P>
         But what happens when you want to replace your server-side rendered views with a modern, JavaScript-based

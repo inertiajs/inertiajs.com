@@ -14,6 +14,7 @@ export const meta = {
     { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
     { url: '#active-states', name: 'Active states' },
+    { url: '#data-loading-attribute', name: 'Data loading attribute' },
   ],
 }
 
@@ -36,16 +37,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/">Home</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -72,7 +64,7 @@ export default function () {
 
               <Link href="/">Home</Link>
             `,
-            description: 'The use:inertia directive can be applied to any HTML element.',
+            description: 'The use:inertia action can be applied to any HTML element.',
           },
         ]}
       />
@@ -83,24 +75,12 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
-
-              // Renders as...
-              <button type="button">Logout</button>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
 
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+              <Link href="/logout" method="post" as="button">Logout</Link>
 
               // Renders as...
               <button type="button">Logout</button>
@@ -112,7 +92,7 @@ export default function () {
             code: dedent`
               import { Link } from '@inertiajs/react'
 
-              <Link href="/logout" method="post" as="button" type="button">Logout</Link>
+              <Link href="/logout" method="post" as="button">Logout</Link>
 
               // Renders as...
               <button type="button">Logout</button>
@@ -122,23 +102,21 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { inertia } from '@inertiajs/svelte'
+              import { Link } from '@inertiajs/svelte'
 
-              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
+              <Link href="/logout" method="post" as="button">Logout</Link>
 
               // Renders as...
               <button type="button">Logout</button>
             `,
-            description:
-              'Svelte does not support dynamic elements yet, but you can use the "inertia" directive to achieve the same results.',
           },
         ]}
       />
       <Notice>
         Creating <Code color="orange">POST</Code>/<Code color="orange">PUT</Code>/<Code color="orange">PATCH</Code>/
         <Code color="orange">DELETE</Code> anchor <Code color="orange">{'<a>'}</Code> links is discouraged as it causes
-        "Open Link in New Tab / Window" accessibility issues. Instead, consider using a more appropriate element, such
-        as a <Code color="orange">{'<button>'}</Code>.
+        "Open Link in New Tab / Window" accessibility issues. The component automatically renders a{` `}
+        <Code color="orange">{'<button>'}</Code> element when using these methods.
       </Notice>
       <H2>Method</H2>
       <P>
@@ -149,16 +127,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/logout" method="post" as="button">Logout</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -181,8 +150,56 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
+              <button use:inertia={{ href: '/logout', method: 'post' }} type="button">Logout</button>
 
+              <Link href="/logout" method="post">Logout</button>
+            `,
+          },
+        ]}
+      />
+
+      <H2>Wayfinder</H2>
+      <P>
+        <strong>Requires Inertia &gt;= v2.0.6</strong>
+      </P>
+      <P>
+        When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the{' '}
+        <Code>Link</Code>
+        component, you can simply pass the resulting object directly to the <Code>href</Code> prop. The{' '}
+        <Code>Link</Code> will infer the HTTP method and URL directly from the Wayfinder object:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'jsx',
+            code: dedent`
+              import { Link } from '@inertiajs/vue3'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              <Link :href="show(1)">John Doe</Link>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { Link } from '@inertiajs/react'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              <Link href={show(1)}>John Doe</Link>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'jsx',
+            code: dedent`
+              import { inertia, Link } from '@inertiajs/svelte'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              <button use:inertia={{ href: show(1) }} type="button">John Doe</button>
+
+              <Link href={show(1)}>John Doe</button>
             `,
           },
         ]}
@@ -196,16 +213,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/endpoint" method="post" :data="{ foo: bar }">Save</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -226,7 +234,9 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { Link } from '@inertiajs/svelte'
+              import { inertia, Link } from '@inertiajs/svelte'
+
+              <button use:inertia={{ href: '/endpoint', method: 'post', data: { foo: bar } }} type="button">Save</button>
 
               <Link href="/endpoint" method="post" data={{ foo: bar }}>Save</Link>
             `,
@@ -241,16 +251,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/endpoint" :headers="{ foo: bar }">Save</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -273,9 +274,9 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>
+              <button use:inertia={{ href: '/endpoint', headers: { foo: bar } }}>Save</button>
 
-              <Link href="/endpoint" headers={{ foo: bar}}>Save</Link>
+              <Link href="/endpoint" headers={{ foo: bar }}>Save</Link>
             `,
           },
         ]}
@@ -291,16 +292,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/" replace>Home</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -323,7 +315,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/" use:inertia="{{ replace: true }}">Home</a>
+              <a href="/" use:inertia={{ replace: true }}>Home</a>
 
               <Link href="/" replace>Home</Link>
             `,
@@ -339,18 +331,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <input v-model="query" type="text" />
-
-              <Link href="/search" :data="{ query }" preserve-state>Search</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -366,7 +347,7 @@ export default function () {
             code: dedent`
               import { Link } from '@inertiajs/react'
 
-              <input onChange={this.handleChange} value={query} />
+              <input onChange={this.handleChange} value={query} type="text" />
 
               <Link href="/search" data={query} preserveState>Search</Link>
             `,
@@ -377,11 +358,11 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <input on:change={handleChange} value={query} />
+              <input bind:value={query} type="text" />
 
-              <button use:inertia="{{ href: '/search', data: query, preserveState: true }}">Search</button>
+              <button use:inertia={{ href: '/search', data: { query }, preserveState: true }}>Search</button>
 
-              <Link href="/search" data={query} preserveState>Search</Link>
+              <Link href="/search" data={{ query }} preserveState>Search</Link>
             `,
           },
         ]}
@@ -394,16 +375,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/" preserve-scroll>Home</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -426,7 +398,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
+              <a href="/" use:inertia={{ preserveScroll: true }}>Home</a>
 
               <Link href="/" preserveScroll>Home</Link>
             `,
@@ -445,16 +417,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              <Link href="/users?active=true" :only="['users']">Show active</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -477,7 +440,7 @@ export default function () {
             code: dedent`
               import { inertia, Link } from '@inertiajs/svelte'
 
-              <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
+              <a href="/users?active=true" use:inertia={{ only: ['users'] }}>Show active</a>
 
               <Link href="/users?active=true" only={['users']}>Show active</Link>
             `,
@@ -497,26 +460,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Link } from '@inertiajs/vue2'
-
-              // URL exact match...
-              <Link href="/users" :class="{ 'active': $page.url === '/users' }">Users</Link>
-
-              // Component exact match...
-              <Link href="/users" :class="{ 'active': $page.component === 'Users/Index' }">Users</Link>
-
-              // URL starts with (/users, /users/create, /users/1, etc.)...
-              <Link href="/users" :class="{ 'active': $page.url.startsWith('/users') }">Users</Link>
-
-              // Component starts with (Users/Index, Users/Create, Users/Show, etc.)...
-              <Link href="/users" :class="{ 'active': $page.component.startsWith('Users') }">Users</Link>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Link } from '@inertiajs/vue3'
@@ -559,13 +503,13 @@ export default function () {
             name: 'Svelte',
             language: 'jsx',
             code: dedent`
-              import { page } from '@inertiajs/svelte'
+              import { inertia, Link, page } from '@inertiajs/svelte'
 
               // URL exact match...
-              <Link href="/users" class={$page.url === '/users' ? 'active' : ''}>Users</Link>
+              <a href="/users" use:inertia class:active={$page.url === '/users'}>Users</a>
 
               // Component exact match...
-              <Link href="/users" class={$page.component === 'Users/Index' ? 'active' : ''}>Users</Link>
+              <a href="/users" use:inertia class:active={$page.component === 'Users/Index'}>Users</a>
 
               // URL starts with (/users, /users/create, /users/1, etc.)...
               <Link href="/users" class={$page.url.startsWith('/users') ? 'active' : ''}>Users</Link>
@@ -584,6 +528,12 @@ export default function () {
         Using this approach, you're not limited to just setting class names. You can use this technique to conditionally
         render any markup on active state, such as different link text or even an SVG icon that represents the link is
         active.
+      </P>
+      <H2>Data loading attribute</H2>
+      <P>
+        While a link is making an active request, a <Code>data-loading</Code> attribute is added to the link element.
+        This allows you to style the link while it's in a loading state. The attribute is removed once the request is
+        complete.
       </P>
     </>
   )
