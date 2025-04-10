@@ -208,8 +208,8 @@ export default function () {
         workaround for this limitation is to simply upload files using a <Code>POST</Code> request instead.
       </P>
       <P>
-        However, some frameworks, such as{' '}
-        <a href="https://laravel.com/docs/8.x/routing#form-method-spoofing">Laravel</a> and{' '}
+        However, some frameworks, such as <a href="https://laravel.com/docs/routing#form-method-spoofing">Laravel</a>{' '}
+        and{' '}
         <a href="https://guides.rubyonrails.org/form_helpers.html#how-do-forms-with-patch-put-or-delete-methods-work-questionmark">
           Rails
         </a>
