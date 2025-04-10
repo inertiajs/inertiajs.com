@@ -19,7 +19,7 @@ export default function () {
       <P>
         Since Inertia powered JavaScript apps are rendered within the document <Code>{'<body>'}</Code>, they are unable
         to render markup to the document <Code>{'<head>'}</Code>, as it's outside of their scope. To help with this,
-        Inertia ships with an <Code>{'<Head>'}</Code> component which can be used to set the page{' '}
+        Inertia ships with a <Code>{'<Head>'}</Code> component which can be used to set the page{' '}
         <Code>{'<title>'}</Code>, <Code>{'<meta>'}</Code> tags, and other <Code>{'<head>'}</Code> elements.
       </P>
       <Notice>
@@ -38,19 +38,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Head } from '@inertiajs/vue2'
-
-              <Head>
-                <title>Your page title</title>
-                <meta name="description" content="Your page description">
-              </Head>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Head } from '@inertiajs/vue3'
@@ -94,16 +82,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Head } from '@inertiajs/vue2'
-
-              <Head title="Your page title" />
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Head } from '@inertiajs/vue3'
@@ -152,16 +131,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Head } from '@inertiajs/vue2'
-
-              <Head title="Home">
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Head } from '@inertiajs/vue3'
@@ -203,18 +173,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { Head } from '@inertiajs/vue2'
-
-              <Head>
-                <title>Home</title>
-              </Head>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { Head } from '@inertiajs/vue3'
@@ -248,36 +207,12 @@ export default function () {
       <P>
         It's possible to have multiple instances of the <Code>{'<Head>'}</Code> component throughout your application.
         For example, your layout can set some default <Code>{'<Head>'}</Code> elements, and then your individual pages
-        can overide those defaults.
+        can override those defaults.
       </P>
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              // Layout.vue
-
-              import { Head } from '@inertiajs/vue2'
-
-              <Head>
-                <title>My app</title>
-                <meta head-key="description" name="description" content="This is the default description" />
-                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-              </Head>
-
-              // About.vue
-
-              import { Head } from '@inertiajs/vue2'
-
-              <Head>
-                <title>About - My app</title>
-                <meta head-key="description" name="description" content="This is a page specific description" />
-              </Head>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               // Layout.vue
@@ -359,33 +294,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <!-- AppHead.vue -->
-
-              <template>
-                <Head :title="title ? \`\${title} - My App\` : 'My App'">
-                  <slot />
-                </Head>
-              </template>
-
-              <script>
-              import { Head } from '@inertiajs/vue2'
-
-              export default {
-                components: {
-                  Head,
-                },
-                props: {
-                  title: String,
-                },
-              }
-              </script>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <!-- AppHead.vue -->
@@ -436,16 +345,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import AppHead from './AppHead'
-
-              <AppHead title="About" />
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import AppHead from './AppHead'

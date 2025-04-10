@@ -93,41 +93,15 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <main>
-                  <header>
-                    You are logged in as: {{ user.name }}
-                  </header>
-                  <content>
-                    <slot />
-                  </content>
-                </main>
-              </template>
-
-              <script>
-              export default {
-                computed: {
-                  user() {
-                    return this.$page.props.auth.user
-                  }
-                }
-              }
-              </script>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script setup>
               import { computed } from 'vue'
               import { usePage } from '@inertiajs/vue3'
-              
+
               const page = usePage()
-              
+
               const user = computed(() => page.props.auth.user)
               </script>
 
@@ -136,9 +110,9 @@ export default function () {
                   <header>
                     You are logged in as: {{ user.name }}
                   </header>
-                  <content>
+                  <article>
                     <slot />
-                  </content>
+                  </article>
                 </main>
               </template>
             `,
@@ -157,9 +131,9 @@ export default function () {
                     <header>
                       You are logged in as: {auth.user.name}
                     </header>
-                    <content>
+                    <article>
                       {children}
-                    </content>
+                    </article>
                   </main>
                 )
               }
@@ -177,9 +151,9 @@ export default function () {
                 <header>
                   You are logged in as: {$page.props.auth.user.name}
                 </header>
-                <content>
+                <article>
                   <slot />
-                </content>
+                </article>
               </main>
             `,
           },
@@ -220,36 +194,18 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <template>
                 <main>
                   <header></header>
-                  <content>
+                  <article>
                     <div v-if="$page.props.flash.message" class="alert">
                       {{ $page.props.flash.message }}
                     </div>
                     <slot />
-                  </content>
-                  <footer></footer>
-                </main>
-              </template>
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <main>
-                  <header></header>
-                  <content>
-                    <div v-if="$page.props.flash.message" class="alert">
-                      {{ $page.props.flash.message }}
-                    </div>
-                    <slot />
-                  </content>
+                  </article>
                   <footer></footer>
                 </main>
               </template>
@@ -267,12 +223,12 @@ export default function () {
                 return (
                   <main>
                     <header></header>
-                    <content>
+                    <article>
                       {flash.message && (
                         <div class="alert">{flash.message}</div>
                       )}
                       {children}
-                    </content>
+                    </article>
                     <footer></footer>
                   </main>
                 )
@@ -289,12 +245,12 @@ export default function () {
 
               <main>
                 <header></header>
-                <content>
+                <article>
                   {#if $page.props.flash.message}
                     <div class="alert">{$page.props.flash.message}</div>
                   {/if}
                   <slot />
-                </content>
+                </article>
                 <footer></footer>
               </main>
             `,
