@@ -240,6 +240,11 @@ const Nav = ({ className }) => {
             Testing
           </Link>
         </li>
+        <li className="md:pr-3">
+          <Link href="/code-splitting" className={linkClass('/code-splitting')}>
+            Code splitting
+          </Link>
+        </li>
       </ul>
     </nav>
   )
