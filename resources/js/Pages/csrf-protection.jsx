@@ -36,20 +36,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', {
-                _token: this.$page.props.csrf_token,
-                name: 'John Doe',
-                email: 'john.doe@example.com',
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router, usePage } from '@inertiajs/vue3'

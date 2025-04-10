@@ -9,6 +9,7 @@ export const meta = {
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#file-uploads', name: 'File uploads' },
     { url: '#browser-history', name: 'Browser history' },
+    { url: '#client-side-visits', name: 'Client side visits' },
     { url: '#state-preservation', name: 'State preservation' },
     { url: '#scroll-preservation', name: 'Scroll preservation' },
     { url: '#partial-reloads', name: 'Partial reloads' },
@@ -28,34 +29,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, {
-                method: 'get',
-                data: {},
-                replace: false,
-                preserveState: false,
-                preserveScroll: false,
-                only: [],
-                headers: {},
-                errorBag: null,
-                forceFormData: false,
-                onCancelToken: cancelToken => {},
-                onCancel: () => {},
-                onBefore: visit => {},
-                onStart: visit => {},
-                onProgress: progress => {},
-                onSuccess: page => {},
-                onError: errors => {},
-                onFinish: visit => {},
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -67,9 +41,17 @@ export default function () {
                 preserveState: false,
                 preserveScroll: false,
                 only: [],
+                except: [],
                 headers: {},
                 errorBag: null,
                 forceFormData: false,
+                queryStringArrayFormat: 'brackets',
+                async: false,
+                showProgress: true,
+                fresh: false,
+                reset: [],
+                preserveUrl: false,
+                prefetch: false,
                 onCancelToken: cancelToken => {},
                 onCancel: () => {},
                 onBefore: visit => {},
@@ -78,6 +60,8 @@ export default function () {
                 onSuccess: page => {},
                 onError: errors => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -94,9 +78,17 @@ export default function () {
                 preserveState: false,
                 preserveScroll: false,
                 only: [],
+                except: [],
                 headers: {},
                 errorBag: null,
                 forceFormData: false,
+                queryStringArrayFormat: 'brackets',
+                async: false,
+                showProgress: true,
+                fresh: false,
+                reset: [],
+                preserveUrl: false,
+                prefetch: false,
                 onCancelToken: cancelToken => {},
                 onCancel: () => {},
                 onBefore: visit => {},
@@ -105,6 +97,8 @@ export default function () {
                 onSuccess: page => {},
                 onError: errors => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -121,9 +115,17 @@ export default function () {
                 preserveState: false,
                 preserveScroll: false,
                 only: [],
+                except: [],
                 headers: {},
                 errorBag: null,
                 forceFormData: false,
+                queryStringArrayFormat: 'brackets',
+                async: false,
+                showProgress: true,
+                fresh: false,
+                reset: [],
+                preserveUrl: false,
+                prefetch: false,
                 onCancelToken: cancelToken => {},
                 onCancel: () => {},
                 onBefore: visit => {},
@@ -132,6 +134,8 @@ export default function () {
                 onSuccess: page => {},
                 onError: errors => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -144,21 +148,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get(url, data, options)
-              router.post(url, data, options)
-              router.put(url, data, options)
-              router.patch(url, data, options)
-              router.delete(url, options)
-              router.reload(options) // Uses the current URL
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -215,16 +205,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, { method: 'post' })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -266,22 +247,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit('/users', {
-                method: 'post',
-                data: {
-                  name: 'John Doe',
-                  email: 'john.doe@example.com',
-                },
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -334,19 +300,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', {
-                name: 'John Doe',
-                email: 'john.doe@example.com',
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -390,20 +344,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                headers: {
-                  'Custom-Header': 'value',
-                },
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -456,18 +397,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/companies', data, {
-                forceFormData: true,
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -513,16 +443,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get('/users', { search: 'John' }, { replace: true })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -554,6 +475,118 @@ export default function () {
         Visits made to the same URL automatically set <Code color="orange">replace</Code> to{' '}
         <Code color="orange">true</Code>.
       </Notice>
+      <H2>Client side visits</H2>
+      <P>
+        You can use the <Code>router.push</Code> and <Code>router.replace</Code> method to make client-side visits. This
+        method is useful when you want to update the browser's history without making a server request.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+
+              router.push({
+                url: '/users',
+                component: 'Users',
+                props: { search: 'John' },
+                clearHistory: false,
+                encryptHistory: false,
+                preserveScroll: false,
+                preserveState: false,
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+
+              router.push({
+                url: '/users',
+                component: 'Users',
+                props: { search: 'John' },
+                clearHistory: false,
+                encryptHistory: false,
+                preserveScroll: false,
+                preserveState: false,
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              router.push({
+                url: '/users',
+                component: 'Users',
+                props: { search: 'John' },
+                clearHistory: false,
+                encryptHistory: false,
+                preserveScroll: false,
+                preserveState: false,
+              })
+            `,
+          },
+        ]}
+      />
+      <P>
+        All of the parameters are optional. By default, all passed paramaters will be merged with the current page. This
+        means you are responsible for overriding the current page's URL, component, and props.
+      </P>
+      <P>
+        If you need access to the current page's props you can pass a function to the props option. This function will
+        receive the current page's props as an argument and should return the new props.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+
+              router.push({ url: '/users', component: 'Users' })
+              router.replace({
+                props: (currentProps) => ({ ...currentProps, search: 'John' })
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+
+              router.push({ url: '/users', component: 'Users' })
+              router.replace({
+                props: (currentProps) => ({ ...currentProps, search: 'John' })
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              router.push({ url: '/users', component: 'Users' })
+              router.replace({
+                props: (currentProps) => ({ ...currentProps, search: 'John' })
+              })
+            `,
+          },
+        ]}
+      />
+      <Notice>
+        Make sure that any route you push on the client side is also defined on the server side. If the user refreshes
+        the page, the server will need to know how to render the page.
+      </Notice>
       <H2>State preservation</H2>
       <P>
         By default, page visits to the same page create a fresh page component instance. This causes any local state,
@@ -574,16 +607,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get('/users', { search: 'John' }, { preserveState: true })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -618,16 +642,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get('/users', { search: 'John' }, { preserveState: 'errors' })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -662,18 +677,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                preserveState: (page) => page.props.someProp === 'value',
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -719,16 +723,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, { preserveScroll: false })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -763,16 +758,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.visit(url, { preserveScroll: 'errors' })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -807,18 +793,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                preserveScroll: (page) => page.props.someProp === 'value',
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -865,16 +840,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.get('/users', { search: 'John' }, { only: ['users'] })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -914,21 +880,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                onCancelToken: (cancelToken) => (this.cancelToken = cancelToken),
-              })
-
-              // Cancel the visit...
-              this.cancelToken.cancel()
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -983,24 +935,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/users', data, {
-                onBefore: (visit) => {},
-                onStart: (visit) => {},
-                onProgress: (progress) => {},
-                onSuccess: (page) => {},
-                onError: (errors) => {},
-                onCancel: () => {},
-                onFinish: visit => {},
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -1013,6 +948,8 @@ export default function () {
                 onError: (errors) => {},
                 onCancel: () => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -1030,6 +967,8 @@ export default function () {
                 onError: (errors) => {},
                 onCancel: () => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -1047,6 +986,8 @@ export default function () {
                 onError: (errors) => {},
                 onCancel: () => {},
                 onFinish: visit => {},
+                onPrefetching: () => {},
+                onPrefetched: () => {},
               })
             `,
           },
@@ -1058,18 +999,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.delete(\`/users/\${user.id}\`, {
-                onBefore: () => confirm('Are you sure you want to delete this user?'),
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -1110,27 +1040,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post(url, {
-                onSuccess: () => {
-                  return Promise.all([
-                    this.doThing(),
-                    this.doAnotherThing()
-                  ])
-                }
-                onFinish: visit => {
-                  // This won't be called until doThing()
-                  // and doAnotherThing() have finished.
-                },
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'

@@ -16,6 +16,8 @@ export const meta = {
     { url: '#exception', name: 'Exception' },
     { url: '#finish', name: 'Finish' },
     { url: '#navigate', name: 'Navigate' },
+    { url: '#prefetching', name: 'Prefetching' },
+    { url: '#prefetched', name: 'Prefetched' },
     { url: '#event-callbacks', name: 'Event callbacks' },
   ],
 }
@@ -34,18 +36,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -87,18 +78,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              document.addEventListener('inertia:start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -140,21 +120,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              let removeStartEventListener = router.on('start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })
-
-              // Remove the listener...
-              removeStartEventListener()
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -201,25 +167,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'jsx',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              export default {
-                mounted() {
-                  this.$once(
-                    'hook:destroyed',
-                    router.on('start', (event) => {
-                      console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-                    })
-                  )
-                },
-              }
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'jsx',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -247,13 +195,26 @@ export default function () {
             `,
           },
           {
-            name: 'Svelte',
-            language: 'jsx',
+            name: 'Svelte 4',
+            language: 'js',
             code: dedent`
               import { router } from '@inertiajs/svelte'
               import { onMount } from 'svelte'
 
               onMount(() => {
+                return router.on('start', (event) => {
+                  console.log(\`Starting a visit to \${event.detail.visit.url}\`)
+                })
+              })
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              $effect(() => {
                 return router.on('start', (event) => {
                   console.log(\`Starting a visit to \${event.detail.visit.url}\`)
                 })
@@ -269,23 +230,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              let startEventListener = (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              }
-
-              document.addEventListener('inertia:start', startEventListener)
-
-              // Remove the listener...
-              document.removeEventListener('inertia:start', startEventListener)
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -343,20 +288,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('before', (event) => {
-                if (!confirm('Are you sure you want to navigate away?')) {
-                  event.preventDefault()
-                }
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -403,18 +335,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('before', (event) => {
-                return confirm('Are you sure you want to navigate away?')
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -460,18 +381,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('before', (event) => {
-                console.log(\`About to make a visit to \${event.detail.visit.url}\`)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -509,18 +419,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('before', (event) => {
-                return confirm('Are you sure you want to navigate away?')
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -562,18 +461,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('start', (event) => {
-                console.log(\`Starting a visit to \${event.detail.visit.url}\`)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -617,18 +505,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('progress', (event) => {
-                this.form.progress = event.detail.progress.percentage
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -673,18 +550,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('success', (event) => {
-                console.log(\`Successfully made a visit to \${event.detail.page.url}\`)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -728,18 +594,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('error', (errors) => {
-                console.log(errors)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -790,19 +645,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('invalid', (event) => {
-                console.log(\`An invalid Inertia response was received.\`)
-                console.log(event.detail.response)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -845,20 +688,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('invalid', (event) => {
-                event.preventDefault()
-
-                // Handle the invalid response yourself...
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -906,19 +736,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('exception', (event) => {
-                console.log(\`An unexpected error occurred during an Inertia visit.\`)
-                console.log(event.detail.error)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -961,19 +779,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('exception', (event) => {
-                event.preventDefault()
-                // Handle the error yourself
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -1023,18 +829,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('finish', (event) => {
-                NProgress.done()
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -1078,18 +873,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.on('navigate', (event) => {
-                console.log(\`Navigated to \${event.detail.page.url}\`)
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
@@ -1125,6 +909,94 @@ export default function () {
       />
       <P>
         The <Code>navigate</Code> event is not cancelable.
+      </P>
+      <H2>Prefetching</H2>
+      <P>
+        The <Code>prefetching</Code> event fires when the router starts prefetching a page.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+
+              router.on('prefetching', (event) => {
+                console.log(\`Prefetching \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+
+              router.on('prefetching', (event) => {
+                console.log(\`Prefetching \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              router.on('prefetching', (event) => {
+                console.log(\`Prefetching \${event.detail.page.url}\`)
+              })
+            `,
+          },
+        ]}
+      />
+      <P>
+        The <Code>prefetching</Code> event is not cancelable.
+      </P>
+      <H2>Prefetched</H2>
+      <P>
+        The <Code>prefetched</Code> event fires when the router has successfully prefetched a page.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+
+              router.on('prefetched', (event) => {
+                console.log(\`Prefetched \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+
+              router.on('prefetched', (event) => {
+                console.log(\`Prefetched \${event.detail.page.url}\`)
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+
+              router.on('prefetched', (event) => {
+                console.log(\`Prefetched \${event.detail.page.url}\`)
+              })
+            `,
+          },
+        ]}
+      />
+      <P>
+        The <Code>prefetched</Code> event is not cancelable.
       </P>
       <H2>Event callbacks</H2>
       <P>
