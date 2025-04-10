@@ -6,7 +6,7 @@ export const meta = {
   links: [
     { url: '#top', name: 'Defining routes' },
     { url: '#shorthand-routes', name: 'Shorthand routes' },
-    { url: '#generating-routes', name: 'Generating URLs' },
+    { url: '#generating-urls', name: 'Generating URLs' },
   ],
 }
 
