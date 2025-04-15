@@ -22,9 +22,9 @@ export default function () {
 
       <H2>Server side</H2>
       <P>
-        To only load a prop when visible, you can use the <Code>optional</Code> method when returning your response.
-        This method receives a callback that returns the prop data. The callback will be executed in a separate request
-        once the element becomes visible.
+        To achieve this, you can use the <Code>optional</Code> method when returning your response. This method receives
+        a callback that returns the prop data. The callback will be executed in a separate request once the element
+        becomes visible.
       </P>
       <TabbedCode
         examples={[
