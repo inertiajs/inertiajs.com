@@ -19,6 +19,32 @@ export default function () {
         <Code>WhenVisible</Code> component as a convenient way to load data when an element becomes visible in the
         viewport.
       </P>
+
+      <H2>Server side</H2>
+      <P>
+        To only load a prop when visible, you can use the <Code>optional</Code> method when returning your response.
+        This method receives a callback that returns the prop data. The callback will be executed in a separate request
+        once the element becomes visible.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+            Route::get('/users', function () {
+                return Inertia::render('Users/Index', [
+                    'users' => User::all(),
+                    'roles' => Role::all(),
+                    'permissions' => Inertia::optional(fn () => Permission::all()),
+                ]);
+            });
+            `,
+          },
+        ]}
+      />
+
+      <H2>Client side</H2>
       <P>
         The <Code>WhenVisible</Code> component accepts a <Code>data</Code> prop that specifies the key of the prop to
         load. It also accepts a <Code>fallback</Code> prop that specifies a component to render while the data is
