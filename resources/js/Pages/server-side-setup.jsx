@@ -81,6 +81,7 @@ export default function () {
       <P>
         By default, Inertia's Laravel adapter will assume your root template is named <Code>app.blade.php</Code>. If you
         would like to use a different root view, you can change it using the <Code>Inertia::setRootView()</Code> method.
+        For React applications, make sure to include the <code>@viteReactRefresh</code> directive in your Blade file. This directive enables React Fast Refresh during development, which is essential for preserving component state and ensuring hot module replacement works correctly. Without it, you may encounter errors or unexpected behavior while developing your application.
       </P>
       <H2>Middleware</H2>
       <P>
