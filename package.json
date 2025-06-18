@@ -6,6 +6,7 @@
         "heroku-postbuild": "npm run build"
     },
     "dependencies": {
+        "@docsearch/css": "^3.9.0",
         "@docsearch/react": "^3.6.2",
         "@inertiajs/react": "^1.0.0",
         "@vitejs/plugin-react": "^3.0.1",
