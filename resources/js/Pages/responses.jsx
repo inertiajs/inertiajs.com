@@ -122,7 +122,7 @@ export default function () {
       </P>
       <P>
         For example, <A href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState">Firefox</A> has a size
-        limit of 640k characters and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed this limit.
+        limit of 16 MiB and throws a <Code>NS_ERROR_ILLEGAL_VALUE</Code> error if you exceed this limit.
         Typically, this is much more data than you'll ever practically need when building applications.
       </P>
     </>

@@ -76,7 +76,7 @@ export default function () {
       />
       <P>
         This template should include your assets, as well as the <Code>@inertia</Code> and <Code>@inertiaHead</Code>{' '}
-        directives.
+        directives. For React applications, it's recommended to include the <Code>@viteReactRefresh</Code> directive before the <Code>@vite</Code> directive to enable Fast Refresh in development.
       </P>
       <P>
         By default, Inertia's Laravel adapter will assume your root template is named <Code>app.blade.php</Code>. If you
