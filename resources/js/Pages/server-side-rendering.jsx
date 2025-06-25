@@ -91,13 +91,6 @@ export default function () {
           },
         ]}
       />
-      <P>Then, make sure you have the latest version of the Inertia Laravel adapter installed.</P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          composer require inertiajs/inertia-laravel
-        `}
-      />
       <H2>Add server entry-point</H2>
       <P>
         Next, we'll create a <Code>resources/js/ssr.js</Code> file within our Laravel project that will serve as our SSR
@@ -339,6 +332,16 @@ export default function () {
         language="bash"
         children={dedent`
           php artisan inertia:start-ssr
+        `}
+      />
+      <P>
+        You may use the <Code>--runtime</Code> option to specify which runtime you want to use. This allows you to
+        switch from the default Node.js runtime to Bun.
+      </P>
+      <CodeBlock
+        language="bash"
+        children={dedent`
+          php artisan inertia:start-ssr --runtime=bun
         `}
       />
       <P>
