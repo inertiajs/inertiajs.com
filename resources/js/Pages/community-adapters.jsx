@@ -18,9 +18,12 @@ export default function () {
         </Li>
         <Li>
           <A href="https://docs.adonisjs.com/guides/inertia">AdonisJS</A>
-        </Li>
+        </Li>      
         <Li>
           <A href="https://github.com/kapi2289/InertiaCore">ASP.NET</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/CakeDC/cakephp-inertia">CakePHP InertiaJS plugin</A>
         </Li>
         <Li>
           <A href="https://github.com/ishanvyas22/cakephp-inertiajs">CakePHP</A>
