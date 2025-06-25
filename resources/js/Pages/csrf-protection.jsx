@@ -21,7 +21,7 @@ export default function () {
       </Notice>
       <P>
         If your server-side framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that
-        each Inertia requests includes the necessary CSRF token for <Code>POST</Code>, <Code>PUT</Code>,{' '}
+        each Inertia request includes the necessary CSRF token for <Code>POST</Code>, <Code>PUT</Code>,{' '}
         <Code>PATCH</Code>, and <Code>DELETE</Code> requests.
       </P>
       <P>
