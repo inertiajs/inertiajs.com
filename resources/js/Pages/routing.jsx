@@ -82,20 +82,6 @@ export default function () {
         If you're using the Vue plugin included with Ziggy, you may use the <Code>route()</Code>{' '}
         function directly in your templates.
       </P>
-<<<<<<< patch-1
-=======
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue',
-            language: 'js',
-            code: dedent`
-              app.config.globalProperties.$route = route
-            `,
-          },
-        ]}
-      />
->>>>>>> master
       <CodeBlock
         language="html"
         children={dedent`
