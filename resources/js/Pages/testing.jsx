@@ -15,17 +15,17 @@ export default function () {
     <>
       <H1>Testing</H1>
       <P>
-        There are many different ways to test an Inertia.js application. This page provides a quick overview of the
-        tools available.
+        There are many different ways to test an Inertia application. This page provides a quick overview of the tools
+        available.
       </P>
       <H2>End-to-end tests</H2>
       <P>
         One popular approach to testing your JavaScript page components is to use an end-to-end testing tool like{' '}
-        <A href="https://www.cypress.io/">Cypress</A> or <A href="https://laravel.com/docs/8.x/dusk">Laravel Dusk</A>.
-        These are browser automation tools that allow you to run real simulations of your app in the browser. These
-        tests are known to be slower and sometimes brittle. However, since they test your application at the same layer
-        as your end users, they can provide a lot of confidence that your app is working correctly. And, since these
-        tests are run in the browser, your JavaScript code is actually executed and tested as well.
+        <A href="https://www.cypress.io/">Cypress</A> or <A href="https://laravel.com/docs/dusk">Laravel Dusk</A>. These
+        are browser automation tools that allow you to run real simulations of your app in the browser. These tests are
+        known to be slower; however, since they test your application at the same layer as your end users, they can
+        provide a lot of confidence that your app is working correctly. And, since these tests are run in the browser,
+        your JavaScript code is actually executed and tested as well.
       </P>
       <H2>Client-side unit tests</H2>
       <P>
@@ -86,8 +86,9 @@ export default function () {
         scope your assertions.
       </P>
       <P>
-        To assert that the Inertia response has a property, you may use the <Code>has</Code> method. You can think of
-        this method as being similar to PHP's <Code>isset</Code> function.
+        Let's dig into the available assertions in detail. First, to assert that the Inertia response has a property,
+        you may use the <Code>has</Code> method. You can think of this method as being similar to PHP's{' '}
+        <Code>isset</Code> function.
       </P>
       <CodeBlock
         language="php"
@@ -103,7 +104,7 @@ export default function () {
       />
       <P>
         To assert that an Inertia property has a specified amount of items, you may provide the expected size as the
-        second argument to the <Code>has</Code> method:
+        second argument to the <Code>has</Code> method.
       </P>
       <CodeBlock
         language="php"
@@ -177,10 +178,10 @@ export default function () {
         `}
       />
       <P>
-        Inertia's testing methods will automatically fail your test when you haven't interacted with at least one of the
-        props in a scope. While this is generally useful, you might run into situations where you're working with
-        unreliable data (such as from an external feed), or with data that you really don't want interact with in order
-        to keep your test simple. For these situations, the <Code>etc</Code> method exists.
+        Inertia's testing methods will automatically fail when you haven't interacted with at least one of the props in
+        a scope. While this is generally useful, you might run into situations where you're working with unreliable data
+        (such as from an external feed), or with data that you really don't want interact with in order to keep your
+        test simple. For these situations, the <Code>etc</Code> method exists.
       </P>
       <CodeBlock
         language="php"

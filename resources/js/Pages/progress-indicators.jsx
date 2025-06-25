@@ -6,6 +6,7 @@ export const meta = {
   links: [
     { url: '#default', name: 'Default' },
     { url: '#custom', name: 'Custom' },
+    { url: '#visit-options', name: 'Visit Options' },
   ],
 }
 
@@ -14,17 +15,18 @@ export default function () {
     <>
       <H1>Progress indicators</H1>
       <P>
-        Since Inertia requests are made via XHR, there's no default browser loading indicator when navigating from one
-        page to another. To solve this Inertia displays a progress indicator at the top of the page whenever you make an
-        Inertia visit.
+        Since Inertia requests are made via XHR, there would typically not be a browser loading indicator when
+        navigating from one page to another. To solve this, Inertia displays a progress indicator at the top of the page
+        whenever you make an Inertia visit. However, <A href="#visit-options">asynchronous requests</A> do not show the
+        progress indicator unless explicitly configured.
       </P>
       <P>
-        If you prefer, you can also disable Inertia's default loading indicator and provide your own custom
-        implementation. We'll look at both approaches below.
+        Of course, if you prefer, you can disable Inertia's default loading indicator and provide your own custom
+        implementation. We'll discuss both approaches below.
       </P>
       <H2>Default</H2>
       <P>
-        Inertia's default progress indicator is a light wrapper around the{' '}
+        Inertia's default progress indicator is a light-weight wrapper around the{' '}
         <A href="https://ricostacruz.com/nprogress/">NProgress</A> library. You can customize it via the{' '}
         <Code>progress</Code> property of the <Code>createInertiaApp()</Code> function.
       </P>
@@ -33,17 +35,16 @@ export default function () {
         children={dedent`
           createInertiaApp({
             progress: {
-              // The delay after which the progress bar will appear
-              // during navigation, in milliseconds.
+              // The delay after which the progress bar will appear, in milliseconds...
               delay: 250,
 
-              // The color of the progress bar.
+              // The color of the progress bar...
               color: '#29d',
 
-              // Whether to include the default NProgress styles.
+              // Whether to include the default NProgress styles...
               includeCSS: true,
 
-              // Whether the NProgress spinner will be shown.
+              // Whether the NProgress spinner will be shown...
               showSpinner: false,
             },
             // ...
@@ -52,7 +53,7 @@ export default function () {
       />
       <P>
         You can disable Inertia's default loading indicator by setting the <Code>progress</Code> property to{' '}
-        <Code>false</Code>:
+        <Code>false</Code>.
       </P>
       <CodeBlock
         language="js"
@@ -66,10 +67,10 @@ export default function () {
       <H2>Custom</H2>
       <P>
         It's also possible to setup your own custom page loading indicators using Inertia <A href="/events">events</A>.
-        Let's explore how to do this, using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
+        Let's explore how to do this using the <A href="https://ricostacruz.com/nprogress/">NProgress</A> library as an
         example.
       </P>
-      <P>First, disable Inertia's default loading indicator:</P>
+      <P>First, disable Inertia's default loading indicator.</P>
       <CodeBlock
         language="js"
         children={dedent`
@@ -79,10 +80,7 @@ export default function () {
           })
         `}
       />
-      <P>
-        Next, install the NProgress library. Technically this is already installed since it's an Inertia dependency, but
-        it's good to be explicit, as Inertia could change in the future.
-      </P>
+      <P>Next, install the NProgress library.</P>
       <CodeBlock
         language="bash"
         children={dedent`
@@ -90,9 +88,9 @@ export default function () {
         `}
       />
       <P>
-        You'll need to add the NProgress{' '}
+        After installation, you'll need to add the NProgress{' '}
         <A href="https://github.com/rstacruz/nprogress/blob/master/nprogress.css">styles</A> to your project. You can do
-        this using the CDN version.
+        this using a CDN hosted copy of the styles.
       </P>
       <CodeBlock
         language="html"
@@ -106,15 +104,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import NProgress from 'nprogress'
-              import { router } from '@inertiajs/vue2'
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import NProgress from 'nprogress'
@@ -150,7 +140,7 @@ export default function () {
         `}
       />
       <P>
-        Next, let's add a <Code>finish</Code> event listener to hide the progress bar when the page visit finishes.
+        Then, let's add a <Code>finish</Code> event listener to hide the progress bar when the page visit finishes.
       </P>
       <CodeBlock
         language="js"
@@ -215,7 +205,7 @@ export default function () {
         indicator from appearing constantly on quick page visits, which can be visually distracting.
       </P>
       <P>
-        To implement the delay behaviour, we'll use the <Code>setTimeout</Code> and <Code>clearTimeout</Code> functions.
+        To implement the delay behavior, we'll use the <Code>setTimeout</Code> and <Code>clearTimeout</Code> functions.
         Let's start by defining a variable to keep track of the timeout.
       </P>
       <CodeBlock
@@ -285,41 +275,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import NProgress from 'nprogress'
-              import { router } from '@inertiajs/vue2'
-
-              let timeout = null
-
-              router.on('start', () => {
-                timeout = setTimeout(() => NProgress.start(), 250)
-              })
-
-              router.on('progress', (event) => {
-                if (NProgress.isStarted() && event.detail.progress.percentage) {
-                  NProgress.set((event.detail.progress.percentage / 100) * 0.9)
-                }
-              })
-
-              router.on('finish', (event) => {
-                clearTimeout(timeout)
-                if (!NProgress.isStarted()) {
-                  return
-                } else if (event.detail.visit.completed) {
-                  NProgress.done()
-                } else if (event.detail.visit.interrupted) {
-                  NProgress.set(0)
-                } else if (event.detail.visit.cancelled) {
-                  NProgress.done()
-                  NProgress.remove()
-                }
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import NProgress from 'nprogress'
@@ -421,6 +377,38 @@ export default function () {
             `,
           },
         ]}
+      />
+      <H2>Visit Options</H2>
+      <P>
+        In addition to these configurations, Inertia.js provides two visit options to control the loading indicator on a
+        per-request basis: <Code>showProgress</Code> and <Code>async</Code>. These options offer greater control over
+        how Inertia.js handles asynchronous requests and manages progress indicators.
+      </P>
+      <H3>showProgress</H3>
+      <P>
+        The <Code>showProgress</Code> option provides fine-grained control over the visibility of the loading indicator
+        during requests.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          router.get('/settings', {}, { showProgress: false })
+        `}
+      />
+      <H3>async</H3>
+      <P>
+        The <Code>async</Code> option allows you to perform asynchronous requests without displaying the default
+        progress indicator. It can be used in combination with the <Code>showProgress</Code> option.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          // Disable the progress indicator
+          router.get('/settings', {}, { async: true })
+
+          // Enable the progress indicator with async requests
+          router.get('/settings', {}, { async: true, showProgress: true })
+        `}
       />
     </>
   )

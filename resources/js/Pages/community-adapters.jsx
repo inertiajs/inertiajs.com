@@ -17,10 +17,10 @@ export default function () {
           <A href="https://github.com/inertiajs/inertia-rails">Rails</A>
         </Li>
         <Li>
-          <A href="https://github.com/eidellev/inertiajs-adonisjs">AdonisJs</A>
+          <A href="https://docs.adonisjs.com/guides/inertia">AdonisJS</A>
         </Li>
         <Li>
-          <A href="https://github.com/Nothing-Works/inertia-aspnetcore">ASP.NET Core</A>
+          <A href="https://github.com/kapi2289/InertiaCore">ASP.NET</A>
         </Li>
         <Li>
           <A href="https://github.com/ishanvyas22/cakephp-inertiajs">CakePHP</A>
@@ -41,7 +41,16 @@ export default function () {
           <A href="https://pypi.org/project/inertia-django/">Django</A>
         </Li>
         <Li>
-          <A href="https://github.com/petaki/inertia-go">Go</A>
+          <A href="https://github.com/j0ack/flask-inertia">Flask</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/petaki/inertia-go">Go (inertia-go)</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/tobimori/kirby-inertia">Kirby CMS</A>
         </Li>
         <Li>
           <A href="https://github.com/girardinsamuel/masonite-inertia/">Masonite</A>
@@ -50,33 +59,27 @@ export default function () {
           <A href="https://github.com/tbreuss/inertia-mithril">Mithril.js</A>
         </Li>
         <Li>
-          <A href="https://github.com/jordankaerim/inertia-node">Node.js</A>
-        </Li>
-        <Li>
-          <A href="https://github.com/devato/inertia_phoenix">Phoenix</A>
+          <A href="https://github.com/inertiajs/inertia-phoenix">Phoenix</A>
         </Li>
         <Li>
           <A href="https://github.com/cherifGsoul/inertia-psr15">PSR-15</A>
         </Li>
         <Li>
-          <A href="https://github.com/hotmeteor/inertia-statamic">Statamic</A>
+          <A href="https://kaiofelps.github.io/inertia-rust/">Rust</A>
         </Li>
         <Li>
-          <A href="https://github.com/rompetomp/inertia-bundle">Symfony</A>
+          <A href="https://github.com/skipthedragon/inertia-bundle">Symfony</A>
         </Li>
         <Li>
-          <A href="https://github.com/boxybird/inertia-wordpress">WordPress</A>
+          <A href="https://github.com/evo-mark/inertia-wordpress">WordPress</A>
         </Li>
         <Li>
           <A href="https://github.com/tbreuss/yii2-inertia">Yii2</A>
         </Li>
-        <Li>
-          <A href="https://github.com/j0ack/flask-inertia">Flask</A>
-        </Li>
       </Ul>
       <P>
         If you have an adapter you'd like listed here, please send a{' '}
-        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.js">
+        <A href="https://github.com/inertiajs/inertiajs.com/edit/master/resources/js/Pages/community-adapters.jsx">
           pull request
         </A>
         .

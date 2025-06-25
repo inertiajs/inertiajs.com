@@ -25,34 +25,28 @@ export default function () {
         <Code>PATCH</Code>, and <Code>DELETE</Code> requests.
       </P>
       <P>
-        One solution is to include the CSRF token as a prop on every response. You can then use the token when making
-        Inertia requests.
+        Of course, as already discussed, some server-side frameworks such as Laravel automatically handle the inclusion
+        of the CSRF token when making requests.{' '}
+        <strong>Therefore, no additional configuration is required when using one of these frameworks.</strong>
+      </P>
+      <P>
+        However, if you need to handle CSRF protection manually, one approach is to include the CSRF token as a prop on
+        every response. You can then use the token when making Inertia requests.
       </P>
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
+            name: 'Vue',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'
+              import { router, usePage } from '@inertiajs/vue3'
+
+              const page = usePage()
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue3'
-
-              router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: page.props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -60,12 +54,14 @@ export default function () {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'
+              import { router, usePage } from '@inertiajs/react'
+
+              const props = usePage().props
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -73,12 +69,12 @@ export default function () {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'
+              import { page, router } from '@inertiajs/svelte'
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: $page.props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -102,11 +98,6 @@ export default function () {
         cookie on each response, and then verify the token using the <Code>X-XSRF-TOKEN</Code> header sent in the
         requests from axios.
       </P>
-      <P>
-        Of course, as already discussed, some server-side frameworks such as Laravel automatically handle the inclusion
-        of the CSRF token when making requests. Therefore, no additional configuration is required when using one of
-        these frameworks.
-      </P>
       <H2>Handling mismatches</H2>
       <P>
         When a CSRF token mismatch occurs, your server-side framework will likely throw an exception that results in an
@@ -124,8 +115,8 @@ export default function () {
       </P>
       <P>
         When using Laravel, you may modify your application's exception handler to automatically redirect the user back
-        to the page they were previously on while flashing a message to the session. First, you will need to extend your
-        exception handler's <Code>render</Code> method.
+        to the page they were previously on while flashing a message to the session. To accomplish this, you may use the
+        <Code>respond</Code> exception method in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <TabbedCode
         examples={[
@@ -133,27 +124,19 @@ export default function () {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Throwable;
-              use Inertia\\Inertia;
+              use Symfony\\Component\\HttpFoundation\\Response;
 
-              /**
-               * Prepare exception for rendering.
-               *
-               * @param  \\Throwable  $e
-               * @return \\Throwable
-               */
-              public function render($request, Throwable $e)
-              {
-                  $response = parent::render($request, $e);
+              ->withExceptions(function (Exceptions $exceptions) {
+                  $exceptions->respond(function (Response $response) {
+                      if ($response->getStatusCode() === 419) {
+                          return back()->with([
+                              'message' => 'The page expired, please try again.',
+                          ]);
+                      }
 
-                  if ($response->status() === 419) {
-                      return back()->with([
-                          'message' => 'The page expired, please try again.',
-                      ]);
-                  }
-
-                  return $response;
-              }
+                      return $response;
+                  });
+              });
             `,
           },
         ]}
