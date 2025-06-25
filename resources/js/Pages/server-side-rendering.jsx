@@ -335,6 +335,16 @@ export default function () {
         `}
       />
       <P>
+        You may use the <Code>--runtime</Code> option to specify which runtime you want to use. This allows you to
+        switch from the default Node.js runtime to Bun.
+      </P>
+      <CodeBlock
+        language="bash"
+        children={dedent`
+          php artisan inertia:start-ssr --runtime=bun
+        `}
+      />
+      <P>
         With the server running, you should be able to access your app within the browser with server-side rendering
         enabled. In fact, you should be able to disable JavaScript entirely and still navigate around your application.
       </P>
@@ -541,16 +551,6 @@ export default function () {
         Note, you must have the <Code>heroku/nodejs</Code> buildpack installed in addition to the{' '}
         <Code>heroku/php</Code> buildback for the SSR server to run.
       </P>
-      <H2>Bun.js</H2>
-      <P>
-        To use Bun as runtime instead of Nodejs, you can do the following
-      </P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          php artisan inertia:start-ssr --runtime=bun
-        `}
-      />
     </>
   )
 }
