@@ -100,7 +100,7 @@ export default function () {
             <span className="text-blue-400">Content-Type:</span> application/json
           </div>
           <div>
-            <span className="text-blue-400">Vary:</span> Accept
+            <span className="text-blue-400">Vary:</span> X-Inertia
           </div>
           <div>
             <span className="text-blue-400">X-Inertia:</span> true
@@ -119,7 +119,9 @@ export default function () {
                 }
               },
               "url": "/events/80",
-              "version": "c32b8e4965f418ad16eaebba1d4e960f"
+              "version": "c32b8e4965f418ad16eaebba1d4e960f",
+              "encryptHistory": true,
+              "clearHistory": false
             }
           `}
         </CodeBlock>
@@ -142,6 +144,12 @@ export default function () {
         </Li>
         <Li>
           <Strong>version:</Strong> The current asset version.
+        </Li>
+        <Li>
+          <Strong>encryptHistory:</Strong> Whether or not to encrypt the current page's history state.
+        </Li>
+        <Li>
+          <Strong>clearHistory:</Strong> Whether or not to clear any encrypted history state.
         </Li>
       </Ol>
       <P>
