@@ -4,8 +4,6 @@ export const meta = {
   description:
     'Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers.',
   hero: true,
-  sponsor: true,
-  twitterCardImage: 'https://inertiajs.com/previews/home.png',
   links: [
     { url: '#top', name: 'Introduction' },
     { url: '#not-a-framework', name: 'Not a framework' },
@@ -31,8 +29,8 @@ export default function () {
       <P>
         Inertia isn't a framework, nor is it a replacement for your existing server-side or client-side frameworks.
         Rather, it's designed to work with them. Think of Inertia as glue that connects the two. Inertia does this via
-        adapters. We currently have three official client-side adapters (React, Vue, and Svelte) and two server-side
-        adapters (Laravel and Rails).
+        adapters. We currently have three official client-side adapters (React, Vue, and Svelte) and three server-side
+        adapters (Laravel, Rails, and Phoenix).
       </P>
       <H2>Next steps</H2>
       <P>

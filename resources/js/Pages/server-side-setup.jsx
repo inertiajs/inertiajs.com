@@ -76,7 +76,7 @@ export default function () {
       />
       <P>
         This template should include your assets, as well as the <Code>@inertia</Code> and <Code>@inertiaHead</Code>{' '}
-        directives.
+        directives. For React applications, it's recommended to include the <Code>@viteReactRefresh</Code> directive before the <Code>@vite</Code> directive to enable Fast Refresh in development.
       </P>
       <P>
         By default, Inertia's Laravel adapter will assume your root template is named <Code>app.blade.php</Code>. If you
@@ -95,16 +95,19 @@ export default function () {
         `}
       />
       <P>
-        Once the middleware has been published, register the <Code>HandleInertiaRequests</Code> middleware in your{' '}
-        <Code>App\Http\Kernel</Code> as the <u>last item</u> in your <Code>web</Code> middleware group.
+        Once the middleware has been published, append the <Code>HandleInertiaRequests</Code> middleware to the{' '}
+        <Code>web</Code> middleware group in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <CodeBlock
         language="php"
         children={dedent`
-          'web' => [
-              // ...
-              \\App\\Http\\Middleware\\HandleInertiaRequests::class,
-          ],
+          use App\\Http\\Middleware\\HandleInertiaRequests;
+
+          ->withMiddleware(function (Middleware $middleware) {
+              $middleware->web(append: [
+                  HandleInertiaRequests::class,
+              ]);
+          })
         `}
       />
       <P>

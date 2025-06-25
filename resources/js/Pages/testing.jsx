@@ -21,11 +21,11 @@ export default function () {
       <H2>End-to-end tests</H2>
       <P>
         One popular approach to testing your JavaScript page components is to use an end-to-end testing tool like{' '}
-        <A href="https://www.cypress.io/">Cypress</A> or <A href="https://laravel.com/docs/dusk">Laravel Dusk</A>.
-        These are browser automation tools that allow you to run real simulations of your app in the browser. These
-        tests are known to be slower; however, since they test your application at the same layer as your end users,
-        they can provide a lot of confidence that your app is working correctly. And, since these tests are run in the
-        browser, your JavaScript code is actually executed and tested as well.
+        <A href="https://www.cypress.io/">Cypress</A> or <A href="https://laravel.com/docs/dusk">Laravel Dusk</A>. These
+        are browser automation tools that allow you to run real simulations of your app in the browser. These tests are
+        known to be slower; however, since they test your application at the same layer as your end users, they can
+        provide a lot of confidence that your app is working correctly. And, since these tests are run in the browser,
+        your JavaScript code is actually executed and tested as well.
       </P>
       <H2>Client-side unit tests</H2>
       <P>

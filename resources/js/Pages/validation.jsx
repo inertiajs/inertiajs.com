@@ -56,51 +56,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'markup',
-            code: dedent`
-              <template>
-                <form @submit.prevent="submit">
-                  <label for="first_name">First name:</label>
-                  <input id="first_name" v-model="form.first_name" />
-                  <div v-if="errors.first_name">{{ errors.first_name }}</div>
-                  <label for="last_name">Last name:</label>
-                  <input id="last_name" v-model="form.last_name" />
-                  <div v-if="errors.last_name">{{ errors.last_name }}</div>
-                  <label for="email">Email:</label>
-                  <input id="email" v-model="form.email" />
-                  <div v-if="errors.email">{{ errors.email }}</div>
-                  <button type="submit">Submit</button>
-                </form>
-              </template>
-
-              <script>
-              import { router } from '@inertiajs/vue2'
-
-              export default {
-                props: {
-                  errors: Object,
-                },
-                data() {
-                  return {
-                    form: {
-                      first_name: null,
-                      last_name: null,
-                      email: null,
-                    },
-                  }
-                },
-                methods: {
-                  submit() {
-                    router.post('/users', this.form)
-                  },
-                },
-              }
-              </script>
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'markup',
             code: dedent`
               <script setup>
@@ -166,13 +122,13 @@ export default function () {
 
                 return (
                   <form onSubmit={handleSubmit}>
-                    <label for="first_name">First name:</label>
+                    <label htmlFor="first_name">First name:</label>
                     <input id="first_name" value={values.first_name} onChange={handleChange} />
                     {errors.first_name && <div>{errors.first_name}</div>}
-                    <label for="last_name">Last name:</label>
+                    <label htmlFor="last_name">Last name:</label>
                     <input id="last_name" value={values.last_name} onChange={handleChange} />
                     {errors.last_name && <div>{errors.last_name}</div>}
-                    <label for="email">Email:</label>
+                    <label htmlFor="email">Email:</label>
                     <input id="email" value={values.email} onChange={handleChange} />
                     {errors.email && <div>{errors.email}</div>}
                     <button type="submit">Submit</button>
@@ -259,22 +215,7 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue2'
-
-              router.post('/companies', data, {
-                errorBag: 'createCompany',
-              })
-
-              router.post('/users', data, {
-                errorBag: 'createUser',
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
+            name: 'Vue',
             language: 'js',
             code: dedent`
               import { router } from '@inertiajs/vue3'
