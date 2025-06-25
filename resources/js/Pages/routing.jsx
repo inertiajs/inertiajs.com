@@ -79,24 +79,13 @@ export default function () {
         <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Ziggy is already configured for you.
       </P>
       <P>
-        If you're using Ziggy with Vue, it's helpful to make this function available as a custom <Code>$route</Code>{' '}
-        property so you can use it directly in your templates.
+        If you're using the Vue plugin included with Ziggy, you may use the <Code>route()</Code>{' '}
+        function directly in your templates.
       </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue',
-            language: 'js',
-            code: dedent`
-              app.config.globalProperties.$route = route
-            `,
-          },
-        ]}
-      />
       <CodeBlock
         language="html"
         children={dedent`
-          <Link :href="$route('users.create')">Create User</Link>
+          <Link :href="route('users.create')">Create User</Link>
         `}
       />
     </>
