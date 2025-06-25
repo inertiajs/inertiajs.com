@@ -357,25 +357,25 @@ export default function () {
       </P>
       <Vue>
         <P>
-          To enable client-side hydration in a Vue app, update your <Code>app.js</Code> file to use{' '}
+          To enable client-side hydration in a Vue app, update your <Code>ssr.js</Code> file to use{' '}
           <Code>createSSRApp</Code> instead of <Code>createApp</Code>:
         </P>
       </Vue>
       <React>
         <P>
-          To enable client-side hydration in a React app, update your <Code>app.js</Code> file to use{' '}
+          To enable client-side hydration in a React app, update your <Code>ssr.js</Code> file to use{' '}
           <Code>hydrateRoot</Code> instead of <Code>createRoot</Code>:
         </P>
       </React>
       <Svelte4>
         <P>
           To enable client-side hydration in a Svelte 4 app, set the <Code>hydrate</Code> option to <Code>true</Code> in
-          your <Code>app.js</Code> file:
+          your <Code>ssr.js</Code> file:
         </P>
       </Svelte4>
       <Svelte5>
         <P>
-          To enable client-side hydration in a Svelte 5 app, update your <Code>app.js</Code> file to use{' '}
+          To enable client-side hydration in a Svelte 5 app, update your <Code>ssr.js</Code> file to use{' '}
           <Code>hydrate</Code> instead of <Code>mount</Code> when server rendering:
         </P>
       </Svelte5>
