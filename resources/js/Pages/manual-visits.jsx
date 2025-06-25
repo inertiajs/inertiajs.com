@@ -238,7 +238,7 @@ export default function () {
         Laravel. Instead, make the request via <Code color="orange">post</Code>, including a{' '}
         <Code color="orange">_method</Code> field set to <Code color="orange">put</Code> or{' '}
         <Code color="orange">patch</Code>. This is called{' '}
-        <A href="https://laravel.com/docs/8.x/routing#form-method-spoofing">form method spoofing</A>.
+        <A href="https://laravel.com/docs/routing#form-method-spoofing">form method spoofing</A>.
       </Notice>
       <H2>Data</H2>
       <P>
@@ -845,7 +845,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/vue3'
 
-              router.visit('/users', { search: 'John' }, { only: ['users'] })
+              router.get('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
           {
@@ -854,7 +854,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/react'
 
-              router.visit('/users', { search: 'John' }, { only: ['users'] })
+              router.get('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
           {
@@ -863,7 +863,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/svelte'
 
-              router.visit('/users', { search: 'John' }, { only: ['users'] })
+              router.get('/users', { search: 'John' }, { only: ['users'] })
             `,
           },
         ]}

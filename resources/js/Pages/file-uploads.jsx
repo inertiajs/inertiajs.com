@@ -124,7 +124,7 @@ export default function () {
               return (
                 <form onSubmit={submit}>
                   <input type="text" value={data.name} onChange={e => setData('name', e.target.value)} />
-                  <input type="file" value={data.avatar} onChange={e => setData('avatar', e.target.files[0])} />
+                  <input type="file" onChange={e => setData('avatar', e.target.files[0])} />
                   {progress && (
                     <progress value={progress.percentage} max="100">
                       {progress.percentage}%
@@ -208,8 +208,8 @@ export default function () {
         workaround for this limitation is to simply upload files using a <Code>POST</Code> request instead.
       </P>
       <P>
-        However, some frameworks, such as{' '}
-        <a href="https://laravel.com/docs/8.x/routing#form-method-spoofing">Laravel</a> and{' '}
+        However, some frameworks, such as <a href="https://laravel.com/docs/routing#form-method-spoofing">Laravel</a>{' '}
+        and{' '}
         <a href="https://guides.rubyonrails.org/form_helpers.html#how-do-forms-with-patch-put-or-delete-methods-work-questionmark">
           Rails
         </a>

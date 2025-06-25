@@ -214,7 +214,7 @@ export default function () {
         closure. This can significantly increase the performance of pages that contain a lot of optional data.
       </P>
       <P>
-        Additionally, Inertia provides an <Code>Inertia::lazy()</Code> method to specify that a prop should never be
+        Additionally, Inertia provides an <Code>Inertia::optional()</Code> method to specify that a prop should never be
         included unless explicitly requested using the <Code>only</Code> option:
       </P>
       <TabbedCode
@@ -224,7 +224,7 @@ export default function () {
             language: 'php',
             code: dedent`
               return Inertia::render('Users/Index', [
-                  'users' => Inertia::lazy(fn () => User::all()),
+                  'users' => Inertia::optional(fn () => User::all()),
               ]);
             `,
           },
@@ -268,7 +268,7 @@ export default function () {
                   // NEVER included on standard visits
                   // OPTIONALLY included on partial reloads
                   // ONLY evaluated when needed
-                  'users' => Inertia::lazy(fn () => User::all()),
+                  'users' => Inertia::optional(fn () => User::all()),
 
                   // ALWAYS included on standard visits
                   // ALWAYS included on partial reloads

@@ -16,8 +16,8 @@ export default function () {
       <H2>Development</H2>
       <P>
         One of the advantages to working with a robust server-side framework is the built-in exception handling you get
-        for free. For example, Laravel ships with <A href="https://github.com/facade/ignition">Ignition</A>, a beautiful
-        error reporting tool which displays a nicely formatted stack trace in local development.
+        for free. For example, Laravel ships with a beautiful error reporting tool which displays a nicely formatted
+        stack trace in local development.
       </P>
       <P>
         The challenge is, if you're making an XHR request (which Inertia does) and you hit a server-side error, you're
@@ -57,7 +57,7 @@ export default function () {
               ->withExceptions(function (Exceptions $exceptions) {
                   $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
                       if (! app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [500, 503, 404, 403])) {
-                          return Inertia::render('Error', ['status' => $response->getStatusCode()])
+                          return Inertia::render('ErrorPage', ['status' => $response->getStatusCode()])
                               ->toResponse($request)
                               ->setStatusCode($response->getStatusCode());
                       } elseif ($response->getStatusCode() === 419) {
@@ -74,8 +74,8 @@ export default function () {
         ]}
       />
       <P>
-        You may have noticed we're returning an <Code>Error</Code> page component in the example above. You'll need to
-        actually create this component, which will serve as the generic error page for your application. Here's an
+        You may have noticed we're returning an <Code>ErrorPage</Code> page component in the example above. You'll need
+        to actually create this component, which will serve as the generic error page for your application. Here's an
         example error component you can use as a starting point.
       </P>
       <TabbedCode

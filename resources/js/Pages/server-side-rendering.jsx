@@ -1,4 +1,19 @@
-import { A, Code, CodeBlock, H1, H2, Notice, P, React, Svelte, Svelte4, Svelte5, TabbedCode, Vue } from '@/Components'
+import {
+  A,
+  Code,
+  CodeBlock,
+  H1,
+  H2,
+  H3,
+  Notice,
+  P,
+  React,
+  Svelte,
+  Svelte4,
+  Svelte5,
+  TabbedCode,
+  Vue,
+} from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -75,13 +90,6 @@ export default function () {
             `,
           },
         ]}
-      />
-      <P>Then, make sure you have the latest version of the Inertia Laravel adapter installed.</P>
-      <CodeBlock
-        language="bash"
-        children={dedent`
-          composer require inertiajs/inertia-laravel
-        `}
       />
       <H2>Add server entry-point</H2>
       <P>
@@ -196,6 +204,82 @@ export default function () {
         When creating this file, be sure to add anything that's missing from your <Code>app.js</Code> file that makes
         sense to run in SSR mode, such as plugins or custom mixins.
       </P>
+      <H3>Clustering</H3>
+      <P>
+        By default, the SSR server will run on a single thread. Clustering starts multiple Node servers on the same
+        port, requests are then handled by each thread in a round-robin way.
+      </P>
+      <P>
+        You can enable clustering by passing a second argument to <Code>createServer</Code>:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/vue3'
+              import createServer from '@inertiajs/vue3/server'
+              import { renderToString } from '@vue/server-renderer'
+              import { createSSRApp, h } from 'vue'
+
+              createServer(page =>
+                createInertiaApp({
+                  // ...
+                }),
+                { cluster: true },
+              )
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/react'
+              import createServer from '@inertiajs/react/server'
+              import ReactDOMServer from 'react-dom/server'
+
+              createServer(page =>
+                createInertiaApp({
+                  // ...
+                }),
+                { cluster: true },
+              )
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/svelte'
+              import createServer from '@inertiajs/svelte/server'
+
+              createServer(page =>
+                createInertiaApp({
+                  // ...
+                }),
+                { cluster: true },
+              )
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/svelte'
+              import createServer from '@inertiajs/svelte/server'
+              import { render } from 'svelte/server'
+
+              createServer(page =>
+                createInertiaApp({
+                  // ...
+                }),
+                { cluster: true },
+              )
+            `,
+          },
+        ]}
+      />
       <H2>Setup Vite</H2>
       <P>
         Next, we need to update our Vite configuration to build our new <Code>ssr.js</Code> file. We can do this by
@@ -248,6 +332,16 @@ export default function () {
         language="bash"
         children={dedent`
           php artisan inertia:start-ssr
+        `}
+      />
+      <P>
+        You may use the <Code>--runtime</Code> option to specify which runtime you want to use. This allows you to
+        switch from the default Node.js runtime to Bun.
+      </P>
+      <CodeBlock
+        language="bash"
+        children={dedent`
+          php artisan inertia:start-ssr --runtime=bun
         `}
       />
       <P>

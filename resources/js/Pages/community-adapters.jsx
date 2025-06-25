@@ -18,10 +18,16 @@ export default function () {
         </Li>
         <Li>
           <A href="https://docs.adonisjs.com/guides/inertia">AdonisJS</A>
+        </Li>      
+        <Li>
+          <A href="https://github.com/kapi2289/InertiaCore">ASP.NET</A>
         </Li>
         <Li>
           <A href="https://github.com/CakeDC/cakephp-inertia">CakePHP InertiaJS plugin</A>
-        </Li>          
+        </Li>
+        <Li>
+          <A href="https://github.com/ishanvyas22/cakephp-inertiajs">CakePHP</A>
+        </Li>
         <Li>
           <A href="https://github.com/cherifGsoul/inertia-can">CanJS</A>
         </Li>
@@ -38,10 +44,16 @@ export default function () {
           <A href="https://pypi.org/project/inertia-django/">Django</A>
         </Li>
         <Li>
+          <A href="https://github.com/j0ack/flask-inertia">Flask</A>
+        </Li>
+        <Li>
           <A href="https://github.com/petaki/inertia-go">Go (inertia-go)</A>
         </Li>
         <Li>
           <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/tobimori/kirby-inertia">Kirby CMS</A>
         </Li>
         <Li>
           <A href="https://github.com/girardinsamuel/masonite-inertia/">Masonite</A>
@@ -56,7 +68,10 @@ export default function () {
           <A href="https://github.com/cherifGsoul/inertia-psr15">PSR-15</A>
         </Li>
         <Li>
-          <A href="https://github.com/hotmeteor/inertia-statamic">Statamic</A>
+          <A href="https://kaiofelps.github.io/inertia-rust/">Rust</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/Inertia4J/inertia4j">Spring/Ktor</A>
         </Li>
         <Li>
           <A href="https://github.com/skipthedragon/inertia-bundle">Symfony</A>
@@ -66,12 +81,6 @@ export default function () {
         </Li>
         <Li>
           <A href="https://github.com/tbreuss/yii2-inertia">Yii2</A>
-        </Li>
-        <Li>
-          <A href="https://github.com/j0ack/flask-inertia">Flask</A>
-        </Li>
-        <Li>
-          <A href="https://github.com/tobimori/kirby-inertia">Kirby CMS</A>
         </Li>
       </Ul>
       <P>
