@@ -88,6 +88,16 @@ export default function () {
           <Link :href="route('users.create')">Create User</Link>
         `}
       />
+      <P>When <A href="/server-side-rendering">server-side rendering</A> is enabled, pass an options object to the Ziggy plugin in your <Code>ssr.js</Code> file, containing the route definitions and current location.</P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          .use(ZiggyVue, {
+            ...page.props.ziggy,
+            location: new URL(page.props.ziggy.location),
+          });
+         `}
+      />
     </>
   )
 }
