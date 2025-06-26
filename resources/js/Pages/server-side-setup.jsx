@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -74,6 +74,9 @@ export default function () {
           },
         ]}
       />
+      <Notice>
+        For React applications, it's recommended to include the <Code>@viteReactRefresh</Code> directive before the <Code>@vite</Code> directive to enable Fast Refresh in development.
+      </Notice>
       <P>
         The <Code>@inertia</Code> directive renders a <Code>{'<div>'}</Code> element with an <Code>id</Code> of <Code>app</Code>.{' '}
         This element serves as the mounting point for your JavaScript application. You may customize the <Code>id</Code> by passing a{' '}
@@ -112,16 +115,19 @@ export default function () {
         `}
       />
       <P>
-        Once the middleware has been published, register the <Code>HandleInertiaRequests</Code> middleware in your{' '}
-        <Code>App\Http\Kernel</Code> as the <u>last item</u> in your <Code>web</Code> middleware group.
+        Once the middleware has been published, append the <Code>HandleInertiaRequests</Code> middleware to the{' '}
+        <Code>web</Code> middleware group in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <CodeBlock
         language="php"
         children={dedent`
-          'web' => [
-              // ...
-              \\App\\Http\\Middleware\\HandleInertiaRequests::class,
-          ],
+          use App\\Http\\Middleware\\HandleInertiaRequests;
+
+          ->withMiddleware(function (Middleware $middleware) {
+              $middleware->web(append: [
+                  HandleInertiaRequests::class,
+              ]);
+          })
         `}
       />
       <P>

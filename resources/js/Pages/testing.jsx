@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, P } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, H3, P } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -21,11 +21,11 @@ export default function () {
       <H2>End-to-end tests</H2>
       <P>
         One popular approach to testing your JavaScript page components is to use an end-to-end testing tool like{' '}
-        <A href="https://www.cypress.io/">Cypress</A> or <A href="https://laravel.com/docs/dusk">Laravel Dusk</A>.
-        These are browser automation tools that allow you to run real simulations of your app in the browser. These
-        tests are known to be slower; however, since they test your application at the same layer as your end users,
-        they can provide a lot of confidence that your app is working correctly. And, since these tests are run in the
-        browser, your JavaScript code is actually executed and tested as well.
+        <A href="https://www.cypress.io/">Cypress</A> or <A href="https://laravel.com/docs/dusk">Laravel Dusk</A>. These
+        are browser automation tools that allow you to run real simulations of your app in the browser. These tests are
+        known to be slower; however, since they test your application at the same layer as your end users, they can
+        provide a lot of confidence that your app is working correctly. And, since these tests are run in the browser,
+        your JavaScript code is actually executed and tested as well.
       </P>
       <H2>Client-side unit tests</H2>
       <P>
@@ -86,7 +86,26 @@ export default function () {
         scope your assertions.
       </P>
       <P>
-        Let's dig into the available assertions in detail. First, to assert that the Inertia response has a property,
+        You may use the <Code>inertiaProps</Code> method to retrieve the props returned in the response.
+        You can pass a key to retrieve a specific property, and nested properties are supported using "dot" notation.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response = $this->get('/podcasts/41');
+
+          // Returns all props...
+          $response->inertiaProps();
+
+          // Returns a specific prop...
+          $response->inertiaProps('podcast');
+
+          // Returns a nested prop using "dot" notation...
+          $response->inertiaProps('podcast.id');
+        `}
+      />
+      <P>
+        Let's dig into the <Code>assertInertia</Code> method and the available assertions in detail. First, to assert that the Inertia response has a property,
         you may use the <Code>has</Code> method. You can think of this method as being similar to PHP's{' '}
         <Code>isset</Code> function.
       </P>
@@ -211,6 +230,25 @@ export default function () {
           );
         `}
       />
+      <H3>Testing Partial Reloads</H3>
+      <P>
+        You may use the <Code>reloadOnly</Code> and <Code>reloadExcept</Code> methods to test how your application responds to <A href="/partial-reloads">partial reloads</A>.{' '}
+        These methods perform a follow-up request and allow you to make assertions against the response.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              ->has('orders')
+              ->missing('statuses')
+              ->reloadOnly('statuses', fn (Assert $reload) => $reload
+                  ->missing('orders')
+                  ->has('statuses', 5)
+              )
+          );
+        `}
+      />
+      <P>Instead of passing a single prop as a string, you may also pass an array of props to <Code>reloadOnly</Code> or <Code>reloadExcept</Code>.</P>
     </>
   )
 }

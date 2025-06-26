@@ -21,7 +21,7 @@ export default function () {
       </Notice>
       <P>
         If your server-side framework includes cross-site request forgery (CSRF) protection, you'll need to ensure that
-        each Inertia requests includes the necessary CSRF token for <Code>POST</Code>, <Code>PUT</Code>,{' '}
+        each Inertia request includes the necessary CSRF token for <Code>POST</Code>, <Code>PUT</Code>,{' '}
         <Code>PATCH</Code>, and <Code>DELETE</Code> requests.
       </P>
       <P>
@@ -36,28 +36,17 @@ export default function () {
       <TabbedCode
         examples={[
           {
-            name: 'Vue 2',
+            name: 'Vue',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/vue2'
+              import { router, usePage } from '@inertiajs/vue3'
+
+              const page = usePage()
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
-              })
-            `,
-          },
-          {
-            name: 'Vue 3',
-            language: 'js',
-            code: dedent`
-              import { router } from '@inertiajs/vue3'
-
-              router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: page.props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -65,12 +54,14 @@ export default function () {
             name: 'React',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/react'
+              import { router, usePage } from '@inertiajs/react'
+
+              const props = usePage().props
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -78,12 +69,12 @@ export default function () {
             name: 'Svelte',
             language: 'js',
             code: dedent`
-              import { router } from '@inertiajs/svelte'
+              import { page, router } from '@inertiajs/svelte'
 
               router.post('/users', {
-                name: this.name,
-                email: this.email,
-                _token: this.$page.props.csrf_token,
+                _token: $page.props.csrf_token,
+                name: 'John Doe',
+                email: 'john.doe@example.com',
               })
             `,
           },
@@ -124,8 +115,8 @@ export default function () {
       </P>
       <P>
         When using Laravel, you may modify your application's exception handler to automatically redirect the user back
-        to the page they were previously on while flashing a message to the session. First, you will need to extend your
-        exception handler's <Code>render</Code> method.
+        to the page they were previously on while flashing a message to the session. To accomplish this, you may use the
+        <Code>respond</Code> exception method in your application's <Code>bootstrap/app.php</Code> file.
       </P>
       <TabbedCode
         examples={[
@@ -133,27 +124,19 @@ export default function () {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-              use Throwable;
-              use Inertia\\Inertia;
+              use Symfony\\Component\\HttpFoundation\\Response;
 
-              /**
-               * Prepare exception for rendering.
-               *
-               * @param  \\Throwable  $e
-               * @return \\Throwable
-               */
-              public function render($request, Throwable $e)
-              {
-                  $response = parent::render($request, $e);
+              ->withExceptions(function (Exceptions $exceptions) {
+                  $exceptions->respond(function (Response $response) {
+                      if ($response->getStatusCode() === 419) {
+                          return back()->with([
+                              'message' => 'The page expired, please try again.',
+                          ]);
+                      }
 
-                  if ($response->status() === 419) {
-                      return back()->with([
-                          'message' => 'The page expired, please try again.',
-                      ]);
-                  }
-
-                  return $response;
-              }
+                      return $response;
+                  });
+              });
             `,
           },
         ]}
