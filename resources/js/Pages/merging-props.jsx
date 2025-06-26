@@ -74,7 +74,9 @@ export default function () {
       />
 
       <P>
-        You may chain the <Code>matchOn</Code> method to control how data is merged. This allows you to specify one or more keys to determine how existing items should be matched and updated.
+        During the merging process, if the value is an array, the incoming items will be{' '}
+        <em>appended</em> to the existing array, not merged by index. However, you may chain the{' '}
+        <Code>matchOn</Code> method to determine how existing items should be matched and updated.
       </P>
       <CodeBlock
         language="php"
@@ -85,7 +87,9 @@ export default function () {
         `}
       />
       <P>
-        In this example, Inertia will iterate over the <Code>users.data</Code> array and attempt to match each item based on its <Code>id</Code> field. If an item with a matching id already exists, it will be replaced. Otherwise, the new item will be added to the array.
+        In this example, Inertia will iterate over the <Code>users.data</Code> array and attempt to{' '}
+        match each item by its <Code>id</Code> field. If a match is found, the existing item will be replaced.
+        If no match is found, the new item will be appended.
       </P>
       <Notice>
         You may also pass an array of keys to <Code>matchOn</Code> to specify multiple keys for matching.
