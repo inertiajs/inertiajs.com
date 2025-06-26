@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, P, Strong, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -6,6 +6,8 @@ export const meta = {
   links: [
     { url: '#top', name: 'Introduction' },
     { url: '#server-side', name: 'Server side' },
+    { url: '#client-side', name: 'Client side' },
+    { url: '#combining-with-deferred-props', name: 'Deferred props' },
     { url: '#resetting-props', name: 'Resetting props' },
   ],
 }
@@ -72,14 +74,29 @@ export default function () {
       />
 
       <P>
+        You may chain the <Code>matchOn</Code> method to control how data is merged. This allows you to specify one or more keys to determine how existing items should be matched and updated.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          Inertia::render('Users/Index', [
+              'users' => Inertia::deepMerge($users)->matchOn('data.id'),
+          ]);
+        `}
+      />
+      <P>
+        In this example, Inertia will iterate over the <Code>users.data</Code> array and attempt to match each item based on its <Code>id</Code> field. If an item with a matching id already exists, it will be replaced. Otherwise, the new item will be added to the array.
+      </P>
+      <Notice>
+        You may also pass an array of keys to <Code>matchOn</Code> to specify multiple keys for matching.
+      </Notice>
+      <H2>Client side</H2>
+      <P>
         On the client side, Inertia detects that this prop should be merged. If the prop returns an array, it will
         append the response to the current prop value. If it's an object, it will merge the response with the current
         prop value. If you have opted to <Code>deepMerge</Code>, Inertia ensures a deep merge of the entire structure.
       </P>
-      <P>
-        <Strong>Of note:</Strong> During the merging process, if the value is an array, the incoming items will be{' '}
-        <em>appended</em> to the existing array, not merged by index.
-      </P>
+      <H2>Combining with deferred props</H2>
       <P>
         You can also combine <A href="/deferred-props">deferred props</A> with mergeable props to defer the loading of
         the prop and ultimately mark it as mergeable once it's loaded.
