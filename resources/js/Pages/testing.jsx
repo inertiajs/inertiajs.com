@@ -86,6 +86,33 @@ export default function () {
         scope your assertions.
       </P>
       <P>
+        In addition to the <Code>assertInertia</Code> method, you may use the <Code>inertiaProps</Code> method to retrieve the props returned in the response.
+        You can pass a key to retrieve a specific property, and nested properties are supported using "dot" notation.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          use Inertia\\Testing\\AssertableInertia as Assert;
+
+          class PodcastsControllerTest extends TestCase
+          {
+              public function test_can_view_podcast()
+              {
+                  $response = $this->get('/podcasts/41');
+
+                  // Returns all props...
+                  $response->inertiaProps();
+
+                  // Returns a specific prop...
+                  $response->inertiaProps('podcast');
+
+                  // Returns a nested prop using "dot" notation...
+                  $response->inertiaProps('podcast.id');
+              }
+          }
+        `}
+      />
+      <P>
         Let's dig into the available assertions in detail. First, to assert that the Inertia response has a property,
         you may use the <Code>has</Code> method. You can think of this method as being similar to PHP's{' '}
         <Code>isset</Code> function.
