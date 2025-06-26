@@ -48,7 +48,7 @@ export default function () {
       />
       <H2>Root template</H2>
       <P>
-        Next, set up the root template that will be loaded on the first page visit to your application. This template{' '}
+        Next, setup the root template that will be loaded on the first page visit to your application. This template{' '}
         is responsible for loading your site assets (CSS and JavaScript). It should include your assets, as well{' '}
         as the <Code>@inertia</Code> and <Code>@inertiaHead</Code> directives.
       </P>
