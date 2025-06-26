@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -48,9 +48,9 @@ export default function () {
       />
       <H2>Root template</H2>
       <P>
-        Next, setup the root template that will be loaded on the first page visit to your application. This will be used
-        to load your site assets (CSS and JavaScript), and will also contain a root <Code>{'<div>'}</Code> in which to
-        boot your JavaScript application.
+        Next, setup the root template that will be loaded on the first page visit to your application. This template{' '}
+        is responsible for loading your site assets (CSS and JavaScript). It should include your assets, as well{' '}
+        as the <Code>@inertia</Code> and <Code>@inertiaHead</Code> directives.
       </P>
       <TabbedCode
         examples={[
@@ -74,9 +74,29 @@ export default function () {
           },
         ]}
       />
+      <Notice>
+        For React applications, it's recommended to include the <Code>@viteReactRefresh</Code> directive before the <Code>@vite</Code> directive to enable Fast Refresh in development.
+      </Notice>
       <P>
-        This template should include your assets, as well as the <Code>@inertia</Code> and <Code>@inertiaHead</Code>{' '}
-        directives. For React applications, it's recommended to include the <Code>@viteReactRefresh</Code> directive before the <Code>@vite</Code> directive to enable Fast Refresh in development.
+        The <Code>@inertia</Code> directive renders a <Code>{'<div>'}</Code> element with an <Code>id</Code> of <Code>app</Code>.{' '}
+        This element serves as the mounting point for your JavaScript application. You may customize the <Code>id</Code> by passing a{' '}
+        different value to the directive.
+      </P>
+      <CodeBlock
+        language="markup"
+        children={dedent`
+              <!DOCTYPE html>
+              <html>
+                ...
+                <body>
+                  @inertia('custom-app-id')
+                </body>
+              </html>
+            `
+        }
+      />
+      <P>
+        If you change the <Code>id</Code> of the root element, be sure to update it <A href="/client-side-setup#defining-a-root-element">client-side</A> as well.
       </P>
       <P>
         By default, Inertia's Laravel adapter will assume your root template is named <Code>app.blade.php</Code>. If you
