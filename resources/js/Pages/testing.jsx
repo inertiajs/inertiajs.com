@@ -1,4 +1,4 @@
-import { A, Code, CodeBlock, H1, H2, P } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, H3, P } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -230,6 +230,25 @@ export default function () {
           );
         `}
       />
+      <H3>Testing Partial Reloads</H3>
+      <P>
+        You may use the <Code>reloadOnly</Code> and <Code>reloadExcept</Code> methods to test how your application responds to <A href="/partial-reloads">partial reloads</A>.{' '}
+        These methods perform a follow-up request and allow you to make assertions against the response.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          $response->assertInertia(fn (Assert $page) => $page
+              ->has('orders')
+              ->missing('statuses')
+              ->reloadOnly('statuses', fn (Assert $reload) => $reload
+                  ->missing('orders')
+                  ->has('statuses', 5)
+              )
+          );
+        `}
+      />
+      <P>Instead of passing a single prop as a string, you may also pass an array of props to <Code>reloadOnly</Code> or <Code>reloadExcept</Code>.</P>
     </>
   )
 }
