@@ -17,7 +17,7 @@ const TabbedCode = ({ className, examples, height }) => {
   const [codeTabs, setCodeTabs] = useContext(CodeTabContext) || useState({ unknown: 0 })
   const tabType = guessTabType(examples.map(example => example.name))
   const exampleIndex = examples.findIndex(example => codeTabs[tabType] === example.name)
-  const activeTab = exampleIndex < 0 ? 0 : exampleIndex
+  const activeTab = exampleIndex < 0 ? (examples.length - 1) : exampleIndex
 
   return (
     <div className={className || 'my-8 overflow-hidden rounded'}>
