@@ -213,6 +213,9 @@ export default function () {
           </div>
         </div>
       </div>
+      <P>
+        You can read more about this on the <A href="/asset-versioning">asset versioning</A> page.
+      </P>
       <H2>Partial reloads</H2>
       <P>
         When making Inertia requests, the partial reload option allows you to request a subset of the props (data) from
