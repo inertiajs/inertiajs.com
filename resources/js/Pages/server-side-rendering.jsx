@@ -45,8 +45,8 @@ export default function () {
       </Notice>
       <H2>Laravel starter kits</H2>
       <P>
-        If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Breeze or Jetstream</A>, you may
-        install the starter kit's scaffolding with Inertia SSR support pre-configured using the <Code>--ssr</Code> flag.
+        If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Starter Kits</A>, Inertia SSR is 
+        <A href="https://laravel.com/docs/starter-kits#inertia-ssr">supported</A> through a build command:
       </P>
       <TabbedCode
         examples={[
@@ -54,8 +54,7 @@ export default function () {
             name: 'Laravel',
             language: 'bash',
             code: dedent`
-              php artisan breeze:install react --ssr
-              php artisan breeze:install vue --ssr
+              npm run build:ssr
             `,
           },
         ]}
