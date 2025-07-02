@@ -92,6 +92,9 @@ export default function () {
           <A href="https://kaiofelps.github.io/inertia-rust/">Rust</A>
         </Li>
         <Li>
+          <A href="https://github.com/sailscastshq/boring-stack/tree/main/packages/inertia-sails">Sails</A>
+        </Li>
+        <Li>
           <A href="https://github.com/Inertia4J/inertia4j">Spring/Ktor</A>
         </Li>
         <Li>
