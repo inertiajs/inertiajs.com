@@ -56,6 +56,9 @@ export default function () {
           <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
         </Li>
         <Li>
+          <A href="https://github.com/matrei/grails-inertia-plugin">Grails</A>
+        </Li>
+        <Li>
           <A href="https://github.com/tobimori/kirby-inertia">Kirby CMS</A>
         </Li>
         <Li>
