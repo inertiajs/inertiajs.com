@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Feature Request
+    url: https://github.com/inertiajs/inertia/discussions/new?category=ideas
+    about: "For ideas or feature requests, start a new discussion"
+  - name: Support Questions & Other
+    url: https://github.com/inertiajs/inertia/discussions/new?category=help
+    about: "This repository is only for reporting bugs. If you have a question or need help using the library, click:"
+  - name: Bug in Inertia.js core or adapter
+    url: https://github.com/inertiajs/inertia/issues/new/choose
+    about: For bugs in the JS package (React/Vue/Svelte adapters), open an issue in the inertiajs/inertia repo
+  - name: Bug in Laravel adapter
+    url: https://github.com/inertiajs/inertia-laravel/issues/new/choose
+    about: For backend-related bugs using the Laravel adapter, open an issue in the inertiajs/inertia-laravel repository
