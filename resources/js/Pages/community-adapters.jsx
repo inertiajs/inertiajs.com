@@ -65,6 +65,9 @@ export default function () {
           <A href="https://github.com/cherifGsoul/inertia-psr15">PSR-15</A>
         </Li>
         <Li>
+          <A href="https://github.com/stuarth/inertia-rs">Rust</A>
+        </Li>
+        <Li>
           <A href="https://kaiofelps.github.io/inertia-rust/">Rust</A>
         </Li>
         <Li>
