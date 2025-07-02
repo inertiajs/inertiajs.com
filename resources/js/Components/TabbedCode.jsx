@@ -16,7 +16,19 @@ const guessTabType = tabNames => {
 const TabbedCode = ({ className, examples, height }) => {
   const [codeTabs, setCodeTabs] = useContext(CodeTabContext) || useState({ unknown: 0 })
   const tabType = guessTabType(examples.map(example => example.name))
-  const exampleIndex = examples.findIndex(example => codeTabs[tabType] === example.name)
+  const exampleIndex = examples.findIndex(example => {
+    if (codeTabs[tabType] === example.name) {
+      return true
+    }
+
+    if (
+      (codeTabs[tabType]?.startsWith('Svelte') && example.name === 'Svelte') ||
+      (codeTabs[tabType] === 'Svelte' && example.name.startsWith('Svelte'))
+    ) {
+      // Svelte example are named either 'Svelte', 'Svelte 4', or 'Svelte 5'
+      return true
+    }
+  })
   const activeTab = exampleIndex < 0 ? 0 : exampleIndex
 
   return (
