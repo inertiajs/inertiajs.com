@@ -524,7 +524,22 @@ export default function () {
           php artisan inertia:stop-ssr
         `}
       />
-      <H2>Laravel Forge</H2>
+      <P>
+        You may use the <Code>inertia:check-ssr</Code> Artisan command to verify that the SSR server is running.{' '}
+        This can be helpful after deployment and works well as a Docker health check to ensure the server is responding as expected.
+      </P>
+      <CodeBlock
+        language="bash"
+        children={dedent`
+          php artisan inertia:check-ssr
+        `}
+      />
+      <P>
+        By default, a check is performed to ensure the server-side bundle exists before dispatching a request to the SSR server.{' '}
+        In some cases, such as when your app runs on multiple servers or is containerized, the web server may not have access to the SSR bundle.{' '}
+        To disable this check, you may set the <Code>inertia.ssr.ensure_bundle_exists</Code> configuration value to <Code>false</Code>.
+      </P>
+      <H3>Laravel Forge</H3>
       <P>
         To run the SSR server on Forge, you should create a new daemon that runs{' '}
         <Code>php artisan inertia:start-ssr</Code> from the root of your app. Or, you may utilize the built-in Inertia
@@ -535,7 +550,7 @@ export default function () {
         <Code>php artisan inertia:stop-ssr</Code> command. This will stop the existing SSR server, forcing a new one to
         be started by your process monitor.
       </P>
-      <H2>Heroku</H2>
+      <H3>Heroku</H3>
       <P>
         To run the SSR server on Heroku, update the <Code>web</Code> configuration in your <Code>Procfile</Code> to run
         the SSR server before starting your web server.
