@@ -18,9 +18,12 @@ export default function () {
         </Li>
         <Li>
           <A href="https://docs.adonisjs.com/guides/inertia">AdonisJS</A>
-        </Li>
+        </Li>      
         <Li>
           <A href="https://github.com/kapi2289/InertiaCore">ASP.NET</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/CakeDC/cakephp-inertia">CakePHP InertiaJS plugin</A>
         </Li>
         <Li>
           <A href="https://github.com/ishanvyas22/cakephp-inertiajs">CakePHP</A>
@@ -32,7 +35,7 @@ export default function () {
           <A href="https://github.com/prestancedesign/inertia-clojure">Clojure</A>
         </Li>
         <Li>
-          <A href="https://github.com/amiranagram/inertia-codeigniter-4">CodeIgniter4</A>
+          <A href="https://github.com/amiranagram/inertia-codeigniter-4">CodeIgniter4 (deprecated)</A>
         </Li>
         <Li>
           <A href="https://github.com/elpete/cbInertia">ColdBox</A>
@@ -48,6 +51,9 @@ export default function () {
         </Li>
         <Li>
           <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/inventor96/inertia-mako/">Mako</A>
         </Li>
         <Li>
           <A href="https://github.com/tobimori/kirby-inertia">Kirby CMS</A>
@@ -69,6 +75,9 @@ export default function () {
         </Li>
         <Li>
           <A href="https://kaiofelps.github.io/inertia-rust/">Rust</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/Inertia4J/inertia4j">Spring/Ktor</A>
         </Li>
         <Li>
           <A href="https://github.com/skipthedragon/inertia-bundle">Symfony</A>
