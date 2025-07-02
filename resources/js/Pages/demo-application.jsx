@@ -35,25 +35,31 @@ export default function () {
       </P>
       <Ul>
         <Li>
-          <A href="https://github.com/ledermann/pingcrm/">Ruby on Rails/Vue</A> by Georg Ledermann
+          <A href="https://github.com/prestancedesign/pingcrm-clojure">Clojure/React</A> by Michaël Salihi
+        </Li>
+        <Li>
+          <A href="https://github.com/kohkimakimoto/pingcrm-echo">Echo/Vue</A> by Kohki Makimoto
+        </Li>
+        <Li>
+          <A href="https://github.com/matrei/pingcrm-grails">Grails/Vue</A> by Mattias Reichel
         </Li>
         <Li>
           <A href="https://github.com/Landish/pingcrm-react">Laravel/React</A> by Lado Lomidze
         </Li>
         <Li>
-          <A href="https://github.com/zgabievi/pingcrm-svelte">Laravel/Svelte</A> by Zura Gabievi
-        </Li>
-        <Li>
           <A href="https://github.com/tbreuss/pingcrm-mithril">Laravel/Mithril.js</A> by Thomas Breuss
         </Li>
         <Li>
-          <A href="https://github.com/tbreuss/pingcrm-yii2">Yii 2/Vue</A> by Thomas Breuss
+          <A href="https://github.com/zgabievi/pingcrm-svelte">Laravel/Svelte</A> by Zura Gabievi
+        </Li>
+        <Li>
+          <A href="https://github.com/ledermann/pingcrm/">Ruby on Rails/Vue</A> by Georg Ledermann
         </Li>
         <Li>
           <A href="https://github.com/aleksblendwerk/pingcrm-symfony">Symfony/Vue</A> by Aleks Seltenreich
         </Li>
         <Li>
-          <A href="https://github.com/prestancedesign/pingcrm-clojure">Clojure/React</A> by Michaël Salihi
+          <A href="https://github.com/tbreuss/pingcrm-yii2">Yii 2/Vue</A> by Thomas Breuss
         </Li>
       </Ul>
     </>
