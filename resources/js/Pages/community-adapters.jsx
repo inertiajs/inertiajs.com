@@ -14,9 +14,6 @@ export default function () {
       </P>
       <Ul>
         <Li>
-          <A href="https://github.com/inertiajs/inertia-rails">Rails</A>
-        </Li>
-        <Li>
           <A href="https://docs.adonisjs.com/guides/inertia">AdonisJS</A>
         </Li>
         <Li>
@@ -50,10 +47,10 @@ export default function () {
           <A href="https://github.com/j0ack/flask-inertia">Flask</A>
         </Li>
         <Li>
-          <A href="https://github.com/petaki/inertia-go">Go (inertia-go)</A>
+          <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
         </Li>
         <Li>
-          <A href="https://github.com/romsar/gonertia">Go (gonertia)</A>
+          <A href="https://github.com/petaki/inertia-go">Go (inertia-go)</A>
         </Li>
         <Li>
           <A href="https://github.com/matrei/grails-inertia-plugin">Grails</A>
@@ -84,6 +81,9 @@ export default function () {
         </Li>
         <Li>
           <A href="https://github.com/cherifGsoul/inertia-psr15">PSR-15</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/inertiajs/inertia-rails">Rails</A>
         </Li>
         <Li>
           <A href="https://github.com/stuarth/inertia-rs">Rust</A>
