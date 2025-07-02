@@ -18,7 +18,7 @@ export default function () {
         </Li>
         <Li>
           <A href="https://docs.adonisjs.com/guides/inertia">AdonisJS</A>
-        </Li>      
+        </Li>
         <Li>
           <A href="https://github.com/kapi2289/InertiaCore">ASP.NET</A>
         </Li>
@@ -42,6 +42,9 @@ export default function () {
         </Li>
         <Li>
           <A href="https://pypi.org/project/inertia-django/">Django</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/kohkimakimoto/inertia-echo">Echo</A>
         </Li>
         <Li>
           <A href="https://github.com/j0ack/flask-inertia">Flask</A>
