@@ -45,8 +45,8 @@ export default function () {
       </Notice>
       <H2>Laravel starter kits</H2>
       <P>
-        If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Breeze or Jetstream</A>, you may
-        install the starter kit's scaffolding with Inertia SSR support pre-configured using the <Code>--ssr</Code> flag.
+        If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Starter Kits</A>, Inertia SSR is 
+        <A href="https://laravel.com/docs/starter-kits#inertia-ssr">supported</A> through a build command:
       </P>
       <TabbedCode
         examples={[
@@ -54,8 +54,7 @@ export default function () {
             name: 'Laravel',
             language: 'bash',
             code: dedent`
-              php artisan breeze:install react --ssr
-              php artisan breeze:install vue --ssr
+              npm run build:ssr
             `,
           },
         ]}
@@ -357,25 +356,25 @@ export default function () {
       </P>
       <Vue>
         <P>
-          To enable client-side hydration in a Vue app, update your <Code>app.js</Code> file to use{' '}
+          To enable client-side hydration in a Vue app, update your <Code>ssr.js</Code> file to use{' '}
           <Code>createSSRApp</Code> instead of <Code>createApp</Code>:
         </P>
       </Vue>
       <React>
         <P>
-          To enable client-side hydration in a React app, update your <Code>app.js</Code> file to use{' '}
+          To enable client-side hydration in a React app, update your <Code>ssr.js</Code> file to use{' '}
           <Code>hydrateRoot</Code> instead of <Code>createRoot</Code>:
         </P>
       </React>
       <Svelte4>
         <P>
           To enable client-side hydration in a Svelte 4 app, set the <Code>hydrate</Code> option to <Code>true</Code> in
-          your <Code>app.js</Code> file:
+          your <Code>ssr.js</Code> file:
         </P>
       </Svelte4>
       <Svelte5>
         <P>
-          To enable client-side hydration in a Svelte 5 app, update your <Code>app.js</Code> file to use{' '}
+          To enable client-side hydration in a Svelte 5 app, update your <Code>ssr.js</Code> file to use{' '}
           <Code>hydrate</Code> instead of <Code>mount</Code> when server rendering:
         </P>
       </Svelte5>

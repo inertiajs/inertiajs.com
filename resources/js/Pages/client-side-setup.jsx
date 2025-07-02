@@ -211,6 +211,9 @@ export default function () {
           })
         `}
       />
+      <P>
+        If you change the <Code>id</Code> of the root element, be sure to update it <A href="/server-side-setup#root-template">server-side</A> as well.
+      </P>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, P, TabbedCode } from '@/Components'
+import { A, Code, CodeBlock, H1, H2, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -7,6 +7,7 @@ export const meta = {
     { url: '#introduction', name: 'Introduction' },
     { url: '#configuration', name: 'Configuration' },
     { url: '#cache-busting', name: 'Cache busting' },
+    { url: '#manual-refreshing', name: 'Manual refreshing' },
   ],
 }
 
@@ -72,9 +73,40 @@ export default function () {
         busting. For example, appending a version query parameter to the end of your asset URLs.
       </P>
       <P>
-        If you're using Laravel Mix, you can do this automatically by enabling{' '}
-        <A href="https://laravel.com/docs/mix#versioning-and-cache-busting">versioning</A> in your{' '}
-        <Code>webpack.mix.js</Code> file. When using Laravel's Vite integration, asset versioning is done automatically.
+        With Laravel's Vite integration, asset versioning is done automatically. If you're using Laravel Mix, you can do{' '}
+        this automatically by enabling <A href="https://laravel.com/docs/mix#versioning-and-cache-busting">versioning</A> in your{' '}
+        <Code>webpack.mix.js</Code> file.
+      </P>
+      <H2>Manual refreshing</H2>
+      <P>
+        If you want to take asset refreshing into your control, you can return a fixed value from the <Code>version</Code> method in the{' '}
+        <Code>HandleInertiaRequests</Code> middleware. This disables Inertia's automatic asset versioning.
+      </P>
+      <P>
+        For example, if you want to notify users when a new version of your frontend is available, you can still expose{' '}
+        the actual asset version to the frontend by including it as <A href="/shared-data">shared data</A>.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          class HandleInertiaRequests extends Middleware
+          {
+              public function version(Request $request)
+              {
+                  return null;
+              }
+
+              public function share(Request $request)
+              {
+                  return array_merge(parent::share($request), [
+                      'version' => parent::version($request),
+                  ]);
+              }
+          }
+      `}
+      />
+      <P>
+        On the frontend, you can watch the <Code>version</Code> property and show a notification when a new version is detected.
       </P>
     </>
   )

@@ -79,24 +79,62 @@ export default function () {
         <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Ziggy is already configured for you.
       </P>
       <P>
-        If you're using Ziggy with Vue, it's helpful to make this function available as a custom <Code>$route</Code>{' '}
-        property so you can use it directly in your templates.
+        If you're using the Vue plugin included with Ziggy, you may use the <Code>route()</Code>{' '}
+        function directly in your templates.
       </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue',
-            language: 'js',
-            code: dedent`
-              app.config.globalProperties.$route = route
-            `,
-          },
-        ]}
-      />
       <CodeBlock
         language="html"
         children={dedent`
-          <Link :href="$route('users.create')">Create User</Link>
+          <Link :href="route('users.create')">Create User</Link>
+        `}
+      />
+      <P>
+        When <A href="/server-side-rendering">server-side rendering</A> is enabled, you may pass an options object to the Ziggy{' '}
+        plugin in your <Code>ssr.js</Code> file. This should include the route definitions and current location.
+      </P>
+      <CodeBlock
+        language="js"
+        children={dedent`
+          .use(ZiggyVue, {
+            ...page.props.ziggy,
+            location: new URL(page.props.ziggy.location),
+          });
+         `}
+      />
+      <H2>Customizing the Page URL</H2>
+      <P>
+        The <A href="/the-protocol#the-page-object">page object</A> includes a <Code>url</Code> that represents the current page's URL.
+        By default, the Laravel adapter resolves this using the <Code>fullUrl()</Code> method on the <Code>Request</Code> instance, but
+        strips the scheme and host so the result is a relative URL.
+      </P>
+      <P>
+        If you need to customize how the URL is resolved, you may provide a resolver within the <Code>urlResolver</Code> method of the
+        Inertia <Code>HandleInertiaRequests</Code> middleware.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+              class HandleInertiaRequests extends Middleware
+              {
+                  public function urlResolver()
+                  {
+                      return function (Request $request) {
+                          // Return the URL for the request...
+                      };
+                  }
+              }
+            `
+        }
+      />
+      <P>
+        Alternatively, you may define the resolver using the <Code>Inertia::resolveUrlUsing()</Code> method.
+      </P>
+      <CodeBlock
+        language="php"
+        children={dedent`
+          Inertia::resolveUrlUsing(function (Request $request) {
+              // Return the URL for the request...
+          });
         `}
       />
     </>

@@ -19,7 +19,7 @@ export default function () {
         with Laravel.
       </P>
       <P>
-        Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A>, Breeze and Jetstream, provide
+        Laravel's <A href="https://laravel.com/docs/starter-kits">starter kits</A> provide
         out-of-the-box scaffolding for new Inertia applications, including authentication.
       </P>
     </>
