@@ -148,6 +148,11 @@ export default function () {
           },
         ]}
       />
+      <P>
+        If you attempt to render a page that does not exist, the response will typically be a blank screen. To prevent this, you may set the {' '}
+        <Code>inertia.ensure_pages_exist</Code> configuration option to <Code>true</Code>. The Laravel adapter will then throw an{' '}
+        <Code>Inertia\ComponentNotFoundException</Code> when a page cannot be found.
+      </P>
       <H2>Creating layouts</H2>
       <P>
         While not required, for most projects it makes sense to create a site layout that all of your pages can extend.
