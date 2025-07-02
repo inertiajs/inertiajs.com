@@ -1,0 +1,26 @@
+name: Documentation Issue
+description: Report a problem or missing section in the documentation.
+labels: [documentation]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for helping improve the Inertia documentation! This form is for reporting issues with the content at [inertiajs.com](https://inertiajs.com), such as missing pages, incorrect examples, or unclear wording."
+  - type: input
+    attributes:
+      label: URL or section
+      description: Point to the page or section where the problem exists (or should exist).
+      placeholder: e.g. https://inertiajs.com/forms
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What's missing or unclear?
+      description: Describe what's wrong or missing. Be as specific as possible.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Suggested improvement
+      description: If possible, suggest how the documentation could better explain the topic.
+    validations:
+      required: false

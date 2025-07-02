@@ -1,0 +1,40 @@
+name: Website Issue
+description: Report a layout, navigation, or technical issue with inertiajs.com.
+labels: [website]
+body:
+  - type: markdown
+    attributes:
+      value: "This form is for reporting bugs with the website itself — like layout problems, broken navigation, missing assets, or console errors. For content issues or missing documentation, please use the **Documentation Issue** template instead."
+  - type: input
+    attributes:
+      label: Affected URL or section
+      description: Provide the URL or section of the site where the issue occurs.
+      placeholder: e.g. https://inertiajs.com/server-side-setup
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe the problem
+      description: Describe what you're seeing that appears broken or incorrect. Include browser or device info if relevant.
+      placeholder: |
+        The mobile navigation toggle doesn't open on iOS Safari.
+        I noticed this on iPhone 16 running iOS 26.
+        No errors in the console.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: Include steps to reliably reproduce the issue. Screenshots or videos are helpful if available.
+      placeholder: |
+        1. Open the site on Safari mobile
+        2. Tap the hamburger menu
+        3. Nothing happens
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional context (optional)
+      description: Add any other details, device info, screenshots, or links that might help.
+    validations:
+      required: false
