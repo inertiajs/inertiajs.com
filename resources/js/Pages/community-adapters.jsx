@@ -65,7 +65,10 @@ export default function () {
           <A href="https://github.com/girardinsamuel/masonite-inertia/">Masonite</A>
         </Li>
         <Li>
-          <A href="https://github.com/tbreuss/inertia-mithril">Mithril.js</A>
+          <A href="https://github.com/maicol07/inertia-mithril">Mithril.js</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/tbreuss/inertia-mithril">Mithril.js (for Inertia 0.1)</A>
         </Li>
         <Li>
           <A href="https://github.com/jcs224/oak_inertia">Oak</A>
