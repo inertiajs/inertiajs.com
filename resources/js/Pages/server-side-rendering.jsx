@@ -362,7 +362,7 @@ export default function () {
       </Vue>
       <React>
         <P>
-          To enable client-side hydration in a React app, update your <Code>ssr.js</Code> file to use{' '}
+          To enable client-side hydration in a React app, update your <Code>app.js</Code> file to use{' '}
           <Code>hydrateRoot</Code> instead of <Code>createRoot</Code>:
         </P>
       </React>
