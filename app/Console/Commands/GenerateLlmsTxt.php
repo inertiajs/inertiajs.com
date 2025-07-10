@@ -2,14 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Support\Markdown;
 use DOMDocument;
 use DOMNode;
 use Illuminate\Console\Command;
-use League\HTMLToMarkdown\Converter\ConverterInterface;
-use League\HTMLToMarkdown\ElementInterface;
-use League\HTMLToMarkdown\HtmlConverter;
-use Illuminate\Support\Str;
-use SebastianBergmann\CodeCoverage\Report\PHP;
 
 class GenerateLlmsTxt extends Command
 {
@@ -51,127 +47,7 @@ class GenerateLlmsTxt extends Command
 
         $page = file_get_contents(resource_path('js/Pages/' . $url . '.jsx'));
 
-        $replace = [
-            '<>' => '',
-            '</>' => '',
-            "{' '}" => ' ',
-            '<Link' => '<a',
-            '</Link>' => '</a>',
-            '<Notice>' => '<p>',
-            '</Notice>' => '</p>',
-        ];
-
-        $codeBlockType = null;
-        $inFencedCodeBlock = false;
-
-        $page = str($page)
-            ->after('return (')
-            ->beforeLast(')')
-            ->replace(array_keys($replace), array_values($replace))
-            ->replaceMatches('/className=\{[^}]*\}/', '')
-            ->explode(PHP_EOL)
-            ->map(function ($line) use (&$codeBlockType, &$inFencedCodeBlock) {
-                if (str_contains($line, '<TabbedCode')) {
-                    $codeBlockType = 'tabbedcode';
-
-                    $this->currentCodeBlockId = Str::random(10);
-                    $this->tabbedCodeBlocks[$this->currentCodeBlockId] = $line;
-
-                    return '<p><tabbedcode>' . $this->currentCodeBlockId . '</tabbedcode></p>';
-                }
-
-                if (str_contains($line, '<CodeBlock')) {
-                    $codeBlockType = 'codeblock';
-
-                    $this->currentCodeBlockId = Str::random(10);
-                    $this->codeBlocks[$this->currentCodeBlockId] = $line;
-
-                    return '<p><codeblock>' . $this->currentCodeBlockId . '</codeblock></p>';
-                }
-
-                if ($codeBlockType === null) {
-                    return str($line)->replaceMatches('/\s+/', ' ')->replaceMatches('/\{\'<(.+)>\'\}/', '&lt;$1&gt;')->trim()->toString();
-                }
-
-                if (str_contains($line, '`')) {
-                    $inFencedCodeBlock = !$inFencedCodeBlock;
-                }
-
-                try {
-                    if ($codeBlockType === 'tabbedcode') {
-                        $this->tabbedCodeBlocks[$this->currentCodeBlockId] .= $line;
-                    } else {
-                        $this->codeBlocks[$this->currentCodeBlockId] .= $line;
-                    }
-                } catch (\Exception $e) {
-                    dd($this->tabbedCodeBlocks, $this->codeBlocks, $codeBlockType, $line);
-                }
-
-                if ($inFencedCodeBlock) {
-                    // Don't look for ending tag inside fenced code blocks
-                    return null;
-                }
-
-                if (str_contains($line, '/>')) {
-                    $codeBlockType = null;
-                }
-
-                return null;
-            })
-            ->filter(fn($line) => $line !== null && trim($line) !== '')
-            ->implode(PHP_EOL);
-
-        $converter = new HtmlConverter(['header_style' => 'atx', 'hard_break' => true, 'remove_nodes' => 'div']);
-        $converter->getEnvironment()->addConverter(new class($this->tabbedCodeBlocks, $this->codeBlocks) implements ConverterInterface {
-            public function __construct(protected array $tabbedBlocks, protected array $codeBlocks)
-            {
-                //
-            }
-
-            public function convert(ElementInterface $node): string
-            {
-                if ($node->getTagName() === 'tabbedcode') {
-                    $content = $this->tabbedBlocks[$node->getValue()];
-
-                    return str($content)->after('examples={')->beforeLast('}')->explode('`,')->map(function ($example) {
-                        if (!str_contains($example, 'code:')) {
-                            return null;
-                        }
-
-                        preg_match("/language: '([^']+)'/", $example, $matches);
-                        $language = $matches[1];
-
-                        preg_match("/name: '([^']+)'/", $example, $matches);
-                        $name = $matches[1];
-
-                        preg_match("/description: '([^']+)'/m", $example, $matches);
-                        $description = $matches[1] ?? null;
-
-                        $code = str($example)->after('dedent`')->beforeLast('`,')->trim()->replaceMatches('/\s{7,}/', PHP_EOL)->toString();
-
-                        return sprintf("%s%s:\n\n```%s\n%s\n```", $name, $description ? ' (' . $description . ')' : '', $language, $code);
-                    })->filter()->implode(PHP_EOL . PHP_EOL);
-                }
-
-                $content = $this->codeBlocks[$node->getValue()];
-                preg_match('/language="([^"]+)"/', $content, $matches);
-                $language = $matches[1];
-                preg_match('/dedent`([^`]+)`/', $content, $matches);
-                $code = str($matches[1])->trim()->replaceMatches('/\s{7,}/', PHP_EOL)->toString();
-
-                return sprintf("```%s\n%s\n```", $language, $code);
-            }
-
-            public function getSupportedTags(): array
-            {
-                return [
-                    'tabbedcode',
-                    'codeblock',
-                ];
-            }
-        });
-
-        $markdown = $converter->convert($page);
+        $markdown = Markdown::fromJsx($page);
 
         $this->full[] = $markdown;
     }
