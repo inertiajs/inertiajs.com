@@ -253,7 +253,7 @@ export default function Layout({ meta, children }) {
                 </div>
               )}
               <a
-                href={window.location.pathname + '.md'}
+                href={(window.location.pathname === '/' ? 'index' : window.location.pathname) + '.md'}
                 target="_blank"
                 class="mb-12 inline-block rounded border border-gray-400 px-2 py-1 text-xs font-medium uppercase hover:border-gray-500"
               >
