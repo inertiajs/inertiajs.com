@@ -84,7 +84,7 @@ class GenerateLlmsTxt extends Command
 
                     if (!str_starts_with($url, 'http')) {
                         $this->pages[] = $url;
-                        $url = url($url);
+                        $url = url($url) . '.md';
                         $md[] = sprintf('- [%s](%s)', trim($node->textContent), $url);
                     }
                 }
