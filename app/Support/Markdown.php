@@ -32,6 +32,7 @@ class Markdown
             ->beforeLast(')')
             ->replace(array_keys($replace), array_values($replace))
             ->replaceMatches('/className=\{[^}]*\}/', '')
+            ->replaceMatches('/style=\{\{[^}]*\}\}/', '')
             ->explode(PHP_EOL)
             ->map(function ($line) use (&$codeBlockType, &$inFencedCodeBlock, &$currentCodeBlockId, &$tabbedCodeBlocks, &$codeBlocks) {
                 if (str_contains($line, '<TabbedCode')) {
@@ -56,7 +57,7 @@ class Markdown
                     return str($line)->replaceMatches('/\s+/', ' ')->replaceMatches('/\{\'<(.+)>\'\}/', '&lt;$1&gt;')->trim()->toString();
                 }
 
-                if (str_contains($line, '`')) {
+                if (str_contains($line, '`') && !str_contains($line, '\\`')) {
                     $inFencedCodeBlock = !$inFencedCodeBlock;
                 }
 
@@ -89,36 +90,36 @@ class Markdown
 
             public function convert(ElementInterface $node): string
             {
-                if ($node->getTagName() === 'tabbedcode') {
-                    $content = $this->tabbedBlocks[$node->getValue()];
+                if ($node->getTagName() === 'codeblock') {
+                    $content = $this->codeBlocks[$node->getValue()];
+                    preg_match('/language="([^"]+)"/', $content, $matches);
+                    $language = $matches[1];
+                    preg_match('/dedent`([^`]+)`/', $content, $matches);
+                    $code = str($matches[1])->trim()->replaceMatches('/\s{7,}/', PHP_EOL)->toString();
 
-                    return str($content)->after('examples={')->beforeLast('}')->explode('`,')->map(function ($example) {
-                        if (!str_contains($example, 'code:')) {
-                            return null;
-                        }
-
-                        preg_match("/language: '([^']+)'/", $example, $matches);
-                        $language = $matches[1];
-
-                        preg_match("/name: '([^']+)'/", $example, $matches);
-                        $name = $matches[1];
-
-                        preg_match("/description: '([^']+)'/m", $example, $matches);
-                        $description = $matches[1] ?? null;
-
-                        $code = str($example)->after('dedent`')->beforeLast('`,')->trim()->replaceMatches('/\s{7,}/', PHP_EOL)->toString();
-
-                        return sprintf("%s%s:\n\n```%s\n%s\n```", $name, $description ? ' (' . $description . ')' : '', $language, $code);
-                    })->filter()->implode(PHP_EOL . PHP_EOL);
+                    return sprintf("```%s\n%s\n```", $language, $code);
                 }
 
-                $content = $this->codeBlocks[$node->getValue()];
-                preg_match('/language="([^"]+)"/', $content, $matches);
-                $language = $matches[1];
-                preg_match('/dedent`([^`]+)`/', $content, $matches);
-                $code = str($matches[1])->trim()->replaceMatches('/\s{7,}/', PHP_EOL)->toString();
+                $content = $this->tabbedBlocks[$node->getValue()];
 
-                return sprintf("```%s\n%s\n```", $language, $code);
+                return str($content)->after('examples={')->beforeLast('}')->explode('`,')->map(function ($example) {
+                    if (!str_contains($example, 'code:')) {
+                        return null;
+                    }
+
+                    preg_match("/language: '([^']+)'/", $example, $matches);
+                    $language = $matches[1];
+
+                    preg_match("/name: '([^']+)'/", $example, $matches);
+                    $name = $matches[1];
+
+                    preg_match("/description: '([^']+)'/m", $example, $matches);
+                    $description = $matches[1] ?? null;
+
+                    $code = str($example)->after('dedent`')->beforeLast('`,')->trim()->replaceMatches('/\s{7,}/', PHP_EOL)->toString();
+
+                    return sprintf("%s%s:\n\n```%s\n%s\n```", $name, $description ? ' (' . $description . ')' : '', $language, $code);
+                })->filter()->implode(PHP_EOL . PHP_EOL);
             }
 
             public function getSupportedTags(): array

@@ -31,8 +31,8 @@ export default function () {
         <Code>data-page</Code> attribute with a JSON encoded <A href="#the-page-object">page object</A> for the initial
         page. Inertia uses this information to boot your client-side framework and display the initial page component.
       </P>
-      <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
-        <div className="px-6 pt-6 font-mono text-sm text-white">
+      <div className="mb-6 overflow-hidden rounded" style={{ background: '#202e59' }}>
+        <div className="p-6 font-mono text-sm text-white">
           <div className="text-xs font-bold uppercase text-gray-600">Request</div>
           <div className="mt-1">
             <span className="text-blue-400">GET:</span> http://example.com/events/80
@@ -46,8 +46,11 @@ export default function () {
             <span className="text-blue-400">Content-Type:</span> text/html; charset=utf-8
           </div>
         </div>
-        <CodeBlock className="p-6 leading-normal" language="html">
-          {dedent`
+      </div>
+      <CodeBlock
+        className="p-6 leading-normal"
+        language="html"
+        children={dedent`
             <html>
             <head>
                 <title>My app</title>
@@ -61,8 +64,7 @@ export default function () {
             </body>
             </html>
           `}
-        </CodeBlock>
-      </div>
+      />
       <Notice>
         While the initial response is HTML, Inertia does not server-side render the JavaScript page components.
       </Notice>
@@ -76,8 +78,8 @@ export default function () {
         When the server detects the <Code>X-Inertia</Code> header, instead of responding with a full HTML document, it
         returns a JSON response with an encoded <A href="#the-page-object">page object</A>.
       </P>
-      <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
-        <div className="px-6 pt-6 font-mono text-sm text-white">
+      <div className="mb-6 overflow-hidden rounded" style={{ background: '#202e59' }}>
+        <div className="p-6 font-mono text-sm text-white">
           <div className="text-xs font-bold uppercase text-gray-600">Request</div>
           <div className="mt-1">
             <span className="text-blue-400">GET:</span> http://example.com/events/80
@@ -106,8 +108,11 @@ export default function () {
             <span className="text-blue-400">X-Inertia:</span> true
           </div>
         </div>
-        <CodeBlock className="p-6 leading-normal" language="json">
-          {dedent`
+      </div>
+      <CodeBlock
+        className="p-6 leading-normal"
+        language="json"
+        children={dedent`
             {
               "component": "Event",
               "props": {
@@ -124,8 +129,7 @@ export default function () {
               "clearHistory": false
             }
           `}
-        </CodeBlock>
-      </div>
+      />
       <H2>The page object</H2>
       <P>
         Inertia shares data between the server and client via a page object. This object includes the necessary
@@ -188,7 +192,7 @@ export default function () {
         If "flash" session data exists when a <Code>409 Conflict</Code> response occurs, Inertia's server-side framework
         adapters will automatically reflash this data.
       </P>
-      <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
+      <div className="mb-6 overflow-hidden rounded" style={{ background: '#202e59' }}>
         <div className="p-6 font-mono text-sm text-white">
           <div className="text-xs font-bold uppercase text-gray-600">Request</div>
           <div className="mt-1">
@@ -236,8 +240,8 @@ export default function () {
         the final destination is different for some reason (eg. the user was logged out and is now on the login page),
         then no partial reloading will occur.
       </P>
-      <div className="overflow-hidden rounded" style={{ background: '#202e59' }}>
-        <div className="px-6 pt-6 font-mono text-sm text-white">
+      <div className="mb-6 overflow-hidden rounded" style={{ background: '#202e59' }}>
+        <div className="p-6 font-mono text-sm text-white">
           <div className="text-xs font-bold uppercase text-gray-600">Request</div>
           <div className="mt-1">
             <span className="text-blue-400">GET:</span> http://example.com/events
@@ -266,8 +270,11 @@ export default function () {
             <span className="text-blue-400">Content-Type:</span> application/json
           </div>
         </div>
-        <CodeBlock className="p-6 leading-normal" language="json">
-          {dedent`
+      </div>
+      <CodeBlock
+        className="p-6 leading-normal"
+        language="json"
+        children={dedent`
             {
               "component": "Events",
               "props": {
@@ -279,8 +286,7 @@ export default function () {
               "version": "6b16b94d7c51cbe5b1fa42aac98241d5"
             }
           `}
-        </CodeBlock>
-      </div>
+      />
     </>
   )
 }

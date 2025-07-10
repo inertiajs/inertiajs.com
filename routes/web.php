@@ -17,6 +17,10 @@ use Inertia\Inertia;
 */
 
 Route::get('{page?}', function ($page = 'index') {
+    if ($page === '.md') {
+        $page = 'index.md';
+    }
+
     $template = str($page)->before('.md')->toString();
     $templatePath = resource_path("js/Pages/$template.jsx");
 

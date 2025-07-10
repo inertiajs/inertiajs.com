@@ -239,7 +239,7 @@ export default function Layout({ meta, children }) {
           <div className="relative -mt-8 hidden w-44 flex-shrink-0 xl:block">
             <div className="sticky top-0 pt-8">
               {meta.links && (
-                <div className="mb-12">
+                <div className="mb-8">
                   <div className="text-xs font-bold uppercase tracking-widest text-gray-500">On this page</div>
                   <ul>
                     {meta.links.map((link, index) => (
@@ -252,6 +252,13 @@ export default function Layout({ meta, children }) {
                   </ul>
                 </div>
               )}
+              <a
+                href={window.location.pathname + '.md'}
+                target="_blank"
+                class="mb-12 inline-block rounded border border-gray-400 px-2 py-1 text-xs font-medium uppercase hover:border-gray-500"
+              >
+                View as Markdown
+              </a>
               <div className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-500">Our partners</div>
               <a className="block w-3/4" href="https://forge.laravel.com" title="Laravel Forge">
                 <svg className="h-auto w-full" viewBox="0 0 217.38 39.97">
