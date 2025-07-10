@@ -11,7 +11,8 @@
         "inertiajs/inertia-laravel": "^1.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "league/html-to-markdown": "^5.1"
     },
     "require-dev": {
         "ext-json": "*",

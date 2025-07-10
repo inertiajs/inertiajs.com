@@ -26,8 +26,8 @@ export default function () {
         headers or data. For these requests, the server returns a full HTML document.
       </P>
       <P>
-        This HTML response includes the site assets (CSS, JavaScript) as well as a root <Code>{`<div>`}</Code> in the
-        page's body. The root <Code>{`<div>`}</Code> serves as a mounting point for the client-side app, and includes a{' '}
+        This HTML response includes the site assets (CSS, JavaScript) as well as a root <Code>{'<div>'}</Code> in the
+        page's body. The root <Code>{'<div>'}</Code> serves as a mounting point for the client-side app, and includes a{' '}
         <Code>data-page</Code> attribute with a JSON encoded <A href="#the-page-object">page object</A> for the initial
         page. Inertia uses this information to boot your client-side framework and display the initial page component.
       </P>
@@ -154,7 +154,7 @@ export default function () {
       </Ol>
       <P>
         On standard full page visits, the page object is JSON encoded into the <Code>data-page</Code> attribute in the
-        root <Code>{`<div>`}</Code>. On Inertia visits, the page object is returned as the JSON payload.
+        root <Code>{'<div>'}</Code>. On Inertia visits, the page object is returned as the JSON payload.
       </P>
       <H2>Asset versioning</H2>
       <P>

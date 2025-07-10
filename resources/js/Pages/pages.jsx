@@ -152,7 +152,7 @@ export default function () {
       <P>
         While not required, for most projects it makes sense to create a site layout that all of your pages can extend.
         You may have noticed in our page example above that we're wrapping the page content within a{' '}
-        <Code>{`<Layout>`}</Code> component. Here's an example of such a component:
+        <Code>{'<Layout>'}</Code> component. Here's an example of such a component:
       </P>
       <TabbedCode
         examples={[

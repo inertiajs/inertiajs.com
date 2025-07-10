@@ -58,7 +58,7 @@ export default function () {
                   }
               }
             `,
-            description: `Within Laravel applications, the Event/Show page would typically correspond to the file located at resources/js/Pages/Event/Show.(js|vue|svelte).`,
+            description: 'Within Laravel applications, the Event/Show page would typically correspond to the file located at resources/js/Pages/Event/Show.(js|vue|svelte).',
           },
         ]}
       />
