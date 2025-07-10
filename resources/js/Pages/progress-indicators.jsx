@@ -266,7 +266,7 @@ export default function () {
               return
             }
             // ...
-          }
+           })
         `}
       />
       <P>That's it, you now have a beautiful custom page loading indicator!</P>
