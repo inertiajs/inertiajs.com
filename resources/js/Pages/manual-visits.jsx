@@ -496,6 +496,10 @@ export default function () {
                 encryptHistory: false,
                 preserveScroll: false,
                 preserveState: false,
+                errorBag: null,
+                onSuccess: (page) => {},
+                onError: (errors) => {},
+                onFinish: (visit) => {},
               })
             `,
           },
@@ -513,6 +517,10 @@ export default function () {
                 encryptHistory: false,
                 preserveScroll: false,
                 preserveState: false,
+                errorBag: null,
+                onSuccess: (page) => {},
+                onError: (errors) => {},
+                onFinish: (visit) => {},
               })
             `,
           },
@@ -530,18 +538,27 @@ export default function () {
                 encryptHistory: false,
                 preserveScroll: false,
                 preserveState: false,
+                errorBag: null,
+                onSuccess: (page) => {},
+                onError: (errors) => {},
+                onFinish: (visit) => {},
               })
             `,
           },
         ]}
       />
       <P>
-        All of the parameters are optional. By default, all passed paramaters will be merged with the current page. This
-        means you are responsible for overriding the current page's URL, component, and props.
+        All of the parameters are optional. By default, all passed paramaters (except <Code>errorBag</Code>){' '}
+        will be merged with the current page. This means you are responsible for overriding the current page's
+        URL, component, and props.
       </P>
       <P>
         If you need access to the current page's props you can pass a function to the props option. This function will
         receive the current page's props as an argument and should return the new props.
+      </P>
+      <P>
+        The <Code>errorBag</Code> option allows you to specify which error bag to use when handling validation errors
+        in the <Code>onError</Code> callback.
       </P>
       <TabbedCode
         examples={[
