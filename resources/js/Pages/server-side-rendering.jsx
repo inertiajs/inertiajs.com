@@ -45,7 +45,7 @@ export default function () {
       </Notice>
       <H2>Laravel starter kits</H2>
       <P>
-        If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Starter Kits</A>, Inertia SSR is 
+        If you are using <A href="https://laravel.com/docs/starter-kits">Laravel Starter Kits</A>, Inertia SSR is{' '}
         <A href="https://laravel.com/docs/starter-kits#inertia-ssr">supported</A> through a build command:
       </P>
       <TabbedCode
