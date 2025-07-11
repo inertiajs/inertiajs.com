@@ -743,6 +743,50 @@ export default function () {
         ]}
       />
       <P>
+        Sometimes, you may want to restore your form fields to their default values and clear any validation errors at{' '}
+        the same time. Instead of calling <Code>reset()</Code> and <Code>clearErrors()</Code> separately, you can use the{' '}
+        <Code>resetAndClearErrors()</Code> method, which combines both actions into a single call.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              // Reset the form and clear all errors...
+              form.resetAndClearErrors()
+
+              // Reset specific fields and clear their errors...
+              form.resetAndClearErrors('field', 'anotherfield')
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              const { resetAndClearErrors } = useForm({ ... })
+
+              // Reset the form and clear all errors...
+              resetAndClearErrors()
+
+              // Reset specific fields and clear their errors...
+              resetAndClearErrors('field', 'anotherfield')
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Reset the form and clear all errors...
+              $form.resetAndClearErrors()
+
+              // Reset specific fields and clear their errors...
+              $form.resetAndClearErrors('field', 'anotherfield')
+            `,
+          },
+        ]}
+      />
+      <P>
         If your form's default values become outdated, you can use the <Code>defaults()</Code> method to update them.
         Then, the form will be reset to the correct values the next time the <Code>reset()</Code> method is invoked.
       </P>
