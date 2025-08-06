@@ -7,6 +7,7 @@ export const meta = {
     { url: '#submitting-forms', name: 'Submitting forms' },
     { url: '#server-side-validation', name: 'Server-side validation' },
     { url: '#form-helper', name: 'Form helper' },
+    { url: '#form-component', name: 'Form component' },
     { url: '#file-uploads', name: 'File uploads' },
     { url: '#xhr-fetch-submissions', name: 'XHR / fetch submissions' },
   ],
@@ -1001,6 +1002,679 @@ export default function () {
               })
 
               form.submit(store())
+            `,
+          },
+        ]}
+      />
+      <H2>Form component</H2>
+      <P>
+        As an alternative to the <Code>useForm</Code> helper, Inertia provides a <Code>&lt;Form&gt;</Code> component that
+        offers a declarative approach to form handling. At its simplest, the component behaves much like a classic HTML
+        form, but with all the benefits of Inertia's SPA-like navigation. While <Code>useForm()</Code> gives you programmatic
+        control over form data and submission logic, the <Code>&lt;Form&gt;</Code> component is ideal when you prefer a
+        more HTML-like, declarative approach with minimal JavaScript.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        The component also supports advanced use cases, including nested data structures, file uploads, and dotted key notation:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/reports" method="post">
+                <input type="text" name="name" />
+                <textarea name="report[description]"></textarea>
+                <input type="text" name="report[tags][]" />
+                <input type="file" name="documents" multiple />
+                <button type="submit">Create Report</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/reports" method="post">
+                <input type="text" name="name" />
+                <textarea name="report[description]"></textarea>
+                <input type="text" name="report[tags][]" />
+                <input type="file" name="documents" multiple />
+                <button type="submit">Create Report</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form action="/reports" method="post">
+                <input type="text" name="name" />
+                <textarea name="report[description]"></textarea>
+                <input type="text" name="report[tags][]" />
+                <input type="file" name="documents" multiple />
+                <button type="submit">Create Report</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can pass a <Code>transform</Code> prop to modify the form data before submission. This is useful for
+        injecting additional fields or transforming existing data, although hidden inputs work too:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form
+                action="/posts"
+                method="post"
+                :transform="data => ({ ...data, user_id: 123 })"
+              >
+                <input type="text" name="title" />
+                <button type="submit">Create Post</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form
+                action="/posts"
+                method="post"
+                transform={data => ({ ...data, user_id: 123 })}
+              >
+                <input type="text" name="title" />
+                <button type="submit">Create Post</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/posts"
+                method="post"
+                transform={data => ({ ...data, user_id: 123 })}
+              >
+                <input type="text" name="title" />
+                <button type="submit">Create Post</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Slot props</H3>
+      <P>
+        Just like the <Code>useForm()</Code> helper, the <Code>&lt;Form&gt;</Code> component exposes reactive state
+        and helper methods through its default slot:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                #default="{
+                  errors,
+                  hasErrors,
+                  processing,
+                  progress,
+                  wasSuccessful,
+                  recentlySuccessful,
+                  setError,
+                  clearErrors,
+                  isDirty,
+                  reset,
+                  submit,
+                }"
+              >
+                <input type="text" name="name" />
+                <div v-if="errors.name">{{ errors.name }}</div>
+
+                <button type="submit" :disabled="processing">
+                  {{ processing ? 'Creating...' : 'Create User' }}
+                </button>
+
+                <div v-if="wasSuccessful">User created successfully!</div>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post">
+                {({
+                  errors,
+                  hasErrors,
+                  processing,
+                  progress,
+                  wasSuccessful,
+                  recentlySuccessful,
+                  setError,
+                  clearErrors,
+                  isDirty,
+                  reset,
+                  submit,
+                }) => (
+                  <>
+                    <input type="text" name="name" />
+                    {errors.name && <div>{errors.name}</div>}
+
+                    <button type="submit" disabled={processing}>
+                      {processing ? 'Creating...' : 'Create User'}
+                    </button>
+
+                    {wasSuccessful && <div>User created successfully!</div>}
+                  </>
+                )}
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                let:errors
+                let:hasErrors
+                let:processing
+                let:progress
+                let:wasSuccessful
+                let:recentlySuccessful
+                let:setError
+                let:clearErrors
+                let:isDirty
+                let:reset
+                let:submit
+              >
+                <input type="text" name="name" />
+                {#if errors.name}
+                  <div>{errors.name}</div>
+                {/if}
+
+                <button type="submit" disabled={processing}>
+                  {processing ? 'Creating...' : 'Create User'}
+                </button>
+
+                {#if wasSuccessful}
+                  <div>User created successfully!</div>
+                {/if}
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post">
+                {#snippet children({
+                  errors,
+                  hasErrors,
+                  processing,
+                  progress,
+                  wasSuccessful,
+                  recentlySuccessful,
+                  setError,
+                  clearErrors,
+                  isDirty,
+                  reset,
+                  submit,
+                })}
+                  <input type="text" name="name" />
+                  {#if errors.name}
+                    <div>{errors.name}</div>
+                  {/if}
+
+                  <button type="submit" disabled={processing}>
+                    {processing ? 'Creating...' : 'Create User'}
+                  </button>
+
+                  {#if wasSuccessful}
+                    <div>User created successfully!</div>
+                  {/if}
+                {/snippet}
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Props and options</H3>
+      <P>
+        In addition to <Code>action</Code> and <Code>method</Code>, the <Code>&lt;Form&gt;</Code> component accepts
+        several props. Many of them are identical to the options available in Inertia's{' '}
+        <A href="/manual-visits">visit options</A>:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form
+                action="/profile"
+                method="put"
+                error-bag="profile"
+                query-string-array-format="indices"
+                :headers="{ 'X-Custom-Header': 'value' }"
+                :show-progress="false"
+                :transform="data => ({ ...data, timestamp: Date.now() })"
+                :options="{
+                  preserveScroll: true,
+                  preserveState: true,
+                  preserveUrl: true,
+                  replace: true,
+                  only: ['users', 'flash'],
+                  except: ['secret'],
+                  reset: ['page'],
+                }"
+              >
+                <input type="text" name="name" />
+                <button type="submit">Update</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form
+                action="/profile"
+                method="put"
+                errorBag="profile"
+                queryStringArrayFormat="indices"
+                headers={{ 'X-Custom-Header': 'value' }}
+                showProgress={false}
+                transform={data => ({ ...data, timestamp: Date.now() })}
+                options={{
+                  preserveScroll: true,
+                  preserveState: true,
+                  preserveUrl: true,
+                  replace: true,
+                  only: ['users', 'flash'],
+                  except: ['secret'],
+                  reset: ['page'],
+                }}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Update</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/profile"
+                method="put"
+                errorBag="profile"
+                queryStringArrayFormat="indices"
+                headers={{ 'X-Custom-Header': 'value' }}
+                showProgress={false}
+                transform={data => ({ ...data, timestamp: Date.now() })}
+                options={{
+                  preserveScroll: true,
+                  preserveState: true,
+                  preserveUrl: true,
+                  replace: true,
+                  only: ['users', 'flash'],
+                  except: ['secret'],
+                  reset: ['page'],
+                }}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Update</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        Some props are intentionally grouped under <Code>options</Code> instead of being top-level to avoid confusion.
+        For example, <Code>only</Code>, <Code>except</Code>, and <Code>reset</Code> relate to <em>partial reloads</em>,
+        not <em>partial submissions</em>. The general rule: top-level props are for the form submission itself, while{' '}
+        <Code>options</Code> control how Inertia handles the subsequent visit.
+      </P>
+      <H3>Events</H3>
+      <P>
+        The <Code>&lt;Form&gt;</Code> component emits the same events as <Code>useForm()</Code>, except
+        the ones related to prefetching:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                @cancelToken="handleCancelToken"
+                @before="handleBefore"
+                @start="handleStart"
+                @progress="handleProgress"
+                @cancel="handleCancel"
+                @success="handleSuccess"
+                @error="handleError"
+                @finish="handleFinish"
+              >
+                <input type="text" name="name" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                onCancelToken={handleCancelToken}
+                onBefore={handleBefore}
+                onStart={handleStart}
+                onProgress={handleProgress}
+                onCancel={handleCancel}
+                onSuccess={handleSuccess}
+                onError={handleError}
+                onFinish={handleFinish}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                on:cancelToken={handleCancelToken}
+                on:before={handleBefore}
+                on:start={handleStart}
+                on:progress={handleProgress}
+                on:cancel={handleCancel}
+                on:success={handleSuccess}
+                on:error={handleError}
+                on:finish={handleFinish}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                oncanceltoken={handleCancelToken}
+                onbefore={handleBefore}
+                onstart={handleStart}
+                onprogress={handleProgress}
+                oncancel={handleCancel}
+                onsuccess={handleSuccess}
+                onerror={handleError}
+                onfinish={handleFinish}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Dotted key notation</H3>
+      <P>
+        The <Code>&lt;Form&gt;</Code> component supports dotted key notation for creating nested objects from flat
+        input names. This provides a convenient way to structure form data without needing complex JavaScript logic.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="user.name" />
+                <input type="text" name="user.skills[]" />
+                <input type="text" name="address.street" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="user.name" />
+                <input type="text" name="user.skills[]" />
+                <input type="text" name="address.street" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="user.name" />
+                <input type="text" name="user.skills[]" />
+                <input type="text" name="address.street" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        The above example would generate the following data structure:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'JSON',
+            language: 'json',
+            code: dedent`
+              {
+                "user": {
+                  "name": "John Doe",
+                  "skills": ["JavaScript"]
+                },
+                "address": {
+                  "street": "123 Main St"
+                }
+              }
+            `,
+          },
+        ]}
+      />
+      <P>
+        If you need literal dots in your field names (not as nested object separators), you can escape them using
+        backslashes:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/config" method="post">
+                <input type="text" name="app\\.name" />
+                <input type="text" name="settings.theme\\.mode" />
+                <button type="submit">Save</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/config" method="post">
+                <input type="text" name="app\\.name" />
+                <input type="text" name="settings.theme\\.mode" />
+                <button type="submit">Save</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form action="/config" method="post">
+                <input type="text" name="app\\.name" />
+                <input type="text" name="settings.theme\\.mode" />
+                <button type="submit">Save</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        This would result in:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'JSON',
+            language: 'json',
+            code: dedent`
+              {
+                "app.name": "My Application",
+                "settings": {
+                  "theme.mode": "dark"
+                }
+              }
+            `,
+          },
+        ]}
+      />
+      <P>
+        When using dotted keys or arrays, validation errors follow the same structure. You can access errors for
+        specific array indices or nested fields:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/users" method="post" #default="{ errors }">
+                <input type="text" name="tags[]" />
+                <div v-if="errors['tags.0']">{{ errors['tags.0'] }}</div>
+                
+                <input type="text" name="user.name" />
+                <div v-if="errors['user.name']">{{ errors['user.name'] }}</div>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post">
+                {({ errors }) => (
+                  <>
+                    <input type="text" name="tags[]" />
+                    {errors['tags.0'] && <div>{errors['tags.0']}</div>}
+                    
+                    <input type="text" name="user.name" />
+                    {errors['user.name'] && <div>{errors['user.name']}</div>}
+                  </>
+                )}
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post" let:errors>
+                <input type="text" name="tags[]" />
+                {#if errors['tags.0']}
+                  <div>{errors['tags.0']}</div>
+                {/if}
+                
+                <input type="text" name="user.name" />
+                {#if errors['user.name']}
+                  <div>{errors['user.name']}</div>
+                {/if}
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post">
+                {#snippet children({ errors })}
+                  <input type="text" name="tags[]" />
+                  {#if errors['tags.0']}
+                    <div>{errors['tags.0']}</div>
+                  {/if}
+                  
+                  <input type="text" name="user.name" />
+                  {#if errors['user.name']}
+                    <div>{errors['user.name']}</div>
+                  {/if}
+                {/snippet}
+              </Form>
             `,
           },
         ]}
