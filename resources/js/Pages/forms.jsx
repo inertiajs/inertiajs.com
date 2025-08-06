@@ -1170,6 +1170,7 @@ export default function () {
                   recentlySuccessful,
                   setError,
                   clearErrors,
+                  resetAndClearErrors,
                   isDirty,
                   reset,
                   submit,
@@ -1200,6 +1201,7 @@ export default function () {
                   recentlySuccessful,
                   setError,
                   clearErrors,
+                  resetAndClearErrors,
                   isDirty,
                   reset,
                   submit,
@@ -1233,6 +1235,7 @@ export default function () {
                 let:recentlySuccessful
                 let:setError
                 let:clearErrors
+                let:resetAndClearErrors
                 let:isDirty
                 let:reset
                 let:submit
@@ -1266,6 +1269,7 @@ export default function () {
                   recentlySuccessful,
                   setError,
                   clearErrors,
+                  resetAndClearErrors,
                   isDirty,
                   reset,
                   submit,
