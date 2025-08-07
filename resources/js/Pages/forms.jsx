@@ -1012,7 +1012,7 @@ export default function () {
         offers a declarative approach to form handling. At its simplest, the component behaves much like a classic HTML
         form, but with all the benefits of Inertia's SPA-like navigation. While <Code>useForm()</Code> gives you programmatic
         control over form data and submission logic, the <Code>&lt;Form&gt;</Code> component is ideal when you prefer a
-        more HTML-like, declarative approach with minimal JavaScript.
+        more HTML-like, declarative approach.
       </P>
       <TabbedCode
         examples={[
@@ -1292,6 +1292,64 @@ export default function () {
           },
         ]}
       />
+      <P>
+        The <Code>errors</Code> object uses dotted notation for nested fields, allowing you to display validation
+        messages for complex form structures:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/users" method="post" #default="{ errors }">
+                <input type="text" name="user.name" />
+                <div v-if="errors['user.name']">{{ errors['user.name'] }}</div>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post">
+                {({ errors }) => (
+                  <>
+                    <input type="text" name="user.name" />
+                    {errors['user.name'] && <div>{errors['user.name']}</div>}
+                  </>
+                )}
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post" let:errors>
+                <input type="text" name="user.name" />
+                {#if errors['user.name']}
+                  <div>{errors['user.name']}</div>
+                {/if}
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post">
+                {#snippet children({ errors })}
+                  <input type="text" name="user.name" />
+                  {#if errors['user.name']}
+                    <div>{errors['user.name']}</div>
+                  {/if}
+                {/snippet}
+              </Form>
+            `,
+          },
+        ]}
+      />
       <H3>Props and options</H3>
       <P>
         In addition to <Code>action</Code> and <Code>method</Code>, the <Code>&lt;Form&gt;</Code> component accepts
@@ -1391,8 +1449,8 @@ export default function () {
       </P>
       <H3>Events</H3>
       <P>
-        The <Code>&lt;Form&gt;</Code> component emits the same events as <Code>useForm()</Code>, except
-        the ones related to prefetching:
+        The <Code>&lt;Form&gt;</Code> component emits all the standard visit <A href="/events">events</A> for form
+        submissions, plus a <Code>cancelToken</Code> event for handling form cancellation:
       </P>
       <TabbedCode
         examples={[
@@ -1485,7 +1543,7 @@ export default function () {
       <H3>Dotted key notation</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component supports dotted key notation for creating nested objects from flat
-        input names. This provides a convenient way to structure form data without needing complex JavaScript logic.
+        input names. This provides a convenient way to structure form data.
       </P>
       <TabbedCode
         examples={[
@@ -1605,80 +1663,6 @@ export default function () {
                   "theme.mode": "dark"
                 }
               }
-            `,
-          },
-        ]}
-      />
-      <P>
-        When using dotted keys or arrays, validation errors follow the same structure. You can access errors for
-        specific array indices or nested fields:
-      </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue',
-            language: 'markup',
-            code: dedent`
-              <Form action="/users" method="post" #default="{ errors }">
-                <input type="text" name="tags[]" />
-                <div v-if="errors['tags.0']">{{ errors['tags.0'] }}</div>
-                
-                <input type="text" name="user.name" />
-                <div v-if="errors['user.name']">{{ errors['user.name'] }}</div>
-              </Form>
-            `,
-          },
-          {
-            name: 'React',
-            language: 'jsx',
-            code: dedent`
-              <Form action="/users" method="post">
-                {({ errors }) => (
-                  <>
-                    <input type="text" name="tags[]" />
-                    {errors['tags.0'] && <div>{errors['tags.0']}</div>}
-                    
-                    <input type="text" name="user.name" />
-                    {errors['user.name'] && <div>{errors['user.name']}</div>}
-                  </>
-                )}
-              </Form>
-            `,
-          },
-          {
-            name: 'Svelte 4',
-            language: 'html',
-            code: dedent`
-              <Form action="/users" method="post" let:errors>
-                <input type="text" name="tags[]" />
-                {#if errors['tags.0']}
-                  <div>{errors['tags.0']}</div>
-                {/if}
-                
-                <input type="text" name="user.name" />
-                {#if errors['user.name']}
-                  <div>{errors['user.name']}</div>
-                {/if}
-              </Form>
-            `,
-          },
-          {
-            name: 'Svelte 5',
-            language: 'html',
-            code: dedent`
-              <Form action="/users" method="post">
-                {#snippet children({ errors })}
-                  <input type="text" name="tags[]" />
-                  {#if errors['tags.0']}
-                    <div>{errors['tags.0']}</div>
-                  {/if}
-                  
-                  <input type="text" name="user.name" />
-                  {#if errors['user.name']}
-                    <div>{errors['user.name']}</div>
-                  {/if}
-                {/snippet}
-              </Form>
             `,
           },
         ]}
