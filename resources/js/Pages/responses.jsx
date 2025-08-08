@@ -5,6 +5,9 @@ export const meta = {
   title: 'Responses',
   links: [
     { url: '#creating-responses', name: 'Creating responses' },
+    { url: '#props', name: 'Props' },
+    { url: '#provides-inertia-property', name: 'ProvidesInertiaProperty interface' },
+    { url: '#provides-inertia-properties', name: 'ProvidesInertiaProperties interface' },
     { url: '#root-template-data', name: 'Root template data' },
     { url: '#maximum-response-size', name: 'Maximum response size' },
   ],
@@ -66,6 +69,195 @@ export default function () {
         To ensure that pages load quickly, only return the minimum data required for the page. Also, be aware that all
         data returned from the controllers will be visible client-side, so be sure to omit sensitive information.
       </Notice>
+      <H2>Props</H2>
+      <P>
+        To pass data from the server to your page components, you can use props. You can pass various types of values as
+        props, including primitive types, arrays, objects, and several Laravel-specific types that are automatically resolved:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              use App\\Models\\User;
+              use Illuminate\\Http\\Resources\\Json\\JsonResource;
+
+              Inertia::render('Dashboard', [
+                  // Primitive values
+                  'title' => 'Dashboard',
+                  'count' => 42,
+                  'active' => true,
+
+                  // Arrays and objects
+                  'settings' => ['theme' => 'dark', 'notifications' => true],
+
+                  // Arrayable objects (Collections, Models, etc.)
+                  'user' => auth()->user(), // Eloquent model
+                  'users' => User::all(), // Eloquent collection
+
+                  // API Resources
+                  'profile' => new UserResource(auth()->user()),
+
+                  // Responsable objects
+                  'data' => new JsonResponse(['key' => 'value']),
+
+                  // Closures
+                  'timestamp' => fn() => now()->timestamp,
+              ]);
+            `,
+          },
+        ]}
+      />
+      <P>
+        Arrayable objects like Eloquent models and collections are automatically converted using their <Code>toArray()</Code> method.
+        Responsable objects like API resources and JSON responses are resolved through their <Code>toResponse()</Code> method.
+      </P>
+      <H2>ProvidesInertiaProperty interface</H2>
+      <P>
+        When passing props to your components, you may want to create custom classes that can transform themselves into the
+        appropriate data format. You can do this by implementing the <Code>ProvidesInertiaProperty</Code> interface.
+      </P>
+      <P>
+        This interface requires you to implement a <Code>toInertiaProperty</Code> method that returns the transformed value.
+        The method receives a <Code>PropertyContext</Code> object which provides access to the property key, current props,
+        and the request instance.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              use Inertia\\PropertyContext;
+              use Inertia\\ProvidesInertiaProperty;
+
+              class UserAvatar implements ProvidesInertiaProperty
+              {
+                  public function __construct(protected User $user, protected int $size = 64) {}
+
+                  public function toInertiaProperty(PropertyContext $prop): mixed
+                  {
+                      return $this->user->avatar
+                          ? Storage::url($this->user->avatar)
+                          : "https://ui-avatars.com/api/?name={$this->user->name}&size={$this->size}";
+                  }
+              }
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can use this class directly as a prop value:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              Inertia::render('Profile', [
+                  'user' => $user,
+                  'avatar' => new UserAvatar($user, 128),
+              ]);
+            `,
+          },
+        ]}
+      />
+      <P>
+        The <Code>avatar</Code> prop will contain the full avatar URL.
+      </P>
+      <P>
+        This is particularly useful when you need to create reusable prop transformations or when you need access to the
+        property key or other props during transformation.
+      </P>
+      <H2>ProvidesInertiaProperties interface</H2>
+      <P>
+        In some situations you may want to group related props together for reusability across different pages. You can
+        accomplish this by implementing the <Code>ProvidesInertiaProperties</Code> interface.
+      </P>
+      <P>
+        This interface requires you to implement a <Code>toInertiaProperties</Code> method that returns an array of
+        key-value pairs. The method receives a <Code>RenderContext</Code> object which contains the request instance
+        and component name.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              use Inertia\\RenderContext;
+              use Inertia\\ProvidesInertiaProperties;
+
+              class UserPermissions implements ProvidesInertiaProperties
+              {
+                  public function __construct(protected User $user) {}
+
+                  public function toInertiaProperties(RenderContext $context): array
+                  {
+                      return [
+                          'canEdit' => $this->user->can('edit'),
+                          'canDelete' => $this->user->can('delete'),
+                          'canPublish' => $this->user->can('publish'),
+                          'isAdmin' => $this->user->hasRole('admin'),
+                      ];
+                  }
+              }
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can use these prop classes directly in the <Code>render()</Code> and <Code>with()</Code> methods:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              public function index(UserPermissions $permissions)
+              {
+                  return Inertia::render('UserProfile', $permissions);
+
+                  // or...
+
+                  return Inertia::render('UserProfile')->with($permissions);
+              }
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can also combine multiple prop classes with other props in an array:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              public function index(UserPermissions $permissions)
+              {
+                  return Inertia::render('UserProfile', [
+                      'user' => auth()->user(),
+                      $permissions,
+                  ]);
+
+                  // or using method chaining...
+
+                  return Inertia::render('UserProfile')
+                      ->with('user', auth()->user())
+                      ->with($permissions);
+              }
+            `,
+          },
+        ]}
+      />
+      <P>
+        This approach helps organize your code and avoid repetition when the same props are needed across multiple pages.
+      </P>
       <H2>Root template data</H2>
       <P>
         There are situations where you may want to access your prop data in your application's root Blade template. For
