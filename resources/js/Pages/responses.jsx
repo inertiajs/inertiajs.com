@@ -5,7 +5,7 @@ export const meta = {
   title: 'Responses',
   links: [
     { url: '#creating-responses', name: 'Creating responses' },
-    { url: '#props', name: 'Props' },
+    { url: '#properties', name: 'Properties' },
     { url: '#provides-inertia-property', name: 'ProvidesInertiaProperty interface' },
     { url: '#provides-inertia-properties', name: 'ProvidesInertiaProperties interface' },
     { url: '#root-template-data', name: 'Root template data' },
@@ -21,10 +21,10 @@ export default function () {
       <P>
         Creating an Inertia response is simple. To get started, invoke the <Code>Inertia::render()</Code> method within
         your controller or route, providing both the name of the <A href="/pages">JavaScript page component</A> that you
-        wish to render, as well as any props (data) for the page.
+        wish to render, as well as any properties (data) for the page.
       </P>
       <P>
-        In the example below, we will pass a single prop (<Code>event</Code>) which contains four attributes (
+        In the example below, we will pass a single property (<Code>event</Code>) which contains four attributes (
         <Code>id</Code>, <Code>title</Code>, <Code>start_date</Code> and <Code>description</Code>) to the{' '}
         <Code>Event/Show</Code> page component.
       </P>
@@ -69,9 +69,9 @@ export default function () {
         To ensure that pages load quickly, only return the minimum data required for the page. Also, be aware that all
         data returned from the controllers will be visible client-side, so be sure to omit sensitive information.
       </Notice>
-      <H2>Props</H2>
+      <H2>Properties</H2>
       <P>
-        To pass data from the server to your page components, you can use props. You can pass various types of values as
+        To pass data from the server to your page components, you can use properties. You can pass various types of values as
         props, including primitive types, arrays, objects, and several Laravel-specific types that are automatically resolved:
       </P>
       <TabbedCode
@@ -116,12 +116,12 @@ export default function () {
       <H2>ProvidesInertiaProperty interface</H2>
       <P>
         When passing props to your components, you may want to create custom classes that can transform themselves into the
-        appropriate data format. You can do this by implementing the <Code>ProvidesInertiaProperty</Code> interface.
+        appropriate data format. While Laravel's <Code>Arrayable</Code> interface simply converts objects to arrays, Inertia
+        offers the more powerful <Code>ProvidesInertiaProperty</Code> interface for context-aware transformations.
       </P>
       <P>
-        This interface requires you to implement a <Code>toInertiaProperty</Code> method that returns the transformed value.
-        The method receives a <Code>PropertyContext</Code> object which provides access to the property key, current props,
-        and the request instance.
+        This interface requires a <Code>toInertiaProperty</Code> method that receives a <Code>PropertyContext</Code> object
+        containing the property key, current props, and request instance.
       </P>
       <TabbedCode
         examples={[
@@ -165,21 +165,8 @@ export default function () {
         ]}
       />
       <P>
-        The <Code>avatar</Code> prop will contain the full avatar URL.
-      </P>
-      <P>
-        This is particularly useful when you need to create reusable prop transformations or when you need access to the
-        property key or other props during transformation.
-      </P>
-      <H2>ProvidesInertiaProperties interface</H2>
-      <P>
-        In some situations you may want to group related props together for reusability across different pages. You can
-        accomplish this by implementing the <Code>ProvidesInertiaProperties</Code> interface.
-      </P>
-      <P>
-        This interface requires you to implement a <Code>toInertiaProperties</Code> method that returns an array of
-        key-value pairs. The method receives a <Code>RenderContext</Code> object which contains the request instance
-        and component name.
+        The <Code>PropertyContext</Code> gives you access to the property key, which enables powerful patterns like merging
+        with shared data:
       </P>
       <TabbedCode
         examples={[
@@ -187,12 +174,58 @@ export default function () {
             name: 'Laravel',
             language: 'php',
             code: dedent`
+              use Inertia\\Inertia;
+              use Inertia\\PropertyContext;
+              use Inertia\\ProvidesInertiaProperty;
+
+              class MergeWithShared implements ProvidesInertiaProperty
+              {
+                  public function __construct(protected array $items = []) {}
+
+                  public function toInertiaProperty(PropertyContext $prop): mixed
+                  {
+                      // Access the property key to get shared data
+                      $shared = Inertia::getShared($prop->key, []);
+
+                      // Merge with the new items
+                      return array_merge($shared, $this->items);
+                  }
+              }
+
+              // Usage
+              Inertia::share('notifications', ['Welcome back!']);
+
+              return Inertia::render('Dashboard', [
+                  'notifications' => new MergeWithShared(['New message received']),
+                  // Result: ['Welcome back!', 'New message received']
+              ]);
+            `,
+          },
+        ]}
+      />
+      <H2>ProvidesInertiaProperties interface</H2>
+      <P>
+        In some situations you may want to group related props together for reusability across different pages. You can
+        accomplish this by implementing the <Code>ProvidesInertiaProperties</Code> interface.
+      </P>
+      <P>
+        This interface requires a <Code>toInertiaProperties</Code> method that returns an array of key-value pairs. The
+        method receives a <Code>RenderContext</Code> object containing the request and component name.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              use App\\Models\\User;
+              use Illuminate\\Container\\Attributes\\CurrentUser;
               use Inertia\\RenderContext;
               use Inertia\\ProvidesInertiaProperties;
 
               class UserPermissions implements ProvidesInertiaProperties
               {
-                  public function __construct(protected User $user) {}
+                  public function __construct(#[CurrentUser] protected User $user) {}
 
                   public function toInertiaProperties(RenderContext $context): array
                   {
@@ -276,7 +309,7 @@ export default function () {
         ]}
       />
       <P>
-        Sometimes you may even want to provide data to the root template that will not be sent to your JavaScript page /
+        Sometimes you may even want to provide data to the root template that will not be sent to your JavaScript page
         component. This can be accomplished by invoking the <Code>withViewData</Code> method.
       </P>
       <TabbedCode
