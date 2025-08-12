@@ -230,8 +230,8 @@ export default function () {
 
       <P>
         Inertia also provides a <Code>usePrefetch</Code> hook that allows you to track the prefetch state for the
-        current page. It returns information about whether the page is currently prefetching, has been prefetched, when it was last updated, and a <Code>flush</Code> method
-        that flushes the cache for the current page only.
+        current page. It returns information about whether the page is currently prefetching, has been prefetched,
+        when it was last updated, and a <Code>flush</Code> method that flushes the cache for the current page only.
       </P>
 
       <TabbedCode
