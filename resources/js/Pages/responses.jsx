@@ -121,7 +121,8 @@ export default function () {
       </P>
       <P>
         This interface requires a <Code>toInertiaProperty</Code> method that receives a <Code>PropertyContext</Code> object
-        containing the property key, current props, and request instance.
+        containing the property key (<Code>$context->key</Code>), all props for the page (<Code>$context->props</Code>), and the 
+        request instance (<Code>$context->request</Code>).
       </P>
       <TabbedCode
         examples={[
@@ -136,7 +137,7 @@ export default function () {
               {
                   public function __construct(protected User $user, protected int $size = 64) {}
 
-                  public function toInertiaProperty(PropertyContext $prop): mixed
+                  public function toInertiaProperty(PropertyContext $context): mixed
                   {
                       return $this->user->avatar
                           ? Storage::url($this->user->avatar)
@@ -182,10 +183,10 @@ export default function () {
               {
                   public function __construct(protected array $items = []) {}
 
-                  public function toInertiaProperty(PropertyContext $prop): mixed
+                  public function toInertiaProperty(PropertyContext $context): mixed
                   {
                       // Access the property key to get shared data
-                      $shared = Inertia::getShared($prop->key, []);
+                      $shared = Inertia::getShared($context->key, []);
 
                       // Merge with the new items
                       return array_merge($shared, $this->items);
@@ -210,7 +211,8 @@ export default function () {
       </P>
       <P>
         This interface requires a <Code>toInertiaProperties</Code> method that returns an array of key-value pairs. The
-        method receives a <Code>RenderContext</Code> object containing the request and component name.
+        method receives a <Code>RenderContext</Code> object containing the component name (<Code>$context->component</Code>) 
+        and request instance (<Code>$context->request</Code>).
       </P>
       <TabbedCode
         examples={[
