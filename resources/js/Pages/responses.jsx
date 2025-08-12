@@ -290,9 +290,6 @@ export default function () {
           },
         ]}
       />
-      <P>
-        This approach helps organize your code and avoid repetition when the same props are needed across multiple pages.
-      </P>
       <H2>Root template data</H2>
       <P>
         There are situations where you may want to access your prop data in your application's root Blade template. For
