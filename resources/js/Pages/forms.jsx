@@ -18,9 +18,13 @@ export default function () {
   return (
     <>
       <H1>Forms</H1>
+      <P>
+        Inertia provides two primary ways to build forms: the <Code>&lt;Form&gt;</Code> component and the <Code>useForm</Code> helper.
+        Both integrate with your server-side framework's validation and handle form submissions without full page reloads.
+      </P>
       <H2>Form component</H2>
       <P>
-        Inertia provides a <Code>&lt;Form&gt;</Code> component that behaves much like a classic HTML form, but uses 
+        Inertia provides a <Code>&lt;Form&gt;</Code> component that behaves much like a classic HTML form, but uses
         Inertia under the hood to avoid full page reloads. This is the simplest way to get started with forms in Inertia:
       </P>
       <TabbedCode
@@ -158,7 +162,7 @@ export default function () {
       />
       <H3>Slot props</H3>
       <P>
-        The <Code>&lt;Form&gt;</Code> component exposes reactive state and helper methods through its default slot, 
+        The <Code>&lt;Form&gt;</Code> component exposes reactive state and helper methods through its default slot,
         giving you access to form processing state, errors, and utility functions:
       </P>
       <TabbedCode
@@ -676,9 +680,97 @@ export default function () {
           },
         ]}
       />
+      <H3>Programmatic access</H3>
+      <P>
+        You can access the form's methods programmatically using refs. This provides an alternative to the{' '}
+        <A href="#slot-props">slot props</A> approach when you need to trigger form actions from outside the form:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <script setup>
+              import { ref } from 'vue'
+              import { Form } from '@inertiajs/vue3'
+
+              const formRef = ref()
+
+              const handleSubmit = () => {
+                formRef.value.submit()
+              }
+              </script>
+
+              <template>
+                <Form ref="formRef" action="/users" method="post">
+                  <input type="text" name="name" />
+                  <button type="submit">Submit</button>
+                </Form>
+
+                <button @click="handleSubmit">Submit Programmatically</button>
+              </template>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { useRef } from 'react'
+              import { Form } from '@inertiajs/react'
+
+              export default function CreateUser() {
+                const formRef = useRef()
+
+                const handleSubmit = () => {
+                  formRef.current.submit()
+                }
+
+                return (
+                  <>
+                    <Form ref={formRef} action="/users" method="post">
+                      <input type="text" name="name" />
+                      <button type="submit">Submit</button>
+                    </Form>
+
+                    <button onClick={handleSubmit}>Submit Programmatically</button>
+                  </>
+                )
+              }
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { Form } from '@inertiajs/svelte'
+
+                let formRef
+
+                function handleSubmit() {
+                  formRef.submit()
+                }
+              </script>
+
+              <Form bind:this={formRef} action="/users" method="post">
+                <input type="text" name="name" />
+                <button type="submit">Submit</button>
+              </Form>
+
+              <button on:click={handleSubmit}>Submit Programmatically</button>
+            `,
+          },
+        ]}
+      />
+      <P>
+        In React and Vue, refs provide access to all form methods and reactive state. In Svelte, refs expose only
+        methods, so reactive state like <Code>isDirty</Code> and <Code>errors</Code> should be accessed via{' '}
+        <A href="#slot-props">slot props</A> instead.
+      </P>
       <H2>Form helper</H2>
       <P>
-        In addition to the <Code>&lt;Form&gt;</Code> component, Inertia also provides a <Code>useForm</Code> helper for 
+        In addition to the <Code>&lt;Form&gt;</Code> component, Inertia also provides a <Code>useForm</Code> helper for
         when you need programmatic control over your form's data and submission behavior:
       </P>
       <TabbedCode
@@ -1199,7 +1291,7 @@ export default function () {
         ]}
       />
       <P>
-        Sometimes, you may want to restore your form fields to their default values and clear any validation errors at 
+        Sometimes, you may want to restore your form fields to their default values and clear any validation errors at
         the same time. Instead of calling <Code>reset()</Code> and <Code>clearErrors()</Code> separately, you can use the{' '}
         <Code>resetAndClearErrors()</Code> method, which combines both actions into a single call.
       </P>
@@ -1463,8 +1555,8 @@ export default function () {
       />
       <H2>Server-side responses</H2>
       <P>
-        When using Inertia, you don't typically inspect form responses client-side like you would with traditional XHR/fetch 
-        requests. Instead, your server-side route or controller issues a <A href="/redirects">redirect</A> response after 
+        When using Inertia, you don't typically inspect form responses client-side like you would with traditional XHR/fetch
+        requests. Instead, your server-side route or controller issues a <A href="/redirects">redirect</A> response after
         processing the form, often redirecting to a success page.
       </P>
       <TabbedCode
@@ -1498,19 +1590,19 @@ export default function () {
         ]}
       />
       <P>
-        This redirect-based approach works with all form submission methods: the <Code>&lt;Form&gt;</Code> component, 
-        <Code>useForm</Code> helper, and manual router submissions. It makes handling Inertia forms feel very similar to 
+        This redirect-based approach works with all form submission methods: the <Code>&lt;Form&gt;</Code> component,
+        <Code>useForm</Code> helper, and manual router submissions. It makes handling Inertia forms feel very similar to
         classic server-side form submissions.
       </P>
       <H2>Server-side validation</H2>
       <P>
-        Both the <Code>&lt;Form&gt;</Code> component and <Code>useForm</Code> helper automatically handle server-side 
+        Both the <Code>&lt;Form&gt;</Code> component and <Code>useForm</Code> helper automatically handle server-side
         validation errors. When your server returns validation errors, they're automatically available in the <Code>errors</Code>{' '}
         object without any additional configuration.
       </P>
       <P>
-        Unlike traditional XHR/fetch requests where you'd check for a <Code>422</Code> status code, Inertia handles 
-        validation errors as part of its redirect-based flow, just like classic server-side form submissions, but without 
+        Unlike traditional XHR/fetch requests where you'd check for a <Code>422</Code> status code, Inertia handles
+        validation errors as part of its redirect-based flow, just like classic server-side form submissions, but without
         the full page reload.
       </P>
       <P>
@@ -1519,7 +1611,7 @@ export default function () {
       </P>
       <H2>Manual form submissions</H2>
       <P>
-        It's also possible to submit forms manually using Inertia's <Code>router</Code> methods directly, without using 
+        It's also possible to submit forms manually using Inertia's <Code>router</Code> methods directly, without using
         the <Code>&lt;Form&gt;</Code> component or <Code>useForm</Code> helper:
       </P>
       <TabbedCode
@@ -1668,7 +1760,7 @@ export default function () {
       <H2>File uploads</H2>
       <P>
         When making requests or form submissions that include files, Inertia will automatically convert the request data
-        into a <Code>FormData</Code> object. This works with the <Code>&lt;Form&gt;</Code> component, <Code>useForm</Code>{' '} 
+        into a <Code>FormData</Code> object. This works with the <Code>&lt;Form&gt;</Code> component, <Code>useForm</Code>{' '}
         helper, and manual router submissions.
       </P>
       <P>
