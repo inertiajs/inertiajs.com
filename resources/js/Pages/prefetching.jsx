@@ -229,8 +229,9 @@ export default function () {
       />
 
       <P>
-        To make this even easier, Inertia offers a prefetch helper. This helper provides some additional insight into
-        the request, such as the last updated timestamp and if the request is currently prefetching.
+        Inertia also provides a <Code>usePrefetch</Code> hook that allows you to track the prefetch state for the
+        current page. It returns information about whether the page is currently prefetching, has been prefetched, when it was last updated, and a <Code>flush</Code> method
+        that flushes the cache for the current page only.
       </P>
 
       <TabbedCode
@@ -241,11 +242,7 @@ export default function () {
             code: dedent`
             import { usePrefetch } from '@inertiajs/vue3'
 
-            const { lastUpdatedAt, isPrefetching, isPrefetched } = usePrefetch(
-                '/users',
-                { method: 'get', data: { page: 2 } },
-                { cacheFor: '1m' },
-            )
+            const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
             `,
           },
           {
@@ -254,11 +251,7 @@ export default function () {
             code: dedent`
             import { usePrefetch } from '@inertiajs/react'
 
-            const { lastUpdatedAt, isPrefetching, isPrefetched } = usePrefetch(
-                '/users',
-                { method: 'get', data: { page: 2 } },
-                { cacheFor: '1m' },
-            )
+            const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
             `,
           },
           {
@@ -267,11 +260,47 @@ export default function () {
             code: dedent`
             import { usePrefetch } from '@inertiajs/svelte'
 
-            const { lastUpdatedAt, isPrefetching, isPrefetched } = usePrefetch(
-                '/users',
-                { method: 'get', data: { page: 2 } },
-                { cacheFor: '1m' },
-            )
+            const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can also pass visit options when you need to differentiate between different request configurations for the same URL.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+            import { usePrefetch } from '@inertiajs/vue3'
+
+            const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
+                headers: { 'X-Custom-Header': 'value' }
+            })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+            import { usePrefetch } from '@inertiajs/react'
+
+            const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
+                headers: { 'X-Custom-Header': 'value' }
+            })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+            import { usePrefetch } from '@inertiajs/svelte'
+
+            const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
+                headers: { 'X-Custom-Header': 'value' }
+            })
             `,
           },
         ]}
@@ -286,8 +315,7 @@ export default function () {
         <Code>router.flush</Code> method.
       </P>
       <P>
-        Furthermore, if you are using the prefetch helper, it will return a <Code>flush</Code> method for you to use for
-        that specific page.
+        Furthermore, if you are using the <Code>usePrefetch</Code> hook, it will return a <Code>flush</Code> method for you to use.
       </P>
       <TabbedCode
         examples={[
@@ -304,12 +332,9 @@ export default function () {
                 { method: 'get', data: { page: 2 } },
             )
 
-            const { flush } = usePrefetch(
-                '/users',
-                { method: 'get', data: { page: 2 } },
-            )
+            const { flush } = usePrefetch()
 
-            // Flush cache for a specific page
+            // Flush cache for the current page
             flush()
             `,
           },
