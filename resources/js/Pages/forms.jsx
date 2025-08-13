@@ -25,7 +25,7 @@ export default function () {
       <H2>Form component</H2>
       <P>
         Inertia provides a <Code>&lt;Form&gt;</Code> component that behaves much like a classic HTML form, but uses
-        Inertia under the hood to avoid full page reloads. This is the simplest way to get started with forms in Inertia:
+        Inertia under the hood to avoid full page reloads. This is the simplest way to get started with forms in Inertia.
       </P>
       <TabbedCode
         examples={[
@@ -79,7 +79,7 @@ export default function () {
         ]}
       />
       <P>
-        The component also supports advanced use cases, including nested data structures, file uploads, and dotted key notation:
+        The component also supports advanced use cases, including nested data structures, file uploads, and dotted key notation.
       </P>
       <TabbedCode
         examples={[
@@ -126,7 +126,7 @@ export default function () {
       />
       <P>
         You can pass a <Code>transform</Code> prop to modify the form data before submission. This is useful for
-        injecting additional fields or transforming existing data, although hidden inputs work too:
+        injecting additional fields or transforming existing data, although hidden inputs work too.
       </P>
       <TabbedCode
         examples={[
@@ -177,7 +177,7 @@ export default function () {
       <H3>Slot props</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component exposes reactive state and helper methods through its default slot,
-        giving you access to form processing state, errors, and utility functions:
+        giving you access to form processing state, errors, and utility functions.
       </P>
       <TabbedCode
         examples={[
@@ -321,7 +321,7 @@ export default function () {
       />
       <P>
         The <Code>errors</Code> object uses dotted notation for nested fields, allowing you to display validation
-        messages for complex form structures:
+        messages for complex form structures.
       </P>
       <TabbedCode
         examples={[
@@ -381,7 +381,7 @@ export default function () {
       <P>
         In addition to <Code>action</Code> and <Code>method</Code>, the <Code>&lt;Form&gt;</Code> component accepts
         several props. Many of them are identical to the options available in Inertia's{' '}
-        <A href="/manual-visits">visit options</A>:
+        <A href="/manual-visits">visit options</A>.
       </P>
       <TabbedCode
         examples={[
@@ -477,7 +477,7 @@ export default function () {
       <H3>Events</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component emits all the standard visit <A href="/events">events</A> for form
-        submissions, plus a <Code>cancelToken</Code> event for handling form cancellation:
+        submissions, plus a <Code>cancelToken</Code> event for handling form cancellation.
       </P>
       <TabbedCode
         examples={[
@@ -488,14 +488,14 @@ export default function () {
               <Form
                 action="/users"
                 method="post"
-                @cancelToken="handleCancelToken"
                 @before="handleBefore"
                 @start="handleStart"
                 @progress="handleProgress"
-                @cancel="handleCancel"
                 @success="handleSuccess"
                 @error="handleError"
                 @finish="handleFinish"
+                @cancel="handleCancel"
+                @cancelToken="handleCancelToken"
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -613,7 +613,7 @@ export default function () {
         ]}
       />
       <P>
-        The above example would generate the following data structure:
+        The example above would generate the following data structure.
       </P>
       <TabbedCode
         examples={[
@@ -636,7 +636,7 @@ export default function () {
       />
       <P>
         If you need literal dots in your field names (not as nested object separators), you can escape them using
-        backslashes:
+        backslashes.
       </P>
       <TabbedCode
         examples={[
@@ -676,7 +676,7 @@ export default function () {
         ]}
       />
       <P>
-        This would result in:
+        The example above would generate the following data structure.
       </P>
       <TabbedCode
         examples={[
@@ -697,7 +697,7 @@ export default function () {
       <H3>Programmatic access</H3>
       <P>
         You can access the form's methods programmatically using refs. This provides an alternative to the{' '}
-        <A href="#slot-props">slot props</A> approach when you need to trigger form actions from outside the form:
+        <A href="#slot-props">slot props</A> approach when you need to trigger form actions from outside the form.
       </P>
       <TabbedCode
         examples={[
