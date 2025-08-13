@@ -33,28 +33,42 @@ export default function () {
             name: 'Vue',
             language: 'markup',
             code: dedent`
-              <Form action="/users" method="post">
-                <input type="text" name="name" />
-                <input type="email" name="email" />
-                <button type="submit">Create User</button>
-              </Form>
+              <script setup>
+              import { Form } from '@inertiajs/vue3'
+              </script>
+
+              <template>
+                <Form action="/users" method="post">
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              </template>
             `,
           },
           {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              <Form action="/users" method="post">
-                <input type="text" name="name" />
-                <input type="email" name="email" />
-                <button type="submit">Create User</button>
-              </Form>
+              import { Form } from '@inertiajs/react'
+
+              export default () => (
+                <Form action="/users" method="post">
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              )
             `,
           },
           {
             name: 'Svelte',
             language: 'html',
             code: dedent`
+              <script>
+                import { Form } from '@inertiajs/svelte'
+              </script>
+
               <Form action="/users" method="post">
                 <input type="text" name="name" />
                 <input type="email" name="email" />
