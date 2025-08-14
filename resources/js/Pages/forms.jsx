@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, H3, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, H3, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
