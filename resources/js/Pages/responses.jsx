@@ -121,8 +121,8 @@ export default function () {
       </P>
       <P>
         This interface requires a <Code>toInertiaProperty</Code> method that receives a <Code>PropertyContext</Code> object
-        containing the property key (<Code>$context->key</Code>), all props for the page (<Code>$context->props</Code>), and the 
-        request instance (<Code>$context->request</Code>).
+        containing the property key (<Code>$context-&gt;key</Code>), all props for the page (<Code>$context-&gt;props</Code>), and the
+        request instance (<Code>$context-&gt;request</Code>).
       </P>
       <TabbedCode
         examples={[
@@ -211,8 +211,8 @@ export default function () {
       </P>
       <P>
         This interface requires a <Code>toInertiaProperties</Code> method that returns an array of key-value pairs. The
-        method receives a <Code>RenderContext</Code> object containing the component name (<Code>$context->component</Code>) 
-        and request instance (<Code>$context->request</Code>).
+        method receives a <Code>RenderContext</Code> object containing the component name (<Code>$context-&gt;component</Code>)
+        and request instance (<Code>$context-&gt;request</Code>).
       </P>
       <TabbedCode
         examples={[
