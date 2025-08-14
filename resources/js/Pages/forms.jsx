@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, H3, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, H3, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -79,7 +79,25 @@ export default function () {
         ]}
       />
       <P>
-        The component also supports advanced use cases, including nested data structures, file uploads, and dotted key notation.
+        Just like a traditional HTML form, there is no need to attach{' '}
+        <Vue>
+          a <Code>v-model</Code>
+        </Vue>
+        <React>
+          an <Code>onChange</Code> handler
+        </React>
+        <Svelte>
+          a <Code>bind:</Code>
+        </Svelte>{' '}
+        to your input fields, just give each input a <Code>name</Code> attribute{' '}
+        <React>
+          and a <Code>defaultValue</Code> (if applicable){' '}
+        </React>
+        and the <Code>Form</Code> component will handle the data submission for you.
+      </P>
+      <P>
+        The component also supports advanced use cases, including nested data structures, file uploads, and dotted key
+        notation.
       </P>
       <TabbedCode
         examples={[
