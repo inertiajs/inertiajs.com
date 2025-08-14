@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, H3, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, H3, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -397,6 +397,7 @@ export default function () {
                 :headers="{ 'X-Custom-Header': 'value' }"
                 :show-progress="false"
                 :transform="data => ({ ...data, timestamp: Date.now() })"
+                disable-while-processing
                 :options="{
                   preserveScroll: true,
                   preserveState: true,
@@ -424,6 +425,7 @@ export default function () {
                 headers={{ 'X-Custom-Header': 'value' }}
                 showProgress={false}
                 transform={data => ({ ...data, timestamp: Date.now() })}
+                disableWhileProcessing
                 options={{
                   preserveScroll: true,
                   preserveState: true,
@@ -451,6 +453,7 @@ export default function () {
                 headers={{ 'X-Custom-Header': 'value' }}
                 showProgress={false}
                 transform={data => ({ ...data, timestamp: Date.now() })}
+                disableWhileProcessing
                 options={{
                   preserveScroll: true,
                   preserveState: true,
@@ -474,6 +477,50 @@ export default function () {
         not <em>partial submissions</em>. The general rule: top-level props are for the form submission itself, while{' '}
         <Code>options</Code> control how Inertia handles the subsequent visit.
       </P>
+      <P>
+        When setting the{' '}
+        <React>
+          <Code>disableWhileProcessing</Code>
+        </React>
+        <Svelte>
+          <Code>disableWhileProcessing</Code>
+        </Svelte>
+        <Vue>
+          <Code>disable-while-processing</Code>
+        </Vue>{' '}
+        prop, the <Code>Form</Code> component will add the <Code>inert</Code> attribute to the HTML <Code>form</Code>{' '}
+        tag while the form is processing to prevent user interaction.
+      </P>
+      <P>To style the form while it's processing, you can target the inert form in the following ways:</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Tailwind 4',
+            language: 'jsx',
+            code: dedent`
+                <Form
+                    action="/profile"
+                    method="put"
+                    disableWhileProcessing
+                    className="inert:opacity-50 inert:pointer-events-none"
+                >
+                    {/* Your form fields here */}
+                </Form>
+            `,
+          },
+          {
+            name: 'CSS',
+            language: 'css',
+            code: dedent`
+                form[inert] {
+                    opacity: 0.5;
+                    pointer-events: none;
+                }
+            `,
+          },
+        ]}
+      />
+
       <H3>Events</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component emits all the standard visit <A href="/events">events</A> for form
