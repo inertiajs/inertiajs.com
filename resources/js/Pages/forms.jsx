@@ -216,6 +216,7 @@ export default function () {
                   setError,
                   clearErrors,
                   resetAndClearErrors,
+                  defaults,
                   isDirty,
                   reset,
                   submit,
@@ -247,6 +248,7 @@ export default function () {
                   setError,
                   clearErrors,
                   resetAndClearErrors,
+                  defaults,
                   isDirty,
                   reset,
                   submit,
@@ -281,6 +283,7 @@ export default function () {
                 let:setError
                 let:clearErrors
                 let:resetAndClearErrors
+                let:defaults
                 let:isDirty
                 let:reset
                 let:submit
@@ -315,6 +318,7 @@ export default function () {
                   setError,
                   clearErrors,
                   resetAndClearErrors,
+                  defaults,
                   isDirty,
                   reset,
                   submit,
@@ -337,6 +341,12 @@ export default function () {
           },
         ]}
       />
+      <P>
+        The <Code>defaults</Code> method allows you to update the form's default values to match the current field{' '}
+        values. When called, subsequent <Code>reset()</Code> calls will restore fields to these new defaults, and the{' '}
+        <Code>isDirty</Code> property will track changes from these updated defaults. Unlike <Code>useForm</Code>, this method{' '}
+        accepts no arguments and always uses all current form values.
+      </P>
       <P>
         The <Code>errors</Code> object uses dotted notation for nested fields, allowing you to display validation
         messages for complex form structures.
