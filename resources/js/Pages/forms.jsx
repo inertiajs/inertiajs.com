@@ -574,8 +574,7 @@ export default function () {
       />
       <P>
         The <Code>onSubmitComplete</Code> callback allows you to perform cleanup actions after successful form{' '}
-        submissions. The callback receives an object with methods including <Code>clearErrors</Code>,{' '}
-        <Code>resetAndClearErrors</Code>, <Code>reset</Code>, and <Code>defaults</Code>.
+        submissions. The callback receives an object with methods including <Code>defaults()</Code> and <Code>reset()</Code>.
       </P>
       <TabbedCode
         examples={[
