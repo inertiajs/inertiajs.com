@@ -479,6 +479,11 @@ export default function () {
         The <Code>&lt;Form&gt;</Code> component emits all the standard visit <A href="/events">events</A> for form
         submissions, plus a <Code>cancelToken</Code> event for handling form cancellation.
       </P>
+      <P>
+        In addition, there is an <Code>onSubmitComplete</Code> event that is triggered after the form submission is
+        complete, regardless of success or failure. This can be useful for resetting form state or performing cleanup
+        tasks after a submission.
+      </P>
       <TabbedCode
         examples={[
           {
@@ -496,6 +501,7 @@ export default function () {
                 @finish="handleFinish"
                 @cancel="handleCancel"
                 @cancelToken="handleCancelToken"
+                @submitComplete="handleSubmitComplete"
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -517,6 +523,7 @@ export default function () {
                 onSuccess={handleSuccess}
                 onError={handleError}
                 onFinish={handleFinish}
+                onSubmitComplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -538,6 +545,7 @@ export default function () {
                 on:success={handleSuccess}
                 on:error={handleError}
                 on:finish={handleFinish}
+                on:submitComplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -559,6 +567,7 @@ export default function () {
                 onsuccess={handleSuccess}
                 onerror={handleError}
                 onfinish={handleFinish}
+                onsubmitcomplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
