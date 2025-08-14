@@ -542,7 +542,8 @@ export default function () {
       <H3>Events</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component emits all the standard visit <A href="/events">events</A> for form
-        submissions, plus a <Code>cancelToken</Code> event for handling form cancellation.
+        submissions, plus a <Code>cancelToken</Code> event for handling form cancellation and an{' '}
+        <Code>onSubmitComplete</Code> event for post-submission cleanup.
       </P>
       <TabbedCode
         examples={[
@@ -561,6 +562,7 @@ export default function () {
                 @finish="handleFinish"
                 @cancel="handleCancel"
                 @cancelToken="handleCancelToken"
+                @submitComplete="handleSubmitComplete"
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -582,6 +584,7 @@ export default function () {
                 onSuccess={handleSuccess}
                 onError={handleError}
                 onFinish={handleFinish}
+                onSubmitComplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -603,6 +606,7 @@ export default function () {
                 on:success={handleSuccess}
                 on:error={handleError}
                 on:finish={handleFinish}
+                on:submitComplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -616,19 +620,88 @@ export default function () {
               <Form
                 action="/users"
                 method="post"
-                oncanceltoken={handleCancelToken}
-                onbefore={handleBefore}
-                onstart={handleStart}
-                onprogress={handleProgress}
-                oncancel={handleCancel}
-                onsuccess={handleSuccess}
-                onerror={handleError}
-                onfinish={handleFinish}
+                onCancelToken={handleCancelToken}
+                onBefore={handleBefore}
+                onStart={handleStart}
+                onProgress={handleProgress}
+                onCancel={handleCancel}
+                onSuccess={handleSuccess}
+                onError={handleError}
+                onFinish={handleFinish}
+                onSubmitComplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
               </Form>
             `,
+          },
+        ]}
+      />
+      <P>
+        The <Code>onSubmitComplete</Code> callback allows you to perform cleanup actions after successful form{' '}
+        submissions. The callback receives an object with methods including <Code>defaults()</Code> and <Code>reset()</Code>.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                @submitComplete="(form) => form.reset('password')"
+              >
+                <input type="text" name="name" />
+                <input type="password" name="password" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                onSubmitComplete={(form) => form.reset('password')}
+              >
+                <input type="text" name="name" />
+                <input type="password" name="password" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                on:submitComplete={(form) => form.reset('password')}
+              >
+                <input type="text" name="name" />
+                <input type="password" name="password" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                onSubmitComplete={(form) => form.reset('password')}
+              >
+                <input type="text" name="name" />
+                <input type="password" name="password" />
+                <button type="submit">Create User</button>
+              </Form>
+              `
           },
         ]}
       />
