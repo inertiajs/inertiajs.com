@@ -192,6 +192,66 @@ export default function () {
           },
         ]}
       />
+      <H3>Wayfinder</H3>
+      <P>
+        When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A>, you can pass the resulting object
+        directly to the <Code>action</Code> prop. The Form component will infer the HTTP method and URL from the
+        Wayfinder object.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <script setup>
+              import { Form } from '@inertiajs/vue3'
+              import { store } from 'App/Http/Controllers/UserController'
+              </script>
+
+              <template>
+                <Form :action="store()">
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              </template>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { Form } from '@inertiajs/react'
+              import { store } from 'App/Http/Controllers/UserController'
+
+              export default () => (
+                <Form action={store()}>
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              )
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { Form } from '@inertiajs/svelte'
+                import { store } from 'App/Http/Controllers/UserController'
+              </script>
+
+              <Form action={store()}>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
       <H3>Slot props</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component exposes reactive state and helper methods through its default slot,
