@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, H3, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
+import { A, Code, H1, H2, H3, MinimumVersion, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -189,6 +189,66 @@ export default function () {
               >
                 <input type="text" name="title" />
                 <button type="submit">Create Post</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Wayfinder</H3>
+      <P>
+        When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A>, you can pass the resulting object
+        directly to the <Code>action</Code> prop. The Form component will infer the HTTP method and URL from the
+        Wayfinder object.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <script setup>
+              import { Form } from '@inertiajs/vue3'
+              import { store } from 'App/Http/Controllers/UserController'
+              </script>
+
+              <template>
+                <Form :action="store()">
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              </template>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { Form } from '@inertiajs/react'
+              import { store } from 'App/Http/Controllers/UserController'
+
+              export default () => (
+                <Form action={store()}>
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              )
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { Form } from '@inertiajs/svelte'
+                import { store } from 'App/Http/Controllers/UserController'
+              </script>
+
+              <Form action={store()}>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
               </Form>
             `,
           },
@@ -1752,9 +1812,7 @@ export default function () {
         ]}
       />
       <H3>Wayfinder</H3>
-      <P>
-        <strong>Requires Inertia &gt;= v2.0.6</strong>
-      </P>
+      <MinimumVersion version="2.0.6" />
       <P>
         When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the form helper, you
         can simply pass the resulting object directly to the <Code>form.submit</Code> method. The form helper will infer
