@@ -7,7 +7,8 @@ export const meta = {
     { url: '#top', name: 'Introduction' },
     { url: '#link-prefetching', name: 'Link prefetching' },
     { url: '#programmatic-prefetching', name: 'Programmatic prefetching' },
-    { url: '#flushing-prefetch-cache', name: 'Flushing prefetch cache' },
+    { url: '#cache-tags', name: 'Cache tags' },
+    { url: '#cache-invalidation', name: 'Cache invalidation' },
     { url: '#stale-while-revalidate', name: 'Stale while revalidate' },
   ],
 }
@@ -305,17 +306,70 @@ export default function () {
           },
         ]}
       />
-      <H2>Flushing prefetch cache</H2>
+      <H2>Cache tags</H2>
       <P>
-        You can flush the prefetch cache by calling <Code>router.flushAll</Code>. This will remove all cached data for
-        all pages.
+        Cache tags allow you to group related prefetched data and invalidate it all at once when specific events occur.
       </P>
       <P>
-        If you want to flush the cache for a specific page, you can pass the page URL and options to the{' '}
-        <Code>router.flush</Code> method.
+        To tag cached data, pass a <Code>cacheTags</Code> prop to your <Code>Link</Code> component.
       </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+            <script setup>
+            import { Link } from '@inertiajs/vue3'
+            </script>
+
+            <template>
+              <Link href="/users" prefetch cache-tags="users">Users</Link>
+              <Link href="/dashboard" prefetch :cache-tags="['dashboard', 'stats']">Dashboard</Link>
+            </template>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+            import { Link } from '@inertiajs/react'
+
+            <Link href="/users" prefetch cacheTags="users">Users</Link>
+            <Link href="/dashboard" prefetch cacheTags={['dashboard', 'stats']}>Dashboard</Link>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'jsx',
+            code: dedent`
+            import { inertia } from '@inertiajs/svelte'
+
+            <a href="/users" use:inertia={{ prefetch: true, cacheTags: 'users' }}>Users</a>
+            <a href="/dashboard" use:inertia={{ prefetch: true, cacheTags: ['dashboard', 'stats'] }}>Dashboard</a>
+            `,
+          },
+        ]}
+      />
       <P>
-        Furthermore, if you are using the <Code>usePrefetch</Code> hook, it will return a <Code>flush</Code> method for you to use.
+        When prefetching programmatically, pass <Code>cacheTags</Code> in the third argument to <Code>router.prefetch</Code>.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+            router.prefetch('/users', {}, { cacheTags: 'users' })
+            router.prefetch('/dashboard', {}, { cacheTags: ['dashboard', 'stats'] })
+            `,
+          },
+        ]}
+      />
+      <H2>Cache invalidation</H2>
+      <P>
+        You can manually flush the prefetch cache by calling <Code>router.flushAll</Code> to remove all cached data,
+        or <Code>router.flush</Code> to remove cache for a specific page.
       </P>
       <TabbedCode
         examples={[
@@ -327,15 +381,169 @@ export default function () {
             router.flushAll()
 
             // Flush cache for a specific page
-            router.flush(
-                '/users',
-                { method: 'get', data: { page: 2 } },
-            )
+            router.flush('/users', { method: 'get', data: { page: 2 } })
 
+            // Using the usePrefetch hook
             const { flush } = usePrefetch()
 
-            // Flush cache for the current page
-            flush()
+            flush() // Flush cache for the current page
+            `,
+          },
+        ]}
+      />
+      <P>
+        For more granular control, you can flush cached data by their tags using <Code>router.flushByCacheTags</Code>.
+        This removes any cached response that contains <em>any</em> of the specified tags.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+            // Flush all responses tagged with 'users'
+            router.flushByCacheTags('users')
+
+            // Flush all responses tagged with 'dashboard' OR 'stats'
+            router.flushByCacheTags(['dashboard', 'stats'])
+            `,
+          },
+        ]}
+      />
+      <H3>Invalidate on requests</H3>
+      <P>
+        To automatically invalidate caches when making requests, pass an <Code>invalidateCacheTags</Code> prop to the{' '}
+        <Code>Form</Code> component. The specified tags will be flushed when the form submission succeeds.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+            <script setup>
+            import { Form } from '@inertiajs/vue3'
+            </script>
+
+            <template>
+              <Form action="/users" method="post" :invalidate-cache-tags="['users', 'dashboard']">
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
+              </Form>
+            </template>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+            import { Form } from '@inertiajs/react'
+
+            export default () => (
+              <Form action="/users" method="post" invalidateCacheTags={['users', 'dashboard']}>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
+              </Form>
+            )
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+            <script>
+              import { Form } from '@inertiajs/svelte'
+            </script>
+
+            <Form action="/users" method="post" invalidateCacheTags={['users', 'dashboard']}>
+              <input type="text" name="name" />
+              <input type="email" name="email" />
+              <button type="submit">Create User</button>
+            </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        With the <Code>useForm</Code> helper, you can include <Code>invalidateCacheTags</Code> in the visit options.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+            import { useForm } from '@inertiajs/vue3'
+
+            const form = useForm({
+              name: '',
+              email: '',
+            })
+
+            const submit = () => {
+              form.post('/users', {
+                invalidateCacheTags: ['users', 'dashboard']
+              })
+            }
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+            import { useForm } from '@inertiajs/react'
+
+            const { data, setData, post } = useForm({
+              name: '',
+              email: '',
+            })
+
+            function submit(e) {
+              e.preventDefault()
+              post('/users', {
+                invalidateCacheTags: ['users', 'dashboard']
+              })
+            }
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+            import { useForm } from '@inertiajs/svelte'
+
+            const form = useForm({
+              name: '',
+              email: '',
+            })
+
+            function submit() {
+              $form.post('/users', {
+                invalidateCacheTags: ['users', 'dashboard']
+              })
+            }
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can also invalidate cache tags with programmatic visits by including <Code>invalidateCacheTags</Code> in the options.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+            router.delete(\`/users/\${userId}\`, {}, {
+              invalidateCacheTags: ['users', 'dashboard']
+            })
+
+            router.post('/posts', postData, {
+              invalidateCacheTags: ['posts', 'recent-posts']
+            })
             `,
           },
         ]}
