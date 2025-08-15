@@ -19,13 +19,15 @@ export default function () {
     <>
       <H1>Forms</H1>
       <P>
-        Inertia provides two primary ways to build forms: the <Code>&lt;Form&gt;</Code> component and the <Code>useForm</Code> helper.
-        Both integrate with your server-side framework's validation and handle form submissions without full page reloads.
+        Inertia provides two primary ways to build forms: the <Code>&lt;Form&gt;</Code> component and the{' '}
+        <Code>useForm</Code> helper. Both integrate with your server-side framework's validation and handle form
+        submissions without full page reloads.
       </P>
       <H2>Form component</H2>
       <P>
         Inertia provides a <Code>&lt;Form&gt;</Code> component that behaves much like a classic HTML form, but uses
-        Inertia under the hood to avoid full page reloads. This is the simplest way to get started with forms in Inertia.
+        Inertia under the hood to avoid full page reloads. This is the simplest way to get started with forms in
+        Inertia.
       </P>
       <TabbedCode
         examples={[
@@ -344,8 +346,8 @@ export default function () {
       <P>
         The <Code>defaults</Code> method allows you to update the form's default values to match the current field{' '}
         values. When called, subsequent <Code>reset()</Code> calls will restore fields to these new defaults, and the{' '}
-        <Code>isDirty</Code> property will track changes from these updated defaults. Unlike <Code>useForm</Code>, this method{' '}
-        accepts no arguments and always uses all current form values.
+        <Code>isDirty</Code> property will track changes from these updated defaults. Unlike <Code>useForm</Code>, this
+        method accepts no arguments and always uses all current form values.
       </P>
       <P>
         The <Code>errors</Code> object uses dotted notation for nested fields, allowing you to display validation
@@ -552,8 +554,7 @@ export default function () {
       <H3>Events</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component emits all the standard visit <A href="/events">events</A> for form
-        submissions, plus a <Code>cancelToken</Code> event for handling form cancellation and an{' '}
-        <Code>onSubmitComplete</Code> event for post-submission cleanup.
+        submissions:
       </P>
       <TabbedCode
         examples={[
@@ -572,7 +573,6 @@ export default function () {
                 @finish="handleFinish"
                 @cancel="handleCancel"
                 @cancelToken="handleCancelToken"
-                @submitComplete="handleSubmitComplete"
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -594,7 +594,6 @@ export default function () {
                 onSuccess={handleSuccess}
                 onError={handleError}
                 onFinish={handleFinish}
-                onSubmitComplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -616,7 +615,6 @@ export default function () {
                 on:success={handleSuccess}
                 on:error={handleError}
                 on:finish={handleFinish}
-                on:submitComplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
@@ -638,87 +636,18 @@ export default function () {
                 onSuccess={handleSuccess}
                 onError={handleError}
                 onFinish={handleFinish}
-                onSubmitComplete={handleSubmitComplete}
               >
                 <input type="text" name="name" />
                 <button type="submit">Create User</button>
               </Form>
             `,
-          },
-        ]}
-      />
-      <P>
-        The <Code>onSubmitComplete</Code> callback allows you to perform cleanup actions after successful form{' '}
-        submissions. The callback receives an object with methods including <Code>defaults()</Code> and <Code>reset()</Code>.
-      </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue',
-            language: 'markup',
-            code: dedent`
-              <Form
-                action="/users"
-                method="post"
-                @submitComplete="(form) => form.reset('password')"
-              >
-                <input type="text" name="name" />
-                <input type="password" name="password" />
-                <button type="submit">Create User</button>
-              </Form>
-            `,
-          },
-          {
-            name: 'React',
-            language: 'jsx',
-            code: dedent`
-              <Form
-                action="/users"
-                method="post"
-                onSubmitComplete={(form) => form.reset('password')}
-              >
-                <input type="text" name="name" />
-                <input type="password" name="password" />
-                <button type="submit">Create User</button>
-              </Form>
-            `,
-          },
-          {
-            name: 'Svelte 4',
-            language: 'html',
-            code: dedent`
-              <Form
-                action="/users"
-                method="post"
-                on:submitComplete={(form) => form.reset('password')}
-              >
-                <input type="text" name="name" />
-                <input type="password" name="password" />
-                <button type="submit">Create User</button>
-              </Form>
-            `,
-          },
-          {
-            name: 'Svelte 5',
-            language: 'html',
-            code: dedent`
-              <Form
-                action="/users"
-                method="post"
-                onSubmitComplete={(form) => form.reset('password')}
-              >
-                <input type="text" name="name" />
-                <input type="password" name="password" />
-                <button type="submit">Create User</button>
-              </Form>
-              `
           },
         ]}
       />
       <H3>Dotted key notation</H3>
       <P>
-        The <Code>&lt;Form&gt;</Code> component supports dotted key notation for creating nested objects from flat
-        input names. This provides a convenient way to structure form data.
+        The <Code>&lt;Form&gt;</Code> component supports dotted key notation for creating nested objects from flat input
+        names. This provides a convenient way to structure form data.
       </P>
       <TabbedCode
         examples={[
@@ -760,9 +689,7 @@ export default function () {
           },
         ]}
       />
-      <P>
-        The example above would generate the following data structure.
-      </P>
+      <P>The example above would generate the following data structure.</P>
       <TabbedCode
         examples={[
           {
@@ -823,9 +750,7 @@ export default function () {
           },
         ]}
       />
-      <P>
-        The example above would generate the following data structure.
-      </P>
+      <P>The example above would generate the following data structure.</P>
       <TabbedCode
         examples={[
           {
@@ -1112,7 +1037,7 @@ export default function () {
       <P>
         The submit methods support all of the typical <A href="/manual-visits">visit options</A>, such as{' '}
         <Code>preserveState</Code>, <Code>preserveScroll</Code>, and event callbacks, which can be helpful for
-        performing tasks on successful form submissions. For example, you might use the <Code>onSuccess</Code>{' '}callback
+        performing tasks on successful form submissions. For example, you might use the <Code>onSuccess</Code> callback
         to reset inputs to their original state.
       </P>
       <TabbedCode
@@ -1454,8 +1379,8 @@ export default function () {
       />
       <P>
         Sometimes, you may want to restore your form fields to their default values and clear any validation errors at
-        the same time. Instead of calling <Code>reset()</Code> and <Code>clearErrors()</Code> separately, you can use the{' '}
-        <Code>resetAndClearErrors()</Code> method, which combines both actions into a single call.
+        the same time. Instead of calling <Code>reset()</Code> and <Code>clearErrors()</Code> separately, you can use
+        the <Code>resetAndClearErrors()</Code> method, which combines both actions into a single call.
       </P>
       <TabbedCode
         examples={[
@@ -1717,9 +1642,9 @@ export default function () {
       />
       <H2>Server-side responses</H2>
       <P>
-        When using Inertia, you don't typically inspect form responses client-side like you would with traditional XHR/fetch
-        requests. Instead, your server-side route or controller issues a <A href="/redirects">redirect</A> response after
-        processing the form, often redirecting to a success page.
+        When using Inertia, you don't typically inspect form responses client-side like you would with traditional
+        XHR/fetch requests. Instead, your server-side route or controller issues a <A href="/redirects">redirect</A>{' '}
+        response after processing the form, often redirecting to a success page.
       </P>
       <TabbedCode
         examples={[
@@ -1759,13 +1684,13 @@ export default function () {
       <H2>Server-side validation</H2>
       <P>
         Both the <Code>&lt;Form&gt;</Code> component and <Code>useForm</Code> helper automatically handle server-side
-        validation errors. When your server returns validation errors, they're automatically available in the <Code>errors</Code>{' '}
-        object without any additional configuration.
+        validation errors. When your server returns validation errors, they're automatically available in the{' '}
+        <Code>errors</Code> object without any additional configuration.
       </P>
       <P>
         Unlike traditional XHR/fetch requests where you'd check for a <Code>422</Code> status code, Inertia handles
-        validation errors as part of its redirect-based flow, just like classic server-side form submissions, but without
-        the full page reload.
+        validation errors as part of its redirect-based flow, just like classic server-side form submissions, but
+        without the full page reload.
       </P>
       <P>
         For a complete guide on validation error handling, including error bags and advanced scenarios, see the{' '}
@@ -1922,8 +1847,8 @@ export default function () {
       <H2>File uploads</H2>
       <P>
         When making requests or form submissions that include files, Inertia will automatically convert the request data
-        into a <Code>FormData</Code> object. This works with the <Code>&lt;Form&gt;</Code> component, <Code>useForm</Code>{' '}
-        helper, and manual router submissions.
+        into a <Code>FormData</Code> object. This works with the <Code>&lt;Form&gt;</Code> component,{' '}
+        <Code>useForm</Code> helper, and manual router submissions.
       </P>
       <P>
         For more information on file uploads, including progress tracking, see the{' '}
@@ -1932,8 +1857,8 @@ export default function () {
       <H2>XHR / fetch submissions</H2>
       <P>
         Using Inertia to submit forms works great for the vast majority of situations. However, in the event that you
-        need more control over the form submission, you're free to make plain XHR or <Code>fetch</Code> requests instead,
-        using the library of your choice.
+        need more control over the form submission, you're free to make plain XHR or <Code>fetch</Code> requests
+        instead, using the library of your choice.
       </P>
     </>
   )
