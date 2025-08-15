@@ -425,6 +425,7 @@ export default function () {
                 :headers="{ 'X-Custom-Header': 'value' }"
                 :show-progress="false"
                 :transform="data => ({ ...data, timestamp: Date.now() })"
+                :invalidate-cache-tags="['users', 'dashboard']"
                 disable-while-processing
                 :options="{
                   preserveScroll: true,
@@ -453,6 +454,7 @@ export default function () {
                 headers={{ 'X-Custom-Header': 'value' }}
                 showProgress={false}
                 transform={data => ({ ...data, timestamp: Date.now() })}
+                invalidateCacheTags={['users', 'dashboard']}
                 disableWhileProcessing
                 options={{
                   preserveScroll: true,
@@ -481,6 +483,7 @@ export default function () {
                 headers={{ 'X-Custom-Header': 'value' }}
                 showProgress={false}
                 transform={data => ({ ...data, timestamp: Date.now() })}
+                invalidateCacheTags={['users', 'dashboard']}
                 disableWhileProcessing
                 options={{
                   preserveScroll: true,
