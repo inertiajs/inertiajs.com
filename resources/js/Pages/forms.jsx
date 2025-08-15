@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, H3, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
+import { A, Code, H1, H2, H3, MinimumVersion, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -1658,9 +1658,7 @@ export default function () {
         ]}
       />
       <H3>Wayfinder</H3>
-      <P>
-        <strong>Requires Inertia &gt;= v2.0.6</strong>
-      </P>
+      <MinimumVersion version="2.0.6" />
       <P>
         When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the form helper, you
         can simply pass the resulting object directly to the <Code>form.submit</Code> method. The form helper will infer

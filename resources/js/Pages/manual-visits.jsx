@@ -1,10 +1,11 @@
-import { A, Code, H1, H2, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, MinimumVersion, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
   title: 'Manual visits',
   links: [
     { url: '#method', name: 'Method' },
+    { url: '#wayfinder', name: 'Wayfinder' },
     { url: '#data', name: 'Data' },
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#file-uploads', name: 'File uploads' },
@@ -240,6 +241,90 @@ export default function () {
         <Code color="orange">patch</Code>. This is called{' '}
         <A href="https://laravel.com/docs/routing#form-method-spoofing">form method spoofing</A>.
       </Notice>
+      <H2>Wayfinder</H2>
+      <MinimumVersion version="2.1.2" />
+      <P>
+        When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A>, you can pass the resulting object
+        directly to any router method. The router will infer the HTTP method and URL from the Wayfinder object.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              router.visit(show(1))
+              router.post(store())
+              router.delete(destroy(1))
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              router.visit(show(1))
+              router.post(store())
+              router.delete(destroy(1))
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              router.visit(show(1))
+              router.post(store())
+              router.delete(destroy(1))
+            `,
+          },
+        ]}
+      />
+      <P>
+        If you provide both a Wayfinder object and specify the <Code>method</Code> option, the{' '}
+        <Code>method</Code> option will take precedence.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+              import { update } from 'App/Http/Controllers/UserController'
+
+              router.visit(update(1), { method: 'patch' })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+              import { update } from 'App/Http/Controllers/UserController'
+
+              router.visit(update(1), { method: 'patch' })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+              import { update } from 'App/Http/Controllers/UserController'
+
+              router.visit(update(1), { method: 'patch' })
+            `,
+          },
+        ]}
+      />
       <H2>Data</H2>
       <P>
         You may use the <Code>data</Code> option to add data to the request.

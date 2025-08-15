@@ -1,4 +1,4 @@
-import { A, Code, H1, H2, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, MinimumVersion, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
@@ -7,6 +7,7 @@ export const meta = {
     { url: '#top', name: 'Introduction' },
     { url: '#creating-links', name: 'Creating links' },
     { url: '#method', name: 'Method' },
+    { url: '#wayfinder', name: 'Wayfinder' },
     { url: '#data', name: 'Data' },
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#browser-history', name: 'Browser history' },
@@ -159,9 +160,7 @@ export default function () {
       />
 
       <H2>Wayfinder</H2>
-      <P>
-        <strong>Requires Inertia &gt;= v2.0.6</strong>
-      </P>
+      <MinimumVersion version="2.0.6" />
       <P>
         When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the{' '}
         <Code>Link</Code>
