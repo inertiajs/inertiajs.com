@@ -254,6 +254,12 @@ export default function () {
           },
         ]}
       />
+      <H3>Checkbox inputs</H3>
+      <P>
+        When working with checkboxes, you may want to add an explicit <Code>value</Code> attribute such as{' '}
+        <Code>value="1"</Code>. Without a value attribute, checked checkboxes will submit as <Code>"on"</Code>, which
+        some server-side validation rules may not recognize as a proper boolean value.
+      </P>
       <H3>Slot props</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component exposes reactive state and helper methods through its default slot,
