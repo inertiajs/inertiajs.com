@@ -115,14 +115,36 @@ export default function () {
         JavaScript file. A common use case for the title callback is automatically adding an app name before or after
         each page title.
       </P>
-      <CodeBlock
-        language="js"
-        children={dedent`
-          createInertiaApp({
-            title: title => \`\${title} - My App\`,
-            // ...
-          })
-        `}
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              createInertiaApp({
+                title: title => \`\${title} - My App\`,
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              createInertiaApp({
+                title: title => \`\${title} - My App\`,
+                // ...
+              })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              // Not supported
+            `,
+          },
+        ]}
       />
       <P>
         After defining the <Code>title</Code> callback, the callback will automatically be invoked when you set a title
