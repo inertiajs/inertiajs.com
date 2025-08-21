@@ -155,6 +155,11 @@ const Nav = ({ className }) => {
           </Link>
         </li>
         <li className="md:pr-3">
+          <Link href="/merging-props" className={linkClass('/merging-props')}>
+            Merging props
+          </Link>
+        </li>
+        <li className="md:pr-3">
           <Link href="/polling" className={linkClass('/polling')}>
             Polling
           </Link>
@@ -167,11 +172,6 @@ const Nav = ({ className }) => {
         <li className="md:pr-3">
           <Link href="/load-when-visible" className={linkClass('/load-when-visible')}>
             Load when visible
-          </Link>
-        </li>
-        <li className="md:pr-3">
-          <Link href="/merging-props" className={linkClass('/merging-props')}>
-            Merging props
           </Link>
         </li>
         <li className="md:pr-3">

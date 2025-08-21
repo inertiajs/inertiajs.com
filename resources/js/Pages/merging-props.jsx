@@ -23,7 +23,7 @@ export default function () {
       </P>
       <H2>Server side</H2>
       <P>
-        To specify that a prop should be merged, you can use the <Code>merge</Code> or <Code>deepMerge</Code> method on
+        To specify that a prop should be merged, you can use the <Code>Inertia::merge()</Code> or <Code>Inertia::deepMerge()</Code> methods on
         the prop value.
       </P>
       <P>
@@ -44,7 +44,7 @@ export default function () {
                     'PHP', 'JavaScript', 'TypeScript', 'Docker', 'Vite',
                 ];
 
-                // Load chunk by page
+                // Get chunk of tags by page
                 $page = request()->input('page', 1);
                 $perPage = 5;
                 $offset = ($page - 1) * $perPage;
@@ -62,10 +62,10 @@ export default function () {
             code: dedent`
             Route::get('/users', function () {
                 $page = request()->input('page', 1);
-                $per_page = request()->input('per_page', 10);
+                $perPage = request()->input('per_page', 10);
 
                 return Inertia::render('Users/Index', [
-                    'results' => Inertia::deepMerge(User::paginate($per_page, page: $page)),
+                    'results' => Inertia::deepMerge(User::paginate($perPage, page: $page)),
                 ]);
             });
             `,
@@ -113,10 +113,10 @@ export default function () {
             code: dedent`
             Route::get('/users', function () {
                 $page = request()->input('page', 1);
-                $per_page = request()->input('per_page', 10);
+                $perPage = request()->input('per_page', 10);
 
                 return Inertia::render('Users/Index', [
-                    'results' => Inertia::defer(fn() => User::paginate($per_page, page: $page))->deepMerge(),
+                    'results' => Inertia::defer(fn() => User::paginate($perPage, page: $page))->deepMerge(),
                 ]);
             });
             `,
@@ -140,7 +140,7 @@ export default function () {
             code: dedent`
             router.reload({
                 reset: ['results'],
-                //...
+                // ...
             })
             `,
           },
