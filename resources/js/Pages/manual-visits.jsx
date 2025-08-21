@@ -432,7 +432,7 @@ export default function () {
         ]}
       />
       <P>
-        For more information on uploading files, please consult the dedicated <A href="/file-uploads">file uploads</A>{' '}
+        For more information on uploading files, check out the dedicated <A href="/file-uploads">file uploads</A>{' '}
         documentation.
       </P>
       <H2>Browser history</H2>
@@ -553,7 +553,7 @@ export default function () {
         URL, component, and props.
       </P>
       <P>
-        If you need access to the current page's props you can pass a function to the props option. This function will
+        If you need access to the current page's props, you can pass a function to the props option. This function will
         receive the current page's props as an argument and should return the new props.
       </P>
       <P>
@@ -569,6 +569,7 @@ export default function () {
               import { router } from '@inertiajs/vue3'
 
               router.push({ url: '/users', component: 'Users' })
+
               router.replace({
                 props: (currentProps) => ({ ...currentProps, search: 'John' })
               })
@@ -581,6 +582,7 @@ export default function () {
               import { router } from '@inertiajs/react'
 
               router.push({ url: '/users', component: 'Users' })
+
               router.replace({
                 props: (currentProps) => ({ ...currentProps, search: 'John' })
               })
@@ -593,6 +595,7 @@ export default function () {
               import { router } from '@inertiajs/svelte'
 
               router.push({ url: '/users', component: 'Users' })
+
               router.replace({
                 props: (currentProps) => ({ ...currentProps, search: 'John' })
               })
@@ -1065,13 +1068,12 @@ export default function () {
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
-                    this.doThing(),
-                    this.doAnotherThing()
+                    this.firstTask(),
+                    this.secondTask()
                   ])
                 }
                 onFinish: visit => {
-                  // This won't be called until doThing()
-                  // and doAnotherThing() have finished.
+                  // Not called until firstTask() and secondTask() have finished
                 },
               })
             `,
@@ -1085,13 +1087,12 @@ export default function () {
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
-                    this.doThing(),
-                    this.doAnotherThing()
+                    this.firstTask(),
+                    this.secondTask()
                   ])
                 }
                 onFinish: visit => {
-                  // This won't be called until doThing()
-                  // and doAnotherThing() have finished.
+                  // Not called until firstTask() and secondTask() have finished
                 },
               })
             `,
@@ -1105,13 +1106,12 @@ export default function () {
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
-                    this.doThing(),
-                    this.doAnotherThing()
+                    this.firstTask(),
+                    this.secondTask()
                   ])
                 }
                 onFinish: visit => {
-                  // This won't be called until doThing()
-                  // and doAnotherThing() have finished.
+                  // Not called until firstTask() and secondTask() have finished
                 },
               })
             `,
