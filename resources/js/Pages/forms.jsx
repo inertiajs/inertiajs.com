@@ -98,8 +98,7 @@ export default function () {
         and the <Code>Form</Code> component will handle the data submission for you.
       </P>
       <P>
-        The component also supports advanced use cases, including nested data structures, file uploads, and dotted key
-        notation.
+        The component also supports nested data structures, file uploads, and dotted key notation.
       </P>
       <TabbedCode
         examples={[
@@ -291,7 +290,10 @@ export default function () {
                 }"
               >
                 <input type="text" name="name" />
-                <div v-if="errors.name">{{ errors.name }}</div>
+
+                <div v-if="errors.name">
+                  {{ errors.name }}
+                </div>
 
                 <button type="submit" :disabled="processing">
                   {{ processing ? 'Creating...' : 'Create User' }}
@@ -323,6 +325,7 @@ export default function () {
                 }) => (
                   <>
                     <input type="text" name="name" />
+
                     {errors.name && <div>{errors.name}</div>}
 
                     <button type="submit" disabled={processing}>
@@ -357,6 +360,7 @@ export default function () {
                 let:submit
               >
                 <input type="text" name="name" />
+
                 {#if errors.name}
                   <div>{errors.name}</div>
                 {/if}
@@ -392,6 +396,7 @@ export default function () {
                   submit,
                 })}
                   <input type="text" name="name" />
+
                   {#if errors.name}
                     <div>{errors.name}</div>
                   {/if}
@@ -590,7 +595,7 @@ export default function () {
         prop, the <Code>Form</Code> component will add the <Code>inert</Code> attribute to the HTML <Code>form</Code>{' '}
         tag while the form is processing to prevent user interaction.
       </P>
-      <P>To style the form while it's processing, you can target the inert form in the following ways:</P>
+      <P>To style the form while it's processing, you can target the inert form in the following ways.</P>
       <TabbedCode
         examples={[
           {

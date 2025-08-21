@@ -155,7 +155,7 @@ export default function () {
       </P>
       <H2>Creating layouts</H2>
       <P>
-        While not required, for most projects it makes sense to create a site layout that all of your pages can extend.
+        While not required, for most projects it makes sense to create a layout component that all of your pages can use.
         You may have noticed in our page example above that we're wrapping the page content within a{' '}
         <Code>{'<Layout>'}</Code> component. Here's an example of such a component:
       </P>
@@ -458,7 +458,7 @@ export default function () {
         <P>
           If you're using Vue 3.3+, you can alternatively use{' '}
           <A href="https://vuejs.org/api/sfc-script-setup.html#defineoptions">defineOptions</A> to define a layout
-          within <Code>{'<script setup>'}</Code>. Older versions of Vue can use the
+          within <Code>{'<script setup>'}</Code>. Older versions of Vue can use the{' '}
           <A href="https://vue-macros.sxzz.moe/macros/define-options.html">defineOptions plugin</A>:
         </P>
         <CodeBlock

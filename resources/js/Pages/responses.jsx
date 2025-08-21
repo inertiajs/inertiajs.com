@@ -149,7 +149,7 @@ export default function () {
         ]}
       />
       <P>
-        You can use this class directly as a prop value:
+        Once defined, you can use this class directly as a prop value.
       </P>
       <TabbedCode
         examples={[
@@ -167,7 +167,7 @@ export default function () {
       />
       <P>
         The <Code>PropertyContext</Code> gives you access to the property key, which enables powerful patterns like merging
-        with shared data:
+        with shared data.
       </P>
       <TabbedCode
         examples={[
@@ -244,7 +244,7 @@ export default function () {
         ]}
       />
       <P>
-        You can use these prop classes directly in the <Code>render()</Code> and <Code>with()</Code> methods:
+        You can use these prop classes directly in the <Code>render()</Code> and <Code>with()</Code> methods.
       </P>
       <TabbedCode
         examples={[
