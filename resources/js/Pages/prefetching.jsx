@@ -24,7 +24,7 @@ export default function () {
       </P>
       <H2>Link prefetching</H2>
       <P>
-        To prefetch data for a page, you can add the <Code>prefetch</Code> attribute to the Inertia link component. By
+        To prefetch data for a page, you can add the <Code>prefetch</Code> prop to the Inertia link component. By
         default, Inertia will prefetch the data for the page when the user hovers over the link for more than 75ms.
       </P>
       <TabbedCode

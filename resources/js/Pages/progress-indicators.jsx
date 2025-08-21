@@ -99,7 +99,7 @@ export default function () {
         `}
       />
       <P>
-        Next, import both <Code>NProgress</Code> and the Inertia <Code>router</Code> into your application.
+        Then, import both <Code>NProgress</Code> and the Inertia <Code>router</Code> into your application.
       </P>
       <TabbedCode
         examples={[
@@ -130,7 +130,7 @@ export default function () {
         ]}
       />
       <P>
-        Next, let's add a <Code>start</Code> event listener. We'll use this listener to show the progress bar when a new
+        Next, add a <Code>start</Code> event listener. We'll use this listener to show the progress bar when a new
         Inertia visit begins.
       </P>
       <CodeBlock
@@ -140,7 +140,7 @@ export default function () {
         `}
       />
       <P>
-        Then, let's add a <Code>finish</Code> event listener to hide the progress bar when the page visit finishes.
+        Finally, add a <Code>finish</Code> event listener to hide the progress bar when the page visit finishes.
       </P>
       <CodeBlock
         language="js"

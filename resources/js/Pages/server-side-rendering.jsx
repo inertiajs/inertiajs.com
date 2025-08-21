@@ -209,7 +209,7 @@ export default function () {
         port, requests are then handled by each thread in a round-robin way.
       </P>
       <P>
-        You can enable clustering by passing a second argument to <Code>createServer</Code>:
+        You can enable clustering by passing a second argument of options to <Code>createServer</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -357,25 +357,25 @@ export default function () {
       <Vue>
         <P>
           To enable client-side hydration in a Vue app, update your <Code>ssr.js</Code> file to use{' '}
-          <Code>createSSRApp</Code> instead of <Code>createApp</Code>:
+          <Code>createSSRApp</Code> instead of <Code>createApp</Code>.
         </P>
       </Vue>
       <React>
         <P>
           To enable client-side hydration in a React app, update your <Code>ssr.js</Code> file to use{' '}
-          <Code>hydrateRoot</Code> instead of <Code>createRoot</Code>:
+          <Code>hydrateRoot</Code> instead of <Code>createRoot</Code>.
         </P>
       </React>
       <Svelte4>
         <P>
           To enable client-side hydration in a Svelte 4 app, set the <Code>hydrate</Code> option to <Code>true</Code> in
-          your <Code>ssr.js</Code> file:
+          your <Code>ssr.js</Code> file.
         </P>
       </Svelte4>
       <Svelte5>
         <P>
           To enable client-side hydration in a Svelte 5 app, update your <Code>ssr.js</Code> file to use{' '}
-          <Code>hydrate</Code> instead of <Code>mount</Code> when server rendering:
+          <Code>hydrate</Code> instead of <Code>mount</Code> when server rendering.
         </P>
       </Svelte5>
       <TabbedCode
@@ -538,6 +538,10 @@ export default function () {
         By default, a check is performed to ensure the server-side bundle exists before dispatching a request to the SSR server.{' '}
         In some cases, such as when your app runs on multiple servers or is containerized, the web server may not have access to the SSR bundle.{' '}
         To disable this check, you may set the <Code>inertia.ssr.ensure_bundle_exists</Code> configuration value to <Code>false</Code>.
+      </P>
+      <H3>Laravel Cloud</H3>
+      <P>
+        To run the SSR server on Laravel Cloud, you may use Cloud's <A href="https://cloud.laravel.com/docs/compute#inertia-ssr">native support for Inertia SSR</A>.
       </P>
       <H3>Laravel Forge</H3>
       <P>
