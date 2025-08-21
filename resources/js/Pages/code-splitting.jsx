@@ -23,7 +23,7 @@ export default function () {
         Generally speaking, if you're able to use a single bundle, your app is going to feel snappier.
       </P>
       <P>
-        To enable code splitting you'll need to tweak the <Code>resolve</Code> callback in your{' '}
+        To enable code splitting, you will need to tweak the <Code>resolve</Code> callback in your{' '}
         <Code>createInertiaApp()</Code> configuration, and how you do this is different depending on which bundler
         you're using.
       </P>
