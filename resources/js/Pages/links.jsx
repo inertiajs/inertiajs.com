@@ -166,7 +166,7 @@ export default function () {
         When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the{' '}
         <Code>Link</Code>
         component, you can simply pass the resulting object directly to the <Code>href</Code> prop. The{' '}
-        <Code>Link</Code> will infer the HTTP method and URL directly from the Wayfinder object:
+        <Code>Link</Code> will infer the HTTP method and URL directly from the Wayfinder object.
       </P>
       <TabbedCode
         examples={[
@@ -406,7 +406,7 @@ export default function () {
         ]}
       />
       <P>
-        For more information on managing scroll position, please consult the documentation on{' '}
+        For more information on managing scroll position, check out the documentation on{' '}
         <A href="/scroll-management">scroll management</A>.
       </P>
       <H2>Partial reloads</H2>
@@ -448,12 +448,12 @@ export default function () {
         ]}
       />
       <P>
-        For more information on this topic, please consult the complete documentation on{' '}
+        For more information on this topic, check out the complete documentation on{' '}
         <A href="/partial-reloads">partial reloads</A>.
       </P>
       <H2>Active states</H2>
       <P>
-        It's often desirable to set an active state for navigation links based on the current page. This can be
+        It's common to set an active state for navigation links based on the current page. This can be
         accomplished when using Inertia by inspecting the <Code>page</Code> object and doing string comparisons against
         the <Code>page.url</Code> and <Code>page.component</Code> properties.
       </P>
