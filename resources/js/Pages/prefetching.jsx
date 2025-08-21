@@ -24,8 +24,8 @@ export default function () {
       </P>
       <H2>Link prefetching</H2>
       <P>
-        To prefetch data for a page, you can use the <Code>prefetch</Code> method on the Inertia link component. By
-        default, Inertia will prefetch the data for the page when the user hovers over the link after more than 75ms.
+        To prefetch data for a page, you can add the <Code>prefetch</Code> attribute to the Inertia link component. By
+        default, Inertia will prefetch the data for the page when the user hovers over the link for more than 75ms.
       </P>
       <TabbedCode
         examples={[
@@ -100,7 +100,7 @@ export default function () {
         ]}
       />
       <P>
-        You can also start prefetching on <Code>mousedown</Code> by passing the <Code>click</Code> value to the{' '}
+        Instead of prefetching on hover, you can also start prefetching on <Code>mousedown</Code> by passing the <Code>click</Code> value to the{' '}
         <Code>prefetch</Code> prop.
       </P>
       <TabbedCode
@@ -167,7 +167,7 @@ export default function () {
         ]}
       />
       <P>
-        You can also combine strategies by passing an array of values to the <Code>prefetch</Code> prop.
+        You can also combine prefetch strategies by passing an array of values to the <Code>prefetch</Code> prop.
       </P>
       <TabbedCode
         examples={[
@@ -202,7 +202,7 @@ export default function () {
       />
       <H2>Programmatic prefetching</H2>
       <P>
-        You can also prefetch data programmatically using <Code>router.prefetch</Code>. The signature is identical to{' '}
+        You can prefetch data programmatically using <Code>router.prefetch</Code>. This method's signature is identical to{' '}
         <Code>router.visit</Code> with the exception of a third argument that allows you to specify prefetch options.
       </P>
       <P>
@@ -308,7 +308,7 @@ export default function () {
       />
       <H2>Cache tags</H2>
       <P>
-        Cache tags allow you to group related prefetched data and invalidate it all at once when specific events occur.
+        Cache tags allow you to group related prefetched data and invalidate all cached data with that tag when specific events occur.
       </P>
       <P>
         To tag cached data, pass a <Code>cacheTags</Code> prop to your <Code>Link</Code> component.
@@ -386,7 +386,8 @@ export default function () {
             // Using the usePrefetch hook
             const { flush } = usePrefetch()
 
-            flush() // Flush cache for the current page
+            // Flush cache for the current page
+            flush()
             `,
           },
         ]}
@@ -467,7 +468,7 @@ export default function () {
         ]}
       />
       <P>
-        With the <Code>useForm</Code> helper, you can include <Code>invalidateCacheTags</Code> in the visit options.
+        When using the <Code>useForm</Code> helper, you can include <Code>invalidateCacheTags</Code> in the visit options.
       </P>
       <TabbedCode
         examples={[
@@ -589,18 +590,17 @@ export default function () {
           },
         ]}
       />
-      <H3>How it works</H3>
       <P>
         If a request is made within the fresh period (before the first value), the cache is returned immediately without
         making a request to the server.
       </P>
       <P>
         If a request is made during the stale period (between the two values), the stale value is served to the user,
-        and a request is made in the background to refresh the cached value. Once the value is returned, the data is
+        and a request is made in the background to refresh the cached data. Once the fresh data is returned, it is
         merged into the page so the user has the most recent data.
       </P>
       <P>
-        If a request is made after the second value, the cache is considered expired, and the value is fetched from the
+        If a request is made after the second value, the cache is considered expired, and the page and data is fetched from the
         sever as a regular request.
       </P>
     </>
