@@ -47,8 +47,8 @@ export default function () {
         to <Code>true</Code>.
       </P>
       <P>
-        You are able to opt out of encryption on specific pages by calling the <Code>encryptHistory</Code> method before
-        returning the response:
+        You are able to opt out of encryption on specific pages by calling the <Code>Inertia::encryptHistory()</Code> method before
+        returning the response.
       </P>
       <TabbedCode
         examples={[
@@ -63,8 +63,8 @@ export default function () {
       />
       <H3>Per-request encryption</H3>
       <P>
-        To encrypt the history of an individual request, simply call the <Code>encryptHistory</Code> method before
-        returning the response:
+        To encrypt the history of an individual request, simply call the <Code>Inertia::encryptHistory()</Code> method before
+        returning the response.
       </P>
       <TabbedCode
         examples={[
@@ -79,7 +79,7 @@ export default function () {
       />
       <H3>Encrypt middleware</H3>
       <P>
-        To encrypt a group of routes, Inertia provides the <Code>EncryptHistoryMiddleware</Code> as a convenience.
+        To encrypt a group of routes, you may use Inertia's included <Code>EncryptHistoryMiddleware</Code> middleware.
       </P>
       <TabbedCode
         examples={[
@@ -100,7 +100,7 @@ export default function () {
       />
       <H2>Clearing history</H2>
       <P>
-        To clear the history state, you can call the <Code>clearHistory</Code> method before returning the response:
+        To clear the history state, you can call the <Code>Inertia::clearHistory()</Code> method before returning the response.
       </P>
       <TabbedCode
         examples={[
