@@ -738,7 +738,7 @@ export default function () {
         you've defined) back to the top of the page.
       </P>
       <P>
-        You can disable this behavior by setting the <Code>preserveScroll</Code> option to <Code>false</Code>.
+        You can disable this behavior by setting the <Code>preserveScroll</Code> option to <Code>true</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -748,7 +748,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/vue3'
 
-              router.visit(url, { preserveScroll: false })
+              router.visit(url, { preserveScroll: true })
             `,
           },
           {
@@ -757,7 +757,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/react'
 
-              router.visit(url, { preserveScroll: false })
+              router.visit(url, { preserveScroll: true })
             `,
           },
           {
@@ -766,7 +766,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/svelte'
 
-              router.visit(url, { preserveScroll: false })
+              router.visit(url, { preserveScroll: true })
             `,
           },
         ]}
