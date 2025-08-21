@@ -627,7 +627,7 @@ export default function () {
       <H3>Events</H3>
       <P>
         The <Code>&lt;Form&gt;</Code> component emits all the standard visit <A href="/events">events</A> for form
-        submissions:
+        submissions.
       </P>
       <TabbedCode
         examples={[
@@ -721,7 +721,7 @@ export default function () {
       <P>
         The <Code>Form</Code> component provides several attributes that allow you to reset the form after a submission.
       </P>
-      <P>To reset the form after a successful submission:</P>
+      <P>`resetOnSuccess` may be used to reset the form after a successful submission.</P>
       <TabbedCode
         examples={[
           {
@@ -783,7 +783,7 @@ export default function () {
           },
         ]}
       />
-      <P>To reset the form after errors:</P>
+      <P>`resetOnError` may be used to reset the form after errors.</P>
       <TabbedCode
         examples={[
           {
@@ -845,10 +845,10 @@ export default function () {
           },
         ]}
       />
-      <H3>Setting New Default Values</H3>
+      <H3>Setting new default values</H3>
       <P>
         The <Code>Form</Code> component provides the <Code>setDefaultsOnSuccess</Code> attribute to set the current form
-        values as the new defaults after a successful submission:
+        values as the new defaults after a successful submission.
       </P>
       <TabbedCode
         examples={[
@@ -1012,8 +1012,8 @@ export default function () {
       />
       <H3>Programmatic access</H3>
       <P>
-        You can access the form's methods programmatically using refs. This provides an alternative to the{' '}
-        <A href="#slot-props">slot props</A> approach when you need to trigger form actions from outside the form.
+        You can access the form's methods programmatically using refs. This provides an alternative to{' '}
+        <A href="#slot-props">slot props</A> when you need to trigger form actions from outside the form.
       </P>
       <TabbedCode
         examples={[
@@ -1101,7 +1101,7 @@ export default function () {
       <H2>Form helper</H2>
       <P>
         In addition to the <Code>&lt;Form&gt;</Code> component, Inertia also provides a <Code>useForm</Code> helper for
-        when you need programmatic control over your form's data and submission behavior:
+        when you need programmatic control over your form's data and submission behavior.
       </P>
       <TabbedCode
         examples={[
@@ -1435,6 +1435,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Form errors</H3>
       <P>
         If there are form validation errors, they are available via the <Code>errors</Code> property. When building
         Laravel powered Inertia applications, form errors will automatically be populated when your application throws
@@ -1578,6 +1579,7 @@ export default function () {
         <Code>true</Code> for two seconds after a successful form submission. This property can be utilized to show
         temporary success messages.
       </P>
+      <H3>Resetting the Form</H3>
       <P>
         To reset the form's values back to their default values, you can use the <Code>reset()</Code> method.
       </P>
@@ -1664,6 +1666,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Setting new default values</H3>
       <P>
         If your form's default values become outdated, you can use the <Code>defaults()</Code> method to update them.
         Then, the form will be reset to the correct values the next time the <Code>reset()</Code> method is invoked.
@@ -1725,6 +1728,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Form field change tracking</H3>
       <P>
         To determine if a form has any changes, you may use the <Code>isDirty</Code> property.
       </P>
@@ -1757,6 +1761,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Canceling form submissions</H3>
       <P>
         To cancel a form submission, use the <Code>cancel()</Code> method.
       </P>
@@ -1787,6 +1792,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Form data and history state</H3>
       <P>
         To instruct Inertia to store a form's data and errors in <A href="/remembering-state">history state</A>, you can
         provide a unique form key as the first argument when instantiating your form.
@@ -1830,7 +1836,7 @@ export default function () {
       <P>
         When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the form helper, you
         can simply pass the resulting object directly to the <Code>form.submit</Code> method. The form helper will infer
-        the HTTP method and URL from the Wayfinder object:
+        the HTTP method and URL from the Wayfinder object.
       </P>
       <TabbedCode
         examples={[
@@ -1919,7 +1925,7 @@ export default function () {
       />
       <P>
         This redirect-based approach works with all form submission methods: the <Code>&lt;Form&gt;</Code> component,
-        <Code>useForm</Code> helper, and manual router submissions. It makes handling Inertia forms feel very similar to
+        {' '}<Code>useForm</Code> helper, and manual router submissions. It makes handling Inertia forms feel very similar to
         classic server-side form submissions.
       </P>
       <H2>Server-side validation</H2>
@@ -1929,7 +1935,7 @@ export default function () {
         <Code>errors</Code> object without any additional configuration.
       </P>
       <P>
-        Unlike traditional XHR/fetch requests where you'd check for a <Code>422</Code> status code, Inertia handles
+        Unlike traditional XHR/fetch requests where you might check for a <Code>422</Code> status code, Inertia handles
         validation errors as part of its redirect-based flow, just like classic server-side form submissions, but
         without the full page reload.
       </P>
