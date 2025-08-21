@@ -1761,7 +1761,7 @@ export default function () {
           },
         ]}
       />
-      <H3>Canceling form submissions</H3>
+      <H3>Canceling Form submissions</H3>
       <P>
         To cancel a form submission, use the <Code>cancel()</Code> method.
       </P>
