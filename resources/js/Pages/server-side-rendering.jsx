@@ -71,7 +71,7 @@ export default function () {
             name: 'Vue',
             language: 'bash',
             code: dedent`
-              npm install @vue/server-renderer
+              npm install vue/server-renderer
             `,
           },
           {
@@ -113,7 +113,7 @@ export default function () {
             code: dedent`
               import { createInertiaApp } from '@inertiajs/vue3'
               import createServer from '@inertiajs/vue3/server'
-              import { renderToString } from '@vue/server-renderer'
+              import { renderToString } from 'vue/server-renderer'
               import { createSSRApp, h } from 'vue'
 
               createServer(page =>
