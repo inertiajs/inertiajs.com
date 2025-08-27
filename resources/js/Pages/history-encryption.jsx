@@ -79,7 +79,7 @@ export default function () {
       />
       <H3>Encrypt middleware</H3>
       <P>
-        To encrypt a group of routes, you may use Inertia's included <Code>EncryptHistoryMiddleware</Code> middleware.
+        To encrypt a group of routes, you may use Inertia's included <Code>EncryptHistory</Code> middleware.
       </P>
       <TabbedCode
         examples={[
@@ -87,7 +87,7 @@ export default function () {
             name: 'Laravel',
             language: 'php',
             code: dedent`
-            Route::middleware([Inertia\\EncryptHistoryMiddleware::class])->get('/', function() {
+            Route::middleware([Inertia\\Middleware\\EncryptHistory::class])->get('/', function() {
                 //
             });
 
