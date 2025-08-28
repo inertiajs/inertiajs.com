@@ -96,11 +96,12 @@ export default function () {
                   return null;
               }
 
-              public function share(Request $request)
+              public function share(Request $request): array
               {
-                  return array_merge(parent::share($request), [
+                  return [
+                      ...parent::share($request),
                       'version' => parent::version($request),
-                  ]);
+                  ];
               }
           }
       `}
