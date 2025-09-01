@@ -279,6 +279,95 @@ export default function () {
           },
         ]}
       />
+      <H3>Changing the Port</H3>
+      <P>
+        By default, the SSR server will run on port <Code>13174</Code>.If you don't specify a port, Inertia will
+        continue to use this default. You might want to change this if the default port is already in use or if you need
+        to use multiple applications with SSR.
+      </P>
+      <P>
+        You can change the port by passing a second argument to <Code>createServer</Code>:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/vue3'
+              import createServer from '@inertiajs/vue3/server'
+              import { renderToString } from '@vue/server-renderer'
+              import { createSSRApp, h } from 'vue'
+
+              createServer(page =>
+                createInertiaApp({
+                  // ...
+                }),
+                { port: 13714 },
+              )
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/react'
+              import createServer from '@inertiajs/react/server'
+              import ReactDOMServer from 'react-dom/server'
+
+              createServer(page =>
+                createInertiaApp({
+                  // ...
+                }),
+                { port: 13714 },
+              )
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/svelte'
+              import createServer from '@inertiajs/svelte/server'
+
+              createServer(page =>
+                createInertiaApp({
+                  // ...
+                }),
+                { port: 13714 },
+              )
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'js',
+            code: dedent`
+              import { createInertiaApp } from '@inertiajs/svelte'
+              import createServer from '@inertiajs/svelte/server'
+              import { render } from 'svelte/server'
+
+              createServer(page =>
+                createInertiaApp({
+                  // ...
+                }),
+                { port: 13714 },
+              )
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can also combine options, for example: <Code>{'{ port: 13714, cluster: true }'}</Code>.
+      </P>
+      <P>
+        After changing the port, update the SSR URL in your Inertia configuration by adding an{' '}
+        <Code>INERTIA_SSR_URL</Code> entry to your <Code>.env</Code> file:
+      </P>
+      <CodeBlock
+        children={dedent`
+            INERTIA_SSR_URL='http://127.0.0.1:13714'
+        `}
+      />
       <H2>Setup Vite</H2>
       <P>
         Next, we need to update our Vite configuration to build our new <Code>ssr.js</Code> file. We can do this by
