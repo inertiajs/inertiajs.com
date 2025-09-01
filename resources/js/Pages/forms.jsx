@@ -1,12 +1,14 @@
-import { A, Code, H1, H2, H3, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, H3, MinimumVersion, Notice, P, React, Svelte, TabbedCode, Vue } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
   title: 'Forms',
   links: [
-    { url: '#submitting-forms', name: 'Submitting forms' },
-    { url: '#server-side-validation', name: 'Server-side validation' },
+    { url: '#form-component', name: 'Form component' },
     { url: '#form-helper', name: 'Form helper' },
+    { url: '#server-side-responses', name: 'Server-side responses' },
+    { url: '#server-side-validation', name: 'Server-side validation' },
+    { url: '#manual-form-submissions', name: 'Manual form submissions' },
     { url: '#file-uploads', name: 'File uploads' },
     { url: '#xhr-fetch-submissions', name: 'XHR / fetch submissions' },
   ],
@@ -16,11 +18,16 @@ export default function () {
   return (
     <>
       <H1>Forms</H1>
-      <H2>Submitting forms</H2>
       <P>
-        While it's possible to make classic HTML form submissions with Inertia, it's not recommended since they cause
-        full-page reloads. Instead, it's better to intercept form submissions and then make the{' '}
-        <A href="/manual-visits">request using Inertia</A>.
+        Inertia provides two primary ways to build forms: the <Code>&lt;Form&gt;</Code> component and the{' '}
+        <Code>useForm</Code> helper. Both integrate with your server-side framework's validation and handle form
+        submissions without full page reloads.
+      </P>
+      <H2>Form component</H2>
+      <P>
+        Inertia provides a <Code>&lt;Form&gt;</Code> component that behaves much like a classic HTML form, but uses
+        Inertia under the hood to avoid full page reloads. This is the simplest way to get started with forms in
+        Inertia.
       </P>
       <TabbedCode
         examples={[
@@ -29,30 +36,15 @@ export default function () {
             language: 'markup',
             code: dedent`
               <script setup>
-              import { reactive } from 'vue'
-              import { router } from '@inertiajs/vue3'
-
-              const form = reactive({
-                first_name: null,
-                last_name: null,
-                email: null,
-              })
-
-              function submit() {
-                router.post('/users', form)
-              }
+              import { Form } from '@inertiajs/vue3'
               </script>
 
               <template>
-                <form @submit.prevent="submit">
-                  <label for="first_name">First name:</label>
-                  <input id="first_name" v-model="form.first_name" />
-                  <label for="last_name">Last name:</label>
-                  <input id="last_name" v-model="form.last_name" />
-                  <label for="email">Email:</label>
-                  <input id="email" v-model="form.email" />
-                  <button type="submit">Submit</button>
-                </form>
+                <Form action="/users" method="post">
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
               </template>
             `,
           },
@@ -60,170 +52,1056 @@ export default function () {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              import { useState } from 'react'
-              import { router } from '@inertiajs/react'
+              import { Form } from '@inertiajs/react'
 
-              export default function Edit() {
-                const [values, setValues] = useState({
-                  first_name: "",
-                  last_name: "",
-                  email: "",
-                })
+              export default () => (
+                <Form action="/users" method="post">
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              )
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { Form } from '@inertiajs/svelte'
+              </script>
 
-                function handleChange(e) {
-                  const key = e.target.id;
-                  const value = e.target.value
-                  setValues(values => ({
-                      ...values,
-                      [key]: value,
-                  }))
-                }
+              <Form action="/users" method="post">
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        Just like a traditional HTML form, there is no need to attach{' '}
+        <Vue>
+          a <Code>v-model</Code>
+        </Vue>
+        <React>
+          an <Code>onChange</Code> handler
+        </React>
+        <Svelte>
+          a <Code>bind:</Code>
+        </Svelte>{' '}
+        to your input fields, just give each input a <Code>name</Code> attribute{' '}
+        <React>
+          and a <Code>defaultValue</Code> (if applicable){' '}
+        </React>
+        and the <Code>Form</Code> component will handle the data submission for you.
+      </P>
+      <P>
+        The component also supports nested data structures, file uploads, and dotted key notation.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/reports" method="post">
+                <input type="text" name="name" />
+                <textarea name="report[description]"></textarea>
+                <input type="text" name="report[tags][]" />
+                <input type="file" name="documents" multiple />
+                <button type="submit">Create Report</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/reports" method="post">
+                <input type="text" name="name" />
+                <textarea name="report[description]"></textarea>
+                <input type="text" name="report[tags][]" />
+                <input type="file" name="documents" multiple />
+                <button type="submit">Create Report</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form action="/reports" method="post">
+                <input type="text" name="name" />
+                <textarea name="report[description]"></textarea>
+                <input type="text" name="report[tags][]" />
+                <input type="file" name="documents" multiple />
+                <button type="submit">Create Report</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        You can pass a <Code>transform</Code> prop to modify the form data before submission. This is useful for
+        injecting additional fields or transforming existing data, although hidden inputs work too.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form
+                action="/posts"
+                method="post"
+                :transform="data => ({ ...data, user_id: 123 })"
+              >
+                <input type="text" name="title" />
+                <button type="submit">Create Post</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form
+                action="/posts"
+                method="post"
+                transform={data => ({ ...data, user_id: 123 })}
+              >
+                <input type="text" name="title" />
+                <button type="submit">Create Post</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/posts"
+                method="post"
+                transform={data => ({ ...data, user_id: 123 })}
+              >
+                <input type="text" name="title" />
+                <button type="submit">Create Post</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Wayfinder</H3>
+      <P>
+        When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A>, you can pass the resulting object
+        directly to the <Code>action</Code> prop. The Form component will infer the HTTP method and URL from the
+        Wayfinder object.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <script setup>
+              import { Form } from '@inertiajs/vue3'
+              import { store } from 'App/Http/Controllers/UserController'
+              </script>
 
-                function handleSubmit(e) {
-                  e.preventDefault()
-                  router.post('/users', values)
-                }
+              <template>
+                <Form :action="store()">
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              </template>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { Form } from '@inertiajs/react'
+              import { store } from 'App/Http/Controllers/UserController'
 
-                return (
-                  <form onSubmit={handleSubmit}>
-                    <label htmlFor="first_name">First name:</label>
-                    <input id="first_name" value={values.first_name} onChange={handleChange} />
-                    <label htmlFor="last_name">Last name:</label>
-                    <input id="last_name" value={values.last_name} onChange={handleChange} />
-                    <label htmlFor="email">Email:</label>
-                    <input id="email" value={values.email} onChange={handleChange} />
-                    <button type="submit">Submit</button>
-                  </form>
-                )
-              }
+              export default () => (
+                <Form action={store()}>
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Create User</button>
+                </Form>
+              )
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { Form } from '@inertiajs/svelte'
+                import { store } from 'App/Http/Controllers/UserController'
+              </script>
+
+              <Form action={store()}>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Checkbox inputs</H3>
+      <P>
+        When working with checkboxes, you may want to add an explicit <Code>value</Code> attribute such as{' '}
+        <Code>value="1"</Code>. Without a value attribute, checked checkboxes will submit as <Code>"on"</Code>, which
+        some server-side validation rules may not recognize as a proper boolean value.
+      </P>
+      <H3>Slot props</H3>
+      <P>
+        The <Code>&lt;Form&gt;</Code> component exposes reactive state and helper methods through its default slot,
+        giving you access to form processing state, errors, and utility functions.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                #default="{
+                  errors,
+                  hasErrors,
+                  processing,
+                  progress,
+                  wasSuccessful,
+                  recentlySuccessful,
+                  setError,
+                  clearErrors,
+                  resetAndClearErrors,
+                  defaults,
+                  isDirty,
+                  reset,
+                  submit,
+                }"
+              >
+                <input type="text" name="name" />
+
+                <div v-if="errors.name">
+                  {{ errors.name }}
+                </div>
+
+                <button type="submit" :disabled="processing">
+                  {{ processing ? 'Creating...' : 'Create User' }}
+                </button>
+
+                <div v-if="wasSuccessful">User created successfully!</div>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post">
+                {({
+                  errors,
+                  hasErrors,
+                  processing,
+                  progress,
+                  wasSuccessful,
+                  recentlySuccessful,
+                  setError,
+                  clearErrors,
+                  resetAndClearErrors,
+                  defaults,
+                  isDirty,
+                  reset,
+                  submit,
+                }) => (
+                  <>
+                    <input type="text" name="name" />
+
+                    {errors.name && <div>{errors.name}</div>}
+
+                    <button type="submit" disabled={processing}>
+                      {processing ? 'Creating...' : 'Create User'}
+                    </button>
+
+                    {wasSuccessful && <div>User created successfully!</div>}
+                  </>
+                )}
+              </Form>
             `,
           },
           {
             name: 'Svelte 4',
             language: 'html',
             code: dedent`
-              <script>
-                import { router } from '@inertiajs/svelte'
+              <Form
+                action="/users"
+                method="post"
+                let:errors
+                let:hasErrors
+                let:processing
+                let:progress
+                let:wasSuccessful
+                let:recentlySuccessful
+                let:setError
+                let:clearErrors
+                let:resetAndClearErrors
+                let:defaults
+                let:isDirty
+                let:reset
+                let:submit
+              >
+                <input type="text" name="name" />
 
-                let values = {
-                  first_name: null,
-                  last_name: null,
-                  email: null,
-                }
+                {#if errors.name}
+                  <div>{errors.name}</div>
+                {/if}
 
-                function submit() {
-                  router.post('/users', values)
-                }
-              </script>
+                <button type="submit" disabled={processing}>
+                  {processing ? 'Creating...' : 'Create User'}
+                </button>
 
-              <form on:submit|preventDefault={submit}>
-                <label for="first_name">First name:</label>
-                <input id="first_name" bind:value={values.first_name}>
-
-                <label for="last_name">Last name:</label>
-                <input id="last_name" bind:value={values.last_name}>
-
-                <label for="email">Email:</label>
-                <input id="email" bind:value={values.email}>
-
-                <button type="submit">Submit</button>
-              </form>
+                {#if wasSuccessful}
+                  <div>User created successfully!</div>
+                {/if}
+              </Form>
             `,
           },
           {
             name: 'Svelte 5',
             language: 'html',
             code: dedent`
-              <script>
-                import { router } from '@inertiajs/svelte'
+              <Form action="/users" method="post">
+                {#snippet children({
+                  errors,
+                  hasErrors,
+                  processing,
+                  progress,
+                  wasSuccessful,
+                  recentlySuccessful,
+                  setError,
+                  clearErrors,
+                  resetAndClearErrors,
+                  defaults,
+                  isDirty,
+                  reset,
+                  submit,
+                })}
+                  <input type="text" name="name" />
 
-                let values = {
-                  first_name: null,
-                  last_name: null,
-                  email: null,
-                }
+                  {#if errors.name}
+                    <div>{errors.name}</div>
+                  {/if}
 
-                function submit(e) {
-                  e.preventDefault()
-                  router.post('/users', values)
-                }
-              </script>
+                  <button type="submit" disabled={processing}>
+                    {processing ? 'Creating...' : 'Create User'}
+                  </button>
 
-              <form onsubmit={submit}>
-                <label for="first_name">First name:</label>
-                <input id="first_name" bind:value={values.first_name}>
-
-                <label for="last_name">Last name:</label>
-                <input id="last_name" bind:value={values.last_name}>
-
-                <label for="email">Email:</label>
-                <input id="email" bind:value={values.email}>
-
-                <button type="submit">Submit</button>
-              </form>
+                  {#if wasSuccessful}
+                    <div>User created successfully!</div>
+                  {/if}
+                {/snippet}
+              </Form>
             `,
           },
         ]}
       />
       <P>
-        As you may have noticed in the example above, when using Inertia, you don't typically need to inspect form
-        responses client-side like you would when making XHR / fetch requests manually.
+        The <Code>defaults</Code> method allows you to update the form's default values to match the current field{' '}
+        values. When called, subsequent <Code>reset()</Code> calls will restore fields to these new defaults, and the{' '}
+        <Code>isDirty</Code> property will track changes from these updated defaults. Unlike <Code>useForm</Code>, this
+        method accepts no arguments and always uses all current form values.
       </P>
       <P>
-        Instead, your server-side route / controller typically issues a <A href="/redirects">redirect</A> response. And,
-        Of course, there is nothing stopping you from redirecting the user right back to the page they were previously
-        on. Using this approach, handling Inertia form submissions feels very similar to handling classic HTML form
+        The <Code>errors</Code> object uses dotted notation for nested fields, allowing you to display validation
+        messages for complex form structures.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/users" method="post" #default="{ errors }">
+                <input type="text" name="user.name" />
+                <div v-if="errors['user.name']">{{ errors['user.name'] }}</div>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post">
+                {({ errors }) => (
+                  <>
+                    <input type="text" name="user.name" />
+                    {errors['user.name'] && <div>{errors['user.name']}</div>}
+                  </>
+                )}
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post" let:errors>
+                <input type="text" name="user.name" />
+                {#if errors['user.name']}
+                  <div>{errors['user.name']}</div>
+                {/if}
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post">
+                {#snippet children({ errors })}
+                  <input type="text" name="user.name" />
+                  {#if errors['user.name']}
+                    <div>{errors['user.name']}</div>
+                  {/if}
+                {/snippet}
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Props and options</H3>
+      <P>
+        In addition to <Code>action</Code> and <Code>method</Code>, the <Code>&lt;Form&gt;</Code> component accepts
+        several props. Many of them are identical to the options available in Inertia's{' '}
+        <A href="/manual-visits">visit options</A>.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form
+                action="/profile"
+                method="put"
+                error-bag="profile"
+                query-string-array-format="indices"
+                :headers="{ 'X-Custom-Header': 'value' }"
+                :show-progress="false"
+                :transform="data => ({ ...data, timestamp: Date.now() })"
+                :invalidate-cache-tags="['users', 'dashboard']"
+                disable-while-processing
+                :options="{
+                  preserveScroll: true,
+                  preserveState: true,
+                  preserveUrl: true,
+                  replace: true,
+                  only: ['users', 'flash'],
+                  except: ['secret'],
+                  reset: ['page'],
+                }"
+              >
+                <input type="text" name="name" />
+                <button type="submit">Update</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form
+                action="/profile"
+                method="put"
+                errorBag="profile"
+                queryStringArrayFormat="indices"
+                headers={{ 'X-Custom-Header': 'value' }}
+                showProgress={false}
+                transform={data => ({ ...data, timestamp: Date.now() })}
+                invalidateCacheTags={['users', 'dashboard']}
+                disableWhileProcessing
+                options={{
+                  preserveScroll: true,
+                  preserveState: true,
+                  preserveUrl: true,
+                  replace: true,
+                  only: ['users', 'flash'],
+                  except: ['secret'],
+                  reset: ['page'],
+                }}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Update</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/profile"
+                method="put"
+                errorBag="profile"
+                queryStringArrayFormat="indices"
+                headers={{ 'X-Custom-Header': 'value' }}
+                showProgress={false}
+                transform={data => ({ ...data, timestamp: Date.now() })}
+                invalidateCacheTags={['users', 'dashboard']}
+                disableWhileProcessing
+                options={{
+                  preserveScroll: true,
+                  preserveState: true,
+                  preserveUrl: true,
+                  replace: true,
+                  only: ['users', 'flash'],
+                  except: ['secret'],
+                  reset: ['page'],
+                }}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Update</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>
+        Some props are intentionally grouped under <Code>options</Code> instead of being top-level to avoid confusion.
+        For example, <Code>only</Code>, <Code>except</Code>, and <Code>reset</Code> relate to <em>partial reloads</em>,
+        not <em>partial submissions</em>. The general rule: top-level props are for the form submission itself, while{' '}
+        <Code>options</Code> control how Inertia handles the subsequent visit.
+      </P>
+      <P>
+        When setting the{' '}
+        <React>
+          <Code>disableWhileProcessing</Code>
+        </React>
+        <Svelte>
+          <Code>disableWhileProcessing</Code>
+        </Svelte>
+        <Vue>
+          <Code>disable-while-processing</Code>
+        </Vue>{' '}
+        prop, the <Code>Form</Code> component will add the <Code>inert</Code> attribute to the HTML <Code>form</Code>{' '}
+        tag while the form is processing to prevent user interaction.
+      </P>
+      <P>To style the form while it's processing, you can target the inert form in the following ways.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Tailwind 4',
+            language: 'jsx',
+            code: dedent`
+                <Form
+                    action="/profile"
+                    method="put"
+                    disableWhileProcessing
+                    className="inert:opacity-50 inert:pointer-events-none"
+                >
+                    {/* Your form fields here */}
+                </Form>
+            `,
+          },
+          {
+            name: 'CSS',
+            language: 'css',
+            code: dedent`
+                form[inert] {
+                    opacity: 0.5;
+                    pointer-events: none;
+                }
+            `,
+          },
+        ]}
+      />
+      <H3>Events</H3>
+      <P>
+        The <Code>&lt;Form&gt;</Code> component emits all the standard visit <A href="/events">events</A> for form
         submissions.
       </P>
       <TabbedCode
         examples={[
           {
-            name: 'Laravel',
-            language: 'php',
+            name: 'Vue',
+            language: 'markup',
             code: dedent`
-              class UsersController extends Controller
+              <Form
+                action="/users"
+                method="post"
+                @before="handleBefore"
+                @start="handleStart"
+                @progress="handleProgress"
+                @success="handleSuccess"
+                @error="handleError"
+                @finish="handleFinish"
+                @cancel="handleCancel"
+                @cancelToken="handleCancelToken"
+              >
+                <input type="text" name="name" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                onCancelToken={handleCancelToken}
+                onBefore={handleBefore}
+                onStart={handleStart}
+                onProgress={handleProgress}
+                onCancel={handleCancel}
+                onSuccess={handleSuccess}
+                onError={handleError}
+                onFinish={handleFinish}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                on:cancelToken={handleCancelToken}
+                on:before={handleBefore}
+                on:start={handleStart}
+                on:progress={handleProgress}
+                on:cancel={handleCancel}
+                on:success={handleSuccess}
+                on:error={handleError}
+                on:finish={handleFinish}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <Form
+                action="/users"
+                method="post"
+                onCancelToken={handleCancelToken}
+                onBefore={handleBefore}
+                onStart={handleStart}
+                onProgress={handleProgress}
+                onCancel={handleCancel}
+                onSuccess={handleSuccess}
+                onError={handleError}
+                onFinish={handleFinish}
+              >
+                <input type="text" name="name" />
+                <button type="submit">Create User</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Resetting the Form</H3>
+      <P>
+        The <Code>Form</Code> component provides several attributes that allow you to reset the form after a submission.
+      </P>
+      <P>`resetOnSuccess` may be used to reset the form after a successful submission.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <!-- Reset the entire form on success -->
+              <Form action="/users" method="post" resetOnSuccess>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+
+              <!-- Reset specific fields on success -->
+              <Form action="/users" method="post" :resetOnSuccess="['name']">
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              // Reset the entire form on success
+              <Form action="/users" method="post" resetOnSuccess>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+
+              // Reset specific fields on success
+              <Form action="/users" method="post" resetOnSuccess={['name']}>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+                <!-- Reset the entire form on success -->
+                <Form action="/users" method="post" resetOnSuccess>
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Submit</button>
+                </Form>
+
+                <!-- Reset specific fields on success -->
+                <Form action="/users" method="post" resetOnSuccess={['name']}>
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Submit</button>
+                </Form>
+            `,
+          },
+        ]}
+      />
+      <P>`resetOnError` may be used to reset the form after errors.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <!-- Reset the entire form on success -->
+              <Form action="/users" method="post" resetOnError>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+
+              <!-- Reset specific fields on success -->
+              <Form action="/users" method="post" :resetOnError="['name']">
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              // Reset the entire form on success
+              <Form action="/users" method="post" resetOnError>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+
+              // Reset specific fields on success
+              <Form action="/users" method="post" resetOnError={['name']}>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+                <!-- Reset the entire form on success -->
+                <Form action="/users" method="post" resetOnError>
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Submit</button>
+                </Form>
+
+                <!-- Reset specific fields on success -->
+                <Form action="/users" method="post" resetOnError={['name']}>
+                  <input type="text" name="name" />
+                  <input type="email" name="email" />
+                  <button type="submit">Submit</button>
+                </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Setting new default values</H3>
+      <P>
+        The <Code>Form</Code> component provides the <Code>setDefaultsOnSuccess</Code> attribute to set the current form
+        values as the new defaults after a successful submission.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/users" method="post" setDefaultsOnSuccess>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post" setDefaultsOnSuccess>
+                <input type="text" name="name" />
+                <input type="email" name="email" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+                <Form action="/users" method="post" setDefaultsOnSuccess>
+                    <input type="text" name="name" />
+                    <input type="email" name="email" />
+                    <button type="submit">Submit</button>
+                </Form>
+            `,
+          },
+        ]}
+      />
+      <H3>Dotted key notation</H3>
+      <P>
+        The <Code>&lt;Form&gt;</Code> component supports dotted key notation for creating nested objects from flat input
+        names. This provides a convenient way to structure form data.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="user.name" />
+                <input type="text" name="user.skills[]" />
+                <input type="text" name="address.street" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="user.name" />
+                <input type="text" name="user.skills[]" />
+                <input type="text" name="address.street" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form action="/users" method="post">
+                <input type="text" name="user.name" />
+                <input type="text" name="user.skills[]" />
+                <input type="text" name="address.street" />
+                <button type="submit">Submit</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>The example above would generate the following data structure.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'JSON',
+            language: 'json',
+            code: dedent`
               {
-                  public function index()
-                  {
-                      return Inertia::render('Users/Index', [
-                        'users' => User::all(),
-                      ]);
-                  }
-
-                  public function store(Request $request)
-                  {
-                      User::create($request->validate([
-                        'first_name' => ['required', 'max:50'],
-                        'last_name' => ['required', 'max:50'],
-                        'email' => ['required', 'max:50', 'email'],
-                      ]));
-
-                      return to_route('users.index');
-                  }
+                "user": {
+                  "name": "John Doe",
+                  "skills": ["JavaScript"]
+                },
+                "address": {
+                  "street": "123 Main St"
+                }
               }
             `,
           },
         ]}
       />
-      <H2>Server-side validation</H2>
       <P>
-        Handling server-side validation errors in Inertia works a little different than handling errors from manual XHR
-        / fetch requests. When making XHR / fetch requests, you typically inspect the response for a <Code>422</Code>{' '}
-        status code and manually update the form's error state.
+        If you need literal dots in your field names (not as nested object separators), you can escape them using
+        backslashes.
       </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <Form action="/config" method="post">
+                <input type="text" name="app\\.name" />
+                <input type="text" name="settings.theme\\.mode" />
+                <button type="submit">Save</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              <Form action="/config" method="post">
+                <input type="text" name="app\\.name" />
+                <input type="text" name="settings.theme\\.mode" />
+                <button type="submit">Save</button>
+              </Form>
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <Form action="/config" method="post">
+                <input type="text" name="app\\.name" />
+                <input type="text" name="settings.theme\\.mode" />
+                <button type="submit">Save</button>
+              </Form>
+            `,
+          },
+        ]}
+      />
+      <P>The example above would generate the following data structure.</P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'JSON',
+            language: 'json',
+            code: dedent`
+              {
+                "app.name": "My Application",
+                "settings": {
+                  "theme.mode": "dark"
+                }
+              }
+            `,
+          },
+        ]}
+      />
+      <H3>Programmatic access</H3>
       <P>
-        However, when using Inertia, a <Code>422</Code> response is never returned by your server. Instead, as we saw in
-        the example above, your routes / controllers will typically return a redirect response - much like a classic,
-        full-page form submission.
+        You can access the form's methods programmatically using refs. This provides an alternative to{' '}
+        <A href="#slot-props">slot props</A> when you need to trigger form actions from outside the form.
       </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <script setup>
+              import { ref } from 'vue'
+              import { Form } from '@inertiajs/vue3'
+
+              const formRef = ref()
+
+              const handleSubmit = () => {
+                formRef.value.submit()
+              }
+              </script>
+
+              <template>
+                <Form ref="formRef" action="/users" method="post">
+                  <input type="text" name="name" />
+                  <button type="submit">Submit</button>
+                </Form>
+
+                <button @click="handleSubmit">Submit Programmatically</button>
+              </template>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { useRef } from 'react'
+              import { Form } from '@inertiajs/react'
+
+              export default function CreateUser() {
+                const formRef = useRef()
+
+                const handleSubmit = () => {
+                  formRef.current.submit()
+                }
+
+                return (
+                  <>
+                    <Form ref={formRef} action="/users" method="post">
+                      <input type="text" name="name" />
+                      <button type="submit">Submit</button>
+                    </Form>
+
+                    <button onClick={handleSubmit}>Submit Programmatically</button>
+                  </>
+                )
+              }
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { Form } from '@inertiajs/svelte'
+
+                let formRef
+
+                function handleSubmit() {
+                  formRef.submit()
+                }
+              </script>
+
+              <Form bind:this={formRef} action="/users" method="post">
+                <input type="text" name="name" />
+                <button type="submit">Submit</button>
+              </Form>
+
+              <button on:click={handleSubmit}>Submit Programmatically</button>
+            `,
+          },
+        ]}
+      />
       <P>
-        For a full discussion on handling and displaying validation errors with Inertia, please consult the{' '}
-        <A href="/validation">validation</A> documentation.
+        In React and Vue, refs provide access to all form methods and reactive state. In Svelte, refs expose only
+        methods, so reactive state like <Code>isDirty</Code> and <Code>errors</Code> should be accessed via{' '}
+        <A href="#slot-props">slot props</A> instead.
       </P>
       <H2>Form helper</H2>
       <P>
-        Since working with forms is so common, Inertia includes a form helper designed to help reduce the amount of
-        boilerplate code needed for handling typical form submissions.
+        In addition to the <Code>&lt;Form&gt;</Code> component, Inertia also provides a <Code>useForm</Code> helper for
+        when you need programmatic control over your form's data and submission behavior.
       </P>
       <TabbedCode
         examples={[
@@ -557,6 +1435,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Form errors</H3>
       <P>
         If there are form validation errors, they are available via the <Code>errors</Code> property. When building
         Laravel powered Inertia applications, form errors will automatically be populated when your application throws
@@ -700,6 +1579,7 @@ export default function () {
         <Code>true</Code> for two seconds after a successful form submission. This property can be utilized to show
         temporary success messages.
       </P>
+      <H3>Resetting the Form</H3>
       <P>
         To reset the form's values back to their default values, you can use the <Code>reset()</Code> method.
       </P>
@@ -743,9 +1623,9 @@ export default function () {
         ]}
       />
       <P>
-        Sometimes, you may want to restore your form fields to their default values and clear any validation errors at{' '}
-        the same time. Instead of calling <Code>reset()</Code> and <Code>clearErrors()</Code> separately, you can use the{' '}
-        <Code>resetAndClearErrors()</Code> method, which combines both actions into a single call.
+        Sometimes, you may want to restore your form fields to their default values and clear any validation errors at
+        the same time. Instead of calling <Code>reset()</Code> and <Code>clearErrors()</Code> separately, you can use
+        the <Code>resetAndClearErrors()</Code> method, which combines both actions into a single call.
       </P>
       <TabbedCode
         examples={[
@@ -786,6 +1666,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Setting new default values</H3>
       <P>
         If your form's default values become outdated, you can use the <Code>defaults()</Code> method to update them.
         Then, the form will be reset to the correct values the next time the <Code>reset()</Code> method is invoked.
@@ -847,6 +1728,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Form field change tracking</H3>
       <P>
         To determine if a form has any changes, you may use the <Code>isDirty</Code> property.
       </P>
@@ -879,6 +1761,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Canceling Form submissions</H3>
       <P>
         To cancel a form submission, use the <Code>cancel()</Code> method.
       </P>
@@ -909,6 +1792,7 @@ export default function () {
           },
         ]}
       />
+      <H3>Form data and history state</H3>
       <P>
         To instruct Inertia to store a form's data and errors in <A href="/remembering-state">history state</A>, you can
         provide a unique form key as the first argument when instantiating your form.
@@ -948,13 +1832,11 @@ export default function () {
         ]}
       />
       <H3>Wayfinder</H3>
-      <P>
-        <strong>Requires Inertia &gt;= v2.0.6</strong>
-      </P>
+      <MinimumVersion version="2.0.6" />
       <P>
         When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A> in conjunction with the form helper, you
         can simply pass the resulting object directly to the <Code>form.submit</Code> method. The form helper will infer
-        the HTTP method and URL from the Wayfinder object:
+        the HTTP method and URL from the Wayfinder object.
       </P>
       <TabbedCode
         examples={[
@@ -1005,20 +1887,225 @@ export default function () {
           },
         ]}
       />
+      <H2>Server-side responses</H2>
+      <P>
+        When using Inertia, you don't typically inspect form responses client-side like you would with traditional
+        XHR/fetch requests. Instead, your server-side route or controller issues a <A href="/redirects">redirect</A>{' '}
+        response after processing the form, often redirecting to a success page.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Laravel',
+            language: 'php',
+            code: dedent`
+              class UsersController extends Controller
+              {
+                  public function index()
+                  {
+                      return Inertia::render('Users/Index', [
+                        'users' => User::all(),
+                      ]);
+                  }
+
+                  public function store(Request $request)
+                  {
+                      User::create($request->validate([
+                        'first_name' => ['required', 'max:50'],
+                        'last_name' => ['required', 'max:50'],
+                        'email' => ['required', 'max:50', 'email'],
+                      ]));
+
+                      return to_route('users.index');
+                  }
+              }
+            `,
+          },
+        ]}
+      />
+      <P>
+        This redirect-based approach works with all form submission methods: the <Code>&lt;Form&gt;</Code> component,
+        {' '}<Code>useForm</Code> helper, and manual router submissions. It makes handling Inertia forms feel very similar to
+        classic server-side form submissions.
+      </P>
+      <H2>Server-side validation</H2>
+      <P>
+        Both the <Code>&lt;Form&gt;</Code> component and <Code>useForm</Code> helper automatically handle server-side
+        validation errors. When your server returns validation errors, they're automatically available in the{' '}
+        <Code>errors</Code> object without any additional configuration.
+      </P>
+      <P>
+        Unlike traditional XHR/fetch requests where you might check for a <Code>422</Code> status code, Inertia handles
+        validation errors as part of its redirect-based flow, just like classic server-side form submissions, but
+        without the full page reload.
+      </P>
+      <P>
+        For a complete guide on validation error handling, including error bags and advanced scenarios, see the{' '}
+        <A href="/validation">validation documentation</A>.
+      </P>
+      <H2>Manual form submissions</H2>
+      <P>
+        It's also possible to submit forms manually using Inertia's <Code>router</Code> methods directly, without using
+        the <Code>&lt;Form&gt;</Code> component or <Code>useForm</Code> helper:
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'markup',
+            code: dedent`
+              <script setup>
+              import { reactive } from 'vue'
+              import { router } from '@inertiajs/vue3'
+
+              const form = reactive({
+                first_name: null,
+                last_name: null,
+                email: null,
+              })
+
+              function submit() {
+                router.post('/users', form)
+              }
+              </script>
+
+              <template>
+                <form @submit.prevent="submit">
+                  <label for="first_name">First name:</label>
+                  <input id="first_name" v-model="form.first_name" />
+                  <label for="last_name">Last name:</label>
+                  <input id="last_name" v-model="form.last_name" />
+                  <label for="email">Email:</label>
+                  <input id="email" v-model="form.email" />
+                  <button type="submit">Submit</button>
+                </form>
+              </template>
+            `,
+          },
+          {
+            name: 'React',
+            language: 'jsx',
+            code: dedent`
+              import { useState } from 'react'
+              import { router } from '@inertiajs/react'
+
+              export default function Edit() {
+                const [values, setValues] = useState({
+                  first_name: "",
+                  last_name: "",
+                  email: "",
+                })
+
+                function handleChange(e) {
+                  const key = e.target.id;
+                  const value = e.target.value
+                  setValues(values => ({
+                      ...values,
+                      [key]: value,
+                  }))
+                }
+
+                function handleSubmit(e) {
+                  e.preventDefault()
+                  router.post('/users', values)
+                }
+
+                return (
+                  <form onSubmit={handleSubmit}>
+                    <label htmlFor="first_name">First name:</label>
+                    <input id="first_name" value={values.first_name} onChange={handleChange} />
+                    <label htmlFor="last_name">Last name:</label>
+                    <input id="last_name" value={values.last_name} onChange={handleChange} />
+                    <label htmlFor="email">Email:</label>
+                    <input id="email" value={values.email} onChange={handleChange} />
+                    <button type="submit">Submit</button>
+                  </form>
+                )
+              }
+            `,
+          },
+          {
+            name: 'Svelte 4',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { router } from '@inertiajs/svelte'
+
+                let values = {
+                  first_name: null,
+                  last_name: null,
+                  email: null,
+                }
+
+                function submit() {
+                  router.post('/users', values)
+                }
+              </script>
+
+              <form on:submit|preventDefault={submit}>
+                <label for="first_name">First name:</label>
+                <input id="first_name" bind:value={values.first_name}>
+
+                <label for="last_name">Last name:</label>
+                <input id="last_name" bind:value={values.last_name}>
+
+                <label for="email">Email:</label>
+                <input id="email" bind:value={values.email}>
+
+                <button type="submit">Submit</button>
+              </form>
+            `,
+          },
+          {
+            name: 'Svelte 5',
+            language: 'html',
+            code: dedent`
+              <script>
+                import { router } from '@inertiajs/svelte'
+
+                let values = {
+                  first_name: null,
+                  last_name: null,
+                  email: null,
+                }
+
+                function submit(e) {
+                  e.preventDefault()
+                  router.post('/users', values)
+                }
+              </script>
+
+              <form onsubmit={submit}>
+                <label for="first_name">First name:</label>
+                <input id="first_name" bind:value={values.first_name}>
+
+                <label for="last_name">Last name:</label>
+                <input id="last_name" bind:value={values.last_name}>
+
+                <label for="email">Email:</label>
+                <input id="email" bind:value={values.email}>
+
+                <button type="submit">Submit</button>
+              </form>
+            `,
+          },
+        ]}
+      />
       <H2>File uploads</H2>
       <P>
         When making requests or form submissions that include files, Inertia will automatically convert the request data
-        into a <Code>FormData</Code> object.
+        into a <Code>FormData</Code> object. This works with the <Code>&lt;Form&gt;</Code> component,{' '}
+        <Code>useForm</Code> helper, and manual router submissions.
       </P>
       <P>
-        For a more thorough discussion of file uploads, please consult the{' '}
+        For more information on file uploads, including progress tracking, see the{' '}
         <A href="/file-uploads">file uploads documentation</A>.
       </P>
       <H2>XHR / fetch submissions</H2>
       <P>
-        Using Inertia to submit forms works great for the vast majority of situations; however, in the event that you
-        need more control over the form submission, you're free to make plain XHR or <Code>fetch</Code> requests instead
-        using the library of your choice.
+        Using Inertia to submit forms works great for the vast majority of situations. However, in the event that you
+        need more control over the form submission, you're free to make plain XHR or <Code>fetch</Code> requests
+        instead, using the library of your choice.
       </P>
     </>
   )

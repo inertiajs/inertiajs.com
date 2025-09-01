@@ -109,7 +109,7 @@ export default function () {
       />
       <P>
         If you'd like more control over the polling behavior, the poll helper provides <Code>stop</Code> and{' '}
-        <Code>start</Code>
+        <Code>start</Code>{' '}
         methods that allow you to manually start and stop polling. You can pass the <Code>autoStart: false</Code> option
         to the poll helper to prevent it from automatically starting polling when the component is mounted.
       </P>

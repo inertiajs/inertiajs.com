@@ -28,7 +28,7 @@ export default function () {
       <P>To mitigate this issue, you can tell Inertia which local component state to save in the browser history.</P>
       <H2>Saving local state</H2>
       <P>
-        To save local component state to the history state, use the <Code>remember</Code> feature to tell Inertia which
+        To save local component state to the history state, use the <Code>useRemember</Code> feature to tell Inertia which
         data it should remember.
       </P>
       <TabbedCode
@@ -230,12 +230,12 @@ export default function () {
       />
       <H2>Manually saving state</H2>
       <P>
-        The <Code>useRemember</Code> hook watch for data changes and automatically save those changes to the history
+        The <Code>useRemember</Code> hook watches for data changes and automatically saves those changes to the history
         state. Then, Inertia will restore the data on page load.
       </P>
       <P>
         However, it's also possible to manage this manually using the underlying <Code>remember()</Code> and{' '}
-        <Code>restore()</Code> methods in Inertia.
+        <Code>restore()</Code> methods exposed by Inertia.
       </P>
       <TabbedCode
         examples={[
@@ -245,10 +245,10 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/vue3'
 
-              // Save local component state to history state...
+              // Save local component state to history state
               router.remember(data, 'my-key')
 
-              // Restore local component state from history state...
+              // Restore local component state from history state
               let data = router.restore('my-key')
             `,
           },
@@ -258,10 +258,10 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/react'
 
-              // Save local component state to history state...
+              // Save local component state to history state
               router.remember(data, 'my-key')
 
-              // Restore local component state from history state...
+              // Restore local component state from history state
               let data = router.restore('my-key')
             `,
           },
@@ -271,10 +271,10 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/svelte'
 
-              // Save local component state to history state...
+              // Save local component state to history state
               router.remember(data, 'my-key')
 
-              // Restore local component state from history state...
+              // Restore local component state from history state
               let data = router.restore('my-key')
             `,
           },

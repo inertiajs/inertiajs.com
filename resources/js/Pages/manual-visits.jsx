@@ -1,10 +1,11 @@
-import { A, Code, H1, H2, Notice, P, TabbedCode } from '@/Components'
+import { A, Code, H1, H2, MinimumVersion, Notice, P, TabbedCode } from '@/Components'
 import dedent from 'dedent-js'
 
 export const meta = {
   title: 'Manual visits',
   links: [
     { url: '#method', name: 'Method' },
+    { url: '#wayfinder', name: 'Wayfinder' },
     { url: '#data', name: 'Data' },
     { url: '#custom-headers', name: 'Custom headers' },
     { url: '#file-uploads', name: 'File uploads' },
@@ -240,6 +241,90 @@ export default function () {
         <Code color="orange">patch</Code>. This is called{' '}
         <A href="https://laravel.com/docs/routing#form-method-spoofing">form method spoofing</A>.
       </Notice>
+      <H2>Wayfinder</H2>
+      <MinimumVersion version="2.1.2" />
+      <P>
+        When using <A href="https://github.com/laravel/wayfinder">Wayfinder</A>, you can pass the resulting object
+        directly to any router method. The router will infer the HTTP method and URL from the Wayfinder object.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              router.visit(show(1))
+              router.post(store())
+              router.delete(destroy(1))
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              router.visit(show(1))
+              router.post(store())
+              router.delete(destroy(1))
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+              import { show } from 'App/Http/Controllers/UserController'
+
+              router.visit(show(1))
+              router.post(store())
+              router.delete(destroy(1))
+            `,
+          },
+        ]}
+      />
+      <P>
+        If you provide both a Wayfinder object and specify the <Code>method</Code> option, the{' '}
+        <Code>method</Code> option will take precedence.
+      </P>
+      <TabbedCode
+        examples={[
+          {
+            name: 'Vue',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/vue3'
+              import { update } from 'App/Http/Controllers/UserController'
+
+              router.visit(update(1), { method: 'patch' })
+            `,
+          },
+          {
+            name: 'React',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/react'
+              import { update } from 'App/Http/Controllers/UserController'
+
+              router.visit(update(1), { method: 'patch' })
+            `,
+          },
+          {
+            name: 'Svelte',
+            language: 'js',
+            code: dedent`
+              import { router } from '@inertiajs/svelte'
+              import { update } from 'App/Http/Controllers/UserController'
+
+              router.visit(update(1), { method: 'patch' })
+            `,
+          },
+        ]}
+      />
       <H2>Data</H2>
       <P>
         You may use the <Code>data</Code> option to add data to the request.
@@ -432,7 +517,7 @@ export default function () {
         ]}
       />
       <P>
-        For more information on uploading files, please consult the dedicated <A href="/file-uploads">file uploads</A>{' '}
+        For more information on uploading files, check out the dedicated <A href="/file-uploads">file uploads</A>{' '}
         documentation.
       </P>
       <H2>Browser history</H2>
@@ -553,7 +638,7 @@ export default function () {
         URL, component, and props.
       </P>
       <P>
-        If you need access to the current page's props you can pass a function to the props option. This function will
+        If you need access to the current page's props, you can pass a function to the props option. This function will
         receive the current page's props as an argument and should return the new props.
       </P>
       <P>
@@ -569,6 +654,7 @@ export default function () {
               import { router } from '@inertiajs/vue3'
 
               router.push({ url: '/users', component: 'Users' })
+
               router.replace({
                 props: (currentProps) => ({ ...currentProps, search: 'John' })
               })
@@ -581,6 +667,7 @@ export default function () {
               import { router } from '@inertiajs/react'
 
               router.push({ url: '/users', component: 'Users' })
+
               router.replace({
                 props: (currentProps) => ({ ...currentProps, search: 'John' })
               })
@@ -593,6 +680,7 @@ export default function () {
               import { router } from '@inertiajs/svelte'
 
               router.push({ url: '/users', component: 'Users' })
+
               router.replace({
                 props: (currentProps) => ({ ...currentProps, search: 'John' })
               })
@@ -735,7 +823,7 @@ export default function () {
         you've defined) back to the top of the page.
       </P>
       <P>
-        You can disable this behavior by setting the <Code>preserveScroll</Code> option to <Code>false</Code>.
+        You can disable this behavior by setting the <Code>preserveScroll</Code> option to <Code>true</Code>.
       </P>
       <TabbedCode
         examples={[
@@ -745,7 +833,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/vue3'
 
-              router.visit(url, { preserveScroll: false })
+              router.visit(url, { preserveScroll: true })
             `,
           },
           {
@@ -754,7 +842,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/react'
 
-              router.visit(url, { preserveScroll: false })
+              router.visit(url, { preserveScroll: true })
             `,
           },
           {
@@ -763,7 +851,7 @@ export default function () {
             code: dedent`
               import { router } from '@inertiajs/svelte'
 
-              router.visit(url, { preserveScroll: false })
+              router.visit(url, { preserveScroll: true })
             `,
           },
         ]}
@@ -1065,13 +1153,12 @@ export default function () {
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
-                    this.doThing(),
-                    this.doAnotherThing()
+                    this.firstTask(),
+                    this.secondTask()
                   ])
                 }
                 onFinish: visit => {
-                  // This won't be called until doThing()
-                  // and doAnotherThing() have finished.
+                  // Not called until firstTask() and secondTask() have finished
                 },
               })
             `,
@@ -1085,13 +1172,12 @@ export default function () {
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
-                    this.doThing(),
-                    this.doAnotherThing()
+                    this.firstTask(),
+                    this.secondTask()
                   ])
                 }
                 onFinish: visit => {
-                  // This won't be called until doThing()
-                  // and doAnotherThing() have finished.
+                  // Not called until firstTask() and secondTask() have finished
                 },
               })
             `,
@@ -1105,13 +1191,12 @@ export default function () {
               router.post(url, {
                 onSuccess: () => {
                   return Promise.all([
-                    this.doThing(),
-                    this.doAnotherThing()
+                    this.firstTask(),
+                    this.secondTask()
                   ])
                 }
                 onFinish: visit => {
-                  // This won't be called until doThing()
-                  // and doAnotherThing() have finished.
+                  // Not called until firstTask() and secondTask() have finished
                 },
               })
             `,
