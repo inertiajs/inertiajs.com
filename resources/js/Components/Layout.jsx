@@ -2,9 +2,9 @@ import Nav from '@/Components/Nav'
 import TabbedCode from '@/Components/TabbedCode'
 import '@docsearch/css'
 import * as DocSearchReact from '@docsearch/react'
-import { Head, Link, router } from '@inertiajs/react'
+import { Head, Link, router, usePage } from '@inertiajs/react'
 import dedent from 'dedent-js'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 const { DocSearch } = DocSearchReact
 
@@ -34,6 +34,14 @@ export default function Layout({ meta, children }) {
     localStorage.setItem('tab.frontend', value.frontend)
     localStorage.setItem('tab.backend', value.backend)
   }
+
+  const page = usePage()
+
+  const markdownUrl = useMemo(() => {
+    const url = new URL(page.url, 'https://inertiajs.com')
+
+    return (url.pathname === '/' ? '/index' : url.pathname) + '.md';
+  }, [page.url])
 
   useEffect(() => {
     setShowSearch(true)
@@ -253,9 +261,9 @@ export default function Layout({ meta, children }) {
                 </div>
               )}
               <a
-                href={(window.location.pathname === '/' ? 'index' : window.location.pathname) + '.md'}
+                href={markdownUrl}
                 target="_blank"
-                class="mb-12 inline-block rounded border border-gray-400 px-2 py-1 text-xs font-medium uppercase hover:border-gray-500"
+                className="mb-12 inline-block rounded border border-gray-400 px-2 py-1 text-xs font-medium uppercase hover:border-gray-500"
               >
                 View as Markdown
               </a>
