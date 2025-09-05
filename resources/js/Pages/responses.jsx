@@ -6,8 +6,8 @@ export const meta = {
   links: [
     { url: '#creating-responses', name: 'Creating responses' },
     { url: '#properties', name: 'Properties' },
-    { url: '#provides-inertia-property', name: 'ProvidesInertiaProperty interface' },
-    { url: '#provides-inertia-properties', name: 'ProvidesInertiaProperties interface' },
+    { url: '#provides-inertia-property-interface', name: 'ProvidesInertiaProperty interface' },
+    { url: '#provides-inertia-properties-interface', name: 'ProvidesInertiaProperties interface' },
     { url: '#root-template-data', name: 'Root template data' },
     { url: '#maximum-response-size', name: 'Maximum response size' },
   ],
