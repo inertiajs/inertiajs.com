@@ -38,9 +38,11 @@ export default function () {
             code: dedent`
               class HandleInertiaRequests extends Middleware
               {
-                  public function share(Request $request)
+                  public function share(Request $request): array
                   {
-                      return array_merge(parent::share($request), [
+                      return [
+                          ...parent::share($request),
+
                           // Synchronously...
                           'appName' => config('app.name'),
 
@@ -48,7 +50,7 @@ export default function () {
                           'auth.user' => fn () => $request->user()
                               ? $request->user()->only('id', 'name', 'email')
                               : null,
-                      ]);
+                      ];
                   }
               }
             `,
@@ -177,13 +179,14 @@ export default function () {
             code: dedent`
               class HandleInertiaRequests extends Middleware
               {
-                  public function share(Request $request)
+                  public function share(Request $request): array
                   {
-                      return array_merge(parent::share($request), [
+                      return [
+                          ...parent::share($request),
                           'flash' => [
                               'message' => fn () => $request->session()->get('message')
                           ],
-                      ]);
+                      ];
                   }
               }
             `,
