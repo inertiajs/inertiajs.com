@@ -20,7 +20,6 @@ export const meta = {
   title: 'Server-side rendering (SSR)',
   links: [
     { url: '#laravel-starter-kits', name: 'Laravel starter kits' },
-    { url: '#install-dependencies', name: 'Install dependencies' },
     { url: '#add-server-entry-point', name: 'Add server entry-point' },
     { url: '#setup-vite-js', name: 'Setup Vite' },
     { url: '#update-npm-script', name: 'Update npm script' },
@@ -59,37 +58,6 @@ export default function () {
           },
         ]}
       />
-      <H2>Install dependencies</H2>
-      <P>
-        If you are not using a Laravel starter kit and would like to manually configure SSR, we'll first install the
-        additional dependencies required for server-side rendering. This is only necessary for the Vue adapters, so you
-        can skip this step if you're using React or Svelte.
-      </P>
-      <TabbedCode
-        examples={[
-          {
-            name: 'Vue',
-            language: 'bash',
-            code: dedent`
-              npm install @vue/server-renderer
-            `,
-          },
-          {
-            name: 'React',
-            language: 'js',
-            code: dedent`
-              // No additional dependencies required
-            `,
-          },
-          {
-            name: 'Svelte',
-            language: 'js',
-            code: dedent`
-              // No additional dependencies required
-            `,
-          },
-        ]}
-      />
       <H2>Add server entry-point</H2>
       <P>
         Next, we'll create a <Code>resources/js/ssr.js</Code> file within our Laravel project that will serve as our SSR
@@ -113,7 +81,7 @@ export default function () {
             code: dedent`
               import { createInertiaApp } from '@inertiajs/vue3'
               import createServer from '@inertiajs/vue3/server'
-              import { renderToString } from '@vue/server-renderer'
+              import { renderToString } from 'vue/server-renderer'
               import { createSSRApp, h } from 'vue'
 
               createServer(page =>
