@@ -790,14 +790,14 @@ export default function () {
             name: 'Vue',
             language: 'markup',
             code: dedent`
-              <!-- Reset the entire form on success -->
+              <!-- Reset the entire form on error -->
               <Form action="/users" method="post" resetOnError>
                 <input type="text" name="name" />
                 <input type="email" name="email" />
                 <button type="submit">Submit</button>
               </Form>
 
-              <!-- Reset specific fields on success -->
+              <!-- Reset specific fields on error -->
               <Form action="/users" method="post" :resetOnError="['name']">
                 <input type="text" name="name" />
                 <input type="email" name="email" />
@@ -809,14 +809,14 @@ export default function () {
             name: 'React',
             language: 'jsx',
             code: dedent`
-              // Reset the entire form on success
+              // Reset the entire form on error
               <Form action="/users" method="post" resetOnError>
                 <input type="text" name="name" />
                 <input type="email" name="email" />
                 <button type="submit">Submit</button>
               </Form>
 
-              // Reset specific fields on success
+              // Reset specific fields on error
               <Form action="/users" method="post" resetOnError={['name']}>
                 <input type="text" name="name" />
                 <input type="email" name="email" />
@@ -828,14 +828,14 @@ export default function () {
             name: 'Svelte',
             language: 'html',
             code: dedent`
-                <!-- Reset the entire form on success -->
+                <!-- Reset the entire form on error -->
                 <Form action="/users" method="post" resetOnError>
                   <input type="text" name="name" />
                   <input type="email" name="email" />
                   <button type="submit">Submit</button>
                 </Form>
 
-                <!-- Reset specific fields on success -->
+                <!-- Reset specific fields on error -->
                 <Form action="/users" method="post" resetOnError={['name']}>
                   <input type="text" name="name" />
                   <input type="email" name="email" />
