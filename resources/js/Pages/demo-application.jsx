@@ -41,6 +41,9 @@ export default function () {
           <A href="https://github.com/kohkimakimoto/pingcrm-echo">Echo/Vue</A> by Kohki Makimoto
         </Li>
         <Li>
+          <A href="https://github.com/mahendra7041/pingcrm-react-inertia">Express.js/React</A> by Mahendra Chavda
+        </Li>
+        <Li>
           <A href="https://github.com/matrei/pingcrm-grails">Grails/Vue</A> by Mattias Reichel
         </Li>
         <Li>

@@ -44,6 +44,12 @@ export default function () {
           <A href="https://github.com/kohkimakimoto/inertia-echo">Echo</A>
         </Li>
         <Li>
+          <A href="https://github.com/mahendra7041/express-inertia">Express.js</A>
+        </Li>
+        <Li>
+          <A href="https://github.com/mahendra7041/fastify-inertia">Fastify</A>
+        </Li>
+        <Li>
           <A href="https://github.com/j0ack/flask-inertia">Flask</A>
         </Li>
         <Li>
